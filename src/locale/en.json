@@ -158,6 +158,7 @@
   },
   "sidebar": { 
     "account_setting": "Setting",
+    "lock_your_account": "Lock your account",
     "logout": "Log out",
     "your_account": "My Account",
     "locker_help_center": "Locker Help Center",

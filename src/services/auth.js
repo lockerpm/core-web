@@ -69,6 +69,7 @@ function access_token_type() {
 }
 
 async function redirect_login() {
+  await coreServices.lock();
   const currentPage = getRouterByLocation(window.location)
   let isAdmin = !!global.routers.ADMIN_ROUTERS.find((r) => r.name === currentPage?.name)
   if (access_token()) {

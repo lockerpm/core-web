@@ -19,7 +19,27 @@ function LayoutBreadcrumb() {
   useEffect(() => {
     if (location) {
       const brRouters = getRoutersByLocation(location);
-      setMenus(brRouters);
+      const lastRouter = brRouters.slice(-1)[0];
+      if (lastRouter) {
+        let lastMenus = [lastRouter]
+        if (lastRouter.children) {
+          lastMenus = [
+            {
+              ...lastRouter.children[0],
+              label: lastRouter.label
+            },
+            {
+              ...lastRouter.children.find((m) => m.key === currentPage.name)
+            }
+          ]
+        }
+        setMenus([
+          ...brRouters.filter((m) => m.key !== lastRouter.key),
+          ...lastMenus
+        ]);
+      } else {
+        setMenus(brRouters);
+      }
     }
   }, [location, currentPage])
 

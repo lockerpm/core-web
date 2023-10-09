@@ -15,7 +15,7 @@ import global from '../../../config/global';
 
 import {
   LogoutOutlined,
-  PlusOutlined
+  LockOutlined
 } from '@ant-design/icons'
 
 function DropdownMenu() {
@@ -63,31 +63,9 @@ function DropdownMenu() {
       type: 'divider',
     },
     {
-      key: 'locker_help_center',
-      label: <a href={':;'} target="_blank">
-        {t('sidebar.locker_help_center')}
-      </a>
-    },
-    {
-      key: 'locker_community_forum',
-      label: <a href={':;'} target="_blank">
-        {t('sidebar.locker_community_forum')}
-      </a>
-    },
-    {
-      key: 'status_page',
-      label: <a href={':;'} target="_blank">
-        {t('sidebar.status_page')}
-      </a>
-    },
-    {
-      key: 'terms_policy',
-      label: <a href={':;'} target="_blank">
-        {t('sidebar.terms_policy')}
-      </a>
-    },
-    {
-      type: 'divider',
+      key: 'lock',
+      icon: <LockOutlined />,
+      label: <span>{t('sidebar.lock_your_account')}</span>
     },
     {
       key: 'logout',
@@ -98,14 +76,17 @@ function DropdownMenu() {
   ]
 
 
-  const dropdownClick = (item) => {
+  const dropdownClick = async (item) => {
     if (item.key === 'account') {
       if (isCloud) {
         window.open(process.env.REACT_APP_LOCKER_ID_URL)
       } else {
+        global.navigate('SETTINGS_ACCOUNT')
       }
     } else if (item.key === 'logout') {
       authServices.logout();
+    } else if (item.key === 'lock') {
+      await authServices.redirect_login();
     }
   }
 
