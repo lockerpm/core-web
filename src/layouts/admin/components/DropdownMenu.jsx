@@ -103,7 +103,6 @@ function DropdownMenu() {
       if (isCloud) {
         window.open(process.env.REACT_APP_LOCKER_ID_URL)
       } else {
-        global.navigate('ACCOUNT_DETAILS')
       }
     } else if (item.key === 'logout') {
       authServices.logout();

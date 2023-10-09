@@ -156,10 +156,6 @@
       "title": "Warning"
     }
   },
-  "locker": {
-    "name": "Locker Password Manager",
-    "quick_share": "Quick Share"
-  },
   "sidebar": { 
     "account_setting": "Setting",
     "logout": "Log out",
@@ -167,7 +163,24 @@
     "locker_help_center": "Locker Help Center",
     "locker_community_forum": "Locker Community Forum",
     "status_page": "Status Page",
-    "terms_policy": "Terms & Policy"
+    "terms_policy": "Terms & Policy",
+    "inventory": "Inventory",
+    "all": "All",
+    "password": "Password",
+    "notes": "Notes",
+    "cards": "Cards",
+    "crypto_backups": "Crypto Backups",
+    "identities": "Identities",
+    "authenticator": "Authenticator",
+    "security_tools": "Security_tools",
+    "shares": "Shares",
+    "private_email": "Private_email",
+    "trash": "Trash",
+    "settings": "Settings",
+    "account": "Account",
+    "import_export": "Import/Export",
+    "security": "Security",
+    "notifications": "Notifications"
   },
   "auth_pages": {
     "username": "Email",
@@ -211,17 +224,6 @@
     "created": "Created",
     "accessed": "Accessed"
   },
-  "members": {
-    "title": "Members",
-    "new": "Add New Member",
-    "edit": "Edit Member"
-  },
-  "member": {
-    "username_description": "Email of new member",
-    "role_description": "Role of new member",
-    "full_name_description": "Full name of new member",
-    "new_member_info": "New member information"
-  },
   "change_password": {
     "title": "Change Password",
     "subtitle": "Please enter your current password to change your password.",
@@ -246,12 +248,6 @@
       "delete_data": "Delete Data",
       "delete_data_desc": "Delete add data permanently, including all your data will be deleted."
     }
-  },
-  "notifications": {
-    "title": "Notifications"
-  },
-  "manage_sessions": {
-    "title": "Manage Sessions"
   },
   "drag_upload": {
     "action": "Click or drag",
@@ -359,5 +355,8 @@
     "confirm_master_password": "Confirm Master Password",
     "master_password_hint": "Master Password hint (Optional)",
     "note": "CyStack cannot view, cannot store, nor can it recover your Master Password in case you forget or lose it."
+  },
+  "vault": {
+    "all_items": "All items"
   }
 }  

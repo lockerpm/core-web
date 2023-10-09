@@ -24,9 +24,6 @@ function SidebarCenter(props) {
   const currentMenu = useMemo(() => {
     if (currentPage) {
       return menus.find((m) => {
-        if (m.children) {
-          return !!m.children.find((c) => c.key === currentPage.name)
-        }
         if (currentPage.parent) {
           return m.key === currentPage.parent && m.parent
         }
@@ -71,7 +68,7 @@ function SidebarCenter(props) {
         />
       }
       <Menu
-        defaultOpenKeys={[currentMenu?.key]}
+        defaultOpenKeys={sidebarMenus.filter((m) => m.children).map((m) => m.key)}
         selectedKeys={[currentPage?.parent || currentPage?.key]}
         mode="inline"
         collapsed={collapsed.toString()}

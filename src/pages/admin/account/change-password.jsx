@@ -28,8 +28,8 @@ const AccountChangePassword = (props) => {
         </Col>
         <Col lg={8}  md={16} sm={16} xs={24}>
           <ChangePasswordForm
-            onCancel={() => global.navigate('ACCOUNT_DETAILS')}
-            callback={() => global.navigate('ACCOUNT_DETAILS')}
+            onCancel={() => {}}
+            callback={() => {}}
             cancelText={t('button.cancel')}
             okText={t('button.save_changes')}
           />
