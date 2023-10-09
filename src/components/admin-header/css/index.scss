@@ -1,0 +1,12 @@
+.admin-header {
+  height: 32px;
+  &__left {
+    &--title {
+      color: var(--header-title-color);
+    }
+
+    &--subtitle {
+      color: var(--header-subtitle-color);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.upload-file {
+  .ant-upload {
+    &.ant-upload-select {
+      margin: 0 !important;
+      width: 280px !important;
+      max-width: 100%;
+      max-height: auto;
+      height: 280px !important;
+      background-color: #ffff !important;
+    }
+  }
+}

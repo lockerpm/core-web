@@ -1,0 +1,12 @@
+.ant-card {
+  .ant-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    li {
+      width: auto !important;
+      padding: 0 24px;
+    }
+  }
+}

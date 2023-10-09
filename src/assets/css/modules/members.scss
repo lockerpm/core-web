@@ -1,0 +1,60 @@
+.ant-select-selector {
+  .ant-select-selection-item {
+    .member {
+      .ant-avatar {
+        width: 20px !important;
+        height: 20px !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          height: 20px !important;
+          width: 20px !important;
+        }
+
+        .anticon-user {
+          font-size: 14px;
+        }
+      }
+
+      >div {
+        display: flex;
+        align-items: center;
+      }
+
+      p {
+        line-height: 16px;
+        font-size: 12px;
+        font-weight: 500 !important;
+
+        &.email {
+          display: none;
+        }
+
+        small {
+          line-height: 12px;
+        }
+      }
+    }
+  }
+}
+
+.popup-members {
+  .ant-select-item-option-content {
+    img {
+      height: 100% !important;
+    }
+
+    p {
+      &.fullname {
+        line-height: 16px;
+      }
+
+      &.email {
+        line-height: 14px;
+      }
+    }
+  }
+}

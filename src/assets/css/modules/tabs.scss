@@ -1,0 +1,21 @@
+.ant-tabs {
+  .ant-tabs-nav-list {
+    .ant-tabs-tab {
+      font-weight: 600;
+    }
+  }
+  &.ant-tabs-left {
+    .ant-tabs-nav {
+      .ant-tabs-nav-wrap {
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            border: 1px solid rgba(5, 5, 5, 0.06) !important;
+          }
+        }
+      }
+    }
+    .ant-tabs-content-holder {
+      border-left: none;
+    }
+  }
+}

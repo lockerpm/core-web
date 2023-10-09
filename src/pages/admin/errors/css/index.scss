@@ -1,0 +1,11 @@
+.admin-error {
+  width: 100%;
+  height: calc(100vh - var(--header-height) - var(--page-content-spacing));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__content {
+    max-width: 400px;
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "common": {
+    "app_name": "Locker Password Manager",
+    "app_title": "For Developments",
+    "total": "Total",
+    "status": "Status",
+    "created_time": "Created Time",
+    "updated_time": "Updated Time",
+    "created_by": "Created by",
+    "title": "Title",
+    "actions": "Actions",
+    "type": "Type",
+    "here": "here",
+    "assignee": "Assignee",
+    "products": "Products",
+    "no_data": "No data",
+    "confirm": "Confirm",
+    "delete_question": "Are you sure you want to delete?",
+    "information": "Information",
+    "value": "Value",
+    "error": "Error",
+    "all_time": "All Time",
+    "last_week": "Last Week",
+    "last_month": "Last Month",
+    "custom_time": "Custom Time",
+    "public": "Public",
+    "private": "Private",
+    "language": "Language",
+    "english": "English (US)",
+    "vietnamese": "Vietnamese (VN)",
+    "count": "Count",
+    "search_all": "Search all system data",
+    "back": "Back",
+    "all": "All",
+    "all_default": "All (*)",
+    "copy": "Copy",
+    "copied": "Copied",
+    "access_type": "Access Type",
+    "client": "Client",
+    "location": "Location",
+    "time": "Time",
+    "ip_address": "IP Address",
+    "last_used": "Last Used",
+    "last_ip_address": "Last IP Address",
+    "read": "Read",
+    "write": "Read & Write",
+    "items": "items",
+    "description": "Description",
+    "active": "Active",
+    "inactive": "Inactive",
+    "role": "Role",
+    "full_name": "Full name",
+    "access_date": "Access date",
+    "email": "Email",
+    "on": "On", 
+    "off": "Off",
+    "no": "No.",
+    "coming_soon": "Coming Soon", 
+    "results": "Results",
+    "no_file_chosen": "No file chosen"
+  },
+  "button": {
+    "add": "Add",
+    "edit": "Edit",
+    "create": "Create",
+    "update": "Update",
+    "detail": "Detail",
+    "delete": "Delete",
+    "next": "Next",
+    "back": "Back",
+    "review": "Review",
+    "submit": "Submit",
+    "reset": "Reset",
+    "see_more": "See more",
+    "cancel": "Cancel",
+    "save": "Save",
+    "go_back": "Go Back",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "regenerate": "Regenerate",
+    "import": "Import",
+    "export": "Export",
+    "download": "Download", 
+    "new_member": "New Member",
+    "logout": "Log out",
+    "save_changes": "Save Changes",
+    "delete_data": "Delete Data",
+    "enable": "Enable",
+    "disable": "Disable",
+    "verify": "Verify",
+    "send_test": "Send test email",
+    "send": "Send",
+    "choose_file": "Choose file",
+    "reinvite": "Reinvite",
+    "select": "Select"
+   },
+  "placeholder": {
+    "name": "Enter name",
+    "search": "Enter search information...",
+    "description": "Enter description",
+    "type": "Select type",
+    "value": "Enter value",
+    "date": "Select date",
+    "select": "Please select",
+    "enter": "Please enter",
+    "ip": "Please enter new IPs address",
+    "username": "Enter email",
+    "email": "Enter your email",
+    "password": "Enter your password",
+    "code": "Hope that you got the code...",
+    "otp": "Enter the 6-digit code"
+  },
+  "validation": {
+    "required": "{{name}} is required.",
+    "invalid": "{{name}} is invalid.",
+    "existed": "{{name}} is existed.",
+    "least_length": "Ensure this {{name}} has at least {{ min }} characters.",
+    "passwords_not_match": "The two passwords that you entered do not match!",
+    "key_existed": "This key already exists on the chosen environment"
+  },
+  "notification": {
+    "error": {
+      "title": "Error",
+      "message": {
+        "default": "An error occurred, please try again later!"
+      }
+    },
+    "success": {
+      "title": "Success",
+      "member": {
+        "created": "The new member is added.",
+        "updated": "The member information is updated.",
+        "deleted": "The member is deleted.",
+        "reinvited": "The invite email send successfully"
+      },
+      "change_password": {
+        "changed": "Your password is changed."
+      },
+      "account_details": {
+        "updated": "Account details is updated."
+      },
+      "factor2": {
+        "enabled": "Tow Factor Authentication is enabled",
+        "disabled": "Tow Factor Authentication is disabled"
+      },
+      "email_setting": {
+        "updated": "Mail plugin is set up success.",
+        "reset": "Mail setting reset successfully.",
+        "send_test": "Send test email successfully."
+      }
+    },
+    "warning": {
+      "title": "Warning"
+    }
+  },
+  "locker": {
+    "name": "Locker Password Manager",
+    "quick_share": "Quick Share"
+  },
+  "sidebar": { 
+    "account_setting": "Setting",
+    "logout": "Log out",
+    "your_account": "My Account",
+    "locker_help_center": "Locker Help Center",
+    "locker_community_forum": "Locker Community Forum",
+    "status_page": "Status Page",
+    "terms_policy": "Terms & Policy"
+  },
+  "auth_pages": {
+    "username": "Email",
+    "password": "Password",
+    "otp": "OTP code",
+    "confirm_password": "Confirm Password",
+    "sign_in": {
+      "title": "Welcome back!"
+    },
+    "sign_up": {
+      "title": "Create admin account"
+    },
+    "otp_code": {
+      "title": "Enter 2FA Code",
+      "description": "Enter the 6-digit code sent to your registered device",
+      "remember_device": "Remember this device"
+    }
+  },
+  "error_pages": {
+    "admin_error": {
+      "title": "Something went wrong",
+      "description": "We ran into a problem and could not continue. You can ask your administrator or try again latter."
+    },
+    "permission": {
+      "title": "You do not have permission to access this feature",
+      "login_other_account": "Sign in to another account"
+    },
+    "page_not_found": {
+      "title": "Page not found",
+      "go_back_dashboard": "Go back to the Dashboard"
+    }
+  },
+  "roles": {
+    "admin": "Admin",
+    "member": "Member"
+  },
+  "statuses": {
+    "confirmed": "Confirmed",
+    "invited": "Invited",
+    "accepted": "Accepted",
+    "created": "Created",
+    "accessed": "Accessed"
+  },
+  "members": {
+    "title": "Members",
+    "new": "Add New Member",
+    "edit": "Edit Member"
+  },
+  "member": {
+    "username_description": "Email of new member",
+    "role_description": "Role of new member",
+    "full_name_description": "Full name of new member",
+    "new_member_info": "New member information"
+  },
+  "change_password": {
+    "title": "Change Password",
+    "subtitle": "Please enter your current password to change your password.",
+    "your_password": "Your Password",
+    "current_password": "Current Password",
+    "new_password": "New password",
+    "confirm_new_password": "Confirm new password"
+  },
+  "account_details": {
+    "title": "Account Details",
+    "description": "Manage your profile details, account preferences, account security and privacy.",
+    "personal_info": "Personal Info",
+    "profile_photo": "Your Profile Photo",
+    "security_settings": "Security Settings",
+    "change_password": "Change Password",
+    "2fa": {
+      "setup": "Setup Two Factor Authentication",
+      "setup_on": "Two-step authentication is"
+    },
+    "danger_zone": {
+      "title": "Danger zone",
+      "delete_data": "Delete Data",
+      "delete_data_desc": "Delete add data permanently, including all your data will be deleted."
+    }
+  },
+  "notifications": {
+    "title": "Notifications"
+  },
+  "manage_sessions": {
+    "title": "Manage Sessions"
+  },
+  "drag_upload": {
+    "action": "Click or drag",
+    "description": "file to this area to upload",
+    "note": "SVG, PNG, JPG or GIF (max. 800x400px)",
+    "invalid": "Invalid! File is image SVG, PNG, JPG or GIF",
+    "large": "File size is very large! Please select file has size 800x400px",
+    "content_invalid": "File content is invalid."
+  },
+  "2fa": {
+    "title": "Setup Two Factor Authentication",
+    "description": "After entering your password, you’ll be asked for a second authentication step.",
+    "name": "App Authentication",
+    "name_description": "Keep your account extra secure with a second login step.",
+    "enter_code": "Enter the code that was generated here",
+    "step1": {
+      "title": "Download Locker Password Manager",
+      "description": "Download the Locker Password Manager app for your mobile phone, desktop computer, or install it in your browser extension."
+    },
+    "step2": {
+      "title": "Write down this following key",
+      "description": "Write down this key <key>{{key}}</key> on the paper and store it safe in Locker note. You will need it if you lose or change your device."
+    },
+    "step3": {
+      "title": "Go to OTP tab in Locker Password Manager app",
+      "description": "Open the Locker Password Manager app and navigate to the OTP tab. Scan QR barcode revealed below with the Locker App."
+    },
+    "step4": {
+      "title": "Enter Authentication code",
+      "description": "The Authentication code given by your Locker app in the box."
+    }
+  },
+  "email_setting": {
+    "title": "Email Settings",
+    "description": "Integrate with an Email service Provider to enable email notifications for your group members.",
+    "email_provider": {
+      "title": "Email Provider",
+      "description": "Choose an Email Provider that you want to use for email sending."
+    },
+    "set_up_integration": {
+      "title": "Set up Integration"
+    },
+    "general": {
+      "from_email": "From email",
+      "from_email_placeholder": "Default address that emails will be sent from",
+      "from_name": "From name",
+      "from_name_placeholder": "Default name that emails will be sent from"
+    },
+    "smtp": {
+      "title": "SMTP",
+      "provider": "SMTP Provider",
+      "description": "The SMTP Credentials will be stored in your database. A few important expectations about your server:",
+      "description1": "It must support LOGIN authentication",
+      "description2": "It must support TLS 1.0 or higher",
+      "note": "Need help to integrate with SMTP?",
+      "note_link": "Follow our instructions.",
+      "host": "Host",
+      "host_placeholder": "Your SMTP Host",
+      "port": "Port",
+      "port_placeholder": "SMTP Port",
+      "port_description": "Common ports for SMTP transmission are 25, 465, 587.",
+      "username": "Username",
+      "username_placeholder": "Your SMTP Username",
+      "password": "Password",
+      "password_placeholder": "Your SMTP Password "
+    },
+    "amazon_ses": {
+      "title": "Amazon SES"
+    },
+    "send_grid": {
+      "title": "SendGrid",
+      "api_key": "API Key",
+      "api_key_placeholder": "SendGrid’s API Key",
+      "domain": "Domain/Subdomain",
+      "domain_placeholder": "Domain/Subdomain configured in SendGrid" 
+    },
+    "sendinblue": {
+      "title": "Sendinblue"
+    },
+    "google": {
+      "title": "Google"
+    },
+    "outlook": {
+      "title": "Outlook"
+    },
+    "send_test": {
+      "title": "Send test email",
+      "description": "Enter an email address to send a test email to"
+    },
+    "reset": {
+      "title": "Reset Email Plugin?",
+      "description": "Are you sure to reset? All changes you have made will be reset and your users will no longer receive emails."
+    }
+  }
+}  

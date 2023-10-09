@@ -1,0 +1,74 @@
+// .ant-table-content {
+//   .ant-table-thead {
+//     &:hover {
+//       .ant-table-selection-column {
+//         .ant-checkbox {
+//           display: block !important;
+//         }
+//       }
+//     }
+//     .ant-table-selection-column {
+//       .ant-table-selection {
+//         .ant-checkbox-wrapper {
+//           .ant-checkbox {
+//             display: none;
+//             &.ant-checkbox-indeterminate {
+//               display: block !important;
+//             }
+//           }
+//           &.ant-checkbox-wrapper-checked {
+//             .ant-checkbox {
+//               display: block !important;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .ant-table-tbody {
+//     .ant-table-row {
+//       &:hover {
+//         .ant-table-selection-column {
+//           .ant-checkbox {
+//             display: block !important;
+//           }
+//         }
+//       }
+//       .ant-table-selection-column {
+//         .ant-checkbox-wrapper {
+//           .ant-checkbox {
+//             display: none;
+//           }
+//           &.ant-checkbox-wrapper-checked {
+//             .ant-checkbox {
+//               display: block !important;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media only screen and (max-width: 768px) {
+//   .ant-table-content {
+//     .ant-table-thead {
+//       .ant-table-selection-column {
+//         .ant-checkbox {
+//           display: block !important;
+//         }
+//       }
+//     }
+  
+//     .ant-table-tbody {
+//       .ant-table-row {
+//         .ant-table-selection-column {
+//           .ant-checkbox {
+//             display: block !important;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

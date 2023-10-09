@@ -1,0 +1,14 @@
+:root {
+  --header-height: 60px;
+  --page-height: calc(100vh - 60px);
+  --sidebar-top-height: 60px;
+  --sidebar-bottom-height: 0px;
+  --sidebar-width: 280px;
+  --sidebar-width-mobile: 240px;
+  --sidebar-top-height-collapsed: 112px;
+  --sidebar-width-collapsed: 72px;
+  --default-spacing: 12px;
+  --page-content-spacing: 32px;
+  --page-content-spacing-collapsed: 12px;
+  --admin-header-height: 60px;
+}
