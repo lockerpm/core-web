@@ -9,7 +9,8 @@ import {
   SettingOutlined,
   UserOutlined,
   ImportOutlined,
-  BellOutlined
+  BellOutlined,
+  FolderOutlined
 } from '@ant-design/icons'
 
 import { Trans } from 'react-i18next'
@@ -54,6 +55,11 @@ export default {
           label: <Trans i18nKey='sidebar.identities' />
         },
       ]
+    },
+    {
+      key: 'FOLDERS',
+      icon: <FolderOutlined />,
+      label: <Trans i18nKey='sidebar.folders' />,
     },
     {
       key: 'AUTHENTICATOR',

@@ -90,6 +90,11 @@ export default {
       element: 'Identities',
     },
     {
+      name: 'FOLDERS',
+      path: '/folders',
+      element: 'Folders',
+    },
+    {
       name: 'AUTHENTICATOR',
       path: '/authenticator',
       element: 'Authenticator',
