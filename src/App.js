@@ -28,7 +28,7 @@ import authServices from './services/auth'
 
 import i18n from './config/i18n'
 import global from './config/global'
-import jsCore from './core-js/secrets'
+import jsCore from './core-js/index'
 
 import pages from './pages'
 

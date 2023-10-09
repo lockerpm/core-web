@@ -2,8 +2,8 @@
 import Authenticate from './auth/authenticate'
 import SignIn from './auth/sign-in'
 import SignUp from './auth/sign-up'
-import Splash from './auth/splash'
 import OtpCode from './auth/otp-code'
+import Lock from './auth/lock'
 
 // Errors pages
 import Error403 from './errors/403'
@@ -24,8 +24,8 @@ export default {
   Authenticate,
   SignIn,
   SignUp,
-  Splash,
   OtpCode,
+  Lock,
 
   Error403,
   Error404,

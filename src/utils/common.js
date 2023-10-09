@@ -233,18 +233,6 @@ export const getRoutersByLocation = location => {
   return menus
 }
 
-export const accessType = type => {
-  return global.constants.ACCESS_TYPES.find(t => t.value === type)
-}
-
-export const accessKeyPermission = permission => {
-  return global.constants.ACCESS_KEY_PERMISSIONS.find(t => t.value === permission)
-}
-
-export const accessKeyStatus = activated => {
-  return global.constants.ACCESS_KEY_STATUSES.find(t => t.value === activated)
-}
-
 export const scrollToTop = () => {
   const layoutContent = document.querySelector('.layout-content')
   if (layoutContent) {
@@ -322,22 +310,6 @@ export const getColorByIndex = index => {
   return newColors[key1][key2]
 }
 
-export const getEnvironment = (id, envs = []) => {
-  const newEnvs = envs.map((env, index) => {
-    return {
-      ...env,
-      environment: {
-        ...env.environment,
-        color: getColorByIndex(index)
-      }
-    }
-  })
-  return newEnvs.find(e => e.id === id)?.environment || {
-    name: <Trans i18nKey='common.all_default' />,
-    color: 'default'
-  }
-}
-
 export const getProject = (id, projects = []) => {
   return projects.find(e => e.id == id)
 }
@@ -368,20 +340,4 @@ export const downloadCSV = (rows = []) => {
   })
   const encodedUri = encodeURI(csvContent)
   window.open(encodedUri)
-}
-
-export const wsMemberRole = role => {
-  return global.constants.WORKSPACE_MEMBER_ROLES.find(r => r.value == role)
-}
-
-export const wsMemberStatus = status => {
-  return global.constants.WORKSPACE_MEMBER_STATUSES.find(r => r.value == status)
-}
-
-export const projectMemberRole = role => {
-  return global.constants.PROJECT_MEMBER_ROLES.find(r => r.value == role) || global.constants.PROJECT_MEMBER_ROLES[0]
-}
-
-export const projectMemberStatus = status => {
-  return global.constants.PROJECT_MEMBER_STATUSES.find(r => r.value == status) || global.constants.PROJECT_MEMBER_STATUSES[0]
 }

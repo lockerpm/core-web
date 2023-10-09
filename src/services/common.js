@@ -1,4 +1,3 @@
-import authServices from './auth'
 import userServices from './user'
 import coreServices from './core'
 import syncServices from './sync'
@@ -6,18 +5,6 @@ import syncServices from './sync'
 import store from '../store'
 import storeActions from '../store/actions'
 import global from '../config/global'
-
-async function update_auth_info(data, isUnlock = true) {
-  authServices.update_access_token(data.token)
-  authServices.update_access_token_type(data.token_type)
-  userServices.update_account_info({
-    username: data.username,
-    full_name: data.full_name,
-  })
-  if (isUnlock) {
-    await coreServices.unlock(data)
-  }
-}
 
 async function sync_profile() {
   const { profile } = await syncServices.sync_profile_data();
@@ -49,20 +36,7 @@ async function sync_ciphers() {
   store.dispatch(storeActions.updateSyncing(false))
 }
 
-async function fetch_data(callback = () => {}) {
-  const requests = [
-    userServices.factor2(),
-  ]
-  await Promise.all(requests).then(async ([
-    factor2,
-  ]) => {
-    store.dispatch(storeActions.updateFactor2(factor2))
-  })
-}
-
 export default {
-  update_auth_info,
   sync_profile,
   sync_ciphers,
-  fetch_data
 }

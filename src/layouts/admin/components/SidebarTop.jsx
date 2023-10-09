@@ -20,10 +20,9 @@ import {
 function SidebarTop(props) {
   const { collapsed } = props
   const { t } = useTranslation();
-  const selectedWorkspace = useSelector((state) => state.workspace.selectedWorkspace);
 
   const handleClickLogo = () => {
-    global.navigate('PROJECTS', { workspace_id: selectedWorkspace.id });
+    global.navigate('VAULT');
   }
 
   return (

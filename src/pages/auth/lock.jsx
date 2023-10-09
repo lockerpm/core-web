@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './css/index.scss';
+import './css/auth.scss';
 
 import {
   Image,
@@ -23,19 +23,17 @@ import { useNavigate } from 'react-router-dom';
 
 import storeActions from "../../store/actions";
 
+import coreService from "../../services/core";
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
 
-import { convertStringToQuery } from '../../secrets-web/src/utils/common';
-import global from "../../secrets-web/src/config/global";
-
-import {
-} from '../../utils/common'
+import { convertStringToQuery } from '../../utils/common';
+import global from "../../config/global";
 
 const Lock = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [callingAPI, setCallingAPI] = useState(false);
@@ -47,21 +45,46 @@ const Lock = () => {
   const isLoading = useSelector((state) => state.system.isLoading);
   const query = convertStringToQuery(window.location.search);
 
+  useEffect(() => {
+    fetchMe();
+    fetchUsersMe();
+  }, [])
+
+  const fetchMe = async () => {
+    await userServices.me().then((response) => {
+      dispatch(storeActions.updateUserInfo(response))
+    }).catch(async () => {
+      await authServices.logout();
+    })
+  }
+
+  const fetchUsersMe = async () => {
+    await userServices.users_me().then((response) => {
+      dispatch(storeActions.updateUsersMe(response))
+      if (!response.is_pwd_manager) {
+        global.navigate('CREATE_MASTER_PASSWORD')
+      }
+    }).catch(async () => {
+      await authServices.logout();
+    })
+  }
+
   const handleUnlock = async () => {
-    setCallingAPI(true)
-    const password = form.getFieldValue('masterPassword')
-    await userServices.new_session({
-      masterPassword: password,
-      email: userInfo.email
-    }).then(async (response) => {
-      await commonServices.update_auth_info({...response, password, username: userInfo.email })
-      await commonServices.sync_data();
-      const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
-      navigate(returnUrl);
-    }).catch((error) => {
-      global.pushError(error)
-    });
-    setCallingAPI(false)
+    form.validateFields().then(async (values) => {
+      setCallingAPI(true)
+      await userServices.users_session({
+        masterPassword: values.masterPassword,
+        email: userInfo.email
+      }).then(async (response) => {
+        await coreService.unlock({...response, password: values.masterPassword, username: userInfo.email })
+        const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
+        navigate(returnUrl);
+        // await commonServices.sync_data();
+      }).catch((error) => {
+        global.pushError(error)
+      });
+      setCallingAPI(false)
+    })
   }
 
   const handleLogout = async () => {

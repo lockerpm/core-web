@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 
 import storeActions from "../../store/actions";
 import authServices from "../../services/auth";
+import coreServices from "../../services/core";
 import commonServices from "../../services/common";
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
@@ -46,16 +47,14 @@ const OtpCode = () => {
       otp: values.otp,
       save_device: values.save_device || false,
     }).then(async (response) => {
-      await commonServices.update_auth_info({
+      await coreServices.unlock({
         ...loginPayload,
         ...response
       })
       await commonServices.sync_profile()
       await Promise.all([
-        commonServices.fetch_data(),
         commonServices.sync_ciphers()
       ])
-      dispatch(storeActions.updateLoginInfo({}))
       setCallingAPI(false)
     }).catch((error) => {
       global.pushError(error)

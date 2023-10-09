@@ -48,22 +48,6 @@ const CreateMasterPassword = () => {
 
   const handleCreateMasterPassword = async () => {
     setCallingAPI(true)
-    // const password = form.getFieldValue('masterPassword')
-    // await authServices.new_session({
-    //   masterPassword: password,
-    //   email: userInfo.email
-    // }).then(async (response) => {
-    //   await coreServices.unlock({ password, username: userInfo.email, ...response })
-    //   await syncServices.sync().then(async (response) => {
-    //     dispatch(storeActions.updateProjects(response.projects))
-    //     await coreServices.sync_data(response)
-    //   })
-    //   const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
-    //   navigate(returnUrl);
-    // }).catch((error) => {
-    //   const message = error?.response?.data?.message;
-    //   global.notification('error', t('notification.error.title'), message || t('notification.error.message.default'))
-    // });
     setCallingAPI(false)
   }
 

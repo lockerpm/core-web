@@ -13,26 +13,13 @@ import global from '../../../config/global';
 function SidebarCenter(props) {
   const { collapsed } = props
   const currentPage = useSelector((state) => state.system.currentPage);
-  const wsRole = useSelector((state) => state.workspace.wsRole);
-  const selectedWorkspace = useSelector((state) => state.workspace.selectedWorkspace);
-  const selectedProject = useSelector((state) => state.project.selectedProject);
-  const workspaces = useSelector((state) => state.workspace.workspaces);
 
   const { t } = useTranslation();
 
   const menus = useMemo(() => {
-    let menusInfo = []
-    if (selectedProject) {
-      menusInfo = global.menus.ADMIN_MENUS.filter(
-        ((m) => !m.pRoles || m.pRoles.includes(selectedProject?.role))
-      )
-    } else {
-      menusInfo = global.menus.ADMIN_MENUS.filter(
-        ((m) => !m.wsRoles || m.wsRoles.includes(wsRole))
-      )
-    }
+    let menusInfo = global.menus.ADMIN_MENUS
     return menusInfo
-  }, [wsRole, selectedProject])
+  }, [])
 
   const currentMenu = useMemo(() => {
     if (currentPage) {
@@ -64,10 +51,7 @@ function SidebarCenter(props) {
     } else {
       routerInfo = global.routers.ADMIN_ROUTERS.find((r) => r.name === menu.key)
     }
-    global.navigate(routerInfo.name, {
-      workspace_id: currentPage.params?.workspace_id || workspaces[0]?.id,
-      project_id: currentPage.params?.project_id || null,
-    });
+    global.navigate(routerInfo.name);
   }
 
   return (
@@ -79,7 +63,7 @@ function SidebarCenter(props) {
           mode="inline"
           collapsed={collapsed.toString()}
           items={[{
-            ...getRouterByName('PROJECTS', { workspace_id: currentPage.params?.workspace_id || selectedWorkspace?.id || workspaces[0]?.id  }),
+            ...getRouterByName('VAULT'),
             label: t('common.back'),
             icon: <LeftOutlined />
           }]}

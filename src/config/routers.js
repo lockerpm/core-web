@@ -27,14 +27,14 @@ export default {
       not_auth: true
     },
     {
-      name: 'CHANGE_INFORMATION',
-      path: '/change-information',
-      element: 'ChangeInformation'
-    },
-    {
       name: 'OTP_CODE',
       path: '/otp-code',
       element: 'OtpCode',
+    },
+    {
+      name: 'CREATE_MASTER_PASSWORD',
+      path: '/create-master-password',
+      element: 'CreateMasterPassword',
     },
   ],
 

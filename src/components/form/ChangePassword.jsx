@@ -34,31 +34,6 @@ const ChangePasswordForm = (props) => {
   const handleChangePassword = async (values) => {
     const query = getRouterByLocation(window.location)?.query
     setCallingAPI(true);
-    if (values.full_name) {
-      await userServices.update({
-        username: userServices.account_info().username,
-        full_name: values.full_name
-      })
-    }
-    await userServices.change_password({
-      ...values,
-      is_check_password: query?.is_check_password == 0 ? false : true
-    }).then(async () => {
-      const loginPayload = {
-        username: userServices.account_info().username,
-        password: values.new_password
-      }
-      await authServices.login(loginPayload).then(async (response) => {
-        await commonServices.update_auth_info({ ...loginPayload, ...response });
-        global.pushSuccess(t('notification.success.change_password.changed'));
-        callback();
-
-      }).catch((error) => {
-        global.pushError(error)
-      });
-    }).catch((error) => {
-      global.pushError(error)
-    })
     setCallingAPI(false);
   }
 

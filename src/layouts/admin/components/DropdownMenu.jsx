@@ -21,9 +21,7 @@ import {
 function DropdownMenu() {
   const { t } = useTranslation();
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const workspaces = useSelector((state) => state.workspace.workspaces);
   const isCloud = useSelector((state) => state.system.isCloud);
-  const selectedWorkspace = useSelector((state) => state.workspace.selectedWorkspace);
 
   const AvatarIcon = useMemo((size = 32) => {
     if (userInfo?.avatar) {
@@ -50,35 +48,6 @@ function DropdownMenu() {
       label: <div className='account-info'>
         <div>{userInfo?.full_name}</div>
       </div>,
-    },
-    {
-      key: 'workspace',
-      label: <span>
-        <span className='font-semibold'>
-          {t('common.workspace')}:</span> <span>{selectedWorkspace?.name}
-        </span>
-      </span>,
-      children: isCloud ? [
-        ...workspaces.map((w) => ({
-          key: `workspace_${w.id}`,
-          label: <p className={w.id === selectedWorkspace?.id ? 'text-primary' : ''}>
-            {w.name}
-          </p>,
-        })),
-        {
-          type: 'divider'
-        },
-        {
-          key: 'create',
-          label: <div
-            className='flex items-center'
-            onClick={() => global.navigate('CREATE_WORKSPACE')}
-          >
-            <PlusOutlined className='mr-2'/>
-            {t('button.new_workspace')}
-          </div>
-        }
-      ] : null
     },
     {
       key: 'language',
@@ -138,9 +107,6 @@ function DropdownMenu() {
       }
     } else if (item.key === 'logout') {
       authServices.logout();
-    } else if (item.key.includes('workspace_')) {
-      const workspace_id = item.key.split('workspace_')[1]
-      global.navigate('PROJECTS', { workspace_id })
     }
   }
 

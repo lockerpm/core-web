@@ -15,16 +15,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
-import storeActions from "../../store/actions";
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
-import commonServices from "../../services/common";
 
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
-
-import {
-  convertStringToQuery
-} from '../../utils/common';
 
 import global from "../../config/global";
 
@@ -32,51 +26,59 @@ const SingIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [callingAPI, setCallingAPI] = useState(false);
   const locale = useSelector((state) => state.system.locale);
-  const accountInfo = userServices.account_info();
   const [form] = Form.useForm();
 
+  const username = Form.useWatch('username', form);
+  
+  const [callingAPI, setCallingAPI] = useState(false);
+  const [authMethod, setAuthMethod] = useState(null);
+
   useEffect(() => {
-    if (accountInfo) {
-      form.setFieldsValue({
-        username: accountInfo.username,
-        password: ''
-      })
-    } else {
-      form.setFieldsValue({
-        username: '',
-        password: ''
-      })
-    }
+    form.setFieldsValue({
+      username: null,
+      password: null
+    })
   }, [])
 
-  const handleSignIn = async (values) => {
+  useEffect(() => {
+    setAuthMethod(null)
+  }, [username])
+
+  const handleSubmit = async (values) => {
     setCallingAPI(true)
-    await authServices.login(values).then(async (response) => {
-      if (response.is_factor2) {
-        dispatch(storeActions.updateLoginInfo({
-          ...values,
-          ...response
-        }));
-        global.navigate('OTP_CODE')
-      } else {
-        await commonServices.update_auth_info({ ...values, ...response })
-        if (!response.is_password_changed) {
-          global.navigate('CHANGE_INFORMATION', {}, {});
-        } else {
-          await commonServices.sync_profile()
-          await Promise.all([
-            commonServices.fetch_data(),
-            commonServices.sync_ciphers()
-          ])
-        }
-      }
+    if (!authMethod) {
+      await handleAuthMethod(values)
+    } else {
+      await handleSignIn(values)
+    }
+    setCallingAPI(false)
+  }
+
+  const handleAuthMethod = async (values) => {
+    setCallingAPI(true)
+    await authServices.auth_method({
+      username: values.username
+    }).then(async (response) => {
+      setAuthMethod(response)
     }).catch((error) => {
       global.pushError(error)
     });
-    setCallingAPI(false)
   }
+
+  const handleSignIn = async (values) => {
+    await authServices.login({
+      ...values,
+      language: locale
+    }).then(async (response) => {
+      authServices.update_access_token(response.token)
+      global.navigate('LOCK')
+    }).catch((error) => {
+      global.pushError(error)
+    });
+  }
+
+
 
   return (
     <div
@@ -114,42 +116,43 @@ const SingIn = () => {
             <Form
               form={form}
               key={locale}
-              onFinish={handleSignIn}
+              onFinish={handleSubmit}
             >
-              <div className="mb-4">
-                <Form.Item
-                  name="username"
-                  rules={[
-                    global.rules.REQUIRED(t('auth_pages.username')),
-                  ]}
-                >
-                  <Input
-                    placeholder={t('auth_pages.username')}
-                    size="large"
-                    disabled={callingAPI}
-                  />
-                </Form.Item>
-              </div>
               <Form.Item
-                name="password"
+                name="username"
                 rules={[
-                  global.rules.REQUIRED(t('auth_pages.password')),
+                  global.rules.REQUIRED(t('auth_pages.username')),
                 ]}
               >
-                <Input.Password
-                  placeholder={t('auth_pages.password')}
+                <Input
+                  placeholder={t('placeholder.username')}
                   size="large"
                   disabled={callingAPI}
                 />
               </Form.Item>
+              {
+                authMethod && <Form.Item
+                  name="password"
+                  rules={[
+                    global.rules.REQUIRED(t('auth_pages.password')),
+                  ]}
+                >
+                  <Input.Password
+                    placeholder={t('auth_pages.password')}
+                    size="large"
+                    disabled={callingAPI}
+                  />
+                </Form.Item>
+              }
               <Button
-                className="w-full mt-6"
+                className="w-full"
                 size="large"
                 type="primary"
                 htmlType="submit"
                 loading={callingAPI}
+                disabled={!username}
               >
-                {t('button.sign_in')}
+                { authMethod ? t('button.sign_in') : t('button.continue')}
               </Button>
             </Form>
           </Card>

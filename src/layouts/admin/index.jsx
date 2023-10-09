@@ -43,13 +43,11 @@ function AdminLayout(props) {
   const collapsed = useSelector((state) => state.system.collapsed);
   const currentPage = useSelector((state) => state.system.currentPage);
   const isScrollToTop = useSelector((state) => state.system.isScrollToTop);
-  const isSync = useSelector((state) => state.core.isSync);
-  const isFetchProjects = useSelector((state) => state.project.isFetchProjects);
 
   const [respCollapsed, setRespCollapsed] = useState(false);
 
   const accessToken = authServices.access_token()
-  const { lastMessage } = useWebSocket(`${process.env.REACT_APP_WS_URL}?token=${accessToken}`);
+  const { lastMessage } = useWebSocket(`${process.env.REACT_APP_WS_URL}/cystack_platform/pm/sync?token=${accessToken}`);
 
   useEffect(() => {
     if (lastMessage) {
@@ -70,46 +68,13 @@ function AdminLayout(props) {
     convertSize()
   }, [location])
 
-  useEffect(() => {
-    if (isFetchProjects) {
-      fetchProjects()
-    }
-  }, [isFetchProjects])
-
   window.addEventListener("resize", (event) => {
     convertSize()
   });
 
-  const fetchProjects = async () => {
-    await projectServices.list({ paging: 0 }).then((response) => {
-      dispatch(storeActions.updateProjects(response))
-      if (currentPage.params?.project_id) {
-        dispatch(storeActions.updateSelectedProject(response.find((p) => p.id == currentPage.params?.project_id)))
-      }
-    }).catch(() => {
-      dispatch(storeActions.updateProjects([]))
-      dispatch(storeActions.updateSelectedProject(null))
-    })
-    dispatch(storeActions.updateIsFetchProjects(false));
-  }
-
   const handleSyncWsData = async (messageData) => {
     dispatch(storeActions.updateSyncing(true))
     if (messageData?.data?.id) {
-      if (messageData.type.includes('delete')) {
-        await global.jsCore.cipherService.delete(messageData.data.id)
-      } else if (messageData.data.project_id) {
-        const userId = await global.jsCore.userService.getUserId()
-        if (messageData.type.includes('secret')) {
-          const data = await secretServices.get(messageData.data.project_id, messageData.data.id)
-          const secretData = coreServices.convert_origin_item_to_cipher({ ...data, type: CipherType.Secret })
-          await global.jsCore.cipherService.upsert(new CipherData(secretData, userId))
-        } else if (messageData.type.includes('env')) {
-          const data = await environmentServices.get(messageData.data.project_id, messageData.data.id)
-          const secretData = coreServices.convert_origin_item_to_cipher({ ...data, type: CipherType.Environment })
-          await global.jsCore.cipherService.upsert(new CipherData(secretData, userId))
-        }
-      }
     }
     dispatch(storeActions.updateSyncing(false));
   }

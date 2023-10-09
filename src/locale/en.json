@@ -94,7 +94,8 @@
     "send": "Send",
     "choose_file": "Choose file",
     "reinvite": "Reinvite",
-    "select": "Select"
+    "select": "Select",
+    "continue": "Continue"
    },
   "placeholder": {
     "name": "Enter name",
@@ -106,7 +107,7 @@
     "select": "Please select",
     "enter": "Please enter",
     "ip": "Please enter new IPs address",
-    "username": "Enter email",
+    "username": "Enter Email or Username",
     "email": "Enter your email",
     "password": "Enter your password",
     "code": "Hope that you got the code...",
@@ -344,5 +345,19 @@
       "title": "Reset Email Plugin?",
       "description": "Are you sure to reset? All changes you have made will be reset and your users will no longer receive emails."
     }
+  },
+  "lock": {
+    "title": "Sign in to your account",
+    "description": "Enter your Master Password to unlock",
+    "master_password": "Master Password",
+    "master_password_hint": "Get Master Password hint",
+    "unlock": "Unlock"
+  },
+  "create_master_password": {
+    "title": "Create Master Password",
+    "description": "The Master Password is the key to unlock your Locker. This is the only password you need to remember to access all other passwords stored in the Locker. Please do not share this password with anyone.",
+    "confirm_master_password": "Confirm Master Password",
+    "master_password_hint": "Master Password hint (Optional)",
+    "note": "CyStack cannot view, cannot store, nor can it recover your Master Password in case you forget or lose it."
   }
 }  
