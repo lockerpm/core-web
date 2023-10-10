@@ -42,7 +42,7 @@ const AdminErrorPage = () => {
             className="p-0"
             type="link"
             icon={<LeftOutlined />}
-            onClick={() => {global.navigate('BACK')}}
+            onClick={() => {global.navigate(global.keys.BACK)}}
           >
             {t('button.go_back')}
           </Button>

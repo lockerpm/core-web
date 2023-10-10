@@ -12,28 +12,21 @@ import {
   PlusOutlined
 } from '@ant-design/icons';
 
-import EnvironmentFormData from "../environments/FormData";
-
-import secretServices from '../../../../../services/secret';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { } from '../../../../../utils/common';
+import { } from '../../../../utils/common';
 
-import global from '../../../../../config/global';
+import global from '../../../../config/global';
 
 function FormData(props) {
   const {
     visible = false,
     item = null,
     allItems = [],
-    environments = [],
     onClose = () => {},
     onReload = () => {}
   } = props
   const { t } = useTranslation()
-  const selectedProject = useSelector((state) => state.project.selectedProject);
-
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
@@ -194,7 +187,7 @@ function FormData(props) {
               >
                 {t('common.all_default')}
               </Select.Option>
-              {environments.map((env) => (
+              {[].map((env) => (
                 <Select.Option
                   value={env.id}
                   key={env.id}
@@ -206,12 +199,6 @@ function FormData(props) {
           </Form.Item>
         </Form>
       </Drawer>
-      <EnvironmentFormData
-        visible={formVisible}
-        item={null}
-        onClose={() => setFormVisible(false)}
-        callback={(env) => form.setFieldValue('environmentId', env.id)}
-      />
     </div>
   );
 }

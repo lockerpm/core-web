@@ -73,9 +73,9 @@ async function redirect_login() {
   const currentPage = getRouterByLocation(window.location)
   let isAdmin = !!global.routers.ADMIN_ROUTERS.find((r) => r.name === currentPage?.name)
   if (access_token()) {
-    global.navigate('LOCK', {}, { return_url: encodeURIComponent(isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
+    global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
   } else {
-    global.navigate('SIGN_IN')
+    global.navigate(global.keys.SIGN_IN)
   }
 }
 
@@ -92,7 +92,7 @@ async function logout() {
   }
   await coreServices.logout()
   Cookies.remove('access_token')
-  global.navigate('SIGN_IN')
+  global.navigate(global.keys.SIGN_IN)
 }
 
 export default {

@@ -1,38 +1,37 @@
-import constants from './constants'
-import { Trans } from 'react-i18next'
+import keys from './keys'
 
 export default {
   AUTH_ROUTERS: [
     {
-      name: 'AUTHENTICATE',
+      name: keys.AUTHENTICATE,
       path: '/authenticate',
       element: 'Authenticate',
     },
     {
-      name: 'SIGN_IN',
+      name: keys.SIGN_IN,
       path: '/sign-in',
       element: 'SignIn',
       not_auth: true
     },
     {
-      name: 'SIGN_UP',
+      name: keys.SIGN_UP,
       path: '/sign-up',
       element: 'SignUp',
       not_auth: true
     },
     {
-      name: 'LOCK',
+      name: keys.LOCK,
       path: '/lock',
       element: 'Lock',
       not_auth: true
     },
     {
-      name: 'OTP_CODE',
+      name: keys.OTP_CODE,
       path: '/otp-code',
       element: 'OtpCode',
     },
     {
-      name: 'CREATE_MASTER_PASSWORD',
+      name: keys.CREATE_MASTER_PASSWORD,
       path: '/create-master-password',
       element: 'CreateMasterPassword',
     },
@@ -40,13 +39,13 @@ export default {
 
   ERROR_ROUTERS: [
     {
-      name: '404',
+      name: keys.ERROR_404,
       path: '/errors/404',
       element: 'Error404',
       not_auth: true
     },
     {
-      name: '403',
+      name: keys.ERROR_403,
       path: '/errors/403',
       element: 'Error403',
       not_auth: true
@@ -55,87 +54,128 @@ export default {
 
   ADMIN_ROUTERS: [
     {
-      name: 'ADMIN_ERROR',
+      name: keys.ADMIN_ERROR,
       path: '/admin-error',
       element: 'AdminErrorPage',
     },
     {
-      name: 'VAULT',
+      name: keys.VAULT,
       path: '/',
       element: 'Vault',
     },
     {
-      name: 'PASSWORDS',
+      name: keys.VAULT_DETAIL,
+      parent: keys.VAULT,
+      path: '/vault/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.PASSWORDS,
       path: '/passwords',
-      element: 'Passwords',
+      element: 'Vault',
     },
     {
-      name: 'NOTES',
+      name: keys.PASSWORD_DETAIL,
+      parent: keys.PASSWORDS,
+      path: '/passwords/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.NOTES,
       path: '/notes',
-      element: 'Notes',
+      element: 'Vault',
     },
     {
-      name: 'CARDS',
+      name: keys.NOTE_DETAIL,
+      parent: keys.NOTES,
+      path: '/notes/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.CARDS,
       path: '/cards',
-      element: 'Cards',
+      element: 'Vault',
     },
     {
-      name: 'CRYPTO_BACKUPS',
+      name: keys.CARD_DETAIL,
+      parent: keys.CARDS,
+      path: '/cards/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.CRYPTO_BACKUPS,
       path: '/crypto-backups',
-      element: 'CryptoBackups',
+      element: 'Vault',
     },
     {
-      name: 'IDENTITIES',
+      name: keys.CRYPTO_BACKUP_DETAIL,
+      parent: keys.CRYPTO_BACKUPS,
+      path: '/crypto-backups/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.IDENTITIES,
       path: '/identities',
-      element: 'Identities',
+      element: 'Vault',
     },
     {
-      name: 'FOLDERS',
+      name: keys.IDENTITY_DETAIL,
+      parent: keys.IDENTITIES,
+      path: '/identities/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.FOLDERS,
       path: '/folders',
       element: 'Folders',
     },
     {
-      name: 'AUTHENTICATOR',
+      name: keys.AUTHENTICATOR,
       path: '/authenticator',
       element: 'Authenticator',
     },
     {
-      name: 'SECURITY_TOOLS',
+      name: keys.SECURITY_TOOLS,
       path: '/tools',
       element: 'Tools',
     },
     {
-      name: 'SHARES',
+      name: keys.SHARES,
       path: '/shares',
       element: 'shares',
     },
     {
-      name: 'PRIVATE_EMAIL',
+      name: keys.PRIVATE_EMAIL,
       path: '/relay',
       element: 'PrivateEmail',
     },
     {
-      name: 'TRASH',
+      name: keys.TRASH,
       path: '/trash',
       element: 'Trash',
     },
     {
-      name: 'SETTINGS_ACCOUNT',
+      name: keys.TRASH_DETAIL,
+      path: '/trash/:id',
+      element: 'VaultDetail',
+    },
+    {
+      name: keys.SETTINGS_ACCOUNT,
       path: '/settings/account',
       element: 'SettingsAccount',
     },
     {
-      name: 'SETTINGS_IMPORT_EXPORT',
+      name: keys.SETTINGS_IMPORT_EXPORT,
       path: '/settings/import-export',
       element: 'SettingsImportExport',
     },
     {
-      name: 'SETTINGS_SECURITY',
+      name: keys.SETTINGS_SECURITY,
       path: '/settings/security',
       element: 'SettingsSecurity',
     },
     {
-      name: 'SETTINGS_NOTIFICATION',
+      name: keys.SETTINGS_NOTIFICATIONS,
       path: '/settings/notifications',
       element: 'SettingsNotifications',
     }

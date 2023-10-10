@@ -10,6 +10,9 @@ import vi from '../locale/vi.json'
 import en from '../locale/en.json'
 import global from '../config/global'
 
+import keys from '../config/keys'
+global.keys = keys
+
 import constants from '../config/constants'
 global.constants = constants
 

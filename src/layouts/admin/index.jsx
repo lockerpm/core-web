@@ -24,11 +24,9 @@ import PageContent from '../../routes';
 import storeActions from "../../store/actions";
 
 import authServices from '../../services/auth';
-import coreServices from '../../services/core';
+import syncServices from '../../services/sync';
 
 import global from '../../config/global';
-import { CipherType } from "../../core-js/src/enums";
-import { CipherData } from '../../core-js/src/models/data/cipherData'
 
 import { scrollToTop } from '../../utils/common';
 
@@ -47,7 +45,7 @@ function AdminLayout(props) {
   const [respCollapsed, setRespCollapsed] = useState(false);
 
   const accessToken = authServices.access_token()
-  const { lastMessage } = useWebSocket(`${process.env.REACT_APP_WS_URL}/cystack_platform/pm/sync?token=${accessToken}`);
+  const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`);
 
   useEffect(() => {
     if (lastMessage) {
@@ -72,9 +70,22 @@ function AdminLayout(props) {
     convertSize()
   });
 
-  const handleSyncWsData = async (messageData) => {
+  const handleSyncWsData = async (message) => {
     dispatch(storeActions.updateSyncing(true))
-    if (messageData?.data?.id) {
+    if (message.type.includes('cipher')) {
+      if (message.type.includes('update')) {
+        const res = await syncServices.sync_cipher(message.data.id);
+        await global.jsCore.cipherService.upsert([res])
+      } else if (message.type.includes('delete')) {
+        await global.jsCore.cipherService.delete(message.data.ids)
+      }
+    } else if (message.type.includes('folder')) {
+      if (message.type.includes('update')) {
+        const res = await syncServices.sync_folder(message.data.id);
+        await global.jsCore.folderService.upsert([res])
+      } else if (message.type.includes('delete')) {
+        await global.jsCore.folderService.delete(message.data.ids)
+      }
     }
     dispatch(storeActions.updateSyncing(false));
   }

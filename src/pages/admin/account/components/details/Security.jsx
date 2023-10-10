@@ -34,7 +34,7 @@ const Security = (props) => {
           <Card
             bodyStyle={{ padding: 16 }}
             hoverable
-            onClick={() => global.navigate('ACCOUNT_CHANGE_PASSWORD')}
+            onClick={() => {}}
           >
             <div>
               <UnlockOutlined />
@@ -48,7 +48,7 @@ const Security = (props) => {
           <Card
             bodyStyle={{ padding: 16 }}
             hoverable
-            onClick={() => global.navigate('ACCOUNT_2FA')}
+            onClick={() => {}}
           >
             <div className="flex justify-between">
               <SecurityScanOutlined />

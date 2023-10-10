@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
   Input,
-  Select,
-  DatePicker
 } from '@lockerpm/design';
 
 import {
@@ -19,10 +17,11 @@ const Filter = (props) => {
   const {
     className = '',
     params = {},
-    environments = [],
     setParams = () => { }
   } = props;
 
+  const [filterTimeout, setFilterTimeout] = useState(null)
+  const [searchText, setSearchText] = useState(params.searchText)
 
   return (
     <Row
@@ -35,39 +34,22 @@ const Filter = (props) => {
           justify={'left'}
           gutter={[12, 12]}
         >
-          <Col xl={4} lg={6} md={8} xs={12}>
-            <p className="font-semibold mb-1">{t('secret.key')}</p>
+          <Col xl={8} lg={8} md={12} xs={24}>
             <Input
               prefix={<SearchOutlined />}
-              value={params.key}
-              placeholder={t('placeholder.enter')}
-              onChange={(e) => setParams({ ...params, key: e.target.value })}
+              value={searchText}
+              placeholder={t('placeholder.search')}
+              onChange={(e) => {
+                if (filterTimeout) {
+                  clearTimeout(filterTimeout)
+                }
+                setSearchText(e.target.value)
+                setFilterTimeout(setTimeout(() => {
+                  setParams({ ...params, searchText: e.target.value })
+                }, 500))
+              }}
+              onPressEnter={() => setParams({ ...params, searchText })}
             />
-          </Col>
-          <Col xl={4} lg={6} md={8} xs={12}>
-            <p className="font-semibold mb-1">{t('secret.environment')}</p>
-            <Select
-              placeholder={t('placeholder.select')}
-              className="w-full"
-              value={params.environmentId}
-              allowClear
-              onChange={(v) => setParams({ ...params, environmentId: v })}
-            >
-              <Select.Option
-                value={''}
-                key={'all'}
-              >
-                {t('common.all_default')}
-              </Select.Option>
-              {environments.map((env) => (
-                <Select.Option
-                  value={env.id}
-                  key={env.id}
-                >
-                  {env.environment.name}
-                </Select.Option>
-              ))}
-            </Select>
           </Col>
         </Row>
       </Col>

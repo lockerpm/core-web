@@ -99,7 +99,7 @@ const App = () => {
     const accessToken = authServices.access_token()
     if (accessToken) {
       if (!currentPage) {
-        global.navigate('ADMIN_ERROR')
+        global.navigate(global.keys.ADMIN_ERROR)
         return
       }
       if (!currentPage.not_auth) {
@@ -107,7 +107,7 @@ const App = () => {
       }
     } else {
       if (!currentPage) {
-        global.navigate('404')
+        global.navigate(global.keys.ERROR_404)
         return
       }
     }

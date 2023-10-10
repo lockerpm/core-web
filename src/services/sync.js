@@ -16,6 +16,20 @@ function sync_count() {
   })
 }
 
+function sync_cipher(id) {
+  return request({
+    url: global.endpoint.SYNC_CIPHER.replace(':id', id),
+    method: 'get',
+  })
+}
+
+function sync_folder(id) {
+  return request({
+    url: global.endpoint.SYNC_FOLDER.replace(':id', id),
+    method: 'get',
+  })
+}
+
 function sync_revision_date() {
   return request({
     url: global.endpoint.SYNC_REVISION_DATE,
@@ -26,5 +40,7 @@ function sync_revision_date() {
 export default {
   sync,
   sync_count,
+  sync_cipher,
+  sync_folder,
   sync_revision_date
 }

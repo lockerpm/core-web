@@ -81,7 +81,7 @@ function DropdownMenu() {
       if (isCloud) {
         window.open(process.env.REACT_APP_LOCKER_ID_URL)
       } else {
-        global.navigate('SETTINGS_ACCOUNT')
+        global.navigate(global.keys.SETTINGS_ACCOUNT)
       }
     } else if (item.key === 'logout') {
       authServices.logout();

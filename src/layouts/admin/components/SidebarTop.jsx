@@ -22,7 +22,7 @@ function SidebarTop(props) {
   const { t } = useTranslation();
 
   const handleClickLogo = () => {
-    global.navigate('VAULT');
+    global.navigate(global.keys.VAULT)
   }
 
   return (

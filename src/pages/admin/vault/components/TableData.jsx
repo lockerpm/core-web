@@ -3,35 +3,38 @@ import {
   Table,
   Button,
   Space,
-  Tag,
+  Image,
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  TextCopy
-} from '../../../../../components'
+  TextCopy,
+  RouterLink
+} from '../../../../components'
 
 import {
-  convertDateTime,
-  getEnvironment
-} from '../../../../../utils/common'
+  timeFromNow,
+  cipherSubtitle,
+} from '../../../../utils/common'
 
 import {
   EditOutlined,
   DeleteOutlined
 } from "@ant-design/icons";
 
+import global from "../../../../config/global";
+
 const TableData = (props) => {
   const { t } = useTranslation();
-  const isReadOnly = useSelector((state) => state.project.isReadOnly)
+  const allCiphers = useSelector((state) => state.cipher.allCiphers)
+
   const {
     loading = false,
     className = '',
     data = [],
     params = {},
-    environments = [],
     rowSelection = {},
     onUpdate = () => {},
     onDelete = () => {}
@@ -47,44 +50,31 @@ const TableData = (props) => {
         width: 80,
       },
       {
-        title: t('secret.key'),
-        dataIndex: 'key',
-        key: 'key',
+        title: t('common.name'),
+        dataIndex: 'title',
+        key: 'name',
         width: 300,
         align: 'left',
-        render: (_, record) => <TextCopy
-          value={record.secret.key}
-        />
-      },
-      {
-        title: t('secret.value'),
-        dataIndex: 'value',
-        key: 'value',
-        align: 'left',
-        width: 300,
-        render: (_, record) => <TextCopy
-          isPassword
-          value={record.secret.value}
-        />
-      },
-      {
-        title: t('secret.environment'),
-        dataIndex: 'environmentId',
-        key: 'environmentId',
-        align: 'left',
-        width: 200,
-        render: (_, record) => {
-          const environment = getEnvironment(record.environmentId, environments)
-          return environment ? <div>
-            <Tag
-              color={environment?.color}
-            >
-              <TextCopy
-                value={environment?.name}
-              />
-            </Tag>
-          </div> : <></>
-        }
+        render: (_, record) => <div className="flex items-center">
+          <Image
+            preview={false}
+            width={32}
+            height={32}
+            src={require('../../../../assets/images/icons/ciphers/card.svg').default}
+          />
+          <div className="ml-2 flex-1">
+            <RouterLink
+              className={'font-semibold'}
+              label={record.name}
+              routerName={global.keys.VAULT_DETAIL}
+              routerParams={{ id: record.id }}
+            />
+            <TextCopy
+              className="text-sm"
+              value={cipherSubtitle(allCiphers.find((d) => d.id === record.id))}
+            />
+          </div>
+        </div>
       },
       {
         title: t('common.created_time'),
@@ -93,18 +83,18 @@ const TableData = (props) => {
         align: 'center',
         width: 200,
         render: (_, record) => <TextCopy
-          value={convertDateTime(record.creationDate)}
+          value={timeFromNow(record.creationDate)}
           align={'center'}
         />
       },
       {
         title: t('common.updated_time'),
-        dataIndex: 'updatedDate',
-        key: 'updatedDate',
+        dataIndex: 'revisionDate',
+        key: 'revisionDate',
         align: 'center',
         width: 200,
         render: (_, record) => <TextCopy
-          value={convertDateTime(record.updatedDate)}
+          value={timeFromNow(record.revisionDate)}
           align={'center'}
         />
       },
@@ -115,25 +105,13 @@ const TableData = (props) => {
         align: 'center',
         fixed: 'right',
         width: 100,
-        hide: isReadOnly,
         render: (_, record) => (
           <Space size={[8, 8]}>
-            <Button
-              icon={<EditOutlined />}
-              type={'link'}
-              onClick={() => onUpdate(record)}
-            ></Button>
-            <Button
-              icon={<DeleteOutlined />}
-              type={'link'}
-              danger
-              onClick={() => onDelete(record)}
-            ></Button>
           </Space>
         ),
       },
     ].filter((c) => !c.hide)
-  }, [isReadOnly])
+  }, [])
   return (
     <Table
       className={className}

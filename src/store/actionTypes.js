@@ -20,4 +20,7 @@ export default {
   SET_USER_INFO: 'SET_USER_INFO',
   SET_FACTOR2: 'SET_FACTOR2',
   SET_USERS_ME: 'SET_USERS_ME',
+
+  // Cipher
+  SET_ALL_CIPHERS: 'SET_ALL_CIPHERS',
 }

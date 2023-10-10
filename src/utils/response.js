@@ -7,14 +7,14 @@ export async function handleResponseErrorMessage(err) {
     return err
   }
   if (err.response.status === 401) {
-    // authServices.logout();
+    authServices.logout();
     return
   }
   if ([403, 404, 500, 502].includes(err.response.status)) {
     const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
     if (!isLocked) {
       const currentPage = getRouterByLocation(window.location)
-      global.navigate('ADMIN_ERROR', currentPage.params || {}, { code: err.response.status })
+      global.navigate(global.keys.ADMIN_ERROR, currentPage.params || {}, { code: err.response.status })
     }
   }
   return err

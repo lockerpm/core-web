@@ -57,7 +57,8 @@
     "no": "No.",
     "coming_soon": "Coming Soon", 
     "results": "Results",
-    "no_file_chosen": "No file chosen"
+    "no_file_chosen": "No file chosen",
+    "name": "Name"
   },
   "button": {
     "add": "Add",
@@ -95,7 +96,8 @@
     "choose_file": "Choose file",
     "reinvite": "Reinvite",
     "select": "Select",
-    "continue": "Continue"
+    "continue": "Continue",
+    "new_item": "New item"
    },
   "placeholder": {
     "name": "Enter name",
@@ -167,7 +169,7 @@
     "terms_policy": "Terms & Policy",
     "inventory": "Inventory",
     "all": "All",
-    "password": "Password",
+    "passwords": "Passwords",
     "notes": "Notes",
     "cards": "Cards",
     "crypto_backups": "Crypto Backups",

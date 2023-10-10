@@ -24,10 +24,10 @@ const Authenticate = () => {
       authServices.update_access_token(token);
       await authServices.locker_access_token().then(async (response) => {
         authServices.update_access_token(response.access_token);
-        global.navigate('LOCK');
+        global.navigate(global.keys.LOCK);
       })
     } else {
-      global.navigate('LOGIN')
+      global.navigate(global.keys.SIGN_IN)
     }
   }
   return (

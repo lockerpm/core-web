@@ -90,7 +90,7 @@ const Identity = () => {
                   className="w-full mr-2 mt-6"
                   size="large"
                   loading={callingAPI}
-                  onClick={() => global.navigate('SIGN_IN')}
+                  onClick={() => {}}
                 >
                   {t('button.back')}
                 </Button>

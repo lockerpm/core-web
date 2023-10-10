@@ -72,7 +72,7 @@ const SingIn = () => {
       language: locale
     }).then(async (response) => {
       authServices.update_access_token(response.token)
-      global.navigate('LOCK')
+      global.navigate(global.keys.LOCK)
     }).catch((error) => {
       global.pushError(error)
     });

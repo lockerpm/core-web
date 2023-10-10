@@ -13,7 +13,7 @@ const PageNotFound = () => {
       <p className="content">{t('error_pages.page_not_found.title')}</p>
       <p className="note">
         <a onClick={() => {
-          global.navigate('VAULT');
+          global.navigate(global.keys.LOCK)
         }}>{t('error_pages.page_not_found.go_back_dashboard')}</a>
       </p>
     </div>

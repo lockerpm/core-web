@@ -122,7 +122,7 @@ const OtpCode = () => {
                   className="w-full mr-2 mt-6"
                   size="large"
                   disabled={callingAPI}
-                  onClick={() => global.navigate('SIGN_IN')}
+                  onClick={() => global.navigate(global.keys.SIGN_IN)}
                 >
                   {t('button.back')}
                 </Button>

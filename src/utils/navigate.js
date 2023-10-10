@@ -6,12 +6,12 @@ import {
 } from './common'
 
 import storeActions from '../store/actions'
+import global from '../config/global'
 
 export const navigatePage = async (navigate, dispatch, name, params = {}, query = {}) => {
-  if (name === 'BACK') {
+  if (name === global.keys.BACK) {
     return navigate(-1)
   }
-
 
   const currentRouter = getRouterByName(name)
   if (!currentRouter) {

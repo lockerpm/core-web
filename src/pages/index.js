@@ -16,7 +16,10 @@ import AccountManageSessions from './admin/account/sessions'
 import AccountChangePassword from './admin/account/change-password'
 import Account2FA from './admin/account/2fa'
 
-// API Error page
+// Admin Pages
+import Vault from './admin/vault'
+
+// Admin Error page
 import AdminErrorPage from './admin/errors'
 
 export default {
@@ -35,6 +38,8 @@ export default {
   AccountManageSessions,
   AccountChangePassword,
   Account2FA,
+
+  Vault,
 
   AdminErrorPage
 }

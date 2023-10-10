@@ -61,7 +61,7 @@ const Lock = () => {
     await userServices.users_me().then((response) => {
       dispatch(storeActions.updateUsersMe(response))
       if (!response.is_pwd_manager) {
-        global.navigate('CREATE_MASTER_PASSWORD')
+        global.navigate(global.keys.CREATE_MASTER_PASSWORD)
       }
     }).catch(async () => {
       await authServices.logout();

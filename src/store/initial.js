@@ -22,5 +22,8 @@ export default {
     isSync: false,
     syncing: false,
     syncProfile: null
+  },
+  cipher: {
+    allCiphers: []
   }
 }

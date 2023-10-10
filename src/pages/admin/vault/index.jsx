@@ -15,13 +15,16 @@ import { useLocation } from 'react-router-dom';
 import {
   getRouterByLocation,
   paginationAndSortData,
-  scrollEnd
+  scrollEnd,
+  cipherTypeInfo
 } from '../../../utils/common';
 
 import global from "../../../config/global";
+import coreServices from "../../../services/core";
+import cipherServices from "../../../services/cipher";
+import { CipherType } from "../../../core-js/src/enums"
 
-const Inventory = (props) => {
-  const { } = props;
+const Vault = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -29,43 +32,64 @@ const Inventory = (props) => {
   const currentPage = getRouterByLocation(location);
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
-  const isReadOnly = useSelector((state) => state.project.isReadOnly)
+  const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [total, setTotal] = useState(0);
-  const [secrets, setSecrets] = useState([]);
+  const [ciphers, setCiphers] = useState([]);
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
-    sortBy: 'creationDate',
-    sortType: 'descend',
-    key: '',
-    environmentId: null
+    orderField: 'revisionDate',
+    orderDirection: 'desc',
+    searchText: '',
   });
 
+  const cipherType = useMemo(() => {
+    if (currentPage.name === global.keys.TRASH) {
+      return {
+        type: null,
+        title: t('sidebar.trash'),
+        deleted: true,
+        listRouter: global.keys.TRASH,
+        detailRouter: global.keys.TRASH_DETAIL,
+      }
+    }
+    return {
+      ...cipherTypeInfo('listRouter', currentPage.name),
+      deleted: false,
+    }
+  }, [currentPage])
+
+  const filters = useMemo(() => {
+    const f = []
+    if (cipherType.type) {
+      f.push((c) => c.type === cipherType.type)
+    } else {
+      f.push((c) => c.type !== CipherType.TOTP)
+    }
+    return f
+  }, [cipherType])
+
   useEffect(() => {
-    fetchData()
-  }, [syncing, currentPage.params?.project_id])
+    fetchData();
+  }, [params.searchText, allCiphers, JSON.stringify(cipherType)])
 
   useEffect(() => {
     setParams({
       ...params,
       page: 1,
-      key: currentPage?.query?.key,
+      searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.key])
+  }, [currentPage?.query?.searchText, cipherType.type, syncing])
 
   const filteredData = useMemo(() => {
     return paginationAndSortData(
-      secrets,
+      ciphers,
       params,
-      params.sortBy,
-      params.sortType,
-      []
     )
-  }, [secrets, JSON.stringify(params)])
-  
+  }, [ciphers, JSON.stringify(params)])
+
   useEffect(() => {
     setParams({
       ...params,
@@ -83,9 +107,12 @@ const Inventory = (props) => {
   };
 
   const fetchData = async () => {
-    const secrets = await secretServices.list_ciphers(currentPage?.params?.project_id);
-    setTotal(secrets.length);
-    setSecrets(secrets);
+    const result = await coreServices.list_ciphers({
+      deleted: cipherType.deleted,
+      searchText: params.searchText,
+      filters: filters
+    }, allCiphers)
+    setCiphers(result);
   }
 
   const handleOpenForm = (item = null) => {
@@ -93,10 +120,10 @@ const Inventory = (props) => {
     setFormVisible(true)
   }
 
-  const deleteItem = (secret) => {
+  const deleteItem = (cipher) => {
     global.confirmDelete(() => {
-      secretServices.remove(currentPage?.params?.project_id, secret.id).then(async () => {
-        global.pushSuccess(t('notification.success.secret.deleted'));
+      cipherServices.delete_ciphers({ ids: [cipher.id] }).then(async () => {
+        global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
@@ -111,21 +138,20 @@ const Inventory = (props) => {
 
   return (
     <div
-      className="secrets layout-content"
+      className="vault layout-content"
       onScroll={(e) => scrollEnd(e, params, filteredData.total, setParams)}
     >
       <AdminHeader
-        title={t('secrets.title')}
-        subtitle={t('secrets.description')}
-        docLink={'/'}
-        docLabel={t('secrets.doc')}
+        title={cipherType.title}
+        total={filteredData.total}
         actions={[
           {
             key: 'add',
-            label: t('secrets.new'),
+            label: t('button.new_item'),
             type: 'primary',
             icon: <PlusOutlined />,
-            hide: isReadOnly,
+            hide: currentPage.name === global.keys.TRASH,
+            disabled: syncing,
             click: () => handleOpenForm()
           }
         ]}
@@ -134,7 +160,6 @@ const Inventory = (props) => {
         <Filter
           className={'mt-6'}
           params={params}
-          environments={environments}
           setParams={(v) => setParams({ ...v, page: 1 })}
         />
       }
@@ -149,7 +174,6 @@ const Inventory = (props) => {
               loading={syncing}
               data={filteredData.result}
               params={params}
-              environments={environments}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
             /> : <TableData
@@ -157,7 +181,6 @@ const Inventory = (props) => {
               loading={syncing}
               data={filteredData.result}
               params={params}
-              environments={environments}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
             />
@@ -174,12 +197,10 @@ const Inventory = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
-        allItems={secrets}
-        environments={environments}
         onClose={() => setFormVisible(false)}
       />
     </div>
   );
 }
 
-export default Inventory;
+export default Vault;

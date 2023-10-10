@@ -1,14 +1,18 @@
 import { Trans } from 'react-i18next'
+import { CipherType } from '../core-js/src/enums'
+
+import keys from './keys'
 
 const FILE_TYPE = {
   JSON: 'json',
 }
 
 export default {
+  FILE_TYPE,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
-  FILE_TYPE,
+  PAGE_SIZE: 50,
   LANGUAGES: [
     {
       value: 'en',
@@ -76,5 +80,49 @@ export default {
       host: 'smtp.postmarkapp.com',
       port: '587'
     },
+  ],
+  CIPHER_TYPES: [
+    {
+      type: null,
+      icon: 'vault',
+      listRouter: keys.VAULT,
+      detailRouter: keys.VAULT_DETAIL,
+      title: <Trans i18nKey={'vault.all_items'}/>
+    },
+    {
+      type: CipherType.Login,
+      icon: 'login',
+      listRouter: keys.PASSWORDS,
+      detailRouter: keys.PASSWORD_DETAIL,
+      title: <Trans i18nKey={'sidebar.passwords'}/>
+    },
+    {
+      type: CipherType.SecureNote,
+      icon: 'secure-note',
+      listRouter: keys.NOTES,
+      detailRouter: keys.NOTE_DETAIL,
+      title: <Trans i18nKey={'sidebar.notes'}/>
+    },
+    {
+      type: CipherType.Card,
+      icon: 'card',
+      listRouter: keys.CARDS,
+      detailRouter: keys.CARD_DETAIL,
+      title: <Trans i18nKey={'sidebar.cards'}/>
+    },
+    {
+      type: CipherType.CryptoWallet,
+      icon: 'crypto-wallet',
+      listRouter: keys.CRYPTO_BACKUPS,
+      detailRouter: keys.CRYPTO_BACKUP_DETAIL,
+      title: <Trans i18nKey={'sidebar.crypto_backups'}/>
+    },
+    {
+      type: CipherType.Identity,
+      icon: 'identity',
+      listRouter: keys.IDENTITIES,
+      detailRouter: keys.IDENTITY_DETAIL,
+      title: <Trans i18nKey={'sidebar.identities'}/>
+    }
   ]
 }

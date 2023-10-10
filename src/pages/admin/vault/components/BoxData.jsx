@@ -12,12 +12,11 @@ import { useTranslation } from "react-i18next";
 
 import {
   TextCopy
-} from '../../../../../components'
+} from '../../../../components'
 
 import {
   convertDateTime,
-  getEnvironment
-} from '../../../../../utils/common'
+} from '../../../../utils/common'
 
 import {
   EditOutlined,
@@ -26,14 +25,12 @@ import {
 
 const BoxData = (props) => {
   const { t } = useTranslation();
-  const isReadOnly = useSelector((state) => state.project.isReadOnly)
 
   const {
     loading = false,
     className = '',
     data = [],
     params = {},
-    environments = [],
     rowSelection = {},
     onUpdate = () => {},
     onDelete = () => {}
@@ -65,7 +62,7 @@ const BoxData = (props) => {
               />
             </div>
             {
-              !isReadOnly && <Space size={[8, 8]}>
+              <Space size={[8, 8]}>
                 <Button
                   icon={<EditOutlined />}
                   type={'link'}
@@ -92,21 +89,6 @@ const BoxData = (props) => {
           </div>
           <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('secret.environment')}:</p>
-            {
-              (() => {
-                {
-                  const environment = getEnvironment(record.environmentId, environments)
-                  return environment ? <Tag
-                    style={{ width: '50%' }}
-                    color={environment?.color}
-                  >
-                    <TextCopy
-                      value={environment?.name}
-                    />
-                  </Tag> : <></>
-                }
-              })()
-            }
           </div>
           <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('common.created_time')}:</p>

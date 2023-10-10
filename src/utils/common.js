@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import global from '../config/global'
 import store from '../store'
 import storeActions from '../store/actions/index'
+import { CipherType } from '../core-js/src/enums'
 import { Trans } from 'react-i18next'
 
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -99,14 +100,17 @@ export const convertTime = time => {
 }
 
 export const timeFromNow = time => {
-  return dayjs(time * 1000).fromNow()
+  if (time && typeof time === 'number') {
+    return dayjs(time * 1000).fromNow()
+  }
+  return dayjs(time).fromNow()
 }
 
 export const convertDateTime = (date, format = 'HH:mm DD-MM-YYYY') => {
-  if (date) {
+  if (date && typeof date === 'number') {
     return moment(date * 1000).format(format)
   }
-  return ''
+  return moment(date).format(format)
 }
 
 export const disabledDate = current => {
@@ -254,7 +258,7 @@ export const getTimeByOption = (key, value = []) => {
   return dates
 }
 
-export const paginationAndSortData = (allData, params, sortBy = 'creation_date', sortType = 'descend', filters = []) => {
+export const paginationAndSortData = (allData, params, sortBy = 'revisionDate', sortType = 'desc', filters = []) => {
   let filteredData = allData
   filters.forEach(f => {
     filteredData = filteredData.filter(d => f(d))
@@ -268,7 +272,7 @@ export const paginationAndSortData = (allData, params, sortBy = 'creation_date',
       a = dayjs(new Date(a)).unix()
       b = dayjs(new Date(b)).unix()
     }
-    if (sortType === 'ascend') {
+    if (sortType === 'asc') {
       if (a < b) {
         return -1
       }
@@ -285,7 +289,6 @@ export const paginationAndSortData = (allData, params, sortBy = 'creation_date',
     }
     return 0
   })
-
   return {
     total: filteredData.length,
     result: filteredData.slice((params.page - 1) * params.size, params.page * params.size)
@@ -340,4 +343,49 @@ export const downloadCSV = (rows = []) => {
   })
   const encodedUri = encodeURI(csvContent)
   window.open(encodedUri)
+}
+
+export const camelCaseToWords = (str) => {
+  if (!str) {
+    return ''
+  }
+  const newStr = str
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .replace(/(\b[A-Z]{2,}\b)(?=[a-z])/g, '$1 ')
+    .toLowerCase()
+  return newStr ? newStr[0].toUpperCase() + newStr.slice(1) : newStr
+}
+
+export const cipherSubtitle = (item) => {
+  if (!item) {
+    return null
+  }
+  if (item.type === CipherType.CryptoWallet && item.cryptoWallet) {
+    return item.cryptoWallet.username
+  }
+  if (item.type === CipherType.DriverLicense && item.driverLicense) {
+    return item.driverLicense.fullName
+  }
+  if (item.type === CipherType.CitizenID && item.citizenId) {
+    return item.citizenId.fullName
+  }
+  if (item.type === CipherType.Passport && item.passport) {
+    return item.passport.fullName
+  }
+  if (item.type === CipherType.SocialSecurityNumber && item.ssn) {
+    return item.ssn.fullName
+  }
+  if (item.type === CipherType.WirelessRouter && item.router) {
+    return item.router.deviceName
+  }
+  if (item.type === CipherType.Server && item.server) {
+    return item.server.username
+  }
+  return item.subTitle
+}
+
+
+export const cipherTypeInfo = (key = 'type', value) => {
+  return global.constants.CIPHER_TYPES.find((t) => t[key] == value) || global.constants.CIPHER_TYPES[0]
 }
