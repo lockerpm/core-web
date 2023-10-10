@@ -17,9 +17,10 @@ export default {
     factor2: null,
     loginInfo: null
   },
-  core: {
+  sync: {
     isLocked: true,
     isSync: false,
-    syncing: false
+    syncing: false,
+    syncProfile: null
   }
 }

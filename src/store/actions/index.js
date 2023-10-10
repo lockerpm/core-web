@@ -1,9 +1,9 @@
 import authActions from './auth'
-import coreActions from './core'
+import syncActions from './sync'
 import systemActions from './system'
 
 export default {
   ...authActions,
-  ...coreActions,
+  ...syncActions,
   ...systemActions,
 }

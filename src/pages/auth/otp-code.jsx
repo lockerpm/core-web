@@ -18,7 +18,6 @@ import { useTranslation } from "react-i18next";
 import storeActions from "../../store/actions";
 import authServices from "../../services/auth";
 import coreServices from "../../services/core";
-import commonServices from "../../services/common";
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import {
@@ -51,10 +50,6 @@ const OtpCode = () => {
         ...loginPayload,
         ...response
       })
-      await commonServices.sync_profile()
-      await Promise.all([
-        commonServices.sync_ciphers()
-      ])
       setCallingAPI(false)
     }).catch((error) => {
       global.pushError(error)

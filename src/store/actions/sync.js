@@ -21,8 +21,16 @@ const updateSyncing = syncing => {
   }
 }
 
+const updateSyncProfile = profile => {
+  return {
+    type: actionTypes.SET_SYNC_PROFILE,
+    payload: profile,
+  }
+}
+
 export default {
   updateIsLocked,
   updateIsSync,
-  updateSyncing
+  updateSyncing,
+  updateSyncProfile
 }

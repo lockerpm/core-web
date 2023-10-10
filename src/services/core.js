@@ -1,5 +1,7 @@
-import { CipherType } from '../core-js/src/enums'
 import global from '../config/global'
+import store from '../store'
+import storeActions from '../store/actions'
+import syncServices from './sync'
 
 async function clear_keys() {
   await global.jsCore.cryptoService.clearKeys()
@@ -91,29 +93,52 @@ async function logout () {
   }
 }
 
-// async function sync_response(response) {
-//   try {
-//     const { secrets, environments } = response
-//     await global.jsCore.syncService.setLastSync(new Date())
-//     const userId = await global.jsCore.userService.getUserId()
-//     const allCiphers = [
-//       ...secrets.map(s => ({ ...s, type: CipherType.Secret })),
-//       ...environments.map(s => ({ ...s, type: CipherType.Environment }))
-//     ].map(c => convert_origin_item_to_cipher(c))
-  
-//     const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || []
-//     const deletedIds = []
-//     decryptedCipherCache.forEach(cipher => {
-//       if (allCiphers.findIndex(c => c.id === cipher.id) < 0) {
-//         deletedIds.push(cipher.id)
-//       }
-//     })
-//     await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
-//     await global.jsCore.syncService.syncSomeCiphers(userId, allCiphers)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+async function sync_data() {
+  store.dispatch(storeActions.updateSyncing(true));
+  const syncCount = await syncServices.sync_count();
+  const size = 100;
+  const maxCount = syncCount.count.ciphers || 0
+  const request = []
+  for (let page = 1; page <= Math.ceil(maxCount / size); page += 1) {
+    request.push(syncServices.sync({ page, size }))
+  }
+  const result = await Promise.all(request);
+  await sync_profile(result[0].profile)
+  await sync_ciphers({
+    ...result[0],
+    ciphers: result.map((r) => r.ciphers).flat()
+  })
+  store.dispatch(storeActions.updateSyncing(false))
+}
+
+async function sync_profile(profile) {
+  store.dispatch(storeActions.updateSyncProfile(profile));
+  await global.jsCore.syncService.syncProfile({
+    key: profile?.key,
+    privateKey: profile?.privateKey,
+    organizations: profile?.organizations,
+    securityStamp: profile?.securityStamp || null,
+    emailVerified: profile?.emailVerified || false
+  })
+}
+
+async function sync_ciphers(response) {
+  try {
+    await global.jsCore.syncService.setLastSync(new Date())
+    const userId = await global.jsCore.userService.getUserId()
+    const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || []
+    const deletedIds = []
+    decryptedCipherCache.forEach(cipher => {
+      if (response.ciphers.findIndex(c => c.id === cipher.id) < 0) {
+        deletedIds.push(cipher.id)
+      }
+    })
+    await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
+    await global.jsCore.syncService.syncSomeCiphers(userId, response.ciphers)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export default {
   clear_keys,
@@ -123,4 +148,7 @@ export default {
   unlock,
   lock,
   logout,
+  sync_data,
+  sync_profile,
+  sync_ciphers,
 }

@@ -1,8 +1,9 @@
 export default {
-  // Core
+  // Sync
   SET_IS_LOCKED: 'SET_IS_LOCKED',
   SET_IS_SYNC: 'SET_IS_SYNC',
   SET_SYNCING: 'SET_SYNCING',
+  SET_SYNC_PROFILE: 'SET_SYNC_PROFILE',
 
   // System
   CHANGE_LANGUAGE: 'CHANGE_LANGUAGE',

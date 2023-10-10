@@ -14,4 +14,5 @@ export default {
   USERS_SESSION: `${FLAT_FORM}/users/session`,
 
   SYNC: `${FLAT_FORM}/sync`,
+  SYNC_COUNT: `${FLAT_FORM}/sync/count`,
 }

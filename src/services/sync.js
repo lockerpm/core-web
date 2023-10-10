@@ -9,17 +9,9 @@ function sync(params = {}) {
   })
 }
 
-function sync_statistic() {
+function sync_count() {
   return request({
-    url: global.endpoint.SYNC_STATISTIC,
-    method: 'get',
-  })
-}
-
-
-function sync_profile_data() {
-  return request({
-    url: global.endpoint.SYNC_PROFILE_DATA,
+    url: global.endpoint.SYNC_COUNT,
     method: 'get',
   })
 }
@@ -33,7 +25,6 @@ function sync_revision_date() {
 
 export default {
   sync,
-  sync_statistic,
-  sync_profile_data,
+  sync_count,
   sync_revision_date
 }

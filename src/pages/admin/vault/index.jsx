@@ -27,7 +27,7 @@ const Inventory = (props) => {
   const dispatch = useDispatch();
 
   const currentPage = getRouterByLocation(location);
-  const syncing = useSelector((state) => state.core.syncing);
+  const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
   const isReadOnly = useSelector((state) => state.project.isReadOnly)
 

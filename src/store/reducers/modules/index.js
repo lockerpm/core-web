@@ -1,9 +1,9 @@
 import auth from './auth'
-import core from './core'
+import sync from './sync'
 import system from './system'
 
 export default {
   auth,
-  core,
+  sync,
   system,
 }

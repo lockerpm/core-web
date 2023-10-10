@@ -18,7 +18,6 @@ import { useTranslation } from "react-i18next";
 
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
-import commonServices from "../../services/common";
 
 import global from "../../config/global";
 
@@ -33,10 +32,6 @@ const SingUp = () => {
     setCallingAPI(true)
     await userServices.sign_up(values).then(async (response) => {
       await coreServices.unlock({ ...response, ...values })
-      await commonServices.sync_profile()
-      await Promise.all([
-        commonServices.sync_ciphers()
-      ])
     }).catch((error) => {
       global.pushError(error)
     });

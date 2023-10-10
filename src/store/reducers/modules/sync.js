@@ -1,7 +1,7 @@
 import actionTypes from '../../actionTypes'
 import initial from '../../initial'
 
-const core = (state = initial.core, action) => {
+const sync = (state = initial.sync, action) => {
   switch (action.type) {
   case actionTypes.SET_IS_LOCKED:
     return { ...state, isLocked: action.payload }
@@ -9,9 +9,11 @@ const core = (state = initial.core, action) => {
     return { ...state, isSync: action.payload }
   case actionTypes.SET_SYNCING:
     return { ...state, syncing: action.payload }
+  case actionTypes.SET_SYNC_PROFILE:
+    return { ...state, syncProfile: action.payload }
   default:
     return state
   }
 }
 
-export default core
+export default sync

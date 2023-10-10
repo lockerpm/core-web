@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
-import commonServices from "../../services/common";
+import coreServices from "../../services/core";
 
 import global from "../../config/global";
 import { getRouterByLocation } from "../../utils/common"
