@@ -92,7 +92,7 @@ const TableData = (props) => {
         title: t('common.actions'),
         dataIndex: 'actions',
         key: 'actions',
-        align: 'center',
+        align: 'right',
         fixed: 'right',
         width: 100,
         render: (_, record) => (
