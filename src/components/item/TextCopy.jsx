@@ -4,9 +4,6 @@ import {
   Input
 } from '@lockerpm/design';
 
-import {
-} from '../../utils/common'
-
 import { useTranslation } from "react-i18next";
 import { gray } from '@ant-design/colors';
 import { CopyOutlined, CheckOutlined } from '@ant-design/icons';

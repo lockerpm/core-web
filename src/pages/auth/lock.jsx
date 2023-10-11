@@ -27,7 +27,7 @@ import coreServices from "../../services/core";
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
 
-import { convertStringToQuery } from '../../utils/common';
+import common from "../../utils/common";
 import global from "../../config/global";
 
 const Lock = () => {
@@ -42,7 +42,8 @@ const Lock = () => {
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const isLoading = useSelector((state) => state.system.isLoading);
-  const query = convertStringToQuery(window.location.search);
+
+  const query = common.convertStringToQuery(window.location.search);
 
   useEffect(() => {
     fetchMe();
@@ -79,6 +80,7 @@ const Lock = () => {
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         navigate(returnUrl);
         await coreServices.sync_data();
+        await coreServices.get_all_ciphers();
       }).catch((error) => {
         global.pushError(error)
       });

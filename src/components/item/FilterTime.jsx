@@ -10,8 +10,9 @@ import {
 } from "@ant-design/icons";
 
 import { useSelector } from 'react-redux';
-import { getTimeByOption } from '../../utils/common';
 import { useTranslation } from "react-i18next";
+
+import common from '../../utils/common';
 
 import dayjs from 'dayjs'
 
@@ -75,7 +76,7 @@ const FilterTime = (props) => {
   const changeOption = (key) => {
     if (key !== params.time_option) {
       setSelectedItem(key)
-      onChange({ time_option: key, dates: getTimeByOption(key, []) })
+      onChange({ time_option: key, dates: common.getTimeByOption(key, []) })
     }
   }
 

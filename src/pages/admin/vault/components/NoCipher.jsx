@@ -10,9 +10,7 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  cipherTypeInfo
-} from '../../../../utils/common';
+import common from "../../../../utils/common";
 
 import {
   NoData
@@ -30,7 +28,7 @@ const NoCipher = (props) => {
     isEmpty = false,
     onCreate = () => {}
   } = props;
-  const cipherType = cipherTypeInfo('type', type)
+  const cipherType = common.cipherTypeInfo('type', type)
   return (
     <Spin spinning={loading} style={{ minHeight: 100 }}>
       {

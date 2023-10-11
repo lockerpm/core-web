@@ -4,9 +4,6 @@ import {
   ConfigProvider
 } from '@lockerpm/design';
 
-import {
-} from '../../utils/common'
-
 import { useTranslation } from "react-i18next";
 
 

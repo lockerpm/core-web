@@ -20,9 +20,6 @@ import authServices from "../../services/auth";
 import coreServices from "../../services/core";
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
-import {
-} from '../../utils/common';
-
 import global from "../../config/global";
 
 const OtpCode = () => {

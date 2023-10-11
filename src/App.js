@@ -15,7 +15,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'react-phone-number-input/style.css'
 
 import { navigatePage } from './utils/navigate'
-import { getRouterByLocation } from './utils/common'
+import common from './utils/common'
 
 import AdminLayout from './layouts/admin'
 import AuthLayout from './layouts/auth'
@@ -80,7 +80,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    const currentPage = getRouterByLocation(location)
+    const currentPage = common.getRouterByLocation(location)
     dispatch(storeActions.updateCurrentPage(currentPage))
   }, [location])
 
@@ -95,7 +95,7 @@ const App = () => {
   }
 
   const beforeRedirect = async () => {
-    const currentPage = getRouterByLocation(location)
+    const currentPage = common.getRouterByLocation(location)
     const accessToken = authServices.access_token()
     if (accessToken) {
       if (!currentPage) {

@@ -1,19 +1,13 @@
-import {
-  convertQueryToString,
-  convertStringToQuery,
-  getRouterByName,
-  getRouterParams,
-} from './common'
-
 import storeActions from '../store/actions'
 import global from '../config/global'
+import common from './common'
 
 export const navigatePage = async (navigate, dispatch, name, params = {}, query = {}) => {
   if (name === global.keys.BACK) {
     return navigate(-1)
   }
 
-  const currentRouter = getRouterByName(name)
+  const currentRouter = common.getRouterByName(name)
   if (!currentRouter) {
     return navigate('/')
   }
@@ -22,10 +16,13 @@ export const navigatePage = async (navigate, dispatch, name, params = {}, query 
     ...currentRouter,
     key: name,
     params,
-    query: convertStringToQuery(query)
+    query: common.convertStringToQuery(query)
   }))
 
   const newParams = { ...params }
-  const newPath = convertQueryToString(getRouterParams(currentRouter.path, newParams), query)
+  const newPath = common.convertQueryToString(
+    common.getRouterParams(currentRouter.path, newParams),
+    query
+  )
   return navigate(newPath)
 }

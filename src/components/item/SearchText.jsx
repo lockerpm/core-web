@@ -2,9 +2,6 @@ import React, { useMemo } from "react";
 import {
 } from '@lockerpm/design';
 
-import {
-} from '../../utils/common'
-
 import { useTranslation } from "react-i18next";
 import { green } from '@ant-design/colors';
 

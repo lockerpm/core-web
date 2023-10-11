@@ -138,11 +138,14 @@ async function sync_ciphers(response) {
     })
     await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
     await global.jsCore.syncService.syncSomeCiphers(userId, response.ciphers)
-    const allCiphers = await global.jsCore.cipherService.getAllDecrypted()
-    store.dispatch(storeActions.updateAllCiphers(allCiphers))
   } catch (error) {
     console.log(error)
   }
+}
+
+async function get_all_ciphers() {
+  const allCiphers = await global.jsCore.cipherService.getAllDecrypted()
+  store.dispatch(storeActions.updateAllCiphers(allCiphers))
 }
 
 async function list_ciphers(params, ciphers = null) {
@@ -182,5 +185,6 @@ export default {
   sync_data,
   sync_profile,
   sync_ciphers,
+  get_all_ciphers,
   list_ciphers
 }

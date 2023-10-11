@@ -14,9 +14,7 @@ import {
   TextCopy
 } from '../../../../components'
 
-import {
-  convertDateTime,
-} from '../../../../utils/common'
+import common from "../../../../utils/common";
 
 import {
   EditOutlined,
@@ -93,13 +91,13 @@ const BoxData = (props) => {
           <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('common.created_time')}:</p>
             <TextCopy
-              value={convertDateTime(record.creationDate)}
+              value={common.convertDateTime(record.creationDate)}
             />
           </div>
           <div className="flex items-center">
             <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
             <TextCopy
-              value={convertDateTime(record.updatedDate)}
+              value={common.convertDateTime(record.updatedDate)}
             />
           </div>
         </Collapse.Panel>)

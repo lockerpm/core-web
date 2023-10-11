@@ -14,7 +14,6 @@ import {
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { } from '../../../../utils/common';
 
 import global from '../../../../config/global';
 

@@ -28,10 +28,7 @@ import coreServices from "../../secrets-web/src/services/core";
 import authServices from "../../services/auth";
 import global from "../../secrets-web/src/config/global";
 
-import { convertStringToQuery } from '../../secrets-web/src/utils/common';
-
-import {
-} from '../../utils/common'
+import common from "../../utils/common";
 
 const CreateMasterPassword = () => {
   const dispatch = useDispatch();
@@ -44,7 +41,7 @@ const CreateMasterPassword = () => {
 
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const query = convertStringToQuery(window.location.search);
+  const query = common.convertStringToQuery(window.location.search);
 
   const handleCreateMasterPassword = async () => {
     setCallingAPI(true)

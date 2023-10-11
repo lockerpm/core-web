@@ -1,9 +1,6 @@
 import React, { useMemo } from "react";
 import {
   Table,
-  Button,
-  Space,
-  Image,
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
@@ -12,19 +9,15 @@ import { useTranslation } from "react-i18next";
 import {
   TextCopy,
   RouterLink
-} from '../../../../components'
+} from '../../../../components';
+
+import common from "../../../../utils/common";
 
 import {
-  timeFromNow,
-  cipherSubtitle,
-} from '../../../../utils/common'
-
-import {
-  EditOutlined,
-  DeleteOutlined
 } from "@ant-design/icons";
 
 import CipherIcon from "./CipherIcon";
+import Actions from "./Actions";
 
 import global from "../../../../config/global";
 
@@ -37,9 +30,6 @@ const TableData = (props) => {
     className = '',
     data = [],
     params = {},
-    rowSelection = {},
-    onUpdate = () => {},
-    onDelete = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -59,7 +49,7 @@ const TableData = (props) => {
         align: 'left',
         render: (_, record) => <div className="flex items-center">
           <CipherIcon
-            item={record}
+            // item={record}
             type={record.type}
           />
           <div className="ml-2 flex-1">
@@ -71,7 +61,7 @@ const TableData = (props) => {
             />
             <TextCopy
               className="text-sm"
-              value={cipherSubtitle(allCiphers.find((d) => d.id === record.id))}
+              value={common.cipherSubtitle(allCiphers.find((d) => d.id === record.id))}
             />
           </div>
         </div>
@@ -83,7 +73,7 @@ const TableData = (props) => {
         align: 'center',
         width: 200,
         render: (_, record) => <TextCopy
-          value={timeFromNow(record.creationDate)}
+          value={common.timeFromNow(record.creationDate)}
           align={'center'}
         />
       },
@@ -94,7 +84,7 @@ const TableData = (props) => {
         align: 'center',
         width: 200,
         render: (_, record) => <TextCopy
-          value={timeFromNow(record.revisionDate)}
+          value={common.timeFromNow(record.revisionDate)}
           align={'center'}
         />
       },
@@ -106,8 +96,9 @@ const TableData = (props) => {
         fixed: 'right',
         width: 100,
         render: (_, record) => (
-          <Space size={[8, 8]}>
-          </Space>
+          <Actions
+            item={record}
+          />
         ),
       },
     ].filter((c) => !c.hide)
@@ -120,7 +111,9 @@ const TableData = (props) => {
       loading={loading}
       pagination={false}
       rowKey={(record) => record?.id}
-      rowSelection={rowSelection}
+      rowSelection={{
+        columnWidth: 25
+      }}
       size="small"
       scroll={{ x: 1024 }}
     />

@@ -9,10 +9,6 @@ import {
 
 import { } from 'react-redux';
 
-import {
-} from '../../utils/common'
-
-
 const NoData = (props) => {
   const {
     loading = false,

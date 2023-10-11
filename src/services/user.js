@@ -4,9 +4,6 @@ import coreServices from './core'
 import authServices from './auth'
 import global from '../config/global'
 
-import {
-} from '../utils/common'
-
 async function me() {
   return request({
     url: global.endpoint.ME,

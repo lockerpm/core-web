@@ -13,9 +13,6 @@ import {
   TextCopy
 } from '../../components'
 
-import {
-} from '../../utils/common';
-
 import { useTranslation } from "react-i18next";
 import global from "../../config/global";
 

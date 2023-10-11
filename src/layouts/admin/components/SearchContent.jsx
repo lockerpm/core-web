@@ -16,12 +16,8 @@ import { NoData, SearchText } from '../../../components'
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import global from '../../../config/global';
 
-import {
-} from '../../../utils/common'
-
-function SearchAllForm(props) {
+function SearchContent(props) {
   const {
     onClose = () => {}
   } = props
@@ -30,8 +26,6 @@ function SearchAllForm(props) {
 
   const [searchText, setSearchText] = useState(null);
   const [searching, setSearching] = useState(false);
-
-
 
   useEffect(() => {
   }, [])
@@ -121,4 +115,4 @@ function SearchAllForm(props) {
   );
 }
 
-export default SearchAllForm;
+export default SearchContent;

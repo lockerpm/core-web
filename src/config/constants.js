@@ -7,8 +7,16 @@ const FILE_TYPE = {
   JSON: 'json',
 }
 
+const ACCOUNT_ROLE = {
+  OWNER: 0,
+  ADMIN: 1,
+  MEMBER: 2,
+  MANAGER: 3
+}
+
 export default {
   FILE_TYPE,
+  ACCOUNT_ROLE,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',

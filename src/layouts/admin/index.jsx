@@ -25,10 +25,11 @@ import storeActions from "../../store/actions";
 
 import authServices from '../../services/auth';
 import syncServices from '../../services/sync';
+import coreServices from '../../services/core';
 
 import global from '../../config/global';
 
-import { scrollToTop } from '../../utils/common';
+import common from '../../utils/common';
 
 function AdminLayout(props) {
   const {
@@ -71,7 +72,6 @@ function AdminLayout(props) {
   });
 
   const handleSyncWsData = async (message) => {
-    dispatch(storeActions.updateSyncing(true))
     if (message.type.includes('cipher')) {
       if (message.type.includes('update')) {
         const res = await syncServices.sync_cipher(message.data.id);
@@ -87,7 +87,7 @@ function AdminLayout(props) {
         await global.jsCore.folderService.delete(message.data.ids)
       }
     }
-    dispatch(storeActions.updateSyncing(false));
+    await coreServices.get_all_ciphers();
   }
 
   const convertSize = () => {
@@ -171,7 +171,7 @@ function AdminLayout(props) {
               <Button
                 type="primary"
                 shape="circle"
-                onClick={() => scrollToTop()}
+                onClick={() => common.scrollToTop()}
                 icon={<VerticalAlignTopOutlined />} size={'large'}
               />
             </div>

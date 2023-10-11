@@ -14,8 +14,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from "../../../../../config/global";
-import { convertDateTime } from "../../../../../utils/common"
+import common from "../../../../../utils/common";
 
 const Security = (props) => {
   const { callingAPI } = props
@@ -69,7 +68,7 @@ const Security = (props) => {
             <p>
               {t(`common.${smartOtp.is_active ? 'on' : 'off'}`)} <span>
                 {
-                  smartOtp.revision_date && `(${convertDateTime(smartOtp.revision_date)})`
+                  smartOtp.revision_date && `(${common.convertDateTime(smartOtp.revision_date)})`
                 }
               </span>
             </p>

@@ -6,13 +6,12 @@ import { AdminHeader } from "../../../components";
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import { getRouterByLocation } from '../../../utils/common';
-
+import common from "../../../utils/common";
 
 const Notifications = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const currentPage = getRouterByLocation(window.location);
+  const currentPage = common.getRouterByLocation(window.location);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({});
 

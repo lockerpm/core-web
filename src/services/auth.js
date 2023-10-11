@@ -2,7 +2,7 @@ import request from '../utils/request'
 import Cookies from 'js-cookie'
 import coreServices from './core'
 import global from '../config/global'
-import { getRouterByLocation } from '../utils/common'
+import common from '../utils/common'
 
 function device_id() {
   let device_id = Cookies.get('device_id')
@@ -70,7 +70,7 @@ function access_token_type() {
 
 async function redirect_login() {
   await coreServices.lock();
-  const currentPage = getRouterByLocation(window.location)
+  const currentPage = common.getRouterByLocation(window.location)
   let isAdmin = !!global.routers.ADMIN_ROUTERS.find((r) => r.name === currentPage?.name)
   if (access_token()) {
     global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })

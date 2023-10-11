@@ -8,7 +8,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import { cipherTypeInfo } from "../../../../utils/common";
+import common from "../../../../utils/common";
 import { CipherType } from "../../../../core-js/src/enums";
 import global from "../../../../config/global";
 
@@ -45,7 +45,7 @@ const CipherIcon = (props) => {
         }
       }
     }
-    const cipherType = cipherTypeInfo('type', type)
+    const cipherType = common.cipherTypeInfo('type', type)
     return logo || {
       src: cipherType.icon.default,
       alt: cipherType.key,

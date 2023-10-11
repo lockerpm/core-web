@@ -4,7 +4,7 @@ import { Breadcrumb } from '@lockerpm/design';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { getRoutersByLocation } from "../../utils/common";
+import common from '../../utils/common';
 import { RouterLink } from "../../components";
 
 import './css/Breadcrumb.scss';
@@ -18,7 +18,7 @@ function LayoutBreadcrumb() {
 
   useEffect(() => {
     if (location) {
-      const brRouters = getRoutersByLocation(location);
+      const brRouters = common.getRoutersByLocation(location);
       const lastRouter = brRouters.slice(-1)[0];
       if (lastRouter) {
         let lastMenus = [lastRouter]

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   LeftOutlined,
 } from '@ant-design/icons'
-import { getRouterByName } from '../../../utils/common';
+import common from '../../../utils/common';
 
 import { useTranslation } from "react-i18next";
 import global from '../../../config/global';
@@ -60,7 +60,7 @@ function SidebarCenter(props) {
           mode="inline"
           collapsed={collapsed.toString()}
           items={[{
-            ...getRouterByName('VAULT'),
+            ...common.getRouterByName('VAULT'),
             label: t('common.back'),
             icon: <LeftOutlined />
           }]}

@@ -9,12 +9,7 @@ import { } from "@ant-design/icons";
 import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import authServices from "../../services/auth";
-import userServices from "../../services/user";
-import coreServices from "../../services/core";
-
 import global from "../../config/global";
-import { getRouterByLocation } from "../../utils/common"
 
 const ChangePasswordForm = (props) => {
   const { t } = useTranslation();
@@ -32,7 +27,6 @@ const ChangePasswordForm = (props) => {
   const [callingAPI, setCallingAPI] = useState(false);
 
   const handleChangePassword = async (values) => {
-    const query = getRouterByLocation(window.location)?.query
     setCallingAPI(true);
     setCallingAPI(false);
   }

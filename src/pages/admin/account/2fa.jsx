@@ -19,7 +19,7 @@ import './css/2fa.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { Trans, useTranslation } from "react-i18next";
 
-import { convertDateTime } from '../../../utils/common';
+import common from "../../../utils/common";
 
 import QRCode from "react-qr-code";
 
@@ -77,7 +77,7 @@ const Account2FA = (props) => {
                   </div>
                   {
                     smartOtp.revision_date && <p style={{ color: 'gray' }} className="text-xs">
-                      ({convertDateTime(smartOtp.revision_date)})
+                      ({common.convertDateTime(smartOtp.revision_date)})
                     </p>
                   }
                 </div>

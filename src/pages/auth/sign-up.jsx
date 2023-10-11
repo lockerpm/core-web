@@ -8,7 +8,6 @@ import {
   Form,
   Button
 } from '@lockerpm/design';
-import { } from '../../utils/common';
 
 import AuthLogo from '../../assets/images/logos/auth-logo.svg'
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";

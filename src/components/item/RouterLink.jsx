@@ -8,12 +8,7 @@ import {
 import { } from 'react-redux';
 import { Link } from "react-router-dom";
 
-import {
-  convertQueryToString,
-  getRouterByName,
-  getRouterParams,
-} from '../../utils/common'
-
+import common from "../../utils/common";
 
 const RouterLink = (props) => {
   const {
@@ -26,8 +21,11 @@ const RouterLink = (props) => {
     maxWidth = '100%',
   } = props;
 
-  const currentRouter = getRouterByName(routerName)
-  const newPath = convertQueryToString(getRouterParams(currentRouter.path, routerParams), routerQuery)
+  const currentRouter = common.getRouterByName(routerName)
+  const newPath = common.convertQueryToString(
+    common.getRouterParams(currentRouter.path, routerParams),
+    routerQuery
+  )
   return (
     <Link
       className={`cs-link ${className} text-primary text-limited`}

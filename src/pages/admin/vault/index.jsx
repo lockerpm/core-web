@@ -13,12 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import {
-  getRouterByLocation,
-  paginationAndSortData,
-  scrollEnd,
-  cipherTypeInfo
-} from '../../../utils/common';
+import common from "../../../utils/common";
 
 import global from "../../../config/global";
 import coreServices from "../../../services/core";
@@ -30,7 +25,7 @@ const Vault = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const currentPage = getRouterByLocation(location);
+  const currentPage = common.getRouterByLocation(location);
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -58,7 +53,7 @@ const Vault = (props) => {
       }
     }
     return {
-      ...cipherTypeInfo('listRouter', currentPage.name),
+      ...common.cipherTypeInfo('listRouter', currentPage.name),
       deleted: false,
     }
   }, [currentPage])
@@ -90,7 +85,7 @@ const Vault = (props) => {
   }, [currentPage?.query?.searchText, cipherType.type, syncing])
 
   const filteredData = useMemo(() => {
-    return paginationAndSortData(
+    return common.paginationAndSortData(
       ciphers,
       params,
     )
@@ -147,7 +142,7 @@ const Vault = (props) => {
   return (
     <div
       className="vault layout-content"
-      onScroll={(e) => scrollEnd(e, params, filteredData.total, setParams)}
+      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
       <AdminHeader
         title={cipherType.title}
