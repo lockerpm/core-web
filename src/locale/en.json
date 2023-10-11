@@ -1,7 +1,7 @@
 {
   "common": {
     "app_name": "Locker Password Manager",
-    "app_title": "For Developments",
+    "app_title": "Locker",
     "total": "Total",
     "status": "Status",
     "created_time": "Created Time",
@@ -360,7 +360,43 @@
     "master_password_hint": "Master Password hint (Optional)",
     "note": "CyStack cannot view, cannot store, nor can it recover your Master Password in case you forget or lose it."
   },
-  "vault": {
-    "all_items": "All items"
+  "inventory": {
+    "all_items": "All items",
+    "vault": {
+      "title": "Let's get started!",
+      "description": "Add your first item. You will find it here whenever you need it.",
+      "add": "Add Item",
+      "edit": "Edit item"
+    },
+    "identities": {
+      "title": "Fill online forms faster",
+      "description": "Add Identity card so that Locker can autofill online forms on behalf of you.",
+      "add": "Add Identity card",
+      "edit": "Edit item"
+    },
+    "crypto_backups": {
+      "title": "Add your first crypto backup",
+      "description": "Keep your crypto account/wallet in safe place.",
+      "add": "Add crypto backup",
+      "edit": "Edit crypto backup"
+    },
+    "cards": {
+      "title": "Simplify online shopping",
+      "description": "Add payment card to autofill when shopping online.",
+      "add": "Add payment card",
+      "edit": "Edit payment card"
+    },
+    "notes": {
+      "title": "Free up your memory",
+      "description": "Save Wi-Fi codes, office security alarm codes or your friends birthdays...",
+      "add": "Add note",
+      "edit": "Edit note"
+    },
+    "passwords": {
+      "title": "Let's get started!",
+      "description": "Add your passwords and access them on any device, anytime.",
+      "add": "Add password",
+      "edit": "Edit password"
+    }
   }
 }  

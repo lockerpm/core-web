@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
-import { AdminHeader, NoData, Pagination } from "../../../components";
+import { AdminHeader, Pagination } from "../../../components";
 
+import NoCipher from "./components/NoCipher";
 import Filter from "./components/Filter";
 import TableData from "./components/TableData";
 import BoxData from "./components/BoxData";
@@ -34,6 +35,7 @@ const Vault = (props) => {
   const isMobile = useSelector((state) => state.system.isMobile)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
+  const [loading, setLoading] = useState(true);
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ciphers, setCiphers] = useState([]);
@@ -60,6 +62,10 @@ const Vault = (props) => {
       deleted: false,
     }
   }, [currentPage])
+
+  const isEmpty = useMemo(() => {
+    return ciphers.length === 0 && !params.searchText
+  }, [ciphers, params.searchText])
 
   const filters = useMemo(() => {
     const f = []
@@ -107,12 +113,14 @@ const Vault = (props) => {
   };
 
   const fetchData = async () => {
+    setLoading(true);
     const result = await coreServices.list_ciphers({
       deleted: cipherType.deleted,
       searchText: params.searchText,
       filters: filters
     }, allCiphers)
     setCiphers(result);
+    setLoading(false);
   }
 
   const handleOpenForm = (item = null) => {
@@ -150,35 +158,38 @@ const Vault = (props) => {
             label: t('button.new_item'),
             type: 'primary',
             icon: <PlusOutlined />,
-            hide: currentPage.name === global.keys.TRASH,
-            disabled: syncing,
+            hide: currentPage.name === global.keys.TRASH || isEmpty,
+            disabled: syncing || loading,
             click: () => handleOpenForm()
           }
         ]}
       />
       {
-        <Filter
+        !isEmpty && <Filter
           className={'mt-6'}
           params={params}
           setParams={(v) => setParams({ ...v, page: 1 })}
         />
       }
       {
-        filteredData.total == 0 ? <NoData
-          loading={syncing}
+        filteredData.total == 0 ? <NoCipher
           className={'mt-6'}
+          type={cipherType.type}
+          loading={syncing || loading}
+          isEmpty={isEmpty}
+          onCreate={() => handleOpenForm()}
         /> : <>
           {
             isMobile ? <BoxData
               className="mt-4"
-              loading={syncing}
+              loading={syncing || loading}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
             /> : <TableData
               className="mt-4"
-              loading={syncing}
+              loading={syncing || loading}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
@@ -197,6 +208,7 @@ const Vault = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
+        cipherType={cipherType}
         onClose={() => setFormVisible(false)}
       />
     </div>

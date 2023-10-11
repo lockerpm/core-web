@@ -83,46 +83,224 @@ export default {
   ],
   CIPHER_TYPES: [
     {
+      key: 'vault',
       type: null,
-      icon: 'vault',
+      icon: require('../assets/images/icons/ciphers/vault.svg'),
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
-      title: <Trans i18nKey={'vault.all_items'}/>
+      title: <Trans i18nKey={'inventory.all_items'}/>,
+      isCreate: false
     },
     {
+      key: 'passwords',
       type: CipherType.Login,
-      icon: 'login',
+      icon: require('../assets/images/icons/ciphers/login.svg'),
       listRouter: keys.PASSWORDS,
       detailRouter: keys.PASSWORD_DETAIL,
-      title: <Trans i18nKey={'sidebar.passwords'}/>
+      title: <Trans i18nKey={'sidebar.passwords'}/>,
+      isCreate: true,
     },
     {
+      key: 'notes',
       type: CipherType.SecureNote,
-      icon: 'secure-note',
+      icon: require('../assets/images/icons/ciphers/secure-note.svg'),
       listRouter: keys.NOTES,
       detailRouter: keys.NOTE_DETAIL,
-      title: <Trans i18nKey={'sidebar.notes'}/>
+      title: <Trans i18nKey={'sidebar.notes'}/>,
+      isCreate: true,
     },
     {
+      key: 'cards',
       type: CipherType.Card,
-      icon: 'card',
+      icon: require('../assets/images/icons/ciphers/card.svg'),
       listRouter: keys.CARDS,
       detailRouter: keys.CARD_DETAIL,
-      title: <Trans i18nKey={'sidebar.cards'}/>
+      title: <Trans i18nKey={'sidebar.cards'}/>,
+      isCreate: true,
     },
     {
+      key: 'crypto_backups',
       type: CipherType.CryptoWallet,
-      icon: 'crypto-wallet',
+      icon: require('../assets/images/icons/ciphers/crypto-wallet.svg'),
       listRouter: keys.CRYPTO_BACKUPS,
       detailRouter: keys.CRYPTO_BACKUP_DETAIL,
-      title: <Trans i18nKey={'sidebar.crypto_backups'}/>
+      title: <Trans i18nKey={'sidebar.crypto_backups'}/>,
+      isCreate: true,
     },
     {
+      key: 'identities',
       type: CipherType.Identity,
-      icon: 'identity',
+      icon: require('../assets/images/icons/ciphers/identity.svg'),
       listRouter: keys.IDENTITIES,
       detailRouter: keys.IDENTITY_DETAIL,
-      title: <Trans i18nKey={'sidebar.identities'}/>
+      title: <Trans i18nKey={'sidebar.identities'}/>,
+      isCreate: true,
+    },
+    {
+      key: 'authenticator',
+      type: CipherType.TOTP,
+      icon: require('../assets/images/icons/ciphers/authenticator.svg'),
+      listRouter: keys.AUTHENTICATOR,
+      title: <Trans i18nKey={'sidebar.authenticator'}/>,
+      isCreate: false
+    },
+    {
+      key: 'master_password',
+      type: CipherType.MasterPassword,
+      icon: require('../assets/images/icons/ciphers/login.svg'),
+      listRouter: keys.VAULT,
+      detailRouter: keys.VAULT_DETAIL,
+      title: <Trans i18nKey={''}/>,
+      isCreate: false
+    }
+  ],
+  WALLET_APPS: [
+    {
+      name: 'Coinbase',
+      alias: 'coinbase',
+      icon: require('../assets/images/icons/wallet-apps/coinbase.jpeg'),
+    },
+    {
+      name: 'Binance',
+      alias: 'bsc',
+      icon: require('../assets/images/icons/wallet-apps/binance.webp'),
+    },
+    {
+      name: 'Metamask',
+      alias: 'metamask',
+      icon: require('../assets/images/icons/wallet-apps/metamask.webp'),
+    },
+    {
+      name: 'Huobi',
+      alias: 'huobi',
+      icon: require('../assets/images/icons/wallet-apps/huobi.webp'),
+    },
+    {
+      name: 'Exodus',
+      alias: 'exodus',
+      icon: require('../assets/images/icons/wallet-apps/exodus.webp'),
+    },
+    {
+      name: 'Crypto.com DeFi Wallet',
+      alias: 'cryptocom',
+      icon: require('../assets/images/icons/wallet-apps/cryptocom.webp'),
+    },
+    {
+      name: 'RICE Wallet',
+      alias: 'rice',
+      icon: require('../assets/images/icons/wallet-apps/rice.webp'),
+    },
+    {
+      name: 'Coin98',
+      alias: 'coin98',
+      icon: require('../assets/images/icons/wallet-apps/coin98.webp'),
+    },
+    {
+      name: 'Trust Wallet',
+      alias: 'trustwallet',
+      icon: require('../assets/images/icons/wallet-apps/trustwallet.webp'),
+    },
+    {
+      name: 'Other',
+      alias: 'other',
+      icon: require('../assets/images/icons/wallet-apps/crypto-wallet.png'),
+    }
+  ],
+  CHAINS: [
+    {
+      name: 'Bitcoin',
+      alias: 'bitcoin',
+      logo: require('../assets/images/icons/chains/bitcoin.png')
+    },
+    {
+      name: 'Binance Smart Chain',
+      alias: 'bsc',
+      logo: require('../assets/images/icons/chains/bsc.png')
+    },
+    {
+      name: 'Ethereum',
+      alias: 'ethereum',
+      logo: require('../assets/images/icons/chains/ethereum.png')
+    },
+    {
+      name: 'Polygon',
+      alias: 'polygon',
+      logo: require('../assets/images/icons/chains/polygon.png')
+    },
+    {
+      name: 'Avalanche',
+      alias: 'avalanche',
+      logo: require('../assets/images/icons/chains/avalanche.png')
+    },
+    {
+      name: 'Solana',
+      alias: 'solana',
+      logo: require('../assets/images/icons/chains/solana.png')
+    },
+    {
+      name: 'Polkadot',
+      alias: 'polkadot',
+      logo: require('../assets/images/icons/chains/polkadot.png')
+    },
+    {
+      name: 'Cosmos',
+      alias: 'cosmos',
+      logo: require('../assets/images/icons/chains/cosmos.png')
+    },
+    {
+      name: 'Metadium',
+      alias: 'metadium',
+      logo: require('../assets/images/icons/chains/metadium.png')
+    },
+    {
+      name: 'Cronos',
+      alias: 'cronos',
+      logo: require('../assets/images/icons/chains/cronos.png')
+    },
+    {
+      name: 'Shibachain',
+      alias: 'shibachain',
+      logo: require('../assets/images/icons/chains/shibachain.png')
+    },
+    {
+      name: 'XRP Ledger',
+      alias: 'xrpl',
+      logo: require('../assets/images/icons/chains/xrpl.png')
+    },
+    {
+      name: 'Cardano',
+      alias: 'cardano',
+      logo: require('../assets/images/icons/chains/cardano.png')
+    },
+    {
+      name: 'Hedera',
+      alias: 'hedera',
+      logo: require('../assets/images/icons/chains/hedera.png')
+    },
+    {
+      name: 'Tezos',
+      alias: 'tezos',
+      logo: require('../assets/images/icons/chains/tezos.png')
+    },
+    {
+      name: 'Boba',
+      alias: 'boba',
+      logo: require('../assets/images/icons/chains/boba.png')
+    },
+    {
+      name: 'Tomochain',
+      alias: 'tomochain',
+      logo: require('../assets/images/icons/chains/tomochain.png')
+    },
+    {
+      name: 'Gnosis',
+      alias: 'gnosis',
+      logo: require('../assets/images/icons/chains/gnosis.png')
+    },
+    {
+      name: 'Other',
+      alias: 'other',
+      logo: require('../assets/images/icons/chains/other.png')
     }
   ]
 }

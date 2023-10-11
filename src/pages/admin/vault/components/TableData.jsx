@@ -24,6 +24,8 @@ import {
   DeleteOutlined
 } from "@ant-design/icons";
 
+import CipherIcon from "./CipherIcon";
+
 import global from "../../../../config/global";
 
 const TableData = (props) => {
@@ -47,7 +49,7 @@ const TableData = (props) => {
         dataIndex: 'stt',
         key: 'stt',
         align: 'center',
-        width: 80,
+        width: 60,
       },
       {
         title: t('common.name'),
@@ -56,11 +58,9 @@ const TableData = (props) => {
         width: 300,
         align: 'left',
         render: (_, record) => <div className="flex items-center">
-          <Image
-            preview={false}
-            width={32}
-            height={32}
-            src={require('../../../../assets/images/icons/ciphers/card.svg').default}
+          <CipherIcon
+            item={record}
+            type={record.type}
           />
           <div className="ml-2 flex-1">
             <RouterLink
