@@ -25,7 +25,7 @@ import storeActions from "../../store/actions";
 
 import authServices from '../../services/auth';
 import syncServices from '../../services/sync';
-import coreServices from '../../services/core';
+import commonServices from '../../services/common';
 
 import global from '../../config/global';
 
@@ -79,6 +79,7 @@ function AdminLayout(props) {
       } else if (message.type.includes('delete')) {
         await global.jsCore.cipherService.delete(message.data.ids)
       }
+      await commonServices.get_all_ciphers();
     } else if (message.type.includes('folder')) {
       if (message.type.includes('update')) {
         const res = await syncServices.sync_folder(message.data.id);
@@ -86,8 +87,16 @@ function AdminLayout(props) {
       } else if (message.type.includes('delete')) {
         await global.jsCore.folderService.delete(message.data.ids)
       }
+      await commonServices.get_all_folders();
+    } else if (message.type.includes('collection')) {
+      if (message.type.includes('update')) {
+        const res = await syncServices.sync_collection(message.data.id);
+        await global.jsCore.collectionService.upsert([res])
+      } else if (message.type.includes('delete')) {
+        await global.jsCore.collectionService.delete(message.data.ids)
+      }
+      await commonServices.get_all_collections();
     }
-    await coreServices.get_all_ciphers();
   }
 
   const convertSize = () => {

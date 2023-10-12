@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import {
   Table,
+  Image
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
@@ -11,19 +12,20 @@ import {
   RouterLink
 } from '../../../../components';
 
-import common from "../../../../utils/common";
-
 import {
 } from "@ant-design/icons";
 
 import CipherIcon from "./CipherIcon";
 import Actions from "./Actions";
 
+import common from "../../../../utils/common";
 import global from "../../../../config/global";
+import ShareIcon from "../../../../assets/images/icons/shares-icon.svg"
 
 const TableData = (props) => {
   const { t } = useTranslation();
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
 
   const {
     loading = false,
@@ -39,7 +41,7 @@ const TableData = (props) => {
         dataIndex: 'stt',
         key: 'stt',
         align: 'center',
-        width: 60,
+        width: 50,
       },
       {
         title: t('common.name'),
@@ -53,12 +55,24 @@ const TableData = (props) => {
             type={record.type}
           />
           <div className="ml-2 flex-1">
-            <RouterLink
-              className={'font-semibold'}
-              label={record.name}
-              routerName={global.keys.VAULT_DETAIL}
-              routerParams={{ id: record.id }}
-            />
+            <div className="flex items-center">
+              <RouterLink
+                className={'font-semibold'}
+                label={record.name}
+                routerName={global.keys.VAULT_DETAIL}
+                routerParams={{ id: record.id }}
+                icon={
+                  record.organizationId && (
+                    common.isCipherShared(record.organizationId) || common.isCipherSharedWithMe(allOrganizations, record.organizationId)
+                  ) ? <Image
+                    className="ml-1"
+                    preview={false}
+                    src={ShareIcon}
+                    title={t('inventory.shared')}
+                  /> : <></>
+                }
+              />
+            </div>
             <TextCopy
               className="text-sm"
               value={common.cipherSubtitle(allCiphers.find((d) => d.id === record.id))}

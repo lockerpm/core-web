@@ -19,6 +19,7 @@ const RouterLink = (props) => {
     label = '',
     blank = false,
     maxWidth = '100%',
+    icon = <></>
   } = props;
 
   const currentRouter = common.getRouterByName(routerName)
@@ -32,9 +33,8 @@ const RouterLink = (props) => {
       style={{ maxWidth: maxWidth, flex: 1 }}
       target={blank ? '_blank' : ''}
       to={newPath}
-      title={label}
     >
-      {label}
+      <span title={label}>{label}</span> {icon}
     </Link>
   );
 }

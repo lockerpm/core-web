@@ -77,11 +77,6 @@ export default {
       label: <Trans i18nKey='sidebar.shares' />,
     },
     {
-      key: keys.PRIVATE_EMAIL,
-      icon: <MailOutlined />,
-      label: <Trans i18nKey='sidebar.private_email' />,
-    },
-    {
       key: keys.TRASH,
       icon: <DeleteOutlined />,
       label: <Trans i18nKey='sidebar.trash' />,

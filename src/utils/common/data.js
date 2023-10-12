@@ -19,9 +19,13 @@ const paginationAndSortData = (
     if (!a) {
       return 0
     }
-    if (new Date(a) instanceof Date) {
+    if (a instanceof Date) {
       a = dayjs(new Date(a)).unix()
       b = dayjs(new Date(b)).unix()
+    }
+    if (typeof a === 'string') {
+      a = a?.toLowerCase() || ''
+      b = b?.toLowerCase() || ''
     }
     if (sortType === 'asc') {
       if (a < b) {

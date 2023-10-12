@@ -145,11 +145,6 @@ export default {
       element: 'shares',
     },
     {
-      name: keys.PRIVATE_EMAIL,
-      path: '/relay',
-      element: 'PrivateEmail',
-    },
-    {
       name: keys.TRASH,
       path: '/trash',
       element: 'Trash',

@@ -23,4 +23,17 @@ export default {
 
   // Cipher
   SET_ALL_CIPHERS: 'SET_ALL_CIPHERS',
+
+  // Organization
+  SET_ALL_ORGANIZATIONS: 'SET_ALL_ORGANIZATIONS',
+
+  // Folder
+  SET_ALL_FOLDERS: 'SET_ALL_FOLDERS',
+
+  // Collection
+  SET_ALL_COLLECTIONS: 'SET_ALL_COLLECTIONS',
+
+  // Share
+  SET_MY_SHARES: 'SET_MY_SHARES',
+  SET_INVITATIONS: 'SET_INVITATIONS'
 }

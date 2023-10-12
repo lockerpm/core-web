@@ -16,7 +16,7 @@ import { useLocation } from 'react-router-dom';
 import common from "../../../utils/common";
 
 import global from "../../../config/global";
-import coreServices from "../../../services/core";
+import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
 import { CipherType } from "../../../core-js/src/enums"
 
@@ -58,10 +58,6 @@ const Vault = (props) => {
     }
   }, [currentPage])
 
-  const isEmpty = useMemo(() => {
-    return ciphers.length === 0 && !params.searchText
-  }, [ciphers, params.searchText])
-
   const filters = useMemo(() => {
     const f = []
     if (cipherType.type) {
@@ -72,8 +68,14 @@ const Vault = (props) => {
     return f
   }, [cipherType])
 
+  const isEmpty = useMemo(() => {
+    return !allCiphers.find(
+      (c) => !c.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
+    )
+  }, [allCiphers, JSON.stringify(cipherType)])
+
   useEffect(() => {
-    fetchData();
+    fetchCiphers();
   }, [params.searchText, allCiphers, JSON.stringify(cipherType)])
 
   useEffect(() => {
@@ -88,6 +90,8 @@ const Vault = (props) => {
     return common.paginationAndSortData(
       ciphers,
       params,
+      params.orderField,
+      params.orderDirection
     )
   }, [ciphers, JSON.stringify(params)])
 
@@ -107,9 +111,9 @@ const Vault = (props) => {
     })
   };
 
-  const fetchData = async () => {
+  const fetchCiphers = async () => {
     setLoading(true);
-    const result = await coreServices.list_ciphers({
+    const result = await commonServices.list_ciphers({
       deleted: cipherType.deleted,
       searchText: params.searchText,
       filters: filters
@@ -160,15 +164,15 @@ const Vault = (props) => {
         ]}
       />
       {
-        !isEmpty && <Filter
-          className={'mt-6'}
+        !isEmpty && !syncing && !loading && <Filter
+          className={'mt-2'}
           params={params}
           setParams={(v) => setParams({ ...v, page: 1 })}
         />
       }
       {
         filteredData.total == 0 ? <NoCipher
-          className={'mt-6'}
+          className={'mt-4'}
           type={cipherType.type}
           loading={syncing || loading}
           isEmpty={isEmpty}

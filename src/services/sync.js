@@ -30,9 +30,9 @@ function sync_folder(id) {
   })
 }
 
-function sync_revision_date() {
+function sync_collection(id) {
   return request({
-    url: global.endpoint.SYNC_REVISION_DATE,
+    url: global.endpoint.SYNC_FOLDER.replace(':id', id),
     method: 'get',
   })
 }
@@ -42,5 +42,5 @@ export default {
   sync_count,
   sync_cipher,
   sync_folder,
-  sync_revision_date
+  sync_collection,
 }

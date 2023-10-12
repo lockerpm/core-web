@@ -1,5 +1,7 @@
 import { CipherType } from '../../core-js/src/enums';
 import global from '../../config/global';
+import cloneDeep from 'lodash/cloneDeep';
+import newTypes from '../new-types';
 
 const cipherSubtitle = (item) => {
   if (!item) {
@@ -8,25 +10,15 @@ const cipherSubtitle = (item) => {
   if (item.type === CipherType.CryptoWallet && item.cryptoWallet) {
     return item.cryptoWallet.username
   }
-  if (item.type === CipherType.DriverLicense && item.driverLicense) {
-    return item.driverLicense.fullName
-  }
-  if (item.type === CipherType.CitizenID && item.citizenId) {
-    return item.citizenId.fullName
-  }
-  if (item.type === CipherType.Passport && item.passport) {
-    return item.passport.fullName
-  }
-  if (item.type === CipherType.SocialSecurityNumber && item.ssn) {
-    return item.ssn.fullName
-  }
-  if (item.type === CipherType.WirelessRouter && item.router) {
-    return item.router.deviceName
-  }
-  if (item.type === CipherType.Server && item.server) {
-    return item.server.username
-  }
   return item.subTitle
+}
+
+const parseNotesOfNewTypes = (originalCipher) => {
+  const cipher = cloneDeep(originalCipher)
+  if (cipher.type === CipherType.CryptoWallet) {
+    cipher['cryptoWallet'] = newTypes.cryptoWallet.toCryptoWalletData(cipher.notes)
+  }
+  return cipher
 }
 
 const cipherTypeInfo = (key = 'type', value) => {
@@ -36,5 +28,6 @@ const cipherTypeInfo = (key = 'type', value) => {
 
 export default {
   cipherSubtitle,
-  cipherTypeInfo
+  cipherTypeInfo,
+  parseNotesOfNewTypes
 }

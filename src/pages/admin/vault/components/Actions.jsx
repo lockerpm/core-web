@@ -14,19 +14,22 @@ import {
 } from "@ant-design/icons";
 
 import { useTranslation } from "react-i18next";
+import { useSelector } from 'react-redux';
 
-import common from "../../../../utils/common";
 import { CipherType } from "../../../../core-js/src/enums";
 
 import global from "../../../../config/global";
+import common from "../../../../utils/common";
 
 const CipherActions = (props) => {
   const { t } = useTranslation()
   
   const {
     className = '',
-    item = null
+    item = null,
   } = props;
+
+  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
 
   const [loginTotp, setLoginTotp] = useState(null)
 
@@ -49,7 +52,7 @@ const CipherActions = (props) => {
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
-            value: item.login.password
+            onClick: () => common.copyToClipboard(item.login.password)
           },
         ]
       case CipherType.Login:
@@ -57,18 +60,18 @@ const CipherActions = (props) => {
           {
             key: 'copy_username',
             label: t('inventory.actions.copy_username'),
-            value: item.login.username
+            onClick: () => common.copyToClipboard(item.login.username)
           },
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
-            value: item.login.password
+            onClick: () => common.copyToClipboard(item.login.password)
           },
           {
             key: 'copy_totp',
             label: t('inventory.actions.copy_totp'),
             disabled: !loginTotp,
-            value: loginTotp,
+            onClick: () => common.copyToClipboard(loginTotp)
           }
         ]
       case CipherType.SecureNote:
@@ -76,8 +79,8 @@ const CipherActions = (props) => {
           {
             key: 'copy_note',
             label: t('inventory.actions.copy_note'),
-            value: item.notes,
             disabled: !item.notes,
+            onClick: () => common.copyToClipboard(item.notes)
           },
         ]
       case CipherType.CryptoWallet:
@@ -88,26 +91,26 @@ const CipherActions = (props) => {
           {
             key: 'copy_seed_phrase',
             label: t('inventory.actions.copy_seed_phrase'),
-            value: item.cryptoWallet.seed,
             disabled: !item.cryptoWallet.seed,
+            onClick: () => common.copyToClipboard(item.cryptoWallet.seed)
           },
           {
             key: 'copy_wallet_address',
             label: t('inventory.actions.copy_wallet_address'),
-            value: item.cryptoWallet.address,
             disabled: !item.cryptoWallet.address,
+            onClick: () => common.copyToClipboard(item.cryptoWallet.address)
           },
           {
             key: 'copy_private_key',
             label: t('inventory.actions.copy_private_key'),
-            value: item.cryptoWallet.privateKey,
             disabled: !item.cryptoWallet.privateKey,
+            onClick: () => common.copyToClipboard(item.cryptoWallet.privateKey)
           },
           {
             key: 'copy_password_pin',
             label: t('inventory.actions.copy_password_pin'),
-            value: item.cryptoWallet.password,
             disabled: !item.cryptoWallet.password,
+            onClick: () => common.copyToClipboard(item.cryptoWallet.password)
           },
         ]
       default:
@@ -116,9 +119,13 @@ const CipherActions = (props) => {
   }, [item, loginTotp])
 
   const shareMenus = useMemo(() => {
+    if (item.type === CipherType.MasterPassword) {
+      return []
+    }
     return [
       {
         key: 'in_app_shares',
+        hide: !common.isCipherShareable(allOrganizations, item),
         label: <Tooltip
           title={t('inventory.actions.in_app_shares_note')}
         >
@@ -127,48 +134,75 @@ const CipherActions = (props) => {
       },
       {
         key: 'get_shareable_link',
+        hide: !common.isCipherQuickShareable(item),
         label: <Tooltip
           title={t('inventory.actions.get_shareable_link_note')}
         >
           <p>{t('inventory.actions.get_shareable_link')}</p>
         </Tooltip>
       },
-    ]
-  })
+    ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
+  }, [item, allOrganizations])
 
   const generalMenus = useMemo(() => {
-    return [
-      {
-        key: 'edit',
-        label: t('inventory.actions.edit')
-      },
-      {
-        key: 'clone',
-        label: t('inventory.actions.clone')
-      },
-      {
-        key: 'move_to_folder',
-        label: t('inventory.actions.move_to_folder')
-      },
-      {
-        type: 'divider',
-      },
-      {
-        key: 'delete',
-        label: t('inventory.actions.delete'),
-        danger: true,
-      },
-    ]
+    if (item.type === CipherType.MasterPassword ) {
+      return []
+    }
+    if (!item.isDeleted) {
+      return [
+        {
+          key: 'edit',
+          hide: !common.isChangeCipher(allOrganizations, item),
+          label: t('inventory.actions.edit')
+        },
+        {
+          key: 'clone',
+          label: t('inventory.actions.clone')
+        },
+        {
+          key: 'move_to_folder',
+          label: t('inventory.actions.move_to_folder')
+        },
+        {
+          key: 'stop_sharing',
+          hide: !(common.isOwner(allOrganizations, item) && item.organizationId && !item.collectionIds.length),
+          label: t('inventory.actions.stop_sharing')
+        },
+        {
+          type: 'divider',
+        },
+        {
+          key: 'delete',
+          hide: !common.isOwner(allOrganizations, item),
+          label: t('inventory.actions.delete'),
+          danger: true,
+        },
+      ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
+    }
+    if (item.isDeleted && common.isOwner(allOrganizations, item)) {
+      return [
+        {
+          key: 'restore',
+          label: t('inventory.actions.restore')
+        },
+        {
+          key: 'permanently_delete',
+          label: t('inventory.actions.permanently_delete'),
+          danger: true,
+        },
+      ]
+    }
+    return []
   })
 
   const role = useMemo(() => {
     return {
       isGoToWeb: !item.isDeleted && !!item.login?.canLaunch,
       isCopy: copyMenus.length > 0,
-      isShares: true,
-      isGeneral: item.type !== CipherType.MasterPassword
+      isShares: shareMenus.length > 0,
+      isGeneral: generalMenus.length > 0
     }
-  }, [item, copyMenus])
+  }, [item, copyMenus, shareMenus])
 
   return (
     <div className={className}>
@@ -181,7 +215,7 @@ const CipherActions = (props) => {
               type="text"
               size="small"
               icon={<ExportOutlined />}
-              onClick={() => common.openNewTab(item.login.url)}
+              onClick={() => common.openNewTab(item.login.uri)}
             />
           </Tooltip>
         }

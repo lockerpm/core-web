@@ -4,7 +4,7 @@ import format from './format'
 import time from './time'
 import router from './router'
 import cipher from './cipher'
-import share from'./share'
+import permission from'./permission'
 
 export default {
   ...other,
@@ -13,5 +13,5 @@ export default {
   ...time,
   ...router,
   ...cipher,
-  ...share,
+  ...permission,
 }

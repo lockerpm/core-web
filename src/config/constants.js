@@ -310,5 +310,31 @@ export default {
       alias: 'other',
       logo: require('../assets/images/icons/chains/other.png')
     }
+  ],
+  SORT_OPTIONS: [
+    {
+      key: 'name_ascending',
+      orderField: 'name',
+      orderDirection: 'asc',
+      label: <Trans i18nKey={'sort_options.name_ascending'}/>,
+    },
+    {
+      key: 'name_descending',
+      orderField: 'name',
+      orderDirection: 'desc',
+      label: <Trans i18nKey={'sort_options.name_descending'}/>,
+    },
+    {
+      key: 'time_ascending',
+      orderField: 'revisionDate',
+      orderDirection: 'asc',
+      label: <Trans i18nKey={'sort_options.time_ascending'}/>,
+    },
+    {
+      key: 'time_descending',
+      orderField: 'revisionDate',
+      orderDirection: 'desc',
+      label: <Trans i18nKey={'sort_options.time_descending'}/>,
+    }
   ]
 }

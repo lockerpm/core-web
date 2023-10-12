@@ -132,6 +132,7 @@
     },
     "success": {
       "title": "Success",
+      "copied": "Copied to clipboard",
       "member": {
         "created": "The new member is added.",
         "updated": "The member information is updated.",
@@ -178,7 +179,6 @@
     "authenticator": "Authenticator",
     "security_tools": "Security_tools",
     "shares": "Shares",
-    "private_email": "Private_email",
     "trash": "Trash",
     "settings": "Settings",
     "account": "Account",
@@ -227,6 +227,13 @@
     "accepted": "Accepted",
     "created": "Created",
     "accessed": "Accessed"
+  },
+  "sort_options": {
+    "sort_by": "Sort by",
+    "name_ascending": "Name Ascending",
+    "name_descending": "Name Descending",
+    "time_ascending": "Time Ascending",
+    "time_descending": "Time Descending"
   },
   "change_password": {
     "title": "Change Password",
@@ -362,6 +369,7 @@
   },
   "inventory": {
     "all_items": "All items",
+    "shared": "Shared in Locker",
     "vault": {
       "title": "Let's get started!",
       "description": "Add your first item. You will find it here whenever you need it.",
@@ -415,6 +423,9 @@
       "edit": "Edit",
       "clone": "Clone",
       "move_to_folder": "Move to a folder",
+      "stop_sharing": "Stop sharing",
+      "restore": "Restore",
+      "permanently_delete": "Permanently delete",
       "delete": "Delete"
     }
   }

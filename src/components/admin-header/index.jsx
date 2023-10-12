@@ -35,7 +35,7 @@ const AdminHeader = (props) => {
 
   const height = useMemo(() => {
     if (isAvatar || subtitle || ![null, undefined].includes(total)) {
-      return 40;
+      return 60;
     }
     return 40
   }, [isAvatar, subtitle, total])
@@ -75,7 +75,7 @@ const AdminHeader = (props) => {
           <div className="w-full">
             {
               isEdit ? <EditForm /> : <h1
-                className={`admin-header__left--title ${isMarginTop ? 'text-2xl' : 'text-xl'}`}
+                className={`admin-header__left--title font-semibold ${isMarginTop ? 'text-2xl' : 'text-xl'}`}
               >
                 {title}
               </h1>

@@ -24,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import storeActions from "../../store/actions";
 
 import coreServices from "../../services/core";
+import commonServices from "../../services/common";
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
 
@@ -79,8 +80,10 @@ const Lock = () => {
         await coreServices.unlock({...response, password: values.masterPassword, username: userInfo.email })
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         navigate(returnUrl);
-        await coreServices.sync_data();
-        await coreServices.get_all_ciphers();
+        await commonServices.sync_data();
+        await commonServices.get_quick_shares();
+        await commonServices.get_my_shares();
+        await commonServices.get_invitations();
       }).catch((error) => {
         global.pushError(error)
       });

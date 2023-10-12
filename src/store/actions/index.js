@@ -2,10 +2,18 @@ import authActions from './auth'
 import syncActions from './sync'
 import systemActions from './system'
 import cipherActions from './cipher'
+import folderActions from './folder'
+import collectionActions from './collection'
+import organizationActions from './organization'
+import shareActions from './share'
 
 export default {
   ...authActions,
   ...syncActions,
   ...systemActions,
-  ...cipherActions
+  ...cipherActions,
+  ...folderActions,
+  ...collectionActions,
+  ...organizationActions,
+  ...shareActions
 }

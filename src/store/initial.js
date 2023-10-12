@@ -23,7 +23,20 @@ export default {
     syncing: false,
     syncProfile: null
   },
+  share: {
+    myShares: [],
+    invitations: []
+  },
   cipher: {
     allCiphers: []
+  },
+  organization: {
+    allOrganizations: []
+  },
+  folder: {
+    allFolders: []
+  },
+  collection: {
+    allCollections: []
   }
 }
