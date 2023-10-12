@@ -1,24 +1,22 @@
 import React, { useMemo } from "react";
 import {
   Collapse,
-  Space,
-  Button,
   Checkbox,
-  Tag
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  TextCopy
-} from '../../../../components'
+  TextCopy,
+} from '../../../../components';
+
+import Name from "./Name";
+import Actions from "./Actions";
 
 import common from "../../../../utils/common";
 
 import {
-  EditOutlined,
-  DeleteOutlined
 } from "@ant-design/icons";
 
 const BoxData = (props) => {
@@ -29,9 +27,6 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
-    rowSelection = {},
-    onUpdate = () => {},
-    onDelete = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -55,49 +50,21 @@ const BoxData = (props) => {
           >
             <div className="flex align-items">
               <Checkbox className="mr-2"/>
-              <TextCopy
-                value={record.secret.key}
-              />
+              <Name cipher={record}/>
             </div>
-            {
-              <Space size={[8, 8]}>
-                <Button
-                  icon={<EditOutlined />}
-                  type={'link'}
-                  size="small"
-                  onClick={() => onUpdate(record)}
-                ></Button>
-                <Button
-                  icon={<DeleteOutlined />}
-                  type={'link'}
-                  size="small"
-                  danger
-                  onClick={() => onDelete(record)}
-                ></Button>
-              </Space>
-            }
+            <Actions cipher={record}/>
           </div>}
         >
           <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('secret.value')}:</p>
-            <TextCopy
-              isPassword
-              value={record.secret.value}
-            />
-          </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('secret.environment')}:</p>
-          </div>
-          <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('common.created_time')}:</p>
             <TextCopy
-              value={common.convertDateTime(record.creationDate)}
+              value={common.timeFromNow(record.creationDate)}
             />
           </div>
           <div className="flex items-center">
             <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
             <TextCopy
-              value={common.convertDateTime(record.updatedDate)}
+              value={common.timeFromNow(record.revisionDate)}
             />
           </div>
         </Collapse.Panel>)

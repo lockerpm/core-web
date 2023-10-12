@@ -1,7 +1,6 @@
 import global from '../config/global'
 import store from '../store'
 import storeActions from '../store/actions'
-import orderBy from 'lodash/orderBy'
 import common from '../utils/common'
 
 import syncServices from './sync'
@@ -55,21 +54,17 @@ async function sync_collections(collections) {
 }
 
 async function sync_ciphers(response) {
-  try {
-    await global.jsCore.syncService.setLastSync(new Date())
-    const userId = await global.jsCore.userService.getUserId()
-    const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || []
-    const deletedIds = []
-    decryptedCipherCache.forEach(cipher => {
-      if (response.ciphers.findIndex(c => c.id === cipher.id) < 0) {
-        deletedIds.push(cipher.id)
-      }
-    })
-    await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
-    await global.jsCore.syncService.syncSomeCiphers(userId, response.ciphers)
-  } catch (error) {
-    console.log(error)
-  }
+  await global.jsCore.syncService.setLastSync(new Date())
+  const userId = await global.jsCore.userService.getUserId()
+  const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || []
+  const deletedIds = []
+  decryptedCipherCache.forEach(cipher => {
+    if (response.ciphers.findIndex(c => c.id === cipher.id) < 0) {
+      deletedIds.push(cipher.id)
+    }
+  })
+  await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
+  await global.jsCore.syncService.syncSomeCiphers(userId, response.ciphers)
 }
 
 async function get_all_ciphers() {

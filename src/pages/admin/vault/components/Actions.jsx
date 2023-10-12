@@ -26,7 +26,7 @@ const CipherActions = (props) => {
   
   const {
     className = '',
-    item = null,
+    cipher = null,
   } = props;
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
@@ -35,24 +35,24 @@ const CipherActions = (props) => {
 
   useEffect(() => {
     fetchLoginTotp();
-  }, [item])
+  }, [cipher])
 
   const fetchLoginTotp = async () => {
     let totp = null
-    if (item?.login?.totp) {
-      totp = await global.jsCore.totpService.getCode(item.login.totp)
+    if (cipher?.login?.totp) {
+      totp = await global.jsCore.totpService.getCode(cipher.login.totp)
     }
     setLoginTotp(totp)
   }
 
   const copyMenus = useMemo(() => {
-    switch (item.type) {
+    switch (cipher.type) {
       case CipherType.MasterPassword:
         return [
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
-            onClick: () => common.copyToClipboard(item.login.password)
+            onClick: () => common.copyToClipboard(cipher.login.password)
           },
         ]
       case CipherType.Login:
@@ -60,12 +60,12 @@ const CipherActions = (props) => {
           {
             key: 'copy_username',
             label: t('inventory.actions.copy_username'),
-            onClick: () => common.copyToClipboard(item.login.username)
+            onClick: () => common.copyToClipboard(cipher.login.username)
           },
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
-            onClick: () => common.copyToClipboard(item.login.password)
+            onClick: () => common.copyToClipboard(cipher.login.password)
           },
           {
             key: 'copy_totp',
@@ -79,53 +79,53 @@ const CipherActions = (props) => {
           {
             key: 'copy_note',
             label: t('inventory.actions.copy_note'),
-            disabled: !item.notes,
-            onClick: () => common.copyToClipboard(item.notes)
+            disabled: !cipher.notes,
+            onClick: () => common.copyToClipboard(cipher.notes)
           },
         ]
       case CipherType.CryptoWallet:
-        if (!item.cryptoWallet) {
+        if (!cipher.cryptoWallet) {
           return []
         }
         return [
           {
             key: 'copy_seed_phrase',
             label: t('inventory.actions.copy_seed_phrase'),
-            disabled: !item.cryptoWallet.seed,
-            onClick: () => common.copyToClipboard(item.cryptoWallet.seed)
+            disabled: !cipher.cryptoWallet.seed,
+            onClick: () => common.copyToClipboard(cipher.cryptoWallet.seed)
           },
           {
             key: 'copy_wallet_address',
             label: t('inventory.actions.copy_wallet_address'),
-            disabled: !item.cryptoWallet.address,
-            onClick: () => common.copyToClipboard(item.cryptoWallet.address)
+            disabled: !cipher.cryptoWallet.address,
+            onClick: () => common.copyToClipboard(cipher.cryptoWallet.address)
           },
           {
             key: 'copy_private_key',
             label: t('inventory.actions.copy_private_key'),
-            disabled: !item.cryptoWallet.privateKey,
-            onClick: () => common.copyToClipboard(item.cryptoWallet.privateKey)
+            disabled: !cipher.cryptoWallet.privateKey,
+            onClick: () => common.copyToClipboard(cipher.cryptoWallet.privateKey)
           },
           {
             key: 'copy_password_pin',
             label: t('inventory.actions.copy_password_pin'),
-            disabled: !item.cryptoWallet.password,
-            onClick: () => common.copyToClipboard(item.cryptoWallet.password)
+            disabled: !cipher.cryptoWallet.password,
+            onClick: () => common.copyToClipboard(cipher.cryptoWallet.password)
           },
         ]
       default:
         return [];
     }
-  }, [item, loginTotp])
+  }, [cipher, loginTotp])
 
   const shareMenus = useMemo(() => {
-    if (item.type === CipherType.MasterPassword) {
+    if (cipher.type === CipherType.MasterPassword) {
       return []
     }
     return [
       {
         key: 'in_app_shares',
-        hide: !common.isCipherShareable(allOrganizations, item),
+        hide: !common.isCipherShareable(allOrganizations, cipher),
         label: <Tooltip
           title={t('inventory.actions.in_app_shares_note')}
         >
@@ -134,7 +134,7 @@ const CipherActions = (props) => {
       },
       {
         key: 'get_shareable_link',
-        hide: !common.isCipherQuickShareable(item),
+        hide: !common.isCipherQuickShareable(cipher),
         label: <Tooltip
           title={t('inventory.actions.get_shareable_link_note')}
         >
@@ -142,17 +142,17 @@ const CipherActions = (props) => {
         </Tooltip>
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [item, allOrganizations])
+  }, [cipher, allOrganizations])
 
   const generalMenus = useMemo(() => {
-    if (item.type === CipherType.MasterPassword ) {
+    if (cipher.type === CipherType.MasterPassword ) {
       return []
     }
-    if (!item.isDeleted) {
+    if (!cipher.isDeleted) {
       return [
         {
           key: 'edit',
-          hide: !common.isChangeCipher(allOrganizations, item),
+          hide: !common.isChangeCipher(allOrganizations, cipher),
           label: t('inventory.actions.edit')
         },
         {
@@ -165,7 +165,7 @@ const CipherActions = (props) => {
         },
         {
           key: 'stop_sharing',
-          hide: !(common.isOwner(allOrganizations, item) && item.organizationId && !item.collectionIds.length),
+          hide: !(common.isOwner(allOrganizations, cipher) && cipher.organizationId && !cipher.collectionIds.length),
           label: t('inventory.actions.stop_sharing')
         },
         {
@@ -173,13 +173,13 @@ const CipherActions = (props) => {
         },
         {
           key: 'delete',
-          hide: !common.isOwner(allOrganizations, item),
+          hide: !common.isOwner(allOrganizations, cipher),
           label: t('inventory.actions.delete'),
           danger: true,
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
-    if (item.isDeleted && common.isOwner(allOrganizations, item)) {
+    if (cipher.isDeleted && common.isOwner(allOrganizations, cipher)) {
       return [
         {
           key: 'restore',
@@ -197,12 +197,12 @@ const CipherActions = (props) => {
 
   const role = useMemo(() => {
     return {
-      isGoToWeb: !item.isDeleted && !!item.login?.canLaunch,
+      isGoToWeb: !cipher.isDeleted && !!cipher.login?.canLaunch,
       isCopy: copyMenus.length > 0,
       isShares: shareMenus.length > 0,
       isGeneral: generalMenus.length > 0
     }
-  }, [item, copyMenus, shareMenus])
+  }, [cipher, copyMenus, shareMenus])
 
   return (
     <div className={className}>
@@ -215,7 +215,7 @@ const CipherActions = (props) => {
               type="text"
               size="small"
               icon={<ExportOutlined />}
-              onClick={() => common.openNewTab(item.login.uri)}
+              onClick={() => common.openNewTab(cipher.login.uri)}
             />
           </Tooltip>
         }
