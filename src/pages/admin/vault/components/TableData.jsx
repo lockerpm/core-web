@@ -13,8 +13,8 @@ import {
 import {
 } from "@ant-design/icons";
 
-import Name from "./Name";
-import Actions from "./Actions";
+import Name from "./table/Name";
+import Actions from "./table/Actions";
 
 import common from "../../../../utils/common";
 

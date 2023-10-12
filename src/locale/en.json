@@ -58,7 +58,9 @@
     "coming_soon": "Coming Soon", 
     "results": "Results",
     "no_file_chosen": "No file chosen",
-    "name": "Name"
+    "name": "Name",
+    "other": "Other",
+    "length": "Length"
   },
   "button": {
     "add": "Add",
@@ -260,6 +262,26 @@
       "delete_data_desc": "Delete add data permanently, including all your data will be deleted."
     }
   },
+  "generate_password": {
+    "title": "Generate random password",
+    "fill_password": "Fill Password",
+    "copy_password": "Copy Password",
+    "show_options": "Show Options",
+    "options": {
+      "uppercase": "Use uppercase letters (A-Z)",
+      "lowercase": "Use lowercase letters (a-z)",
+      "digits": "Use digits (0-9)",
+      "symbols": "Use symbols (@!$%*)",
+      "ambiguous": "Avoid ambiguous characters"
+    },
+    "status": {
+      "very_weak": "Very weak",
+      "weak": "Weak",
+      "medium": "Medium",
+      "good": "Good",
+      "strong": "Strong"
+    }
+  },
   "drag_upload": {
     "action": "Click or drag",
     "description": "file to this area to upload",
@@ -427,6 +449,82 @@
       "restore": "Restore",
       "permanently_delete": "Permanently delete",
       "delete": "Delete"
+    }
+  },
+  "cipher": {
+    "type": "Item type",
+    "item_name": "Item name",
+    "others": "Others",
+    "notes": "Notes",
+    "select_folder": "Select a folder",
+    "types": {
+      "password": "Password",
+      "note": "Note",
+      "card": "Card",
+      "crypto_backup": "Crypto Backup",
+      "identity": "Identity"
+    },
+    "custom_fields": {
+      "title": "Custom fields",
+      "new": "New custom field",
+      "text": "Text",
+      "hidden_field": "Hidden field",
+      "url": "URL",
+      "email": "Email",
+      "date": "Date",
+      "month_year": "Month / Year",
+      "phone": "Phone",
+      "field_name": "Field name"
+    },
+    "password": {
+      "title": "Login Information",
+      "username": "Email/Username",
+      "password": "Password",
+      "website": "Website address",
+      "setup_otp": "2FA Setup",
+      "no_otp": "No OTP",
+      "new_otp": "Add new OTP",
+      "existing_otp": "Set up from an existing OTP",
+      "secret_key": "Secret key or Path",
+      "select_otp": "Select an OTP"
+    },
+    "card": {
+      "title": "Card Information",
+      "cardholder_name": "Cardholder name",
+      "card_number": "Card number",
+      "expiration_month": "Expiration month",
+      "expiration_year": "Expiration year",
+      "security_code": "Security Code (CVV)"
+    },
+    "crypto_backup": {
+      "wallet_app": "Wallet App",
+      "username": "Username",
+      "password": "Password",
+      "pin": "PIN",
+      "wallet_address": "Wallet Address",
+      "Private_key": "Private Key",
+      "seed_phrase": "Seed Phrase",
+      "networks": "Networks"
+    },
+    "identity": {
+      "personal_title": "Personal Information",
+      "title": "Title",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "username": "Username",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "social_security_number": "Social security number",
+      "passport_number": "Passport number",
+      "license_number": "License number",
+      "contact_title": "Contact Information",
+      "address1": "Address1",
+      "address2": "Address2",
+      "city_town": "City / Town",
+      "state_province": "State / Province",
+      "zip_postal": "Zip / Postal code",
+      "country": "Country"
     }
   }
 }  

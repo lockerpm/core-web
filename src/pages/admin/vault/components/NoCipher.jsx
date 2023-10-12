@@ -16,7 +16,7 @@ import {
   NoData
 } from '../../../../components';
 
-import CipherIcon from "./CipherIcon";
+import CipherIcon from "./table/CipherIcon";
 import { gray } from '@ant-design/colors';
 
 const NoCipher = (props) => {

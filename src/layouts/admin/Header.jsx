@@ -10,8 +10,9 @@ import {
 } from '@ant-design/icons';
 import './css/Header.scss';
 
+import { ImageIcon } from '../../components';
+
 import Breadcrumb from './Breadcrumb';
-import { ImageIcon } from '../../components'
 import SearchContent from './components/SearchContent';
 
 import { useSelector } from 'react-redux';
@@ -40,7 +41,10 @@ function Header(props) {
         }
         {
           !isMobile && <div className='menu-toggle-icon mr-2' onClick={() => setCollapsed(!collapsed)}>
-            <ImageIcon name={ collapsed ? 'expand-icon' : 'wrapper-icon' }/>
+            <ImageIcon
+              name={ collapsed ? 'expand-icon' : 'wrapper-icon' }
+              className={'flex items-center'}
+            />
           </div>
         }
         {

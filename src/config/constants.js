@@ -97,6 +97,7 @@ export default {
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
       title: <Trans i18nKey={'inventory.all_items'}/>,
+      name: <></>,
       isCreate: false
     },
     {
@@ -106,6 +107,7 @@ export default {
       listRouter: keys.PASSWORDS,
       detailRouter: keys.PASSWORD_DETAIL,
       title: <Trans i18nKey={'sidebar.passwords'}/>,
+      name: <Trans i18nKey={'cipher.types.password'}/>,
       isCreate: true,
     },
     {
@@ -115,6 +117,7 @@ export default {
       listRouter: keys.NOTES,
       detailRouter: keys.NOTE_DETAIL,
       title: <Trans i18nKey={'sidebar.notes'}/>,
+      name: <Trans i18nKey={'cipher.types.note'}/>,
       isCreate: true,
     },
     {
@@ -124,6 +127,7 @@ export default {
       listRouter: keys.CARDS,
       detailRouter: keys.CARD_DETAIL,
       title: <Trans i18nKey={'sidebar.cards'}/>,
+      name: <Trans i18nKey={'cipher.types.card'}/>,
       isCreate: true,
     },
     {
@@ -133,6 +137,7 @@ export default {
       listRouter: keys.CRYPTO_BACKUPS,
       detailRouter: keys.CRYPTO_BACKUP_DETAIL,
       title: <Trans i18nKey={'sidebar.crypto_backups'}/>,
+      name: <Trans i18nKey={'cipher.types.crypto_backup'}/>,
       isCreate: true,
     },
     {
@@ -142,6 +147,7 @@ export default {
       listRouter: keys.IDENTITIES,
       detailRouter: keys.IDENTITY_DETAIL,
       title: <Trans i18nKey={'sidebar.identities'}/>,
+      name: <Trans i18nKey={'cipher.types.identity'}/>,
       isCreate: true,
     },
     {

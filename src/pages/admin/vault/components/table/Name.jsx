@@ -8,17 +8,17 @@ import { useTranslation } from "react-i18next";
 
 import {
   TextCopy,
-  RouterLink
-} from '../../../../components';
+  RouterLink,
+  ImageIcon
+} from '../../../../../components';
 
 import {
 } from "@ant-design/icons";
 
 import CipherIcon from "./CipherIcon";
 
-import common from "../../../../utils/common";
-import global from "../../../../config/global";
-import ShareIcon from "../../../../assets/images/icons/shares-icon.svg"
+import common from "../../../../../utils/common";
+import global from "../../../../../config/global";
 
 const Name = (props) => {
   const { t } = useTranslation()
@@ -41,10 +41,9 @@ const Name = (props) => {
             icon={
               cipher.organizationId && (
                 common.isCipherShared(cipher.organizationId) || common.isCipherSharedWithMe(allOrganizations, cipher.organizationId)
-              ) ? <Image
+              ) ? <ImageIcon
                 className="ml-1"
-                preview={false}
-                src={ShareIcon}
+                name={'shares-icon'}
                 title={t('inventory.shared')}
               /> : <></>
             }

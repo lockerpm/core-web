@@ -8,14 +8,17 @@ import {
   Select,
   Divider
 } from '@lockerpm/design';
+
 import {
-  PlusOutlined
 } from '@ant-design/icons';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
+import PasswordForm from './forms/Password';
+
 import global from '../../../../config/global';
+import { CipherType } from '../../../../core-js/src/enums';
 
 function FormData(props) {
   const {
@@ -23,24 +26,29 @@ function FormData(props) {
     item = null,
     cipherType = {},
     onClose = () => {},
-    onReload = () => {}
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
-  const [formVisible, setFormVisible] = useState(false);
+
+  const cipherTypes = global.constants.CIPHER_TYPES.filter((t) => t.isCreate)
+  const type = Form.useWatch('type', form)
 
   useEffect(() => {
     if (visible) {
       if (item) {
         form.setFieldsValue({
+          type: item.type
         })
       } else {
         form.setFieldsValue({
+          type: cipherType.type || cipherTypes[0].type
         })
       }
+    } else {
+      form.resetFields();
     }
-  }, [visible])
+  }, [visible, cipherType])
 
 
   const handleSave = async () => {
@@ -55,6 +63,7 @@ function FormData(props) {
         placement="right"
         onClose={onClose}
         open={visible}
+        width={400}
         footer={
           <Space className='flex items-center justify-end'>
             <Button
@@ -78,6 +87,33 @@ function FormData(props) {
           layout="vertical"
           labelAlign={'left'}
         >
+          {
+            !cipherType.type && <Form.Item
+              name={'type'}
+              label={
+                <p className='font-semibold'>{t('cipher.type')}</p>
+              }
+            >
+              <Select
+                className='w-full'
+                options={cipherTypes.map((t) => ({ value: t.type, label: t.name }))}
+              />
+            </Form.Item>
+          }
+          <Form.Item
+            name={'name'}
+            label={
+              <p className='font-semibold'>{t('cipher.item_name')}</p>
+            }
+            rules={[
+              global.rules.REQUIRED(t('cipher.item_name'))
+            ]}
+          >
+            <Input placeholder={t('placeholder.enter')}/>
+          </Form.Item>
+          {
+            type === CipherType.Login && <PasswordForm />
+          }
         </Form>
       </Drawer>
     </div>

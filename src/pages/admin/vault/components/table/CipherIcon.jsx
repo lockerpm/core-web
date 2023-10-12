@@ -8,9 +8,9 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import common from "../../../../utils/common";
-import { CipherType } from "../../../../core-js/src/enums";
-import global from "../../../../config/global";
+import common from "../../../../../utils/common";
+import { CipherType } from "../../../../../core-js/src/enums";
+import global from "../../../../../config/global";
 
 import extractDomain from 'extract-domain';
 
