@@ -1,5 +1,6 @@
 import { Trans } from 'react-i18next'
 import { CipherType } from '../core-js/src/enums'
+import { FieldType } from '../core-js/src/enums/fieldType'
 
 import keys from './keys'
 
@@ -341,6 +342,44 @@ export default {
       orderField: 'revisionDate',
       orderDirection: 'desc',
       label: <Trans i18nKey={'sort_options.time_descending'}/>,
+    }
+  ],
+  FIELD_TYPES: [
+    {
+      key: 'text',
+      value: FieldType.Text,
+      fieldPlaceholder: 'field_name',
+    },
+    {
+      key: 'hidden_field',
+      value: FieldType.Hidden,
+      fieldPlaceholder: 'field_name',
+      placeholder: 'text'
+    },
+    {
+      key: 'url',
+      value: FieldType.Url,
+      defaultValue: 'https://',
+      pattern: 'URL'
+    },
+    {
+      key: 'email',
+      value: FieldType.Email,
+      pattern: 'EMAIL'
+    },
+    {
+      key: 'date',
+      value: FieldType.Date,
+    },
+    {
+      key: 'month_year',
+      value: FieldType.MonthYear,
+      pattern: 'MONTH_YEAR'
+    },
+    {
+      key: 'phone',
+      value: FieldType.Phone,
+      pattern: 'PHONE'
     }
   ]
 }

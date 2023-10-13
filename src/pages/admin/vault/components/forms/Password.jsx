@@ -28,8 +28,9 @@ function PasswordForm(props) {
       </p>
       <Form.Item
         name={'username'}
+        className='mb-2'
         label={
-          <p className=''>
+          <p className='text-gray'>
             {t('cipher.password.username')}
           </p>
         }
@@ -40,8 +41,9 @@ function PasswordForm(props) {
       </Form.Item>
       <Form.Item
         name={'password'}
+        className='mb-2'
         label={
-          <p className=''>
+          <p className='text-gray'>
             {t('cipher.password.password')}
           </p>
         }
@@ -50,11 +52,11 @@ function PasswordForm(props) {
           placeholder={t('placeholder.enter')}
         />
       </Form.Item>
-      Password random
       <Form.Item
         name={'website'}
+        className='mb-2'
         label={
-          <p className=''>
+          <p className='text-gray'>
             {t('cipher.password.website')}
           </p>
         }

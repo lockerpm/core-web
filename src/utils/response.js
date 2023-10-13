@@ -10,7 +10,7 @@ export async function handleResponseErrorMessage(err) {
     authServices.logout();
     return
   }
-  if ([403, 404, 500, 502].includes(err.response.status)) {
+  if ([403, 500, 502].includes(err.response.status)) {
     const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
     if (!isLocked) {
       const currentPage = common.getRouterByLocation(window.location)

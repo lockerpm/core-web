@@ -107,15 +107,20 @@
     "description": "Enter description",
     "type": "Select type",
     "value": "Enter value",
-    "date": "Select date",
     "select": "Please select",
     "enter": "Please enter",
     "ip": "Please enter new IPs address",
     "username": "Enter Email or Username",
-    "email": "Enter your email",
     "password": "Enter your password",
     "code": "Hope that you got the code...",
-    "otp": "Enter the 6-digit code"
+    "otp": "Enter the 6-digit code",
+    "text": "Text",
+    "email": "example@gmail.com",
+    "phone": "0123456789",
+    "month_year": "MM/YY",
+    "date": "DD/MM/YYYY",
+    "url": "https://",
+    "field_name": "Field name"
   },
   "validation": {
     "required": "{{name}} is required.",
@@ -457,6 +462,8 @@
     "others": "Others",
     "notes": "Notes",
     "select_folder": "Select a folder",
+    "no_folder": "No Folder",
+    "add_folder": "Add new folder",
     "types": {
       "password": "Password",
       "note": "Note",
@@ -473,8 +480,7 @@
       "email": "Email",
       "date": "Date",
       "month_year": "Month / Year",
-      "phone": "Phone",
-      "field_name": "Field name"
+      "phone": "Phone"
     },
     "password": {
       "title": "Login Information",

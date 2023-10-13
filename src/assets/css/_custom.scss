@@ -2,6 +2,7 @@
 @import './modules/table.scss';
 @import './modules/tabs.scss';
 @import './modules/popver.scss';
+@import './modules/form.scss';
 
 .ant-layout {
   background: none;
@@ -10,27 +11,6 @@
 .ant-pagination {
   margin-top: 12px;
   text-align: end;
-}
-
-.ant-form-item-has-error {
-  .phone-input {
-    border: 1px solid #ff7875 !important;
-
-    &:hover {
-      box-shadow: 0 0 0 2px #ff777523;
-    }
-  }
-}
-
-.ant-form-item-explain-error {
-  font-size: 12px !important;
-}
-
-.ant-form-item-required {
-  align-items: start !important;
-  &::before {
-    padding-top: 4px;
-  }
 }
 
 .phone-input {
