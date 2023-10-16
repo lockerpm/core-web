@@ -60,7 +60,11 @@
     "no_file_chosen": "No file chosen",
     "name": "Name",
     "other": "Other",
-    "length": "Length"
+    "length": "Length",
+    "mr": "Mr",
+    "mrs": "Mrs",
+    "ms": "Ms",
+    "dr": "Dr"
   },
   "button": {
     "add": "Add",
@@ -120,7 +124,9 @@
     "month_year": "MM/YY",
     "date": "DD/MM/YYYY",
     "url": "https://",
-    "field_name": "Field name"
+    "field_name": "Field name",
+    "wallet_app": "Select a wallet app",
+    "networks": "Select networks"
   },
   "validation": {
     "required": "{{name}} is required.",
@@ -503,12 +509,13 @@
       "security_code": "Security Code (CVV)"
     },
     "crypto_backup": {
+      "title": "Crypto Backup Information",
       "wallet_app": "Wallet App",
       "username": "Username",
       "password": "Password",
       "pin": "PIN",
       "wallet_address": "Wallet Address",
-      "Private_key": "Private Key",
+      "private_key": "Private Key",
       "seed_phrase": "Seed Phrase",
       "networks": "Networks"
     },

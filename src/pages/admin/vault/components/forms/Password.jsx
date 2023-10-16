@@ -7,6 +7,8 @@ import {
 import {
 } from '@ant-design/icons';
 
+import { GeneratePassword } from '../../../../../components'
+
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -14,9 +16,12 @@ import global from '../../../../../config/global';
 
 function PasswordForm(props) {
   const {
-    form
+    form,
+    disabled = false
   } = props
   const { t } = useTranslation()
+
+  const password = Form.useWatch('password', form) || ''
   
   useEffect(() => {
   }, [])
@@ -37,6 +42,7 @@ function PasswordForm(props) {
       >
         <Input
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
       <Form.Item
@@ -50,10 +56,16 @@ function PasswordForm(props) {
       >
         <Input.Password
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
+      <GeneratePassword
+        password={password}
+        disabled={disabled}
+        onFill={(v) => form.setFieldValue('password', v)}
+      />
       <Form.Item
-        name={'website'}
+        name={'uri'}
         className='mb-2'
         label={
           <p className='text-gray'>
@@ -63,6 +75,7 @@ function PasswordForm(props) {
       >
         <Input
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
     </div>

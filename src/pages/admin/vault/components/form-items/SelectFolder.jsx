@@ -17,7 +17,8 @@ import global from '../../../../../config/global';
 function SelectFolder(props) {
   const { form } = props
   const { t } = useTranslation()
-  
+
+  const allFolders = useSelector((state) => state.folder.allFolders)
   useEffect(() => {
   }, [])
 
@@ -36,7 +37,11 @@ function SelectFolder(props) {
             {
               value: '',
               label: t('cipher.no_folder')
-            }
+            },
+            ...allFolders.map((f) => ({
+              value: f.id,
+              label: f.name
+            }))
           ]}
           dropdownRender={(menu) => (
             <>

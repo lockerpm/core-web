@@ -11,6 +11,7 @@ import TextCopy from './item/TextCopy'
 import ItemInput from './item/ItemInput'
 import ImageIcon from './item/ImageIcon'
 import SearchText from './item/SearchText'
+import GeneratePassword from './item/GeneratePassword'
 
 import ChangePasswordForm from './form/ChangePassword'
 
@@ -28,6 +29,7 @@ export {
   ItemInput,
   ImageIcon,
   SearchText,
+  GeneratePassword,
 
   ChangePasswordForm
 }

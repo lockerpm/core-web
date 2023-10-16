@@ -27,6 +27,7 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
+    onUpdate = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -52,7 +53,10 @@ const BoxData = (props) => {
               <Checkbox className="mr-2"/>
               <Name cipher={record}/>
             </div>
-            <Actions cipher={record}/>
+            <Actions
+              cipher={record}
+              onUpdate={() => onUpdate(record)}
+            />
           </div>}
         >
           <div className="flex items-center mb-2">

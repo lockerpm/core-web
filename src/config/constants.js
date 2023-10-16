@@ -203,7 +203,7 @@ export default {
     {
       name: 'RICE Wallet',
       alias: 'rice',
-      icon: require('../assets/images/icons/wallet-apps/rice.webp'),
+      icon: require('../assets/images/icons/wallet-apps/rice.png'),
     },
     {
       name: 'Coin98',

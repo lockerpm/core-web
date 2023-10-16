@@ -20,9 +20,15 @@ import SelectFolder from './form-items/SelectFolder';
 import CustomFields from './form-items/CustomFields';
 
 import PasswordForm from './forms/Password';
+import CardForm from './forms/Card';
+import CryptoBackupForm from './forms/CryptoBackup';
+import IdentityForm from './forms/Identity';
 
 import global from '../../../../config/global';
 import { CipherType } from '../../../../core-js/src/enums';
+import { Cipher } from '../../../../core-js/src/models/domain';
+
+import common from '../../../../utils/common';
 
 function FormData(props) {
   const {
@@ -40,17 +46,12 @@ function FormData(props) {
 
   useEffect(() => {
     if (visible) {
-      if (item) {
-        form.setFieldsValue({
-          type: item.type,
-        })
+      if (item?.id) {
+        const formData = common.convertCipherToForm(item)
+        form.setFieldsValue(formData)
       } else {
-        form.setFieldsValue({
-          type: cipherType.type || cipherTypes[0].type,
-          notes: null,
-          fields: [],
-          folderId: ''
-        })
+        const formData = common.convertCipherToForm({ type: cipherType.type || cipherTypes[0].type })
+        form.setFieldsValue(formData)
       }
     } else {
       form.resetFields();
@@ -98,18 +99,46 @@ function FormData(props) {
             className={'mb-4'}
             cipherTypes={cipherTypes}
             cipherType={cipherType}
+            disabled={false}
           />
           <div className='mb-4'>
             {
-              type === CipherType.Login && <PasswordForm />
+              type === CipherType.Login && <PasswordForm
+                form={form}
+                disabled={false}
+              />
+            }
+            {
+              type === CipherType.Card && <CardForm
+                form={form}
+                disabled={false}
+              />
+            }
+            {
+              type === CipherType.CryptoWallet && <CryptoBackupForm
+                form={form}
+                disabled={false}
+              />
+            }
+            {
+              type === CipherType.Identity && <IdentityForm
+                form={form}
+                disabled={false}
+              />
             }
           </div>
-          <Notes className={'mb-4'}/>
+          <Notes
+            className={'mb-4'}
+            disabled={false}
+          />
           <CustomFields
             className={'mb-4'}
             form={form}
+            disabled={false}
           />
-          <SelectFolder />
+          <SelectFolder
+            disabled={false}
+          />
         </Form>
       </Drawer>
     </div>

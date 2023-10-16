@@ -27,6 +27,7 @@ const CipherActions = (props) => {
   const {
     className = '',
     cipher = null,
+    onUpdate = () => {}
   } = props;
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
@@ -153,7 +154,8 @@ const CipherActions = (props) => {
         {
           key: 'edit',
           hide: !common.isChangeCipher(allOrganizations, cipher),
-          label: t('inventory.actions.edit')
+          label: t('inventory.actions.edit'),
+          onClick: () => onUpdate()
         },
         {
           key: 'clone',

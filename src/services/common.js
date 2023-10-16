@@ -135,6 +135,12 @@ async function get_invitations() {
   await store.dispatch(storeActions.updateInvitations(invitations))
 }
 
+function password_strength(password) {
+  return global.jsCore.passwordGenerationService.passwordStrength(password, [
+    'cystack'
+  ]) || { score: 0}
+}
+
 export default {
   clear_data,
   sync_data,
@@ -148,4 +154,5 @@ export default {
   get_quick_shares,
   get_my_shares,
   get_invitations,
+  password_strength
 }

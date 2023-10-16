@@ -25,6 +25,7 @@ const TableData = (props) => {
     className = '',
     data = [],
     params = {},
+    onUpdate = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -74,7 +75,10 @@ const TableData = (props) => {
         fixed: 'right',
         width: 100,
         render: (_, record) => (
-          <Actions cipher={record}/>
+          <Actions
+            cipher={record}
+            onUpdate={() => onUpdate(record)}
+          />
         ),
       },
     ].filter((c) => !c.hide)

@@ -77,6 +77,11 @@ const getTimeByOption = (key, value = []) => {
   return dates
 }
 
+const convertCipherFieldDate = (date) => {
+  const newDate = date.split('-').reverse();
+  return dayjs(newDate.join('-'))
+}
+
 export default {
   convertTime,
   timeFromNow,
@@ -85,5 +90,6 @@ export default {
   disabledTime,
   getCurrentWeekday,
   convertDateNow,
-  getTimeByOption
+  getTimeByOption,
+  convertCipherFieldDate
 }
