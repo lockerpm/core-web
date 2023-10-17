@@ -3,7 +3,7 @@ import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
 import { AdminHeader, Pagination } from "../../../components";
 
-import NoCipher from "./components/NoCipher";
+import NoFolder from "./components/NoFolder";
 import Filter from "./components/Filter";
 import TableData from "./components/TableData";
 import BoxData from "./components/BoxData";
@@ -16,11 +16,9 @@ import { useLocation } from 'react-router-dom';
 import common from "../../../utils/common";
 
 import global from "../../../config/global";
-import commonServices from "../../../services/common";
-import cipherServices from "../../../services/cipher";
-import { CipherType } from "../../../core-js/src/enums"
+import folderServices from "../../../services/folder";
 
-const Vault = (props) => {
+const Folders = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -28,13 +26,10 @@ const Vault = (props) => {
   const currentPage = common.getRouterByLocation(location);
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
-  const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const allFolders = useSelector((state) => state.folder.allFolders)
 
-  const [loading, setLoading] = useState(true);
-  const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [ciphers, setCiphers] = useState([]);
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -43,41 +38,10 @@ const Vault = (props) => {
     searchText: '',
   });
 
-  const cipherType = useMemo(() => {
-    if (currentPage.name === global.keys.TRASH) {
-      return {
-        type: null,
-        title: t('sidebar.trash'),
-        deleted: true,
-        listRouter: global.keys.TRASH,
-        detailRouter: global.keys.TRASH_DETAIL,
-      }
-    }
-    return {
-      ...common.cipherTypeInfo('listRouter', currentPage.name),
-      deleted: false,
-    }
-  }, [currentPage])
-
-  const filters = useMemo(() => {
-    const f = []
-    if (cipherType.type) {
-      f.push((c) => c.type === cipherType.type)
-    } else {
-      f.push((c) => c.type !== CipherType.TOTP)
-    }
-    return f
-  }, [cipherType])
-
   const isEmpty = useMemo(() => {
-    return !allCiphers.find(
-      (c) => !c.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
-    )
-  }, [allCiphers, JSON.stringify(cipherType)])
+    return allFolders.length === 0
+  }, [allFolders])
 
-  useEffect(() => {
-    fetchCiphers();
-  }, [params.searchText, allCiphers, JSON.stringify(cipherType)])
 
   useEffect(() => {
     setParams({
@@ -85,16 +49,20 @@ const Vault = (props) => {
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.searchText, cipherType.type, syncing])
+  }, [currentPage?.query?.searchText, syncing])
 
   const filteredData = useMemo(() => {
     return common.paginationAndSortData(
-      ciphers,
+      allFolders,
       params,
       params.orderField,
-      params.orderDirection
+      params.orderDirection,
+      [
+        (f) => f.id,
+        (f) => params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
+      ]
     )
-  }, [ciphers, JSON.stringify(params)])
+  }, [allFolders, JSON.stringify(params)])
 
   useEffect(() => {
     setParams({
@@ -112,27 +80,15 @@ const Vault = (props) => {
     })
   };
 
-  const fetchCiphers = async () => {
-    setLoading(true);
-    const result = await commonServices.list_ciphers({
-      deleted: cipherType.deleted,
-      searchText: params.searchText,
-      filters: filters
-    }, allCiphers)
-    setCiphers(result);
-    setLoading(false);
-  }
-
   const handleOpenForm = (item = null, cloneMode = false) => {
     setSelectedItem(item);
     setFormVisible(true);
-    setCloneMode(cloneMode)
   }
 
-  const deleteItem = (cipher) => {
+  const deleteItem = (folder) => {
     global.confirmDelete(() => {
-      cipherServices.multiple_delete({ ids: [cipher.id] }).then(async () => {
-        global.pushSuccess(t('notification.success.cipher.deleted'));
+      folderServices.remove(folder.id).then(async () => {
+        global.pushSuccess(t('notification.success.folder.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
@@ -151,16 +107,15 @@ const Vault = (props) => {
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
       <AdminHeader
-        title={cipherType.title}
+        title={t('inventory.all_folders')}
         total={filteredData.total}
         actions={[
           {
             key: 'add',
-            label: t('button.new_item'),
+            label: t('button.new_folder'),
             type: 'primary',
             icon: <PlusOutlined />,
-            hide: currentPage.name === global.keys.TRASH || isEmpty,
-            disabled: syncing || loading,
+            disabled: syncing,
             click: () => handleOpenForm()
           }
         ]}
@@ -174,24 +129,23 @@ const Vault = (props) => {
         />
       }
       {
-        filteredData.total == 0 ? <NoCipher
+        filteredData.total == 0 ? <NoFolder
           className={'mt-4'}
-          type={cipherType.type}
-          loading={syncing || loading}
+          loading={syncing}
           isEmpty={isEmpty}
           onCreate={() => handleOpenForm()}
         /> : <>
           {
             isMobile ? <BoxData
               className="mt-4"
-              loading={syncing || loading}
+              loading={syncing}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
             /> : <TableData
               className="mt-4"
-              loading={syncing || loading}
+              loading={syncing}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
@@ -210,13 +164,10 @@ const Vault = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
-        cipherType={cipherType}
-        cloneMode={cloneMode}
-        setCloneMode={setCloneMode}
         onClose={() => setFormVisible(false)}
       />
     </div>
   );
 }
 
-export default Vault;
+export default Folders;

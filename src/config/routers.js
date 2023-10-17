@@ -130,6 +130,12 @@ export default {
       element: 'Folders',
     },
     {
+      name: keys.FOLDER_DETAIL,
+      path: '/folders/:id',
+      element: 'Vault',
+      parent: keys.FOLDERS,
+    },
+    {
       name: keys.AUTHENTICATOR,
       path: '/authenticator',
       element: 'Authenticator',
@@ -147,7 +153,7 @@ export default {
     {
       name: keys.TRASH,
       path: '/trash',
-      element: 'Trash',
+      element: 'Vault',
     },
     {
       name: keys.TRASH_DETAIL,

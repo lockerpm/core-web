@@ -103,7 +103,8 @@
     "reinvite": "Reinvite",
     "select": "Select",
     "continue": "Continue",
-    "new_item": "New item"
+    "new_item": "New item",
+    "new_folder": "New folder"
    },
   "placeholder": {
     "name": "Enter name",
@@ -169,7 +170,13 @@
       },
       "cipher": {
         "created": "The new item is added.",
+        "updated": "The item information is updated.",
         "deleted": "The item is deleted."
+      },
+      "folder": {
+        "created": "The new folder is added.",
+        "updated": "The folder information is updated.",
+        "deleted": "The folder is deleted."
       }
     },
     "warning": {
@@ -406,6 +413,7 @@
   },
   "inventory": {
     "all_items": "All items",
+    "all_folders": "All folders",
     "shared": "Shared in Locker",
     "vault": {
       "title": "Let's get started!",
@@ -443,6 +451,12 @@
       "add": "Add password",
       "edit": "Edit password"
     },
+    "folders": {
+      "title": "Add your first folder",
+      "description": "Add an folder to manage ciphers.",
+      "add": "Add folder",
+      "edit": "Rename folder"
+    },
     "actions": {
       "go_to_web": "Go to website",
       "copy_username": "Copy Username",
@@ -463,7 +477,8 @@
       "stop_sharing": "Stop sharing",
       "restore": "Restore",
       "permanently_delete": "Permanently delete",
-      "delete": "Delete"
+      "delete": "Delete",
+      "share": "Share"
     }
   },
   "cipher": {
@@ -472,6 +487,7 @@
     "others": "Others",
     "notes": "Notes",
     "select_folder": "Select a folder",
+    "folder_name": "Folder name",
     "no_folder": "No Folder",
     "add_folder": "Add new folder",
     "types": {

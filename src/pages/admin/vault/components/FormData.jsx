@@ -69,24 +69,11 @@ function FormData(props) {
       if (cloneMode || !item?.id) {
         await createCipher(values);
       } else {
+        await editCipher(values);
       }
       setCallingAPI(false);
       onClose();
     })
-  }
-
-  const getPasswordStrength = (cipher) => {
-    let pw = ''
-    if (cipher.type === CipherType.CryptoWallet) {
-      pw = cipher.cryptoWallet.password
-    }
-    if (cipher.type === CipherType.Login) {
-      pw = cipher.login.password
-    }
-    if (!pw) {
-      return {}
-    }
-    return commonServices.password_strength(pw) || {}
   }
 
   const createCipher = async (values) => {
@@ -111,6 +98,29 @@ function FormData(props) {
       global.pushError(error)
     })
   }
+
+  const editCipher = async (values) => {
+    const cipher = common.convertFormToCipher({ ...values, type: type });
+    const passwordStrength = values.password ? commonServices.password_strength(values.password) : {};
+    const { data, collectionIds } = await common.getEncCipherForRequest(
+      cipher,
+      {
+        writeableCollections: await commonServices.get_writable_collections(),
+        nonWriteableCollections: await commonServices.get_writable_collections(true),
+      }
+    )
+    const payload = {
+      ...data,
+      collectionIds,
+      score: passwordStrength.score,
+    }
+    await cipherServices.update(item.id, payload).then(() => {
+      global.pushSuccess(t('notification.success.cipher.updated'))
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
+
 
   return (
     <div className={props.className}>

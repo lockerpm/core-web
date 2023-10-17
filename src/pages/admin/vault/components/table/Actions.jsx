@@ -34,29 +34,34 @@ const CipherActions = (props) => {
   } = props;
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
+  const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const [loginTotp, setLoginTotp] = useState(null)
 
+  const originCipher = useMemo(() => {
+    return allCiphers.find((d) => d.id === cipher.id) || cipher
+  }, [allCiphers, cipher])
+
   useEffect(() => {
     fetchLoginTotp();
-  }, [cipher])
+  }, [originCipher])
 
   const fetchLoginTotp = async () => {
     let totp = null
-    if (cipher?.login?.totp) {
-      totp = await global.jsCore.totpService.getCode(cipher.login.totp)
+    if (originCipher?.login?.totp) {
+      totp = await global.jsCore.totpService.getCode(originCipher.login.totp)
     }
     setLoginTotp(totp)
   }
 
   const copyMenus = useMemo(() => {
-    switch (cipher.type) {
+    switch (originCipher.type) {
       case CipherType.MasterPassword:
         return [
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
-            onClick: () => common.copyToClipboard(cipher.login.password)
+            onClick: () => common.copyToClipboard(originCipher.login.password)
           },
         ]
       case CipherType.Login:
@@ -64,12 +69,12 @@ const CipherActions = (props) => {
           {
             key: 'copy_username',
             label: t('inventory.actions.copy_username'),
-            onClick: () => common.copyToClipboard(cipher.login.username)
+            onClick: () => common.copyToClipboard(originCipher.login.username)
           },
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
-            onClick: () => common.copyToClipboard(cipher.login.password)
+            onClick: () => common.copyToClipboard(originCipher.login.password)
           },
           {
             key: 'copy_totp',
@@ -83,53 +88,53 @@ const CipherActions = (props) => {
           {
             key: 'copy_note',
             label: t('inventory.actions.copy_note'),
-            disabled: !cipher.notes,
-            onClick: () => common.copyToClipboard(cipher.notes)
+            disabled: !originCipher.notes,
+            onClick: () => common.copyToClipboard(originCipher.notes)
           },
         ]
       case CipherType.CryptoWallet:
-        if (!cipher.cryptoWallet) {
+        if (!originCipher.cryptoWallet) {
           return []
         }
         return [
           {
             key: 'copy_seed_phrase',
             label: t('inventory.actions.copy_seed_phrase'),
-            disabled: !cipher.cryptoWallet.seed,
-            onClick: () => common.copyToClipboard(cipher.cryptoWallet.seed)
+            disabled: !originCipher.cryptoWallet.seed,
+            onClick: () => common.copyToClipboard(originCipher.cryptoWallet.seed)
           },
           {
             key: 'copy_wallet_address',
             label: t('inventory.actions.copy_wallet_address'),
-            disabled: !cipher.cryptoWallet.address,
-            onClick: () => common.copyToClipboard(cipher.cryptoWallet.address)
+            disabled: !originCipher.cryptoWallet.address,
+            onClick: () => common.copyToClipboard(originCipher.cryptoWallet.address)
           },
           {
             key: 'copy_private_key',
             label: t('inventory.actions.copy_private_key'),
-            disabled: !cipher.cryptoWallet.privateKey,
-            onClick: () => common.copyToClipboard(cipher.cryptoWallet.privateKey)
+            disabled: !originCipher.cryptoWallet.privateKey,
+            onClick: () => common.copyToClipboard(originCipher.cryptoWallet.privateKey)
           },
           {
             key: 'copy_password_pin',
             label: t('inventory.actions.copy_password_pin'),
-            disabled: !cipher.cryptoWallet.password,
-            onClick: () => common.copyToClipboard(cipher.cryptoWallet.password)
+            disabled: !originCipher.cryptoWallet.password,
+            onClick: () => common.copyToClipboard(originCipher.cryptoWallet.password)
           },
         ]
       default:
         return [];
     }
-  }, [cipher, loginTotp])
+  }, [originCipher, loginTotp])
 
   const shareMenus = useMemo(() => {
-    if (cipher.type === CipherType.MasterPassword) {
+    if (originCipher.type === CipherType.MasterPassword) {
       return []
     }
     return [
       {
         key: 'in_app_shares',
-        hide: !common.isCipherShareable(allOrganizations, cipher),
+        hide: !common.isCipherShareable(allOrganizations, originCipher),
         label: <Tooltip
           title={t('inventory.actions.in_app_shares_note')}
         >
@@ -138,7 +143,7 @@ const CipherActions = (props) => {
       },
       {
         key: 'get_shareable_link',
-        hide: !common.isCipherQuickShareable(cipher),
+        hide: !common.isCipherQuickShareable(originCipher),
         label: <Tooltip
           title={t('inventory.actions.get_shareable_link_note')}
         >
@@ -146,24 +151,24 @@ const CipherActions = (props) => {
         </Tooltip>
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [cipher, allOrganizations])
+  }, [originCipher, allOrganizations])
 
   const generalMenus = useMemo(() => {
-    if (cipher.type === CipherType.MasterPassword ) {
+    if (originCipher.type === CipherType.MasterPassword ) {
       return []
     }
-    if (!cipher.isDeleted) {
+    if (!originCipher.isDeleted) {
       return [
         {
           key: 'edit',
-          hide: !common.isChangeCipher(allOrganizations, cipher),
+          hide: !common.isChangeCipher(allOrganizations, originCipher),
           label: t('inventory.actions.edit'),
-          onClick: () => onUpdate(cipher)
+          onClick: () => onUpdate(originCipher)
         },
         {
           key: 'clone',
           label: t('inventory.actions.clone'),
-          onClick: () => onUpdate(cipher, true)
+          onClick: () => onUpdate(originCipher, true)
         },
         {
           key: 'move_to_folder',
@@ -171,7 +176,7 @@ const CipherActions = (props) => {
         },
         {
           key: 'stop_sharing',
-          hide: !(common.isOwner(allOrganizations, cipher) && cipher.organizationId && !cipher.collectionIds.length),
+          hide: !(common.isOwner(allOrganizations, originCipher) && originCipher.organizationId && !originCipher.collectionIds.length),
           label: t('inventory.actions.stop_sharing')
         },
         {
@@ -179,14 +184,14 @@ const CipherActions = (props) => {
         },
         {
           key: 'delete',
-          hide: !common.isOwner(allOrganizations, cipher),
+          hide: !common.isOwner(allOrganizations, originCipher),
           label: t('inventory.actions.delete'),
           danger: true,
-          onClick: () => onDelete(cipher)
+          onClick: () => onDelete(originCipher)
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
-    if (cipher.isDeleted && common.isOwner(allOrganizations, cipher)) {
+    if (originCipher.isDeleted && common.isOwner(allOrganizations, originCipher)) {
       return [
         {
           key: 'restore',
@@ -200,16 +205,16 @@ const CipherActions = (props) => {
       ]
     }
     return []
-  })
+  }, [originCipher])
 
   const role = useMemo(() => {
     return {
-      isGoToWeb: !cipher.isDeleted && !!cipher.login?.canLaunch,
-      isCopy: copyMenus.length > 0,
-      isShares: shareMenus.length > 0,
+      isGoToWeb: !originCipher.isDeleted && !!originCipher.login?.canLaunch,
+      isCopy: !originCipher.isDeleted && copyMenus.length > 0,
+      isShares: !originCipher.isDeleted && shareMenus.length > 0,
       isGeneral: generalMenus.length > 0
     }
-  }, [cipher, copyMenus, shareMenus])
+  }, [originCipher, copyMenus, shareMenus])
 
   return (
     <div className={className}>
@@ -222,7 +227,7 @@ const CipherActions = (props) => {
               type="text"
               size="small"
               icon={<ExportOutlined />}
-              onClick={() => common.openNewTab(cipher.login.uri)}
+              onClick={() => common.openNewTab(originCipher.login.uri)}
             />
           </Tooltip>
         }

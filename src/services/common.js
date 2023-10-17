@@ -141,14 +141,14 @@ function password_strength(password) {
   ]) || { score: 0}
 }
 
-async function get_writable_collections () {
+async function get_writable_collections (nonWriteable = false) {
   let collections = []
   try {
     collections = await global.jsCore.collectionService.getAllDecrypted()
     const organizations = await global.jsCore.userService.getAllOrganizations()
     collections = collections.filter(item => {
       const _type = organizations.find((o) => o.id === item.organizationId)?.type
-      return _type === 0
+      return nonWriteable ? _type !== 0 : _type === 0
     })
   } catch (error) {}
   return collections

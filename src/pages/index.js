@@ -18,6 +18,7 @@ import Account2FA from './admin/account/2fa'
 
 // Admin Pages
 import Vault from './admin/vault'
+import Folders from './admin/folders'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'
@@ -40,6 +41,7 @@ export default {
   Account2FA,
 
   Vault,
+  Folders,
 
   AdminErrorPage
 }
