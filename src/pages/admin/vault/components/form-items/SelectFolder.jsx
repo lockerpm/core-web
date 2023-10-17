@@ -15,7 +15,10 @@ import { useTranslation } from "react-i18next";
 import global from '../../../../../config/global';
 
 function SelectFolder(props) {
-  const { form } = props
+  const {
+    form,
+    disabled = false
+  } = props
   const { t } = useTranslation()
 
   const allFolders = useSelector((state) => state.folder.allFolders)
@@ -33,6 +36,7 @@ function SelectFolder(props) {
       >
         <Select
           className='w-full'
+          disabled={disabled}
           options={[
             {
               value: '',

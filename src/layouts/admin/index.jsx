@@ -72,6 +72,7 @@ function AdminLayout(props) {
   });
 
   const handleSyncWsData = async (message) => {
+    dispatch(storeActions.updateSyncing(true))
     if (message.type.includes('cipher')) {
       if (message.type.includes('update')) {
         const res = await syncServices.sync_cipher(message.data.id);
@@ -97,6 +98,7 @@ function AdminLayout(props) {
       }
       await commonServices.get_all_collections();
     }
+    dispatch(storeActions.updateSyncing(false))
   }
 
   const convertSize = () => {

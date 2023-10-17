@@ -14,7 +14,8 @@ import { useTranslation } from "react-i18next";
 
 function ContactForm(props) {
   const {
-    form
+    form,
+    disabled = false
   } = props
   const { t } = useTranslation()
 
@@ -36,6 +37,7 @@ function ContactForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -51,6 +53,7 @@ function ContactForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -66,6 +69,7 @@ function ContactForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -81,6 +85,7 @@ function ContactForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -96,6 +101,7 @@ function ContactForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -111,6 +117,7 @@ function ContactForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>

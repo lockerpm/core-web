@@ -141,6 +141,19 @@ function password_strength(password) {
   ]) || { score: 0}
 }
 
+async function get_writable_collections () {
+  let collections = []
+  try {
+    collections = await global.jsCore.collectionService.getAllDecrypted()
+    const organizations = await global.jsCore.userService.getAllOrganizations()
+    collections = collections.filter(item => {
+      const _type = organizations.find((o) => o.id === item.organizationId)?.type
+      return _type === 0
+    })
+  } catch (error) {}
+  return collections
+}
+
 export default {
   clear_data,
   sync_data,
@@ -154,5 +167,6 @@ export default {
   get_quick_shares,
   get_my_shares,
   get_invitations,
-  password_strength
+  password_strength,
+  get_writable_collections
 }

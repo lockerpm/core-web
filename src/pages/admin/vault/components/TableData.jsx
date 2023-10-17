@@ -25,7 +25,8 @@ const TableData = (props) => {
     className = '',
     data = [],
     params = {},
-    onUpdate = () => {}
+    onUpdate = () => {},
+    onDelete = () => {},
   } = props;
 
   const columns = useMemo(() => {
@@ -77,7 +78,8 @@ const TableData = (props) => {
         render: (_, record) => (
           <Actions
             cipher={record}
-            onUpdate={() => onUpdate(record)}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
           />
         ),
       },

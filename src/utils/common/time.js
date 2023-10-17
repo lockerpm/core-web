@@ -21,9 +21,9 @@ const timeFromNow = time => {
 
 const convertDateTime = (date, format = 'HH:mm DD-MM-YYYY') => {
   if (date && typeof date === 'number') {
-    return moment(date * 1000).format(format)
+    return dayjs(date * 1000).format(format)
   }
-  return moment(date).format(format)
+  return dayjs(date).format(format)
 }
 
 const disabledDate = current => {

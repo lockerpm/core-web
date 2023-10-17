@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 
 function IdentityForm(props) {
   const {
+    disabled = false
   } = props
   const { t } = useTranslation()
 
@@ -21,8 +22,8 @@ function IdentityForm(props) {
 
   return (
     <div className={props.className}>
-      <PersonalForm className="mb-2"/>
-      <ContactForm className=""/>
+      <PersonalForm className="mb-2" disabled={disabled}/>
+      <ContactForm className="" disabled={disabled}/>
     </div>
   );
 }

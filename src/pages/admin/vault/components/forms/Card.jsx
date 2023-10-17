@@ -21,17 +21,6 @@ function CardForm(props) {
     disabled = false
   } = props
   const { t } = useTranslation()
-
-  const expirationMonths = [
-    {
-      label: '----',
-      value: null,
-    },
-    ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => ({
-      label: `${m}`.length === 1 ? `0${m}` : `${m}`,
-      value: m
-    }))
-  ]
   
   return (
     <div className={props.className}>
@@ -88,7 +77,7 @@ function CardForm(props) {
           >
             <Select
               className='w-full'
-              options={expirationMonths}
+              options={global.constants.EXP_MONTH_OPTIONS}
               disabled={disabled}
             />
           </Form.Item>

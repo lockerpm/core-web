@@ -19,7 +19,8 @@ import global from '../../../../../config/global';
 
 function CryptoBackupForm(props) {
   const {
-    form
+    form,
+    disabled = false
   } = props
   const { t } = useTranslation()
 
@@ -44,6 +45,7 @@ function CryptoBackupForm(props) {
       >
         <Select
           className='w-full'
+          disabled={disabled}
           placeholder={t('placeholder.wallet_app')}
           options={global.constants.WALLET_APPS.map((c) => ({
             value: c.alias,
@@ -70,6 +72,7 @@ function CryptoBackupForm(props) {
       >
         <Input
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
       <Form.Item
@@ -83,12 +86,15 @@ function CryptoBackupForm(props) {
       >
         <Input.Password
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
-      <GeneratePassword
-        password={password}
-        onFill={(v) => form.setFieldValue('password', v)}
-      />
+      {
+        !disabled && <GeneratePassword
+          password={password}
+          onFill={(v) => form.setFieldValue('password', v)}
+        />
+      }
       <Form.Item
         name={'pin'}
         className='mb-2'
@@ -100,6 +106,7 @@ function CryptoBackupForm(props) {
       >
         <Input.Password
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
       <Form.Item
@@ -113,6 +120,7 @@ function CryptoBackupForm(props) {
       >
         <Input
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
       <Form.Item
@@ -126,6 +134,7 @@ function CryptoBackupForm(props) {
       >
         <Input
           placeholder={t('placeholder.enter')}
+          disabled={disabled}
         />
       </Form.Item>
       <Form.Item
@@ -137,7 +146,7 @@ function CryptoBackupForm(props) {
           </p>
         }
       >
-        <SeedPhrase />
+        <SeedPhrase disabled={disabled}/>
       </Form.Item>
       <Form.Item
         name={'networks'}
@@ -151,6 +160,7 @@ function CryptoBackupForm(props) {
         <Select
           className='w-full'
           mode="multiple"
+          disabled={disabled}
           placeholder={t('placeholder.networks')}
           options={global.constants.CHAINS.map((c) => ({
             value: c.alias,

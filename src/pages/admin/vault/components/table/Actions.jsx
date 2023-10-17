@@ -21,13 +21,16 @@ import { CipherType } from "../../../../../core-js/src/enums";
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
+import cipherServices from "../../../../../services/cipher";
+
 const CipherActions = (props) => {
   const { t } = useTranslation()
   
   const {
     className = '',
     cipher = null,
-    onUpdate = () => {}
+    onUpdate = () => {},
+    onDelete = () => {}
   } = props;
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
@@ -155,11 +158,12 @@ const CipherActions = (props) => {
           key: 'edit',
           hide: !common.isChangeCipher(allOrganizations, cipher),
           label: t('inventory.actions.edit'),
-          onClick: () => onUpdate()
+          onClick: () => onUpdate(cipher)
         },
         {
           key: 'clone',
-          label: t('inventory.actions.clone')
+          label: t('inventory.actions.clone'),
+          onClick: () => onUpdate(cipher, true)
         },
         {
           key: 'move_to_folder',
@@ -178,6 +182,7 @@ const CipherActions = (props) => {
           hide: !common.isOwner(allOrganizations, cipher),
           label: t('inventory.actions.delete'),
           danger: true,
+          onClick: () => onDelete(cipher)
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }

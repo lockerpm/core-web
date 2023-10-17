@@ -12,11 +12,14 @@ import { useTranslation } from "react-i18next";
 import global from '../../../../../../config/global';
 
 function PasswordOTP(props) {
-  const { form } = props
+  const {
+    form,
+    disabled = false
+  } = props
   const { t } = useTranslation()
   
   useEffect(() => {
-  }, [visible])
+  }, [])
 
   return (
     <div className={props.className}>

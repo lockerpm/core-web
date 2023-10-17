@@ -15,7 +15,8 @@ import { useTranslation } from "react-i18next";
 
 function PersonalForm(props) {
   const {
-    form
+    form,
+    disabled = false
   } = props
   const { t } = useTranslation()
 
@@ -58,6 +59,7 @@ function PersonalForm(props) {
               className='w-full'
               placeholder={t('placeholder.select')}
               options={titleOptions}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -73,6 +75,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -88,6 +91,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -103,6 +107,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -118,6 +123,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -133,6 +139,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -148,6 +155,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -163,6 +171,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -178,6 +187,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>
@@ -193,6 +203,7 @@ function PersonalForm(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
+              disabled={disabled}
             />
           </Form.Item>
         </Col>

@@ -166,6 +166,10 @@
         "updated": "Mail plugin is set up success.",
         "reset": "Mail setting reset successfully.",
         "send_test": "Send test email successfully."
+      },
+      "cipher": {
+        "created": "The new item is added.",
+        "deleted": "The item is deleted."
       }
     },
     "warning": {

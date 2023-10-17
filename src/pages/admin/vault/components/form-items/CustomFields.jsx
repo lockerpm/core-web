@@ -22,7 +22,8 @@ function CustomFields(props) {
   const { t } = useTranslation()
   const {
     form,
-    className
+    className,
+    disabled = false
   } = props
 
   const fieldTypes = global.constants.FIELD_TYPES
@@ -77,6 +78,7 @@ function CustomFields(props) {
                     >
                       <Select
                         className='w-full'
+                        disabled={disabled}
                         options={fieldTypes.map((f) => ({ ...f, label: t(`cipher.custom_fields.${f.key}`) }))}
                         onChange={(v) => resetField(v, index)}
                       />
@@ -91,6 +93,7 @@ function CustomFields(props) {
                       
                     >
                       <Input
+                        disabled={disabled}
                         placeholder={
                           field?.fieldPlaceholder ? t(`placeholder.${field?.fieldPlaceholder}`) : t(`cipher.custom_fields.${field.key}`)
                         }
@@ -108,12 +111,14 @@ function CustomFields(props) {
                     >
                       {
                         field?.key === 'date' && <DatePicker
+                          disabled={disabled}
                           className='w-full'
                           format={'DD/MM/YYYY'}
                         />
                       }
                       {
                         field?.key !== 'date' && <Input
+                          disabled={disabled}
                           placeholder={t(`placeholder.${field?.placeholder || field?.key}`)}
                         />
                       }
@@ -122,6 +127,7 @@ function CustomFields(props) {
                   <Col span={2} align="right">
                     <Button
                       type={'text'}
+                      disabled={disabled}
                       danger
                       icon={<CloseOutlined />}
                       onClick={() => remove(name)}
@@ -130,24 +136,26 @@ function CustomFields(props) {
                 </Row>
               )
             })}
-            <Button
-              type={'primary'}
-              className={customFields.length === 0 ? 'mt-2' : ''}
-              ghost
-              onClick={() => {
-                form.setFieldValue('fields', [
-                  ...customFields,
-                  {
-                    type: fieldTypes[0].value,
-                    name: '',
-                    value: fieldTypes[0].defaultValue || '',
-                  }
-                ])
-              }}
-              icon={<PlusCircleOutlined />}
-            >
-              {t('cipher.custom_fields.new')}
-            </Button>
+            {
+              !disabled && <Button
+                type={'primary'}
+                className={customFields.length === 0 ? 'mt-2' : ''}
+                ghost
+                onClick={() => {
+                  form.setFieldValue('fields', [
+                    ...customFields,
+                    {
+                      type: fieldTypes[0].value,
+                      name: '',
+                      value: fieldTypes[0].defaultValue || '',
+                    }
+                  ])
+                }}
+                icon={<PlusCircleOutlined />}
+              >
+                {t('cipher.custom_fields.new')}
+              </Button>
+            }
           </>
         )}
       </Form.List>

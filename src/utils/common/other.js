@@ -1,5 +1,6 @@
 import global from '../../config/global';
 import { Trans } from 'react-i18next';
+import creditCardType from 'credit-card-type'
 
 const has = Object.prototype.hasOwnProperty
 
@@ -78,6 +79,34 @@ const copyToClipboard = (str) => {
   global.pushSuccess(<Trans i18nKey='notification.success.copied' />)
 };
 
+const detectCardBrand = (cardNumber) => {
+  if (!cardNumber) {
+    return null
+  }
+  const card = creditCardType(cardNumber)
+  return card[0]?.niceType || null
+}
+
+const cardBrandByNumber = (number) => {
+  const cardLabel = detectCardBrand(number)
+  const brandOption = global.constants.CARD_BRAND_OPTIONS.find(o => o.label === cardLabel)
+  if (brandOption) {
+    return brandOption.value
+  }
+  if (cardLabel) {
+    return 'Other'
+  }
+  return null
+}
+
+const selectedWalletApp = (alias) => {
+  return global.constants.WALLET_APPS.find((a) => a.alias === alias) || { name: '', alias: '' }
+}
+
+const selectedNetworks = (aliases = []) => {
+  return global.constants.CHAINS.filter((a) => aliases.includes(a.alias)) || []
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -86,5 +115,9 @@ export default {
   scrollToTop,
   getColorByIndex,
   openNewTab,
-  copyToClipboard
+  copyToClipboard,
+  detectCardBrand,
+  cardBrandByNumber,
+  selectedWalletApp,
+  selectedNetworks
 }

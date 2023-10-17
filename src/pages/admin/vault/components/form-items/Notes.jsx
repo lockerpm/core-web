@@ -10,7 +10,10 @@ import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 function Notes(props) {
-  const { form } = props
+  const {
+    form,
+    disabled = false
+  } = props
   const { t } = useTranslation()
   
   useEffect(() => {
@@ -25,7 +28,11 @@ function Notes(props) {
           <p className='font-semibold'>{t('cipher.notes')}</p>
         }
       >
-        <Input.TextArea rows={4} placeholder={t('placeholder.enter')}/>
+        <Input.TextArea
+          rows={4}
+          placeholder={t('placeholder.enter')}
+          disabled={disabled}
+        />
       </Form.Item>
     </div>
   );

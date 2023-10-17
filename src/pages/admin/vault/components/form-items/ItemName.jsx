@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import global from '../../../../../config/global';
 
 function Name(props) {
-  const { cipherType, cipherTypes } = props
+  const { cipherType, cipherTypes, disabled = false } = props
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -31,6 +31,7 @@ function Name(props) {
         >
           <Select
             className='w-full'
+            disabled={disabled}
             options={cipherTypes.map((t) => ({ value: t.type, label: t.name }))}
           />
         </Form.Item>
@@ -45,7 +46,10 @@ function Name(props) {
           global.rules.REQUIRED(t('cipher.item_name'))
         ]}
       >
-        <Input placeholder={t('placeholder.enter')}/>
+        <Input
+          placeholder={t('placeholder.enter')}
+          disabled={disabled}
+        />
       </Form.Item>
     </div>
   );

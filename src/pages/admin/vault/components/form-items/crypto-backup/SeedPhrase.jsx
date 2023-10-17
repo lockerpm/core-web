@@ -66,7 +66,7 @@ function SeedPhrase(props) {
           newValue.filter((w, index) => index < workCount).map((w, index) => <Col key={index} span={8}>
             <Input
               prefix={<p>{index + 1}.</p>}
-              suffix={workCount > MIN_WORD_COUNT && <span
+              suffix={workCount > MIN_WORD_COUNT && !disabled && <span
                   className='cursor-pointer'
                   onClick={() => handleRemoveWord(index)}
                 >

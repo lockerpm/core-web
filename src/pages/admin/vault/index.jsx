@@ -31,6 +31,7 @@ const Vault = (props) => {
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const [loading, setLoading] = useState(true);
+  const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ciphers, setCiphers] = useState([]);
@@ -122,14 +123,15 @@ const Vault = (props) => {
     setLoading(false);
   }
 
-  const handleOpenForm = (item = null) => {
+  const handleOpenForm = (item = null, cloneMode = false) => {
     setSelectedItem(item);
-    setFormVisible(true)
+    setFormVisible(true);
+    setCloneMode(cloneMode)
   }
 
   const deleteItem = (cipher) => {
     global.confirmDelete(() => {
-      cipherServices.delete_ciphers({ ids: [cipher.id] }).then(async () => {
+      cipherServices.multiple_delete({ ids: [cipher.id] }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
@@ -208,6 +210,8 @@ const Vault = (props) => {
         visible={formVisible}
         item={selectedItem}
         cipherType={cipherType}
+        cloneMode={cloneMode}
+        setCloneMode={setCloneMode}
         onClose={() => setFormVisible(false)}
       />
     </div>

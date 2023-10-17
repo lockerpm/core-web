@@ -27,7 +27,8 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
-    onUpdate = () => {}
+    onUpdate = () => {},
+    onDelete = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -55,7 +56,8 @@ const BoxData = (props) => {
             </div>
             <Actions
               cipher={record}
-              onUpdate={() => onUpdate(record)}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
             />
           </div>}
         >

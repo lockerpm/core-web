@@ -31,6 +31,7 @@
     "chart.js": "^4.0.1",
     "chartjs-plugin-labels": "^1.1.0",
     "craco-less": "^2.0.0",
+    "credit-card-type": "^9.1.0",
     "draft-js": "^0.11.7",
     "env-cmd": "^10.1.0",
     "eslint": "^8.50.0",

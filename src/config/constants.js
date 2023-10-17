@@ -381,5 +381,32 @@ export default {
       value: FieldType.Phone,
       pattern: 'PHONE'
     }
+  ],
+  CARD_BRAND_OPTIONS: [
+    { label: '----', value: '', icon: '' },
+    { label: 'Visa', value: 'Visa' },
+    { label: 'Mastercard', value: 'Mastercard' },
+    { label: 'American Express', value: 'Amex' },
+    { label: 'Discover', value: 'Discover' },
+    { label: 'Diners Club', value: 'Diners Club' },
+    { label: 'JCB', value: 'JCB' },
+    { label: 'Maestro', value: 'Maestro' },
+    { label: 'UnionPay', value: 'UnionPay' },
+    { label: 'Other', value: 'Other' }
+  ],
+  EXP_MONTH_OPTIONS: [
+    { label: '----', value: '' },
+    { label: '01', value: '1' },
+    { label: '02', value: '2' },
+    { label: '03', value: '3' },
+    { label: '04', value: '4' },
+    { label: '05', value: '5' },
+    { label: '06', value: '6' },
+    { label: '07', value: '7' },
+    { label: '08', value: '8' },
+    { label: '09', value: '9' },
+    { label: '10', value: '10' },
+    { label: '11', value: '11' },
+    { label: '12', value: '12' }
   ]
 }

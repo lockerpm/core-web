@@ -1,11 +1,9 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import {
-  Input,
   Form,
   Space,
   Button,
   Drawer,
-  Select,
 } from '@lockerpm/design';
 
 import {
@@ -24,17 +22,21 @@ import CardForm from './forms/Card';
 import CryptoBackupForm from './forms/CryptoBackup';
 import IdentityForm from './forms/Identity';
 
-import global from '../../../../config/global';
 import { CipherType } from '../../../../core-js/src/enums';
-import { Cipher } from '../../../../core-js/src/models/domain';
 
+import global from '../../../../config/global';
 import common from '../../../../utils/common';
+
+import commonServices from '../../../../services/common';
+import cipherServices from '../../../../services/cipher';
 
 function FormData(props) {
   const {
     visible = false,
     item = null,
     cipherType = {},
+    cloneMode = false,
+    setCloneMode = () => {},
     onClose = () => {},
   } = props
   const { t } = useTranslation()
@@ -54,20 +56,66 @@ function FormData(props) {
         form.setFieldsValue(formData)
       }
     } else {
+      setCloneMode(false);
       form.resetFields();
+      setCallingAPI(false);
     }
   }, [visible, cipherType])
 
 
   const handleSave = async () => {
-    form.validateFields().then(async (value) => {
+    form.validateFields().then(async (values) => {
+      setCallingAPI(true);
+      if (cloneMode || !item?.id) {
+        await createCipher(values);
+      } else {
+      }
+      setCallingAPI(false);
+      onClose();
+    })
+  }
+
+  const getPasswordStrength = (cipher) => {
+    let pw = ''
+    if (cipher.type === CipherType.CryptoWallet) {
+      pw = cipher.cryptoWallet.password
+    }
+    if (cipher.type === CipherType.Login) {
+      pw = cipher.login.password
+    }
+    if (!pw) {
+      return {}
+    }
+    return commonServices.password_strength(pw) || {}
+  }
+
+  const createCipher = async (values) => {
+    const cipher = common.convertFormToCipher({ ...values, type: type });
+    const passwordStrength = values.password ? commonServices.password_strength(values.password) : {};
+    const { data, collectionIds } = await common.getEncCipherForRequest(
+      cipher,
+      {
+        writeableCollections: await commonServices.get_writable_collections(),
+        isNewCipher: true,
+        cloneMode
+      }
+    )
+    const payload = {
+      ...data,
+      collectionIds,
+      score: passwordStrength.score,
+    }
+    await cipherServices.create(payload).then(() => {
+      global.pushSuccess(t('notification.success.cipher.created'))
+    }).catch((error) => {
+      global.pushError(error)
     })
   }
 
   return (
     <div className={props.className}>
       <Drawer
-        title={t( `inventory.${cipherType.key}.${item ? 'edit' : 'add'}`)}
+        title={t( `inventory.${cipherType.key}.${item && !cloneMode ? 'edit' : 'add'}`)}
         placement="right"
         onClose={onClose}
         open={visible}
@@ -99,45 +147,45 @@ function FormData(props) {
             className={'mb-4'}
             cipherTypes={cipherTypes}
             cipherType={cipherType}
-            disabled={false}
+            disabled={callingAPI}
           />
           <div className='mb-4'>
             {
               type === CipherType.Login && <PasswordForm
                 form={form}
-                disabled={false}
+                disabled={callingAPI}
               />
             }
             {
               type === CipherType.Card && <CardForm
                 form={form}
-                disabled={false}
+                disabled={callingAPI}
               />
             }
             {
               type === CipherType.CryptoWallet && <CryptoBackupForm
                 form={form}
-                disabled={false}
+                disabled={callingAPI}
               />
             }
             {
               type === CipherType.Identity && <IdentityForm
                 form={form}
-                disabled={false}
+                disabled={callingAPI}
               />
             }
           </div>
           <Notes
             className={'mb-4'}
-            disabled={false}
+            disabled={callingAPI}
           />
           <CustomFields
             className={'mb-4'}
             form={form}
-            disabled={false}
+            disabled={callingAPI}
           />
           <SelectFolder
-            disabled={false}
+            disabled={callingAPI}
           />
         </Form>
       </Drawer>
