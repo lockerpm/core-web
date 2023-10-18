@@ -37,7 +37,7 @@ const Name = (props) => {
             className={'font-semibold'}
             label={cipher.name}
             routerName={global.keys.VAULT_DETAIL}
-            routerParams={{ id: cipher.id }}
+            routerParams={{ cipher_id: cipher.id }}
             icon={
               cipher.organizationId && (
                 common.isCipherShared(cipher.organizationId) || common.isCipherSharedWithMe(allOrganizations, cipher.organizationId)

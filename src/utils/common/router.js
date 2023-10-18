@@ -42,7 +42,7 @@ const convertStringToQuery = (queryString = {}) => {
 
 const getRouterParams = (routerPath, params) => {
   let path = routerPath || ''
-  const keys = routerPath.split('/:').map(p => p.split('/')[0]).filter(Boolean)
+  const keys = routerPath?.split('/:').map(p => p.split('/')[0]).filter(Boolean) || []
   keys.forEach(key => {
     path = path.replace(`:${key}`, params[key])
   })

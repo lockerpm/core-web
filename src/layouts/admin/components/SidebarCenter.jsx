@@ -17,17 +17,16 @@ function SidebarCenter(props) {
   const { t } = useTranslation();
 
   const menus = useMemo(() => {
-    let menusInfo = global.menus.ADMIN_MENUS
-    return menusInfo
+    return global.menus.ADMIN_MENUS
   }, [])
 
   const currentMenu = useMemo(() => {
     if (currentPage) {
       return menus.find((m) => {
         if (currentPage.parent) {
-          return m.key === currentPage.parent && m.parent
+          return m.key === currentPage.parent && m.parent && !m.isChildren
         }
-        return m.key === currentPage.name && m.parent
+        return m.key === currentPage.name && m.parent && !m.isChildren
       })
     }
     return null
@@ -37,7 +36,12 @@ function SidebarCenter(props) {
     if (currentMenu) {
       return menus.filter((m) => m.parent === currentMenu.parent)
     }
-    return menus.filter((m) => !m.parent)
+    return menus
+      .filter((m) => !m.parent)
+      .map((m) => {
+        const children = menus.filter((c) => c.parent === m.key && c.isChildren).map((ch) => ({ key: ch.key, label: ch.label }))
+        return { ...m, children: children.length > 0 ? children : null }
+      })
   }, [currentMenu, menus])
 
   const handleMenuClick = (menu) => {
@@ -75,8 +79,8 @@ function SidebarCenter(props) {
         items={sidebarMenus.map((m) => ({
           key: m.key,
           label: m.label,
+          icon: m.icon,
           children: m.children,
-          icon: m.icon
         }))}
         onClick={handleMenuClick}
       />

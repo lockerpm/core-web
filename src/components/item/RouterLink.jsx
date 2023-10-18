@@ -23,10 +23,10 @@ const RouterLink = (props) => {
   } = props;
 
   const currentRouter = common.getRouterByName(routerName)
-  const newPath = common.convertQueryToString(
-    common.getRouterParams(currentRouter.path, routerParams),
+  const newPath = currentRouter ? common.convertQueryToString(
+    common.getRouterParams(currentRouter?.path, routerParams),
     routerQuery
-  )
+  ) : '/'
   return (
     <Link
       className={`cs-link ${className} text-primary text-limited`}

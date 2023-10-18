@@ -28,21 +28,17 @@ function SeedPhrase(props) {
   const MIN_WORD_COUNT = 12
   const MAX_WORD_COUNT = 24
 
-  const [workCount, setWorkCount] = useState(MIN_WORD_COUNT)
   const [newValue, setNewValue] = useState([])
 
   useEffect(() => {
     const words = value?.split(' ')
-    setWorkCount(words.length > MIN_WORD_COUNT ? MAX_WORD_COUNT : MIN_WORD_COUNT)
-  }, [])
-  
-  useEffect(() => {
-    const words = value?.split(' ')
-    while (words.length < MAX_WORD_COUNT) {
-      words.push('')
-    }
     setNewValue(words)
   }, [value])
+
+  const handleAddWord = () => {
+    const words = [...newValue, '']
+    onChange(words.join(' '))
+  }
 
   const handleChangeWord = (value, index) => {
     const validValue = value.trim().split(' ').join('')
@@ -51,22 +47,21 @@ function SeedPhrase(props) {
   }
 
   const handleRemoveWord = (index) => {
-    if (index + 1 <= MIN_WORD_COUNT) {
+    if (newValue.length <= MIN_WORD_COUNT) {
       return
     }
     const words = newValue.filter((v, i) => i !== index)
     onChange(words.join(' '))
-    setWorkCount(workCount - 1)
   }
 
   return (
     <div className={props.className}>
       <Row gutter={[8, 8]}>
         {
-          newValue.filter((w, index) => index < workCount).map((w, index) => <Col key={index} span={8}>
+          newValue.map((w, index) => <Col key={index} span={8}>
             <Input
               prefix={<p>{index + 1}.</p>}
-              suffix={workCount > MIN_WORD_COUNT && !disabled && <span
+              suffix={newValue.length > MIN_WORD_COUNT && !disabled && <span
                   className='cursor-pointer'
                   onClick={() => handleRemoveWord(index)}
                 >
@@ -80,13 +75,13 @@ function SeedPhrase(props) {
           </Col>)
         }
         {
-          workCount < 24 && !disabled && <Col span={8}>
+          newValue.length < 24 && !disabled && <Col span={8}>
             <Button
               className="w-full"
               type="primary"
               ghost
               icon={<PlusCircleOutlined />}
-              onClick={() => setWorkCount(workCount + 1)}
+              onClick={() => handleAddWord()}
             >
               {t('button.add')}
             </Button>

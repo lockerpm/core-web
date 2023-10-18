@@ -27,34 +27,45 @@ export default {
     },
     {
       key: keys.INVENTORY,
+      router: keys.VAULT,
       icon: <LockOutlined />,
       label: <Trans i18nKey='sidebar.inventory' />,
-      children: [
-        {
-          key: keys.VAULT,
-          label: <Trans i18nKey='sidebar.all' />
-        },
-        {
-          key: keys.PASSWORDS,
-          label: <Trans i18nKey='sidebar.passwords' />
-        },
-        {
-          key: keys.NOTES,
-          label: <Trans i18nKey='sidebar.notes' />
-        },
-        {
-          key: keys.CARDS,
-          label: <Trans i18nKey='sidebar.cards' />
-        },
-        {
-          key: keys.CRYPTO_BACKUPS,
-          label: <Trans i18nKey='sidebar.crypto_backups' />
-        },
-        {
-          key: keys.IDENTITIES,
-          label: <Trans i18nKey='sidebar.identities' />
-        },
-      ]
+    },
+    {
+      key: keys.VAULT,
+      label: <Trans i18nKey='sidebar.all' />,
+      parent: keys.INVENTORY,
+      isChildren: true
+    },
+    {
+      key: keys.PASSWORDS,
+      label: <Trans i18nKey='sidebar.passwords' />,
+      parent: keys.INVENTORY,
+      isChildren: true
+    },
+    {
+      key: keys.NOTES,
+      label: <Trans i18nKey='sidebar.notes' />,
+      parent: keys.INVENTORY,
+      isChildren: true
+    },
+    {
+      key: keys.CARDS,
+      label: <Trans i18nKey='sidebar.cards' />,
+      parent: keys.INVENTORY,
+      isChildren: true
+    },
+    {
+      key: keys.CRYPTO_BACKUPS,
+      label: <Trans i18nKey='sidebar.crypto_backups' />,
+      parent: keys.INVENTORY,
+      isChildren: true
+    },
+    {
+      key: keys.IDENTITIES,
+      label: <Trans i18nKey='sidebar.identities' />,
+      parent: keys.INVENTORY,
+      isChildren: true
     },
     {
       key: keys.FOLDERS,
