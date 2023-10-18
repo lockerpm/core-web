@@ -570,6 +570,7 @@
       "country": "Country"
     },
     "otp": {
+      "name": "OTP",
       "secret_key": "Secret key"
     }
   }

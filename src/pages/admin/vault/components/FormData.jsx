@@ -16,6 +16,7 @@ import ItemName from './form-items/ItemName';
 import Notes from './form-items/Notes';
 import SelectFolder from './form-items/SelectFolder';
 import CustomFields from './form-items/CustomFields';
+import PasswordOTP from './form-items/PasswordOTP';
 
 import PasswordForm from './forms/Password';
 import CardForm from './forms/Card';
@@ -48,6 +49,7 @@ function FormData(props) {
 
   useEffect(() => {
     if (visible) {
+      form.resetFields();
       if (item?.id) {
         const formData = common.convertCipherToForm(item)
         form.setFieldsValue(formData)
@@ -57,7 +59,6 @@ function FormData(props) {
       }
     } else {
       setCloneMode(false);
-      form.resetFields();
       setCallingAPI(false);
     }
   }, [visible, cipherType])
@@ -71,8 +72,8 @@ function FormData(props) {
       } else {
         await editCipher(values);
       }
-      setCallingAPI(false);
       onClose();
+      setCallingAPI(false);
     })
   }
 
@@ -162,6 +163,7 @@ function FormData(props) {
           <div className='mb-4'>
             {
               type === CipherType.Login && <PasswordForm
+                visible={visible}
                 form={form}
                 disabled={callingAPI}
               />
@@ -184,6 +186,17 @@ function FormData(props) {
                 disabled={callingAPI}
               />
             }
+          </div>
+          <div>
+            {
+              type === CipherType.Login && <PasswordOTP
+                className={'mb-4'}
+                item={item}
+                form={form}
+                visible={visible}
+                disabled={callingAPI}
+              />
+            }            
           </div>
           <Notes
             className={'mb-4'}

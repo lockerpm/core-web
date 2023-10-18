@@ -12,8 +12,6 @@ import { GeneratePassword } from '../../../../../components'
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from '../../../../../config/global';
-
 function PasswordForm(props) {
   const {
     form,

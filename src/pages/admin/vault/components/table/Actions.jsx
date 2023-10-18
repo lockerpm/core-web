@@ -34,23 +34,9 @@ const CipherActions = (props) => {
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
-  const [loginTotp, setLoginTotp] = useState(null)
-
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === cipher.id) || cipher
   }, [allCiphers, cipher])
-
-  useEffect(() => {
-    fetchLoginTotp();
-  }, [originCipher])
-
-  const fetchLoginTotp = async () => {
-    let totp = null
-    if (originCipher?.login?.totp) {
-      totp = await global.jsCore.totpService.getCode(originCipher.login.totp)
-    }
-    setLoginTotp(totp)
-  }
 
   const copyMenus = useMemo(() => {
     switch (originCipher.type) {
@@ -77,8 +63,8 @@ const CipherActions = (props) => {
           {
             key: 'copy_totp',
             label: t('inventory.actions.copy_totp'),
-            disabled: !loginTotp,
-            onClick: () => common.copyToClipboard(loginTotp)
+            disabled: !common.getTOTP(originCipher.login.totp),
+            onClick: () => common.copyToClipboard(common.getTOTP(originCipher.login.totp))
           }
         ]
       case CipherType.SecureNote:
@@ -123,7 +109,7 @@ const CipherActions = (props) => {
       default:
         return [];
     }
-  }, [originCipher, loginTotp])
+  }, [originCipher])
 
   const shareMenus = useMemo(() => {
     if (originCipher.type === CipherType.MasterPassword) {
