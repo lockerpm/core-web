@@ -22,7 +22,7 @@ const Name = (props) => {
   const { folder = {} } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
   const folderCiphers = useMemo(() => {
-    return allCiphers.filter((c) => c.folderId === folder?.id)
+    return allCiphers.filter((c) => c.folderId === folder?.id && !c.isDeleted)
   }, [folder, allCiphers])
   return (
     <div className="flex items-center">

@@ -1,12 +1,10 @@
 import React from "react";
 import {
-  Row,
-  Col,
+  Space,
   Button,
 } from '@lockerpm/design';
 
 import {
-  DeleteOutlined
 } from "@ant-design/icons";
 
 import { useSelector } from 'react-redux';
@@ -17,52 +15,76 @@ const MultipleSelect = (props) => {
     name = '',
     selectedRowKeys = [],
     callingAPI = false,
-    multipleDelete = () => { },
-    onCancel = () => { }
+    isMove = false,
+    isRestore = false,
+    isDelete = false,
+    isPermanentlyDelete = false,
+    onMove = () => {},
+    onDelete = () => { },
+    onPermanentlyDelete = () => {},
+    onRestore = () => {},
+    onCancel = () => { },
   } = props;
 
   const { t } = useTranslation()
 
   return (
-    <Row
-      className="filter"
-      justify={'space-between'}
-      gutter={[0, 8]}
-    >
-      <Col>
-        <Row
-          align={'middle'}
-          justify={'left'}
-          gutter={[16, 16]}
+    <Space size={[8, 8]}>
+      <p className="text-s">{t('common.selected_items', { amount: selectedRowKeys.length, name: name })}</p>
+      {
+        isMove && <Button
+          size="medium"
+          ghost
+          type={'primary'}
+          loading={callingAPI}
+          onClick={() => onMove()}
         >
-          <Col>
-            <p className="text-s">{t('common.selectedItems', { amount: selectedRowKeys.length, name: name })}</p>
-          </Col>
-          <Col>
-            <Button
-              size="medium"
-              ghost
-              type={'primary'}
-              loading={callingAPI}
-              danger
-              onClick={() => multipleDelete()}
-              icon={<DeleteOutlined />}
-            >
-              {t('button.delete')}
-            </Button>
-          </Col>
-          <Col>
-            <Button
-              size="medium"
-              disabled={callingAPI}
-              onClick={() => onCancel()}
-            >
-              {t('button.cancel')}
-            </Button>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+          {t('inventory.actions.move_to_folder')}
+        </Button>
+      }
+      {
+        isRestore && <Button
+          size="medium"
+          ghost
+          type={'primary'}
+          loading={callingAPI}
+          onClick={() => onDelete()}
+        >
+          {t('inventory.actions.restore')}
+        </Button>
+      }
+      {
+        isDelete && <Button
+          size="medium"
+          ghost
+          type={'primary'}
+          loading={callingAPI}
+          danger
+          onClick={() => onRestore()}
+        >
+          {t('button.delete')}
+        </Button>
+      }
+      {
+        isPermanentlyDelete && <Button
+          size="medium"
+          ghost
+          type={'primary'}
+          loading={callingAPI}
+          danger
+          onClick={() => onPermanentlyDelete()}
+        >
+          {t('inventory.actions.permanently_delete')}
+        </Button>
+      }
+      <Button
+        size="medium"
+        disabled={callingAPI}
+        onClick={() => onCancel()}
+      >
+        {t('button.cancel')}
+      </Button>
+    </Space>
   );
 }
 

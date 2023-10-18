@@ -25,8 +25,13 @@ const TableData = (props) => {
     className = '',
     data = [],
     params = {},
+    selectedRowKeys = [],
     onUpdate = () => {},
     onDelete = () => {},
+    onRestore = () => {},
+    onPermanentlyDelete = () => {},
+    selectionChange = () => {},
+    getCheckboxProps = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -80,6 +85,8 @@ const TableData = (props) => {
             cipher={record}
             onUpdate={onUpdate}
             onDelete={onDelete}
+            onRestore={onRestore}
+            onPermanentlyDelete={onPermanentlyDelete}
           />
         ),
       },
@@ -94,7 +101,10 @@ const TableData = (props) => {
       pagination={false}
       rowKey={(record) => record?.id}
       rowSelection={{
-        columnWidth: 25
+        columnWidth: 25,
+        selectedRowKeys: selectedRowKeys,
+        onChange: selectionChange,
+        getCheckboxProps: getCheckboxProps,
       }}
       size="small"
       scroll={{ x: 1024 }}

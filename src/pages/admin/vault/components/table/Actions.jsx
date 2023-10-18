@@ -28,7 +28,9 @@ const CipherActions = (props) => {
     className = '',
     cipher = null,
     onUpdate = () => {},
-    onDelete = () => {}
+    onDelete = () => {},
+    onRestore = () => {},
+    onPermanentlyDelete = () => {}
   } = props;
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
@@ -171,7 +173,7 @@ const CipherActions = (props) => {
           hide: !common.isOwner(allOrganizations, originCipher),
           label: t('inventory.actions.delete'),
           danger: true,
-          onClick: () => onDelete(originCipher)
+          onClick: () => onDelete([originCipher.id])
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
@@ -179,12 +181,14 @@ const CipherActions = (props) => {
       return [
         {
           key: 'restore',
-          label: t('inventory.actions.restore')
+          label: t('inventory.actions.restore'),
+          onClick: () => onRestore([originCipher.id])
         },
         {
           key: 'permanently_delete',
           label: t('inventory.actions.permanently_delete'),
           danger: true,
+          onClick: () => onPermanentlyDelete([originCipher.id])
         },
       ]
     }

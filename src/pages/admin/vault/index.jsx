@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
-import { AdminHeader, Pagination } from "../../../components";
+import { AdminHeader, Pagination, Multiple } from "../../../components";
 
 import NoCipher from "./components/NoCipher";
 import Filter from "./components/Filter";
@@ -19,7 +19,8 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
-
+import syncServices from "../../../services/sync";
+import storeActions from "../../../store/actions";
 
 const Vault = (props) => {
   const { t } = useTranslation();
@@ -30,12 +31,15 @@ const Vault = (props) => {
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
 
   const [loading, setLoading] = useState(true);
+  const [callingAPI, setCallingAPI] = useState(false);
   const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ciphers, setCiphers] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -109,6 +113,7 @@ const Vault = (props) => {
   }, [isMobile])
 
   const handleChangePage = (page, size) => {
+    setSelectedRowKeys([])
     setParams({
       ...params,
       page,
@@ -133,10 +138,26 @@ const Vault = (props) => {
     setCloneMode(cloneMode)
   }
 
-  const deleteItem = (cipher) => {
+  const getCheckboxProps = (record) => {
+    const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
+    return {
+      disabled: originCipher.type === CipherType.MasterPassword || !common.isOwner(allOrganizations, originCipher)
+    }
+  }
+
+  const handleSelectionChange = (selectedRowKeys) => {
+    const selectedCiphers = ciphers.filter((cipher) => selectedRowKeys.includes(cipher.id)
+      && cipher.type !== CipherType.MasterPassword
+      && common.isOwner(allOrganizations, cipher)
+    )
+    setSelectedRowKeys(selectedCiphers.map((cipher) => cipher.id))
+  }
+
+  const deleteItem = (cipherIds) => {
     global.confirmDelete(() => {
-      cipherServices.multiple_delete({ ids: [cipher.id] }).then(async () => {
+      cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
+        await syncItems(cipherIds)
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
@@ -152,6 +173,58 @@ const Vault = (props) => {
       okText: t('button.ok'),
       okButtonProps: { danger: false },
     });
+  };
+
+  const restoreItem = (cipherIds) => {
+    global.confirmDelete(() => {
+      cipherServices.restore({ ids: cipherIds }).then(async () => {
+        global.pushSuccess(t('notification.success.cipher.restored'));
+        await syncItems(cipherIds)
+        if (filteredData.length === 1 && params.page > 1) {
+          setParams({
+            ...params,
+            page: params.page - 1
+          })
+        }
+      }).catch((error) => {
+        global.pushError(error)
+      });
+    }, {
+      title: t('common.warning'),
+      content: t('cipher.restore_question'),
+      okText: t('button.ok'),
+      okButtonProps: { danger: false },
+    });
+  };
+
+  const permanentlyDeleteItem = (cipherIds) => {
+    global.confirmDelete(() => {
+      cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
+        global.pushSuccess(t('notification.success.cipher.deleted'));
+        if (filteredData.length === 1 && params.page > 1) {
+          setParams({
+            ...params,
+            page: params.page - 1
+          })
+        }
+      }).catch((error) => {
+        global.pushError(error)
+      });
+    }, {
+      title: t('common.warning'),
+      content: t('cipher.permanently_delete_question'),
+      okText: t('button.ok'),
+    });
+  };
+
+  const syncItems = async (cipherIds) => {
+    dispatch(storeActions.updateSyncing(true))
+    const requests = cipherIds.map((id) => syncServices.sync_cipher(id))
+    await Promise.all(requests).then(async (response) => {
+      await global.jsCore.cipherService.upsert(response)
+    })
+    commonServices.get_all_ciphers();
+    dispatch(storeActions.updateSyncing(false))
   };
 
   return (
@@ -175,12 +248,25 @@ const Vault = (props) => {
         ]}
       />
       {
-        !isEmpty && <Filter
-          className={'mt-2'}
-          params={params}
-          loading={syncing}
-          setParams={(v) => setParams({ ...v, page: 1 })}
-        />
+        !isEmpty && <>
+          {
+            selectedRowKeys.length > 0 ? <Multiple
+              selectedRowKeys={selectedRowKeys}
+              callingAPI={callingAPI}
+              multipleDelete={() => {}}
+              isMove={currentPage.name !== global.keys.TRASH}
+              isDelete={currentPage.name !== global.keys.TRASH}
+              isRestore={currentPage.name === global.keys.TRASH}
+              isPermanentlyDelete={currentPage.name === global.keys.TRASH}
+              onCancel={() => setSelectedRowKeys([])}
+            /> : <Filter
+              className={'mt-2'}
+              params={params}
+              loading={syncing}
+              setParams={(v) => setParams({ ...v, page: 1 })}
+            />
+          }
+        </>
       }
       {
         filteredData.total == 0 ? <NoCipher
@@ -198,13 +284,20 @@ const Vault = (props) => {
               params={params}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
+              onRestore={restoreItem}
+              onPermanentlyDelete={permanentlyDeleteItem}
             /> : <TableData
               className="mt-4"
               loading={syncing || loading}
               data={filteredData.result}
               params={params}
+              selectedRowKeys={selectedRowKeys}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
+              onRestore={restoreItem}
+              onPermanentlyDelete={permanentlyDeleteItem}
+              selectionChange={handleSelectionChange}
+              getCheckboxProps={getCheckboxProps}
             />
           }
         </>

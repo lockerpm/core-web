@@ -28,7 +28,9 @@ const BoxData = (props) => {
     data = [],
     params = {},
     onUpdate = () => {},
-    onDelete = () => {}
+    onDelete = () => {},
+    onRestore = () => {},
+    onPermanentlyDelete = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -58,6 +60,8 @@ const BoxData = (props) => {
               cipher={record}
               onUpdate={onUpdate}
               onDelete={onDelete}
+              onRestore={onRestore}
+              onPermanentlyDelete={onPermanentlyDelete}
             />
           </div>}
         >

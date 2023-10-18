@@ -67,7 +67,8 @@
     "ms": "Ms",
     "dr": "Dr",
     "ok": "OK",
-    "detail": "Detail"
+    "detail": "Detail",
+    "selected_items": "{{amount}} Selected Items"
   },
   "button": {
     "add": "Add",
@@ -151,36 +152,37 @@
       "title": "Success",
       "copied": "Copied to clipboard",
       "member": {
-        "created": "The new member is added.",
-        "updated": "The member information is updated.",
-        "deleted": "The member is deleted.",
+        "created": "The new member has been added.",
+        "updated": "The member information has been updated.",
+        "deleted": "The member has been deleted.",
         "reinvited": "The invite email send successfully"
       },
       "change_password": {
-        "changed": "Your password is changed."
+        "changed": "Your password has been changed."
       },
       "account_details": {
-        "updated": "Account details is updated."
+        "updated": "Account details has been updated."
       },
       "factor2": {
-        "enabled": "Tow Factor Authentication is enabled",
-        "disabled": "Tow Factor Authentication is disabled"
+        "enabled": "Tow Factor Authentication has been enabled",
+        "disabled": "Tow Factor Authentication has been disabled"
       },
       "email_setting": {
-        "updated": "Mail plugin is set up success.",
+        "updated": "Mail plugin has been set up success.",
         "reset": "Mail setting reset successfully.",
         "send_test": "Send test email successfully."
       },
       "cipher": {
-        "created": "The new item is added.",
-        "updated": "The item information is updated.",
+        "created": "The new item has been added.",
+        "updated": "The item information has been updated.",
         "deleted": "The Item has been moved to trash!.",
-        "permanently_delete": "The item is permanently deleted."
+        "permanently_delete": "The item has been permanently deleted.",
+        "restored": "The item has been restored!"
       },
       "folder": {
-        "created": "The new folder is added.",
-        "updated": "The folder information is updated.",
-        "deleted": "The folder is deleted."
+        "created": "The new folder has been added.",
+        "updated": "The folder information has been updated.",
+        "deleted": "The folder has been deleted."
       }
     },
     "warning": {
@@ -501,6 +503,8 @@
     "no_folder": "No Folder",
     "add_folder": "Add new folder",
     "delete_question": "Do you really want to send to the trash? Trash items will be permanently deleted after 30 days.",
+    "restore_question": "Are you sure you want to restore this item?",
+    "permanently_delete_question": "Are you sure you want to permanently delete this item?",
     "types": {
       "password": "Password",
       "note": "Note",

@@ -77,7 +77,7 @@ function AdminLayout(props) {
       if (message.type.includes('update')) {
         const res = await syncServices.sync_cipher(message.data.id);
         await global.jsCore.cipherService.upsert([res])
-      } else if (message.type.includes('delete')) {
+      } else if (message.type.includes('cipher_delete_permanent')) {
         await global.jsCore.cipherService.delete(message.data.ids)
       }
       await commonServices.get_all_ciphers();
