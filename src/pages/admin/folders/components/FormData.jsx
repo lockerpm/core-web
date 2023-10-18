@@ -25,6 +25,7 @@ function FormData(props) {
     cloneMode = false,
     setCloneMode = () => {},
     onClose = () => {},
+    callback = () => {}
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
@@ -60,8 +61,9 @@ function FormData(props) {
 
   const createFolder = async (values) => {
     const payload = await common.getEncFolderForRequest(values)
-    await folderServices.create(payload).then(() => {
+    await folderServices.create(payload).then((response) => {
       global.pushSuccess(t('notification.success.folder.created'))
+      callback(response)
     }).catch((error) => {
       global.pushError(error)
     })

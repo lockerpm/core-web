@@ -66,7 +66,7 @@ export default {
     {
       name: keys.VAULT_DETAIL,
       parent: keys.VAULT,
-      path: '/vault/:id',
+      path: '/vault/:cipher_id',
       element: 'VaultDetail',
     },
     {
@@ -77,7 +77,7 @@ export default {
     {
       name: keys.PASSWORD_DETAIL,
       parent: keys.PASSWORDS,
-      path: '/passwords/:id',
+      path: '/passwords/:cipher_id',
       element: 'VaultDetail',
     },
     {
@@ -88,7 +88,7 @@ export default {
     {
       name: keys.NOTE_DETAIL,
       parent: keys.NOTES,
-      path: '/notes/:id',
+      path: '/notes/:cipher_id',
       element: 'VaultDetail',
     },
     {
@@ -99,7 +99,7 @@ export default {
     {
       name: keys.CARD_DETAIL,
       parent: keys.CARDS,
-      path: '/cards/:id',
+      path: '/cards/:cipher_id',
       element: 'VaultDetail',
     },
     {
@@ -110,7 +110,7 @@ export default {
     {
       name: keys.CRYPTO_BACKUP_DETAIL,
       parent: keys.CRYPTO_BACKUPS,
-      path: '/crypto-backups/:id',
+      path: '/crypto-backups/:cipher_id',
       element: 'VaultDetail',
     },
     {
@@ -121,7 +121,7 @@ export default {
     {
       name: keys.IDENTITY_DETAIL,
       parent: keys.IDENTITIES,
-      path: '/identities/:id',
+      path: '/identities/:cipher_id',
       element: 'VaultDetail',
     },
     {
@@ -131,7 +131,7 @@ export default {
     },
     {
       name: keys.FOLDER_DETAIL,
-      path: '/folders/:id',
+      path: '/folders/:folder_id',
       element: 'Vault',
       parent: keys.FOLDERS,
     },
@@ -157,7 +157,7 @@ export default {
     },
     {
       name: keys.TRASH_DETAIL,
-      path: '/trash/:id',
+      path: '/trash/:cipher_id',
       element: 'VaultDetail',
     },
     {

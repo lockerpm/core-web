@@ -58,7 +58,7 @@ const Vault = (props) => {
       ...common.cipherTypeInfo('listRouter', currentPage.name),
       deleted: false,
     }
-  }, [currentPage])
+  }, [JSON.stringify(currentPage)])
 
   const filters = useMemo(() => {
     const f = []
@@ -66,9 +66,12 @@ const Vault = (props) => {
       f.push((c) => c.type === cipherType.type)
     } else {
       f.push((c) => c.type !== CipherType.TOTP)
+      if (currentPage.name === global.keys.FOLDER_DETAIL) {
+        f.push((c) => c.folderId == currentPage.params.folder_id)
+      }
     }
     return f
-  }, [cipherType])
+  }, [cipherType, currentPage])
 
   const isEmpty = useMemo(() => {
     return !allCiphers.find(
@@ -218,6 +221,7 @@ const Vault = (props) => {
         item={selectedItem}
         cipherType={cipherType}
         cloneMode={cloneMode}
+        folderId={currentPage.params.folder_id}
         setCloneMode={setCloneMode}
         onClose={() => setFormVisible(false)}
       />

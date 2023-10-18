@@ -38,7 +38,7 @@ const Name = (props) => {
             className={'font-semibold'}
             label={folder.name}
             routerName={global.keys.FOLDER_DETAIL}
-            routerParams={{ id: folder.id }}
+            routerParams={{ folder_id: folder.id }}
           />
         </div>
         <TextCopy

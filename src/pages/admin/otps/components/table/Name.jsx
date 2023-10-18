@@ -27,7 +27,7 @@ const Name = (props) => {
       <div className="ml-2 flex-1">
         <div className="flex items-center justify-between">
           <TextCopy
-            className={'font-semibold'}
+            className={'font-semibold flex-1'}
             value={cipher.name}
           />
           <DisplayOtp

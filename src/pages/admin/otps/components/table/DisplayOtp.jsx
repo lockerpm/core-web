@@ -61,7 +61,10 @@ const DisplayOtp = (props) => {
   }
 
   return (
-    <div className="flex items-center">
+    <div
+      className="flex items-center justify-end"
+      style={{ width: 160 }}
+    >
       <p
         className="text-2xl font-semibold text-primary cursor-pointer"
         onClick={() => common.copyToClipboard(otp)}

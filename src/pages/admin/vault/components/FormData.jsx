@@ -22,6 +22,7 @@ import PasswordForm from './forms/Password';
 import CardForm from './forms/Card';
 import CryptoBackupForm from './forms/CryptoBackup';
 import IdentityForm from './forms/Identity';
+import FolderFormData from "../../folders/components/FormData";
 
 import { CipherType } from '../../../../core-js/src/enums';
 
@@ -37,12 +38,14 @@ function FormData(props) {
     item = null,
     cipherType = {},
     cloneMode = false,
+    folderId = null,
     setCloneMode = () => {},
     onClose = () => {},
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
+  const [folderVisible, setFolderVisible] = useState(false);
 
   const cipherTypes = global.constants.CIPHER_TYPES.filter((t) => t.isCreate)
   const type = Form.useWatch('type', form) || cipherType.type
@@ -54,7 +57,10 @@ function FormData(props) {
         const formData = common.convertCipherToForm(item)
         form.setFieldsValue(formData)
       } else {
-        const formData = common.convertCipherToForm({ type: cipherType.type || cipherTypes[0].type })
+        const formData = common.convertCipherToForm({
+          type: cipherType.type || cipherTypes[0].type,
+          folderId: folderId || '',
+        })
         form.setFieldsValue(formData)
       }
     } else {
@@ -209,9 +215,19 @@ function FormData(props) {
           />
           <SelectFolder
             disabled={callingAPI}
+            onCreate={() => setFolderVisible(true)}
           />
         </Form>
       </Drawer>
+      <FolderFormData
+        visible={folderVisible}
+        onClose={() => setFolderVisible(false)}
+        callback={(res) => {
+          setTimeout(() => {
+            form.setFieldValue('folderId', res.id)
+          }, 2000);
+        }}
+      />
     </div>
   );
 }

@@ -66,7 +66,8 @@
     "mrs": "Mrs",
     "ms": "Ms",
     "dr": "Dr",
-    "ok": "OK"
+    "ok": "OK",
+    "detail": "Detail"
   },
   "button": {
     "add": "Add",

@@ -3,27 +3,32 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { Breadcrumb } from '@lockerpm/design';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
-import common from '../../utils/common';
 import { RouterLink } from "../../components";
+import common from '../../utils/common';
+import global from '../../config/global';
 
 import './css/Breadcrumb.scss';
 
 function LayoutBreadcrumb() {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const [menus, setMenus] = useState([])
   const currentPage = useSelector((state) => state.system.currentPage);
   const userInfo = useSelector((state) => state.auth.userInfo);
+  const allFolders = useSelector((state) => state.folder.allFolders);
+  const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
   useEffect(() => {
     if (location) {
       const brRouters = common.getRoutersByLocation(location);
       const lastRouter = brRouters.slice(-1)[0];
       if (lastRouter) {
-        let lastMenus = [lastRouter]
+        let lastRouters = [lastRouter]
         if (lastRouter.children) {
-          lastMenus = [
+          lastRouters = [
             {
               ...lastRouter.children[0],
               label: lastRouter.label
@@ -33,15 +38,31 @@ function LayoutBreadcrumb() {
             }
           ]
         }
-        setMenus([
-          ...brRouters.filter((m) => m.key !== lastRouter.key),
-          ...lastMenus
-        ]);
+        if (lastRouter.parent && !common.isEmpty(lastRouter.params)) {
+          let label = lastRouter.label || t('common.detail')
+          if (lastRouter.parent == global.keys.FOLDERS) {
+            label = allFolders.find((f) => f.id == lastRouter.params.folder_id)?.name || t('common.detail')
+          } else {
+            label = allCiphers.find((f) => f.id == lastRouter.params.cipher_id)?.name || t('common.detail')
+          }
+          setMenus([
+            ...brRouters.filter((m) => m.key !== lastRouter.key),
+            {
+              ...lastRouter,
+              label
+            }
+          ]);
+        } else {
+          setMenus([
+            ...brRouters.filter((m) => m.key !== lastRouter.key),
+            ...lastRouters
+          ]);
+        }
       } else {
         setMenus(brRouters);
       }
     }
-  }, [location, currentPage])
+  }, [location, currentPage, allFolders, allCiphers])
 
   const items = useMemo(() => {
     const breadcrumbRouters = menus.map((m, index) => ({

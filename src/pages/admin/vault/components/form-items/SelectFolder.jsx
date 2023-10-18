@@ -16,14 +16,12 @@ import global from '../../../../../config/global';
 
 function SelectFolder(props) {
   const {
-    form,
-    disabled = false
+    disabled = false,
+    onCreate = () => {}
   } = props
   const { t } = useTranslation()
 
   const allFolders = useSelector((state) => state.folder.allFolders)
-  useEffect(() => {
-  }, [])
 
   return (
     <div className={props.className}>
@@ -54,7 +52,7 @@ function SelectFolder(props) {
               <Button
                 type="link"
                 icon={<PlusOutlined />}
-                onClick={() => {}}
+                onClick={onCreate}
                 className='text-primary'
               >
                 {t('cipher.add_folder')}
