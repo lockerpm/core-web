@@ -35,9 +35,19 @@ const camelCaseToWords = (str) => {
   return newStr ? newStr[0].toUpperCase() + newStr.slice(1) : newStr
 }
 
+const formatOTP = (otp) => {
+  if (!otp) {
+    return 'N/A'
+  }
+  const first = otp.slice(0, 3);
+  const last = otp.slice(3, otp.length);
+  return `${first} ${last}`
+}
+
 export default {
   formatCurrency,
   separatorNumber,
   convertCurrency,
-  camelCaseToWords
+  camelCaseToWords,
+  formatOTP
 }

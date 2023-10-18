@@ -3,7 +3,7 @@ import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
 import { AdminHeader, Pagination } from "../../../components";
 
-import NoCipher from "./components/NoCipher";
+import NoCipher from "../vault/components/NoCipher";
 import Filter from "./components/Filter";
 import TableData from "./components/TableData";
 import BoxData from "./components/BoxData";
@@ -17,11 +17,10 @@ import { CipherType } from "../../../core-js/src/enums"
 import common from "../../../utils/common";
 
 import global from "../../../config/global";
-import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
+import commonServices from "../../../services/common";
 
-
-const Vault = (props) => {
+const Authenticator = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ const Vault = (props) => {
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const [loading, setLoading] = useState(true);
-  const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ciphers, setCiphers] = useState([]);
@@ -44,41 +42,13 @@ const Vault = (props) => {
     searchText: '',
   });
 
-  const cipherType = useMemo(() => {
-    if (currentPage.name === global.keys.TRASH) {
-      return {
-        type: null,
-        title: t('sidebar.trash'),
-        deleted: true,
-        listRouter: global.keys.TRASH,
-        detailRouter: global.keys.TRASH_DETAIL,
-      }
-    }
-    return {
-      ...common.cipherTypeInfo('listRouter', currentPage.name),
-      deleted: false,
-    }
-  }, [currentPage])
-
-  const filters = useMemo(() => {
-    const f = []
-    if (cipherType.type) {
-      f.push((c) => c.type === cipherType.type)
-    } else {
-      f.push((c) => c.type !== CipherType.TOTP)
-    }
-    return f
-  }, [cipherType])
-
   const isEmpty = useMemo(() => {
-    return !allCiphers.find(
-      (c) => !c.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
-    )
-  }, [allCiphers, JSON.stringify(cipherType)])
+    return !allCiphers.find((c) => !c.isDeleted && c.type === CipherType.TOTP)
+  }, [allCiphers])
 
   useEffect(() => {
     fetchCiphers();
-  }, [params.searchText, allCiphers, JSON.stringify(cipherType)])
+  }, [params.searchText, allCiphers])
 
   useEffect(() => {
     setParams({
@@ -86,14 +56,18 @@ const Vault = (props) => {
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.searchText, cipherType.type, syncing])
+  }, [currentPage?.query?.searchText, syncing])
 
   const filteredData = useMemo(() => {
     return common.paginationAndSortData(
       ciphers,
       params,
       params.orderField,
-      params.orderDirection
+      params.orderDirection,
+      [
+        (f) => f.id,
+        (f) => params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
+      ]
     )
   }, [ciphers, JSON.stringify(params)])
 
@@ -116,9 +90,9 @@ const Vault = (props) => {
   const fetchCiphers = async () => {
     setLoading(true);
     const result = await commonServices.list_ciphers({
-      deleted: cipherType.deleted,
+      deleted: false,
       searchText: params.searchText,
-      filters: filters
+      filters: [(c) => c.type === CipherType.TOTP]
     }, allCiphers)
     setCiphers(result);
     setLoading(false);
@@ -127,12 +101,11 @@ const Vault = (props) => {
   const handleOpenForm = (item = null, cloneMode = false) => {
     setSelectedItem(item);
     setFormVisible(true);
-    setCloneMode(cloneMode)
   }
 
   const deleteItem = (cipher) => {
     global.confirmDelete(() => {
-      cipherServices.multiple_delete({ ids: [cipher.id] }).then(async () => {
+      cipherServices.permanent_delete({ ids: [cipher.id] }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
@@ -143,21 +116,16 @@ const Vault = (props) => {
       }).catch((error) => {
         global.pushError(error)
       });
-    }, {
-      title: t('common.warning'),
-      content: t('cipher.delete_question'),
-      okText: t('button.ok'),
-      okButtonProps: { danger: false },
     });
   };
 
   return (
     <div
-      className="vault layout-content"
+      className="authenticator layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
       <AdminHeader
-        title={cipherType.title}
+        title={t('sidebar.authenticator')}
         total={filteredData.total}
         actions={[
           {
@@ -165,7 +133,7 @@ const Vault = (props) => {
             label: t('button.new_item'),
             type: 'primary',
             icon: <PlusOutlined />,
-            hide: currentPage.name === global.keys.TRASH || isEmpty,
+            hide: isEmpty,
             disabled: syncing || loading,
             click: () => handleOpenForm()
           }
@@ -182,7 +150,7 @@ const Vault = (props) => {
       {
         filteredData.total == 0 ? <NoCipher
           className={'mt-4'}
-          type={cipherType.type}
+          type={CipherType.TOTP}
           loading={syncing || loading}
           isEmpty={isEmpty}
           onCreate={() => handleOpenForm()}
@@ -216,13 +184,10 @@ const Vault = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
-        cipherType={cipherType}
-        cloneMode={cloneMode}
-        setCloneMode={setCloneMode}
         onClose={() => setFormVisible(false)}
       />
     </div>
   );
 }
 
-export default Vault;
+export default Authenticator;

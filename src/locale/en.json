@@ -15,6 +15,7 @@
     "products": "Products",
     "no_data": "No data",
     "confirm": "Confirm",
+    "warning": "Warning",
     "delete_question": "Are you sure you want to delete?",
     "information": "Information",
     "value": "Value",
@@ -64,7 +65,8 @@
     "mr": "Mr",
     "mrs": "Mrs",
     "ms": "Ms",
-    "dr": "Dr"
+    "dr": "Dr",
+    "ok": "OK"
   },
   "button": {
     "add": "Add",
@@ -171,7 +173,8 @@
       "cipher": {
         "created": "The new item is added.",
         "updated": "The item information is updated.",
-        "deleted": "The item is deleted."
+        "deleted": "The Item has been moved to trash!.",
+        "permanently_delete": "The item is permanently deleted."
       },
       "folder": {
         "created": "The new folder is added.",
@@ -451,6 +454,12 @@
       "add": "Add password",
       "edit": "Edit password"
     },
+    "authenticator": {
+      "title": "Secure your account",
+      "description": "Add an additional layer of security for your online accounts by setting up two-factor authentication with Locker.",
+      "add": "Set up 2FA",
+      "edit": "Edit OTP"
+    },
     "folders": {
       "title": "Add your first folder",
       "description": "Add an folder to manage ciphers.",
@@ -490,6 +499,7 @@
     "folder_name": "Folder name",
     "no_folder": "No Folder",
     "add_folder": "Add new folder",
+    "delete_question": "Do you really want to send to the trash? Trash items will be permanently deleted after 30 days.",
     "types": {
       "password": "Password",
       "note": "Note",
@@ -558,6 +568,9 @@
       "state_province": "State / Province",
       "zip_postal": "Zip / Postal code",
       "country": "Country"
+    },
+    "otp": {
+      "secret_key": "Secret key"
     }
   }
 }  

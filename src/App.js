@@ -56,15 +56,13 @@ const App = () => {
       message || t('notification.error.message.default')
     )
   }
-  global.confirmDelete = (handleOK = () => {}) => Modal.confirm({
-    title: t('common.confirm'),
+  global.confirmDelete = (handleOK = () => {}, options = {}) => Modal.confirm({
+    title: options.title || t('common.confirm'),
     icon: <ExclamationCircleOutlined />,
-    content: t('common.delete_question'),
-    okText: t('button.delete'),
+    content: options.content || t('common.delete_question'),
+    okText: options.okeText || t('button.delete'),
     cancelText: t('button.cancel'),
-    okButtonProps: {
-      danger: true
-    },
+    okButtonProps: options.okButtonProps || { danger: true },
     onOk: handleOK
   })
 

@@ -21,8 +21,6 @@ import { CipherType } from "../../../../../core-js/src/enums";
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
-import cipherServices from "../../../../../services/cipher";
-
 const CipherActions = (props) => {
   const { t } = useTranslation()
   
