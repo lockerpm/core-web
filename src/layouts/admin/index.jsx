@@ -72,18 +72,22 @@ function AdminLayout(props) {
   });
 
   const handleSyncWsData = async (message) => {
+    console.log(message);
     dispatch(storeActions.updateSyncing(true))
     if (message.type.includes('cipher')) {
-      if (['cipher_share'].includes(message.type)) {
-        await Promise.all([
-          commonServices.sync_profile(),
-          commonServices.sync_collections(),
-        ])
-        await commonServices.sync_items([message.data.id])
-      } else if (['cipher_update'].includes(message.type)) {
-        await commonServices.sync_items([message.data.id])
-      } else if (['cipher_delete', 'cipher_restore'].includes(message.type)) {
-        await commonServices.sync_items(message.data.ids)
+      if (['cipher_share', 'cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
+        if (message.type === 'cipher_share') {
+          await Promise.all([
+            commonServices.sync_profile(),
+            commonServices.sync_collections(),
+          ])
+        }
+        if (message.data.id) {
+          await commonServices.sync_items([message.data.id])
+        }
+        if (message.data.ids) {
+          await commonServices.sync_items(message.data.ids)
+        }
       } else if (message.type.includes('cipher_delete_permanent')) {
         await global.jsCore.cipherService.delete(message.data.ids)
       }

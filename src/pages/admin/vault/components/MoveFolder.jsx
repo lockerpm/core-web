@@ -68,7 +68,7 @@ function MoveFolder(props) {
           const addRequests = ciphers.map((cipher) => addToCollection(cipher, orgKey, collection));
           await Promise.all(addRequests)
         } else {
-          await cipherServices.move({ ids: cipherIds, folderId: folderId })
+          await cipherServices.move({ ids: cipherIds, folderId: folderId || null })
         }
         global.pushSuccess(t('notification.success.cipher.moved'))
         onClose();
