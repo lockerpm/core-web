@@ -16,7 +16,25 @@ function list_invitations() {
   })
 }
 
+function stop_sharing(organizationId, data) {
+  return request({
+    url: global.endpoint.SHARING_STOP.replace(':organization_id', organizationId),
+    method: 'post',
+    data
+  })
+}
+
+function stop_sharing_member(organizationId, memberId, data) {
+  return request({
+    url: global.endpoint.SHARING_MEMBER_STOP.replace(':organization_id', organizationId).replace(':member_id', memberId),
+    method: 'post',
+    data
+  })
+}
+
 export default {
   list_my_shares,
   list_invitations,
+  stop_sharing,
+  stop_sharing_member,
 }

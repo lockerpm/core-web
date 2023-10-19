@@ -27,9 +27,11 @@ const CipherActions = (props) => {
   const {
     className = '',
     cipher = null,
+    onMove = () => {},
     onUpdate = () => {},
     onDelete = () => {},
     onRestore = () => {},
+    onStopSharing = () => {},
     onPermanentlyDelete = () => {}
   } = props;
 
@@ -158,12 +160,14 @@ const CipherActions = (props) => {
         },
         {
           key: 'move_to_folder',
-          label: t('inventory.actions.move_to_folder')
+          label: t('inventory.actions.move_to_folder'),
+          onClick: () => onMove(originCipher)
         },
         {
           key: 'stop_sharing',
           hide: !(common.isOwner(allOrganizations, originCipher) && originCipher.organizationId && !originCipher.collectionIds.length),
-          label: t('inventory.actions.stop_sharing')
+          label: t('inventory.actions.stop_sharing'),
+          onClick: () => onStopSharing(originCipher)
         },
         {
           type: 'divider',

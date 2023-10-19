@@ -1,6 +1,5 @@
 import global from "../../config/global";
 import { CipherType } from "../../core-js/src/enums";
-import store from "../../store";
 
 const isProtectedCipher = (cipher) => {
   return cipher.type === CipherType.MasterPassword
@@ -28,7 +27,7 @@ const isChangeCipher = (organizations, cipher) => {
 }
 
 const isCipherShared = (organizationId) => {
-  const share = store.getState().share.myShares.find(s => s.id === organizationId) || {
+  const share = global.store.getState().share.myShares.find(s => s.id === organizationId) || {
     members: [],
     groups: []
   }
@@ -53,7 +52,7 @@ const isCipherShareable = (organizations, cipher) => {
 const isCipherQuickShareable = (cipher) => {
   const isBelongToSelf =
     !cipher.organizationId ||
-    !!store.getState().share.myShares.find(i => i.organization_id === cipher.organizationId)
+    !!global.store.getState().share.myShares.find(i => i.organization_id === cipher.organizationId)
   return (
     cipher.type !== CipherType.TOTP &&
     !cipher.isDeleted &&

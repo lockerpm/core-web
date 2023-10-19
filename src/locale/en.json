@@ -491,6 +491,10 @@
       "permanently_delete": "Permanently delete",
       "delete": "Delete",
       "share": "Share"
+    },
+    "move_to": {
+      "title": "Move to",
+      "description": "Choose a folder that you would like to move the {{amount}} selected item(s) to."
     }
   },
   "cipher": {

@@ -95,3 +95,14 @@
     padding-left: 32px !important;
   }
 }
+
+.ant-collapse {
+  background-color: white;
+  .ant-collapse-item {
+    &.checked {
+      .ant-collapse-header {
+        background-color: var(--sidebar-menu-active-background-color);
+      }
+    }
+  }
+}

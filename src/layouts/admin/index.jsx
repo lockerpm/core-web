@@ -73,10 +73,16 @@ function AdminLayout(props) {
 
   const handleSyncWsData = async (message) => {
     dispatch(storeActions.updateSyncing(true))
+    console.log(message);
     if (message.type.includes('cipher')) {
-      if (message.type.includes('update')) {
-        const res = await syncServices.sync_cipher(message.data.id);
-        await global.jsCore.cipherService.upsert([res])
+      if (['cipher_update'].includes(message.type)) {
+        await Promise.all([
+          commonServices.sync_profile(),
+          commonServices.sync_collections(),
+        ])
+        await commonServices.sync_items([message.data.id])
+      } else if (['cipher_delete', 'cipher_restore'].includes(message.type)) {
+        await commonServices.sync_items(message.data.ids)
       } else if (message.type.includes('cipher_delete_permanent')) {
         await global.jsCore.cipherService.delete(message.data.ids)
       }

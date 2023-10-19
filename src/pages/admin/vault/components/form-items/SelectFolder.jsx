@@ -17,11 +17,31 @@ import global from '../../../../../config/global';
 function SelectFolder(props) {
   const {
     disabled = false,
+    isMove = false,
     onCreate = () => {}
   } = props
   const { t } = useTranslation()
 
-  const allFolders = useSelector((state) => state.folder.allFolders)
+  const allCollections = useSelector((state) => state.collection.allCollections)
+  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
+  const allFolders = useSelector((state) => state.folder.allFolders);
+
+  const options = useMemo(() => {
+    const result = allFolders.map((f) => ({
+      value: f.id,
+      label: f.name
+    }))
+    if (isMove) {
+      return result
+    }
+    return [
+      {
+        value: '',
+        label: t('cipher.no_folder')
+      },
+      ...result
+    ]
+  }, [allFolders, isMove])
 
   return (
     <div className={props.className}>
@@ -35,16 +55,8 @@ function SelectFolder(props) {
         <Select
           className='w-full'
           disabled={disabled}
-          options={[
-            {
-              value: '',
-              label: t('cipher.no_folder')
-            },
-            ...allFolders.map((f) => ({
-              value: f.id,
-              label: f.name
-            }))
-          ]}
+          placeholder={t('placeholder.select')}
+          options={options}
           dropdownRender={(menu) => (
             <>
               {menu}

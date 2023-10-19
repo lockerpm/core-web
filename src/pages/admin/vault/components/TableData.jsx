@@ -26,9 +26,11 @@ const TableData = (props) => {
     data = [],
     params = {},
     selectedRowKeys = [],
+    onMove = () => {},
     onUpdate = () => {},
     onDelete = () => {},
     onRestore = () => {},
+    onStopSharing = () => {},
     onPermanentlyDelete = () => {},
     selectionChange = () => {},
     getCheckboxProps = () => {}
@@ -83,9 +85,11 @@ const TableData = (props) => {
         render: (_, record) => (
           <Actions
             cipher={record}
+            onMove={onMove}
             onUpdate={onUpdate}
             onDelete={onDelete}
             onRestore={onRestore}
+            onStopSharing={onStopSharing}
             onPermanentlyDelete={onPermanentlyDelete}
           />
         ),

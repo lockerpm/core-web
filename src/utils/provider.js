@@ -34,6 +34,9 @@ global.routers = routers
 import menus from '../config/menus'
 global.menus = menus
 
+import store from '../store'
+global.store = store
+
 const Locales = props => {
   const localeIntl = {
     locale: props.locale,

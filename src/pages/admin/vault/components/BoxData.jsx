@@ -27,10 +27,15 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
+    selectedRowKeys = [],
+    onMove = () => {},
     onUpdate = () => {},
     onDelete = () => {},
     onRestore = () => {},
-    onPermanentlyDelete = () => {}
+    onStopSharing = () => {},
+    onPermanentlyDelete = () => {},
+    selectionChange = () => {},
+    getCheckboxProps = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -49,18 +54,26 @@ const BoxData = (props) => {
       {
         boxData.map((record) => <Collapse.Panel
           key={record.id}
+          className={`${selectedRowKeys.includes(record.id) ? 'checked' : ''}`}
           header={<div
             className="flex align-items justify-between"
           >
             <div className="flex align-items">
-              <Checkbox className="mr-2"/>
+              <Checkbox
+                className="mr-2"
+                checked={selectedRowKeys.includes(record.id)}
+                disabled={getCheckboxProps(record)?.disabled}
+                onChange={(e) => selectionChange(null, record.id, e.target.checked)}
+              />
               <Name cipher={record}/>
             </div>
             <Actions
               cipher={record}
+              onMove={onMove}
               onUpdate={onUpdate}
               onDelete={onDelete}
               onRestore={onRestore}
+              onStopSharing={onStopSharing}
               onPermanentlyDelete={onPermanentlyDelete}
             />
           </div>}

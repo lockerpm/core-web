@@ -1,5 +1,4 @@
 import dayjs from 'dayjs'
-import store from '../../store'
 import storeActions from '../../store/actions/index'
 import global from '../../config/global'
 
@@ -59,11 +58,11 @@ function scrollEnd(
   pageSize = global.constants.PAGE_SIZE
 ) {
   if (event.target.scrollTop > 100) {
-    store.dispatch(storeActions.updateIsScrollToTop(true))
+    global.store.dispatch(storeActions.updateIsScrollToTop(true))
   } else {
-    store.dispatch(storeActions.updateIsScrollToTop(false))
+    global.store.dispatch(storeActions.updateIsScrollToTop(false))
   }
-  if (store.getState().system.isMobile || isMobile) {
+  if (global.store.getState().system.isMobile || isMobile) {
     const isBottom = event.target.scrollTop > 0 && (Math.round(event.target.scrollHeight) === Math.round(event.target.offsetHeight + event.target.scrollTop))
     if (isBottom && params.size < total) {
       setParams({

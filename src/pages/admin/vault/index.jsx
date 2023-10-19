@@ -8,6 +8,7 @@ import Filter from "./components/Filter";
 import TableData from "./components/TableData";
 import BoxData from "./components/BoxData";
 import FormData from "./components/FormData";
+import MoveFolder from "./components/MoveFolder";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -37,6 +38,7 @@ const Vault = (props) => {
   const [callingAPI, setCallingAPI] = useState(false);
   const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
+  const [moveVisible, setMoveVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ciphers, setCiphers] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
@@ -84,6 +86,7 @@ const Vault = (props) => {
   }, [allCiphers, JSON.stringify(cipherType)])
 
   useEffect(() => {
+    setSelectedRowKeys([]);
     fetchCiphers();
   }, [params.searchText, allCiphers, JSON.stringify(cipherType)])
 
@@ -138,6 +141,11 @@ const Vault = (props) => {
     setCloneMode(cloneMode)
   }
 
+  const handleMoveForm = (item = null) => {
+    setSelectedItem(item);
+    setMoveVisible(true);
+  }
+
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
     return {
@@ -145,19 +153,23 @@ const Vault = (props) => {
     }
   }
 
-  const handleSelectionChange = (selectedRowKeys) => {
-    const selectedCiphers = ciphers.filter((cipher) => selectedRowKeys.includes(cipher.id)
-      && cipher.type !== CipherType.MasterPassword
-      && common.isOwner(allOrganizations, cipher)
-    )
-    setSelectedRowKeys(selectedCiphers.map((cipher) => cipher.id))
+  const handleSelectionChange = (keys, key, value) => {
+    if (keys) {
+      const selectedCiphers = ciphers.filter((cipher) => keys.includes(cipher.id)
+        && cipher.type !== CipherType.MasterPassword
+        && common.isOwner(allOrganizations, cipher)
+      )
+      setSelectedRowKeys(selectedCiphers.map((cipher) => cipher.id))
+    } else {
+      const selectedKeys = value ? [...selectedRowKeys, key] : selectedRowKeys.filter((k) => k !== key);
+      setSelectedRowKeys(selectedKeys)
+    }
   }
 
-  const deleteItem = (cipherIds) => {
+  const deleteItems = (cipherIds) => {
     global.confirmDelete(() => {
       cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
-        await syncItems(cipherIds)
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
@@ -175,11 +187,10 @@ const Vault = (props) => {
     });
   };
 
-  const restoreItem = (cipherIds) => {
+  const restoreItems = (cipherIds) => {
     global.confirmDelete(() => {
       cipherServices.restore({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.restored'));
-        await syncItems(cipherIds)
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
@@ -197,7 +208,16 @@ const Vault = (props) => {
     });
   };
 
-  const permanentlyDeleteItem = (cipherIds) => {
+  const stopSharingItem = async (cipher) => {
+    try {
+      await commonServices.stop_sharing(cipher);
+      global.pushSuccess(t('notification.success.cipher.updated'))
+    } catch (error) {
+      global.pushError(error)
+    }
+  }
+
+  const permanentlyDeleteItems = (cipherIds) => {
     global.confirmDelete(() => {
       cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
@@ -215,16 +235,6 @@ const Vault = (props) => {
       content: t('cipher.permanently_delete_question'),
       okText: t('button.ok'),
     });
-  };
-
-  const syncItems = async (cipherIds) => {
-    dispatch(storeActions.updateSyncing(true))
-    const requests = cipherIds.map((id) => syncServices.sync_cipher(id))
-    await Promise.all(requests).then(async (response) => {
-      await global.jsCore.cipherService.upsert(response)
-    })
-    commonServices.get_all_ciphers();
-    dispatch(storeActions.updateSyncing(false))
   };
 
   return (
@@ -253,11 +263,12 @@ const Vault = (props) => {
             selectedRowKeys.length > 0 ? <Multiple
               selectedRowKeys={selectedRowKeys}
               callingAPI={callingAPI}
-              multipleDelete={() => {}}
               isMove={currentPage.name !== global.keys.TRASH}
               isDelete={currentPage.name !== global.keys.TRASH}
               isRestore={currentPage.name === global.keys.TRASH}
               isPermanentlyDelete={currentPage.name === global.keys.TRASH}
+              onDelete={() => {}}
+              onMove={() => handleMoveForm(null)}
               onCancel={() => setSelectedRowKeys([])}
             /> : <Filter
               className={'mt-2'}
@@ -282,20 +293,27 @@ const Vault = (props) => {
               loading={syncing || loading}
               data={filteredData.result}
               params={params}
+              selectedRowKeys={selectedRowKeys}
+              onMove={handleMoveForm}
               onUpdate={handleOpenForm}
-              onDelete={deleteItem}
-              onRestore={restoreItem}
-              onPermanentlyDelete={permanentlyDeleteItem}
+              onDelete={deleteItems}
+              onRestore={restoreItems}
+              onStopSharing={stopSharingItem}
+              onPermanentlyDelete={permanentlyDeleteItems}
+              selectionChange={handleSelectionChange}
+              getCheckboxProps={getCheckboxProps}
             /> : <TableData
               className="mt-4"
               loading={syncing || loading}
               data={filteredData.result}
               params={params}
               selectedRowKeys={selectedRowKeys}
+              onMove={handleMoveForm}
               onUpdate={handleOpenForm}
-              onDelete={deleteItem}
-              onRestore={restoreItem}
-              onPermanentlyDelete={permanentlyDeleteItem}
+              onDelete={deleteItems}
+              onRestore={restoreItems}
+              onStopSharing={stopSharingItem}
+              onPermanentlyDelete={permanentlyDeleteItems}
               selectionChange={handleSelectionChange}
               getCheckboxProps={getCheckboxProps}
             />
@@ -316,7 +334,18 @@ const Vault = (props) => {
         cloneMode={cloneMode}
         folderId={currentPage.params.folder_id}
         setCloneMode={setCloneMode}
-        onClose={() => setFormVisible(false)}
+        onClose={() => {
+          setFormVisible(false);
+          setSelectedItem(null);
+        }}
+      />
+      <MoveFolder
+        visible={moveVisible}
+        cipherIds={selectedItem ? [selectedItem.id] : selectedRowKeys}
+        onClose={() => {
+          setMoveVisible(false);
+          setSelectedItem(null);
+        }}
       />
     </div>
   );

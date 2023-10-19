@@ -21,6 +21,10 @@ export default {
 
   SYNC: `${FLAT_FORM}/sync`,
   SYNC_COUNT: `${FLAT_FORM}/sync/count`,
+  SYNC_PROFILE: `${FLAT_FORM}/sync/profile`,
+  SYNC_FOLDERS: `${FLAT_FORM}/sync/folders`,
+  SYNC_POLICIES: `${FLAT_FORM}/sync/policies`,
+  SYNC_COLLECTIONS: `${FLAT_FORM}/sync/collections`,
   SYNC_CIPHER: `${FLAT_FORM}/sync/ciphers/:id`,
   SYNC_FOLDER: `${FLAT_FORM}/sync/folders/:id`,
   SYNC_COLLECTION: `${FLAT_FORM}/sync/collections/:id`,

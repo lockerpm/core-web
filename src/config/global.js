@@ -6,6 +6,7 @@ export default {
   menus: {},
   patterns: {},
   rules: {},
+  store: {},
   confirmDelete: () => {},
   notification: () => {},
   navigate: () => {},
