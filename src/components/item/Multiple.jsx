@@ -48,7 +48,7 @@ const MultipleSelect = (props) => {
           ghost
           type={'primary'}
           loading={callingAPI}
-          onClick={() => onDelete()}
+          onClick={() => onRestore(selectedRowKeys)}
         >
           {t('inventory.actions.restore')}
         </Button>
@@ -60,7 +60,7 @@ const MultipleSelect = (props) => {
           type={'primary'}
           loading={callingAPI}
           danger
-          onClick={() => onRestore()}
+          onClick={() => onDelete(selectedRowKeys)}
         >
           {t('button.delete')}
         </Button>
@@ -72,7 +72,7 @@ const MultipleSelect = (props) => {
           type={'primary'}
           loading={callingAPI}
           danger
-          onClick={() => onPermanentlyDelete()}
+          onClick={() => onPermanentlyDelete(selectedRowKeys)}
         >
           {t('inventory.actions.permanently_delete')}
         </Button>

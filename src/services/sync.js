@@ -60,7 +60,7 @@ function sync_folder(id) {
 
 function sync_collection(id) {
   return request({
-    url: global.endpoint.SYNC_FOLDER.replace(':id', id),
+    url: global.endpoint.SYNC_COLLECTION.replace(':id', id),
     method: 'get',
   })
 }

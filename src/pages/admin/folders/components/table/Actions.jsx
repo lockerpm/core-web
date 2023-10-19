@@ -11,25 +11,62 @@ import {
 
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
+import common from "../../../../../utils/common";
 
 const FolderActions = (props) => {
   const { t } = useTranslation()
   
   const {
     className = '',
-    folder = null,
+    item = null,
     onUpdate = () => {},
     onDelete = () => {}
   } = props;
 
   const allFolders = useSelector((state) => state.folder.allFolders)
+  const allCollections = useSelector((state) => state.collection.allCollections)
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
 
+  const originCollection = useMemo(() => {
+    return allCollections.find((d) => d.id === item?.id)
+  }, [allCollections, item])
+
   const originFolder = useMemo(() => {
-    return allFolders.find((d) => d.id === folder?.id) || folder
-  }, [allFolders, folder])
+    return allFolders.find((d) => d.id === item?.id)
+  }, [allFolders, item])
 
   const generalMenus = useMemo(() => {
+    if (originCollection) {
+      return [
+        {
+          key: 'rename',
+          label: t('inventory.actions.edit'),
+          hide: !common.isChangeCipher(allOrganizations, originCollection),
+          onClick: () => onUpdate(originCollection)
+        },
+        {
+          key: 'share',
+          hide: !common.isOwner(allOrganizations, originCollection),
+          label: t('inventory.actions.share')
+        },
+        {
+          key: 'stop_share',
+          hide: !common.isOwner(allOrganizations, originCollection),
+          label: t('inventory.actions.stop_sharing')
+        },
+        {
+          hide: !common.isOwner(allOrganizations, originCollection),
+          type: 'divider',
+        },
+        {
+          key: 'delete',
+          hide: !common.isOwner(allOrganizations, originCollection),
+          label: t('inventory.actions.delete'),
+          danger: true,
+          onClick: () => onDelete(originFolder)
+        },
+      ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
+    }
     return [
       {
         key: 'rename',
@@ -50,7 +87,7 @@ const FolderActions = (props) => {
         onClick: () => onDelete(originFolder)
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [originFolder])
+  }, [originFolder, originCollection])
 
   return (
     <div className={className}>

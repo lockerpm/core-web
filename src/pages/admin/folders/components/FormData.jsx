@@ -17,12 +17,12 @@ import global from '../../../../config/global';
 import common from '../../../../utils/common';
 
 import folderServices from '../../../../services/folder';
+import sharingServices from '../../../../services/sharing';
 
 function FormData(props) {
   const {
     visible = false,
     item = null,
-    cloneMode = false,
     setCloneMode = () => {},
     onClose = () => {},
     callback = () => {}
@@ -49,8 +49,10 @@ function FormData(props) {
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
-      if (cloneMode || !item?.id) {
+      if (!item?.id) {
         await createFolder(values);
+      } else if (item?.organizationId) {
+        await editCollection(values);
       } else {
         await editFolder(values);
       }
@@ -72,6 +74,16 @@ function FormData(props) {
   const editFolder = async (values) => {
     const payload = await common.getEncFolderForRequest(values)
     await folderServices.update(item.id, payload).then(() => {
+      global.pushSuccess(t('notification.success.folder.updated'))
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
+
+  const editCollection = async (values) => {
+    const orgKey = await global.jsCore.cryptoService.getOrgKey(item.organizationId)
+    const payload = await common.getEncFolderForRequest({ ...item, ...values }, orgKey)
+    await sharingServices.update_sharing_folder(item.organizationId, item.id, payload).then(() => {
       global.pushSuccess(t('notification.success.folder.updated'))
     }).catch((error) => {
       global.pushError(error)

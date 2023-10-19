@@ -20,8 +20,6 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
-import syncServices from "../../../services/sync";
-import storeActions from "../../../store/actions";
 
 const Vault = (props) => {
   const { t } = useTranslation();
@@ -167,8 +165,9 @@ const Vault = (props) => {
   }
 
   const deleteItems = (cipherIds) => {
-    global.confirmDelete(() => {
-      cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
+    global.confirmDelete(async () => {
+      setCallingAPI(true)
+      await cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
@@ -179,6 +178,7 @@ const Vault = (props) => {
       }).catch((error) => {
         global.pushError(error)
       });
+      setCallingAPI(false)
     }, {
       title: t('common.warning'),
       content: t('cipher.delete_question'),
@@ -188,8 +188,9 @@ const Vault = (props) => {
   };
 
   const restoreItems = (cipherIds) => {
-    global.confirmDelete(() => {
-      cipherServices.restore({ ids: cipherIds }).then(async () => {
+    global.confirmDelete(async () => {
+      setCallingAPI(true)
+      await cipherServices.restore({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.restored'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
@@ -200,6 +201,7 @@ const Vault = (props) => {
       }).catch((error) => {
         global.pushError(error)
       });
+      setCallingAPI(false)
     }, {
       title: t('common.warning'),
       content: t('cipher.restore_question'),
@@ -218,8 +220,9 @@ const Vault = (props) => {
   }
 
   const permanentlyDeleteItems = (cipherIds) => {
-    global.confirmDelete(() => {
-      cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
+    global.confirmDelete(async () => {
+      setCallingAPI(true)
+      await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
@@ -230,6 +233,7 @@ const Vault = (props) => {
       }).catch((error) => {
         global.pushError(error)
       });
+      setCallingAPI(false)
     }, {
       title: t('common.warning'),
       content: t('cipher.permanently_delete_question'),
@@ -267,8 +271,10 @@ const Vault = (props) => {
               isDelete={currentPage.name !== global.keys.TRASH}
               isRestore={currentPage.name === global.keys.TRASH}
               isPermanentlyDelete={currentPage.name === global.keys.TRASH}
-              onDelete={() => {}}
               onMove={() => handleMoveForm(null)}
+              onDelete={deleteItems}
+              onRestore={restoreItems}
+              onPermanentlyDelete={permanentlyDeleteItems}
               onCancel={() => setSelectedRowKeys([])}
             /> : <Filter
               className={'mt-2'}

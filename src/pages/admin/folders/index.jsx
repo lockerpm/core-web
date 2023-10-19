@@ -27,6 +27,7 @@ const Folders = (props) => {
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
   const allFolders = useSelector((state) => state.folder.allFolders)
+  const allCollections = useSelector((state) => state.collection.allCollections)
 
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -39,8 +40,8 @@ const Folders = (props) => {
   });
 
   const isEmpty = useMemo(() => {
-    return allFolders.length === 0
-  }, [allFolders])
+    return [...allCollections, ...allFolders].length === 0
+  }, [allFolders, allCollections])
 
 
   useEffect(() => {
@@ -53,7 +54,10 @@ const Folders = (props) => {
 
   const filteredData = useMemo(() => {
     return common.paginationAndSortData(
-      allFolders,
+      [
+        ...allCollections.map((c) => ({ ...c, isCollection: true })),
+        ...allFolders
+      ],
       params,
       params.orderField,
       params.orderDirection,
@@ -62,7 +66,7 @@ const Folders = (props) => {
         (f) => params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
       ]
     )
-  }, [allFolders, JSON.stringify(params)])
+  }, [allFolders, allCollections, JSON.stringify(params)])
 
   useEffect(() => {
     setParams({

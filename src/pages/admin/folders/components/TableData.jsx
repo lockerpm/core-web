@@ -44,7 +44,7 @@ const TableData = (props) => {
         key: 'name',
         width: 300,
         align: 'left',
-        render: (_, record) => <Name folder={record}/>
+        render: (_, record) => <Name item={record}/>
       },
       {
         title: t('common.created_time'),
@@ -77,7 +77,7 @@ const TableData = (props) => {
         width: 100,
         render: (_, record) => (
           <Actions
-            folder={record}
+            item={record}
             onUpdate={onUpdate}
             onDelete={onDelete}
           />

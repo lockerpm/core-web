@@ -51,10 +51,10 @@ const BoxData = (props) => {
             className="flex align-items justify-between"
           >
             <div className="flex align-items">
-              <Name folder={record}/>
+              <Name item={record}/>
             </div>
             <Actions
-              folder={record}
+              item={record}
               onUpdate={onUpdate}
               onDelete={onDelete}
             />
