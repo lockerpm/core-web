@@ -177,7 +177,8 @@
         "updated": "The item information has been updated.",
         "deleted": "The Item has been moved to trash!.",
         "permanently_delete": "The item has been permanently deleted.",
-        "restored": "The item has been restored!"
+        "restored": "The item has been restored!",
+        "mover": "The item has been moved!"
       },
       "folder": {
         "created": "The new folder has been added.",

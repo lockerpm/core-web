@@ -103,8 +103,8 @@ async function get_all_organizations() {
 async function sync_data() {
   clear_data();
   global.store.dispatch(storeActions.updateSyncing(true));
+  await sync_profile();
   await Promise.all([
-    sync_profile(),
     sync_folders(),
     sync_collections(),
   ])
@@ -150,8 +150,11 @@ async function get_writable_collections (nonWriteable = false) {
     collections = await global.jsCore.collectionService.getAllDecrypted()
     const organizations = await global.jsCore.userService.getAllOrganizations()
     collections = collections.filter(item => {
-      const _type = organizations.find((o) => o.id === item.organizationId)?.type
-      return nonWriteable ? _type !== 0 : _type === 0
+      const isOwner = common.isOwner(organizations, item)
+      if (nonWriteable) {
+        return  !isOwner
+      }
+      return isOwner
     })
   } catch (error) {}
   return collections

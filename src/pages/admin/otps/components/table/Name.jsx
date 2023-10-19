@@ -32,6 +32,7 @@ const Name = (props) => {
           />
           <DisplayOtp
             notes={cipher.notes}
+            justify="end"
           />
         </div>
       </div>

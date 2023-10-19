@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   Select,
   Form,
@@ -12,28 +12,44 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from '../../../../../config/global';
+import commonServices from '../../../../../services/common';
 
 function SelectFolder(props) {
   const {
     disabled = false,
     isMove = false,
-    onCreate = () => {}
+    folderId = null,
+    onCreate = () => {},
   } = props
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const allCollections = useSelector((state) => state.collection.allCollections)
-  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
   const allFolders = useSelector((state) => state.folder.allFolders);
+  const allCollections = useSelector((state) => state.collection.allCollections);
+
+  const [writeableCollections, setWriteableCollections] = useState([]);
+  const [nonWriteableCollections, setNonWriteableCollections] = useState([]);
+
+  useEffect(() => {
+    initData();
+  }, [])
+
+  const initData = async () => {
+    setWriteableCollections(await commonServices.get_writable_collections());
+    setNonWriteableCollections(await commonServices.get_writable_collections(true))
+  }
+
+  const canChangeFolder = useMemo(() => {
+    if (folderId) {
+      return !nonWriteableCollections.some(f => f.id === folderId)
+    }
+    return true
+  }, [nonWriteableCollections])
 
   const options = useMemo(() => {
-    const result = allFolders.map((f) => ({
-      value: f.id,
-      label: f.name
-    }))
-    if (isMove) {
-      return result
-    }
+    const result = [
+      ...allFolders,
+      ...(isMove || canChangeFolder ? writeableCollections : allCollections)
+    ].map((f) => ({ value: f.id, label: f.name }))
     return [
       {
         value: '',
@@ -41,7 +57,7 @@ function SelectFolder(props) {
       },
       ...result
     ]
-  }, [allFolders, isMove])
+  }, [allFolders, writeableCollections, allCollections, canChangeFolder, isMove])
 
   return (
     <div className={props.className}>
@@ -54,7 +70,7 @@ function SelectFolder(props) {
       >
         <Select
           className='w-full'
-          disabled={disabled}
+          disabled={disabled || !canChangeFolder}
           placeholder={t('placeholder.select')}
           options={options}
           dropdownRender={(menu) => (

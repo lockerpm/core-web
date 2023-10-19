@@ -32,9 +32,27 @@ function stop_sharing_member(organizationId, memberId, data) {
   })
 }
 
+function update_sharing_folder_items(organizationId, folderId, data) {
+  return request({
+    url: global.endpoint.SHARING_FOLDER_ITEMS.replace(':organization_id', organizationId).replace(':folder_id', folderId),
+    method: 'put',
+    data
+  })
+}
+
+function add_sharing_folder_items(organizationId, folderId, data) {
+  return request({
+    url: global.endpoint.SHARING_FOLDER_ITEMS.replace(':organization_id', organizationId).replace(':folder_id', folderId),
+    method: 'post',
+    data
+  })
+}
+
 export default {
   list_my_shares,
   list_invitations,
   stop_sharing,
   stop_sharing_member,
+  update_sharing_folder_items,
+  add_sharing_folder_items,
 }

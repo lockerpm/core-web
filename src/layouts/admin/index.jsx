@@ -73,13 +73,14 @@ function AdminLayout(props) {
 
   const handleSyncWsData = async (message) => {
     dispatch(storeActions.updateSyncing(true))
-    console.log(message);
     if (message.type.includes('cipher')) {
-      if (['cipher_update'].includes(message.type)) {
+      if (['cipher_share'].includes(message.type)) {
         await Promise.all([
           commonServices.sync_profile(),
           commonServices.sync_collections(),
         ])
+        await commonServices.sync_items([message.data.id])
+      } else if (['cipher_update'].includes(message.type)) {
         await commonServices.sync_items([message.data.id])
       } else if (['cipher_delete', 'cipher_restore'].includes(message.type)) {
         await commonServices.sync_items(message.data.ids)

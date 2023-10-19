@@ -19,7 +19,8 @@ import global from "../../../../../config/global";
 const DisplayOtp = (props) => {
   const { t } = useTranslation()
   const {
-    notes = null
+    notes = null,
+    justify = 'left'
   } = props;
 
   const [otp, setOtp] = useState('')
@@ -62,7 +63,7 @@ const DisplayOtp = (props) => {
 
   return (
     <div
-      className="flex items-center justify-end"
+      className={`flex items-center justify-${justify}`}
       style={{ width: 160 }}
     >
       <p
