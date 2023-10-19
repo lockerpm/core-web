@@ -28,7 +28,8 @@ const BoxData = (props) => {
     data = [],
     params = {},
     onUpdate = () => {},
-    onDelete = () => {}
+    onDelete = () => {},
+    onStop = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -57,6 +58,7 @@ const BoxData = (props) => {
               item={record}
               onUpdate={onUpdate}
               onDelete={onDelete}
+              onStop={onStop}
             />
           </div>}
         >

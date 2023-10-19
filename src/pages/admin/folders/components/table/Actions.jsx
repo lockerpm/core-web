@@ -20,7 +20,8 @@ const FolderActions = (props) => {
     className = '',
     item = null,
     onUpdate = () => {},
-    onDelete = () => {}
+    onDelete = () => {},
+    onStop = () => {}
   } = props;
 
   const allFolders = useSelector((state) => state.folder.allFolders)
@@ -52,7 +53,8 @@ const FolderActions = (props) => {
         {
           key: 'stop_share',
           hide: !common.isOwner(allOrganizations, originCollection),
-          label: t('inventory.actions.stop_sharing')
+          label: t('inventory.actions.stop_sharing'),
+          onClick: () => onStop(originCollection)
         },
         {
           hide: !common.isOwner(allOrganizations, originCollection),
@@ -63,7 +65,7 @@ const FolderActions = (props) => {
           hide: !common.isOwner(allOrganizations, originCollection),
           label: t('inventory.actions.delete'),
           danger: true,
-          onClick: () => onDelete(originFolder)
+          onClick: () => onDelete(originCollection)
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }

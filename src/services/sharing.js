@@ -56,6 +56,14 @@ function add_sharing_folder_items(organizationId, folderId, data) {
   })
 }
 
+function delete_sharing_folder(organizationId, folderId, data) {
+  return request({
+    url: global.endpoint.SHARING_FOLDER_DELETE.replace(':organization_id', organizationId).replace(':folder_id', folderId),
+    method: 'post',
+    data
+  })
+}
+
 export default {
   list_my_shares,
   list_invitations,
@@ -64,4 +72,5 @@ export default {
   update_sharing_folder,
   update_sharing_folder_items,
   add_sharing_folder_items,
+  delete_sharing_folder,
 }

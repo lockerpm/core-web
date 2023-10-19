@@ -3,6 +3,7 @@ import storeActions from '../store/actions'
 import common from '../utils/common'
 
 import syncServices from './sync'
+import folderServices from './folder'
 import sharingServices from './sharing'
 import quickShareServices from './quick-share'
 
@@ -201,6 +202,89 @@ async function stop_sharing(cipher) {
   }
 }
 
+async function stop_sharing_folder(folder) {
+  let memberId = null
+  if (folder.user) {
+    memberId = folder.user.id
+    delete folder.user
+  }
+  const folderNameEnc = await global.jsCore.cryptoService.encrypt(folder.name)
+
+  // Encrypt ciphers with self key
+  const personalKey = await global.jsCore.cryptoService.getEncKey()
+  const cipherInsideFolder = global.store.getState().cipher.allCiphers.filter(c => c.collectionIds.includes(folder.id))
+  const ciphers = await Promise.all(
+    cipherInsideFolder.map(async cipher => {
+      const { data } = await common.getEncCipherForRequest(cipher, {
+        noCheck: true,
+        encKey: personalKey
+      })
+      return {
+        id: cipher.id,
+        ...data,
+        creationDate: cipher.creationDate
+      }
+    })
+  )
+
+  const payload = {
+    folder: {
+      id: folder.id,
+      name: folderNameEnc.encryptedString,
+      ciphers
+    }
+  }
+
+  if (memberId) {
+    await sharingServices.stop_sharing_member(
+      folder.organizationId,
+      memberId, 
+      payload
+    )
+  } else {
+    await sharingServices.stop_sharing(
+      folder.organizationId,
+      payload
+    )
+  }
+}
+
+async function delete_collection(collection) {
+  const folderNameEnc = await global.jsCore.cryptoService.encrypt(collection.name)
+  // Encrypt ciphers with self key
+  const personalKey = await global.jsCore.cryptoService.getEncKey()
+  const cipherInsideCollection = global.store.getState().cipher.allCiphers.filter(c => c.collectionIds.includes(collection.id))
+  const ciphers = await Promise.all(
+    cipherInsideCollection.map(async cipher => {
+      const { data } = await common.getEncCipherForRequest(cipher, {
+        noCheck: true,
+        encKey: personalKey
+      })
+      return {
+        id: cipher.id,
+        ...data
+      }
+    })
+  )
+  const payload = {
+    folder: {
+      id: collection.id,
+      name: folderNameEnc.encryptedString,
+      ciphers
+    }
+  }
+  await sharingServices.delete_sharing_folder(folder.organizationId, folder.id, payload);
+  await global.jsCore.cipherService.softDelete(cipherInsideCollection.map((c) => c.id));
+  await get_all_collections();
+}
+
+async function delete_folder(folder) {
+  const cipherInsideFolder = global.store.getState().cipher.allCiphers.filter(c => c.folderId === folder.id)
+  await folderServices.remove(folder.id)
+  await global.jsCore.cipherService.softDelete(cipherInsideFolder.map((c) => c.id));
+  await get_all_folders();
+}
+
 export default {
   clear_data,
   sync_data,
@@ -219,5 +303,8 @@ export default {
   password_strength,
   get_writable_collections,
   sync_items,
-  stop_sharing
+  stop_sharing,
+  stop_sharing_folder,
+  delete_collection,
+  delete_folder
 }

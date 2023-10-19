@@ -27,6 +27,7 @@ const TableData = (props) => {
     params = {},
     onUpdate = () => {},
     onDelete = () => {},
+    onStop = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -80,6 +81,7 @@ const TableData = (props) => {
             item={record}
             onUpdate={onUpdate}
             onDelete={onDelete}
+            onStop={onStop}
           />
         ),
       },

@@ -77,9 +77,10 @@ function AdminLayout(props) {
     if (message.type.includes('cipher')) {
       if (['cipher_share', 'cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
         if (message.type === 'cipher_share') {
+          await commonServices.sync_profile(),
           await Promise.all([
-            commonServices.sync_profile(),
             commonServices.sync_collections(),
+            commonServices.sync_folders(),
           ])
         }
         if (message.data.id) {

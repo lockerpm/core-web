@@ -17,6 +17,7 @@ import common from "../../../utils/common";
 
 import global from "../../../config/global";
 import folderServices from "../../../services/folder";
+import commonServices from "../../../services/common";
 
 const Folders = (props) => {
   const { t } = useTranslation();
@@ -89,9 +90,23 @@ const Folders = (props) => {
     setFormVisible(true);
   }
 
+  const stopSharing = async (collection) => {
+    try {
+      await commonServices.stop_sharing_folder(collection);
+      global.pushSuccess(t('notification.success.folder.updated'))
+    } catch (error) {
+      global.pushError(error)
+    }
+  }
+
   const deleteItem = (folder) => {
-    global.confirmDelete(() => {
-      folderServices.remove(folder.id).then(async () => {
+    global.confirmDelete(async () => {
+      try {
+        if (folder.organizationId) {
+          await commonServices.delete_collection(folder)
+        } else {
+          await commonServices.delete_folder(folder)
+        }
         global.pushSuccess(t('notification.success.folder.deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
@@ -99,9 +114,9 @@ const Folders = (props) => {
             page: params.page - 1
           })
         }
-      }).catch((error) => {
+      } catch (error) {
         global.pushError(error)
-      });
+      }
     });
   };
 
@@ -147,6 +162,7 @@ const Folders = (props) => {
               params={params}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
+              onStop={stopSharing}
             /> : <TableData
               className="mt-4"
               loading={syncing}
@@ -154,6 +170,7 @@ const Folders = (props) => {
               params={params}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
+              onStop={stopSharing}
             />
           }
         </>
