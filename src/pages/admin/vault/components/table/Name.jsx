@@ -38,7 +38,7 @@ const Name = (props) => {
   return (
     <div className="flex items-center">
       <CipherIcon
-        // item={originCipher}
+        item={originCipher}
         type={originCipher.type}
       />
       <div className="ml-2 flex-1">
