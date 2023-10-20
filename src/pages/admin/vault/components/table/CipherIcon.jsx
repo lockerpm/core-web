@@ -36,7 +36,7 @@ const CipherIcon = (props) => {
           shape: 'square'
         }
       } else if ([CipherType.Login, CipherType.MasterPassword].includes(cipher.type)) {
-        const domain = extractDomain(cipher?.login.uris[0]._uri)
+        const domain = cipher?.login?.uris && cipher?.login?.uris[0]?._uri ? extractDomain(cipher.login.uris[0]._uri) : null
         if (domain) {
           logo = {
             src: `${process.env.REACT_APP_LOGO_URL}/${domain}?size=${size}`,
