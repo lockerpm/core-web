@@ -83,8 +83,21 @@ export default {
     },
     {
       key: keys.SHARES,
+      router: keys.SHARED_WITH_ME,
       icon: <ShareAltOutlined />,
       label: <Trans i18nKey='sidebar.shares' />,
+    },
+    {
+      key: keys.SHARED_WITH_ME,
+      label: <Trans i18nKey='sidebar.shared_with_me' />,
+      parent: keys.SHARES,
+      isChildren: true
+    },
+    {
+      key: keys.MY_SHARED_ITEMS,
+      label: <Trans i18nKey='sidebar.my_shared_items' />,
+      parent: keys.SHARES,
+      isChildren: true
     },
     {
       key: keys.TRASH,

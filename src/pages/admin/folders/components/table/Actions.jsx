@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 import common from "../../../../../utils/common";
 
-const FolderActions = (props) => {
+const Actions = (props) => {
   const { t } = useTranslation()
   
   const {
@@ -26,7 +26,6 @@ const FolderActions = (props) => {
 
   const allFolders = useSelector((state) => state.folder.allFolders)
   const allCollections = useSelector((state) => state.collection.allCollections)
-  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
 
   const originCollection = useMemo(() => {
     return allCollections.find((d) => d.id === item?.id)
@@ -42,27 +41,27 @@ const FolderActions = (props) => {
         {
           key: 'rename',
           label: t('inventory.actions.edit'),
-          hide: !common.isChangeCipher(allOrganizations, originCollection),
+          hide: !common.isChangeCipher(originCollection),
           onClick: () => onUpdate(originCollection)
         },
         {
           key: 'share',
-          hide: !common.isOwner(allOrganizations, originCollection),
+          hide: !common.isOwner(originCollection),
           label: t('inventory.actions.share')
         },
         {
           key: 'stop_share',
-          hide: !common.isOwner(allOrganizations, originCollection),
+          hide: !common.isOwner(originCollection),
           label: t('inventory.actions.stop_sharing'),
           onClick: () => onStop(originCollection)
         },
         {
-          hide: !common.isOwner(allOrganizations, originCollection),
+          hide: !common.isOwner(originCollection),
           type: 'divider',
         },
         {
           key: 'delete',
-          hide: !common.isOwner(allOrganizations, originCollection),
+          hide: !common.isOwner(originCollection),
           label: t('inventory.actions.delete'),
           danger: true,
           onClick: () => onDelete(originCollection)
@@ -95,7 +94,7 @@ const FolderActions = (props) => {
     <div className={className}>
       <Space size={[4, 4]}>
         {
-          <Dropdown
+          !!generalMenus.length && <Dropdown
             menu={{ items: generalMenus }}
             trigger={['click']}
           >
@@ -111,4 +110,4 @@ const FolderActions = (props) => {
   );
 }
 
-export default FolderActions;
+export default Actions;

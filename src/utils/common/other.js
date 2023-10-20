@@ -107,6 +107,18 @@ const selectedNetworks = (aliases = []) => {
   return global.constants.CHAINS.filter((a) => aliases.includes(a.alias)) || []
 }
 
+const getOrganization = (id) => {
+  return global.store.getState().organization.allOrganizations.find((o) => o.id === id)
+}
+
+const getInvitationStatus = (status) => {
+  return global.constants.INVITATION_STATUSES.find((s) => !s.value || s.value === status)
+}
+
+const getSharePermission = (permission) => {
+  return global.constants.SHARE_PERMISSIONS.find((s) => !s.value || s.value === permission)
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -119,5 +131,8 @@ export default {
   detectCardBrand,
   cardBrandByNumber,
   selectedWalletApp,
-  selectedNetworks
+  selectedNetworks,
+  getOrganization,
+  getInvitationStatus,
+  getSharePermission
 }

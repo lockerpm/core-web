@@ -15,9 +15,25 @@ const ACCOUNT_ROLE = {
   MANAGER: 3
 }
 
+const PERMISSION = {
+  EDIT: 'Edit',
+  VIEW: 'View',
+  ONLY_USE: 'Only Use'
+}
+
+const STATUS = {
+  CONFIRMED: 'confirmed',
+  ACCEPTED: 'accepted',
+  INVITED: 'invited',
+  EXPIRED: 'expired',
+  SHARED: null
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
+  PERMISSION,
+  STATUS,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
@@ -38,58 +54,6 @@ export default {
       label: 'Json'
     }
   ],
-  SMTP_PROVIDERS: [
-    {
-      name: 'Other SMTP provider',
-      host: '',
-      port: ''
-    },
-    {
-      name: 'Gmail',
-      host: 'smtp.gmail.com',
-      port: '587'
-    },
-    {
-      name: 'Microsoft Outlook',
-      host: 'smtp.office365.com',
-      port: '587'
-    },
-    {
-      name: 'Yahoo',
-      host: 'smtp.mail.yahoo.com',
-      port: '587'
-    },
-    {
-      name: 'Mailtrap Email Sending',
-      host: 'live.smtp.mailtrap.io',
-      port: '587'
-    },
-    {
-      name: 'Mailgun',
-      host: 'mtp.mailgun.org',
-      port: '587'
-    },
-    {
-      name: 'Apple mail',
-      host: 'smtp.mail.me.com',
-      port: '587'
-    },
-    {
-      name: 'Mandrill',
-      host: 'smtp.mandrillapp.com',
-      port: '587'
-    },
-    {
-      name: 'SparkPost',
-      host: 'mtp.sparkpostmail.com',
-      port: '587'
-    },
-    {
-      name: 'Postmark',
-      host: 'smtp.postmarkapp.com',
-      port: '587'
-    },
-  ],
   CIPHER_TYPES: [
     {
       key: 'vault',
@@ -102,7 +66,7 @@ export default {
       isCreate: false
     },
     {
-      key: 'passwords',
+      key: 'password',
       type: CipherType.Login,
       icon: require('../assets/images/icons/ciphers/login.svg'),
       listRouter: keys.PASSWORDS,
@@ -112,7 +76,7 @@ export default {
       isCreate: true,
     },
     {
-      key: 'notes',
+      key: 'note',
       type: CipherType.SecureNote,
       icon: require('../assets/images/icons/ciphers/secure-note.svg'),
       listRouter: keys.NOTES,
@@ -122,7 +86,7 @@ export default {
       isCreate: true,
     },
     {
-      key: 'cards',
+      key: 'card',
       type: CipherType.Card,
       icon: require('../assets/images/icons/ciphers/card.svg'),
       listRouter: keys.CARDS,
@@ -132,7 +96,7 @@ export default {
       isCreate: true,
     },
     {
-      key: 'crypto_backups',
+      key: 'crypto_backup',
       type: CipherType.CryptoWallet,
       icon: require('../assets/images/icons/ciphers/crypto-wallet.svg'),
       listRouter: keys.CRYPTO_BACKUPS,
@@ -142,7 +106,7 @@ export default {
       isCreate: true,
     },
     {
-      key: 'identities',
+      key: 'identity',
       type: CipherType.Identity,
       icon: require('../assets/images/icons/ciphers/identity.svg'),
       listRouter: keys.IDENTITIES,
@@ -166,7 +130,19 @@ export default {
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
       title: <Trans i18nKey={''}/>,
+      name: <Trans i18nKey={'cipher.types.master_password'}/>,
       isCreate: false
+    },
+    {
+      key: 'trash',
+      type: null,
+      icon: require('../assets/images/icons/ciphers/trash.svg'),
+      listRouter: keys.TRASH,
+      detailRouter: keys.VAULT_DETAIL,
+      title: <Trans i18nKey={'sidebar.trash'}/>,
+      name: <Trans i18nKey={'cipher.types.trash'}/>,
+      isCreate: false,
+      isDeleted: true
     }
   ],
   WALLET_APPS: [
@@ -408,5 +384,46 @@ export default {
     { label: '10', value: '10' },
     { label: '11', value: '11' },
     { label: '12', value: '12' }
+  ],
+  INVITATION_STATUSES: [
+    {
+      value: STATUS.CONFIRMED,
+      label: <Trans i18nKey={'statuses.confirmed'}/>,
+      color: 'default'
+    },
+    {
+      value: STATUS.ACCEPTED,
+      label: <Trans i18nKey={'statuses.accepted'}/>,
+      color: 'processing'
+    },
+    {
+      value: STATUS.INVITED,
+      label: <Trans i18nKey={'statuses.invited'}/>,
+      color: 'warning'
+    },
+    {
+      value: STATUS.EXPIRED,
+      label: <Trans i18nKey={'statuses.expired'}/>,
+      color: 'error'
+    },
+    {
+      value: STATUS.SHARED,
+      label: <Trans i18nKey={'statuses.shared'}/>,
+      color: 'success'
+    },
+  ],
+  SHARE_PERMISSIONS: [
+    {
+      value: PERMISSION.ONLY_USE,
+      label: <Trans i18nKey={'permissions.only_use'}/>,
+    },
+    {
+      value: PERMISSION.EDIT,
+      label: <Trans i18nKey={'permissions.editable'}/>,
+    },
+    {
+      value: PERMISSION.VIEW,
+      label: <Trans i18nKey={'permissions.viewable'}/>,
+    },
   ]
 }

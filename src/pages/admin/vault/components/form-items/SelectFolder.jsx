@@ -12,7 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import commonServices from '../../../../../services/common';
+import common from '../../../../../utils/common';
 
 function SelectFolder(props) {
   const {
@@ -26,29 +26,19 @@ function SelectFolder(props) {
   const allFolders = useSelector((state) => state.folder.allFolders);
   const allCollections = useSelector((state) => state.collection.allCollections);
 
-  const [writeableCollections, setWriteableCollections] = useState([]);
-  const [nonWriteableCollections, setNonWriteableCollections] = useState([]);
-
-  useEffect(() => {
-    initData();
-  }, [])
-
-  const initData = async () => {
-    setWriteableCollections(await commonServices.get_writable_collections());
-    setNonWriteableCollections(await commonServices.get_writable_collections(true))
-  }
-
   const canChangeFolder = useMemo(() => {
+    const memberCollections = allCollections.filter((c) => !common.isOwner(c))
     if (folderId) {
-      return !nonWriteableCollections.some(f => f.id === folderId)
+      return !memberCollections.some(f => f.id === folderId)
     }
     return true
-  }, [nonWriteableCollections])
+  }, [allCollections])
 
   const options = useMemo(() => {
+    const ownerCollections = allCollections.filter((c) => common.isOwner(c))
     const result = [
       ...allFolders,
-      ...(isMove || canChangeFolder ? writeableCollections : allCollections)
+      ...((isMove || canChangeFolder) ? ownerCollections : allCollections)
     ].map((f) => ({ value: f.id, label: f.name }))
     return [
       {
@@ -57,7 +47,7 @@ function SelectFolder(props) {
       },
       ...result
     ]
-  }, [allFolders, writeableCollections, allCollections, canChangeFolder, isMove])
+  }, [allFolders, allCollections, canChangeFolder, isMove])
 
   return (
     <div className={props.className}>

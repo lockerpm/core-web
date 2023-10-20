@@ -5,17 +5,17 @@ const isProtectedCipher = (cipher) => {
   return cipher.type === CipherType.MasterPassword
 }
 
-const isOwner = (organizations, cipher) => {
+const isOwner = (cipher) => {
+  const organizations = global.store.getState().organization.allOrganizations;
   const organization = organizations.find((o) => o.id === cipher.organizationId)
   if (organization?.id) {
-    return [
-      global.constants.ACCOUNT_ROLE.OWNER,
-    ].includes(organization.type)
+    return [global.constants.ACCOUNT_ROLE.OWNER].includes(organization.type)
   }
   return true
 }
 
-const isChangeCipher = (organizations, cipher) => {
+const isChangeCipher = (cipher) => {
+  const organizations = global.store.getState().organization.allOrganizations;
   const organization = organizations.find((o) => o.id === cipher.organizationId)
   if (organization?.id) {
     return [
@@ -34,15 +34,16 @@ const isCipherShared = (organizationId) => {
   return share?.members?.length || share?.groups?.length
 }
 
-const isCipherSharedWithMe = (organizations, organizationId) => {
+const isCipherSharedWithMe = (organizationId) => {
+  const organizations = global.store.getState().organization.allOrganizations;
   const organization = organizations.find((o) => o.id === organizationId)
   return !!organization
 }
 
-const isCipherShareable = (organizations, cipher) => {
+const isCipherShareable = (cipher) => {
   return (
     !cipher.isDeleted &&
-    isOwner(organizations, cipher) &&
+    isOwner(cipher) &&
     !cipher.collectionIds.length &&
     !isProtectedCipher(cipher) &&
     cipher.type !== CipherType.TOTP

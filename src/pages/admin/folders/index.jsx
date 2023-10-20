@@ -16,7 +16,6 @@ import { useLocation } from 'react-router-dom';
 import common from "../../../utils/common";
 
 import global from "../../../config/global";
-import folderServices from "../../../services/folder";
 import commonServices from "../../../services/common";
 
 const Folders = (props) => {

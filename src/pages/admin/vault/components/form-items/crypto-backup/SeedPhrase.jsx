@@ -32,6 +32,9 @@ function SeedPhrase(props) {
 
   useEffect(() => {
     const words = value?.split(' ')
+    while (words.length < MIN_WORD_COUNT) {
+      words.push(' ')
+    }
     setNewValue(words)
   }, [value])
 
@@ -75,7 +78,7 @@ function SeedPhrase(props) {
           </Col>)
         }
         {
-          newValue.length < 24 && !disabled && <Col span={8}>
+          newValue.length < MAX_WORD_COUNT && !disabled && <Col span={8}>
             <Button
               className="w-full"
               type="primary"

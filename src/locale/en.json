@@ -45,7 +45,8 @@
     "last_ip_address": "Last IP Address",
     "read": "Read",
     "write": "Read & Write",
-    "items": "items",
+    "items": "Items",
+    "folders": "Folders",
     "description": "Description",
     "active": "Active",
     "inactive": "Inactive",
@@ -109,7 +110,7 @@
     "continue": "Continue",
     "new_item": "New item",
     "new_folder": "New folder"
-   },
+  },
   "placeholder": {
     "name": "Enter name",
     "search": "Enter search information...",
@@ -215,7 +216,9 @@
     "account": "Account",
     "import_export": "Import/Export",
     "security": "Security",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "shared_with_me": "Shared With Me",
+    "my_shared_items": "My Shared Items"
   },
   "auth_pages": {
     "username": "Email",
@@ -249,6 +252,7 @@
     }
   },
   "roles": {
+    "owner": "Owner",
     "admin": "Admin",
     "member": "Member"
   },
@@ -257,7 +261,14 @@
     "invited": "Invited",
     "accepted": "Accepted",
     "created": "Created",
-    "accessed": "Accessed"
+    "expired": "Expired",
+    "accessed": "Accessed",
+    "shared": "Shared"
+  },
+  "permissions": {
+    "editable": "Editable",
+    "viewable": "Viewable",
+    "only_use": "Only use"
   },
   "sort_options": {
     "sort_by": "Sort by",
@@ -428,31 +439,31 @@
       "add": "Add Item",
       "edit": "Edit item"
     },
-    "identities": {
+    "identity": {
       "title": "Fill online forms faster",
       "description": "Add Identity card so that Locker can autofill online forms on behalf of you.",
       "add": "Add Identity card",
       "edit": "Edit item"
     },
-    "crypto_backups": {
+    "crypto_backup": {
       "title": "Add your first crypto backup",
       "description": "Keep your crypto account/wallet in safe place.",
       "add": "Add crypto backup",
       "edit": "Edit crypto backup"
     },
-    "cards": {
+    "card": {
       "title": "Simplify online shopping",
       "description": "Add payment card to autofill when shopping online.",
       "add": "Add payment card",
       "edit": "Edit payment card"
     },
-    "notes": {
+    "note": {
       "title": "Free up your memory",
       "description": "Save Wi-Fi codes, office security alarm codes or your friends birthdays...",
       "add": "Add note",
       "edit": "Edit note"
     },
-    "passwords": {
+    "password": {
       "title": "Let's get started!",
       "description": "Add your passwords and access them on any device, anytime.",
       "add": "Add password",
@@ -469,6 +480,10 @@
       "description": "Add an folder to manage ciphers.",
       "add": "Add folder",
       "edit": "Rename folder"
+    },
+    "trash": {
+      "title": "There are no items to list.",
+      "description": "All items that are moved to the Trash can be restored until you permanently delete them "
     },
     "actions": {
       "go_to_web": "Go to website",
@@ -491,7 +506,10 @@
       "restore": "Restore",
       "permanently_delete": "Permanently delete",
       "delete": "Delete",
-      "share": "Share"
+      "share": "Share",
+      "leave": "Leave",
+      "accept": "Accept",
+      "decline": "Decline"
     },
     "move_to": {
       "title": "Move to",
@@ -515,7 +533,9 @@
       "note": "Note",
       "card": "Card",
       "crypto_backup": "Crypto Backup",
-      "identity": "Identity"
+      "identity": "Identity",
+      "master_password": "Master Password",
+      "otp": "OTP"
     },
     "custom_fields": {
       "title": "Custom fields",
@@ -582,6 +602,16 @@
     "otp": {
       "name": "OTP",
       "secret_key": "Secret key"
+    }
+  },
+  "shares": {
+    "encrypted_content": "Encrypted Content",
+    "share_type": "Permission",
+    "no_data": {
+      "title": "There are no items to list.",
+      "description": "Items shared between you and others will appear here",
+      "quick_share_description": "Send a link of the item to anyone, they don't need a Locker account to view it.",
+      "add": "Add Item"
     }
   }
 }  

@@ -10,13 +10,11 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import common from "../../../../utils/common";
-
 import {
-  NoData
+  NoData,
+  ImageIcon
 } from '../../../../components';
 
-import CipherIcon from "./table/CipherIcon";
 import { gray } from '@ant-design/colors';
 
 const NoCipher = (props) => {
@@ -24,11 +22,11 @@ const NoCipher = (props) => {
   const {
     className = '',
     loading = false,
-    cipherType = null,
     isEmpty = false,
+    isSharedWithMe = true,
+    isQuickShare = false,
     onCreate = () => {}
   } = props;
-
   return (
     <Spin spinning={loading} style={{ minHeight: 100 }}>
       {
@@ -37,25 +35,25 @@ const NoCipher = (props) => {
             isEmpty ? <div
               className={`text-center ${className}`}
             >
-              <CipherIcon
-                size={48}
-                type={cipherType.type}
-                typeKey={cipherType.key}
+              <ImageIcon
+                name="shares"
+                width={48}
+                height={48}
               />
               <p className="text-xl font-semibold mt-4">
-                {t(`inventory.${cipherType.key}.title`)}
+                {t('shares.no_data.title')}
               </p>
               <p className="text-sm mt-2" style={{ color: gray[1] }}>
-                {t(`inventory.${cipherType.key}.description`)}
+                {t(`shares.no_data.${isQuickShare ? 'quick_share_description' : 'description'}`)}
               </p>
               {
-                cipherType.key !== 'trash' && <Button
+                !isSharedWithMe && <Button
                   className="mt-6"
                   type="primary"
                   ghost
                   onClick={onCreate}
                 >
-                  {t(`inventory.${cipherType.key}.add`)}
+                  {t('shares.no_data.add')}
                 </Button>
               }
             </div> : <NoData />

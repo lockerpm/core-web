@@ -24,24 +24,32 @@ const Name = (props) => {
   const { t } = useTranslation()
   const { cipher = {} } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
-  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
+
+  const originCipher = useMemo(() => {
+    return allCiphers.find((d) => d.id === cipher.id)
+  }, [allCiphers, cipher])
+
+  const isCipherShare = useMemo(() => {
+    return originCipher.organizationId && (
+      common.isCipherShared(originCipher.organizationId)
+        || common.isCipherSharedWithMe(originCipher.organizationId)
+    )
+  }, [originCipher])
   return (
     <div className="flex items-center">
       <CipherIcon
-        // item={cipher}
-        type={cipher.type}
+        // item={originCipher}
+        type={originCipher.type}
       />
       <div className="ml-2 flex-1">
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}
-            label={cipher.name}
+            label={cipher.name || t('shares.encrypted_content')}
             routerName={global.keys.VAULT_DETAIL}
             routerParams={{ cipher_id: cipher.id }}
             icon={
-              cipher.organizationId && (
-                common.isCipherShared(cipher.organizationId) || common.isCipherSharedWithMe(allOrganizations, cipher.organizationId)
-              ) ? <ImageIcon
+              isCipherShare ? <ImageIcon
                 className="ml-1"
                 name={'shares-icon'}
                 title={t('inventory.shared')}
@@ -51,7 +59,7 @@ const Name = (props) => {
         </div>
         <TextCopy
           className="text-sm"
-          value={common.cipherSubtitle(allCiphers.find((d) => d.id === cipher.id))}
+          value={common.cipherSubtitle(originCipher)}
         />
       </div>
     </div>

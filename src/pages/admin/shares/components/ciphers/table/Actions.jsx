@@ -9,17 +9,16 @@ import {
 import {
   ExportOutlined,
   CopyOutlined,
-  ShareAltOutlined,
-  EllipsisOutlined
+  EllipsisOutlined,
 } from "@ant-design/icons";
 
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 
-import { CipherType } from "../../../../../core-js/src/enums";
+import { CipherType } from "../../../../../../core-js/src/enums";
 
-import global from "../../../../../config/global";
-import common from "../../../../../utils/common";
+import global from "../../../../../../config/global";
+import common from "../../../../../../utils/common";
 
 const Actions = (props) => {
   const { t } = useTranslation()
@@ -29,39 +28,38 @@ const Actions = (props) => {
     cipher = null,
     onMove = () => {},
     onUpdate = () => {},
-    onDelete = () => {},
-    onRestore = () => {},
-    onStopSharing = () => {},
-    onPermanentlyDelete = () => {}
+    onLeave = () => {},
   } = props;
 
-  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+
+  const isInvited = useMemo(() => {
+    return cipher.status === global.constants.STATUS.INVITED
+  }, [cipher])
+
+  const isAccepted = useMemo(() => {
+    return cipher.status === global.constants.STATUS.ACCEPTED
+  }, [cipher])
+
 
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === cipher.id) || cipher
   }, [allCiphers, cipher])
 
   const copyMenus = useMemo(() => {
-    switch (originCipher.type) {
-      case CipherType.MasterPassword:
-        return [
-          {
-            key: 'copy_password',
-            label: t('inventory.actions.copy_password'),
-            onClick: () => common.copyToClipboard(originCipher.login.password)
-          },
-        ]
+    switch (originCipher?.type) {
       case CipherType.Login:
         return [
           {
             key: 'copy_username',
             label: t('inventory.actions.copy_username'),
+            disabled: !originCipher.login.username,
             onClick: () => common.copyToClipboard(originCipher.login.username)
           },
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
+            disabled: !originCipher.login.password,
             onClick: () => common.copyToClipboard(originCipher.login.password)
           },
           {
@@ -115,35 +113,16 @@ const Actions = (props) => {
     }
   }, [originCipher])
 
-  const shareMenus = useMemo(() => {
-    if (originCipher.type === CipherType.MasterPassword) {
-      return []
-    }
-    return [
-      {
-        key: 'in_app_shares',
-        hide: !common.isCipherShareable(originCipher),
-        label: <Tooltip
-          title={t('inventory.actions.in_app_shares_note')}
-        >
-          <p>{t('inventory.actions.in_app_shares')}</p>
-        </Tooltip>
-      },
-      {
-        key: 'get_shareable_link',
-        hide: !common.isCipherQuickShareable(originCipher),
-        label: <Tooltip
-          title={t('inventory.actions.get_shareable_link_note')}
-        >
-          <p>{t('inventory.actions.get_shareable_link')}</p>
-        </Tooltip>
-      },
-    ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [originCipher, allOrganizations])
-
   const generalMenus = useMemo(() => {
-    if (originCipher.type === CipherType.MasterPassword ) {
-      return []
+    if (isAccepted) {
+      return [
+        {
+          key: 'leave',
+          label: t('inventory.actions.leave'),
+          danger: true,
+          onClick: () => {}
+        }
+      ]
     }
     if (!originCipher.isDeleted) {
       return [
@@ -164,54 +143,49 @@ const Actions = (props) => {
           onClick: () => onMove(originCipher)
         },
         {
-          key: 'stop_sharing',
-          hide: !(common.isOwner(originCipher) && originCipher.organizationId && !originCipher.collectionIds.length),
-          label: t('inventory.actions.stop_sharing'),
-          onClick: () => onStopSharing(originCipher)
-        },
-        {
           type: 'divider',
-          hide: !common.isOwner(originCipher),
         },
         {
-          key: 'delete',
-          hide: !common.isOwner(originCipher),
-          label: t('inventory.actions.delete'),
+          key: 'leave',
+          label: t('inventory.actions.leave'),
           danger: true,
-          onClick: () => onDelete([originCipher.id])
+          onClick: () => onLeave(originCipher)
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-    }
-    if (originCipher.isDeleted && common.isOwner(originCipher)) {
-      return [
-        {
-          key: 'restore',
-          label: t('inventory.actions.restore'),
-          onClick: () => onRestore([originCipher.id])
-        },
-        {
-          key: 'permanently_delete',
-          label: t('inventory.actions.permanently_delete'),
-          danger: true,
-          onClick: () => onPermanentlyDelete([originCipher.id])
-        },
-      ]
     }
     return []
   }, [originCipher])
 
   const role = useMemo(() => {
     return {
-      isGoToWeb: !originCipher.isDeleted && !!originCipher.login?.canLaunch,
-      isCopy: !originCipher.isDeleted && copyMenus.length > 0,
-      isShares: !originCipher.isDeleted && shareMenus.length > 0,
-      isGeneral: generalMenus.length > 0
+      isGoToWeb: !originCipher.isDeleted && !!originCipher.login?.canLaunch && !isInvited,
+      isCopy: !isInvited && !originCipher?.isDeleted && copyMenus.length > 0,
+      isGeneral: !isInvited && generalMenus.length > 0
     }
-  }, [originCipher, copyMenus, shareMenus])
+  }, [originCipher, copyMenus])
 
   return (
     <div className={className}>
       <Space size={[4, 4]}>
+        {
+          isInvited && <Button
+            type="primary"
+            rounded
+            size="small"
+            onClick={() => {}}
+          >
+            {t('inventory.actions.accept')}
+          </Button>
+        }
+        {
+          isInvited && <Button
+            rounded
+            size="small"
+            onClick={() => {}}
+          >
+            {t('inventory.actions.decline')}
+          </Button>
+        }
         {
           role.isGoToWeb && <Tooltip
             title={t('inventory.actions.go_to_web')}
@@ -233,18 +207,6 @@ const Actions = (props) => {
               type="text"
               size="small"
               icon={<CopyOutlined />}
-            />
-          </Dropdown>
-        }
-        {
-          role.isShares && <Dropdown
-            menu={{ items: shareMenus }}
-            trigger={['click']}
-          >
-            <Button
-              type="text"
-              size="small"
-              icon={<ShareAltOutlined />}
             />
           </Dropdown>
         }

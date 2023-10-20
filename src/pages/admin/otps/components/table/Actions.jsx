@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 
-const FolderActions = (props) => {
+const Actions = (props) => {
   const { t } = useTranslation()
   
   const {
@@ -64,4 +64,4 @@ const FolderActions = (props) => {
   );
 }
 
-export default FolderActions;
+export default Actions;

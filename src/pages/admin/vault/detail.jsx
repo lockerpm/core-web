@@ -32,7 +32,6 @@ const Vault = (props) => {
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
-  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
 
   const [loading, setLoading] = useState(true);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -149,7 +148,7 @@ const Vault = (props) => {
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
     return {
-      disabled: originCipher.type === CipherType.MasterPassword || !common.isOwner(allOrganizations, originCipher)
+      disabled: originCipher.type === CipherType.MasterPassword || !common.isOwner(originCipher)
     }
   }
 
@@ -157,7 +156,7 @@ const Vault = (props) => {
     if (keys) {
       const selectedCiphers = ciphers.filter((cipher) => keys.includes(cipher.id)
         && cipher.type !== CipherType.MasterPassword
-        && common.isOwner(allOrganizations, cipher)
+        && common.isOwner(cipher)
       )
       setSelectedRowKeys(selectedCiphers.map((cipher) => cipher.id))
     } else {

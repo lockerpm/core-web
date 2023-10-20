@@ -146,9 +146,14 @@ export default {
       element: 'Tools',
     },
     {
-      name: keys.SHARES,
-      path: '/shares',
-      element: 'shares',
+      name: keys.SHARED_WITH_ME,
+      path: '/shares/shared-with-me',
+      element: 'SharedWithMe',
+    },
+    {
+      name: keys.MY_SHARED_ITEMS,
+      path: '/shares/my-shared',
+      element: 'MyShared',
     },
     {
       name: keys.TRASH,

@@ -20,7 +20,8 @@ const CipherIcon = (props) => {
     className = '',
     size = 32,
     item = null,
-    type = null
+    type = null,
+    typeKey = null
   } = props;
   const [cipher, setCipher] = useState(item);
 
@@ -45,7 +46,7 @@ const CipherIcon = (props) => {
         }
       }
     }
-    const cipherType = common.cipherTypeInfo('type', type)
+    const cipherType = typeKey ? common.cipherTypeInfo('key', typeKey) : common.cipherTypeInfo('type', type)
     return logo || {
       src: cipherType.icon.default,
       alt: cipherType.key,

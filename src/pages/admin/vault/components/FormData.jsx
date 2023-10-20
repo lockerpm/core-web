@@ -46,6 +46,7 @@ function FormData(props) {
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [folderVisible, setFolderVisible] = useState(false);
+  const allCollections = useSelector((state) => state.collection.allCollections)
 
   const cipherTypes = global.constants.CIPHER_TYPES.filter((t) => t.isCreate)
   const type = Form.useWatch('type', form) || cipherType.type
@@ -89,7 +90,7 @@ function FormData(props) {
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,
       {
-        writeableCollections: await commonServices.get_writable_collections(),
+        writeableCollections: allCollections.filter((c) => common.isOwner(c)),
         isNewCipher: true,
         cloneMode
       }
@@ -112,8 +113,8 @@ function FormData(props) {
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,
       {
-        writeableCollections: await commonServices.get_writable_collections(),
-        nonWriteableCollections: await commonServices.get_writable_collections(true),
+        writeableCollections: allCollections.filter((c) => common.isOwner(c)),
+        nonWriteableCollections: allCollections.filter((c) => !common.isOwner(c)),
       }
     )
     const payload = {

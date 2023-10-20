@@ -20,6 +20,7 @@ import Account2FA from './admin/account/2fa'
 import Vault from './admin/vault'
 import Folders from './admin/folders'
 import Authenticator from './admin/otps'
+import SharedWithMe from './admin/shares/shared-with-me'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'
@@ -44,6 +45,7 @@ export default {
   Vault,
   Folders,
   Authenticator,
+  SharedWithMe,
 
   AdminErrorPage
 }

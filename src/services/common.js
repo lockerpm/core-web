@@ -101,9 +101,9 @@ async function get_all_organizations() {
   global.store.dispatch(storeActions.updateAllOrganizations(allOrganizations))
 }
 
-async function sync_data() {
+async function sync_data(syncing = true) {
   clear_data();
-  global.store.dispatch(storeActions.updateSyncing(true));
+  global.store.dispatch(storeActions.updateSyncing(syncing));
   await sync_profile();
   await Promise.all([
     sync_folders(),
@@ -143,22 +143,6 @@ function password_strength(password) {
   return global.jsCore.passwordGenerationService.passwordStrength(password, [
     'cystack'
   ]) || { score: 0}
-}
-
-async function get_writable_collections (nonWriteable = false) {
-  let collections = []
-  try {
-    collections = await global.jsCore.collectionService.getAllDecrypted()
-    const organizations = await global.jsCore.userService.getAllOrganizations()
-    collections = collections.filter(item => {
-      const isOwner = common.isOwner(organizations, item)
-      if (nonWriteable) {
-        return  !isOwner
-      }
-      return isOwner
-    })
-  } catch (error) {}
-  return collections
 }
 
 const sync_items = async (cipherIds) => {
@@ -301,7 +285,6 @@ export default {
   get_my_shares,
   get_invitations,
   password_strength,
-  get_writable_collections,
   sync_items,
   stop_sharing,
   stop_sharing_folder,

@@ -28,9 +28,8 @@ const Vault = (props) => {
 
   const currentPage = common.getRouterByLocation(location);
   const syncing = useSelector((state) => state.sync.syncing);
-  const isMobile = useSelector((state) => state.system.isMobile)
-  const allCiphers = useSelector((state) => state.cipher.allCiphers)
-  const allOrganizations = useSelector((state) => state.organization.allOrganizations)
+  const isMobile = useSelector((state) => state.system.isMobile);
+  const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
   const [loading, setLoading] = useState(true);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -49,18 +48,10 @@ const Vault = (props) => {
   });
 
   const cipherType = useMemo(() => {
-    if (currentPage.name === global.keys.TRASH) {
-      return {
-        type: null,
-        title: t('sidebar.trash'),
-        deleted: true,
-        listRouter: global.keys.TRASH,
-        detailRouter: global.keys.TRASH_DETAIL,
-      }
-    }
+    const type = common.cipherTypeInfo('listRouter', currentPage.name)
     return {
-      ...common.cipherTypeInfo('listRouter', currentPage.name),
-      deleted: false,
+      ...type,
+      isDeleted: type.isDeleted || false,
     }
   }, [JSON.stringify(currentPage)])
 
@@ -79,7 +70,7 @@ const Vault = (props) => {
 
   const isEmpty = useMemo(() => {
     return !allCiphers.find(
-      (c) => !c.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
+      (c) => c.isDeleted === cipherType.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
     )
   }, [allCiphers, JSON.stringify(cipherType)])
 
@@ -125,7 +116,7 @@ const Vault = (props) => {
   const fetchCiphers = async () => {
     setLoading(true);
     const result = await commonServices.list_ciphers({
-      deleted: cipherType.deleted,
+      deleted: cipherType.isDeleted,
       searchText: params.searchText,
       filters: filters
     }, allCiphers)
@@ -147,7 +138,7 @@ const Vault = (props) => {
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
     return {
-      disabled: originCipher.type === CipherType.MasterPassword || !common.isOwner(allOrganizations, originCipher)
+      disabled: originCipher.type === CipherType.MasterPassword || !common.isOwner(originCipher)
     }
   }
 
@@ -155,7 +146,7 @@ const Vault = (props) => {
     if (keys) {
       const selectedCiphers = ciphers.filter((cipher) => keys.includes(cipher.id)
         && cipher.type !== CipherType.MasterPassword
-        && common.isOwner(allOrganizations, cipher)
+        && common.isOwner(cipher)
       )
       setSelectedRowKeys(selectedCiphers.map((cipher) => cipher.id))
     } else {
@@ -288,7 +279,7 @@ const Vault = (props) => {
       {
         filteredData.total == 0 ? <NoCipher
           className={'mt-4'}
-          type={cipherType.type}
+          cipherType={cipherType}
           loading={syncing || loading}
           isEmpty={isEmpty}
           onCreate={() => handleOpenForm()}
