@@ -7,8 +7,6 @@ import {
 } from '@lockerpm/design';
 
 import {
-  ExportOutlined,
-  CopyOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
 
@@ -20,13 +18,12 @@ import { CipherType } from "../../../../../../core-js/src/enums";
 import global from "../../../../../../config/global";
 import common from "../../../../../../utils/common";
 
-const Actions = (props) => {
+const FolderActions = (props) => {
   const { t } = useTranslation()
   
   const {
     className = '',
     folder = null,
-    onMove = () => {},
     onUpdate = () => {},
     onLeave = () => {},
   } = props;
@@ -53,7 +50,7 @@ const Actions = (props) => {
           key: 'leave',
           label: t('inventory.actions.leave'),
           danger: true,
-          onClick: () => {}
+          onClick: () => onLeave(folder)
         }
       ]
     }
@@ -69,7 +66,7 @@ const Actions = (props) => {
           key: 'leave',
           label: t('inventory.actions.leave'),
           danger: true,
-          onClick: () => onLeave(originFolder)
+          onClick: () => onLeave(folder)
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
@@ -80,7 +77,7 @@ const Actions = (props) => {
     return {
       isGeneral: !isInvited && generalMenus.length > 0
     }
-  }, [originFolder, copyMenus])
+  }, [originFolder])
 
   return (
     <div className={className}>
@@ -121,4 +118,4 @@ const Actions = (props) => {
   );
 }
 
-export default Actions;
+export default FolderActions;

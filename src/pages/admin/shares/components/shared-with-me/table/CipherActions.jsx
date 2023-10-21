@@ -20,7 +20,7 @@ import { CipherType } from "../../../../../../core-js/src/enums";
 import global from "../../../../../../config/global";
 import common from "../../../../../../utils/common";
 
-const Actions = (props) => {
+const CipherActions = (props) => {
   const { t } = useTranslation()
   
   const {
@@ -150,7 +150,7 @@ const Actions = (props) => {
           key: 'leave',
           label: t('inventory.actions.leave'),
           danger: true,
-          onClick: () => onLeave(originCipher)
+          onClick: () => onLeave(cipher)
         },
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
@@ -226,4 +226,4 @@ const Actions = (props) => {
   );
 }
 
-export default Actions;
+export default CipherActions;

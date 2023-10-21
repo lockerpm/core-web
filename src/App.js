@@ -60,7 +60,7 @@ const App = () => {
     title: options.title || t('common.confirm'),
     icon: <ExclamationCircleOutlined />,
     content: options.content || t('common.delete_question'),
-    okText: options.okeText || t('button.delete'),
+    okText: options.okText || t('button.delete'),
     cancelText: t('button.cancel'),
     okButtonProps: options.okButtonProps || { danger: true },
     onOk: handleOK

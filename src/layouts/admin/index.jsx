@@ -73,6 +73,7 @@ function AdminLayout(props) {
 
   const handleSyncWsData = async (message) => {
     dispatch(storeActions.updateSyncing(true))
+    console.log(message);
     if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
       await commonServices.sync_profile(),
       await Promise.all([
@@ -81,13 +82,15 @@ function AdminLayout(props) {
       ])
       if (message.type === 'cipher_invitation') {
         await Promise.all([
-          await commonServices.get_invitations(),
-          await commonServices.get_my_shares()
+          commonServices.get_invitations(),
+          commonServices.get_my_shares()
         ])
       }
-    }
-    if (message.type.includes('cipher')) {
+    } else if (message.type.includes('cipher')) {
       if (['cipher_share', 'cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
+        if (message.type === 'cipher_update') {
+          await commonServices.sync_profile();
+        }
         if (message.data.id) {
           await commonServices.sync_items([message.data.id])
         }
@@ -99,29 +102,28 @@ function AdminLayout(props) {
       } else {
         await commonServices.sync_data(false);
       }
-      await commonServices.get_all_ciphers();
     } else if (message.type.includes('folder')) {
       if (message.type.includes('update')) {
         const res = await syncServices.sync_folder(message.data.id);
         await global.jsCore.folderService.upsert([res])
+        await commonServices.get_all_folders();
       } else if (message.type.includes('delete')) {
         await global.jsCore.folderService.delete(message.data.ids)
       } else {
         await commonServices.sync_data(false);
       }
-      await commonServices.get_all_folders();
     } else if (message.type.includes('collection')) {
       if (message.type.includes('update')) {
         if (message.data.id) {
           const res = await syncServices.sync_collection(message.data.id);
           await global.jsCore.collectionService.upsert([res])
+          await commonServices.get_all_collections();
         }
       } else if (message.type.includes('delete')) {
         await global.jsCore.collectionService.delete(message.data.ids)
       } else {
         await commonServices.sync_data(false);
       }
-      await commonServices.get_all_collections();
     }
     dispatch(storeActions.updateSyncing(false))
   }

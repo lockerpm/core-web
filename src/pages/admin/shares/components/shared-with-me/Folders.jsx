@@ -43,12 +43,14 @@ const ShareFolders = (props) => {
           loading={loading}
           data={filteredData.result}
           params={params}
+          isFolder={true}
           onUpdate={handleOpenForm}
         /> : <TableData
           className="mt-4"
           loading={loading}
           data={filteredData.result}
           params={params}
+          isFolder={true}
           onUpdate={handleOpenForm}
         />
       }
