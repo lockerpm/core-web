@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import {
   Collapse,
-  Checkbox,
 } from '@lockerpm/design';
 
 import { } from 'react-redux';

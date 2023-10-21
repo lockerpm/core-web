@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import {
   Collapse,
+  Tag
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
@@ -89,7 +90,7 @@ const BoxData = (props) => {
               </p>
             </div>
           }
-          <div className="flex items-center">
+          <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
             <TextCopy
               value={record.revisionDate ? common.timeFromNow(record.revisionDate) : common.timeFromNow(record.access_time)}
