@@ -13,9 +13,9 @@ import {
 import {
 } from "@ant-design/icons";
 
-import CipherName from "../../../../vault/components/table/Name";
+import Name from "../../../../vault/components/table/Name";
 
-const Name = (props) => {
+const CipherName = (props) => {
   const { t } = useTranslation()
   const { cipher = {} } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -27,7 +27,7 @@ const Name = (props) => {
   return (
     <div className="flex items-center">
       {
-        originCipher ? <CipherName cipher={cipher}/> : <div className="flex items-center">
+        originCipher ? <Name cipher={cipher}/> : <div className="flex items-center">
           <ImageIcon
             name={'any-icon'}
             width={32}
@@ -43,4 +43,4 @@ const Name = (props) => {
   );
 }
 
-export default Name;
+export default CipherName;

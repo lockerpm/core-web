@@ -13,21 +13,21 @@ import {
 import {
 } from "@ant-design/icons";
 
-import FolderName from "../../../../folders/components/table/Name";
+import Name from "../../../../folders/components/table/Name";
 
-const Name = (props) => {
+const FolderName = (props) => {
   const { t } = useTranslation()
   const { folder = {} } = props;
-  const allFolders = useSelector((state) => state.folder.allFolders)
+  const allCollections = useSelector((state) => state.collection.allCollections)
 
-  const originFolder = useMemo(() => {
-    return allFolders.find((d) => d.id === folder.id)
-  }, [allFolders, folder])
+  const originCollection = useMemo(() => {
+    return allCollections.find((d) => d.id === folder.id)
+  }, [allCollections, folder])
 
   return (
     <div className="flex items-center">
       {
-        originFolder ? <FolderName item={folder}/> : <div className="flex items-center">
+        originCollection ? <Name item={originCollection}/> : <div className="flex items-center">
           <ImageIcon
             name={'any-icon'}
             width={32}
@@ -43,4 +43,4 @@ const Name = (props) => {
   );
 }
 
-export default Name;
+export default FolderName;

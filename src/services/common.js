@@ -92,7 +92,7 @@ async function get_all_folders() {
 
 async function get_all_collections() {
   const result = await global.jsCore.collectionService.getAllDecrypted() || []
-  const allCollections = result.filter(f => f.id)
+  const allCollections = result.filter(f => f.id).map((c) => ({ ...c, isCollection: true }))
   global.store.dispatch(storeActions.updateAllCollections(allCollections))
 }
 

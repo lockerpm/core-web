@@ -10,8 +10,10 @@ import {
   TextCopy,
 } from '../../../../../components';
 
-import Name from "./table/Name";
-import Actions from "./table/Actions";
+import CipherName from "./table/CipherName";
+import CipherActions from "./table/CipherActions";
+import FolderName from "./table/FolderName";
+import FolderActions from "./table/FolderActions";
 
 import common from "../../../../../utils/common";
 
@@ -26,6 +28,7 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
+    isFolder = false,
     onMove = () => {},
     onUpdate = () => {},
     onLeave = () => {},
@@ -52,15 +55,24 @@ const BoxData = (props) => {
             className="flex align-items justify-between"
           >
             <div className="flex align-items">
-              <Name cipher={record}/>
+              {
+                isFolder ? <FolderName folder={record}/> : <CipherName cipher={record}/>
+              }
             </div>
-            <Actions
-              cipher={record}
-              onMove={onMove}
-              onUpdate={onUpdate}
-              onLeave={onLeave}
-              onUpdateStatus={onUpdateStatus}
-            />
+            {
+              isFolder ? <FolderActions
+                folder={record}
+                onUpdate={onUpdate}
+                onLeave={onLeave}
+                onUpdateStatus={onUpdateStatus}
+              /> : <CipherActions
+                cipher={record}
+                onMove={onMove}
+                onUpdate={onUpdate}
+                onLeave={onLeave}
+                onUpdateStatus={onUpdateStatus}
+              />
+            }
           </div>}
         >
           <div className="flex items-center mb-2">
@@ -69,12 +81,14 @@ const BoxData = (props) => {
               {record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
             </p>
           </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.type')}:</p>
-            <p>
-              {common.cipherTypeInfo('type', record.cipher_type || record.type).name}
-            </p>
-          </div>
+          {
+            !isFolder && <div className="flex items-center mb-2">
+              <p className="font-semibold mr-2">{t('common.type')}:</p>
+              <p>
+                {common.cipherTypeInfo('type', record.cipher_type || record.type).name}
+              </p>
+            </div>
+          }
           <div className="flex items-center">
             <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
             <TextCopy

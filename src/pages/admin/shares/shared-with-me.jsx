@@ -5,7 +5,8 @@ import { AdminHeader } from "../../../components";
 
 import NoCipher from "./components/NoCipher";
 import Filter from "./components/Filter";
-import ShareCiphers from "./components/ciphers";
+import ShareCiphers from "./components/shared-with-me/Ciphers";
+import ShareFolders from "./components/shared-with-me/Folders";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -35,7 +36,7 @@ const SharedWithMe = (props) => {
   const allCollections = useSelector((state) => state.collection.allCollections)
   const invitations = useSelector((state) => state.share.invitations)
 
-  const [menuType, setMenuType] = useState(menuTypes.CIPHERS);
+  const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
   const [callingAPI, setCallingAPI] = useState(false);
   const [params, setParams] = useState({
     page: 1,
@@ -70,7 +71,7 @@ const SharedWithMe = (props) => {
             : (!c.hidePasswords ? global.constants.PERMISSION.VIEW : global.constants.PERMISSION.ONLY_USE)
         }))
     ]
-  }, [allCiphers, allCollections, invitations])
+  }, [allCiphers, allCollections, invitations, menuType])
 
   const isEmpty = useMemo(() => {
     return items.length === 0
@@ -89,7 +90,10 @@ const SharedWithMe = (props) => {
       items,
       params,
       params.orderField,
-      params.orderDirection
+      params.orderDirection,
+      [
+        (f) => params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
+      ]
     )
   }, [items, JSON.stringify(params)])
 
@@ -161,7 +165,10 @@ const SharedWithMe = (props) => {
           loading={syncing}
           menuType={menuType}
           menuTypes={menuTypes}
-          setMenuType={setMenuType}
+          setMenuType={(v) => {
+            setMenuType(v);
+            global.navigate(currentPage.name, {}, { menu_type: v });
+          }}
           setParams={(v) => setParams({ ...v, page: 1 })}
         />
       }
@@ -173,14 +180,28 @@ const SharedWithMe = (props) => {
         />
       }
       {
-        menuType === menuTypes.CIPHERS && <ShareCiphers
-          loading={syncing}
-          params={params}
-          filteredData={filteredData}
-          onUpdateStatus={handleUpdateInvitation}
-          onLeave={handleLeaveShare}
-        />
+        filteredData.total > 0 && <>
+          {
+            menuType === menuTypes.CIPHERS && <ShareCiphers
+              loading={syncing}
+              params={params}
+              filteredData={filteredData}
+              onUpdateStatus={handleUpdateInvitation}
+              onLeave={handleLeaveShare}
+            />
+          }
+          {
+            menuType === menuTypes.FOLDERS && <ShareFolders
+              loading={syncing}
+              params={params}
+              filteredData={filteredData}
+              onUpdateStatus={handleUpdateInvitation}
+              onLeave={handleLeaveShare}
+            />
+          }
+        </>
       }
+      
       {
         filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
           params={params}

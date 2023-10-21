@@ -55,7 +55,7 @@ const Folders = (props) => {
   const filteredData = useMemo(() => {
     return common.paginationAndSortData(
       [
-        ...allCollections.map((c) => ({ ...c, isCollection: true })),
+        ...allCollections,
         ...allFolders
       ],
       params,
