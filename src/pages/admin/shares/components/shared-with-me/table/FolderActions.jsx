@@ -13,8 +13,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 
-import { CipherType } from "../../../../../../core-js/src/enums";
-
 import global from "../../../../../../config/global";
 import common from "../../../../../../utils/common";
 

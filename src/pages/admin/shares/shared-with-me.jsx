@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
-import { } from "@ant-design/icons";
+import {
+  LockOutlined,
+  FolderOutlined
+} from "@ant-design/icons";
 import { AdminHeader } from "../../../components";
 
-import NoCipher from "./components/NoCipher";
-import Filter from "./components/Filter";
+import MenuTabs from "./components/MenuTabs";
+import NoItem from "./components/NoItem";
+import Filter from "../vault/components/Filter";
 import ShareCiphers from "./components/shared-with-me/Ciphers";
 import ShareFolders from "./components/shared-with-me/Folders";
 
@@ -92,7 +96,7 @@ const SharedWithMe = (props) => {
       params.orderField,
       params.orderDirection,
       [
-        (f) => params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
+        (f) => params.searchText ? f.name?.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
       ]
     )
   }, [items, JSON.stringify(params)])
@@ -112,6 +116,12 @@ const SharedWithMe = (props) => {
       size
     })
   };
+  
+  const handleChangeMenuType = (v) => {
+    setMenuType(v);
+    setParams({ ...params, page: 1 })
+    global.navigate(currentPage.name, {}, { menu_type: v });
+  }
 
   const handleUpdateInvitation = async (item, status) => {
     await sharingServices.update_sharing_invitation(item.id, { status }).then(async () => {
@@ -158,22 +168,32 @@ const SharedWithMe = (props) => {
         total={filteredData.total}
         actions={[]}
       />
+      <MenuTabs
+        menu={menuType}
+        menus={[
+          {
+            key: menuTypes.CIPHERS,
+            label: t('common.items'),
+            icon: <LockOutlined />
+          },
+          {
+            key: menuTypes.FOLDERS,
+            label: t('common.folders'),
+            icon: <FolderOutlined />
+          }
+        ]}
+        onChange={(v) => handleChangeMenuType(v)}
+      />
       {
         !isEmpty && <Filter
           className={'mt-2'}
           params={params}
           loading={syncing}
-          menuType={menuType}
-          menuTypes={menuTypes}
-          setMenuType={(v) => {
-            setMenuType(v);
-            global.navigate(currentPage.name, {}, { menu_type: v });
-          }}
           setParams={(v) => setParams({ ...v, page: 1 })}
         />
       }
       {
-        filteredData.total == 0 && <NoCipher
+        filteredData.total == 0 && <NoItem
           className={'mt-4'}
           loading={syncing}
           isEmpty={isEmpty}

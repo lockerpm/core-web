@@ -21,6 +21,7 @@ import Vault from './admin/vault'
 import Folders from './admin/folders'
 import Authenticator from './admin/otps'
 import SharedWithMe from './admin/shares/shared-with-me'
+import MySharedItems from './admin/shares/my-shared-items'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'
@@ -46,6 +47,7 @@ export default {
   Folders,
   Authenticator,
   SharedWithMe,
+  MySharedItems,
 
   AdminErrorPage
 }

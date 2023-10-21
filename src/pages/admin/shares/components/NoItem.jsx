@@ -24,7 +24,7 @@ const NoCipher = (props) => {
     loading = false,
     isEmpty = false,
     isSharedWithMe = true,
-    isQuickShare = false,
+    isQuickShares = false,
     onCreate = () => {}
   } = props;
   return (
@@ -44,7 +44,7 @@ const NoCipher = (props) => {
                 {t('shares.no_data.title')}
               </p>
               <p className="text-sm mt-2" style={{ color: gray[1] }}>
-                {t(`shares.no_data.${isQuickShare ? 'quick_share_description' : 'description'}`)}
+                {t(`shares.no_data.${isQuickShares ? 'quick_share_description' : 'description'}`)}
               </p>
               {
                 !isSharedWithMe && <Button

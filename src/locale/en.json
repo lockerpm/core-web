@@ -109,7 +109,8 @@
     "select": "Select",
     "continue": "Continue",
     "new_item": "New item",
-    "new_folder": "New folder"
+    "new_folder": "New folder",
+    "new_share": "New share"
   },
   "placeholder": {
     "name": "Enter name",
@@ -614,11 +615,16 @@
     "encrypted_content": "Encrypted Content",
     "share_type": "Permission",
     "leave_question": "Are you sure you want to leave this share group?",
+    "in_app_shares": {
+      "items": "In-app shared Items",
+      "folders": "In-app shared Folders",
+      "quick_shares": "Quick shared Items"
+    },
     "no_data": {
       "title": "There are no items to list.",
       "description": "Items shared between you and others will appear here",
       "quick_share_description": "Send a link of the item to anyone, they don't need a Locker account to view it.",
-      "add": "Add Item"
+      "add": "New Share"
     }
   }
 }  

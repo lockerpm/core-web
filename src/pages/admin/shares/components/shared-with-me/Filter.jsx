@@ -18,7 +18,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from "../../../../config/global";
+import global from "../../../../../config/global";
 
 const Filter = (props) => {
   const { t } = useTranslation()

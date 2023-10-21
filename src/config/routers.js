@@ -152,8 +152,8 @@ export default {
     },
     {
       name: keys.MY_SHARED_ITEMS,
-      path: '/shares/my-shared',
-      element: 'MyShared',
+      path: '/shares/my-shared-items',
+      element: 'MySharedItems',
     },
     {
       name: keys.TRASH,
