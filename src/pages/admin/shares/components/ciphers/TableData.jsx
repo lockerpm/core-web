@@ -28,7 +28,8 @@ const TableData = (props) => {
     params = {},
     onMove = () => {},
     onUpdate = () => {},
-    onStopSharing = () => {},
+    onLeave = () => {},
+    onUpdateStatus = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -113,7 +114,8 @@ const TableData = (props) => {
             cipher={record}
             onMove={onMove}
             onUpdate={onUpdate}
-            onStopSharing={onStopSharing}
+            onLeave={onLeave}
+            onUpdateStatus={onUpdateStatus}
           />
         ),
       },

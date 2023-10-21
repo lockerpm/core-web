@@ -79,11 +79,13 @@ const Lock = () => {
       }).then(async (response) => {
         await coreServices.unlock({...response, password: values.masterPassword, username: userInfo.email })
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
+        await Promise.all([
+          commonServices.sync_data(),
+          commonServices.get_quick_shares(),
+          commonServices.get_my_shares(),
+          commonServices.get_invitations(),
+        ])
         navigate(returnUrl);
-        await commonServices.sync_data();
-        await commonServices.get_quick_shares();
-        await commonServices.get_my_shares();
-        await commonServices.get_invitations();
       }).catch((error) => {
         global.pushError(error)
       });

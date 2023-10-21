@@ -269,6 +269,17 @@ async function delete_folder(folder) {
   await get_all_folders();
 }
 
+async function leave_share(item) {
+  await sharingServices.leave_share(item.organizationId || item?.team?.id)
+  if (item.ciphers) {
+    await global.jsCore.cipherService.delete(item.ciphers.map(c => c.id))
+    await global.jsCore.collectionService.delete(item.id)
+  } else {
+    await global.jsCore.cipherService.delete([item.id])
+  }
+  await get_all_ciphers();
+}
+
 export default {
   clear_data,
   sync_data,
@@ -289,5 +300,6 @@ export default {
   stop_sharing,
   stop_sharing_folder,
   delete_collection,
-  delete_folder
+  delete_folder,
+  leave_share
 }

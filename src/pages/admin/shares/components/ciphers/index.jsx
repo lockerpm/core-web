@@ -23,7 +23,9 @@ const ShareCiphers = (props) => {
   const {
     loading = false,
     params = {},
-    filteredData = []
+    filteredData = [],
+    onLeave = () => {},
+    onUpdateStatus = () => {}
   } = props
 
   const currentPage = common.getRouterByLocation(location);
@@ -58,6 +60,8 @@ const ShareCiphers = (props) => {
           params={params}
           onMove={handleMoveForm}
           onUpdate={handleOpenForm}
+          onLeave={onLeave}
+          onUpdateStatus={onUpdateStatus}
         /> : <TableData
           className="mt-4"
           loading={loading}
@@ -65,6 +69,8 @@ const ShareCiphers = (props) => {
           params={params}
           onMove={handleMoveForm}
           onUpdate={handleOpenForm}
+          onLeave={onLeave}
+          onUpdateStatus={onUpdateStatus}
         />
       }
       <FormData

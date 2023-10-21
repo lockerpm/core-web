@@ -72,14 +72,19 @@ function AdminLayout(props) {
   });
 
   const handleSyncWsData = async (message) => {
-    console.log(message);
     dispatch(storeActions.updateSyncing(true))
-    if (['cipher_share', 'collection_update'].includes(message.type)) {
+    if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
       await commonServices.sync_profile(),
       await Promise.all([
         commonServices.sync_collections(),
         commonServices.sync_folders(),
       ])
+      if (message.type === 'cipher_invitation') {
+        await Promise.all([
+          await commonServices.get_invitations(),
+          await commonServices.get_my_shares()
+        ])
+      }
     }
     if (message.type.includes('cipher')) {
       if (['cipher_share', 'cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {

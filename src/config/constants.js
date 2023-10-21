@@ -21,11 +21,17 @@ const PERMISSION = {
   ONLY_USE: 'Only Use'
 }
 
+const STATUS_ACTION = {
+  ACCEPT: 'accept',
+  REJECT: 'reject',
+}
+
 const STATUS = {
   CONFIRMED: 'confirmed',
   ACCEPTED: 'accepted',
   INVITED: 'invited',
   EXPIRED: 'expired',
+  REJECT: 'rejected',
   SHARED: null
 }
 
@@ -34,6 +40,7 @@ export default {
   ACCOUNT_ROLE,
   PERMISSION,
   STATUS,
+  STATUS_ACTION,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
@@ -404,6 +411,11 @@ export default {
     {
       value: STATUS.EXPIRED,
       label: <Trans i18nKey={'statuses.expired'}/>,
+      color: 'error'
+    },
+    {
+      value: STATUS.REJECT,
+      label: <Trans i18nKey={'statuses.reject'}/>,
       color: 'error'
     },
     {

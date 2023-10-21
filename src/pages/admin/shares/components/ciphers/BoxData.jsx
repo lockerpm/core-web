@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import {
   Collapse,
-  Checkbox,
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
@@ -27,15 +26,10 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
-    selectedRowKeys = [],
     onMove = () => {},
     onUpdate = () => {},
-    onDelete = () => {},
-    onRestore = () => {},
-    onStopSharing = () => {},
-    onPermanentlyDelete = () => {},
-    selectionChange = () => {},
-    getCheckboxProps = () => {}
+    onLeave = () => {},
+    onUpdateStatus = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -54,41 +48,59 @@ const BoxData = (props) => {
       {
         boxData.map((record) => <Collapse.Panel
           key={record.id}
-          className={`${selectedRowKeys.includes(record.id) ? 'checked' : ''}`}
           header={<div
             className="flex align-items justify-between"
           >
             <div className="flex align-items">
-              <Checkbox
-                className="mr-2"
-                checked={selectedRowKeys.includes(record.id)}
-                disabled={getCheckboxProps(record)?.disabled}
-                onChange={(e) => selectionChange(null, record.id, e.target.checked)}
-              />
               <Name cipher={record}/>
             </div>
             <Actions
               cipher={record}
               onMove={onMove}
               onUpdate={onUpdate}
-              onDelete={onDelete}
-              onRestore={onRestore}
-              onStopSharing={onStopSharing}
-              onPermanentlyDelete={onPermanentlyDelete}
+              onLeave={onLeave}
+              onUpdateStatus={onUpdateStatus}
             />
           </div>}
         >
           <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.created_time')}:</p>
-            <TextCopy
-              value={common.timeFromNow(record.creationDate)}
-            />
+            <p className="font-semibold mr-2">{t('roles.owner')}:</p>
+            <p>
+              {record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
+            </p>
+          </div>
+          <div className="flex items-center mb-2">
+            <p className="font-semibold mr-2">{t('common.type')}:</p>
+            <p>
+              {common.cipherTypeInfo('type', record.cipher_type || record.type).name}
+            </p>
           </div>
           <div className="flex items-center">
             <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
             <TextCopy
-              value={common.timeFromNow(record.revisionDate)}
+              value={record.revisionDate ? common.timeFromNow(record.revisionDate) : common.timeFromNow(record.access_time)}
+              align={'center'}
             />
+          </div>
+          <div className="flex items-center mb-2">
+            <p className="font-semibold mr-2">{t('common.status')}:</p>
+            {
+              (() => {
+                const status = common.getInvitationStatus(record.status)
+                return <Tag color={status.color}>
+                  {status.label}
+                </Tag>
+              })()
+            }
+          </div>
+          <div className="flex items-center mb-2">
+            <p className="font-semibold mr-2">{t('shares.share_type')}:</p>
+            {
+              (() => {
+                const permission = common.getSharePermission(record.share_type)
+                return permission.label
+              })()
+            }
           </div>
         </Collapse.Panel>)
       }

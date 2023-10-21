@@ -15,6 +15,7 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 
 import commonServices from "../../../services/common";
+import sharingServices from "../../../services/sharing";
 
 const menuTypes = {
   CIPHERS: 'ciphers',
@@ -35,6 +36,7 @@ const SharedWithMe = (props) => {
   const invitations = useSelector((state) => state.share.invitations)
 
   const [menuType, setMenuType] = useState(menuTypes.CIPHERS);
+  const [callingAPI, setCallingAPI] = useState(false);
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -107,6 +109,41 @@ const SharedWithMe = (props) => {
     })
   };
 
+  const handleUpdateInvitation = async (item, status) => {
+    await sharingServices.update_sharing_invitation(item.id, { status }).then(async () => {
+      if (status === global.constants.STATUS_ACTION.ACCEPT) {
+        global.pushSuccess(t('notification.success.sharing.accepted'))
+      } else {
+        global.pushSuccess(t('notification.success.sharing.rejected'))
+      }
+      await commonServices.get_invitations();
+    });
+  }
+
+  const handleLeaveShare = async (item) => {
+    global.confirmDelete(async () => {
+      setCallingAPI(true)
+      try {
+        await commonServices.leave_share(item)
+        global.pushSuccess(t('notification.success.sharing.leave_group_success'));
+        if (filteredData.length === 1 && params.page > 1) {
+          setParams({
+            ...params,
+            page: params.page - 1
+          })
+        }
+      } catch (error) {
+        global.pushError(error)
+      }
+      setCallingAPI(false)
+    }, {
+      title: t('common.warning'),
+      content: t('shares.leave_question'),
+      okText: t('button.ok'),
+      okButtonProps: { danger: false },
+    });
+  }
+
   return (
     <div
       className="vault layout-content"
@@ -140,6 +177,8 @@ const SharedWithMe = (props) => {
           loading={syncing}
           params={params}
           filteredData={filteredData}
+          onUpdateStatus={handleUpdateInvitation}
+          onLeave={handleLeaveShare}
         />
       }
       {

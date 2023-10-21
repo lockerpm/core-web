@@ -29,6 +29,7 @@ const Actions = (props) => {
     onMove = () => {},
     onUpdate = () => {},
     onLeave = () => {},
+    onUpdateStatus = () => {}
   } = props;
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -120,7 +121,7 @@ const Actions = (props) => {
           key: 'leave',
           label: t('inventory.actions.leave'),
           danger: true,
-          onClick: () => {}
+          onClick: () => onLeave(originCipher)
         }
       ]
     }
@@ -170,18 +171,16 @@ const Actions = (props) => {
         {
           isInvited && <Button
             type="primary"
-            rounded
             size="small"
-            onClick={() => {}}
+            onClick={() => onUpdateStatus(cipher, global.constants.STATUS_ACTION.ACCEPT)}
           >
             {t('inventory.actions.accept')}
           </Button>
         }
         {
           isInvited && <Button
-            rounded
             size="small"
-            onClick={() => {}}
+            onClick={() => onUpdateStatus(cipher, global.constants.STATUS_ACTION.REJECT)}
           >
             {t('inventory.actions.decline')}
           </Button>

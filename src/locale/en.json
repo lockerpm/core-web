@@ -185,6 +185,11 @@
         "created": "The new folder has been added.",
         "updated": "The folder information has been updated.",
         "deleted": "The folder has been deleted."
+      },
+      "sharing": {
+        "accepted": "Invitation Accepted",
+        "rejected": "Invitation Rejected",
+        "leave_group_success": "Leave share group successfully"
       }
     },
     "warning": {
@@ -263,7 +268,8 @@
     "created": "Created",
     "expired": "Expired",
     "accessed": "Accessed",
-    "shared": "Shared"
+    "shared": "Shared",
+    "rejected": "Rejected"
   },
   "permissions": {
     "editable": "Editable",
@@ -607,6 +613,7 @@
   "shares": {
     "encrypted_content": "Encrypted Content",
     "share_type": "Permission",
+    "leave_question": "Are you sure you want to leave this share group?",
     "no_data": {
       "title": "There are no items to list.",
       "description": "Items shared between you and others will appear here",

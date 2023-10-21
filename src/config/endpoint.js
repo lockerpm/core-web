@@ -34,7 +34,7 @@ export default {
   SHARING_MY_SHARE: `${FLAT_FORM}/sharing/my_share`,
   SHARING_PUBLIC_KEY: `${FLAT_FORM}/sharing/public_key`,
   SHARING_INVITATIONS: `${FLAT_FORM}/sharing/invitations`,
-  SHARING_INVITATION: `${FLAT_FORM}/sharing/invitations/:cipher_id`,
+  SHARING_INVITATION: `${FLAT_FORM}/sharing/invitations/:invitation_id`,
   SHARING_STOP: `${FLAT_FORM}/sharing/:organization_id/stop`,
   SHARING_LEAVE: `${FLAT_FORM}/sharing/:organization_id/leave`,
   SHARING_MEMBERS: `${FLAT_FORM}/sharing/:organization_id/members`,
