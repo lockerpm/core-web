@@ -7,6 +7,8 @@ const share = (state = initial.share, action) => {
     return { ...state, myShares: action.payload }
   case actionTypes.SET_INVITATIONS:
     return { ...state, invitations: action.payload }
+  case actionTypes.SET_SENDS:
+    return { ...state, sends: action.payload }
   default:
     return state
   }

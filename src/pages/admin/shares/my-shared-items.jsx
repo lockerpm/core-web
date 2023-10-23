@@ -12,6 +12,7 @@ import MenuTabs from "./components/MenuTabs";
 import NoItem from "./components/NoItem";
 import Filter from "../vault/components/Filter";
 import InAppShares from "./components/in-app-shares/index";
+import QuickShares from "./components/quick-shares";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -19,9 +20,6 @@ import { useLocation } from 'react-router-dom';
 
 import common from "../../../utils/common";
 import global from "../../../config/global";
-
-import commonServices from "../../../services/common";
-import sharingServices from "../../../services/sharing";
 
 import { CipherType } from "../../../core-js/src/enums";
 
@@ -43,6 +41,7 @@ const MySharedItems = (props) => {
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
   const allCollections = useSelector((state) => state.collection.allCollections)
   const invitations = useSelector((state) => state.share.invitations)
+  const sends = useSelector((state) => state.share.sends)
 
   const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -66,8 +65,10 @@ const MySharedItems = (props) => {
         .filter((c) => c.id)
         .filter((c) => common.isOwner(c))
     }
-    return []
-  }, [allCiphers, allCollections, invitations, menuType])
+    return sends.map((s) => ({
+      ...s,
+    }))
+  }, [allCiphers, allCollections, invitations, sends, menuType])
 
   const isEmpty = useMemo(() => {
     return items.length === 0
@@ -111,7 +112,7 @@ const MySharedItems = (props) => {
 
   const handleChangeMenuType = (v) => {
     setMenuType(v);
-    setParams({ ...params, page: 1 })
+    setParams({ ...params, page: 1, searchText: null })
     global.navigate(currentPage.name, {}, { menu_type: v });
   }
 
@@ -157,7 +158,7 @@ const MySharedItems = (props) => {
       />
       {
         !isEmpty && <Filter
-          className={'mt-2'}
+          key={menuType}
           params={params}
           loading={syncing}
           menuType={menuType}
@@ -191,7 +192,12 @@ const MySharedItems = (props) => {
             />
           }
           {
-            menuType === menuTypes.QUICK_SHARES && <></>
+            menuType === menuTypes.QUICK_SHARES && <QuickShares
+              loading={syncing}
+              params={params}
+              filteredData={filteredData}
+              onStopSharing={() => {}}
+            />
           }
         </>
       }

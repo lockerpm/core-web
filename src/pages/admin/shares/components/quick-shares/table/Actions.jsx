@@ -11,6 +11,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
+import common from "../../../../../../utils/common";
 
 const Actions = (props) => {
   const { t } = useTranslation()
@@ -18,19 +19,15 @@ const Actions = (props) => {
   const {
     className = '',
     item = null,
-    onUpdate = () => {},
     onStopSharing = () => {},
   } = props;
-
-  const allFolders = useSelector((state) => state.folder.allFolders)
-  const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const generalMenus = useMemo(() => {
     return [
       {
-        key: 'edit',
-        label: t('inventory.actions.edit'),
-        onClick: () => onUpdate(item)
+        key: 'copy',
+        label: t('inventory.actions.copy_link'),
+        onClick: () => common.copyToClipboard(common.getPublicShareUrl(item))
       },
       {
         key: 'stop_sharing',

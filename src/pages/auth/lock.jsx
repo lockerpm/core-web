@@ -81,10 +81,10 @@ const Lock = () => {
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         await Promise.all([
           commonServices.sync_data(),
-          commonServices.get_quick_shares(),
           commonServices.get_my_shares(),
           commonServices.get_invitations(),
         ])
+        await commonServices.get_quick_shares(),
         navigate(returnUrl);
       }).catch((error) => {
         global.pushError(error)

@@ -14,7 +14,15 @@ const updateInvitations = invitations => {
   }
 }
 
+const updateSends = sends => {
+  return {
+    type: actionTypes.SET_SENDS,
+    payload: sends,
+  }
+}
+
 export default {
   updateMyShares,
-  updateInvitations
+  updateInvitations,
+  updateSends
 }

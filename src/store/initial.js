@@ -25,7 +25,8 @@ export default {
   },
   share: {
     myShares: [],
-    invitations: []
+    invitations: [],
+    sends: []
   },
   cipher: {
     allCiphers: []

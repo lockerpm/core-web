@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import {
-  Image
+  Tag
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
@@ -22,14 +22,20 @@ import global from "../../../../../config/global";
 
 const Name = (props) => {
   const { t } = useTranslation()
-  const { cipher = {} } = props;
+  const { cipher = {}, send = null } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const originCipher = useMemo(() => {
+    if (send) {
+      return allCiphers.find((d) => d.id === send?.cipherId)
+    }
     return allCiphers.find((d) => d.id === cipher.id)
   }, [allCiphers, cipher])
 
   const isCipherShare = useMemo(() => {
+    if (send) {
+      return false
+    }
     return originCipher.organizationId && (
       common.isCipherShared(originCipher.organizationId)
         || common.isCipherSharedWithMe(originCipher.organizationId)
@@ -45,9 +51,9 @@ const Name = (props) => {
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}
-            label={cipher.name || t('shares.encrypted_content')}
+            label={cipher.name || originCipher.name || t('shares.encrypted_content')}
             routerName={global.keys.VAULT_DETAIL}
-            routerParams={{ cipher_id: cipher.id }}
+            routerParams={{ cipher_id: cipher.id || originCipher.id }}
             icon={
               isCipherShare ? <ImageIcon
                 className="ml-1"
@@ -56,6 +62,14 @@ const Name = (props) => {
               /> : <></>
             }
           />
+          {
+            send && common.isExpired(send) && <Tag
+              className="ml-2"
+              color="error"
+            >
+              {t('statuses.expired')}
+            </Tag>
+          }
         </div>
         <TextCopy
           className="text-sm"

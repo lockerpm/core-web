@@ -25,7 +25,6 @@ const Filter = (props) => {
     setParams = () => { }
   } = props;
 
-  const [filterTimeout, setFilterTimeout] = useState(null)
   const [searchText, setSearchText] = useState(params.searchText)
 
   const selectedSortOption = useMemo(() => {
@@ -67,16 +66,11 @@ const Filter = (props) => {
               disabled={loading}
               placeholder={t('placeholder.search')}
               onChange={(e) => {
-                if (filterTimeout) {
-                  clearTimeout(filterTimeout)
-                }
                 setSearchText(e.target.value)
-                setFilterTimeout(setTimeout(() => {
-                  setParams({
-                    ...params,
-                    searchText: e.target.value
-                  })
-                }, 500))
+                setParams({
+                  ...params,
+                  searchText: e.target.value
+                })
               }}
               onPressEnter={() => setParams({ ...params, searchText })}
             />

@@ -7,6 +7,7 @@ import cipher from './cipher'
 import otp from './otp'
 import folder from './folder'
 import permission from'./permission'
+import share from './share'
 
 export default {
   ...other,
@@ -18,4 +19,5 @@ export default {
   ...otp,
   ...folder,
   ...permission,
+  ...share
 }

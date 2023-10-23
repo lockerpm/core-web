@@ -516,7 +516,8 @@
       "share": "Share",
       "leave": "Leave",
       "accept": "Accept",
-      "decline": "Decline"
+      "decline": "Decline",
+      "copy_link": "Copy link"
     },
     "move_to": {
       "title": "Move to",
@@ -625,6 +626,14 @@
       "description": "Items shared between you and others will appear here",
       "quick_share_description": "Send a link of the item to anyone, they don't need a Locker account to view it.",
       "add": "New Share"
+    },
+    "quick_shares": {
+      "shared_with": "Shared with",
+      "sharing_time": "Shared time",
+      "views": "Views",
+      "expiration": "Expiration",
+      "anyone": "Anyone",
+      "nobody": "Nobody"
     }
   }
 }  

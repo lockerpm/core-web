@@ -119,7 +119,7 @@ const SharedWithMe = (props) => {
   
   const handleChangeMenuType = (v) => {
     setMenuType(v);
-    setParams({ ...params, page: 1 })
+    setParams({ ...params, page: 1, searchText: null })
     global.navigate(currentPage.name, {}, { menu_type: v });
   }
 
@@ -186,7 +186,7 @@ const SharedWithMe = (props) => {
       />
       {
         !isEmpty && <Filter
-          className={'mt-2'}
+          key={menuType}
           params={params}
           loading={syncing}
           setParams={(v) => setParams({ ...v, page: 1 })}

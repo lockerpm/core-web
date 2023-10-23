@@ -25,12 +25,19 @@ async function list_ciphers(params, ciphers = null) {
 }
 
 async function clear_data() {
+  await Promise.all([
+    global.jsCore.cipherService.clear(),
+    global.jsCore.folderService.clear(),
+    global.jsCore.collectionService.clear(),
+    global.jsCore.sendService.clear()
+  ])
   global.store.dispatch(storeActions.updateAllCiphers([]))
   global.store.dispatch(storeActions.updateAllFolders([]))
   global.store.dispatch(storeActions.updateAllCollections([]))
   global.store.dispatch(storeActions.updateAllOrganizations([]))
   global.store.dispatch(storeActions.updateMyShares([]))
   global.store.dispatch(storeActions.updateInvitations([]))
+  global.store.dispatch(storeActions.updateSends([]))
 }
 
 async function sync_profile() {
@@ -57,6 +64,11 @@ async function sync_collections() {
   const collections = await syncServices.sync_collections();
   await global.jsCore.syncService.syncCollections(collections);
   await get_all_collections();
+}
+
+async function sync_policies() {
+  const policies = await syncServices.sync_policies();
+  await global.jsCore.syncService.syncPolicies(policies);
 }
 
 async function sync_ciphers(response) {
@@ -101,13 +113,23 @@ async function get_all_organizations() {
   global.store.dispatch(storeActions.updateAllOrganizations(allOrganizations))
 }
 
+async function get_sends() {
+  const sends = await global.jsCore.sendService.getAllDecrypted() || []
+  const allCiphers = global.store.getState().cipher.allCiphers
+  global.store.dispatch(storeActions.updateSends(sends.map((s) => {
+    const cipher = allCiphers.find(c => c.id === s.cipherId)
+    return { ...s, name: cipher?.name, cipher }
+  })))
+}
+
 async function sync_data(syncing = true) {
-  clear_data();
   global.store.dispatch(storeActions.updateSyncing(syncing));
+  await clear_data();
   await sync_profile();
   await Promise.all([
     sync_folders(),
     sync_collections(),
+    sync_policies(),
   ])
   const syncCount = await syncServices.sync_count();
   const size = 500;
@@ -118,7 +140,8 @@ async function sync_data(syncing = true) {
   }
   await Promise.all(request).then(async (result) => {
     const ciphers = result.map((r) => r.ciphers).flat();
-    await sync_ciphers({ ...result[0], ciphers:ciphers })
+    await sync_ciphers({ ...result[0], ciphers:ciphers });
+    await global.jsCore.syncService.syncSettings(userId, result[0].domains)
   }).catch(() => {});
   global.store.dispatch(storeActions.updateSyncing(false))
 }
@@ -126,7 +149,8 @@ async function sync_data(syncing = true) {
 async function get_quick_shares() {
   const userId = await global.jsCore.userService.getUserId();
   const quickShares = await quickShareServices.list();
-  await global.jsCore.syncService.syncSends(userId, quickShares)
+  await global.jsCore.syncService.syncSends(userId, quickShares);
+  await get_sends()
 }
 
 async function get_my_shares() {
@@ -286,6 +310,7 @@ export default {
   sync_profile,
   sync_folders,
   sync_collections,
+  sync_policies,
   sync_ciphers,
   get_all_ciphers,
   get_all_folders,
@@ -301,5 +326,6 @@ export default {
   stop_sharing_folder,
   delete_collection,
   delete_folder,
-  leave_share
+  leave_share,
+  get_sends
 }

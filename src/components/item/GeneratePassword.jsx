@@ -6,7 +6,6 @@ import {
   Slider,
   Checkbox
 } from '@lockerpm/design';
-import './css/index.scss'
 import {
   SafetyCertificateOutlined,
   ReloadOutlined,
@@ -144,9 +143,9 @@ const GeneratePassword = (props) => {
       {
         password && <PasswordStrength password={password}/>
       }
-      <div className="flex items-center justify-end">
+      <div className="text-right">
         <Popover
-          placement="bottom"
+          placement="bottomRight"
           trigger={['hover']}
           title={<div className="p-2">
             <div className="flex items-center justify-between mb-2">
@@ -240,9 +239,9 @@ const GeneratePassword = (props) => {
             
           </div>}
         >
-          <p className="text-primary font-semibold cursor-pointer">
+          <span className="text-primary font-semibold cursor-pointer">
             {t('generate_password.title')}
-          </p>
+          </span>
         </Popover>
       </div>
     </div>
