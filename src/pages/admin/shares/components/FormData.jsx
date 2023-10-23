@@ -13,6 +13,7 @@ import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import ShareOption from './form-data/ShareOption';
+import Footer from './form-data/Footer';
 
 function FormData(props) {
   const {
@@ -29,6 +30,7 @@ function FormData(props) {
 
   useEffect(() => {
     if (visible) {
+      setStep(1)
       form.setFieldsValue({
         option: menuType || menuTypes.CIPHERS
       })
@@ -37,18 +39,6 @@ function FormData(props) {
       setCallingAPI(false);
     }
   }, [visible, item, menuType])
-
-  const handleSave = async () => {
-    form.validateFields().then(async (values) => {
-      setCallingAPI(true);
-      setCallingAPI(false);
-      onClose();
-    })
-  }
-
-  const handleContinue = () => {
-    setStep(step + 1)
-  }
 
   return (
     <div className={props.className}>
@@ -59,52 +49,25 @@ function FormData(props) {
         closable={step === 1}
         onClose={step === 1 ? onClose : () => {}}
         open={visible}
-        footer={
-          <Space className='flex items-center justify-end'>
-            {
-              step === 1 && <Button
-                disabled={callingAPI}
-                onClick={onClose}
-              >
-                {t('button.cancel')}
-              </Button>
-            }
-            {
-              step !== 1 && <Button
-                disabled={callingAPI}
-                onClick={() => setStep(step - 1)}
-              >
-                {t('button.back')}
-              </Button>
-            }
-            {
-              step === 1 && <Button
-                type="primary"
-                loading={callingAPI}
-                onClick={handleContinue}
-              >
-                { t('button.continue') } 
-              </Button>
-            }
-            {
-              step === 2 && <Button
-                type="primary"
-                loading={callingAPI}
-                onClick={handleSave}
-              >
-                { t('button.save') } 
-              </Button>
-            }
-          </Space>
-        }
+        footer={<Footer
+          form={form}
+          step={step}
+          setStep={setStep}
+          callingAPI={callingAPI}
+          onClose={onClose}
+          setCallingAPI={setCallingAPI}
+        />}
       >
         <Form
           form={form}
           layout="vertical"
           labelAlign={'left'}
+          disabled={callingAPI}
         >
           {
-            step === 1 && <ShareOption menuTypes={menuTypes}/>
+            step === 1 && <ShareOption
+              menuTypes={menuTypes}
+            />
           }
         </Form>
       </Drawer>

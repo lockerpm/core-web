@@ -109,6 +109,7 @@ function FormData(props) {
           form={form}
           layout="vertical"
           labelAlign={'left'}
+          disabled={callingAPI}
         >
           <Form.Item
             name={'name'}
@@ -122,7 +123,6 @@ function FormData(props) {
           >
             <Input
               placeholder={t('placeholder.enter')}
-              disabled={callingAPI}
             />
           </Form.Item>
           {
@@ -138,7 +138,6 @@ function FormData(props) {
             >
               <Input.Password
                 placeholder={t('placeholder.enter')}
-                disabled={callingAPI}
               />
             </Form.Item>
           }
