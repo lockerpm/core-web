@@ -502,10 +502,6 @@
       "copy_wallet_address": "Copy Wallet Address",
       "copy_private_key": "Copy Private Key",
       "copy_password_pin": "Copy Password/PIN",
-      "in_app_shares": "In-app shares",
-      "in_app_shares_note": "Share with Locker users or group of Locker users (only for Locker business). They can view or edit your item.",
-      "get_shareable_link": "Get shareable link",
-      "get_shareable_link_note": "Send a link of the item to anyone, they don't need a Locker account to view it.",
       "edit": "Edit",
       "clone": "Clone",
       "move_to_folder": "Move to a folder",
@@ -634,6 +630,16 @@
       "expiration": "Expiration",
       "anyone": "Anyone",
       "nobody": "Nobody"
+    },
+    "new_share": {
+      "choose_option": "Choose your sharing option",
+      "in_app_share_items": "In-app share items",
+      "in_app_share_items_note": "Share with Locker users or group of Locker users (only for Locker business). They can view or edit your item.",
+      "in_app_share_folder": "In-app share folder",
+      "in_app_share_folder_note": "Share with Locker users (only for Locker business). They can view or edit your folder.",
+      "quick_shares": "Quick shares",
+      "get_shareable_link": "Get shareable link",
+      "get_shareable_link_note": "Send a link of the item to anyone, they don't need a Locker account to view it."
     }
   }
 }  

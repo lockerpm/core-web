@@ -6,13 +6,9 @@ import { } from "../../../../../components";
 import TableData from "./TableData";
 import BoxData from "./BoxData";
 
-import FormData from "./FormData";
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
-
-import common from "../../../../../utils/common";
 
 const QuickShares = (props) => {
   const { t } = useTranslation();
@@ -29,14 +25,6 @@ const QuickShares = (props) => {
 
   const isMobile = useSelector((state) => state.system.isMobile)
 
-  const [formVisible, setFormVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const handleOpenForm = (item = null, cloneMode = false) => {
-    setSelectedItem(item);
-    setFormVisible(true);
-  }
-
   return (
     <div
       className="quick-shares"
@@ -48,7 +36,6 @@ const QuickShares = (props) => {
           data={filteredData.result}
           params={params}
           isFolder={isFolder}
-          onUpdate={handleOpenForm}
           onStopSharing={onStopSharing}
         /> : <TableData
           className="mt-4"
@@ -56,18 +43,9 @@ const QuickShares = (props) => {
           data={filteredData.result}
           params={params}
           isFolder={isFolder}
-          onUpdate={handleOpenForm}
           onStopSharing={onStopSharing}
         />
       }
-      {/* <FormData
-        visible={formVisible}
-        item={selectedItem}
-        onClose={() => {
-          setFormVisible(false);
-          setSelectedItem(null);
-        }}
-      /> */}
     </div>
   );
 }

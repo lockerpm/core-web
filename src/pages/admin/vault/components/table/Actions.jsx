@@ -124,18 +124,18 @@ const Actions = (props) => {
         key: 'in_app_shares',
         hide: !common.isCipherShareable(originCipher),
         label: <Tooltip
-          title={t('inventory.actions.in_app_shares_note')}
+          title={t('shares.new_share.in_app_shares_note')}
         >
-          <p>{t('inventory.actions.in_app_shares')}</p>
+          <p>{t('shares.new_share.in_app_shares')}</p>
         </Tooltip>
       },
       {
         key: 'get_shareable_link',
         hide: !common.isCipherQuickShareable(originCipher),
         label: <Tooltip
-          title={t('inventory.actions.get_shareable_link_note')}
+          title={t('shares.new_share.get_shareable_link_note')}
         >
-          <p>{t('inventory.actions.get_shareable_link')}</p>
+          <p>{t('shares.new_share.get_shareable_link')}</p>
         </Tooltip>
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })

@@ -10,6 +10,7 @@ import { AdminHeader } from "../../../components";
 
 import MenuTabs from "./components/MenuTabs";
 import NoItem from "./components/NoItem";
+import FormData from "./components/FormData";
 import Filter from "../vault/components/Filter";
 import InAppShares from "./components/in-app-shares/index";
 import QuickShares from "./components/quick-shares";
@@ -44,7 +45,9 @@ const MySharedItems = (props) => {
   const sends = useSelector((state) => state.share.sends)
 
   const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
-  const [callingAPI, setCallingAPI] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -116,6 +119,11 @@ const MySharedItems = (props) => {
     global.navigate(currentPage.name, {}, { menu_type: v });
   }
 
+  const handleOpenForm = (item = null) => {
+    setSelectedItem(item);
+    setFormVisible(true);
+  }
+
   return (
     <div
       className="vault layout-content"
@@ -131,7 +139,7 @@ const MySharedItems = (props) => {
             type: 'primary',
             icon: <PlusOutlined />,
             disabled: syncing,
-            click: () => {}
+            click: () => handleOpenForm()
           }
         ]}
       />
@@ -187,6 +195,7 @@ const MySharedItems = (props) => {
               params={params}
               isFolder={menuType === menuTypes.FOLDERS}
               filteredData={filteredData}
+              onUpdate={handleOpenForm}
               onStopSharing={() => {}}
               onUpdateStatus={() => {}}
             />
@@ -208,6 +217,16 @@ const MySharedItems = (props) => {
           onChange={handleChangePage}
         />
       }
+      <FormData
+        visible={formVisible}
+        item={selectedItem}
+        menuType={menuType}
+        menuTypes={menuTypes}
+        onClose={() => {
+          setFormVisible(false);
+          setSelectedItem(null);
+        }}
+      />
     </div>
   );
 }

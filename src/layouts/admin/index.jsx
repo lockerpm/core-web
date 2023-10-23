@@ -80,14 +80,22 @@ function AdminLayout(props) {
         commonServices.sync_collections(),
         commonServices.sync_folders(),
       ])
-      if (message.type === 'cipher_invitation') {
+      if (['cipher_invitation', 'cipher_share'].includes(message.type)) {
         await Promise.all([
           commonServices.get_invitations(),
           commonServices.get_my_shares()
         ])
       }
+      if (message.type === 'cipher_share') {
+        if (message.data.id) {
+          await commonServices.sync_items([message.data.id])
+        }
+        if (message.data.ids) {
+          await commonServices.sync_items(message.data.ids)
+        }
+      }
     } else if (message.type.includes('cipher')) {
-      if (['cipher_share', 'cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
+      if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
         if (message.type === 'cipher_update') {
           await commonServices.sync_profile();
         }

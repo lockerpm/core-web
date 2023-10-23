@@ -6,13 +6,9 @@ import { } from "../../../../../components";
 import TableData from "./TableData";
 import BoxData from "./BoxData";
 
-import FormData from "./FormData";
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
-
-import common from "../../../../../utils/common";
 
 const InAppShares = (props) => {
   const { t } = useTranslation();
@@ -24,19 +20,12 @@ const InAppShares = (props) => {
     params = {},
     isFolder = false,
     filteredData = [],
+    onUpdate = () => {},
     onStopSharing = () => {},
     onUpdateStatus = () => {}
   } = props
 
   const isMobile = useSelector((state) => state.system.isMobile)
-
-  const [formVisible, setFormVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const handleOpenForm = (item = null, cloneMode = false) => {
-    setSelectedItem(item);
-    setFormVisible(true);
-  }
 
   return (
     <div
@@ -49,7 +38,7 @@ const InAppShares = (props) => {
           data={filteredData.result}
           params={params}
           isFolder={isFolder}
-          onUpdate={handleOpenForm}
+          onUpdate={onUpdate}
           onStopSharing={onStopSharing}
           onUpdateStatus={onUpdateStatus}
         /> : <TableData
@@ -58,19 +47,11 @@ const InAppShares = (props) => {
           data={filteredData.result}
           params={params}
           isFolder={isFolder}
-          onUpdate={handleOpenForm}
+          onUpdate={onUpdate}
           onStopSharing={onStopSharing}
           onUpdateStatus={onUpdateStatus}
         />
       }
-      <FormData
-        visible={formVisible}
-        item={selectedItem}
-        onClose={() => {
-          setFormVisible(false);
-          setSelectedItem(null);
-        }}
-      />
     </div>
   );
 }
