@@ -1,8 +1,6 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import {
   Form,
-  Space,
-  Button,
   Drawer,
 } from '@lockerpm/design';
 
@@ -13,6 +11,9 @@ import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import ShareOption from './form-data/ShareOption';
+import ItemsShare from './form-data/ItemsShare';
+import FolderShare from './form-data/FolderShare';
+import QuickShare from './form-data/QuickShare';
 import Footer from './form-data/Footer';
 
 function FormData(props) {
@@ -22,6 +23,7 @@ function FormData(props) {
     menuType = null,
     item = null,
     onClose = () => {},
+    onChangeMenuType = () => {}
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
@@ -31,9 +33,7 @@ function FormData(props) {
   useEffect(() => {
     if (visible) {
       setStep(1)
-      form.setFieldsValue({
-        option: menuType || menuTypes.CIPHERS
-      })
+      form.setFieldsValue({})
     } else {
       form.resetFields();
       setCallingAPI(false);
@@ -67,7 +67,22 @@ function FormData(props) {
           {
             step === 1 && <ShareOption
               menuTypes={menuTypes}
+              menuType={menuType}
+              onChange={onChangeMenuType}
             />
+          }
+          {
+            step === 2 && <div>
+              {
+                menuType === menuTypes.CIPHERS && <ItemsShare />
+              }
+              {
+                menuType === menuTypes.FOLDERS && <FolderShare />
+              }
+              {
+                menuType === menuTypes.QUICK_SHARES && <QuickShare />
+              }
+            </div>
           }
         </Form>
       </Drawer>

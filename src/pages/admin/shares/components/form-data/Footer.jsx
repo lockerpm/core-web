@@ -66,7 +66,7 @@ function FormData(props) {
           loading={callingAPI}
           onClick={handleSave}
         >
-          { t('button.save') } 
+          { t('button.share') } 
         </Button>
       }
     </Space>

@@ -226,6 +226,7 @@ const MySharedItems = (props) => {
           setFormVisible(false);
           setSelectedItem(null);
         }}
+        onChangeMenuType={handleChangeMenuType}
       />
     </div>
   );

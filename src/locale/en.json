@@ -69,7 +69,8 @@
     "dr": "Dr",
     "ok": "OK",
     "detail": "Detail",
-    "selected_items": "{{amount}} Selected Items"
+    "selected_items": "{{amount}} Selected Items",
+    "member": "Member"
   },
   "button": {
     "add": "Add",
@@ -110,7 +111,9 @@
     "continue": "Continue",
     "new_item": "New item",
     "new_folder": "New folder",
-    "new_share": "New share"
+    "new_share": "New share",
+    "share": "Share",
+    "view": "View"
   },
   "placeholder": {
     "name": "Enter name",
@@ -270,7 +273,8 @@
     "expired": "Expired",
     "accessed": "Accessed",
     "shared": "Shared",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "pending": "Pending"
   },
   "permissions": {
     "editable": "Editable",
@@ -639,7 +643,14 @@
       "in_app_share_folder_note": "Share with Locker users (only for Locker business). They can view or edit your folder.",
       "quick_shares": "Quick shares",
       "get_shareable_link": "Get shareable link",
-      "get_shareable_link_note": "Send a link of the item to anyone, they don't need a Locker account to view it."
+      "get_shareable_link_note": "Send a link of the item to anyone, they don't need a Locker account to view it.",
+      "choose_items": "Choose items",
+      "choose_items_note": "You might choose as many as you want.",
+      "personal_email_or_group": "Personal email or group's name",
+      "search_inventory": "Search Inventory",
+      "personal_email_or_group_placeholder": "Enter email or group name to search",
+      "choose_folder": "Choose folder",
+      "search_folder": "Search Folder"
     }
   }
 }  

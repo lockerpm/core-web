@@ -39,5 +39,8 @@ export default {
   },
   collection: {
     allCollections: []
+  },
+  enterprise: {
+    teams: []
   }
 }

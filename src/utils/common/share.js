@@ -1,4 +1,5 @@
-import { Utils } from "../../core-js/src/misc/utils"
+import { Utils } from "../../core-js/src/misc/utils";
+import global from "../../config/global";
 
 const isExpired = (send) => {
   const expired = send.expirationDate && send.expirationDate <= new Date()
@@ -15,7 +16,14 @@ const getPublicShareUrl = (send) => {
   )}`
 }
 
+const generateMemberKey = async (publicKey, orgKey) => {
+  const pk = Utils.fromB64ToArray(publicKey)
+  const key = await global.jsCore.cryptoService.rsaEncrypt(orgKey.key, pk.buffer)
+  return key.encryptedString
+}
+
 export default {
   isExpired,
-  getPublicShareUrl
+  getPublicShareUrl,
+  generateMemberKey
 }

@@ -36,5 +36,8 @@ export default {
   // Share
   SET_MY_SHARES: 'SET_MY_SHARES',
   SET_INVITATIONS: 'SET_INVITATIONS',
-  SET_SENDS: 'SET_SENDS'
+  SET_SENDS: 'SET_SENDS',
+
+  // Enterprise
+  SET_TEAMS: 'SET_TEAMS'
 }

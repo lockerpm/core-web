@@ -16,6 +16,14 @@ function list_invitations() {
   })
 }
 
+function get_public_key(data) {
+  return request({
+    url: global.endpoint.SHARING_PUBLIC_KEY,
+    method: 'post',
+    data
+  })
+}
+
 function stop_sharing(organizationId, data) {
   return request({
     url: global.endpoint.SHARING_STOP.replace(':organization_id', organizationId),
@@ -82,6 +90,7 @@ function leave_share(organizationId) {
 export default {
   list_my_shares,
   list_invitations,
+  get_public_key,
   stop_sharing,
   stop_sharing_member,
   update_sharing_folder,

@@ -6,6 +6,7 @@ import syncServices from './sync'
 import folderServices from './folder'
 import sharingServices from './sharing'
 import quickShareServices from './quick-share'
+import enterpriseServices from './enterprise'
 
 async function list_ciphers(params, ciphers = null) {
   let result = await global.jsCore.searchService.searchCiphers(
@@ -161,6 +162,11 @@ async function get_my_shares() {
 async function get_invitations() {
   const invitations = await sharingServices.list_invitations();
   await global.store.dispatch(storeActions.updateInvitations(invitations))
+}
+
+async function get_teams() {
+  const teams = await enterpriseServices.list_teams();
+  await global.store.dispatch(storeActions.updateTeams(teams))
 }
 
 function password_strength(password) {
@@ -320,6 +326,7 @@ export default {
   get_quick_shares,
   get_my_shares,
   get_invitations,
+  get_teams,
   password_strength,
   sync_items,
   stop_sharing,

@@ -12,21 +12,26 @@ import { useTranslation } from "react-i18next";
 
 function ShareOption(props) {
   const {
-    menuTypes={menuTypes}
+    menuTypes = {},
+    menuType = null,
+    onChange = () => {}
   } = props
   const { t } = useTranslation()
 
   return (
     <div className={props.className}>
       <Form.Item
-        name={'option'}
         label={
           <p className='font-semibold'>
             {t('shares.new_share.choose_option')}
           </p>
         }
       >
-        <Radio.Group name="radiogroup" defaultValue={1}>
+        <Radio.Group
+          name="radiogroup"
+          value={menuType}
+          onChange={(e) => onChange(e.target.value)}
+        >
           <Radio value={menuTypes.CIPHERS} className='mb-2'>
             <div>
               <p className='font-semibold'>{t('shares.new_share.in_app_share_items')}</p>

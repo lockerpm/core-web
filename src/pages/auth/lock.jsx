@@ -83,6 +83,7 @@ const Lock = () => {
           commonServices.sync_data(),
           commonServices.get_my_shares(),
           commonServices.get_invitations(),
+          commonServices.get_teams(),
         ])
         await commonServices.get_quick_shares(),
         navigate(returnUrl);
