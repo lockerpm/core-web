@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
 
 import common from "../../../utils/common";
 import global from "../../../config/global";
+import commonServices from "../../../services/common";
 
 import { CipherType } from "../../../core-js/src/enums";
 
@@ -124,6 +125,22 @@ const MySharedItems = (props) => {
     setFormVisible(true);
   }
 
+  const stopSharingItem = async (item) => {
+    try {
+      if (menuType === menuTypes.CIPHERS) {
+        await commonServices.stop_sharing_cipher(item);
+        global.pushSuccess(t('notification.success.cipher.updated'))
+      } else if (menuType === menuTypes.FOLDERS) {
+        await commonServices.stop_sharing_folder(item);
+        global.pushSuccess(t('notification.success.folder.updated'))
+      } else {
+        
+      }
+    } catch (error) {
+      global.pushError(error)
+    }
+  }
+
   return (
     <div
       className="vault layout-content"
@@ -138,6 +155,7 @@ const MySharedItems = (props) => {
             label: t('button.new_share'),
             type: 'primary',
             icon: <PlusOutlined />,
+            hide: isEmpty,
             disabled: syncing,
             click: () => handleOpenForm()
           }
@@ -171,11 +189,11 @@ const MySharedItems = (props) => {
           loading={syncing}
           menuType={menuType}
           menuTypes={menuTypes}
+          setParams={(v) => setParams({ ...v, page: 1 })}
           setMenuType={(v) => {
             setMenuType(v);
             global.navigate(currentPage.name, {}, { menu_type: v });
           }}
-          setParams={(v) => setParams({ ...v, page: 1 })}
         />
       }
       {
@@ -185,6 +203,7 @@ const MySharedItems = (props) => {
           isEmpty={isEmpty}
           isSharedWithMe={false}
           isQuickShares={menuType === menuTypes.QUICK_SHARES}
+          onCreate={() => handleOpenForm()}
         />
       }
       {
@@ -196,8 +215,7 @@ const MySharedItems = (props) => {
               isFolder={menuType === menuTypes.FOLDERS}
               filteredData={filteredData}
               onUpdate={handleOpenForm}
-              onStopSharing={() => {}}
-              onUpdateStatus={() => {}}
+              onStopSharing={stopSharingItem}
             />
           }
           {

@@ -41,9 +41,12 @@ async function clear_data() {
   global.store.dispatch(storeActions.updateSends([]))
 }
 
-async function sync_profile() {
-  const profile = await syncServices.sync_profile();
-  global.store.dispatch(storeActions.updateSyncProfile(profile));
+async function sync_profile(data) {
+  let profile = data
+  if (!profile) {
+    profile = await syncServices.sync_profile();
+    global.store.dispatch(storeActions.updateSyncProfile(profile));
+  }
   await global.jsCore.syncService.syncProfile({
     key: profile?.key,
     privateKey: profile?.privateKey,
@@ -54,36 +57,50 @@ async function sync_profile() {
   await get_all_organizations();
 }
 
-async function sync_folders() {
-  const folders = await syncServices.sync_folders();
+async function sync_folders(data) {
+  let folders = data
+  if (!folders) {
+    folders = await syncServices.sync_folders();
+  }
   const userId = await global.jsCore.userService.getUserId()
   await global.jsCore.syncService.syncFolders(userId, folders)
   await get_all_folders();
 }
 
-async function sync_collections() {
-  const collections = await syncServices.sync_collections();
+async function sync_collections(data) {
+  let collections = data
+  if (!collections) {
+    collections = await syncServices.sync_collections();
+  }
   await global.jsCore.syncService.syncCollections(collections);
   await get_all_collections();
 }
 
-async function sync_policies() {
-  const policies = await syncServices.sync_policies();
+async function sync_policies(data) {
+  let policies = data
+  if (!policies) {
+    policies = await syncServices.sync_policies();
+  }
   await global.jsCore.syncService.syncPolicies(policies);
 }
 
-async function sync_ciphers(response) {
+async function sync_settings(domains) {
+  const userId = await global.jsCore.userService.getUserId()
+  global.jsCore.syncService.syncSettings(userId, domains)
+}
+
+async function sync_ciphers(ciphers) {
   await global.jsCore.syncService.setLastSync(new Date())
   const userId = await global.jsCore.userService.getUserId()
   const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || []
   const deletedIds = []
   decryptedCipherCache.forEach(cipher => {
-    if (response.ciphers.findIndex(c => c.id === cipher.id) < 0) {
+    if (ciphers.findIndex(c => c.id === cipher.id) < 0) {
       deletedIds.push(cipher.id)
     }
   })
   await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
-  await global.jsCore.syncService.syncSomeCiphers(userId, response.ciphers)
+  await global.jsCore.syncService.syncSomeCiphers(userId, ciphers)
   await get_all_ciphers();
 }
 
@@ -123,30 +140,6 @@ async function get_sends() {
   })))
 }
 
-async function sync_data(syncing = true) {
-  global.store.dispatch(storeActions.updateSyncing(syncing));
-  await clear_data();
-  await sync_profile();
-  await Promise.all([
-    sync_folders(),
-    sync_collections(),
-    sync_policies(),
-  ])
-  const syncCount = await syncServices.sync_count();
-  const size = 500;
-  const maxCount = syncCount.count.ciphers || 0
-  const request = []
-  for (let page = 1; page <= Math.ceil(maxCount / size); page += 1) {
-    request.push(syncServices.sync({ page, size }))
-  }
-  await Promise.all(request).then(async (result) => {
-    const ciphers = result.map((r) => r.ciphers).flat();
-    await sync_ciphers({ ...result[0], ciphers:ciphers });
-    await global.jsCore.syncService.syncSettings(userId, result[0].domains)
-  }).catch(() => {});
-  global.store.dispatch(storeActions.updateSyncing(false))
-}
-
 async function get_quick_shares() {
   const userId = await global.jsCore.userService.getUserId();
   const quickShares = await quickShareServices.list();
@@ -169,6 +162,39 @@ async function get_teams() {
   await global.store.dispatch(storeActions.updateTeams(teams))
 }
 
+async function sync_data(syncing = true) {
+  global.store.dispatch(storeActions.updateSyncing(syncing));
+  await clear_data();
+  const syncCount = await syncServices.sync_count();
+  const size = 500;
+  const maxCount = syncCount.count.ciphers || 0
+  const request = []
+  for (let page = 1; page <= Math.ceil(maxCount / size); page += 1) {
+    request.push(syncServices.sync({ page, size }))
+  }
+  await Promise.all(request).then(async (result) => {
+    const { profile, collections, policies, folders, domains } = result[0]
+    const ciphers = result.map((r) => r.ciphers).flat();
+    await sync_profile(profile);
+    await Promise.all([
+      sync_folders(folders),
+      sync_collections(collections),
+      sync_policies(policies),
+      sync_ciphers(ciphers),
+      sync_settings(domains)
+    ])
+    await Promise.all([
+      get_my_shares(),
+      get_invitations(),
+      get_teams(),
+      get_quick_shares()
+    ])
+  }).catch((error) => {
+    console.log(error);
+  });
+  global.store.dispatch(storeActions.updateSyncing(false))
+}
+
 function password_strength(password) {
   return global.jsCore.passwordGenerationService.passwordStrength(password, [
     'cystack'
@@ -185,7 +211,7 @@ const sync_items = async (cipherIds) => {
   global.store.dispatch(storeActions.updateSyncing(false))
 };
 
-async function stop_sharing(cipher) {
+async function stop_sharing_cipher(cipher) {
   let memberId = null
   if (cipher.user) {
     memberId = cipher.user.id
@@ -318,6 +344,7 @@ export default {
   sync_collections,
   sync_policies,
   sync_ciphers,
+  sync_settings,
   get_all_ciphers,
   get_all_folders,
   get_all_collections,
@@ -329,7 +356,7 @@ export default {
   get_teams,
   password_strength,
   sync_items,
-  stop_sharing,
+  stop_sharing_cipher,
   stop_sharing_folder,
   delete_collection,
   delete_folder,

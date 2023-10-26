@@ -29,7 +29,6 @@ const TableData = (props) => {
     isFolder = false,
     onUpdate = () => {},
     onStopSharing = () => {},
-    onUpdateStatus = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -80,7 +79,6 @@ const TableData = (props) => {
           item={record}
           onUpdate={onUpdate}
           onStopSharing={onStopSharing}
-          onUpdateStatus={onUpdateStatus}
         />
       },
     ].filter((c) => !c.hide)

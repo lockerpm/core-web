@@ -70,7 +70,8 @@
     "ok": "OK",
     "detail": "Detail",
     "selected_items": "{{amount}} Selected Items",
-    "member": "Member"
+    "member": "Member",
+    "folder": "Folder"
   },
   "button": {
     "add": "Add",
@@ -193,7 +194,13 @@
       "sharing": {
         "accepted": "Invitation Accepted",
         "rejected": "Invitation Rejected",
-        "leave_group_success": "Leave share group successfully"
+        "leave_group_success": "Leave share group successfully",
+        "confirm_member_success": "The member has been confirmed!",
+        "update_share_success": "Sharing members updated successfully",
+        "share_items_success": "The items have been shared!",
+        "share_item_success": "The item have been shared!",
+        "share_folder_success": "The item have been shared!",
+        "stop_share_success": "Stop sharing successfully"
       }
     },
     "warning": {
@@ -615,6 +622,9 @@
   "shares": {
     "encrypted_content": "Encrypted Content",
     "share_type": "Permission",
+    "share_items": "Share Items",
+    "share_item": "Share Item",
+    "share_folder": "Share folder",
     "leave_question": "Are you sure you want to leave this share group?",
     "in_app_shares": {
       "items": "In-app shared Items",

@@ -22,7 +22,6 @@ const InAppShares = (props) => {
     filteredData = [],
     onUpdate = () => {},
     onStopSharing = () => {},
-    onUpdateStatus = () => {}
   } = props
 
   const isMobile = useSelector((state) => state.system.isMobile)
@@ -40,7 +39,6 @@ const InAppShares = (props) => {
           isFolder={isFolder}
           onUpdate={onUpdate}
           onStopSharing={onStopSharing}
-          onUpdateStatus={onUpdateStatus}
         /> : <TableData
           className="mt-4"
           loading={loading}
@@ -49,7 +47,6 @@ const InAppShares = (props) => {
           isFolder={isFolder}
           onUpdate={onUpdate}
           onStopSharing={onStopSharing}
-          onUpdateStatus={onUpdateStatus}
         />
       }
     </div>

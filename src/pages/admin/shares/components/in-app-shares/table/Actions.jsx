@@ -22,9 +22,6 @@ const Actions = (props) => {
     onStopSharing = () => {},
   } = props;
 
-  const allFolders = useSelector((state) => state.folder.allFolders)
-  const allCiphers = useSelector((state) => state.cipher.allCiphers)
-
   const generalMenus = useMemo(() => {
     return [
       {

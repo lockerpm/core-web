@@ -21,12 +21,18 @@ const PERMISSION = {
   ONLY_USE: 'Only Use'
 }
 
+const PERMISSION_ROLE = {
+  ADMIN: 'admin',
+  MEMBER: 'member',
+}
+
 const STATUS_ACTION = {
   ACCEPT: 'accept',
   REJECT: 'reject',
 }
 
 const STATUS = {
+  PENDING: 'pending',
   CONFIRMED: 'confirmed',
   ACCEPTED: 'accepted',
   INVITED: 'invited',
@@ -39,6 +45,7 @@ export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
   PERMISSION,
+  PERMISSION_ROLE,
   STATUS,
   STATUS_ACTION,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
@@ -394,9 +401,14 @@ export default {
   ],
   INVITATION_STATUSES: [
     {
-      value: STATUS.CONFIRMED,
-      label: <Trans i18nKey={'statuses.confirmed'}/>,
+      value: STATUS.PENDING,
+      label: <Trans i18nKey={'statuses.pending'}/>,
       color: 'default'
+    },
+    {
+      value: STATUS.CONFIRMED,
+      label: <Trans i18nKey={'statuses.shared'}/>,
+      color: 'success'
     },
     {
       value: STATUS.ACCEPTED,
@@ -426,15 +438,13 @@ export default {
   ],
   SHARE_PERMISSIONS: [
     {
-      value: PERMISSION.ONLY_USE,
-      label: <Trans i18nKey={'permissions.only_use'}/>,
-    },
-    {
       value: PERMISSION.EDIT,
+      role: PERMISSION_ROLE.ADMIN,
       label: <Trans i18nKey={'permissions.editable'}/>,
     },
     {
       value: PERMISSION.VIEW,
+      role: PERMISSION_ROLE.MEMBER,
       label: <Trans i18nKey={'permissions.viewable'}/>,
     },
   ]

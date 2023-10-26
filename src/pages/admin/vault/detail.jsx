@@ -209,7 +209,7 @@ const Vault = (props) => {
 
   const stopSharingItem = async (cipher) => {
     try {
-      await commonServices.stop_sharing(cipher);
+      await commonServices.stop_sharing_cipher(cipher);
       global.pushSuccess(t('notification.success.cipher.updated'))
     } catch (error) {
       global.pushError(error)

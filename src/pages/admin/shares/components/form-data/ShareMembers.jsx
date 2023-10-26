@@ -3,44 +3,55 @@ import {
   Form,
   Select,
   Avatar,
-  List
+  List,
+  Tag,
+  Button
 } from '@lockerpm/design';
 
 import {
   UserOutlined,
-  GroupOutlined
+  GroupOutlined,
+  CloseOutlined
 } from '@ant-design/icons';
 
 import { useSelector  } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { red } from '@ant-design/colors';
 
 import global from '../../../../../config/global';
 import enterpriseServices from '../../../../../services/enterprise';
 import sharingServices from '../../../../../services/sharing';
+import commonServices from '../../../../../services/common';
 import common from '../../../../../utils/common';
 
 function ShareMembers(props) {
   const {
-    item
+    orgKey,
+    menuType = null,
+    menuTypes = {},
+    cipherOrFolder = null,
+    currentMembers = [],
+    currentGroups = [],
+    newMembers = [],
+    newGroups = [],
+    shareMembersGroups = [],
+    setCurrentMembers = () => {},
+    setCurrentGroups = () => {},
+    setNewMembers = () => {},
+    setNewGroups = () => {},
+    stopSharing = () => {}
   } = props
   const { t } = useTranslation()
 
   const teams = useSelector((state) => state.enterprise.teams);
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const myShares = useSelector((state) => state.share.myShares);
 
   const [memberGroupSearchText, setMemberGroupSearchText] = useState('')
   const [searching, setSearching] = useState(false)
-  const [orgKey, setOrgKey] = useState(null)
-  const [sharingKey, setSharingKey] = useState(null)
+  const [callingAPI, setCallingAPI] = useState(false)
+
   const [members, setMembers] = useState([])
   const [groups, setGroups] = useState([])
-  const [newMembers, setNewMembers] = useState([])
-  const [newGroups, setNewGroups] = useState([])
-
-  useEffect(() => {
-    initData();
-  }, [item])
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,33 +61,22 @@ function ShareMembers(props) {
     }, 300);
   }, [memberGroupSearchText])
 
-  const initData = async () => {
-    if (item?.organizationId) {
-      const orgKey = await global.jsCore.cryptoService.getOrgKey(item.organizationId)
-      setOrgKey(orgKey)
-    } else {
-      const shareKey = await global.jsCore.cryptoService.makeShareKey()
-      setSharingKey(shareKey ? shareKey[0].encryptedString : null)
-      setOrgKey(shareKey[1])
-    }
-  }
-
   const ItemAvatar = (props) => {
-    const { item } = props
+    const { item, size = 20 } = props
     return <div>
       {
-        item.avatar && <Avatar size={20} src={item.avatar}/>
+        item.avatar && <Avatar size={size} src={item.avatar}/>
       }
       {
-        !item.avatar && item.type !== 'group' && <UserOutlined />
+        !item.avatar && item.type !== 'group' && <UserOutlined style={{ fontSize: size }}/>
       }
       {
-        !item.avatar && item.type === 'group' && <GroupOutlined />
+        !item.avatar && item.type === 'group' && <GroupOutlined style={{ fontSize: size }}/>
       }
     </div>
   }
 
-  const memberGroupOptions = useMemo(() => {
+  const membersGroups = useMemo(() => {
     let options = [
       ...members,
       ...groups
@@ -89,52 +89,22 @@ function ShareMembers(props) {
         }
       ]
     }
-    return options.map((d) => ({
+    return options
+  }, [members, groups, memberGroupSearchText])
+
+  const memberGroupOptions = useMemo(() => {
+    return membersGroups.map((d) => ({
       label: <div
         className='flex items-center'
-        onClick={() => handleAddMemberGroup(d)}
       >
         <ItemAvatar item={d}/>
         <p className='ml-2'>{d.full_name || d.name}</p>
       </div>,
-      value: d.email || d.id
+      value: d.email || d.id,
+      disabled: !!shareMembersGroups.find((item) => d.id === item.id || d.email === item.username)
     }))
     
-  }, [members, groups, memberGroupSearchText])
-
-  const currentMembers = useMemo(() => {
-    const share = myShares.find(s => s.id === item?.organizationId) || { members: [] }
-    return share.members.map(member => {
-      return {
-        ...member,
-        username: member.email,
-        status: member.status,
-        role: member.role,
-        id: member.id,
-        key: null
-      }
-    }) || []
-  }, [myShares, item])
-
-  const currentGroups = useMemo(() => {
-    const share = myShares.find(s => s.id === item?.organizationId) || { groups: [] }
-    return share.groups.map(group => {
-      return {
-        ...group,
-        type: 'group',
-        key: null
-      }
-    }) || []
-  }, [myShares, item])
-
-  const shareMembersGroups = useMemo(() => {
-    return [
-      ...newMembers,
-      ...members,
-      ...newGroups,
-      ...groups
-    ]
-  }, [newGroups, newMembers, currentGroups, currentMembers])
+  }, [membersGroups, shareMembersGroups])
 
   const searchMembersGroups = async () => {
     setSearching(true)
@@ -143,11 +113,16 @@ function ShareMembers(props) {
       { query: memberGroupSearchText }
     );
     setMembers(result.members.filter(m => m.email !== userInfo.email))
-    setGroups(result.groups.map(g => ({ ...g, type: 'group' })))
+    if (menuTypes.CIPHERS === menuType) {
+      setGroups(result.groups.map(g => ({ ...g, type: 'group' })))
+    } else {
+      setGroups([])
+    }
     setSearching(false)
   }
 
-  const handleAddMemberGroup = async (item) => {
+  const handleAddMemberGroup = async (v) => {
+    const item = membersGroups.find((d) => d.id === v || d.email === v)
     if (item.type === 'group') {
       await addGroup(item)
     } else {
@@ -156,9 +131,9 @@ function ShareMembers(props) {
   }
 
   const addGroup = async (group) => {
-    const { members } = await enterpriseServices.list_user_group_members(group.id)
+    const result = await enterpriseServices.list_user_group_members(group.id)
     const groupMembers = await Promise.all(
-      members
+      result.members
         .filter(m => !!m.email)
         .map(async m => {
           const publicKey = m.public_key
@@ -173,9 +148,9 @@ function ShareMembers(props) {
       )
     )
     setNewGroups([ ...newGroups, {
-      id,
+      id: group.id,
       name: group.name,
-      role: 'member',
+      role: global.constants.PERMISSION_ROLE.MEMBER,
       type: 'group',
       isNew: true,
       members: groupMembers
@@ -183,7 +158,7 @@ function ShareMembers(props) {
   }
 
   const addMember = async (member) => {
-    const members = await Promise.all(
+    const result = await Promise.all(
       [member]
         .filter(m => !!m.email)
         .map(async m => {
@@ -195,14 +170,84 @@ function ShareMembers(props) {
             id: null,
             username: m.email,
             key,
-            status: 'pending',
-            role: 'member',
+            status: global.constants.STATUS.PENDING,
+            role: global.constants.PERMISSION_ROLE.MEMBER,
             avatar: m.avatar
           }
         }
       )
     )
-    setNewMembers([ ...newMembers, ...members])
+    setNewMembers([ ...newMembers, ...result])
+  }
+
+  const handleChangePermission = async (item, value) => {
+    if (item.id && !item.isNew && cipherOrFolder) {
+      if (item.type === 'group') {
+        await sharingServices.update_sharing_group(cipherOrFolder.organizationId, item.id, { role: value })
+      } else {
+        await sharingServices.update_sharing_member(cipherOrFolder.organizationId, item.id, { role: value })
+      }
+      await commonServices.get_my_shares();
+    }
+    if (item.type === 'group') {
+      if (item.isNew) {
+        setNewGroups(newGroups.map((g) => ({
+          ...g,
+          role: item.id === g.id ? value : g.role
+        })))
+      } else {
+        setCurrentGroups(currentGroups.map((g) => ({
+          ...g,
+          role: item.id === g.id ? value : g.role
+        })))
+      }
+    } else {
+      if (item.isNew) {
+        setNewMembers(newMembers.map((m) => ({
+          ...m,
+          role: item.username === m.username ? value : m.role
+        })))
+      } else {
+        setCurrentMembers(currentMembers.map((m) => ({
+          ...m,
+          role: item.username === m.username ? value : m.role
+        })))
+      }
+    }
+  }
+
+  const handleStopSharing = async (item) => {
+    if (item.type === 'group') {
+      if (item.isNew) {
+        setNewGroups(newGroups.filter((g) => g.id !== item.id))
+      } else {
+        stopSharing(item);
+        setCurrentGroups(currentGroups.filter((g) => g.id !== item.id))
+      }
+    } else {
+      if (item.isNew) {
+        setNewMembers(newMembers.filter((m) => m.username !== item.username))
+      } else {
+        stopSharing(item);
+        setCurrentMembers(currentMembers.filter((m) => m.username !== item.username))
+      }
+    }
+  }
+
+  const handleConfirmMember = async (item) => {
+    setCallingAPI(true)
+    const publicKey = await sharingServices.get_public_key({ email: item.email })
+    const key = await common.generateMemberKey(publicKey, orgKey)
+    sharingServices.add_sharing_member(cipherOrFolder.organizationId, item.id, { key }).then(() => {
+      global.pushSuccess(t('notification.success.sharing.confirm_member_success'))
+      setNewMembers(newMembers.map((m) => ({
+        ...m,
+        status: item.username === m.username ? global.constants.STATUS.CONFIRMED : m.status
+      })))
+    }).catch((error) => {
+      global.pushError(error)
+    })
+    setCallingAPI(false)
   }
 
   return (
@@ -223,24 +268,92 @@ function ShareMembers(props) {
           loading={searching}
           options={memberGroupOptions}
           onSearch={(v) => setMemberGroupSearchText(v)}
+          onChange={(v) => handleAddMemberGroup(v)}
         />
       </Form.Item>
-      <List
-        itemLayout="horizontal"
-        dataSource={shareMembersGroups}
-        renderItem={(item, index) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<ItemAvatar item={item}/>}
-              title={
-                <div className='flex items-center font-regular'>
-                  {item.username || item.name}
+      {
+        shareMembersGroups.length > 0 && <List
+          itemLayout="horizontal"
+          dataSource={shareMembersGroups}
+          className='share-members'
+          header={
+            <div className='flex items-center justify-between font-semibold'>
+              <div style={{ width: 40 }}></div>
+              <div className='flex-1'>
+                {t('common.name')}
+              </div>
+              <div className='flex items-center'>
+                <div style={{ width: 108 }}>
+                  {t('shares.share_type')}
                 </div>
-              }
-            />
-          </List.Item>
-        )}
-      />
+                <div style={{ width: 88 }}>
+                  {t('common.status')}
+                </div>
+              </div>
+              <div style={{ width: 28 }}></div>
+            </div>
+          }
+          renderItem={(item) => (
+            <List.Item
+              actions={[
+                <span
+                  style={{ color: red.primary }}
+                  className='cursor-pointer'
+                  onClick={() => handleStopSharing(item)}
+                >
+                  <CloseOutlined />
+                </span>
+              ]}
+            >
+              <List.Item.Meta
+                avatar={<ItemAvatar item={item} size={24}/>}
+                description={null}
+                title={
+                  <div className='flex items-center justify-between'>
+                    <div
+                      className='text-limited'
+                      title={item.username || item.name}
+                      style={{ width: 174, display: 'block !important' }}
+                    >
+                      {item.username || item.name}
+                    </div>
+                    <div className='flex items-center'>
+                      <Select
+                        size='small'
+                        value={item.role}
+                        className='mr-2'
+                        style={{ width: 100 }}
+                        options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: p.label }))}
+                        onChange={(v) => handleChangePermission(item, v)}
+                      />
+                      <div style={{ width: 80 }}>
+                        {
+                          (() => {
+                            if (item.status === global.constants.STATUS.ACCEPTED) {
+                              return <Button
+                                size="small"
+                                type="primary"
+                                disabled={callingAPI}
+                                onClick={() => handleConfirmMember(item)}
+                              >
+                                {t('common.confirm')}
+                              </Button>
+                            }
+                            const status = item.status ? common.getInvitationStatus(item.status) : null
+                            if (status) {
+                              return <Tag color={status.color}>{status.label}</Tag>
+                            }
+                          })()
+                        }
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            </List.Item>
+          )}
+        />
+      }
     </div>
   );
 }

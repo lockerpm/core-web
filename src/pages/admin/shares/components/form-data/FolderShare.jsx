@@ -14,6 +14,7 @@ import common from '../../../../../utils/common';
 
 function FolderShare(props) {
   const {
+    item = null
   } = props
   const { t } = useTranslation()
 
@@ -47,12 +48,12 @@ function FolderShare(props) {
         }
       >
         <Select
+          disabled={!!item}
           placeholder={t('shares.new_share.search_folder')}
           options={folderOptions}
           onSearch={(v) => setSearchText(v)}
         />
       </Form.Item>
-      <ShareMembers />
     </div>
   );
 }

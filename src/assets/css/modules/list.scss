@@ -1,0 +1,18 @@
+.ant-list {
+  &.share-members {
+    .ant-list-item-meta {
+      display: flex;
+      align-items: center;
+    }
+    .ant-list-item-meta-title {
+      margin-bottom: 0 !important;
+      font-weight: 400;
+    }
+    .ant-list-item-action {
+      margin-inline-start: 16px;
+      li {
+        padding: 0;
+      }
+    }
+  }
+}

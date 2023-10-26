@@ -10,12 +10,11 @@ import {
 import { useSelector  } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import ShareMembers from './ShareMembers';
-
 import common from '../../../../../utils/common';
 
 function ItemsShare(props) {
   const {
+    item = null
   } = props
   const { t } = useTranslation()
 
@@ -45,17 +44,18 @@ function ItemsShare(props) {
             </span>
           </div>
         }
+        rules={[]}
       >
         <Select
           placeholder={t('shares.new_share.search_inventory')}
-          mode='multiple'
+          mode={'multiple'}
+          disabled={!!item}
           filterOption={false}
           showSearch={true}
           options={cipherOptions}
           onSearch={(v) => setCipherSearchText(v)}
         />
       </Form.Item>
-      <ShareMembers />
     </div>
   );
 }

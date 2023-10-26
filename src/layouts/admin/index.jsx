@@ -108,7 +108,7 @@ function AdminLayout(props) {
       } else if (message.type.includes('cipher_delete_permanent')) {
         await global.jsCore.cipherService.delete(message.data.ids)
       } else {
-        await commonServices.sync_data(false);
+        await commonServices.sync_data();
       }
     } else if (message.type.includes('folder')) {
       if (message.type.includes('update')) {
@@ -118,7 +118,7 @@ function AdminLayout(props) {
       } else if (message.type.includes('delete')) {
         await global.jsCore.folderService.delete(message.data.ids)
       } else {
-        await commonServices.sync_data(false);
+        await commonServices.sync_data();
       }
     } else if (message.type.includes('collection')) {
       if (message.type.includes('update')) {
@@ -130,7 +130,7 @@ function AdminLayout(props) {
       } else if (message.type.includes('delete')) {
         await global.jsCore.collectionService.delete(message.data.ids)
       } else {
-        await commonServices.sync_data(false);
+        await commonServices.sync_data();
       }
     }
     dispatch(storeActions.updateSyncing(false))

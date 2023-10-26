@@ -30,7 +30,6 @@ const BoxData = (props) => {
     isFolder = false,
     onUpdate = () => {},
     onStopSharing = () => {},
-    onUpdateStatus = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -61,7 +60,6 @@ const BoxData = (props) => {
               item={record}
               onUpdate={onUpdate}
               onStopSharing={onStopSharing}
-              onUpdateStatus={onUpdateStatus}
             />
           </div>}
         >
