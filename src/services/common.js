@@ -289,9 +289,15 @@ async function stop_sharing_folder(folder) {
   }
 }
 
+async function stop_quick_share(send) {
+  await quickShareServices.stop(send.id).then(async () => {
+    await global.jsCore.sendService.delete([send.id])
+  })
+  await get_quick_shares();
+}
+
 async function delete_collection(collection) {
   const folderNameEnc = await global.jsCore.cryptoService.encrypt(collection.name)
-  // Encrypt ciphers with self key
   const personalKey = await global.jsCore.cryptoService.getEncKey()
   const cipherInsideCollection = global.store.getState().cipher.allCiphers.filter(c => c.collectionIds.includes(collection.id))
   const ciphers = await Promise.all(
@@ -358,6 +364,7 @@ export default {
   sync_items,
   stop_sharing_cipher,
   stop_sharing_folder,
+  stop_quick_share,
   delete_collection,
   delete_folder,
   leave_share,

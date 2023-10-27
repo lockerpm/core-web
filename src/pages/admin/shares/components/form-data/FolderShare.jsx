@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import common from '../../../../../utils/common';
+import global from '../../../../../config/global';
 
 function FolderShare(props) {
   const {
@@ -38,7 +39,7 @@ function FolderShare(props) {
   return (
     <div>
       <Form.Item
-        name={'folder'}
+        name={'folderId'}
         label={
           <div>
             <p className='font-semibold'>
@@ -46,6 +47,9 @@ function FolderShare(props) {
             </p>
           </div>
         }
+        rules={[
+          global.rules.REQUIRED(t('common.folder'))
+        ]}
       >
         <Select
           disabled={!!item}

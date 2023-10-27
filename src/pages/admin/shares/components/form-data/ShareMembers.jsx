@@ -256,12 +256,12 @@ function ShareMembers(props) {
         className='mb-2'
         label={
           <p className='font-semibold'>
-            {t('shares.new_share.personal_email_or_group')}
+            { menuType === menuTypes.CIPHERS ? t('shares.new_share.personal_email_or_group') : t('shares.new_share.personal_email')}
           </p>
         }
       >
         <Select
-          placeholder={t('shares.new_share.personal_email_or_group_placeholder')}
+          placeholder={ menuType === menuTypes.CIPHERS ? t('shares.new_share.personal_email_or_group_placeholder') :  t('shares.new_share.personal_email_placeholder')}
           value={null}
           filterOption={false}
           showSearch={true}

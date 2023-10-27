@@ -2,6 +2,9 @@ import { CipherType, SecureNoteType } from '../../core-js/src/enums';
 import { FieldType } from '../../core-js/src/enums/fieldType';
 import { CipherRequest } from '../../core-js/src/models/request';
 import { SecureNote } from '../../core-js/src/models/domain'
+import { SendView } from '../../core-js/src/models/view/sendView';
+import { Send } from '../../core-js/src/models/domain/send';
+import { SendRequest } from '../../core-js/src/models/request/sendRequest';
 
 import {
   CipherView,
@@ -239,6 +242,33 @@ const getEncCipherForRequest = async (originalCipher, extraData = {}) => {
   }
 }
 
+const quickShareForRequest = async (data) => {
+  const cipher = global.store.getState().cipher.allCiphers.find((c) => c.id === data.cipherId);
+  const type_ = cipher.type
+  if (newCipherTypes.includes(type_)) {
+    cipher.type = CipherType.SecureNote
+    cipher.secureNote.type = 0
+  }
+  const send = new Send()
+  send.cipher = cipher
+  send.cipherId = cipher.id
+  send.password = ''
+  send.maxAccessCount = data.countAccess ? data.maxAccessCount : null
+  send.expirationDate = data.expireAfter ? new Date(Date.now() + data.expireAfter * 1000) : null
+  send.requireOtp = !!data.requireOtp
+  send.emails = data.requireOtp ? data.emails : []
+  send.eachEmailAccessCount = null
+
+  const sendView = new SendView(send)
+
+  sendView.cipher = cipher
+  const sendEnc = await global.jsCore.sendService.encrypt(sendView)
+  const sendRequest = new SendRequest(sendEnc)
+  sendRequest.cipher.type = type_
+  cipher.type = type_
+  return sendRequest
+}
+
 export default {
   newCipherTypes,
   cipherSubtitle,
@@ -247,4 +277,5 @@ export default {
   convertCipherToForm,
   convertFormToCipher,
   getEncCipherForRequest,
+  quickShareForRequest
 }

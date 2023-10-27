@@ -21,6 +21,7 @@ import { red } from '@ant-design/colors';
 const ItemInput = (props) => {
   const {
     type = 'username',
+    note = null,
     value = [],
     items = [],
     disabled = false,
@@ -82,6 +83,9 @@ const ItemInput = (props) => {
         onPressEnter={handleEnter}
         onChange={(e) => handleChange(e.target.value)}
       />
+      <small className="my-1">
+        {note}
+      </small>
       <div className='list-values mt-3'>
         {
           dValues.map((v, index) => <div key={index}>

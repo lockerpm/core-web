@@ -14,6 +14,7 @@ import FormData from "./components/FormData";
 import Filter from "../vault/components/Filter";
 import InAppShares from "./components/in-app-shares/index";
 import QuickShares from "./components/quick-shares";
+import QuickShareReview from "./components/quick-shares/Review";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -47,7 +48,9 @@ const MySharedItems = (props) => {
 
   const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
   const [formVisible, setFormVisible] = useState(false);
+  const [reviewVisible, setReviewVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [sendId, setSendId] = useState(null);
 
   const [params, setParams] = useState({
     page: 1,
@@ -72,7 +75,7 @@ const MySharedItems = (props) => {
     return sends.map((s) => ({
       ...s,
     }))
-  }, [allCiphers, allCollections, invitations, sends, menuType])
+  }, [allCiphers, allCollections, invitations, sends, menuType, syncing])
 
   const isEmpty = useMemo(() => {
     return items.length === 0
@@ -125,17 +128,21 @@ const MySharedItems = (props) => {
     setFormVisible(true);
   }
 
+  const handleOpenReview = (sendId) => {
+    setSendId(sendId);
+    setReviewVisible(true);
+  }
+
   const stopSharingItem = async (item) => {
     try {
       if (menuType === menuTypes.CIPHERS) {
         await commonServices.stop_sharing_cipher(item);
-        global.pushSuccess(t('notification.success.cipher.updated'))
       } else if (menuType === menuTypes.FOLDERS) {
         await commonServices.stop_sharing_folder(item);
-        global.pushSuccess(t('notification.success.folder.updated'))
       } else {
-        
+        await commonServices.stop_quick_share(item)
       }
+      global.pushSuccess(t('notification.success.sharing.stop_share_success'))
     } catch (error) {
       global.pushError(error)
     }
@@ -223,7 +230,7 @@ const MySharedItems = (props) => {
               loading={syncing}
               params={params}
               filteredData={filteredData}
-              onStopSharing={() => {}}
+              onStopSharing={stopSharingItem}
             />
           }
         </>
@@ -245,6 +252,15 @@ const MySharedItems = (props) => {
           setSelectedItem(null);
         }}
         onChangeMenuType={handleChangeMenuType}
+        onReview={handleOpenReview}
+      />
+      <QuickShareReview
+        visible={reviewVisible}
+        sendId={sendId}
+        onClose={() => {
+          setReviewVisible(false);
+          setSendId(null);
+        }}
       />
     </div>
   );

@@ -71,7 +71,11 @@
     "detail": "Detail",
     "selected_items": "{{amount}} Selected Items",
     "member": "Member",
-    "folder": "Folder"
+    "folder": "Folder",
+    "or": "or",
+    "item": "Item",
+    "email_addresses": "Email addresses",
+    "receiver": "Receiver"
   },
   "button": {
     "add": "Add",
@@ -114,7 +118,8 @@
     "new_folder": "New folder",
     "new_share": "New share",
     "share": "Share",
-    "view": "View"
+    "view": "View",
+    "copy_link": "Copy link"
   },
   "placeholder": {
     "name": "Enter name",
@@ -643,7 +648,26 @@
       "views": "Views",
       "expiration": "Expiration",
       "anyone": "Anyone",
-      "nobody": "Nobody"
+      "nobody": "Nobody",
+      "choose_an_item": "Choose an item",
+      "share_with": "Share with",
+      "anyone_with_the_link": "Anyone with the link",
+      "only_invited_people": "Only invited people",
+      "link_expires_after": "Link expires after",
+      "unlimited_access": "Unlimited access",
+      "times_access": "Times access",
+      "get_link_to_share": "Get link to share",
+      "email_addresses_share": "Email addresses for the people to share this with",
+      "email_addresses_share_note": "They'll need to verify their email before they can access the item",
+      "expiration_description": "This item's share link expires on {{time}}",
+      "expire_options": {
+        "an_hour": "an hour",
+        "a_day": "a day",
+        "a_week": "a week",
+        "14_days": "14 days",
+        "a_month": "a month",
+        "no_expiration": "No expiration"
+      }
     },
     "new_share": {
       "choose_option": "Choose your sharing option",
@@ -660,7 +684,9 @@
       "search_inventory": "Search Inventory",
       "personal_email_or_group_placeholder": "Enter email or group name to search",
       "choose_folder": "Choose folder",
-      "search_folder": "Search Folder"
+      "search_folder": "Search Folder",
+      "personal_email": "Personal email",
+      "personal_email_placeholder": "Enter email to search"
     }
   }
 }  

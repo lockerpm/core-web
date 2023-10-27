@@ -23,6 +23,25 @@ import sharingServices from '../../../../services/sharing';
 
 import { FolderRequest } from '../../../../core-js/src/models/request';
 
+const shareWithOptions = {
+  ANYONE: 0,
+  ONLY_SOME: 1
+}
+
+const expirationOptions = {
+  AN_HOUR: 60 * 60 * 1,
+  A_DAY: 60 * 60 * 24,
+  A_WEEK: 60 * 60 * 24 * 7,
+  DAYS: 60 * 60 * 24 * 14,
+  A_MONTH: 60 * 60 * 24 * 30,
+  NO_EXPIRATION: null
+}
+
+const countAccessOptions = {
+  UNLIMITED: 0,
+  TIMES_ACCESS: 1
+}
+
 function FormData(props) {
   const {
     visible = false,
@@ -30,12 +49,14 @@ function FormData(props) {
     menuType = null,
     item = null,
     onClose = () => {},
+    onReview = () => {},
     onChangeMenuType = () => {}
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const myShares = useSelector((state) => state.share.myShares);
-  const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const allFolders = useSelector((state) => state.folder.allFolders)
   const allCollections = useSelector((state) => state.collection.allCollections);
 
   const [step, setStep] = useState(1);
@@ -47,17 +68,22 @@ function FormData(props) {
   const [orgKey, setOrgKey] = useState(null)
   const [sharingKey, setSharingKey] = useState(null)
 
+  const folderId = Form.useWatch('folderId', form)
+
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === item?.id)
   }, [allCiphers, item])
 
   const originCollection = useMemo(() => {
-    return allCollections.find((f) => f.id === item?.id)
-  }, [allCollections, item])
+    if (item) {
+      return allCollections.find((f) => f.id === item?.id) || allFolders.find((f) => f.id === item?.id)
+    }
+    return allCollections.find((f) => f.id === folderId) || allFolders.find((f) => f.id === folderId)
+  }, [allCollections, item, folderId])
 
   const collectionCiphers = useMemo(() => {
-    return allCiphers.find((f) => f.folderId === item?.id)
-  }, [allCiphers, item])
+    return allCiphers.filter((f) => f.folderId === originCollection?.id)
+  }, [allCiphers, originCollection])
 
   useEffect(() => {
     setNewMembers([])
@@ -68,14 +94,22 @@ function FormData(props) {
         if (menuType === menuTypes.CIPHERS) {
           form.setFieldsValue({ items: [item.id] })
         } else if (menuType === menuTypes.FOLDERS) {
-          form.setFieldsValue({ folder: item.id })
+          form.setFieldsValue({ folderId: item.id })
         }
       } else {
         setStep(1)
         if (menuType === menuTypes.CIPHERS) {
           form.setFieldsValue({ items: [] })
         } else if (menuType === menuTypes.FOLDERS) {
-          form.setFieldsValue({ folder: null })
+          form.setFieldsValue({ folderId: null })
+        } else {
+          form.setFieldsValue({
+            emails: [],
+            requireOtp: shareWithOptions.ANYONE,
+            expireAfter: expirationOptions.AN_HOUR,
+            maxAccessCount: 1,
+            countAccess: countAccessOptions.UNLIMITED
+          })
         }
       }
       form.setFieldsValue({})
@@ -86,32 +120,35 @@ function FormData(props) {
   }, [visible, item, menuType])
 
   useEffect(() => {
-    initData();
-  }, [item, myShares])
+    initData(); 
+  }, [item, myShares, originCollection, menuType])
 
   const initData = async () => {
-    if (item?.organizationId) {
-      const orgKey = await global.jsCore.cryptoService.getOrgKey(item.organizationId)
-      setOrgKey(orgKey)
-    } else {
-      const shareKey = await global.jsCore.cryptoService.makeShareKey()
-      setSharingKey(shareKey ? shareKey[0].encryptedString : null)
-      setOrgKey(shareKey[1])
+    if (menuType !== menuTypes.QUICK_SHARES) {
+      const organizationId = item?.organizationId || originCollection?.organizationId
+      if (organizationId) {
+        const orgKey = await global.jsCore.cryptoService.getOrgKey(organizationId)
+        setOrgKey(orgKey)
+      } else {
+        const shareKey = await global.jsCore.cryptoService.makeShareKey()
+        setSharingKey(shareKey ? shareKey[0].encryptedString : null)
+        setOrgKey(shareKey[1])
+      }
+      const share = myShares.find(s => s.id === organizationId) || { members: [], groups: [] }
+      setCurrentMembers(share.members.map(member => ({
+        ...member,
+        username: member.email,
+        status: member.status,
+        role: member.role,
+        id: member.id,
+        key: null
+      })))
+      setCurrentGroups(share.groups.map(group => ({
+        ...group,
+        type: 'group',
+        key: null
+      })))
     }
-    const share = myShares.find(s => s.id === item?.organizationId) || { members: [], groups: [] }
-    setCurrentMembers(share.members.map(member => ({
-      ...member,
-      username: member.email,
-      status: member.status,
-      role: member.role,
-      id: member.id,
-      key: null
-    })))
-    setCurrentGroups(share.groups.map(group => ({
-      ...group,
-      type: 'group',
-      key: null
-    })))
   }
 
   const shareMembersGroups = useMemo(() => {
@@ -216,7 +253,6 @@ function FormData(props) {
             form={form}
             step={step}
             callingAPI={callingAPI}
-            onClose={onClose}
             item={item}
             orgKey={orgKey}
             originCipher={originCipher}
@@ -226,6 +262,8 @@ function FormData(props) {
             newMembers={newMembers}
             newGroups={newGroups}
             setStep={setStep}
+            onClose={onClose}
+            onReview={onReview}
             setCallingAPI={setCallingAPI}
           />
         }
@@ -258,7 +296,10 @@ function FormData(props) {
               }
               {
                 menuType === menuTypes.QUICK_SHARES && <QuickShare
-                  item={item}
+                  form={form}
+                  shareWithOptions={shareWithOptions}
+                  expirationOptions={expirationOptions}
+                  countAccessOptions={countAccessOptions}
                 />
               }
               {
@@ -266,7 +307,7 @@ function FormData(props) {
                   orgKey={orgKey}
                   menuType={menuType}
                   menuTypes={menuTypes}
-                  cipherOrFolder={item}
+                  cipherOrFolder={originCipher || originCollection}
                   currentMembers={currentMembers}
                   currentGroups={currentGroups}
                   newMembers={newMembers}

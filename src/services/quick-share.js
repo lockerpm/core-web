@@ -16,7 +16,24 @@ function get(id) {
   })
 }
 
+function create(data) {
+  return request({
+    url: global.endpoint.QUICK_SHARES,
+    method: 'post',
+    data
+  })
+}
+
+function stop(id) {
+  return request({
+    url: global.endpoint.QUICK_SHARE.replace(':id', id),
+    method: 'delete',
+  })
+}
+
 export default {
   list,
   get,
+  create,
+  stop
 }

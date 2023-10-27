@@ -20,7 +20,9 @@ const ShareFolders = (props) => {
   const {
     loading = false,
     params = {},
-    filteredData = []
+    filteredData = [],
+    onLeave = () => {},
+    onUpdateStatus = () => {}
   } = props
 
   const isMobile = useSelector((state) => state.system.isMobile)
@@ -45,6 +47,8 @@ const ShareFolders = (props) => {
           params={params}
           isFolder={true}
           onUpdate={handleOpenForm}
+          onLeave={onLeave}
+          onUpdateStatus={onUpdateStatus}
         /> : <TableData
           className="mt-4"
           loading={loading}
@@ -52,6 +56,8 @@ const ShareFolders = (props) => {
           params={params}
           isFolder={true}
           onUpdate={handleOpenForm}
+          onLeave={onLeave}
+          onUpdateStatus={onUpdateStatus}
         />
       }
       <FormData

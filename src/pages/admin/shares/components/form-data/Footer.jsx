@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import global from '../../../../../config/global';
 import common from '../../../../../utils/common';
 import sharingServices from '../../../../../services/sharing';
+import quickShareServices from '../../../../../services/quick-share';
+import commonServices from '../../../../../services/common';
 
 function FormData(props) {
   const {
@@ -28,7 +30,8 @@ function FormData(props) {
     sharingKey = null,
     setStep = () => {},
     onClose = () => {},
-    setCallingAPI = () => {}
+    setCallingAPI = () => {},
+    onReview = () => {}
   } = props
   const { t } = useTranslation()
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -36,32 +39,14 @@ function FormData(props) {
   const handleShare = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
-      const selectedCiphers = allCiphers.filter((c) => values.items.includes(c.id));
-      const sharedCiphers = await Promise.all(selectedCiphers.map(async (c) => {
-        let _orgKey = orgKey
-        if (c.organizationId) {
-          _orgKey = await global.jsCore.cryptoService.getOrgKey(c.organizationId)
-        }
-        const { data } = await common.getEncCipherForRequest(c, {
-          noCheck: true,
-          encKey: _orgKey
-        })
-        return {
-          cipher: { id: c.id, ...data },
-          members: newMembers,
-          groups: newGroups
-        }
-      }))
-      await sharingServices.sharing_multiple({
-        sharing_key: sharingKey,
-        ciphers: sharedCiphers
-      }).then(() => {
-        global.pushSuccess(t('notification.success.sharing.share_items_success'))
-      }).catch((error) => {
-        global.pushError(error)
-      })
+      if (values.cipherId) {
+        await quickShare(values);
+      } else if (!values.items) {
+        await shareFolder()
+      } else {
+        await shareCiphers(values)
+      }
       setCallingAPI(false);
-      onClose();
     })
   }
 
@@ -78,6 +63,34 @@ function FormData(props) {
     })
   }
 
+  const shareCiphers = async (values) => {
+    const selectedCiphers = allCiphers.filter((c) => values.items.includes(c.id));
+    const sharedCiphers = await Promise.all(selectedCiphers.map(async (c) => {
+      let _orgKey = orgKey
+      if (c.organizationId) {
+        _orgKey = await global.jsCore.cryptoService.getOrgKey(c.organizationId)
+      }
+      const { data } = await common.getEncCipherForRequest(c, {
+        noCheck: true,
+        encKey: _orgKey
+      })
+      return {
+        cipher: { id: c.id, ...data },
+        members: newMembers,
+        groups: newGroups
+      }
+    }))
+    await sharingServices.sharing_multiple({
+      sharing_key: sharingKey,
+      ciphers: sharedCiphers
+    }).then(() => {
+      global.pushSuccess(t('notification.success.sharing.share_items_success'))
+      onClose();
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
+
   const shareCipher = async () => {
     const { data } = await common.getEncCipherForRequest(originCipher, {
       noCheck: true,
@@ -85,10 +98,11 @@ function FormData(props) {
     });
     await sharingServices.share({
       sharing_key: sharingKey,
-      cipher: { id: item.id, ...data },
+      cipher: { id: originCipher.id, ...data },
       members: newMembers,
       groups: newGroups
     }).then(() => {
+      commonServices.get_my_shares();
       global.pushSuccess(t('notification.success.sharing.update_share_success'))
       onClose();
     }).catch((error) => {
@@ -117,26 +131,40 @@ function FormData(props) {
     const payload = {
       sharing_key: sharingKey,
       folder: {
-        id: item.id,
+        id: originCollection.id,
         name: collectionName,
         ciphers
       },
       members: newMembers
     }
-    if (item.organizationId) {
-      await sharingServices.add_sharing_members(item.organizationId, payload).then(() => {
+    if (originCollection?.organizationId) {
+      await sharingServices.add_sharing_members(originCollection.organizationId, payload).then(() => {
+        commonServices.get_my_shares();
         global.pushSuccess(t('notification.success.sharing.share_folder_success'))
+        onClose();        
       }).catch((error) => {
         global.pushError(error)
       })
     } else {
       await sharingServices.update_sharing(payload).then(() => {
         global.pushSuccess(t('notification.success.sharing.share_folder_success'))
+        onClose();
       }).catch((error) => {
         global.pushError(error)
       })
     }
-    onClose();
+  }
+
+  const quickShare = async (values) => {
+    const quickRequest = await common.quickShareForRequest(values);
+    await quickShareServices.create(quickRequest).then(async (response) => {
+      global.pushSuccess(t('notification.success.sharing.share_folder_success'))
+      await commonServices.get_quick_shares();
+      onReview(response.id);
+      onClose();
+    }).catch((error) => {
+      global.pushError(error)
+    })
   }
 
   const handleContinue = () => {

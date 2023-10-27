@@ -206,8 +206,8 @@ const SharedWithMe = (props) => {
               loading={syncing}
               params={params}
               filteredData={filteredData}
-              onUpdateStatus={handleUpdateInvitation}
               onLeave={handleLeaveShare}
+              onUpdateStatus={handleUpdateInvitation}
             />
           }
           {
@@ -215,8 +215,8 @@ const SharedWithMe = (props) => {
               loading={syncing}
               params={params}
               filteredData={filteredData}
-              onUpdateStatus={handleUpdateInvitation}
               onLeave={handleLeaveShare}
+              onUpdateStatus={handleUpdateInvitation}
             />
           }
         </>

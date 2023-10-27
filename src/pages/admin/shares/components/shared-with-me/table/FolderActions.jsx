@@ -24,6 +24,7 @@ const FolderActions = (props) => {
     folder = null,
     onUpdate = () => {},
     onLeave = () => {},
+    onUpdateStatus = () => {}
   } = props;
 
   const allFolders = useSelector((state) => state.folder.allFolders)
@@ -85,7 +86,7 @@ const FolderActions = (props) => {
             type="primary"
             rounded
             size="small"
-            onClick={() => {}}
+            onClick={() => onUpdateStatus(folder, global.constants.STATUS_ACTION.ACCEPT)}
           >
             {t('inventory.actions.accept')}
           </Button>
@@ -94,7 +95,7 @@ const FolderActions = (props) => {
           isInvited && <Button
             rounded
             size="small"
-            onClick={() => {}}
+            onClick={() => onUpdateStatus(folder, global.constants.STATUS_ACTION.ACCEPT)}
           >
             {t('inventory.actions.decline')}
           </Button>
