@@ -7,7 +7,6 @@ import {
   Avatar,
 } from '@lockerpm/design';
 import {
-  BuildOutlined,
   ArrowRightOutlined
 } from '@ant-design/icons'
 
@@ -17,28 +16,22 @@ import { gray } from '@ant-design/colors';
 
 const AdminHeader = (props) => {
   const {
-    isAvatar = false,
-    avatarUrl,
     title = '',
     total = null,
     subtitle = '',
+    description = '',
     actions = [],
     isEdit = false,
     isMarginTop = true,
     docLink = '',
     docLabel = '',
-    EditForm = () => <></>
+    Logo = () => <></>,
+    EditForm = () => <></>,
+    Right = () => <></>
   } = props
 
   const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
-
-  const height = useMemo(() => {
-    if (isAvatar || subtitle || ![null, undefined].includes(total)) {
-      return 60;
-    }
-    return 40
-  }, [isAvatar, subtitle, total])
 
   return (
     <>
@@ -51,27 +44,13 @@ const AdminHeader = (props) => {
           justify-between
         `}
         style={{
-          height: isMobile ? 'auto' : `${height}px`
+          height: isMobile ? 'auto' : `${60}px`
         }}
       >
-        <Col lg={actions.length > 0 ? 16 : 24} className="admin-header__left flex items-center">
-          {
-            isAvatar && avatarUrl && <Avatar
-              className="mr-3"
-              size={56}
-              shape="square"
-              src={avatarUrl}
-            />
-          }
-          {
-            isAvatar && !avatarUrl && <Avatar
-              style={{ backgroundColor: '#1f2124' }}
-              className="mr-3"
-              size={56}
-              shape="square"
-              icon={<BuildOutlined />}
-            />
-          }
+        <Col lg={actions.length > 0 ? 16 : 20} className="admin-header__left flex items-center">
+          <div>
+            <Logo />
+          </div>
           <div className="w-full">
             {
               isEdit ? <EditForm /> : <h1
@@ -88,9 +67,14 @@ const AdminHeader = (props) => {
                 {t('common.total')}: {total}
               </p>
             }
+            {
+              subtitle && <p className="admin-header__left--subtitle">
+                {subtitle}
+              </p>
+            }
           </div>
         </Col>
-        <Col lg={actions.length > 0 ? 8 : 0} className="admin-header__right" align="right">
+        <Col lg={actions.length > 0 ? 8 : 4} className="admin-header__right" align="right">
           <Row gutter={[8, 8]} justify="end">
             {
               actions.filter((a) => !a.hide).map((a) =>
@@ -109,12 +93,15 @@ const AdminHeader = (props) => {
                   </Button>
                 </Col>
               )}
+              {
+                <Right />
+              }
           </Row>
         </Col>
       </Row>
       {
-        subtitle && <p className="admin-header__left--subtitle mt-1">
-          {subtitle}
+        description && <p className="admin-header__left--subtitle mt-1">
+          {description}
         </p>
       }
       {

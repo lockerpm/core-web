@@ -148,6 +148,11 @@ const Vault = (props) => {
     setShareVisible(true);
   }
 
+  const handleOpenReview = (sendId) => {
+    setSendId(sendId);
+    setReviewVisible(true);
+  }
+
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
     return {
@@ -244,11 +249,6 @@ const Vault = (props) => {
       okText: t('button.ok'),
     });
   };
-
-  const handleOpenReview = (sendId) => {
-    setSendId(sendId);
-    setReviewVisible(true);
-  }
 
   return (
     <div

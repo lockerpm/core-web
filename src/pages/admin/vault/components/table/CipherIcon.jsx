@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Image
 } from '@lockerpm/design';
@@ -24,6 +24,10 @@ const CipherIcon = (props) => {
     typeKey = null
   } = props;
   const [cipher, setCipher] = useState(item);
+
+  useEffect(() => {
+    setCipher(item)
+  }, [item])
 
   const cipherIcon = useMemo(() => {
     let logo = null
@@ -56,6 +60,7 @@ const CipherIcon = (props) => {
   return (
     <div className={className}>
       <Image
+        key={type}
         preview={false}
         width={size}
         height={size}

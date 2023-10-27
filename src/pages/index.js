@@ -18,6 +18,7 @@ import Account2FA from './admin/account/2fa'
 
 // Admin Pages
 import Vault from './admin/vault'
+import VaultDetail from './admin/vault/detail'
 import Folders from './admin/folders'
 import Authenticator from './admin/otps'
 import SharedWithMe from './admin/shares/shared-with-me'
@@ -44,6 +45,7 @@ export default {
   Account2FA,
 
   Vault,
+  VaultDetail,
   Folders,
   Authenticator,
   SharedWithMe,

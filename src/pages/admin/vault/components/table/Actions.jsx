@@ -26,6 +26,7 @@ const Actions = (props) => {
   
   const {
     className = '',
+    size = "small",
     cipher = null,
     onMove = () => {},
     onUpdate = () => {},
@@ -221,7 +222,7 @@ const Actions = (props) => {
           >
             <Button
               type="text"
-              size="small"
+              size={size}
               icon={<ExportOutlined />}
               onClick={() => common.openNewTab(originCipher.login.uri)}
             />
@@ -234,7 +235,7 @@ const Actions = (props) => {
           >
             <Button
               type="text"
-              size="small"
+              size={size}
               icon={<CopyOutlined />}
             />
           </Dropdown>
@@ -246,7 +247,7 @@ const Actions = (props) => {
           >
             <Button
               type="text"
-              size="small"
+              size={size}
               icon={<ShareAltOutlined />}
             />
           </Dropdown>
@@ -258,7 +259,7 @@ const Actions = (props) => {
           >
             <Button
               type="text"
-              size="small"
+              size={size}
               icon={<EllipsisOutlined style={{ fontSize: 16 }}/>}
             />
           </Dropdown>
