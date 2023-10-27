@@ -68,7 +68,8 @@ const Vault = (props) => {
     } else {
       f.push((c) => c.type !== CipherType.TOTP)
       if (currentPage.name === global.keys.FOLDER_DETAIL) {
-        f.push((c) => c.folderId == currentPage.params.folder_id)
+        const folderId = currentPage.params.folder_id
+        f.push((c) => (c.folderId === folderId) || (c.collectionIds && c.collectionIds[0] === folderId))
       }
     }
     return f

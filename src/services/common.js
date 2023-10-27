@@ -18,9 +18,7 @@ async function list_ciphers(params, ciphers = null) {
     ciphers
   ) || []
   result = result.map(item => {
-    const i = common.parseNotesOfNewTypes(item)
-    i.checked = false
-    return i
+    return common.parseNotesOfNewTypes(item)
   })
   return result
 }

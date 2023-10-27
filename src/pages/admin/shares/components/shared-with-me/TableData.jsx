@@ -48,7 +48,6 @@ const TableData = (props) => {
         title: t('common.name'),
         dataIndex: 'title',
         key: 'name',
-        width: 250,
         align: 'left',
         render: (_, record) => isFolder ? <FolderName folder={record}/> : <CipherName cipher={record}/>
       },
@@ -86,7 +85,7 @@ const TableData = (props) => {
         title: t('common.status'),
         dataIndex: 'status',
         key: 'name',
-        width: 150,
+        width: 100,
         align: 'center',
         render: (_, record) => {
           const status = common.getInvitationStatus(record.status)

@@ -44,7 +44,6 @@ const TableData = (props) => {
         title: t('common.name'),
         dataIndex: 'title',
         key: 'name',
-        width: 300,
         align: 'left',
         render: (_, record) => <Name item={record}/>
       },

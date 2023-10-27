@@ -42,7 +42,6 @@ const TableData = (props) => {
         title: t('common.name'),
         dataIndex: 'title',
         key: 'name',
-        width: 300,
         align: 'left',
         render: (_, record) => <Name cipher={record}/>
       },
@@ -51,7 +50,7 @@ const TableData = (props) => {
         dataIndex: 'creationDate',
         key: 'creationDate',
         align: 'center',
-        width: 150,
+        width: 200,
         render: (_, record) => <TextCopy
           value={common.timeFromNow(record.creationDate)}
           align={'center'}
@@ -62,7 +61,7 @@ const TableData = (props) => {
         dataIndex: 'revisionDate',
         key: 'revisionDate',
         align: 'center',
-        width: 150,
+        width: 200,
         render: (_, record) => <TextCopy
           value={common.timeFromNow(record.revisionDate)}
           align={'center'}

@@ -50,7 +50,6 @@ const TableData = (props) => {
         title: t('common.name'),
         dataIndex: 'title',
         key: 'name',
-        width: 300,
         align: 'left',
         render: (_, record) => <Name cipher={record}/>
       },
@@ -82,7 +81,7 @@ const TableData = (props) => {
         key: 'actions',
         align: 'right',
         fixed: 'right',
-        width: 100,
+        width: 150,
         render: (_, record) => (
           <Actions
             cipher={record}

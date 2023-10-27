@@ -42,7 +42,6 @@ const TableData = (props) => {
         title: t('common.name'),
         dataIndex: 'title',
         key: 'name',
-        width: 250,
         align: 'left',
         render: (_, record) => <CipherName
           send={record}
@@ -54,7 +53,7 @@ const TableData = (props) => {
         dataIndex: 'shared_with',
         key: 'shared_with',
         align: 'center',
-        width: 120,
+        width: 200,
         render: (_, record) => <SharedWith send={record}/>
       },
       {
@@ -70,7 +69,7 @@ const TableData = (props) => {
         dataIndex: 'creationDate',
         key: 'creationDate',
         align: 'center',
-        width: 100,
+        width: 200,
         render: (_, record) => <TextCopy
           value={common.timeFromNow(record.creationDate)}
           align={'center'}
@@ -81,7 +80,7 @@ const TableData = (props) => {
         dataIndex: 'views',
         key: 'views',
         align: 'center',
-        width: 80,
+        width: 100,
         render: (_, record) => `${record.accessCount}${record.maxAccessCount ? `/${record.maxAccessCount}` : ''} ${t('shares.quick_shares.views')}`
       },
       {
@@ -89,7 +88,7 @@ const TableData = (props) => {
         dataIndex: 'expiration',
         key: 'expiration',
         align: 'center',
-        width: 180,
+        width: 200,
         render: (_, record) => <TextCopy
           value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : 'N/A'}
           align={'center'}
