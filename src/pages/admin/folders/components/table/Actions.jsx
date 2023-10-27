@@ -21,7 +21,8 @@ const Actions = (props) => {
     item = null,
     onUpdate = () => {},
     onDelete = () => {},
-    onStop = () => {}
+    onStop = () => {},
+    onShare = () => {},
   } = props;
 
   const allFolders = useSelector((state) => state.folder.allFolders)
@@ -47,7 +48,8 @@ const Actions = (props) => {
         {
           key: 'share',
           hide: !common.isOwner(originCollection),
-          label: t('inventory.actions.share')
+          label: t('inventory.actions.share'),
+          onClick: () => onShare(originCollection)
         },
         {
           key: 'stop_share',
@@ -76,7 +78,8 @@ const Actions = (props) => {
       },
       {
         key: 'share',
-        label: t('inventory.actions.share')
+        label: t('inventory.actions.share'),
+        onClick: () => onShare(originFolder)
       },
       {
         type: 'divider',

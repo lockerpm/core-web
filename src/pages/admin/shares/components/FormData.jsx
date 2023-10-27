@@ -95,6 +95,15 @@ function FormData(props) {
           form.setFieldsValue({ items: [item.id] })
         } else if (menuType === menuTypes.FOLDERS) {
           form.setFieldsValue({ folderId: item.id })
+        } else {
+          form.setFieldsValue({
+            cipherId: item.id,
+            emails: [],
+            requireOtp: shareWithOptions.ANYONE,
+            expireAfter: expirationOptions.AN_HOUR,
+            maxAccessCount: 1,
+            countAccess: countAccessOptions.UNLIMITED
+          })
         }
       } else {
         setStep(1)
@@ -245,13 +254,14 @@ function FormData(props) {
         title={formTitle}
         placement="right"
         width={500}
-        closable={step === 1 || item}
-        onClose={step === 1 || item ? onClose : () => {}}
+        onClose={onClose}
         open={visible}
         footer={
           <Footer
             form={form}
             step={step}
+            menuType={menuType}
+            menuTypes={menuTypes}
             callingAPI={callingAPI}
             item={item}
             orgKey={orgKey}
@@ -296,6 +306,7 @@ function FormData(props) {
               }
               {
                 menuType === menuTypes.QUICK_SHARES && <QuickShare
+                  item={item}
                   form={form}
                   shareWithOptions={shareWithOptions}
                   expirationOptions={expirationOptions}

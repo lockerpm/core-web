@@ -30,6 +30,7 @@ const TableData = (props) => {
     onUpdate = () => {},
     onDelete = () => {},
     onRestore = () => {},
+    onShare = () => {},
     onStopSharing = () => {},
     onPermanentlyDelete = () => {},
     selectionChange = () => {},
@@ -89,6 +90,7 @@ const TableData = (props) => {
             onUpdate={onUpdate}
             onDelete={onDelete}
             onRestore={onRestore}
+            onShare={onShare}
             onStopSharing={onStopSharing}
             onPermanentlyDelete={onPermanentlyDelete}
           />

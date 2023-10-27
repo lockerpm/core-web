@@ -9,6 +9,8 @@ import TableData from "./components/TableData";
 import BoxData from "./components/BoxData";
 import FormData from "./components/FormData";
 import MoveFolder from "./components/MoveFolder";
+import ShareFormData from "../shares/components/FormData";
+import QuickShareReview from "../shares/components/quick-shares/Review";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -37,6 +39,10 @@ const Vault = (props) => {
   const [formVisible, setFormVisible] = useState(false);
   const [moveVisible, setMoveVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [menuType, setMenuType] = useState(null);
+  const [shareVisible, setShareVisible] = useState(false);
+  const [reviewVisible, setReviewVisible] = useState(false);
+  const [sendId, setSendId] = useState(null);
   const [ciphers, setCiphers] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [params, setParams] = useState({
@@ -130,9 +136,15 @@ const Vault = (props) => {
     setCloneMode(cloneMode)
   }
 
-  const handleMoveForm = (item = null) => {
+  const handleOpenMoveForm = (item = null) => {
     setSelectedItem(item);
     setMoveVisible(true);
+  }
+
+  const handleOpenShareForm = (item = null, isQuickShares = false) => {
+    setSelectedItem(item);
+    setMenuType(isQuickShares ? global.constants.MENU_TYPES.QUICK_SHARES : global.constants.MENU_TYPES.CIPHERS)
+    setShareVisible(true);
   }
 
   const getCheckboxProps = (record) => {
@@ -232,6 +244,11 @@ const Vault = (props) => {
     });
   };
 
+  const handleOpenReview = (sendId) => {
+    setSendId(sendId);
+    setReviewVisible(true);
+  }
+
   return (
     <div
       className="vault layout-content"
@@ -262,7 +279,7 @@ const Vault = (props) => {
               isDelete={currentPage.name !== global.keys.TRASH}
               isRestore={currentPage.name === global.keys.TRASH}
               isPermanentlyDelete={currentPage.name === global.keys.TRASH}
-              onMove={() => handleMoveForm(null)}
+              onMove={() => handleOpenMoveForm(null)}
               onDelete={deleteItems}
               onRestore={restoreItems}
               onPermanentlyDelete={permanentlyDeleteItems}
@@ -291,10 +308,11 @@ const Vault = (props) => {
               data={filteredData.result}
               params={params}
               selectedRowKeys={selectedRowKeys}
-              onMove={handleMoveForm}
+              onMove={handleOpenMoveForm}
               onUpdate={handleOpenForm}
               onDelete={deleteItems}
               onRestore={restoreItems}
+              onShare={handleOpenShareForm}
               onStopSharing={stopSharingItem}
               onPermanentlyDelete={permanentlyDeleteItems}
               selectionChange={handleSelectionChange}
@@ -305,10 +323,11 @@ const Vault = (props) => {
               data={filteredData.result}
               params={params}
               selectedRowKeys={selectedRowKeys}
-              onMove={handleMoveForm}
+              onMove={handleOpenMoveForm}
               onUpdate={handleOpenForm}
               onDelete={deleteItems}
               onRestore={restoreItems}
+              onShare={handleOpenShareForm}
               onStopSharing={stopSharingItem}
               onPermanentlyDelete={permanentlyDeleteItems}
               selectionChange={handleSelectionChange}
@@ -342,6 +361,25 @@ const Vault = (props) => {
         onClose={() => {
           setMoveVisible(false);
           setSelectedItem(null);
+        }}
+      />
+      <ShareFormData
+        visible={shareVisible}
+        item={selectedItem}
+        menuType={menuType}
+        menuTypes={global.constants.MENU_TYPES}
+        onClose={() => {
+          setShareVisible(false);
+          setSelectedItem(null);
+        }}
+        onReview={handleOpenReview}
+      />
+      <QuickShareReview
+        visible={reviewVisible}
+        sendId={sendId}
+        onClose={() => {
+          setReviewVisible(false);
+          setSendId(null);
         }}
       />
     </div>

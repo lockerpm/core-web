@@ -43,7 +43,7 @@ const ShareCiphers = (props) => {
     setCloneMode(cloneMode)
   }
 
-  const handleMoveForm = (item = null) => {
+  const handleOpenMoveForm = (item = null) => {
     setSelectedItem(item);
     setMoveVisible(true);
   }
@@ -58,7 +58,7 @@ const ShareCiphers = (props) => {
           loading={loading}
           data={filteredData.result}
           params={params}
-          onMove={handleMoveForm}
+          onMove={handleOpenMoveForm}
           onUpdate={handleOpenForm}
           onLeave={onLeave}
           onUpdateStatus={onUpdateStatus}
@@ -67,7 +67,7 @@ const ShareCiphers = (props) => {
           loading={loading}
           data={filteredData.result}
           params={params}
-          onMove={handleMoveForm}
+          onMove={handleOpenMoveForm}
           onUpdate={handleOpenForm}
           onLeave={onLeave}
           onUpdateStatus={onUpdateStatus}

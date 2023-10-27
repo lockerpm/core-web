@@ -28,7 +28,8 @@ const BoxData = (props) => {
     params = {},
     onUpdate = () => {},
     onDelete = () => {},
-    onStop = () => {}
+    onStop = () => {},
+    onShare = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -58,6 +59,7 @@ const BoxData = (props) => {
               onUpdate={onUpdate}
               onDelete={onDelete}
               onStop={onStop}
+              onShare={onShare}
             />
           </div>}
         >

@@ -9,6 +9,7 @@ import {
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+
 import global from '../../../../../config/global';
 import common from '../../../../../utils/common';
 import sharingServices from '../../../../../services/sharing';
@@ -21,6 +22,8 @@ function FormData(props) {
     step = 1,
     callingAPI = false,
     item = null,
+    menuType = null,
+    menuTypes = {},
     originCipher = null,
     originCollection = null,
     collectionCiphers = [],
@@ -198,7 +201,16 @@ function FormData(props) {
         </Button>
       }
       {
-        step === 2 && !item && <Button
+        step === 2 && menuType === menuTypes.QUICK_SHARES && <Button
+          type="primary"
+          loading={callingAPI}
+          onClick={handleShare}
+        >
+          { t('shares.new_share.get_shareable_link') } 
+        </Button>
+      }
+      {
+        step === 2 && !item && menuType !== menuTypes.QUICK_SHARES && <Button
           type="primary"
           loading={callingAPI}
           onClick={handleShare}
@@ -207,7 +219,7 @@ function FormData(props) {
         </Button>
       }
       {
-        step === 2 && item && <Button
+        step === 2 && item && menuType !== menuTypes.QUICK_SHARES && <Button
           type="primary"
           loading={callingAPI}
           onClick={handleSave}

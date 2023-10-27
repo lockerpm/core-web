@@ -8,6 +8,7 @@ import Filter from "./components/Filter";
 import TableData from "./components/TableData";
 import BoxData from "./components/BoxData";
 import FormData from "./components/FormData";
+import ShareFormData from "../shares/components/FormData";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -30,6 +31,7 @@ const Folders = (props) => {
   const allCollections = useSelector((state) => state.collection.allCollections)
 
   const [formVisible, setFormVisible] = useState(false);
+  const [shareVisible, setShareVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [params, setParams] = useState({
     page: 1,
@@ -87,6 +89,11 @@ const Folders = (props) => {
   const handleOpenForm = (item = null, cloneMode = false) => {
     setSelectedItem(item);
     setFormVisible(true);
+  }
+
+  const handleOpenShareForm = (item = null) => {
+    setSelectedItem(item);
+    setShareVisible(true);
   }
 
   const stopSharing = async (collection) => {
@@ -162,6 +169,7 @@ const Folders = (props) => {
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
               onStop={stopSharing}
+              onShare={handleOpenShareForm}
             /> : <TableData
               className="mt-4"
               loading={syncing}
@@ -170,6 +178,7 @@ const Folders = (props) => {
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
               onStop={stopSharing}
+              onShare={handleOpenShareForm}
             />
           }
         </>
@@ -185,6 +194,16 @@ const Folders = (props) => {
         visible={formVisible}
         item={selectedItem}
         onClose={() => setFormVisible(false)}
+      />
+      <ShareFormData
+        visible={shareVisible}
+        item={selectedItem}
+        menuType={global.constants.MENU_TYPES.FOLDERS}
+        menuTypes={global.constants.MENU_TYPES}
+        onClose={() => {
+          setShareVisible(false);
+          setSelectedItem(null);
+        }}
       />
     </div>
   );

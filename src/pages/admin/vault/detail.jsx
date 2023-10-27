@@ -140,7 +140,7 @@ const Vault = (props) => {
     setCloneMode(cloneMode)
   }
 
-  const handleMoveForm = (item = null) => {
+  const handleOpenMoveForm = (item = null) => {
     setSelectedItem(item);
     setMoveVisible(true);
   }
@@ -267,7 +267,7 @@ const Vault = (props) => {
               isRestore={currentPage.name === global.keys.TRASH}
               isPermanentlyDelete={currentPage.name === global.keys.TRASH}
               onDelete={() => {}}
-              onMove={() => handleMoveForm(null)}
+              onMove={() => handleOpenMoveForm(null)}
               onCancel={() => setSelectedRowKeys([])}
             /> : <Filter
               className={'mt-2'}
@@ -293,7 +293,7 @@ const Vault = (props) => {
               data={filteredData.result}
               params={params}
               selectedRowKeys={selectedRowKeys}
-              onMove={handleMoveForm}
+              onMove={handleOpenMoveForm}
               onUpdate={handleOpenForm}
               onDelete={deleteItems}
               onRestore={restoreItems}
@@ -307,7 +307,7 @@ const Vault = (props) => {
               data={filteredData.result}
               params={params}
               selectedRowKeys={selectedRowKeys}
-              onMove={handleMoveForm}
+              onMove={handleOpenMoveForm}
               onUpdate={handleOpenForm}
               onDelete={deleteItems}
               onRestore={restoreItems}

@@ -41,6 +41,12 @@ const STATUS = {
   SHARED: null
 }
 
+const MENU_TYPES = {
+  CIPHERS: 'ciphers',
+  FOLDERS: 'folders',
+  QUICK_SHARES: 'quick-shares'
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
@@ -48,6 +54,7 @@ export default {
   PERMISSION_ROLE,
   STATUS,
   STATUS_ACTION,
+  MENU_TYPES,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',

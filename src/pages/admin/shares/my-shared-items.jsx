@@ -26,16 +26,12 @@ import commonServices from "../../../services/common";
 
 import { CipherType } from "../../../core-js/src/enums";
 
-const menuTypes = {
-  CIPHERS: 'ciphers',
-  FOLDERS: 'folders',
-  QUICK_SHARES: 'quick-shares'
-}
 
 const MySharedItems = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
+  const menuTypes = global.constants.MENU_TYPES
 
   const currentPage = common.getRouterByLocation(location);
 

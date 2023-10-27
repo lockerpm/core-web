@@ -32,6 +32,7 @@ const BoxData = (props) => {
     onUpdate = () => {},
     onDelete = () => {},
     onRestore = () => {},
+    onShare = () => {},
     onStopSharing = () => {},
     onPermanentlyDelete = () => {},
     selectionChange = () => {},
@@ -73,6 +74,7 @@ const BoxData = (props) => {
               onUpdate={onUpdate}
               onDelete={onDelete}
               onRestore={onRestore}
+              onShare={onShare}
               onStopSharing={onStopSharing}
               onPermanentlyDelete={onPermanentlyDelete}
             />

@@ -67,7 +67,6 @@
     "mrs": "Mrs",
     "ms": "Ms",
     "dr": "Dr",
-    "ok": "OK",
     "detail": "Detail",
     "selected_items": "{{amount}} Selected Items",
     "member": "Member",
@@ -119,7 +118,8 @@
     "new_share": "New share",
     "share": "Share",
     "view": "View",
-    "copy_link": "Copy link"
+    "copy_link": "Copy link",
+    "ok": "OK"
   },
   "placeholder": {
     "name": "Enter name",

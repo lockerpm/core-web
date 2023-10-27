@@ -22,16 +22,11 @@ import global from "../../../config/global";
 import commonServices from "../../../services/common";
 import sharingServices from "../../../services/sharing";
 
-const menuTypes = {
-  CIPHERS: 'ciphers',
-  FOLDERS: 'folders'
-}
-
 const SharedWithMe = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
-
+  const menuTypes = global.constants.MENU_TYPES
   const currentPage = common.getRouterByLocation(location);
 
   const syncing = useSelector((state) => state.sync.syncing);

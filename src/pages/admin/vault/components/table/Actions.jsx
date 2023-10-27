@@ -31,6 +31,7 @@ const Actions = (props) => {
     onUpdate = () => {},
     onDelete = () => {},
     onRestore = () => {},
+    onShare = () => {},
     onStopSharing = () => {},
     onPermanentlyDelete = () => {}
   } = props;
@@ -124,10 +125,11 @@ const Actions = (props) => {
         key: 'in_app_shares',
         hide: !common.isCipherShareable(originCipher),
         label: <Tooltip
-          title={t('shares.new_share.in_app_shares_note')}
+          title={t('shares.new_share.in_app_share_items_note')}
         >
-          <p>{t('shares.new_share.in_app_shares')}</p>
-        </Tooltip>
+          <p>{t('shares.new_share.in_app_share_items')}</p>
+        </Tooltip>,
+        onClick: () => onShare(originCipher)
       },
       {
         key: 'get_shareable_link',
@@ -136,7 +138,8 @@ const Actions = (props) => {
           title={t('shares.new_share.get_shareable_link_note')}
         >
           <p>{t('shares.new_share.get_shareable_link')}</p>
-        </Tooltip>
+        </Tooltip>,
+        onClick: () => onShare(originCipher, true)
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
   }, [originCipher, allOrganizations])

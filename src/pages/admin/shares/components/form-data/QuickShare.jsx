@@ -20,6 +20,7 @@ import global from '../../../../../config/global';
 
 function QuickShare(props) {
   const {
+    item,
     form,
     expirationOptions = {},
     countAccessOptions = {},
@@ -59,6 +60,7 @@ function QuickShare(props) {
           filterOption={false}
           showSearch={true}
           options={cipherOptions}
+          disabled={!!item}
           onSearch={(v) => setCipherSearchText(v)}
         />
       </Form.Item>
