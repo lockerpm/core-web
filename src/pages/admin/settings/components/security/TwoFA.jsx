@@ -9,13 +9,13 @@ import { useTranslation } from "react-i18next";
 import {
 } from '../../../../../components'
 
+import TwoFAFormData from "./form-data/TwoFA";
+
 import {
-  ImportOutlined
+  MobileOutlined
 } from "@ant-design/icons";
 
-import ImportForm from "./ImportForm";
-
-const Import = (props) => {
+const TwoFA = (props) => {
   const {
     className = '',
   } = props;
@@ -26,21 +26,21 @@ const Import = (props) => {
     <div className={className}>
       <div className="flex justify-between">
         <p className="font-semibold text-xl">
-          {t('import_export.import')}
+          {t('security.two_fa.title')}
         </p>
         <Button
           type='primary'
           ghost
-          icon={<ImportOutlined />}
+          icon={<MobileOutlined />}
           onClick={() => setFormVisible(true)}
         >
-          {t('button.import')}
+          {t('security.two_fa.turn_on')}
         </Button>
       </div>
       <p className="mt-1">
-        {t('import_export.import_description')}
+        {t('security.two_fa.description')}
       </p>
-      <ImportForm
+      <TwoFAFormData
         visible={formVisible}
         onClose={() => setFormVisible(false)}
       />
@@ -48,4 +48,4 @@ const Import = (props) => {
   );
 }
 
-export default Import;
+export default TwoFA;

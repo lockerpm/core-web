@@ -65,5 +65,8 @@ export default {
 
   ENTERPRISES: `${FLAT_FORM}/enterprises`,
   ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,
-  ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`
+  ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
+
+  NOTIFICATION_SETTINGS: `${FLAT_FORM}/notification/settings`,
+  NOTIFICATION_SETTING: `${FLAT_FORM}/notification/settings/:setting_id`,
 }

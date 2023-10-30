@@ -13,8 +13,6 @@ import ImageIcon from './item/ImageIcon'
 import SearchText from './item/SearchText'
 import GeneratePassword from './item/GeneratePassword'
 
-import ChangePasswordForm from './form/ChangePassword'
-
 export {
   AdminHeader,
   UploadFile,
@@ -30,6 +28,4 @@ export {
   ImageIcon,
   SearchText,
   GeneratePassword,
-
-  ChangePasswordForm
 }

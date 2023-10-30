@@ -20,6 +20,8 @@ import MySharedItems from './admin/shares/my-shared-items'
 // Setting pages
 import SettingsAccount from './admin/settings/Account'
 import SettingsImportExport from './admin/settings/ImportExport'
+import SettingsSecurity from './admin/settings/Security'
+import SettingsNotifications from './admin/settings/Notifications'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'
@@ -44,6 +46,8 @@ export default {
 
   SettingsAccount,
   SettingsImportExport,
+  SettingsSecurity,
+  SettingsNotifications,
 
   AdminErrorPage
 }

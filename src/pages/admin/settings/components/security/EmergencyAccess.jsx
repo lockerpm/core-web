@@ -10,12 +10,11 @@ import {
 } from '../../../../../components'
 
 import {
-  ImportOutlined
+  PlusOutlined,
+  RightOutlined
 } from "@ant-design/icons";
 
-import ImportForm from "./ImportForm";
-
-const Import = (props) => {
+const EmergencyAccess = (props) => {
   const {
     className = '',
   } = props;
@@ -25,27 +24,26 @@ const Import = (props) => {
   return (
     <div className={className}>
       <div className="flex justify-between">
-        <p className="font-semibold text-xl">
-          {t('import_export.import')}
-        </p>
+        <div className="flex text-primary cursor-pointer">
+          <p className="font-semibold text-xl mr-2">
+            {t('security.emergency_access.title')}
+          </p>
+          <RightOutlined />
+        </div>
         <Button
           type='primary'
           ghost
-          icon={<ImportOutlined />}
+          icon={<PlusOutlined />}
           onClick={() => setFormVisible(true)}
         >
-          {t('button.import')}
+          {t('security.emergency_access.add')}
         </Button>
       </div>
       <p className="mt-1">
-        {t('import_export.import_description')}
+        {t('security.emergency_access.description')}
       </p>
-      <ImportForm
-        visible={formVisible}
-        onClose={() => setFormVisible(false)}
-      />
     </div>
   );
 }
 
-export default Import;
+export default EmergencyAccess;

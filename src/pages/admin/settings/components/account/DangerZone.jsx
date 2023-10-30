@@ -18,32 +18,32 @@ const DangerZone = (props) => {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <div>
+      <Card bodyStyle={{ padding: 16 }} className="mb-4">
+        <div className="flex justify-between">
           <p className="font-semibold" style={{ color: red.primary }}>
             {t('account_details.danger_zone.delete_data')}
           </p>
-          <p>
-            {t('account_details.danger_zone.delete_data_desc')}
-          </p>
+          <Button type='primary' danger ghost>
+            {t('account_details.danger_zone.delete_data')}
+          </Button>
         </div>
-        <Button type='primary' danger ghost>
-          {t('account_details.danger_zone.delete_data')}
-        </Button>
-      </div>
-      <div className="flex justify-between mt-6">
-        <div>
+        <p className="mt-1">
+          {t('account_details.danger_zone.delete_data_desc')}
+        </p>
+      </Card>
+      <Card bodyStyle={{ padding: 16 }}>
+        <div className="flex justify-between">
           <p className="font-semibold" style={{ color: red.primary }}>
             {t('account_details.danger_zone.delete_account')}
           </p>
-          <p>
-            {t('account_details.danger_zone.delete_data_desc')}
-          </p>
+          <Button type='primary' danger ghost>
+            {t('account_details.danger_zone.delete_account')}
+          </Button>
         </div>
-        <Button type='primary' danger ghost>
-          {t('account_details.danger_zone.delete_account')}
-        </Button>
-      </div>
+        <p className="mt-1">
+          {t('account_details.danger_zone.delete_data_desc')}
+        </p>
+      </Card>
     </div>
   );
 }

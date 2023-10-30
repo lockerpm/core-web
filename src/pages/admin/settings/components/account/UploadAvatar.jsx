@@ -5,7 +5,8 @@ import {
   Button
 } from '@lockerpm/design';
 import {
-  InboxOutlined
+  InboxOutlined,
+  CloseOutlined
 } from "@ant-design/icons";
 
 import { useDispatch } from 'react-redux';
@@ -81,7 +82,9 @@ const UploadAvatar = (props) => {
   };
 
   return (
-    <div>
+    <div
+      className="upload-avatar"
+    >
       <Upload.Dragger {...uploadProps}>
         <div
           style={{ height: 160 }}
@@ -110,17 +113,23 @@ const UploadAvatar = (props) => {
         </div>
       </Upload.Dragger>
       {
-        imageUrl && <div className="flex justify-end mt-2">
+        imageUrl && <div
+          className="flex justify-end"
+          style={{
+            zIndex: 1000,
+            position: 'absolute',
+            top: 0,
+            right: 0
+          }}
+        >
           <Button
-            type="primary"
             danger
-            ghost
+            icon={<CloseOutlined />}
             onClick={() => {
               setImageUrl(null);
               onChange(null)
             }}
           >
-            {t('button.delete')}
           </Button>
         </div>
       }

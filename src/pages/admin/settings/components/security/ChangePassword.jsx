@@ -9,13 +9,13 @@ import { useTranslation } from "react-i18next";
 import {
 } from '../../../../../components'
 
+import ChangePasswordFormData from "./form-data/ChangePassword";
+
 import {
-  ImportOutlined
+  KeyOutlined,
 } from "@ant-design/icons";
 
-import ImportForm from "./ImportForm";
-
-const Import = (props) => {
+const ChangePassword = (props) => {
   const {
     className = '',
   } = props;
@@ -26,21 +26,21 @@ const Import = (props) => {
     <div className={className}>
       <div className="flex justify-between">
         <p className="font-semibold text-xl">
-          {t('import_export.import')}
+          {t('security.change_password.title')}
         </p>
         <Button
           type='primary'
           ghost
-          icon={<ImportOutlined />}
+          icon={<KeyOutlined />}
           onClick={() => setFormVisible(true)}
         >
-          {t('button.import')}
+          {t('change_password.title')}
         </Button>
       </div>
       <p className="mt-1">
-        {t('import_export.import_description')}
+        {t('security.change_password.description')}
       </p>
-      <ImportForm
+      <ChangePasswordFormData
         visible={formVisible}
         onClose={() => setFormVisible(false)}
       />
@@ -48,4 +48,4 @@ const Import = (props) => {
   );
 }
 
-export default Import;
+export default ChangePassword;

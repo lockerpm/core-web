@@ -177,7 +177,7 @@ const Lock = () => {
                   {t('sidebar.logout')}
                 </Button>
               </Col>
-              <Col lg={12}>
+              <Col span={12}>
                 <Button
                   className="w-full mt-6"
                   size="large"

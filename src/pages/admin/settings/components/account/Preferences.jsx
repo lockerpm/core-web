@@ -1,5 +1,6 @@
 import React, { } from "react";
 import {
+  Card,
   Form,
   Select,
 } from '@lockerpm/design';
@@ -18,63 +19,63 @@ const Preferences = (props) => {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <div>
+      <Card bodyStyle={{ padding: 16 }} className="mb-4">
+        <div className="flex justify-between">
           <p className="font-semibold">
             {t('account_details.preferences.language')}
           </p>
+          <Form.Item
+            name={'language'}
+            className="mb-0"
+          >
+            <Select
+              style={{ width: 150 }}
+              options={global.constants.LANGUAGES}
+            />
+          </Form.Item>
         </div>
-        <Form.Item
-          name={'language'}
-          className="mb-0"
-        >
-          <Select
-            style={{ width: 150 }}
-            options={global.constants.LANGUAGES}
-          />
-        </Form.Item>
-      </div>
-      <div className="flex justify-between mt-6">
-        <div>
+      </Card>
+      <Card bodyStyle={{ padding: 16 }} className="mb-4">
+        <div className="flex justify-between">
           <p className="font-semibold">
             {t('account_details.preferences.timeout')}
           </p>
-          <p>
-            {t('account_details.preferences.timeout_desc')}
-          </p>
+          <Form.Item
+            name={'timeout'}
+            className="mb-0"
+          >
+            <Select
+              style={{ width: 160 }}
+              options={global.constants.VAULT_TIMEOUTS}
+            />
+          </Form.Item>
         </div>
-        <Form.Item
-          name={'timeout'}
-          className="mb-0"
-        >
-          <Select
-            style={{ width: 160 }}
-            options={global.constants.VAULT_TIMEOUTS}
-          />
-        </Form.Item>
-      </div>
-      <div className="flex justify-between mt-6">
-        <div>
+        <p className="mt-1">
+          {t('account_details.preferences.timeout_desc')}
+        </p>
+      </Card>
+      <Card bodyStyle={{ padding: 16 }}>
+        <div className="flex justify-between">
           <p className="font-semibold">
             {t('account_details.preferences.timeout_action')}
           </p>
-          <p>
-            {t('account_details.preferences.timeout_action_lock_desc')}
-          </p>
-          <p>
-            {t('account_details.preferences.timeout_action_logout_desc')}
-          </p>
+          <Form.Item
+            name={'timeout_action'}
+            className="mb-0"
+          >
+            <Select
+              style={{ width: 90 }}
+              options={global.constants.VAULT_TIMEOUT_ACTIONS}
+            />
+          </Form.Item>
         </div>
-        <Form.Item
-          name={'timeout_action'}
-          className="mb-0"
-        >
-          <Select
-            style={{ width: 90 }}
-            options={global.constants.VAULT_TIMEOUT_ACTIONS}
-          />
-        </Form.Item>
-      </div>
+        <p className="mt-1">
+          {t('account_details.preferences.timeout_action_lock_desc')}
+        </p>
+        <p>
+          {t('account_details.preferences.timeout_action_logout_desc')}
+        </p>
+      </Card>
     </div>
   );
 }

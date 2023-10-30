@@ -64,7 +64,7 @@ const Export = (props) => {
       <Row
         gutter={[16, 16]}
       >
-        <Col span={12}>
+        <Col span={12} md={12} sm={24} xs={24}>
           <div>
             <p className="font-semibold text-xl">{t('import_export.export')}</p>
             <p className="mt-1">{t('import_export.export_description')}</p>
@@ -99,6 +99,7 @@ const Export = (props) => {
           <div className="mt-4 flex justify-end">
             <Button
               type='primary'
+              ghost
               onClick={() => setConfirmVisible(true)}
               icon={<ExportOutlined />}
             >

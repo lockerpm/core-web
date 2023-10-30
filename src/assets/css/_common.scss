@@ -71,6 +71,36 @@
   }
 }
 
+.steps-2fa {
+  .ant-steps-item {
+    .ant-steps-item-container {
+      .ant-steps-item-content {
+        padding-bottom: 24px;
+        .ant-steps-item-title {
+          width: 100%;
+          padding-inline-end: 0px !important;
+          .ant-collapse {
+            height: 32px;
+            .ant-collapse-item {
+              height: 100%;
+              .ant-collapse-header {
+                padding: 0;
+                height: 100%;
+                align-items: center;
+              }
+              .ant-collapse-content {
+                .ant-collapse-content-box{
+                  padding: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .layout-content {
     padding: var(--page-content-spacing-collapsed) !important;

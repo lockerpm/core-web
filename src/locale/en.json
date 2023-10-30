@@ -207,6 +207,9 @@
         "share_item_success": "The item have been shared!",
         "share_folder_success": "The item have been shared!",
         "stop_share_success": "Stop sharing successfully"
+      },
+      "notification": {
+        "updated": "Your email notifications have been updated!"
       }
     },
     "warning": {
@@ -330,6 +333,13 @@
       "delete_account": "Delete account",
       "delete_account_desc": "Delete your Locker account permanently."
     }
+  },
+  "security_control": {
+    "title": "Security Control",
+    "description": "Manage your security and privacy."
+  },
+  "email_notifications": {
+    "title": "Email notifications"
   },
   "generate_password": {
     "title": "Generate random password",
@@ -717,5 +727,27 @@
     "four_hours": "4 hours",
     "two_weeks": "2 weeks",
     "on_refresh": "On Browser Reload"
+  },
+  "security": {
+    "change_password": {
+      "title": "Account Password",
+      "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan."
+    },
+    "two_fa": {
+      "title": "Two-factor authentication (2FA)",
+      "description": "Create an additional layer of security by setting up 2FA for your Locker account.",
+      "turn_on": "Turn on 2-step verification",
+      "turn_off": "Turn off 2-step verification"
+    },
+    "emergency_access": {
+      "title": "Emergency Access",
+      "description": "This feature grants other Locker account owner(s) the ability to access to your vault in some emergency situations.",
+      "add": "Add emergency contact"
+    },
+    "manage_sessions": {
+      "title": "Manage sessions",
+      "description": "",
+      "logout": "Log out of all devices"
+    }
   }
 }  
