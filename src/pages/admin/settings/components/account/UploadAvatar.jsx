@@ -11,8 +11,6 @@ import {
 import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from "../../../../../config/global";
-
 const UploadAvatar = (props) => {
   const {
     value,
@@ -116,6 +114,7 @@ const UploadAvatar = (props) => {
           <Button
             type="primary"
             danger
+            ghost
             onClick={() => {
               setImageUrl(null);
               onChange(null)

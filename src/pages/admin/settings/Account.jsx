@@ -11,10 +11,10 @@ import {
 
 import { AdminHeader } from "../../../components";
 
-import PersonalInfo from './components/details/PersonalInfo'
-import UploadAvatar from './components/details/UploadAvatar'
-import Security from './components/details/Security'
-import DangerZone from './components/details/DangerZone'
+import PersonalInfo from './components/account/PersonalInfo'
+import UploadAvatar from './components/account/UploadAvatar'
+import Preferences from './components/account/Preferences'
+import DangerZone from './components/account/DangerZone'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -28,6 +28,9 @@ const AccountDetails = (props) => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.auth.userInfo)
+  const usersMe = useSelector((state) => state.auth.usersMe)
+
+  console.log(userInfo, usersMe);
 
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
@@ -43,8 +46,8 @@ const AccountDetails = (props) => {
       title: t('account_details.profile_photo')
     },
     {
-      key: 'security_settings',
-      title: t('account_details.security_settings')
+      key: 'preferences',
+      title: t('account_details.preferences.title')
     },
     {
       key: 'danger_zone',
@@ -54,16 +57,24 @@ const AccountDetails = (props) => {
 
   useEffect(() => {
     form.setFieldsValue({
+      email: userInfo.email,
       username: userInfo.username,
       full_name: userInfo.full_name,
+      language: userInfo.language,
+      timeout: usersMe.timeout,
+      timeout_action: usersMe.timeout_action
     })
     setAvatar(userInfo.avatar)
-  }, [userInfo])
+  }, [userInfo, usersMe])
 
   const handleCancel = () => {
     form.setFieldsValue({
+      email: userInfo.email,
       username: userInfo.username,
       full_name: userInfo.full_name,
+      language: userInfo.language,
+      timeout: usersMe.timeout,
+      timeout_action: usersMe.timeout_action
     })
     setAvatar(userInfo.avatar)
   }
@@ -113,7 +124,11 @@ const AccountDetails = (props) => {
         subtitle={t('account_details.description')}
         actions={[]}
       />
-      <Form form={form} layout="vertical">
+      <Form
+        form={form}
+        layout="vertical"
+        disabled={callingAPI}
+      >
         <List
           itemLayout="horizontal"
           dataSource={data}
@@ -143,9 +158,7 @@ const AccountDetails = (props) => {
                 </Col>
                 <Col lg={16} md={16} sm={24} xs={24}>
                   {
-                    index === 0 && <PersonalInfo
-                      callingAPI={callingAPI}
-                    />
+                    index === 0 && <PersonalInfo />
                   }
                   {
                     index === 1 && <UploadAvatar
@@ -156,7 +169,7 @@ const AccountDetails = (props) => {
                     />
                   }
                   {
-                    index === 2 && <Security />
+                    index === 2 && <Preferences />
                   }
                   {
                     index === 3 && <DangerZone />

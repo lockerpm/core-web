@@ -9,13 +9,6 @@ import Lock from './auth/lock'
 import Error403 from './errors/403'
 import Error404 from './errors/404'
 
-// Account pages
-import AccountDetails from './admin/account/details'
-import AccountNotifications from './admin/account/notifications'
-import AccountManageSessions from './admin/account/sessions'
-import AccountChangePassword from './admin/account/change-password'
-import Account2FA from './admin/account/2fa'
-
 // Admin Pages
 import Vault from './admin/vault'
 import VaultDetail from './admin/vault/detail'
@@ -23,6 +16,10 @@ import Folders from './admin/folders'
 import Authenticator from './admin/otps'
 import SharedWithMe from './admin/shares/shared-with-me'
 import MySharedItems from './admin/shares/my-shared-items'
+
+// Setting pages
+import SettingsAccount from './admin/settings/Account'
+import SettingsImportExport from './admin/settings/ImportExport'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'
@@ -38,18 +35,15 @@ export default {
   Error403,
   Error404,
 
-  AccountDetails,
-  AccountNotifications,
-  AccountManageSessions,
-  AccountChangePassword,
-  Account2FA,
-
   Vault,
   VaultDetail,
   Folders,
   Authenticator,
   SharedWithMe,
   MySharedItems,
+
+  SettingsAccount,
+  SettingsImportExport,
 
   AdminErrorPage
 }

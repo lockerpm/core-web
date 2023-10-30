@@ -76,11 +76,7 @@ export default {
       icon: <MobileOutlined />,
       label: <Trans i18nKey='sidebar.authenticator' />,
     },
-    {
-      key: keys.SECURITY_TOOLS,
-      icon: <SecurityScanOutlined />,
-      label: <Trans i18nKey='sidebar.security_tools' />,
-    },
+    
     {
       key: keys.SHARES,
       router: keys.SHARED_WITH_ME,
@@ -103,6 +99,11 @@ export default {
       key: keys.TRASH,
       icon: <DeleteOutlined />,
       label: <Trans i18nKey='sidebar.trash' />,
+    },
+    {
+      key: keys.SECURITY_TOOLS,
+      icon: <SecurityScanOutlined />,
+      label: <Trans i18nKey='sidebar.security_tools' />,
     },
     {
       key: keys.SETTINGS,

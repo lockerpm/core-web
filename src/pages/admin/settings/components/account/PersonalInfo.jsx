@@ -11,19 +11,18 @@ import {
 import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from "../../../../../config/global";
-
 const PersonalInfo = (props) => {
-  const { callingAPI } = props
+  const { } = props
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   return (
     <div>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[8, 8]}>
         <Col lg={12} md={12} sm={12} xs={24}>
           <Form.Item
-            name={'username'}
+            name={'email'}
+            className="mb-0"
             label={
               <p className="font-semibold">{t("common.email")}</p>
             }
@@ -37,12 +36,12 @@ const PersonalInfo = (props) => {
         <Col lg={12} md={12} sm={12} xs={24}>
           <Form.Item
             name={'full_name'}
+            className="mb-0"
             label={
               <p className="font-semibold">{t("common.full_name")}</p>
             }
           >
             <Input
-              disabled={callingAPI}
               className='w-full'
               placeholder={t('placeholder.enter')}
             />

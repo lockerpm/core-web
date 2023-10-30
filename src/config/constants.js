@@ -5,7 +5,9 @@ import { FieldType } from '../core-js/src/enums/fieldType'
 import keys from './keys'
 
 const FILE_TYPE = {
+  CSV: 'csv',
   JSON: 'json',
+  ENCRYPTED_JSON: 'encrypted_json'
 }
 
 const ACCOUNT_ROLE = {
@@ -69,10 +71,22 @@ export default {
       label: <Trans i18nKey='common.vietnamese' />,
     },
   ],
-  IMPORT_EXPORT_FILE_TYPES: [
+  IMPORT_FILE_TYPES: [],
+  EXPORT_FILE_TYPES: [
+    {
+      value: FILE_TYPE.CSV,
+      icon: 'files/csv',
+      label: 'CSV'
+    },
     {
       value: FILE_TYPE.JSON,
-      label: 'Json'
+      icon: 'files/json',
+      label: 'JSON'
+    },
+    {
+      value: FILE_TYPE.ENCRYPTED_JSON,
+      icon: 'files/encrypted_json',
+      label: 'ENCRYPTED_JSON'
     }
   ],
   CIPHER_TYPES: [
@@ -454,5 +468,49 @@ export default {
       role: PERMISSION_ROLE.MEMBER,
       label: <Trans i18nKey={'permissions.viewable'}/>,
     },
-  ]
+  ],
+  VAULT_TIMEOUTS: [
+    {
+      value: 1,
+      label: <Trans i18nKey={'timeouts.one_minute'}/>,
+    },
+    {
+      value: 5,
+      label: <Trans i18nKey={'timeouts.five_minutes'}/>,
+    },
+    {
+      value: 15,
+      label: <Trans i18nKey={'timeouts.fifteen_minutes'}/>,
+    },
+    {
+      value: 30,
+      label: <Trans i18nKey={'timeouts.thirty_minutes'}/>,
+    },
+    {
+      value: 60,
+      label: <Trans i18nKey={'timeouts.one_hour'}/>,
+    },
+    {
+      value: 60 * 4,
+      label: <Trans i18nKey={'timeouts.four_hours'}/>,
+    },
+    {
+      value: 60 * 24 * 14,
+      label: <Trans i18nKey={'timeouts.two_weeks'}/>,
+    },
+    {
+      value: -1,
+      label: <Trans i18nKey={'timeouts.on_refresh'}/>,
+    }
+  ],
+  VAULT_TIMEOUT_ACTIONS: [
+    {
+      value: 'lock',
+      label: <Trans i18nKey={'button.lock'}/>,
+    },
+    {
+      value: 'logOut',
+      label: <Trans i18nKey={'button.logout'}/>,
+    },
+  ],
 }

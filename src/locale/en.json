@@ -54,6 +54,7 @@
     "full_name": "Full name",
     "access_date": "Access date",
     "email": "Email",
+    "username": "Username",
     "on": "On", 
     "off": "Off",
     "no": "No.",
@@ -101,9 +102,9 @@
     "export": "Export",
     "download": "Download", 
     "new_member": "New Member",
+    "lock": "Lock",
     "logout": "Log out",
     "save_changes": "Save Changes",
-    "delete_data": "Delete Data",
     "enable": "Enable",
     "disable": "Disable",
     "verify": "Verify",
@@ -313,16 +314,21 @@
     "description": "Manage your profile details, account preferences, account security and privacy.",
     "personal_info": "Personal Info",
     "profile_photo": "Your Profile Photo",
-    "security_settings": "Security Settings",
-    "change_password": "Change Password",
-    "2fa": {
-      "setup": "Setup Two Factor Authentication",
-      "setup_on": "Two-step authentication is"
+    "preferences": {
+      "title": "Preferences",
+      "language": "Language",
+      "timeout": "Timeout",
+      "timeout_desc": "Automatically locks the app after a chosen period of device inactivity.",
+      "timeout_action": "Timeout Action",
+      "timeout_action_lock_desc": "A locked vault requires that you re-enter your master password to access it again.",
+      "timeout_action_logout_desc": "A logged out vault requires that you re-authenticate to access it again."
     },
     "danger_zone": {
       "title": "Danger zone",
-      "delete_data": "Delete Data",
-      "delete_data_desc": "Delete add data permanently, including all your data will be deleted."
+      "delete_data": "Delete Locker data",
+      "delete_data_desc": "Delete all data in your Locker account. Your Locker account still remains.",
+      "delete_account": "Delete account",
+      "delete_account_desc": "Delete your Locker account permanently."
     }
   },
   "generate_password": {
@@ -688,5 +694,28 @@
       "personal_email": "Personal email",
       "personal_email_placeholder": "Enter email to search"
     }
+  },
+  "import_export": {
+    "title": "Import/Export",
+    "description": "Manage your profile details and account preferences.",
+    "import": "Import Items",
+    "file_content": "File content",
+    "import_description": "Transfer passwords and other items from browser or files.",
+    "export": "Export Items",
+    "export_description": "Enter your master password to export your vault data.",
+    "choose_format": "Choose a file format:",
+    "upload_file": "Upload a file from your computer",
+    "confirm": "{{type}}",
+    "confirm_note": "Enter your password to confirm"
+  },
+  "timeouts": {
+    "one_minute": "1 minute",
+    "five_minutes": "5 minutes",
+    "fifteen_minutes": "15 minutes",
+    "thirty_minutes": "30 minutes",
+    "one_hour": "1 hour",
+    "four_hours": "4 hours",
+    "two_weeks": "2 weeks",
+    "on_refresh": "On Browser Reload"
   }
 }  
