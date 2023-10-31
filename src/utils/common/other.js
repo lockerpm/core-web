@@ -111,12 +111,30 @@ const getOrganization = (id) => {
   return global.store.getState().organization.allOrganizations.find((o) => o.id === id)
 }
 
-const getInvitationStatus = (status) => {
-  return global.constants.INVITATION_STATUSES.find((s) => !s.value || s.value === status)
+const getStatus = (status) => {
+  return global.constants.STATUSES.find((s) => !s.value || s.value === status)
+}
+
+const getAccess = (access) => {
+  return global.constants.USER_ACCESSES.find((s) => s.value === access)
 }
 
 const getSharePermission = (permission) => {
   return global.constants.SHARE_PERMISSIONS.find((s) => !s.value || s.value === permission)
+}
+
+const getEmergencyAccessDays = (contact) => {
+  return (
+    ((contact.recovery_initiated_date +
+      contact.wait_time_days * 24 * 60 * 60) *
+      1000 -
+      new Date().getTime()) /
+    (1000 * 60 * 60 * 24)
+  ).toFixed(1)
+}
+
+const getClientInfo = (clientId) => {
+  return global.constants.CLIENTS.find((s) => !s.value || s.value === clientId)
 }
 
 export default {
@@ -133,6 +151,9 @@ export default {
   selectedWalletApp,
   selectedNetworks,
   getOrganization,
-  getInvitationStatus,
-  getSharePermission
+  getStatus,
+  getAccess,
+  getSharePermission,
+  getEmergencyAccessDays,
+  getClientInfo
 }

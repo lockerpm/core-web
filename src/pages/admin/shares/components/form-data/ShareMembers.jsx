@@ -339,7 +339,7 @@ function ShareMembers(props) {
                                 {t('common.confirm')}
                               </Button>
                             }
-                            const status = item.status ? common.getInvitationStatus(item.status) : null
+                            const status = item.status ? common.getStatus(item.status) : null
                             if (status) {
                               return <Tag color={status.color}>{status.label}</Tag>
                             }

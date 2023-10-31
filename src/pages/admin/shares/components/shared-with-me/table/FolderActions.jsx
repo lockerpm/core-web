@@ -84,7 +84,6 @@ const FolderActions = (props) => {
         {
           isInvited && <Button
             type="primary"
-            rounded
             size="small"
             onClick={() => onUpdateStatus(folder, global.constants.STATUS_ACTION.ACCEPT)}
           >
@@ -93,7 +92,6 @@ const FolderActions = (props) => {
         }
         {
           isInvited && <Button
-            rounded
             size="small"
             onClick={() => onUpdateStatus(folder, global.constants.STATUS_ACTION.ACCEPT)}
           >

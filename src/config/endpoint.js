@@ -15,6 +15,7 @@ export default {
   LOGOUT: `${API_URL}/v3/users/logout`,
 
   USERS_ME: `${FLAT_FORM}/users/me`,
+  USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
 
   WS_SYNC: `${WS_FLAT_FORM}/sync`,
@@ -69,4 +70,7 @@ export default {
 
   NOTIFICATION_SETTINGS: `${FLAT_FORM}/notification/settings`,
   NOTIFICATION_SETTING: `${FLAT_FORM}/notification/settings/:setting_id`,
+
+  EMERGENCY_ACCESS_TRUSTED: `${FLAT_FORM}/emergency_access/trusted`,
+  EMERGENCY_ACCESS_GRANTED: `${FLAT_FORM}/emergency_access/granted`,
 }

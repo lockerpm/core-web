@@ -30,7 +30,7 @@ const Security = (props) => {
       <Divider />
       <EmergencyAccess />
       <Divider />
-      <ManageSessions />
+      <ManageSessions className="mb-4"/>
     </div>
   );
 }

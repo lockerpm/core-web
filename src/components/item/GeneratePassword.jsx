@@ -147,7 +147,8 @@ const GeneratePassword = (props) => {
         <Popover
           placement="bottomRight"
           trigger={['hover']}
-          title={<div className="p-2">
+          className="generate-password-popover"
+          title={<div className="p-2" style={{ width: 250 }}>
             <div className="flex items-center justify-between mb-2">
               <p
                 className="text-limited text-md w-4/5"
@@ -170,7 +171,7 @@ const GeneratePassword = (props) => {
               showProgress={false}
             />
           </div>}
-          content={<div className="px-2">
+          content={<div className="px-2" style={{ width: 250 }}>
             <Button
               ghost
               type="primary"

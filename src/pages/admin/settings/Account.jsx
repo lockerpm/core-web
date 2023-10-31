@@ -30,8 +30,6 @@ const AccountDetails = (props) => {
   const userInfo = useSelector((state) => state.auth.userInfo)
   const usersMe = useSelector((state) => state.auth.usersMe)
 
-  console.log(userInfo, usersMe);
-
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
   const [avatar, setAvatar] = useState(null);

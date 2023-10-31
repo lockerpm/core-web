@@ -57,12 +57,12 @@ const Notifications = (props) => {
         loading={loading}
         renderItem={(item, index) => (
           <List.Item
-          actions={[
-            <Switch
-              checked={item.mail}
-              onChange={(v) => updateSetting(item, v)}
-            />
-          ]}
+            actions={[
+              <Switch
+                checked={item.mail}
+                onChange={(v) => updateSetting(item, v)}
+              />
+            ]}
           >
             <p className="font-semibold">
               {item.category[`name_${language}`] || item.category.name}

@@ -18,6 +18,14 @@ async function users_me() {
   })
 }
 
+async function users_me_devices() {
+  return request({
+    url: global.endpoint.USERS_ME_DEVICES,
+    method: 'get',
+  })
+}
+
+
 async function users_session(data) {
   const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
@@ -84,6 +92,7 @@ async function change_password(data = {}) {
 export default {
   me,
   users_me,
+  users_me_devices,
   users_session,
   change_password,
 }

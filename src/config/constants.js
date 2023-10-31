@@ -2,6 +2,13 @@ import { Trans } from 'react-i18next'
 import { CipherType } from '../core-js/src/enums'
 import { FieldType } from '../core-js/src/enums/fieldType'
 
+import {
+  DesktopOutlined,
+  MobileOutlined,
+  GlobalOutlined,
+  ChromeOutlined
+} from "@ant-design/icons";
+
 import keys from './keys'
 
 const FILE_TYPE = {
@@ -40,6 +47,8 @@ const STATUS = {
   INVITED: 'invited',
   EXPIRED: 'expired',
   REJECT: 'rejected',
+  RECOVERY_INITIATED: 'recovery_initiated',
+  RECOVERY_APPROVED: 'recovery_approved',
   SHARED: null
 }
 
@@ -47,6 +56,11 @@ const MENU_TYPES = {
   CIPHERS: 'ciphers',
   FOLDERS: 'folders',
   QUICK_SHARES: 'quick-shares'
+}
+
+const ACCESS_TYPE = {
+  VIEW: 'view',
+  TAKEOVER: 'takeover',
 }
 
 export default {
@@ -57,6 +71,7 @@ export default {
   STATUS,
   STATUS_ACTION,
   MENU_TYPES,
+  ACCESS_TYPE,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
@@ -420,7 +435,7 @@ export default {
     { label: '11', value: '11' },
     { label: '12', value: '12' }
   ],
-  INVITATION_STATUSES: [
+  STATUSES: [
     {
       value: STATUS.PENDING,
       label: <Trans i18nKey={'statuses.pending'}/>,
@@ -450,6 +465,16 @@ export default {
       value: STATUS.REJECT,
       label: <Trans i18nKey={'statuses.reject'}/>,
       color: 'error'
+    },
+    {
+      value: STATUS.RECOVERY_INITIATED,
+      label: <Trans i18nKey={'statuses.recovery_initiated'}/>,
+      color: 'default'
+    },
+    {
+      value: STATUS.RECOVERY_APPROVED,
+      label: <Trans i18nKey={'statuses.recovery_approved'}/>,
+      color: 'success'
     },
     {
       value: STATUS.SHARED,
@@ -513,4 +538,67 @@ export default {
       label: <Trans i18nKey={'button.logout'}/>,
     },
   ],
+  USER_ACCESSES: [
+    {
+      value: ACCESS_TYPE.VIEW,
+      color: 'success',
+      label: <Trans i18nKey={'security.emergency_access.emergency_contact.view'}/>,
+      description: <Trans i18nKey={'security.emergency_access.emergency_contact.view_description'}/>,
+    },
+    {
+      value: ACCESS_TYPE.TAKEOVER,
+      color: 'processing',
+      label: <Trans i18nKey={'security.emergency_access.emergency_contact.takeover'}/>,
+      description: <Trans i18nKey={'security.emergency_access.emergency_contact.takeover_description'}/>
+    },
+  ],
+  WAIT_TIMES: [
+    {
+      value: 1,
+      label: <Trans i18nKey={'common.days_number'} values={{ number: 1 }}/>,
+    },
+    {
+      value: 2,
+      label: <Trans i18nKey={'common.days_number'} values={{ number: 2 }}/>,
+    },
+    {
+      value: 7,
+      label: <Trans i18nKey={'common.days_number'} values={{ number: 7 }}/>,
+    },
+    {
+      value: 14,
+      label: <Trans i18nKey={'common.days_number'} values={{ number: 14 }}/>,
+    },
+    {
+      value: 30,
+      label: <Trans i18nKey={'common.days_number'} values={{ number: 30 }}/>,
+    },
+  ],
+  CLIENTS: [
+    {
+      value: 'web',
+      name: 'Web Application',
+      icon: <GlobalOutlined />
+    },
+    {
+      value: 'browser',
+      name: 'Web Extension',
+      icon: <ChromeOutlined />
+    },
+    {
+      value: 'mobile',
+      name: 'Mobile Application',
+      icon: <MobileOutlined />
+    },
+    {
+      value: 'desktop',
+      name: 'Desktop Application',
+      icon: <DesktopOutlined />
+    },
+    {
+      value: null,
+      name: 'Other Application',
+      icon: <DesktopOutlined />
+    }
+  ]
 }

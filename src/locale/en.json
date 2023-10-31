@@ -36,6 +36,7 @@
     "all_default": "All (*)",
     "copy": "Copy",
     "copied": "Copied",
+    "users": "Users",
     "access_type": "Access Type",
     "client": "Client",
     "location": "Location",
@@ -75,7 +76,8 @@
     "or": "or",
     "item": "Item",
     "email_addresses": "Email addresses",
-    "receiver": "Receiver"
+    "receiver": "Receiver",
+    "days_number": "{{number}} days"
   },
   "button": {
     "add": "Add",
@@ -120,7 +122,8 @@
     "share": "Share",
     "view": "View",
     "copy_link": "Copy link",
-    "ok": "OK"
+    "ok": "OK",
+    "remove": "Remove"
   },
   "placeholder": {
     "name": "Enter name",
@@ -234,7 +237,7 @@
     "identities": "Identities",
     "folders": "Folders",
     "authenticator": "Authenticator",
-    "security_tools": "Security_tools",
+    "security_tools": "Security Tools",
     "shares": "Shares",
     "trash": "Trash",
     "settings": "Settings",
@@ -290,7 +293,9 @@
     "accessed": "Accessed",
     "shared": "Shared",
     "rejected": "Rejected",
-    "pending": "Pending"
+    "pending": "Pending",
+    "recovery_initiated": "Recovery Initiated",
+    "recovery_approved": "Recovery Approved"
   },
   "permissions": {
     "editable": "Editable",
@@ -742,7 +747,31 @@
     "emergency_access": {
       "title": "Emergency Access",
       "description": "This feature grants other Locker account owner(s) the ability to access to your vault in some emergency situations.",
-      "add": "Add emergency contact"
+      "add": "Add emergency contact",
+      "your_trusted_contacts": "Your trusted contacts",
+      "contacts_that_trusted_you": "Contacts that trusted you",
+      "pending_requests": "{{number}} Pending requests",
+      "grantor_recovery_initiated_info": "The user will be provided access after {{day}} day(s) or whenever you manually approve the request.",
+      "grantee_recovery_initiated_info": "You will be provided access after {{day}} day(s) or whenever the user manually approves the request.",
+      "actions": {
+        "accept": "Accept",
+        "request_access": "Request access",
+        "view": "View",
+        "reset_their_lmp": "Reset their Locker Master Password",
+        "reset_their_lp": "Reset their Locker Password",
+        "reinvite": "Resend invitation",
+        "reject": "Reject"
+      },
+      "emergency_contact": {
+        "invite": "Invite emergency contact",
+        "user_access": "User access",
+        "view": "View",
+        "view_description": "They can view all your vault items",
+        "takeover": "Takeover",
+        "takeover_description": "They can reset your Master Password",
+        "wait_time": "Wait Time",
+        "wait_time_description": "Time required before automatically granting access."
+      }
     },
     "manage_sessions": {
       "title": "Manage sessions",

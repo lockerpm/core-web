@@ -88,7 +88,7 @@ const TableData = (props) => {
         width: 100,
         align: 'center',
         render: (_, record) => {
-          const status = common.getInvitationStatus(record.status)
+          const status = common.getStatus(record.status)
           return <Tag color={status.color}>
             {status.label}
           </Tag>
