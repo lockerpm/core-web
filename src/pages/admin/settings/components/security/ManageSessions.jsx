@@ -18,6 +18,8 @@ import {
   DownOutlined
 } from "@ant-design/icons";
 
+import DeauthorizeSessionsModal from "./manage-sessions/DeauthorizeSessions";
+
 import userServices from "../../../../../services/user";
 import common from "../../../../../utils/common";
 
@@ -27,7 +29,7 @@ const ManageSessions = (props) => {
   } = props;
   const { t } = useTranslation();
   const [expand, setExpand] = useState(false);
-  const [formVisible, setFormVisible] = useState(false);
+  const [confirmVisible, setConfirmVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [listDevices, setListDevices] = useState([]);
 
@@ -39,7 +41,11 @@ const ManageSessions = (props) => {
     const devices = await userServices.users_me_devices();
     setListDevices((devices || []).filter((d) => d.is_active))
   }
-
+  
+  const openModal = (item) => {
+    setSelectedDevice(item)
+    setConfirmVisible(true)
+  }
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -59,7 +65,7 @@ const ManageSessions = (props) => {
           ghost
           danger
           icon={<LogoutOutlined />}
-          onClick={() => setFormVisible(true)}
+          onClick={() => openModal(null)}
         >
           {t('security.manage_sessions.logout')}
         </Button>
@@ -76,7 +82,11 @@ const ManageSessions = (props) => {
                   <Badge status="success" />     
                   <span className="ml-2">{t('common.active')}</span>             
                 </Tag>,
-                <Button danger ghost>
+                <Button
+                  danger
+                  ghost
+                  onClick={() => openModal(item)}
+                >
                   {t('button.logout')}
                 </Button>
               ]}
@@ -102,6 +112,11 @@ const ManageSessions = (props) => {
           )}
         />
       }
+      <DeauthorizeSessionsModal
+        visible={confirmVisible}
+        device={selectedDevice}
+        onClose={() => setConfirmVisible(false)}
+      />
     </div>
   );
 }

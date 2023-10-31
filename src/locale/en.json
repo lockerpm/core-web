@@ -776,7 +776,12 @@
     "manage_sessions": {
       "title": "Manage sessions",
       "description": "",
-      "logout": "Log out of all devices"
+      "logout": "Log out of all devices",
+      "log_out_of": "Log out of this {{device_name}}",
+      "log_out_of_description": "This will remove access to your Locker Account from the device. Enter Master Password to confirm.",
+      "log_out_all": "Deauthorize Sessions",
+      "log_out_all_description": "Concerned your account is logged in on another device? Proceed below to deauthorize all computers or devices that you have previously used. This security step is recommended if you previously used a public computer or accidentally saved your password on a device that isn't yours.",
+      "log_out_all_note": "Proceeding will also log you out of your current session, requiring you to log back in."
     }
   }
 }  
