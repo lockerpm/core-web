@@ -25,6 +25,22 @@ async function users_me_devices() {
   })
 }
 
+async function remove_device(deviceId) {
+  return request({
+    url: global.endpoint.USERS_ME_DEVICE.replace(':device_id', deviceId),
+    method: 'delete',
+  })
+}
+
+async function revoke_all_devices(hashedPassword) {
+  return request({
+    url: global.endpoint.USERS_SESSION_REVOKE_ALL,
+    method: 'post',
+    data: {
+      master_password_hash: hashedPassword
+    }
+  })
+}
 
 async function users_session(data) {
   const deviceId = authServices.device_id();
@@ -93,6 +109,8 @@ export default {
   me,
   users_me,
   users_me_devices,
+  remove_device,
   users_session,
   change_password,
+  revoke_all_devices
 }

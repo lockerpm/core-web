@@ -16,7 +16,9 @@ export default {
 
   USERS_ME: `${FLAT_FORM}/users/me`,
   USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,
+  USERS_ME_DEVICE: `${FLAT_FORM}/users/me/devices/:device_id`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
+  USERS_SESSION_REVOKE_ALL: `${FLAT_FORM}/users/session/revoke_all`,
 
   WS_SYNC: `${WS_FLAT_FORM}/sync`,
 

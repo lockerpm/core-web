@@ -213,6 +213,10 @@
       },
       "notification": {
         "updated": "Your email notifications have been updated!"
+      },
+      "manage_sessions": {
+        "logout_device": "The device has been logged!",
+        "logout_all_devices": "All Sessions Deauthorized"
       }
     },
     "warning": {

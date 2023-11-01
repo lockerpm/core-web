@@ -17,6 +17,7 @@ import authServices from "../../../../../../services/auth";
 import common from "../../../../../../utils/common";
 
 import { orange } from '@ant-design/colors';
+import userServices from "../../../../../../services/user";
 
 const DeauthorizeSessionsModal = (props) => {
   const { t } = useTranslation()
@@ -41,12 +42,34 @@ const DeauthorizeSessionsModal = (props) => {
       const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
       const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
       if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
-        onConfirm();
-        onClose();
+        if (device) {
+          await deauthorizeDevice();
+          onConfirm();
+          onClose();
+        } else {
+          await deauthorizeSessions(keyHash);
+          await authServices.redirect_login();
+        }
       } else {
         authServices.logout();
       }
       setCallingAPI(false);
+    })
+  }
+
+  const deauthorizeDevice = async () => {
+    await userServices.remove_device(device.device_identifier).then(() => {
+      global.pushSuccess(t('notification.success.manage_sessions.logout_device'))
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
+
+  const deauthorizeSessions = async (hashedPassword) => {
+    await userServices.revoke_all_devices(hashedPassword).then(() => {
+      global.pushSuccess(t('notification.success.manage_sessions.logout_all_devices'))
+    }).catch((error) => {
+      global.pushError(error)
     })
   }
 

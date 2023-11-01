@@ -46,6 +46,7 @@ const ManageSessions = (props) => {
     setSelectedDevice(item)
     setConfirmVisible(true)
   }
+
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -115,6 +116,7 @@ const ManageSessions = (props) => {
       <DeauthorizeSessionsModal
         visible={confirmVisible}
         device={selectedDevice}
+        onConfirm={fetchDevices}
         onClose={() => setConfirmVisible(false)}
       />
     </div>
