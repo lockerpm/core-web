@@ -42,7 +42,7 @@ function LayoutBreadcrumb() {
           let label = lastRouter.label || t('common.detail')
           if (lastRouter.parent == global.keys.FOLDERS) {
             label = allFolders.find((f) => f.id == lastRouter.params.folder_id)?.name || t('common.detail')
-          } else {
+          } else if (lastRouter.params.cipher_id) {
             label = allCiphers.find((f) => f.id == lastRouter.params.cipher_id)?.name || t('common.detail')
           }
           setMenus([

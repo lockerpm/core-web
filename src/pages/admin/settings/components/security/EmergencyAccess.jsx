@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Button,
-  Card,
   Badge
 } from '@lockerpm/design';
 
@@ -61,14 +60,22 @@ const EmergencyAccess = (props) => {
   }, [trustedPendingRequests, grantedPendingRequests])
 
   const fetchData = async () => {
-    Promise.all([
-      emergencyAccessServices.list_trusted(),
-      emergencyAccessServices.list_granted()
-    ]).then(([trusted, granted]) => {
-      setListTrusted(trusted);
-      setListGranted(granted)
+    fetchTrusted()
+    fetchGranted()
+  }
+
+  const fetchTrusted = async () => {
+    await emergencyAccessServices.list_trusted().then(res => {
+      setListTrusted(res)
     }).catch(() => {
-      setListTrusted([]);
+      setListTrusted([])
+    })
+  }
+
+  const fetchGranted = async () => {
+    await emergencyAccessServices.list_granted().then(res => {
+      setListGranted(res)
+    }).catch(() => {
       setListGranted([])
     })
   }
@@ -105,37 +112,46 @@ const EmergencyAccess = (props) => {
       </p>
       {
         expand && <div className="mt-4">
-          <Card
-            size="small"
-            title={<div className="flex items-center justify-between">
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
               <p className="font-semibold" style={{ fontSize: 16 }}>
                 {t('security.emergency_access.your_trusted_contacts')}
               </p>
-              <small style={{ color: orange[5], fontSize: 12, fontWeight: 400 }}>
-                {t('security.emergency_access.pending_requests', { number: trustedPendingRequests })}
-              </small>
-            </div>}
-          >
-            <TableData data={listTrusted} isTrusted={true}/>
-          </Card>
-          <Card
-            size="small"
-            className="mt-4"
-            title={<div className="flex items-center justify-between">
+              {
+                trustedPendingRequests > 0 && <small style={{ color: orange[5], fontSize: 12, fontWeight: 400 }}>
+                  {t('security.emergency_access.pending_requests', { number: trustedPendingRequests })}
+                </small>
+              }
+            </div>
+            <TableData
+              data={listTrusted}
+              isTrusted={true}
+              fetchTrusted={fetchTrusted}
+              fetchGranted={fetchGranted}
+            />
+          </div>
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
               <p className="font-semibold" style={{ fontSize: 16 }}>
                 {t('security.emergency_access.contacts_that_trusted_you')}
               </p>
-              <small style={{ color: orange[5], fontSize: 12, fontWeight: 400 }}>
-                {t('security.emergency_access.pending_requests', { number: grantedPendingRequests })}
-              </small>
-            </div>}
-          >
-            <TableData data={listGranted}/>
-          </Card>
+              {
+                grantedPendingRequests > 0 && <small style={{ color: orange[5], fontSize: 12, fontWeight: 400 }}>
+                  {t('security.emergency_access.pending_requests', { number: grantedPendingRequests })}
+                </small>
+              }
+            </div>
+            <TableData
+              data={listGranted}
+              fetchTrusted={fetchTrusted}
+              fetchGranted={fetchGranted}
+            />
+          </div>
         </div>
       }
       <EmergencyContactFormData
         visible={formVisible}
+        onReload={fetchData}
         onClose={() => setFormVisible(false)}
       />
     </div>

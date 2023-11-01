@@ -56,7 +56,7 @@ const App = () => {
       message || t('notification.error.message.default')
     )
   }
-  global.confirmDelete = (handleOK = () => {}, options = {}) => Modal.confirm({
+  global.confirm = (handleOK = () => {}, options = {}) => Modal.confirm({
     title: options.title || t('common.confirm'),
     icon: <ExclamationCircleOutlined />,
     content: options.content || t('common.delete_question'),

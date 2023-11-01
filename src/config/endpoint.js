@@ -75,4 +75,18 @@ export default {
 
   EMERGENCY_ACCESS_TRUSTED: `${FLAT_FORM}/emergency_access/trusted`,
   EMERGENCY_ACCESS_GRANTED: `${FLAT_FORM}/emergency_access/granted`,
+  EMERGENCY_ACCESS: `${FLAT_FORM}/emergency_access/:contact_id`,
+  EMERGENCY_ACCESS_ACCEPT: `${FLAT_FORM}/emergency_access/:contact_id/accept`,
+  EMERGENCY_ACCESS_PUBLIC_KEY: `${FLAT_FORM}/emergency_access/:contact_id/public_key`,
+  EMERGENCY_ACCESS_CONFIRM: `${FLAT_FORM}/emergency_access/:contact_id/confirm`,
+  EMERGENCY_ACCESS_INITIATE: `${FLAT_FORM}/emergency_access/:contact_id/initiate`,
+  EMERGENCY_ACCESS_APPROVE: `${FLAT_FORM}/emergency_access/:contact_id/approve`,
+  EMERGENCY_ACCESS_REJECT: `${FLAT_FORM}/emergency_access/:contact_id/reject`,
+  EMERGENCY_ACCESS_INVITE: `${FLAT_FORM}/emergency_access/invite`,
+  EMERGENCY_ACCESS_REINVITE: `${FLAT_FORM}/emergency_access/:contact_id/reinvite`,
+  EMERGENCY_ACCESS_TAKEOVER: `${FLAT_FORM}/emergency_access/:contact_id/takeover`,
+  EMERGENCY_ACCESS_PASSWORD: `${FLAT_FORM}/emergency_access/:contact_id/password`,
+  EMERGENCY_ACCESS_ID_PASSWORD: `${FLAT_FORM}/emergency_access/:contact_id/id_password`,
+  EMERGENCY_ACCESS_VIEW: `${FLAT_FORM}/emergency_access/:contact_id/view`,
+
 }

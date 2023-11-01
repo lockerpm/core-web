@@ -24,7 +24,6 @@ import PageContent from '../../routes';
 import storeActions from "../../store/actions";
 
 import authServices from '../../services/auth';
-import syncServices from '../../services/sync';
 import commonServices from '../../services/common';
 
 import global from '../../config/global';
@@ -53,7 +52,7 @@ function AdminLayout(props) {
       const strData = lastMessage?.data.split("'").join('"')
       const messageData = JSON.parse(strData)
       if (messageData.event === 'sync') {
-        handleSyncWsData(messageData)
+        commonServices.sync_data_by_ws(messageData)
       }
     }
   }, [lastMessage]);
@@ -70,71 +69,6 @@ function AdminLayout(props) {
   window.addEventListener("resize", (event) => {
     convertSize()
   });
-
-  const handleSyncWsData = async (message) => {
-    dispatch(storeActions.updateSyncing(true))
-    console.log(message);
-    if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
-      await commonServices.sync_profile(),
-      await Promise.all([
-        commonServices.sync_collections(),
-        commonServices.sync_folders(),
-      ])
-      if (['cipher_invitation', 'cipher_share'].includes(message.type)) {
-        await Promise.all([
-          commonServices.get_invitations(),
-          commonServices.get_my_shares()
-        ])
-      }
-      if (message.type === 'cipher_share') {
-        if (message.data.id) {
-          await commonServices.sync_items([message.data.id])
-        }
-        if (message.data.ids) {
-          await commonServices.sync_items(message.data.ids)
-        }
-      }
-    } else if (message.type.includes('cipher')) {
-      if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
-        if (message.type === 'cipher_update') {
-          await commonServices.sync_profile();
-        }
-        if (message.data.id) {
-          await commonServices.sync_items([message.data.id])
-        }
-        if (message.data.ids) {
-          await commonServices.sync_items(message.data.ids)
-        }
-      } else if (message.type.includes('cipher_delete_permanent')) {
-        await global.jsCore.cipherService.delete(message.data.ids)
-      } else {
-        await commonServices.sync_data();
-      }
-    } else if (message.type.includes('folder')) {
-      if (message.type.includes('update')) {
-        const res = await syncServices.sync_folder(message.data.id);
-        await global.jsCore.folderService.upsert([res])
-        await commonServices.get_all_folders();
-      } else if (message.type.includes('delete')) {
-        await global.jsCore.folderService.delete(message.data.ids)
-      } else {
-        await commonServices.sync_data();
-      }
-    } else if (message.type.includes('collection')) {
-      if (message.type.includes('update')) {
-        if (message.data.id) {
-          const res = await syncServices.sync_collection(message.data.id);
-          await global.jsCore.collectionService.upsert([res])
-          await commonServices.get_all_collections();
-        }
-      } else if (message.type.includes('delete')) {
-        await global.jsCore.collectionService.delete(message.data.ids)
-      } else {
-        await commonServices.sync_data();
-      }
-    }
-    dispatch(storeActions.updateSyncing(false))
-  }
 
   const convertSize = () => {
     if (window.innerWidth <= 768) {

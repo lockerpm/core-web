@@ -130,7 +130,7 @@ const SharedWithMe = (props) => {
   }
 
   const handleLeaveShare = async (item) => {
-    global.confirmDelete(async () => {
+    global.confirm(async () => {
       setCallingAPI(true)
       try {
         await commonServices.leave_share(item)

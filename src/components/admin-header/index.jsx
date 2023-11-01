@@ -4,11 +4,12 @@ import {
   Button,
   Row,
   Col,
-  Avatar,
 } from '@lockerpm/design';
 import {
   ArrowRightOutlined
-} from '@ant-design/icons'
+} from '@ant-design/icons';
+
+import Notice from "./notice";
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -35,6 +36,7 @@ const AdminHeader = (props) => {
 
   return (
     <>
+      <Notice />
       <Row
         gutter={[24, 8]}
         className={`
@@ -44,7 +46,7 @@ const AdminHeader = (props) => {
           justify-between
         `}
         style={{
-          height: isMobile ? 'auto' : `${60}px`
+          height: (isMobile || description) ? 'auto' : `${60}px`
         }}
       >
         <Col lg={actions.length > 0 ? 16 : 20} className="admin-header__left flex items-center">
@@ -100,7 +102,7 @@ const AdminHeader = (props) => {
         </Col>
       </Row>
       {
-        description && <p className="admin-header__left--subtitle mt-1">
+        description && <p className="admin-header__left--subtitle mt-2">
           {description}
         </p>
       }

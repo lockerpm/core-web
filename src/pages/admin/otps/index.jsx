@@ -104,7 +104,7 @@ const Authenticator = (props) => {
   }
 
   const deleteItem = (cipher) => {
-    global.confirmDelete(() => {
+    global.confirm(() => {
       cipherServices.permanent_delete({ ids: [cipher.id] }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {

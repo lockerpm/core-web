@@ -1,4 +1,5 @@
 import keys from './keys'
+import { Trans } from 'react-i18next'
 
 export default {
   AUTH_ROUTERS: [
@@ -181,9 +182,16 @@ export default {
       element: 'SettingsSecurity',
     },
     {
+      name: keys.EMERGENCY_ACCESS_VIEW,
+      path: '/settings/emergency-access/:contact_id',
+      element: 'EmergencyAccessView',
+      label: <Trans i18nKey='emergency_access_view.title'/>,
+      parent: keys.SETTINGS_SECURITY,
+    },
+    {
       name: keys.SETTINGS_NOTIFICATIONS,
       path: '/settings/notifications',
       element: 'SettingsNotifications',
-    }
+    },
   ],
 }

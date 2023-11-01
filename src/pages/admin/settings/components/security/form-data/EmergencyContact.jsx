@@ -16,27 +16,57 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import global from '../../../../../../config/global';
+import sharingServices from '../../../../../../services/sharing';
+import emergencyAccessServices from '../../../../../../services/emergency-access';
+import common from '../../../../../../utils/common';
 
 function EmergencyContactFormData(props) {
   const {
     visible = false,
     onClose = () => {},
+    onReload = () => {}
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
 
   useEffect(() => {
-    form.resetFields();
+    if (visible) {
+      form.setFieldsValue({
+        email: null,
+        type: global.constants.ACCESS_TYPE.VIEW,
+        wait_time_days: global.constants.WAIT_TIMES[0].value
+      })
+    } else {
+      form.resetFields();
+    }
     setCallingAPI(false);
   }, [visible])
 
 
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
+      console.log(values);
       setCallingAPI(true);
+      await createEmergencyContact(values);
       setCallingAPI(false);
       onClose();
+    })
+  }
+
+  const createEmergencyContact = async (values) => {
+    const { public_key: publicKey } = await sharingServices.get_public_key({ email: values.email });
+    const key = await common.generateAccessKey(publicKey);
+    await emergencyAccessServices.invite({
+      ...values,
+      key
+    }).then(() => {
+      global.pushSuccess(t('notification.success.emergency_access.invited'));
+      onReload();
+      onClose();
+    }).catch((error) => {
+      console.log(error);
+      global.pushError(error)
     })
   }
 

@@ -106,7 +106,7 @@ const Folders = (props) => {
   }
 
   const deleteItem = (folder) => {
-    global.confirmDelete(async () => {
+    global.confirm(async () => {
       try {
         if (folder.organizationId) {
           await commonServices.delete_collection(folder)

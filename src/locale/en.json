@@ -77,7 +77,8 @@
     "item": "Item",
     "email_addresses": "Email addresses",
     "receiver": "Receiver",
-    "days_number": "{{number}} days"
+    "days_number": "{{number}} days",
+    "one_day": "1 day"
   },
   "button": {
     "add": "Add",
@@ -214,6 +215,15 @@
       "notification": {
         "updated": "Your email notifications have been updated!"
       },
+      "emergency_access": {
+        "accepted": "Emergency access accepted",
+        "removed": "Removed user {{user}}",
+        "rejected": "Emergency access rejected",
+        "invited": "Invited user",
+        "reinvited": "{user} has been reinvited",
+        "confirmed": "{user} has been confirmed",
+        "approved": "Emergency access approved"
+      },
       "manage_sessions": {
         "logout_device": "The device has been logged!",
         "logout_all_devices": "All Sessions Deauthorized"
@@ -312,6 +322,13 @@
     "name_descending": "Name Descending",
     "time_ascending": "Time Ascending",
     "time_descending": "Time Descending"
+  },
+  "notice": {
+    "emergency_access_invitations": {
+      "title": "Invitation to become an emergency contact",
+      "description": "You’ve been invited to become an emergency contact for {{owner}}.",
+      "access_type": "Access type: {{type}}"
+    }
   },
   "change_password": {
     "title": "Change Password",
@@ -757,6 +774,9 @@
       "pending_requests": "{{number}} Pending requests",
       "grantor_recovery_initiated_info": "The user will be provided access after {{day}} day(s) or whenever you manually approve the request.",
       "grantee_recovery_initiated_info": "You will be provided access after {{day}} day(s) or whenever the user manually approves the request.",
+      "approve_question": "Are you sure you want to approve emergency access? This will allow {{user}} to {{type}} your account.",
+      "delete_question": "Are you sure you want to remove this emergency contact?",
+      "initiate_question": "Are you sure you want to request emergency access? You will be provided access after {{day}} day(s) or whenever the user manually approves the request.",
       "actions": {
         "accept": "Accept",
         "request_access": "Request access",
@@ -764,7 +784,8 @@
         "reset_their_lmp": "Reset their Locker Master Password",
         "reset_their_lp": "Reset their Locker Password",
         "reinvite": "Resend invitation",
-        "reject": "Reject"
+        "reject": "Reject",
+        "approve": "Approve"
       },
       "emergency_contact": {
         "invite": "Invite emergency contact",
@@ -787,5 +808,9 @@
       "log_out_all_description": "Concerned your account is logged in on another device? Proceed below to deauthorize all computers or devices that you have previously used. This security step is recommended if you previously used a public computer or accidentally saved your password on a device that isn't yours.",
       "log_out_all_note": "Proceeding will also log you out of your current session, requiring you to log back in."
     }
+  },
+  "emergency_access_view": {
+    "title": "Emergency Access view",
+    "description": "Create by: {{owner}}"
   }
 }  

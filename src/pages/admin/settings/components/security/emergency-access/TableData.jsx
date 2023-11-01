@@ -10,6 +10,7 @@ import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
+  InfoCircleOutlined
 } from "@ant-design/icons";
 
 import Actions from "./Actions";
@@ -23,7 +24,9 @@ const TableData = (props) => {
     loading = false,
     className = '',
     data = [],
-    isTrusted = false
+    isTrusted = false,
+    fetchTrusted = () => {},
+    fetchGranted = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -33,15 +36,16 @@ const TableData = (props) => {
         dataIndex: 'email',
         key: 'email',
         align: 'left',
+        width: 300,
         render: (_, record) => <div className="flex items-center">
           <Avatar
             src={record.avatar}
           />
           <div className="ml-2">
-            <div className="font-semibold">
+            <div className="font-semibold text-limited">
               {record.email}
             </div>
-            <small>
+            <small className="text-limited">
               {record.full_name}
             </small>
           </div>
@@ -56,7 +60,7 @@ const TableData = (props) => {
         render: (_, record) => {
           const status = common.getStatus(record.status)
           const days = common.getEmergencyAccessDays(record)
-          return <div className="flex items-center">
+          return <div className="flex items-center justify-center">
             <Tag color={status?.color}>
               {status?.label}
             </Tag>
@@ -65,7 +69,9 @@ const TableData = (props) => {
                 title={
                   t(`security.emergency_access.${isTrusted ? 'grantor_recovery_initiated_info' : 'grantee_recovery_initiated_info'}`, { day: days })
                 }
-              />
+              >
+                <InfoCircleOutlined />
+              </Tooltip>
             }
           </div>
         }
@@ -93,6 +99,8 @@ const TableData = (props) => {
         render: (_, record) => <Actions
           isTrusted={isTrusted}
           contact={record}
+          fetchTrusted={fetchTrusted}
+          fetchGranted={fetchGranted}
         />,
       },
     ].filter((c) => !c.hide)
@@ -106,7 +114,7 @@ const TableData = (props) => {
       pagination={false}
       rowKey={(record) => record?.id}
       size="small"
-      scroll={{ x: 1024 }}
+      scroll={{ x: 600 }}
     />
   );
 }

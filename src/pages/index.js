@@ -22,6 +22,7 @@ import SettingsAccount from './admin/settings/Account'
 import SettingsImportExport from './admin/settings/ImportExport'
 import SettingsSecurity from './admin/settings/Security'
 import SettingsNotifications from './admin/settings/Notifications'
+import EmergencyAccessView from './admin/settings/EmergencyAccessView'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'
@@ -48,6 +49,7 @@ export default {
   SettingsImportExport,
   SettingsSecurity,
   SettingsNotifications,
+  EmergencyAccessView,
 
   AdminErrorPage
 }

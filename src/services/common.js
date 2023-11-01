@@ -340,6 +340,71 @@ async function leave_share(item) {
   await get_all_ciphers();
 }
 
+async function sync_data_by_ws(message) {
+  global.store.dispatch(storeActions.updateSyncing(true))
+    console.log(message);
+    if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
+      await sync_profile(),
+      await Promise.all([
+        sync_collections(),
+        sync_folders(),
+      ])
+      if (['cipher_invitation', 'cipher_share'].includes(message.type)) {
+        await Promise.all([
+          get_invitations(),
+          get_my_shares()
+        ])
+      }
+      if (message.type === 'cipher_share') {
+        if (message.data.id) {
+          await sync_items([message.data.id])
+        }
+        if (message.data.ids) {
+          await sync_items(message.data.ids)
+        }
+      }
+    } else if (message.type.includes('cipher')) {
+      if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
+        if (message.type === 'cipher_update') {
+          await sync_profile();
+        }
+        if (message.data.id) {
+          await sync_items([message.data.id])
+        }
+        if (message.data.ids) {
+          await sync_items(message.data.ids)
+        }
+      } else if (message.type.includes('cipher_delete_permanent')) {
+        await global.jsCore.cipherService.delete(message.data.ids)
+      } else {
+        await sync_data();
+      }
+    } else if (message.type.includes('folder')) {
+      if (message.type.includes('update')) {
+        const res = await syncServices.sync_folder(message.data.id);
+        await global.jsCore.folderService.upsert([res])
+        await get_all_folders();
+      } else if (message.type.includes('delete')) {
+        await global.jsCore.folderService.delete(message.data.ids)
+      } else {
+        await sync_data();
+      }
+    } else if (message.type.includes('collection')) {
+      if (message.type.includes('update')) {
+        if (message.data.id) {
+          const res = await syncServices.sync_collection(message.data.id);
+          await global.jsCore.collectionService.upsert([res])
+          await get_all_collections();
+        }
+      } else if (message.type.includes('delete')) {
+        await global.jsCore.collectionService.delete(message.data.ids)
+      } else {
+        await sync_data();
+      }
+    }
+    global.store.dispatch(storeActions.updateSyncing(false))
+}
+
 export default {
   clear_data,
   sync_data,
@@ -366,5 +431,6 @@ export default {
   delete_collection,
   delete_folder,
   leave_share,
-  get_sends
+  get_sends,
+  sync_data_by_ws
 }

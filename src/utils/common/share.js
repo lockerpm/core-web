@@ -23,8 +23,17 @@ const generateMemberKey = async (publicKey, orgKey) => {
   return key.encryptedString
 }
 
+
+async function generateAccessKey (publicKey) {
+  const pk = Utils.fromB64ToArray(publicKey)
+  const encKey = await global.jsCore.cryptoService.getEncKey()
+  const key = await global.jsCore.cryptoService.rsaEncrypt(encKey.key, pk.buffer)
+  return key.encryptedString
+}
+
 export default {
   isExpired,
   getPublicShareUrl,
-  generateMemberKey
+  generateMemberKey,
+  generateAccessKey
 }

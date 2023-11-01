@@ -31,19 +31,6 @@ const DangerZone = (props) => {
           {t('account_details.danger_zone.delete_data_desc')}
         </p>
       </Card>
-      <Card bodyStyle={{ padding: 16 }}>
-        <div className="flex justify-between">
-          <p className="font-semibold" style={{ color: red.primary }}>
-            {t('account_details.danger_zone.delete_account')}
-          </p>
-          <Button type='primary' danger ghost>
-            {t('account_details.danger_zone.delete_account')}
-          </Button>
-        </div>
-        <p className="mt-1">
-          {t('account_details.danger_zone.delete_data_desc')}
-        </p>
-      </Card>
     </div>
   );
 }

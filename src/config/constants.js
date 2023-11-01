@@ -443,7 +443,7 @@ export default {
     },
     {
       value: STATUS.CONFIRMED,
-      label: <Trans i18nKey={'statuses.shared'}/>,
+      label: <Trans i18nKey={'statuses.confirmed'}/>,
       color: 'success'
     },
     {
@@ -555,7 +555,7 @@ export default {
   WAIT_TIMES: [
     {
       value: 1,
-      label: <Trans i18nKey={'common.days_number'} values={{ number: 1 }}/>,
+      label: <Trans i18nKey={'common.one_day'}/>,
     },
     {
       value: 2,

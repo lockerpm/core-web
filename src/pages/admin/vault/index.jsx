@@ -174,7 +174,7 @@ const Vault = (props) => {
   }
 
   const deleteItems = (cipherIds) => {
-    global.confirmDelete(async () => {
+    global.confirm(async () => {
       setCallingAPI(true)
       await cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
@@ -197,7 +197,7 @@ const Vault = (props) => {
   };
 
   const restoreItems = (cipherIds) => {
-    global.confirmDelete(async () => {
+    global.confirm(async () => {
       setCallingAPI(true)
       await cipherServices.restore({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.restored'));
@@ -229,7 +229,7 @@ const Vault = (props) => {
   }
 
   const permanentlyDeleteItems = (cipherIds) => {
-    global.confirmDelete(async () => {
+    global.confirm(async () => {
       setCallingAPI(true)
       await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
