@@ -89,4 +89,6 @@ export default {
   EMERGENCY_ACCESS_ID_PASSWORD: `${FLAT_FORM}/emergency_access/:contact_id/id_password`,
   EMERGENCY_ACCESS_VIEW: `${FLAT_FORM}/emergency_access/:contact_id/view`,
 
+  IMPORT_FOLDERS: `${FLAT_FORM}/import/folders`,
+  IMPORT_CIPHERS: `${FLAT_FORM}/import/ciphers`,
 }

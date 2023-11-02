@@ -20,7 +20,9 @@ import cloneDeep from 'lodash/cloneDeep';
 import newTypes from '../new-types';
 import time from './time';
 
+import { Utils } from '../../core-js/src/misc/utils';
 import { CryptoWalletData } from '../new-types/crypto-wallet';
+import { CipherMapper } from '../../core-js/src/constants';
 
 import other from './other';
 
@@ -286,6 +288,101 @@ async function createEncryptedMasterPw (masterPw, encKey) {
   return data
 }
 
+function badData (c) {
+  return (
+    (c.name == null || c.name === '--') &&
+    c.type === CipherType.Login &&
+    c.login != null &&
+    Utils.isNullOrWhitespace(c.login.password)
+  )
+}
+
+function buildCommonCipher (cipher, c) {
+  cipher.type = null
+  cipher.name = c.name
+  cipher.notes = c.notes
+  cipher.fields = null
+  cipher.reprompt = c.reprompt
+  // Login props
+  cipher.login_uri = null
+  cipher.login_username = null
+  cipher.login_password = null
+  cipher.login_totp = null
+
+  if (c.fields) {
+    c.fields.forEach(f => {
+      if (!cipher.fields) {
+        cipher.fields = ''
+      } else {
+        cipher.fields += '\n'
+      }
+
+      cipher.fields += (f.name || '') + ': ' + f.value
+    })
+  }
+
+  switch (c.type) {
+  case CipherType.Login:
+    cipher.type = 'login'
+    cipher.login_username = c.login.username
+    cipher.login_password = c.login.password
+    cipher.login_totp = c.login.totp
+
+    if (c.login.uris) {
+      cipher.login_uri = []
+      c.login.uris.forEach(u => {
+        cipher.login_uri.push(u.uri)
+      })
+    }
+    break
+  case CipherType.SecureNote:
+    cipher.type = 'note'
+    break
+  case CipherType.Card:
+    cipher.type = 'card'
+    // eslint-disable-next-line no-case-declarations
+    const cardPayload = {
+      notes: c.notes
+    }
+    Object.getOwnPropertyNames(c.card).forEach(key => {
+      if (key.startsWith('_')) {
+        if (key !== '_subTitle') {
+          cardPayload[key.slice(1)] = c.card[key]
+        }
+      } else {
+        cardPayload[key] = c.card[key]
+      }
+    })
+    cipher.notes = JSON.stringify(cardPayload)
+    break
+  case CipherType.Identity:
+    cipher.type = 'identity'
+    // eslint-disable-next-line no-case-declarations
+    const identityPayload = {
+      notes: c.notes
+    }
+    Object.getOwnPropertyNames(c.identity).forEach(key => {
+      if (key.startsWith('_')) {
+        if (key !== '_subTitle') {
+          identityPayload[key.slice(1)] = c.identity[key]
+        }
+      } else {
+        identityPayload[key] = c.identity[key]
+      }
+    })
+    cipher.notes = JSON.stringify(identityPayload)
+    break
+  default:
+    if (CipherMapper[c.type].csvTypeName) {
+      cipher.type = CipherMapper[c.type].csvTypeName
+    } else {
+      return
+    }
+  }
+
+  return cipher
+}
+
 export default {
   newCipherTypes,
   cipherSubtitle,
@@ -295,5 +392,7 @@ export default {
   convertFormToCipher,
   getEncCipherForRequest,
   quickShareForRequest,
-  createEncryptedMasterPw
+  createEncryptedMasterPw,
+  badData,
+  buildCommonCipher
 }

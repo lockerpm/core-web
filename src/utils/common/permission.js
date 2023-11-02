@@ -63,6 +63,7 @@ const isCipherQuickShareable = (cipher) => {
 }
 
 export default {
+  isProtectedCipher,
   isOwner,
   isChangeCipher,
   isCipherShared,

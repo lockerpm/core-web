@@ -7,20 +7,25 @@ import {
   Upload,
   message,
   Select,
+  Input,
+  Alert
 } from '@lockerpm/design';
 import {
   UploadOutlined,
   LinkOutlined
 } from '@ant-design/icons';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import global from '../../../../../config/global';
-import storeActions from '../../../../../store/actions';
-import ReactJson from 'react-json-view';
 
-import { CipherType } from '../../../../../core-js/src/enums';
-import { CipherData } from '../../../../../core-js/src/models/data/cipherData'
+import global from '../../../../../config/global';
+import common from '../../../../../utils/common';
+import importServices from '../../../../../services/import';
+
+import { FolderRequest } from '../../../../../core-js/src/models/request';
+import { KvpRequest } from '../../../../../core-js/src/models/request/kvpRequest';
+import { ImportCiphersRequest } from '../../../../../core-js/src/models/request/importCiphersRequest';
+import { CipherMapper } from '../../../../../core-js/src/constants';
 
 function ImportForm(props) {
   const {
@@ -32,16 +37,31 @@ function ImportForm(props) {
 
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(false);
-  const [importData, setImportData] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const format = Form.useWatch('format', form)
+  const format = Form.useWatch('format', form);
+  const fileContent = Form.useWatch('fileContent', form);
+
+  const featuredImportOptions = global.jsCore.importService.featuredImportOptions || []
+  const regularImportOptions = (global.jsCore.importService.regularImportOptions || []).sort((a, b) => {
+    if (a.name == null && b.name != null) {
+      return -1
+    }
+    if (a.name != null && b.name == null) {
+      return 1
+    }
+    if (a.name == null && b.name == null) {
+      return 0
+    }
+
+    return a.name.localeCompare(b.name)
+  })
 
   useEffect(() => {
     setSelectedFile(null);
-    setImportData(null);
     form.setFieldsValue({
-      format: global.constants.FILE_TYPE.JSON,
+      format: featuredImportOptions[0].id,
+      fileContent: null
     })
   }, [visible])
 
@@ -66,26 +86,141 @@ function ImportForm(props) {
       const reader = new FileReader()
       reader.readAsText(file, 'utf-8')
       reader.onload = evt => {
+        if (format === 'lastpasscsv' && file.type === 'text/html') {
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(evt.target.result, 'text/html')
+          const pre = doc.querySelector('pre')
+          if (pre != null) {
+            resolve(pre.textContent)
+            return
+          }
+          reject(Error(''))
+          return
+        }
         resolve(evt.target.result)
       }
       reader.onerror = () => {
-        reject(Error('Error'))
+        reject(Error(''))
       }
     })
   }
 
-  const handleReadFile = async () => {
+  const handleImport = async () => {
+    setCallingAPI(true);
     try {
-      const fileContent = await getFileContents(selectedFile);
-      setImportData(JSON.parse(fileContent))
+      const importer = global.jsCore.importService.getImporter(format, null)
+      let content = fileContent;
+      if (selectedFile) {
+        try {
+          const fContent = await getFileContents(selectedFile)
+          if (!fContent) {
+            content = fContent
+          }
+        } catch {}
+      }
+      if (!content) {
+        global.pushError({ message: t('import_export.select_appropriate_file') })
+      } else {
+        const importResult = await importer.parse(content);
+        if (importResult.success) {
+          if (importResult.folders.length === 0 && importResult.ciphers.length === 0) {
+            global.pushError({ message: t('import_export.no_data') })
+            return
+          }
+          if (importResult.ciphers.length > 0) {
+            const halfway = Math.floor(importResult.ciphers.length / 2)
+            const last = importResult.ciphers.length - 1
+            if (
+              common.badData(importResult.ciphers[0]) &&
+              common.badData(importResult.ciphers[halfway]) &&
+              common.badData(importResult.ciphers[last])
+            ) {
+              global.pushError({ message: t('import_export.incorrect_format') })
+              return
+            }
+          }
+          try {
+            const importResponse = await postImport(importResult)
+            global.pushSuccess(
+              t('import_export.import_success', {
+                foldersCount: importResponse.foldersCount,
+                ciphersCount: importResponse.ciphersCount,
+                total: importResponse.totalCipherImport
+              })
+            )
+            
+          } catch (error) {
+            global.pushError(error)
+          }
+        } else {
+          global.pushError({ message: t('import_export.incorrect_format') })
+        }
+      }
     } catch (error) {
       global.pushError({ message: t('drag_upload.content_invalid') })
     }
+    setCallingAPI(false);
   }
 
-  const handleImport = async () => {
-    setCallingAPI(true);
-    setCallingAPI(false);
+  const postImport = async (importResult) => {
+    let request = new ImportCiphersRequest()
+    for (let i = 0; i < importResult.ciphers.length; i++) {
+      const { data } = await common.getEncCipherForRequest(
+        importResult.ciphers[i],
+        {
+          noCheck: true
+        }
+      )
+      request.ciphers.push(data)
+    }
+    if (importResult.folders != null) {
+      for (let i = 0; i < importResult.folders.length; i++) {
+        const f = await global.jsCore.folderService.encrypt(importResult.folders[i])
+        request.folders.push(new FolderRequest(f))
+      }
+    }
+    if (importResult.folderRelationships != null) {
+      importResult.folderRelationships.forEach(r =>
+        request.folderRelationships.push(new KvpRequest(r[0], r[1]))
+      )
+    }
+    const folderRelationships = request.folderRelationships
+    let folderImportResults = []
+    let importedFolders = 0
+    while (importedFolders < request.folders.length) {
+      const folders = request.folders.slice(
+        importedFolders,
+        importedFolders + 1000
+      )
+      const importResult = await importServices.import_folders({ folders })
+      folderImportResults = folderImportResults.concat(importResult.ids || [])
+      importedFolders += 1000
+    }
+    request.ciphers = request.ciphers.map((cipher, index) => {
+      const folderRelationship = folderRelationships.find(
+        item => item.key === index
+      )
+      return {
+        ...cipher,
+        folderId: folderRelationship
+          ? folderImportResults[folderRelationship.value]
+          : null
+      }
+    })
+    let importedCiphers = 0
+    while (importedCiphers < request.ciphers.length) {
+      const ciphers = request.ciphers.slice(
+        importedCiphers,
+        importedCiphers + 1000
+      )
+      await importServices.import_ciphers({ ciphers })
+      importedCiphers += 1000
+    }
+    return {
+      ciphersCount: request.ciphers.length,
+      foldersCount: request.folders.length,
+      totalCipherImport: request.ciphers.length
+    }
   }
 
   const handleClose = () => {
@@ -100,112 +235,108 @@ function ImportForm(props) {
         placement="right"
         onClose={handleClose}
         open={visible}
+        width={600}
         footer={
           <Space className='flex items-center justify-end'>
-            {
-              !importData && <Button
-                onClick={handleClose}
-              >
-                {t('button.cancel')}
-              </Button>
-            }
-            {
-              !importData && <Button
-                type="primary"
-                disabled={!selectedFile}
-                onClick={handleReadFile}
-              >
-                { t('button.next') } 
-              </Button>
-            }
-            {
-              importData && <Button
-                disabled={callingAPI}
-                onClick={() => setImportData(null)}
-              >
-                {t('button.back')}
-              </Button>
-            }
-            {
-              importData && <Button
-                type="primary"
-                loading={callingAPI}
-                onClick={handleImport}
-              >
-                { t('button.import') } 
-              </Button>
-            }
+            <Button
+              onClick={handleClose}
+            >
+              {t('button.cancel')}
+            </Button>
+            <Button
+              type="primary"
+              loading={callingAPI}
+              disabled={!selectedFile && !fileContent}
+              onClick={handleImport}
+            >
+              { t('button.import') } 
+            </Button>
           </Space>
         }
       >
-        {
-          !importData && <Form
-            form={form}
-            layout="vertical"
-            labelAlign={'left'}
+       <Form
+          form={form}
+          layout="vertical"
+          labelAlign={'left'}
+        >
+          <Form.Item
+            name={'format'}
+            className='mb-2'
+            label={<div>
+              <p className='font-semibold'>{t('import_export.choose_format')}</p>
+            </div>}
+            rules={[]}
           >
-            <Form.Item
-              name={'format'}
-              label={<div>
-                <p className='font-bold'>{t('import_export.choose_format')}</p>
-              </div>}
-              rules={[]}
-            >
-              <Select
-                placeholder={t('placeholder.select')}
-                className="w-full"
-              >
-                {global.constants.IMPORT_FILE_TYPES.map((type) => (
-                  <Select.Option
-                    value={type.value}
-                    key={type.value}
-                  >
-                    {type.label}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item
-              className='mb-0'
-              label={<div>
-                <p className='font-bold'>{t('import_export.upload_file')}</p>
-              </div>}
-            >
-              <div className='flex items-center'>
-                <Upload {...uploadProps}>
-                  <Button icon={<UploadOutlined />}>
-                    {t('button.choose_file')}
-                  </Button>
-                </Upload>
+            <Select
+              placeholder={t('placeholder.select')}
+              className="w-full"
+              options={[
                 {
-                  !selectedFile && <span className='ml-2'>
-                    <i>{t('common.no_file_chosen')}</i>
-                  </span>
-                }
-              </div >
-            </Form.Item>
-            {
-              selectedFile && <div className='mt-2 flex items-center'>
-                <LinkOutlined />
-                <p className='ml-2 text-limited text-primary'>{selectedFile?.name}</p>
-              </div>
-            }
-          </Form>
-        }
-        {
-          importData && <div>
-            <p className='font-bold mb-2'>{t('import_export.file_content')}</p>
-            <ReactJson
-              src={importData}
-              enableClipboard={false}
-              displayDataTypes={false}
-              displayObjectSize={false}
-              quotesOnKeys={false}
-              indentWidth={2}
-              onEdit={(v) => setImportData(v.updated_src)}
+                  label: t('import_export.popular'),
+                  options: featuredImportOptions.map((o) => ({ value: o.id, label: o.name })),
+                },
+                {
+                  label: t('import_export.others'),
+                  options: regularImportOptions.map((o) => ({ value: o.id, label: o.name })),
+                },
+              ]}
             />
-          </div>
-        }
+          </Form.Item>
+          {/* <Alert
+            className='mb-2'
+            style={{ padding: 8 }}
+            message={
+              <p className='font_semibold'>
+                {t('import_export.instructions', { name: 'sdvsdv' })}
+              </p>
+            }
+            description={
+              <div
+                dangerouslySetInnerHTML={{ __html: t('instructions.keepassx') }}
+              />
+            }
+            type="info"
+          /> */}
+          <Form.Item
+            className='mb-0 mt-4'
+            label={<div>
+              <p className='font-semibold'>{t('import_export.upload_file')}</p>
+            </div>}
+          >
+            <div className='flex items-center'>
+              <Upload {...uploadProps}>
+                <Button icon={<UploadOutlined />}>
+                  {t('button.choose_file')}
+                </Button>
+              </Upload>
+              {
+                !selectedFile && <span className='ml-2'>
+                  <i>{t('common.no_file_chosen')}</i>
+                </span>
+              }
+            </div >
+          </Form.Item>
+          {
+            selectedFile && <div className='mt-2 flex items-center'>
+              <LinkOutlined />
+              <p className='ml-2 text-limited text-primary'>{selectedFile?.name}</p>
+            </div>
+          }
+          <Form.Item
+            name={'fileContent'}
+            className='mt-4'
+            label={<div>
+              <p className='font-semibold'>
+                {t('import_export.copy_paste_file_contents')}
+              </p>
+            </div>}
+          >
+            <Input.TextArea
+              rows={8}
+              placeholder={t('placeholder.enter')}
+            />
+          </Form.Item>
+        </Form>
       </Drawer>
     </div>
   );
