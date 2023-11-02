@@ -56,6 +56,7 @@ function TwoFAFormData(props) {
         placement="right"
         onClose={onClose}
         open={visible}
+        width={540}
         footer={
           <Space className='flex items-center justify-end'>
             <Button

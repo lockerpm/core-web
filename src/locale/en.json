@@ -161,7 +161,8 @@
     "error": {
       "title": "Error",
       "message": {
-        "default": "An error occurred, please try again later!"
+        "default": "An error occurred, please try again later!",
+        "error_occurred": "An error has occurred"
       }
     },
     "success": {
@@ -222,7 +223,9 @@
         "invited": "Invited user",
         "reinvited": "{user} has been reinvited",
         "confirmed": "{user} has been confirmed",
-        "approved": "Emergency access approved"
+        "approved": "Emergency access approved",
+        "takeover_master_password": "Master Password reset for {{user}}. You can now login Vault using the new Master Password.",
+        "takeover_password": "Password reset for {{user}}. You can now login Locker using the new password."
       },
       "manage_sessions": {
         "logout_device": "The device has been logged!",
@@ -796,6 +799,13 @@
         "takeover_description": "They can reset your Master Password",
         "wait_time": "Wait Time",
         "wait_time_description": "Time required before automatically granting access."
+      },
+      "takeover": {
+        "title": "Takeover",
+        "new_id_password": "New Locker ID password",
+        "re_new_id_password": "Re-Enter new Locker ID password",
+        "new_master_password": "Enter new Master Password",
+        "re_new_master_password": "Re-Enter new Master Password"
       }
     },
     "manage_sessions": {
@@ -811,6 +821,7 @@
   },
   "emergency_access_view": {
     "title": "Emergency Access view",
-    "description": "Create by: {{owner}}"
+    "description": "Created by: {{owner}}",
+    "view_item": "View item"
   }
 }  

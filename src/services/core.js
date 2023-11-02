@@ -1,4 +1,4 @@
-import global from '../config/global'
+import global from '../config/global';
 
 async function clear_keys() {
   await global.jsCore.cryptoService.clearKeys()

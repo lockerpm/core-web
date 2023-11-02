@@ -27,9 +27,9 @@ const Name = (props) => {
 
   const originCipher = useMemo(() => {
     if (send) {
-      return allCiphers.find((d) => d.id === send?.cipherId)
+      return allCiphers.find((d) => d.id === send?.cipherId) || send.cipher
     }
-    return allCiphers.find((d) => d.id === cipher.id)
+    return allCiphers.find((d) => d.id === cipher.id) || cipher
   }, [allCiphers, cipher])
 
   const isCipherShare = useMemo(() => {

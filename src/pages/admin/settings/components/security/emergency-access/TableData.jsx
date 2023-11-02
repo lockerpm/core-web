@@ -26,7 +26,9 @@ const TableData = (props) => {
     data = [],
     isTrusted = false,
     fetchTrusted = () => {},
-    fetchGranted = () => {}
+    fetchGranted = () => {},
+    onResetPassword = () => {},
+    onResetMasterPassword = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -101,6 +103,8 @@ const TableData = (props) => {
           contact={record}
           fetchTrusted={fetchTrusted}
           fetchGranted={fetchGranted}
+          onResetPassword={onResetPassword}
+          onResetMasterPassword={onResetMasterPassword}
         />,
       },
     ].filter((c) => !c.hide)

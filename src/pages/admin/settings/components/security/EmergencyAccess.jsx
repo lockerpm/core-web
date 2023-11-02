@@ -11,7 +11,8 @@ import {
 } from '../../../../../components';
 
 import TableData from "./emergency-access/TableData";
-
+import ResetPasswordFormData from "./form-data/ResetPassword";
+import ResetMasterPasswordFormData from "./form-data/ResetMasterPassword";
 import EmergencyContactFormData from "./form-data/EmergencyContact";
 
 
@@ -36,6 +37,9 @@ const EmergencyAccess = (props) => {
 
   const [listTrusted, setListTrusted] = useState([]);
   const [listGranted, setListGranted] = useState([]);
+  const [resetPasswordVisible, setResetPasswordVisible] = useState(false);
+  const [resetMasterPasswordVisible, setResetMasterPasswordVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     fetchData()
@@ -79,6 +83,18 @@ const EmergencyAccess = (props) => {
       setListGranted([])
     })
   }
+
+  
+  const handleResetPassword = (item = null) => {
+    setSelectedItem(item);
+    setResetPasswordVisible(true);
+  }
+
+  const handleResetMasterPassword = (item = null) => {
+    setSelectedItem(item);
+    setResetMasterPasswordVisible(true);
+  }
+
 
   return (
     <div className={className}>
@@ -145,6 +161,8 @@ const EmergencyAccess = (props) => {
               data={listGranted}
               fetchTrusted={fetchTrusted}
               fetchGranted={fetchGranted}
+              onResetPassword={handleResetPassword}
+              onResetMasterPassword={handleResetMasterPassword}
             />
           </div>
         </div>
@@ -153,6 +171,22 @@ const EmergencyAccess = (props) => {
         visible={formVisible}
         onReload={fetchData}
         onClose={() => setFormVisible(false)}
+      />
+      <ResetPasswordFormData
+        visible={resetPasswordVisible}
+        item={selectedItem}
+        onClose={() => {
+          setResetPasswordVisible(false);
+          setSelectedItem(null);
+        }}
+      />
+      <ResetMasterPasswordFormData
+        visible={resetMasterPasswordVisible}
+        item={selectedItem}
+        onClose={() => {
+          setResetMasterPasswordVisible(false);
+          setSelectedItem(null);
+        }}
       />
     </div>
   );

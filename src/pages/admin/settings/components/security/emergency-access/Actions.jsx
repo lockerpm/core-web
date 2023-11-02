@@ -25,7 +25,9 @@ const Actions = (props) => {
     contact = null,
     isTrusted = false,
     fetchTrusted = () => {},
-    fetchGranted = () => {}
+    fetchGranted = () => {},
+    onResetPassword = () => {},
+    onResetMasterPassword = () => {}
   } = props;
 
   const reinvite = async () => {
@@ -181,13 +183,13 @@ const Actions = (props) => {
         key: 'reset_master_pw',
         hide: contact?.status !== global.constants.STATUS.RECOVERY_APPROVED || contact?.type !== global.constants.ACCESS_TYPE.TAKEOVER,
         label: t('security.emergency_access.actions.reset_their_lmp'),
-        onClick: () => {}
+        onClick: () => onResetMasterPassword(contact)
       },
       {
         key: 'reset_pw',
         hide: contact?.status !== global.constants.STATUS.RECOVERY_APPROVED || contact?.type !== global.constants.ACCESS_TYPE.TAKEOVER,
         label: t('security.emergency_access.actions.reset_their_lp'),
-        onClick: () => {}
+        onClick: () => onResetPassword(contact)
       },
       {
         key: 'remove',

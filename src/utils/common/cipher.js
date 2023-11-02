@@ -269,6 +269,23 @@ const quickShareForRequest = async (data) => {
   return sendRequest
 }
 
+async function createEncryptedMasterPw (masterPw, encKey) {
+  const cipher = new CipherView()
+  cipher.type = CipherType.Login
+  const loginData = new LoginView()
+  loginData.username = 'locker.io'
+  loginData.password = masterPw
+  const uriView = new LoginUriView()
+  uriView.uri = 'https://locker.io'
+  loginData.uris = [uriView]
+  cipher.login = loginData
+  cipher.name = 'Locker Master Password'
+  const cipherEnc = await global.jsCore.cipherService.encrypt(cipher, encKey)
+  const data = new CipherRequest(cipherEnc)
+  data.type = CipherType.MasterPassword
+  return data
+}
+
 export default {
   newCipherTypes,
   cipherSubtitle,
@@ -277,5 +294,6 @@ export default {
   convertCipherToForm,
   convertFormToCipher,
   getEncCipherForRequest,
-  quickShareForRequest
+  quickShareForRequest,
+  createEncryptedMasterPw
 }

@@ -45,6 +45,7 @@ function ChangePasswordFormData(props) {
         placement="right"
         onClose={onClose}
         open={visible}
+        width={500}
         footer={
           <Space className='flex items-center justify-end'>
             <Button

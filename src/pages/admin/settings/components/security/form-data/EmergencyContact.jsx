@@ -46,7 +46,6 @@ function EmergencyContactFormData(props) {
 
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
-      console.log(values);
       setCallingAPI(true);
       await createEmergencyContact(values);
       setCallingAPI(false);
@@ -65,7 +64,6 @@ function EmergencyContactFormData(props) {
       onReload();
       onClose();
     }).catch((error) => {
-      console.log(error);
       global.pushError(error)
     })
   }
