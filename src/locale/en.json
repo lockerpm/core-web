@@ -762,6 +762,15 @@
       "title": "Account Password",
       "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan."
     },
+    "change_master_password": {
+      "title": "Master Password",
+      "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan.",
+      "action": "Change Master Password",
+      "current_master_password": "Current Master Password",
+      "new_master_password": "New Master Password",
+      "re_new_master_password": "Re-Enter new Master Password",
+      "hint": "Hint (Optional)"
+    },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",

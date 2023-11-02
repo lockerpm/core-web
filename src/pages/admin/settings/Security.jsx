@@ -4,6 +4,7 @@ import { } from "@ant-design/icons";
 
 import { AdminHeader } from "../../../components";
 import ChangePassword from "./components/security/ChangePassword";
+import ChangeMasterPassword from "./components/security/ChangeMasterPassword";
 import TwoFA from "./components/security/TwoFA";
 import EmergencyAccess from "./components/security/EmergencyAccess";
 import ManageSessions from "./components/security/ManageSessions";
@@ -25,6 +26,8 @@ const Security = (props) => {
         actions={[]}
       />
       <ChangePassword className="mt-4" />
+      <Divider />
+      <ChangeMasterPassword />
       <Divider />
       <TwoFA />
       <Divider />

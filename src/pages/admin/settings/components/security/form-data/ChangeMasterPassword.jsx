@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 
 import global from '../../../../../../config/global';
 
-function ChangePasswordFormData(props) {
+function ChangeMasterPasswordFormData(props) {
   const {
     visible = false,
     onClose = () => {},
@@ -29,7 +29,6 @@ function ChangePasswordFormData(props) {
     setCallingAPI(false);
   }, [visible])
 
-
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
@@ -41,7 +40,7 @@ function ChangePasswordFormData(props) {
   return (
     <div className={props.className}>
       <Drawer
-        title={t('change_password.title')}
+        title={t('security.change_master_password.action')}
         placement="right"
         onClose={onClose}
         open={visible}
@@ -59,22 +58,21 @@ function ChangePasswordFormData(props) {
               loading={callingAPI}
               onClick={handleSave}
             >
-            { t('button.save') } 
+            { t('button.change') } 
             </Button>
           </Space>
         }
       >
-        <p className='mb-2'>{t('change_password.subtitle')}</p>
         <Form
           form={form}
           layout="vertical"
           labelAlign={'left'}
         >
           <Form.Item
-            name={'password'}
-            label={t('change_password.current_password')}
+            name={'current_master_password'}
+            label={t('security.change_master_password.current_master_password')}
             rules={[
-              global.rules.REQUIRED(t("change_password.current_password")),
+              global.rules.REQUIRED(t("security.change_master_password.current_master_password")),
             ]}
           >
             <Input.Password
@@ -83,11 +81,11 @@ function ChangePasswordFormData(props) {
             />
           </Form.Item>
           <Form.Item
-            name={'new_password'}
-            label={t('change_password.new_password')}
+            name={'new_master_password'}
+            label={t('security.change_master_password.new_master_password')}
             rules={[
-              global.rules.REQUIRED(t("change_password.new_password")),
-              global.rules.LATEST_LENGTH(t('change_password.new_password'), 8)
+              global.rules.REQUIRED(t("security.change_master_password.new_master_password")),
+              global.rules.LATEST_LENGTH(t('security.change_master_password.new_master_password'), 8)
             ]}
           >
             <Input.Password
@@ -96,14 +94,14 @@ function ChangePasswordFormData(props) {
             />
           </Form.Item>
           <Form.Item
-            name={'confirm_new_password'}
-            label={t('change_password.confirm_new_password')}
+            name={'re_new_master_password'}
+            label={t('security.change_master_password.re_new_master_password')}
             rules={[
-              global.rules.REQUIRED(t("change_password.confirm_new_password")),
-              global.rules.LATEST_LENGTH(t('change_password.confirm_new_password'), 8),
+              global.rules.REQUIRED(t("security.change_master_password.re_new_master_password")),
+              global.rules.LATEST_LENGTH(t('security.change_master_password.re_new_master_password'), 8),
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (value && getFieldValue('new_password') !== value) {
+                  if (value && getFieldValue('new_master_password') !== value) {
                     return Promise.reject(new Error(t('validation.passwords_not_match')));
                   }
                 },
@@ -115,10 +113,20 @@ function ChangePasswordFormData(props) {
               placeholder={t('placeholder.enter')}
             />
           </Form.Item>
+          <Form.Item
+            name={'hint'}
+            label={t('security.change_master_password.hint')}
+            rules={[]}
+          >
+            <Input
+              disabled={callingAPI}
+              placeholder={t('placeholder.enter')}
+            />
+          </Form.Item>
         </Form>
       </Drawer>
     </div>
   );
 }
 
-export default ChangePasswordFormData;
+export default ChangeMasterPasswordFormData;
