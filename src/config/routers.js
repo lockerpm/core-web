@@ -143,8 +143,8 @@ export default {
     },
     {
       name: keys.SECURITY_TOOLS,
-      path: '/tools',
-      element: 'Tools',
+      path: '/security-tools',
+      element: 'SecurityTools',
     },
     {
       name: keys.SHARED_WITH_ME,

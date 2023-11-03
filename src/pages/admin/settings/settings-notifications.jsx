@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import {
   List,
-  Switch
+  Switch,
+  Divider
 } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
@@ -70,6 +71,7 @@ const Notifications = (props) => {
           </List.Item>
         )}
       />
+      <Divider className="my-1"/>
     </div>
   );
 }

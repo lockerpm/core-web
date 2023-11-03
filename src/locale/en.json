@@ -898,5 +898,24 @@
     "mark_all_as_read": "Mark all as read",
     "no_notifications": "No new notifications",
     "item_no_longer_shared": "This item is no longer shared"
+  },
+  "security_tools": {
+    "title": "Security Tools",
+    "description": "Locker manager security tools",
+    "password_generate": {
+      "title": "Password Generate",
+      "description": "Create secure passwords for your accounts"
+    },
+    "password_health": {
+      "title": "Password Health",
+      "description": "Identify passwords that can put you at risk"
+    },
+    "data_breach_scanner": {
+      "title": "Data Breach Scanner",
+      "description": "Check if your sensitive data has been leaked online",
+      "content_title": "A &quot;breach&quot; is an incident where a site's data has been illegally accessed by hackers and then released publicly. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.",
+      "input_label": "Check any usernames or email addresses that you use.",
+      "action": "Check breaches"
+    }
   }
 }  

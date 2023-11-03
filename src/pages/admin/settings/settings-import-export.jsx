@@ -29,6 +29,7 @@ const ImportExport = (props) => {
       <Export
         className=""
       />
+      <Divider />
     </div>
   );
 }

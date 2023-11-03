@@ -16,6 +16,7 @@ import Folders from './admin/folders'
 import Authenticator from './admin/otps'
 import SharedWithMe from './admin/shares/shared-with-me'
 import MySharedItems from './admin/shares/my-shared-items'
+import SecurityTools from './admin/security-tools'
 
 // Setting pages
 import SettingsAccount from './admin/settings/settings-account'
@@ -44,6 +45,7 @@ export default {
   Authenticator,
   SharedWithMe,
   MySharedItems,
+  SecurityTools,
 
   SettingsAccount,
   SettingsImportExport,
