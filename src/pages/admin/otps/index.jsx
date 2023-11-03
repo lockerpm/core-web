@@ -39,7 +39,7 @@ const Authenticator = (props) => {
     size: global.constants.PAGE_SIZE,
     orderField: 'revisionDate',
     orderDirection: 'desc',
-    searchText: '',
+    searchText: currentPage?.query?.searchText || '',
   });
 
   const isEmpty = useMemo(() => {

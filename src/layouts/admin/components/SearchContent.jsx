@@ -7,35 +7,66 @@ import {
   SearchOutlined,
   LoadingOutlined,
   CloseOutlined,
-  ProjectOutlined,
 } from '@ant-design/icons';
 
 import { gray } from '@ant-design/colors';
 
-import { NoData, SearchText } from '../../../components'
-
+import { NoData, SearchText, ImageIcon } from '../../../components'
+import CipherIcon from '../../../pages/admin/vault/components/table/CipherIcon';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import common from '../../../utils/common';
+import global from '../../../config/global';
 
 function SearchContent(props) {
   const {
     onClose = () => {}
   } = props
   const { t } = useTranslation();
-  const defaultSize = 5;
+
+  const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const allFolders = useSelector((state) => state.folder.allFolders)
+  const allCollections = useSelector((state) => state.collection.allCollections)
 
   const [searchText, setSearchText] = useState(null);
   const [searching, setSearching] = useState(false);
 
-  useEffect(() => {
-  }, [])
+  const filteredCiphers = useMemo(() => {
+    return [
+      ...allCiphers.filter((c) => c.name?.toLowerCase()?.includes(searchText?.toLowerCase()) || common.cipherSubtitle(c)?.toLowerCase()?.includes(searchText?.toLowerCase()))
+    ]
+  }, [searchText, allCiphers])
+
+  const filteredFolders = useMemo(() => {
+    return [
+      ...allCollections,
+      ...allFolders
+    ].filter((c) => c.name?.toLowerCase()?.includes(searchText?.toLowerCase()))
+  }, [searchText, allFolders])
 
   const items = useMemo(() => {
-    return []
-  }, [searchText])
+    return [
+      ...filteredCiphers,
+      ...filteredFolders.map((f) => ({ ...f, isFolder: true }))
+    ]
+  }, [filteredCiphers, filteredFolders])
 
 
   const onClickItem = (item) => {
+    if (item.isFolder) {
+      global.navigate(global.keys.FOLDER_DETAIL, { folder_id: item.id })
+    } else {
+      const cipherTypes = global.constants.CIPHER_TYPES
+      let cipherType = cipherTypes.find((t) => t.type === item.type);
+      if (item.isDeleted) {
+        cipherType = cipherTypes.find((t) => t.isDeleted);
+      }
+      if (cipherType?.detailRouter) {
+        global.navigate(cipherType?.detailRouter, { cipher_id: item.id })
+      } else {
+        global.navigate(cipherType?.listRouter, { }, { searchText })
+      }
+    }
     onClose()
   }
 
@@ -79,7 +110,7 @@ function SearchContent(props) {
       {
         items.length > 0 && <div>
           <p className='text-l font-semibold mb-1'>
-            {t('common.results')}
+            {t('common.results')} ({items.length})
           </p>
           <div className='search-results'>
             {
@@ -89,21 +120,31 @@ function SearchContent(props) {
                 onClick={() => onClickItem(item)}
               >
                 <div className='flex items-center'>
-                  <ProjectOutlined
-                    className='text-primary'
-                    style={{ fontSize: 24 }}
-                  />
+                  {
+                    item.isFolder ? <ImageIcon
+                      name={item.isCollection ? 'folder-share' : 'folder'}
+                      width={24}
+                      height={24}
+                    /> : <CipherIcon
+                      item={item}
+                      isDeleted={item?.isDeleted}
+                      size={24}
+                      type={item.type}
+                    />
+                  }
                   <div className='ml-2'>
                     <SearchText
                       className='text-xs font-semibold'
                       searchText={searchText}
                       value={item.name}
                     />
-                    <p className='text-xs'>
-                      <small style={{ color: gray[1], fontSize: 10 }}>
-                        {item.name}
-                      </small>
-                    </p>
+                    <div style={{ color: gray[1], fontSize: 10 }}>
+                      <SearchText
+                        className='text-2xs'
+                        searchText={searchText}
+                        value={common.cipherSubtitle(item)}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>)

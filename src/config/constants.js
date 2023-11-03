@@ -188,7 +188,7 @@ export default {
       type: null,
       icon: require('../assets/images/icons/ciphers/trash.svg'),
       listRouter: keys.TRASH,
-      detailRouter: keys.VAULT_DETAIL,
+      detailRouter: keys.TRASH_DETAIL,
       title: <Trans i18nKey={'sidebar.trash'}/>,
       name: <Trans i18nKey={'cipher.types.trash'}/>,
       isCreate: false,

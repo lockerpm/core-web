@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -26,6 +26,10 @@ const Filter = (props) => {
   } = props;
 
   const [searchText, setSearchText] = useState(params.searchText)
+
+  useEffect(() => {
+    setSearchText(params.searchText)
+  }, [params.searchText])
 
   const selectedSortOption = useMemo(() => {
     return global.constants.SORT_OPTIONS.find((o) =>

@@ -5,6 +5,7 @@ import {
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
 import {
   TextCopy,
@@ -22,7 +23,10 @@ import global from "../../../../../config/global";
 
 const Name = (props) => {
   const { t } = useTranslation()
+  const location = useLocation();
+
   const { cipher = {}, send = null } = props;
+  const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const originCipher = useMemo(() => {
@@ -41,10 +45,16 @@ const Name = (props) => {
         || common.isCipherSharedWithMe(originCipher.organizationId)
     )
   }, [originCipher])
+
+  const cipherType = useMemo(() => {
+    return common.cipherTypeInfo('listRouter', currentPage.name)
+  }, [originCipher, currentPage])
+
   return (
     <div className="flex items-center">
       <CipherIcon
-        // item={originCipher}
+        item={originCipher}
+        isDeleted={originCipher?.isDeleted}
         type={originCipher.type}
       />
       <div className="ml-2 flex-1">
@@ -52,7 +62,7 @@ const Name = (props) => {
           <RouterLink
             className={'font-semibold'}
             label={cipher.name || originCipher.name || t('shares.encrypted_content')}
-            routerName={global.keys.VAULT_DETAIL}
+            routerName={cipherType?.detailRouter || global.keys.VAULT_DETAIL}
             routerParams={{ cipher_id: cipher.id || originCipher.id }}
             icon={
               isCipherShare ? <ImageIcon

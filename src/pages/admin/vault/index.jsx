@@ -50,7 +50,7 @@ const Vault = (props) => {
     size: global.constants.PAGE_SIZE,
     orderField: 'revisionDate',
     orderDirection: 'desc',
-    searchText: '',
+    searchText: currentPage?.query?.searchText,
   });
 
   const cipherType = useMemo(() => {
@@ -300,6 +300,7 @@ const Vault = (props) => {
           cipherType={cipherType}
           loading={syncing || loading}
           isEmpty={isEmpty}
+          isTrash={currentPage.name === global.keys.TRASH}
           onCreate={() => handleOpenForm()}
         /> : <>
           {

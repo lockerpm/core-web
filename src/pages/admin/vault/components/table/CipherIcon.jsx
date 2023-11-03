@@ -6,6 +6,7 @@ import {
 import {
 } from "@ant-design/icons";
 
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import common from "../../../../../utils/common";
@@ -21,12 +22,14 @@ const CipherIcon = (props) => {
     size = 32,
     item = null,
     type = null,
-    typeKey = null
+    typeKey = null,
+    isDeleted = false
   } = props;
-  const [cipher, setCipher] = useState(item);
+
+  const [cipher, setCipher] = useState(null);
 
   useEffect(() => {
-    setCipher(item)
+    setCipher(null)
   }, [item])
 
   const cipherIcon = useMemo(() => {
@@ -67,6 +70,7 @@ const CipherIcon = (props) => {
         src={cipherIcon.src}
         alt={cipherIcon.alt}
         onError={() => setCipher(null)}
+        style={{ filter: isDeleted ? 'grayscale(100%)' : '' }}
       />
     </div>
   );

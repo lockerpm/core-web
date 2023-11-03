@@ -18,11 +18,11 @@ import SharedWithMe from './admin/shares/shared-with-me'
 import MySharedItems from './admin/shares/my-shared-items'
 
 // Setting pages
-import SettingsAccount from './admin/settings/Account'
-import SettingsImportExport from './admin/settings/ImportExport'
-import SettingsSecurity from './admin/settings/Security'
-import SettingsNotifications from './admin/settings/Notifications'
-import EmergencyAccessView from './admin/settings/EmergencyAccessView'
+import SettingsAccount from './admin/settings/settings-account'
+import SettingsImportExport from './admin/settings/settings-import-export'
+import SettingsSecurity from './admin/settings/settings-security'
+import SettingsNotifications from './admin/settings/settings-notifications'
+import EmergencyAccessView from './admin/settings/emergency-access-view'
 
 // Admin Error page
 import AdminErrorPage from './admin/errors'

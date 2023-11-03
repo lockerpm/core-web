@@ -26,6 +26,7 @@ const NoCipher = (props) => {
     loading = false,
     cipherType = null,
     isEmpty = false,
+    isTrash = false,
     onCreate = () => {}
   } = props;
 
@@ -41,6 +42,7 @@ const NoCipher = (props) => {
                 size={48}
                 type={cipherType.type}
                 typeKey={cipherType.key}
+                isDeleted={isTrash}
               />
               <p className="text-xl font-semibold mt-4">
                 {t(`inventory.${cipherType.key}.title`)}

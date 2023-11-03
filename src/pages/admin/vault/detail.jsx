@@ -150,8 +150,9 @@ const VaultDetail = (props) => {
         Logo={() => <CipherIcon
           className="mr-4"
           size={48}
+          item={originCipher}
           type={cipherType.type}
-          // item={originCipher}
+          isDeleted={originCipher?.isDeleted}
         />}
         Right={() => <Actions
           size="medium"
