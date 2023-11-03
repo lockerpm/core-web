@@ -63,6 +63,15 @@ const ACCESS_TYPE = {
   TAKEOVER: 'takeover',
 }
 
+const NOTIFICATION_TYPE = {
+  ITEM_SHARING: 'item_sharing',
+  MEMBER_TO_GROUP_SHARE: 'member_to_group_share',
+  EMERGENCY_ACCESS: 'emergency_access',
+  DATA_BREACH: 'data_breach',
+  PASSWORD_TIP_TRICK: 'password_tip_trick',
+  MARKETING: 'marketing'
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
@@ -72,6 +81,7 @@ export default {
   STATUS_ACTION,
   MENU_TYPES,
   ACCESS_TYPE,
+  NOTIFICATION_TYPE,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',

@@ -23,16 +23,20 @@ import {
 } from "@ant-design/icons";
 
 import { orange } from '@ant-design/colors';
+import { useLocation } from "react-router-dom";
 
 import emergencyAccessServices from "../../../../../services/emergency-access";
 import global from "../../../../../config/global";
+import common from "../../../../../utils/common";
 
 const EmergencyAccess = (props) => {
   const {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const [expand, setExpand] = useState(false);
+  const location = useLocation();
+  const currentPage = common.getRouterByLocation(location)
+  const [expand, setExpand] = useState(currentPage?.query?.emergency_access == 'true');
   const [formVisible, setFormVisible] = useState(false);
 
   const [listTrusted, setListTrusted] = useState([]);

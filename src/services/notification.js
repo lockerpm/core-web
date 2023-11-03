@@ -1,6 +1,30 @@
 import request from '../utils/request'
 import global from '../config/global'
 
+function list(params = {}) {
+  return request({
+    url: global.endpoint.NOTIFICATIONS,
+    method: 'get',
+    params
+  })
+}
+
+function update(id, data = {}) {
+  return request({
+    url: global.endpoint.NOTIFICATION.replace(':notification_id', id),
+    method: 'put',
+    data
+  })
+}
+
+function read_all(params = {}) {
+  return request({
+    url: global.endpoint.NOTIFICATIONS_READ_ALL,
+    method: 'put',
+    params
+  })
+}
+
 function list_settings(params = {}) {
   return request({
     url: global.endpoint.NOTIFICATION_SETTINGS,
@@ -18,6 +42,9 @@ async function update_setting(id, data = {}) {
 }
 
 export default {
+  list,
+  update,
+  read_all,
   list_settings,
   update_setting,
 }

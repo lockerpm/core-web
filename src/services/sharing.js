@@ -119,6 +119,14 @@ function leave_share(organizationId) {
   })
 }
 
+function add_sharing_group(organizationId, groupId, data) {
+  return request({
+    url: global.endpoint.SHARING_GROUP.replace(':organization_id', organizationId).replace(':group_id', groupId),
+    method: 'post',
+    data
+  })
+}
+
 function update_sharing_group(organizationId, groupId, data) {
   return request({
     url: global.endpoint.SHARING_GROUP.replace(':organization_id', organizationId).replace(':group_id', groupId),
@@ -167,6 +175,7 @@ export default {
   delete_sharing_folder,
   update_sharing_invitation,
   leave_share,
+  add_sharing_group,
   update_sharing_group,
   update_sharing_member,
   add_sharing_member,

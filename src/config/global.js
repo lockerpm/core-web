@@ -8,6 +8,7 @@ export default {
   rules: {},
   store: {},
   keys: {},
+  urls: {},
   confirm: () => {},
   notification: () => {},
   navigate: () => {},

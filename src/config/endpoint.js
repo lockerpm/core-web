@@ -70,6 +70,9 @@ export default {
   ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,
   ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
 
+  NOTIFICATIONS: `${API_URL}/v3/notifications`,
+  NOTIFICATION: `${API_URL}/v3/notifications/:notification_id`,
+  NOTIFICATIONS_READ_ALL: `${API_URL}/v3/notifications/read_all`,
   NOTIFICATION_SETTINGS: `${FLAT_FORM}/notification/settings`,
   NOTIFICATION_SETTING: `${FLAT_FORM}/notification/settings/:setting_id`,
 

@@ -15,6 +15,7 @@
     "products": "Products",
     "no_data": "No data",
     "confirm": "Confirm",
+    "confirmed": "Confirmed",
     "warning": "Warning",
     "delete_question": "Are you sure you want to delete?",
     "information": "Information",
@@ -211,7 +212,8 @@
         "share_items_success": "The items have been shared!",
         "share_item_success": "The item have been shared!",
         "share_folder_success": "The item have been shared!",
-        "stop_share_success": "Stop sharing successfully"
+        "stop_share_success": "Stop sharing successfully",
+        "shared_to_new_member": "Share item to new member successfully"
       },
       "notification": {
         "updated": "Your email notifications have been updated!"
@@ -890,5 +892,11 @@
     "title": "Emergency Access view",
     "description": "Created by: {{owner}}",
     "view_item": "View item"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark_all_as_read": "Mark all as read",
+    "no_notifications": "No new notifications",
+    "item_no_longer_shared": "This item is no longer shared"
   }
 }  

@@ -14,6 +14,7 @@ import { ImageIcon } from '../../components';
 
 import Breadcrumb from './Breadcrumb';
 import SearchContent from './components/SearchContent';
+import Notifications from './components/Notifications';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -60,11 +61,7 @@ function Header(props) {
             icon={<SearchOutlined />}
             onClick={() => setSearch(true)}
           />
-          <Button
-            shape="circle"
-            icon={<BellOutlined />}
-            onClick={() => {}}
-          />
+          <Notifications />
         </Space>
       </div>
       {

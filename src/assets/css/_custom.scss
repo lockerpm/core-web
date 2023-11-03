@@ -103,3 +103,7 @@
     }
   }
 }
+
+.ant-dropdown-menu-item-selected {
+  background-color: var(--sidebar-menu-active-background-color) !important;
+}
