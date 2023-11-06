@@ -64,7 +64,7 @@ function SeedPhrase(props) {
             <Input
               prefix={<p style={{ marginBottom: 0 }}>{index + 1}.</p>}
               suffix={
-                newValue.length > MIN_WORD_COUNT && !disabled && <span
+                newValue.length > MIN_WORD_COUNT && !disabled && !readOnly && <span
                   className='cursor-pointer'
                   onClick={() => handleRemoveWord(index)}
                 >

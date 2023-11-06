@@ -25,11 +25,15 @@ const ListItemDetails = (props) => {
   const {
     className,
     cipher,
-    loading
+    loading,
+    isEmergencyAccess = false
   } = props;
   const { t } = useTranslation();
 
   const cipherTypeData = useMemo(() => {
+    if (!cipher) {
+      return []
+    }
     if ([CipherType.Login, CipherType.MasterPassword].includes(cipher.type)) {
       return [
         {
@@ -187,6 +191,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.cryptoWallet.address}
             showIcon={true}
+            align="between"
           />
         },
         {
@@ -207,7 +212,7 @@ const ListItemDetails = (props) => {
             align="between"
             display={
               <SeedPhrase
-                className="w-2/3"
+                className="w-3/4"
                 value={cipher.cryptoWallet.seed}
                 readOnly={true}
               />
@@ -388,6 +393,9 @@ const ListItemDetails = (props) => {
   }, [cipher])
 
   const data = useMemo(() => {
+    if (!cipher) {
+      return []
+    }
     return [
       {
         key: 'name',
@@ -420,15 +428,17 @@ const ListItemDetails = (props) => {
       {
         key: 'owner',
         name: t('roles.owner'),
+        hide: isEmergencyAccess,
         value: <div>
           {
-            common.isOwner(cipher) ? t('common.me') : common.getOrganization(cipher.organizationId)?.name || t('common.me')
+            common.isOwner(cipher) ? t('common.me') : common.getOrganization(cipher.organizationId)?.name || null
           }
         </div>
       },
       {
         key: 'folder',
         name: t('common.folder'),
+        hide: isEmergencyAccess,
         value: cipher.folderId ? <FolderName
           item={{ id: cipher.folderId }}
           showItems={false}
@@ -437,6 +447,7 @@ const ListItemDetails = (props) => {
       {
         key: 'created_time',
         name: t('common.created_time'),
+        hide: isEmergencyAccess,
         value: <TextCopy
           value={common.timeFromNow(cipher.creationDate)}
           showIcon={true}
@@ -446,6 +457,7 @@ const ListItemDetails = (props) => {
       {
         key: 'updated_time',
         name: t('common.updated_time'),
+        hide: isEmergencyAccess,
         value: <TextCopy
           value={common.timeFromNow(cipher.revisionDate)}
           showIcon={true}
@@ -455,17 +467,15 @@ const ListItemDetails = (props) => {
       {
         key: 'shared_with',
         name: t('shares.shared_with'),
-        hide: !cipher?.organizationId,
+        hide: !cipher?.organizationId || isEmergencyAccess,
         value: <SharedWith cipher={cipher}/>
       },
     ].filter((c) => !c.hide).map((c) => { delete c.hide; return c })
   }, [
     cipher,
-    cipherTypeData
+    cipherTypeData,
+    isEmergencyAccess
   ])
-
-  useEffect(() => {
-  }, [])
 
   return (
     <div className={`item-details ${className}`}>

@@ -6,6 +6,8 @@ import {
 import {
 } from '@ant-design/icons';
 
+import ListItemDetails from '../../../../vault/components/detail/List';
+
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -27,9 +29,14 @@ function ViewItem(props) {
       <Drawer
         title={t('emergency_access_view.view_item')}
         placement="right"
+        width={800}
         onClose={onClose}
         open={visible}
       >
+        <ListItemDetails
+          cipher={item}
+          isEmergencyAccess={true}
+        />
       </Drawer>
     </div>
   );
