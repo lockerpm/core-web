@@ -9,11 +9,10 @@ import {
   ImageIcon
 } from '../../../../components';
 
-import CheckForm from "./data-breach-scanner/CheckForm";
-
 import {
   RightOutlined
 } from "@ant-design/icons";
+import global from "../../../../config/global";
 
 const DataBreachScanner = (props) => {
   const {
@@ -33,7 +32,7 @@ const DataBreachScanner = (props) => {
         <div className="ml-2">
           <div
             className="flex text-primary items-center cursor-pointer"
-            onClick={() => setFormVisible(true)}
+            onClick={() => global.navigate(global.keys.BREACH_SCANNER)}
           >
             <p className="font-semibold text-lg mr-1">
               {t('security_tools.data_breach_scanner.title')}
@@ -45,10 +44,6 @@ const DataBreachScanner = (props) => {
           </p>
         </div>
       </div>
-      <CheckForm
-        visible={formVisible}
-        onClose={() => setFormVisible(false)}
-      />
     </div>
   );
 }

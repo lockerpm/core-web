@@ -18,6 +18,7 @@ import SharedWithMe from './admin/shares/shared-with-me'
 import MySharedItems from './admin/shares/my-shared-items'
 import SecurityTools from './admin/security-tools'
 import PasswordHealth from './admin/security-tools/password-health'
+import BreachScanner from './admin/security-tools/breach-scanner'
 
 // Setting pages
 import SettingsAccount from './admin/settings/settings-account'
@@ -48,6 +49,7 @@ export default {
   MySharedItems,
   SecurityTools,
   PasswordHealth,
+  BreachScanner,
 
   SettingsAccount,
   SettingsImportExport,

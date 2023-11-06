@@ -174,6 +174,13 @@ export default {
       label: <Trans i18nKey='security_tools.password_health.title'/>,
     },
     {
+      name: keys.BREACH_SCANNER,
+      parent: keys.SECURITY_TOOLS,
+      path: '/security-tools/breach-scanner',
+      element: 'BreachScanner',
+      label: <Trans i18nKey='security_tools.data_breach_scanner.title'/>,
+    },
+    {
       name: keys.SETTINGS_ACCOUNT,
       path: '/settings/account',
       element: 'SettingsAccount',

@@ -94,4 +94,6 @@ export default {
 
   IMPORT_FOLDERS: `${FLAT_FORM}/import/folders`,
   IMPORT_CIPHERS: `${FLAT_FORM}/import/ciphers`,
+
+  TOOLS_BREACH: `${FLAT_FORM}/tools/breach`,
 }

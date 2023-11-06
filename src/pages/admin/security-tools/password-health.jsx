@@ -175,7 +175,7 @@ const PasswordHealth = (props) => {
                 style={{ padding: 12 }}
                 message={
                   <p
-                    className="font-semibold text-primary"
+                    className="font-semibold"
                     style={{ color: getCountByKey(m.key) > 0 ? red[4] : green[6] }}
                   >
                     { getCountByKey(m.key) > 0
@@ -188,7 +188,7 @@ const PasswordHealth = (props) => {
                   ? t(`security_tools.password_health.${activeKey}.alert_description`, { count: getCountByKey(m.key) })
                   : t('security_tools.password_health.good_news_details')
                 }
-                type="warning"
+                type={getCountByKey(m.key) > 0 ? 'warning' : 'success'}
               />
               {
                 getCountByKey(m.key) > 0 && <TableData

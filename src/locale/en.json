@@ -940,7 +940,15 @@
       "description": "Check if your sensitive data has been leaked online",
       "content_title": "A &quot;breach&quot; is an incident where a site's data has been illegally accessed by hackers and then released publicly. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.",
       "input_label": "Check any usernames or email addresses that you use.",
-      "action": "Check breaches"
+      "action": "Check breaches",
+      "breach_not_found_details": "{{username}} was not found in any known data breaches.",
+      "alert_title": "Breached accounts found",
+      "alert_description": "{{username}} was found in {{different_count}} different data breaches online.",
+      "compromised_data": "Compromised data",
+      "website": "Website",
+      "affected_users": "Affected Users",
+      "breach_occurred": "Breach Occurred",
+      "added_occurred": "Added Occurred"
     }
   }
 }  
