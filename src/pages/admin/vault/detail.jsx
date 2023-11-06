@@ -3,6 +3,7 @@ import { } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
 import { AdminHeader } from "../../../components";
+import ListItemDetails from "./components/detail/List";
 import FormData from "./components/FormData";
 import MoveFolder from "./components/MoveFolder";
 import CipherIcon from "./components/table/CipherIcon";
@@ -13,8 +14,6 @@ import QuickShareReview from "../shares/components/quick-shares/Review";
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
-
-import { CipherType } from "../../../core-js/src/enums"
 
 import common from "../../../utils/common";
 import global from "../../../config/global";
@@ -28,10 +27,8 @@ const VaultDetail = (props) => {
 
   const currentPage = common.getRouterByLocation(location);
   const syncing = useSelector((state) => state.sync.syncing);
-  const isMobile = useSelector((state) => state.system.isMobile);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
-  const [callingAPI, setCallingAPI] = useState(false);
   const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [moveVisible, setMoveVisible] = useState(false);
@@ -165,6 +162,10 @@ const VaultDetail = (props) => {
           onStopSharing={stopSharingItem}
           onPermanentlyDelete={permanentlyDeleteItems}
         />}
+      />
+      <ListItemDetails
+        className="mt-4"
+        cipher={originCipher}
       />
       <FormData
         visible={formVisible}

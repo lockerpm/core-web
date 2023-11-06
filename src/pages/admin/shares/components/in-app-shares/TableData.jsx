@@ -16,6 +16,7 @@ import {
 import CipherName from "../../../vault/components/table/Name";
 import FolderName from "../../../folders/components/table/Name";
 import Actions from "./table/Actions";
+import SharedWith from "./table/SharedWith";
 
 import common from "../../../../../utils/common";
 
@@ -46,6 +47,14 @@ const TableData = (props) => {
         key: 'name',
         align: 'left',
         render: (_, record) => isFolder ? <FolderName item={record}/> : <CipherName cipher={record}/>
+      },
+      {
+        title: t('shares.shared_with'),
+        dataIndex: 'shared_with',
+        key: 'shared_with',
+        align: 'center',
+        width: 200,
+        render: (_, record) => <SharedWith cipher={record}/>
       },
       {
         title: t('common.type'),

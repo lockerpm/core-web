@@ -80,7 +80,9 @@
     "receiver": "Receiver",
     "days_number": "{{number}} days",
     "one_day": "1 day",
-    "username_or_email": "Email address or Username"
+    "username_or_email": "Email address or Username",
+    "password_strength": "Password Strength",
+    "me": "Me"
   },
   "button": {
     "add": "Add",
@@ -625,6 +627,7 @@
       "password": "Password",
       "website": "Website address",
       "setup_otp": "2FA Setup",
+      "totp": "TOTP",
       "no_otp": "No OTP",
       "new_otp": "Add new OTP",
       "existing_otp": "Set up from an existing OTP",
@@ -634,6 +637,7 @@
     "card": {
       "title": "Card Information",
       "cardholder_name": "Cardholder name",
+      "brand": "Brand",
       "card_number": "Card number",
       "expiration_month": "Expiration month",
       "expiration_year": "Expiration year",
@@ -682,6 +686,7 @@
     "share_item": "Share Item",
     "share_folder": "Share folder",
     "leave_question": "Are you sure you want to leave this share group?",
+    "shared_with": "Shared with",
     "in_app_shares": {
       "items": "In-app shared Items",
       "folders": "In-app shared Folders",
@@ -694,7 +699,6 @@
       "add": "New Share"
     },
     "quick_shares": {
-      "shared_with": "Shared with",
       "sharing_time": "Shared time",
       "views": "Views",
       "expiration": "Expiration",
@@ -910,7 +914,6 @@
     "password_health": {
       "title": "Password Health",
       "description": "Identify passwords that can put you at risk",
-      "password_strength": "Password Strength",
       "exposed_time": "Exposed Time(s)",
       "exposed_time_count": "Exposed {{count}} time(s)",
       "good_news": "Good News",

@@ -15,11 +15,10 @@ import { useTranslation } from "react-i18next";
 
 import { red } from '@ant-design/colors';
 
-import global from '../../../../../../config/global';
-
 function SeedPhrase(props) {
   const {
     value = '',
+    readOnly = false,
     disabled = false,
     onChange = () => {}
   } = props
@@ -63,8 +62,9 @@ function SeedPhrase(props) {
         {
           newValue.map((w, index) => <Col key={index} span={8}>
             <Input
-              prefix={<p>{index + 1}.</p>}
-              suffix={newValue.length > MIN_WORD_COUNT && !disabled && <span
+              prefix={<p style={{ marginBottom: 0 }}>{index + 1}.</p>}
+              suffix={
+                newValue.length > MIN_WORD_COUNT && !disabled && <span
                   className='cursor-pointer'
                   onClick={() => handleRemoveWord(index)}
                 >
@@ -72,13 +72,14 @@ function SeedPhrase(props) {
                 </span>
               }
               value={w}
+              readOnly={readOnly}
               disabled={disabled}
               onChange={(e) => handleChangeWord(e.target.value, index)}
             />
           </Col>)
         }
         {
-          newValue.length < MAX_WORD_COUNT && !disabled && <Col span={8}>
+          newValue.length < MAX_WORD_COUNT && !disabled && !readOnly && <Col span={8}>
             <Button
               className="w-full"
               type="primary"

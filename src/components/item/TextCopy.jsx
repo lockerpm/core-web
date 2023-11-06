@@ -16,13 +16,15 @@ const TextCopyItem = (props) => {
     align = 'start',
     color = '',
     limited = true,
+    showIcon = false,
+    display = null
   } = props;
 
   const { t } = useTranslation()
   const [isHover, setIsHover] = useState(false)
 
   const icons = useMemo(() => {
-    if (isHover) {
+    if ((isHover || showIcon) && !!value) {
       return [
         <CopyOutlined/>,
         <CheckOutlined/>
@@ -32,13 +34,13 @@ const TextCopyItem = (props) => {
       <></>,
       <></>
     ]
-  })
+  }, [isHover])
 
   const DisplayValue = useMemo(() => {
     if (value) {
       if (isPassword) {
         return <Input.Password
-          className={`p-0 text-${align}`}
+          className={`p-0 text-${align} mr-2`}
           value={value}
           bordered={false}
         />
@@ -68,7 +70,7 @@ const TextCopyItem = (props) => {
         text: value
       }}
     >
-      {DisplayValue}
+      {display || DisplayValue}
     </Typography.Text>
   );
 }

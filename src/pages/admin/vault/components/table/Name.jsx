@@ -47,7 +47,7 @@ const Name = (props) => {
   }, [originCipher])
 
   const cipherType = useMemo(() => {
-    return common.cipherTypeInfo('listRouter', currentPage.name)
+    return common.cipherTypeInfo('listRouter', currentPage.name, cipher.type)
   }, [originCipher, currentPage])
 
   return (

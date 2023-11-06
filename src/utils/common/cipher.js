@@ -49,9 +49,9 @@ const parseNotesOfNewTypes = (originalCipher) => {
   return cipher
 }
 
-const cipherTypeInfo = (key = 'type', value) => {
+const cipherTypeInfo = (key = 'type', value, type = null) => {
   return global.constants.CIPHER_TYPES.find((t) => t[key] == value)
-    || global.constants.CIPHER_TYPES[0]
+    || global.constants.CIPHER_TYPES.find((t) => t.type == type)
 }
 
 const convertCipherToForm = (cipher = {}) => {

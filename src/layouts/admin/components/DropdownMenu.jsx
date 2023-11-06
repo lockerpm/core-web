@@ -28,7 +28,9 @@ function DropdownMenu() {
       return <Avatar
         size={size}
         src={userInfo.avatar}
-      />
+      >
+        {userInfo.email.slice(0, 1)?.toUpperCase()}
+      </Avatar>
     }
     return <Avatar
       size={size}

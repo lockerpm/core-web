@@ -18,8 +18,14 @@ import global from "../../../../../config/global";
 
 const Name = (props) => {
   const { t } = useTranslation()
-  const { item = {} } = props;
+  const { item = {}, showItems = true } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const allFolders = useSelector((state) => state.folder.allFolders)
+  const allCollections = useSelector((state) => state.collection.allCollections)
+
+  const originFolder = useMemo(() => {
+    return [...allFolders, ...allCollections].find((c) => c.id === item?.id)
+  }, [allFolders, allCollections])
 
   const folderCiphers = useMemo(() => {
     return allCiphers.filter((c) => c.folderId === item?.id && !c.isDeleted)
@@ -32,8 +38,7 @@ const Name = (props) => {
   return (
     <div className="flex items-center">
       <ImageIcon
-        className="ml-1"
-        name={item.isCollection ? 'folder-share' : 'folder'}
+        name={originFolder.isCollection ? 'folder-share' : 'folder'}
         width={32}
         height={32}
       />
@@ -41,15 +46,17 @@ const Name = (props) => {
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}
-            label={item.name}
+            label={originFolder.name}
             routerName={global.keys.FOLDER_DETAIL}
-            routerParams={{ folder_id: item.id }}
+            routerParams={{ folder_id: originFolder.id }}
           />
         </div>
-        <TextCopy
-          className="text-sm font-semibold"
-          value={`${[...folderCiphers, ...collectionCiphers].length} ${t('common.items')}`}
-        />
+        {
+          showItems && <TextCopy
+            className="text-sm font-semibold"
+            value={`${[...folderCiphers, ...collectionCiphers].length} ${t('common.items')}`}
+          />
+        }
       </div>
     </div>
   );

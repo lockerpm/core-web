@@ -41,7 +41,7 @@ const TableData = (props) => {
         render: (_, record) => <Name cipher={record}/>
       },
       {
-        title: t('security_tools.password_health.password_strength'),
+        title: t('common.password_strength'),
         dataIndex: 'password_strength',
         key: 'password_strength',
         align: 'left',

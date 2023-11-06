@@ -68,6 +68,7 @@ const DisplayOtp = (props) => {
     >
       <p
         className="text-2xl font-semibold text-primary cursor-pointer"
+        style={{ marginBottom: 0 }}
         onClick={() => common.copyToClipboard(otp)}
       >
         {otpFormat}

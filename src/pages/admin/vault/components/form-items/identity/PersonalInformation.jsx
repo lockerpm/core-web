@@ -15,26 +15,21 @@ import { useTranslation } from "react-i18next";
 
 function PersonalForm(props) {
   const {
-    form,
     disabled = false
   } = props
   const { t } = useTranslation()
 
   const titleOptions = [
     {
-      label: t('common.mr'),
       value: 'mr',
     },
     {
-      label: t('common.mrs'),
       value: 'mrs',
     },
     {
-      label: t('common.ms'),
       value: 'ms',
     },
     {
-      label: t('common.dr'),
       value: 'dr',
     },
   ]
@@ -58,7 +53,10 @@ function PersonalForm(props) {
             <Select
               className='w-full'
               placeholder={t('placeholder.select')}
-              options={titleOptions}
+              options={titleOptions.map((c) => ({
+                ...c,
+                label: t(`common.${c.value}`)
+              }))}
               disabled={disabled}
             />
           </Form.Item>

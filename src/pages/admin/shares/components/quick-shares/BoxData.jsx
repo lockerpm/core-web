@@ -61,7 +61,7 @@ const BoxData = (props) => {
           </div>}
         >
           <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('shares.quick_shares.shared_with')}:</p>
+            <p className="font-semibold mr-2">{t('shares.shared_with')}:</p>
             <SharedWith send={record}/>
           </div>
           <div className="flex items-center mb-2">

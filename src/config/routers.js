@@ -158,6 +158,7 @@ export default {
     },
     {
       name: keys.TRASH_DETAIL,
+      parent: keys.TRASH,
       path: '/trash/:cipher_id',
       element: 'VaultDetail',
     },

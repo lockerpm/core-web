@@ -47,9 +47,8 @@ const TableData = (props) => {
           send={record}
         />
       },
-      
       {
-        title: t('shares.quick_shares.shared_with'),
+        title: t('shares.shared_with'),
         dataIndex: 'shared_with',
         key: 'shared_with',
         align: 'center',

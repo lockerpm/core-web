@@ -138,7 +138,11 @@ const Lock = () => {
                   <Input
                     placeholder={t('auth_pages.username')}
                     prefix={
-                      <Avatar src={userInfo?.avatar} />
+                      <Avatar
+                        src={userInfo?.avatar}
+                      >
+                        {userInfo?.email.slice(0, 1)?.toUpperCase()}
+                      </Avatar>
                     }
                     value={userInfo?.full_name}
                     size="large"
