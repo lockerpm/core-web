@@ -163,8 +163,8 @@ const PasswordHealth = (props) => {
                   </Avatar>
                 }
                 <span>
-                  <span className="mr-1">{t(`security_tools.password_health.${activeKey}.title`)}</span>
-                  <Tooltip title={t(`security_tools.password_health.${activeKey}.description`)}>
+                  <span className="mr-1">{t(`security_tools.password_health.${m.key}.title`)}</span>
+                  <Tooltip title={t(`security_tools.password_health.${m.key}.description`)}>
                     <InfoCircleOutlined style={{ fontSize: 16, marginRight: 0 }}/>
                   </Tooltip>
                 </span>
