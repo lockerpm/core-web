@@ -2,6 +2,7 @@ import AdminHeader from './admin-header'
 import UploadFile from './upload-file'
 import Editor from './editor'
 import GeneratePassword from './generate-password'
+import PasswordStrength from './generate-password/components/PasswordStrength'
 import GeneratePasswordContent from './generate-password/components/Content'
 
 import FilterTime from './item/FilterTime'
@@ -29,5 +30,6 @@ export {
   ImageIcon,
   SearchText,
   GeneratePassword,
+  PasswordStrength,
   GeneratePasswordContent
 }

@@ -79,7 +79,8 @@
     "email_addresses": "Email addresses",
     "receiver": "Receiver",
     "days_number": "{{number}} days",
-    "one_day": "1 day"
+    "one_day": "1 day",
+    "username_or_email": "Email address or Username"
   },
   "button": {
     "add": "Add",
@@ -908,7 +909,31 @@
     },
     "password_health": {
       "title": "Password Health",
-      "description": "Identify passwords that can put you at risk"
+      "description": "Identify passwords that can put you at risk",
+      "password_strength": "Password Strength",
+      "exposed_time": "Exposed Time(s)",
+      "exposed_time_count": "Exposed {{count}} time(s)",
+      "good_news": "Good News",
+      "good_news_details": "All items in your vault with passwords that are strong",
+      "used_time_count": "Used {{count}} time(s)",
+      "weak_passwords": {
+        "title": "Weak passwords",
+        "description": "Easy to guess",
+        "alert_title": "Weak passwords found",
+        "alert_description": "We found {{count}} items in your vault with passwords that are not strong. You should update them to use stronger passwords."
+      },
+      "reused_passwords": {
+        "title": "Reused passwords",
+        "description": "Used for multiple accounts",
+        "alert_title": "Reused passwords found",
+        "alert_description": "We found {{count}} passwords that are being reused in your vault. You should change them to a unique value."
+      },
+      "exposed_passwords": {
+        "title": "Exposed passwords",
+        "description": "Exposed passwords are passwords that have been uncovered in known data breaches that were released publicly or sold on the dark web by hackers.",
+        "alert_title": "Exposed passwords found",
+        "alert_description": "We found {{count}} items in your vault that have passwords that were exposed in known data breaches. You should change them to use a new password."
+      }
     },
     "data_breach_scanner": {
       "title": "Data Breach Scanner",

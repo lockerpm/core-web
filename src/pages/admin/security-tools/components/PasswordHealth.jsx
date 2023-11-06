@@ -12,6 +12,7 @@ import {
 import {
   RightOutlined
 } from "@ant-design/icons";
+import global from "../../../../config/global";
 
 const PasswordHealth = (props) => {
   const {
@@ -31,7 +32,7 @@ const PasswordHealth = (props) => {
         <div className="ml-2">
           <div
             className="flex text-primary items-center cursor-pointer"
-            onClick={() => {}}
+            onClick={() => global.navigate(global.keys.PASSWORD_HEALTH)}
           >
             <p className="font-semibold text-lg mr-1">
               {t('security_tools.password_health.title')}

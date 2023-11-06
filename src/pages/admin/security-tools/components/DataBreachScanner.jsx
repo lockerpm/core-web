@@ -7,7 +7,9 @@ import { useTranslation } from "react-i18next";
 
 import {
   ImageIcon
-} from '../../../../components'
+} from '../../../../components';
+
+import CheckForm from "./data-breach-scanner/CheckForm";
 
 import {
   RightOutlined
@@ -31,7 +33,7 @@ const DataBreachScanner = (props) => {
         <div className="ml-2">
           <div
             className="flex text-primary items-center cursor-pointer"
-            onClick={() => {}}
+            onClick={() => setFormVisible(true)}
           >
             <p className="font-semibold text-lg mr-1">
               {t('security_tools.data_breach_scanner.title')}
@@ -43,6 +45,10 @@ const DataBreachScanner = (props) => {
           </p>
         </div>
       </div>
+      <CheckForm
+        visible={formVisible}
+        onClose={() => setFormVisible(false)}
+      />
     </div>
   );
 }

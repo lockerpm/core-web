@@ -122,30 +122,35 @@ const GeneratePasswordContent = (props) => {
             onChange={(v) => setGenerateOptions({ ...generateOptions, length: v })}
           />
           <Checkbox
+            className="w-full"
             checked={generateOptions.uppercase}
             onChange={(e) => setGenerateOptions({ ...generateOptions, uppercase: e.target.checked })}
           >
             {t('generate_password.options.uppercase')}
           </Checkbox>
           <Checkbox
+            className="w-full"
             checked={generateOptions.lowercase}
             onChange={(e) => setGenerateOptions({ ...generateOptions, lowercase: e.target.checked })}
           >
             {t('generate_password.options.lowercase')}
           </Checkbox>
           <Checkbox
+            className="w-full"
             checked={generateOptions.number}
             onChange={(e) => setGenerateOptions({ ...generateOptions, number: e.target.checked })}
           >
             {t('generate_password.options.digits')}
           </Checkbox>
           <Checkbox
+            className="w-full"
             checked={generateOptions.special}
             onChange={(e) => setGenerateOptions({ ...generateOptions, special: e.target.checked })}
           >
             {t('generate_password.options.symbols')}
           </Checkbox>
           <Checkbox
+            className="w-full"
             checked={generateOptions.ambiguous}
             onChange={(e) => setGenerateOptions({ ...generateOptions, ambiguous: e.target.checked })}
           >

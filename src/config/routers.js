@@ -142,11 +142,6 @@ export default {
       element: 'Authenticator',
     },
     {
-      name: keys.SECURITY_TOOLS,
-      path: '/security-tools',
-      element: 'SecurityTools',
-    },
-    {
       name: keys.SHARED_WITH_ME,
       path: '/shares/shared-with-me',
       element: 'SharedWithMe',
@@ -165,6 +160,18 @@ export default {
       name: keys.TRASH_DETAIL,
       path: '/trash/:cipher_id',
       element: 'VaultDetail',
+    },
+    {
+      name: keys.SECURITY_TOOLS,
+      path: '/security-tools',
+      element: 'SecurityTools',
+    },
+    {
+      name: keys.PASSWORD_HEALTH,
+      parent: keys.SECURITY_TOOLS,
+      path: '/security-tools/password-health',
+      element: 'PasswordHealth',
+      label: <Trans i18nKey='security_tools.password_health.title'/>,
     },
     {
       name: keys.SETTINGS_ACCOUNT,

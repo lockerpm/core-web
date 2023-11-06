@@ -24,18 +24,13 @@ const SecurityTools = (props) => {
         actions={[]}
       />
       <div className="mt-4">
-
+        <PasswordGenerate />
+        <Divider />
+        <PasswordHealth />
+        <Divider />
+        <DataBreachScanner />
+        <Divider />
       </div>
-      <PasswordGenerate
-        className=""
-      />
-      <Divider />
-      <PasswordHealth
-        className=""
-      />
-      <Divider />
-      <DataBreachScanner />
-      <Divider />
     </div>
   );
 }
