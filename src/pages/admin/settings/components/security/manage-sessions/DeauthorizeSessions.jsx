@@ -44,8 +44,12 @@ const DeauthorizeSessionsModal = (props) => {
       if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
         if (device) {
           await deauthorizeDevice();
-          onConfirm();
-          onClose();
+          if (device.device_identifier === authServices.device_id()) {
+            await authServices.redirect_login();
+          } else {
+            onConfirm();
+            onClose();
+          }
         } else {
           await deauthorizeSessions(keyHash);
           await authServices.redirect_login();

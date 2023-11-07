@@ -12,7 +12,6 @@ import {
 import { AdminHeader } from "../../../components";
 
 import PersonalInfo from './components/account/PersonalInfo'
-import UploadAvatar from './components/account/UploadAvatar'
 import Preferences from './components/account/Preferences'
 import DangerZone from './components/account/DangerZone'
 
@@ -38,10 +37,6 @@ const AccountDetails = (props) => {
     {
       key: 'personal_info',
       title: t('account_details.personal_info'),
-    },
-    {
-      key: 'profile_photo',
-      title: t('account_details.profile_photo')
     },
     {
       key: 'preferences',
@@ -159,18 +154,10 @@ const AccountDetails = (props) => {
                     index === 0 && <PersonalInfo />
                   }
                   {
-                    index === 1 && <UploadAvatar
-                      callingAPI={callingAPI}
-                      value={avatar}
-                      onChange={(v) => setAvatar(v)}
-                      onChangeFile={(v) => setAvatarFile(v)}
-                    />
+                    index === 1 && <Preferences />
                   }
                   {
-                    index === 2 && <Preferences />
-                  }
-                  {
-                    index === 3 && <DangerZone />
+                    index === 2 && <DangerZone />
                   }
                 </Col>
               </Row>

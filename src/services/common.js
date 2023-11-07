@@ -375,7 +375,8 @@ async function sync_data_by_ws(message) {
           await sync_items(message.data.ids)
         }
       } else if (message.type.includes('cipher_delete_permanent')) {
-        await global.jsCore.cipherService.delete(message.data.ids)
+        await global.jsCore.cipherService.delete(message.data.ids);
+        await get_all_ciphers();
       } else {
         await sync_data();
       }
@@ -385,7 +386,8 @@ async function sync_data_by_ws(message) {
         await global.jsCore.folderService.upsert([res])
         await get_all_folders();
       } else if (message.type.includes('delete')) {
-        await global.jsCore.folderService.delete(message.data.ids)
+        await global.jsCore.folderService.delete(message.data.ids);
+        await get_all_folders();
       } else {
         await sync_data();
       }
@@ -397,7 +399,8 @@ async function sync_data_by_ws(message) {
           await get_all_collections();
         }
       } else if (message.type.includes('delete')) {
-        await global.jsCore.collectionService.delete(message.data.ids)
+        await global.jsCore.collectionService.delete(message.data.ids);
+        await get_all_collections();
       } else {
         await sync_data();
       }

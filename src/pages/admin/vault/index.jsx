@@ -156,7 +156,7 @@ const Vault = (props) => {
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
     return {
-      disabled: originCipher.type === CipherType.MasterPassword || !common.isOwner(originCipher)
+      disabled: originCipher && (originCipher.type === CipherType.MasterPassword || !common.isOwner(originCipher))
     }
   }
 

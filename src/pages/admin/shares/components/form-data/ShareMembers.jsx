@@ -172,7 +172,8 @@ function ShareMembers(props) {
             key,
             status: global.constants.STATUS.PENDING,
             role: global.constants.PERMISSION_ROLE.MEMBER,
-            avatar: m.avatar
+            avatar: m.avatar,
+            isNew: true,
           }
         }
       )

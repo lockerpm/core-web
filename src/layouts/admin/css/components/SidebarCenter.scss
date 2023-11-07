@@ -1,5 +1,6 @@
 .admin-layout-sidebar-center {
   height: calc(100% - var(--sidebar-bottom-height) - var(--sidebar-top-height));
+  overflow: auto;
   &__group {
     height: 40px;
     padding: 12px;

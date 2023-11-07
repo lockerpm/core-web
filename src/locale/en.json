@@ -226,8 +226,8 @@
         "removed": "Removed user {{user}}",
         "rejected": "Emergency access rejected",
         "invited": "Invited user",
-        "reinvited": "{user} has been reinvited",
-        "confirmed": "{user} has been confirmed",
+        "reinvited": "{{user}} has been reinvited",
+        "confirmed": "{{user}} has been confirmed",
         "approved": "Emergency access approved",
         "takeover_master_password": "Master Password reset for {{user}}. You can now login Vault using the new Master Password.",
         "takeover_password": "Password reset for {{user}}. You can now login Locker using the new password."

@@ -181,6 +181,15 @@ function Notifications() {
     })
   }
 
+  const markAsReadAll = async () => {
+    await notificationServices.read_all({ scope: 'pwdmanager' }).then(() => {
+      featData();
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
+
+
   const shareKeyToNewMember = async (notificationId, sharingId, groupId, emails) => {
     try {
       const orgKey = await global.jsCore.cryptoService.getOrgKey(sharingId)
@@ -228,7 +237,7 @@ function Notifications() {
         <Button
           shape="circle"
           icon={<BellOutlined />}
-          onClick={() => {}}
+          onClick={() => markAsReadAll()}
         />
       </Badge>
     </Dropdown>
