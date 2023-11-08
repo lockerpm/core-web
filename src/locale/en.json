@@ -82,7 +82,8 @@
     "one_day": "1 day",
     "username_or_email": "Email address or Username",
     "password_strength": "Password Strength",
-    "me": "Me"
+    "me": "Me",
+    "otp_code": "OTP code"
   },
   "button": {
     "add": "Add",
@@ -238,6 +239,9 @@
       },
       "import_export": {
         "exported": "The items have been exported!"
+      },
+      "quick_share_detail": {
+        "check_mail": "Please check your mail."
       }
     },
     "warning": {
@@ -952,6 +956,33 @@
       "affected_users": "Affected Users",
       "breach_occurred": "Breach Occurred",
       "added_occurred": "Added Occurred"
+    }
+  },
+  "quick_share_detail": {
+    "title": "Simple and Quick",
+    "description": "Locker Quick Share lets you share sensitive information (including passwords, crypto assets,...) with encryption and a link that automatically expires. So you can keep what you share private and make sure your stuff doesn't stay online forever.",
+    "action": "Try Locker now!",
+    "product_of": "A product of",
+    "copyright": "Copyright © {{year}} Locker.io · All rights reserved.",
+    "teams": "Teams",
+    "privacy_policy": "Privacy Policy",
+    "reveal_information": "Reveal Information",
+    "hide_information": "Hide Information", 
+    "not_fond": {
+      "title": "Sorry, there is no item to view.",
+      "description": {
+        "title": "You may find the reason in one of the following cases:",
+        "note1": "The link to view the item expired or reached limited access.",
+        "note2": "The owner stopped sharing the item.",
+        "note3": "The link you've entered is not correct."
+      }
+    },
+    "verify_email": {
+      "title": "You have been shared sensitive data",
+      "description": " You need to verify yourself before viewing the item. Please enter your email to receive an OTP code.",
+      "enter_otp": "Please enter your OTP code.",
+      "action": "Send code",
+      "resend": "Resend code"
     }
   }
 }  

@@ -44,10 +44,26 @@ const formatOTP = (otp) => {
   return `${first} ${last}`
 }
 
+const formatText = (value, show) => {
+  if (value && !show) {
+    let result = ''
+    for (let i = 0; i < value.length; i++) {
+      if (value[i] === ' ') {
+        result += ' '
+      } else {
+        result += '*'
+      }
+    }
+    return result
+  }
+  return value
+}
+
 export default {
   formatCurrency,
   separatorNumber,
   convertCurrency,
   camelCaseToWords,
-  formatOTP
+  formatOTP,
+  formatText
 }

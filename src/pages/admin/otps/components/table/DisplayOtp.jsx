@@ -20,7 +20,8 @@ const DisplayOtp = (props) => {
   const { t } = useTranslation()
   const {
     notes = null,
-    justify = 'left'
+    justify = 'left',
+    showText = true
   } = props;
 
   const [otp, setOtp] = useState('')
@@ -71,7 +72,7 @@ const DisplayOtp = (props) => {
         style={{ marginBottom: 0 }}
         onClick={() => common.copyToClipboard(otp)}
       >
-        {otpFormat}
+        {common.formatText(otpFormat, showText)}
       </p>
       <span className="ml-2">
         <Progress

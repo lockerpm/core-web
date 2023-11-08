@@ -20,8 +20,8 @@ import common from './utils/common'
 import AdminLayout from './layouts/admin'
 import AuthLayout from './layouts/auth'
 import ErrorsLayout from './layouts/errors'
+import PublicLayout from './layouts/public'
 
-import userServices from './services/user'
 import systemServices from './services/system'
 import storeActions from './store/actions'
 import authServices from './services/auth'
@@ -70,10 +70,13 @@ const App = () => {
   const currentPage = useSelector(state => state.system.currentPage)
 
   useEffect(() => {
+    const currentPage = common.getRouterByLocation(location)
     const locale = systemServices.get_language()
     dispatch(storeActions.changeLanguage(locale))
     i18n.changeLanguage(locale)
-    authServices.redirect_login()
+    if (currentPage.type === 'admin') {
+      authServices.redirect_login()
+    }
     initJsCore()
   }, [])
 
@@ -128,6 +131,12 @@ const App = () => {
       {
         currentPage?.type === 'error' && <ErrorsLayout
           routers={global.routers.ERROR_ROUTERS}
+          pages={pages}
+        />
+      }
+      {
+        currentPage?.type === 'public' && <PublicLayout
+          routers={global.routers.PUBLIC_ROUTERS}
           pages={pages}
         />
       }

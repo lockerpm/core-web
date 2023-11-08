@@ -137,6 +137,21 @@ const getClientInfo = (clientId) => {
   return global.constants.CLIENTS.find((s) => !s.value || s.value === clientId)
 }
 
+const getToken = (email) => {
+  try {
+    const token = JSON.parse(localStorage.getItem(`token_${email}`))
+    if (token.expiredTime * 1000 < Date.now()) {
+      localStorage.removeItem(`token_${email}`)
+      return null
+    } else {
+      return token.value
+    }
+  } catch (error) {
+    localStorage.removeItem(`token_${email}`)
+    return null
+  }
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -155,5 +170,6 @@ export default {
   getAccess,
   getSharePermission,
   getEmergencyAccessDays,
-  getClientInfo
+  getClientInfo,
+  getToken
 }

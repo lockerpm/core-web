@@ -1,11 +1,10 @@
 import { CipherType, SecureNoteType } from '../../core-js/src/enums';
 import { FieldType } from '../../core-js/src/enums/fieldType';
 import { CipherRequest } from '../../core-js/src/models/request';
-import { SecureNote } from '../../core-js/src/models/domain'
+import { SecureNote, Cipher } from '../../core-js/src/models/domain'
 import { SendView } from '../../core-js/src/models/view/sendView';
 import { Send } from '../../core-js/src/models/domain/send';
 import { SendRequest } from '../../core-js/src/models/request/sendRequest';
-
 import {
   CipherView,
   LoginView,
@@ -271,7 +270,7 @@ const quickShareForRequest = async (data) => {
   return sendRequest
 }
 
-async function createEncryptedMasterPw (masterPw, encKey) {
+const createEncryptedMasterPw = async (masterPw, encKey) => {
   const cipher = new CipherView()
   cipher.type = CipherType.Login
   const loginData = new LoginView()
@@ -288,7 +287,7 @@ async function createEncryptedMasterPw (masterPw, encKey) {
   return data
 }
 
-function badData (c) {
+const badData = (c) => {
   return (
     (c.name == null || c.name === '--') &&
     c.type === CipherType.Login &&
@@ -297,7 +296,7 @@ function badData (c) {
   )
 }
 
-function buildCommonCipher (cipher, c) {
+const buildCommonCipher = (cipher, c) => {
   cipher.type = null
   cipher.name = c.name
   cipher.notes = c.notes
@@ -383,6 +382,15 @@ function buildCommonCipher (cipher, c) {
   return cipher
 }
 
+const decryptCipher = async (cipher, key) => {
+  const decKey = await global.jsCore.cryptoService.makeSendKey(
+    Utils.fromUrlB64ToArray(key)
+  )
+  const encCipher = new Cipher(cipher)
+  const cipherView = await encCipher.decrypt(decKey)
+  return cipherView
+}
+
 export default {
   newCipherTypes,
   cipherSubtitle,
@@ -394,5 +402,6 @@ export default {
   quickShareForRequest,
   createEncryptedMasterPw,
   badData,
-  buildCommonCipher
+  buildCommonCipher,
+  decryptCipher
 }

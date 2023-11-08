@@ -5,6 +5,7 @@ const allRouters = () => {
   return [
     ...global.routers.AUTH_ROUTERS.map(r => ({ ...r, type: 'auth' })),
     ...global.routers.ERROR_ROUTERS.map(r => ({ ...r, type: 'error' })),
+    ...global.routers.PUBLIC_ROUTERS.map(r => ({ ...r, type: 'public' })),
     ...global.routers.ADMIN_ROUTERS.map(r => ({ ...r, type: 'admin' })),
   ].map(r => ({
     ...r,
@@ -62,6 +63,7 @@ const compareLocation = (routerKeys, location) => {
   const locationKeys = pathName.split('/') || []
   const result = {
     params: {},
+    hash: location.hash || null,
     valid: true
   }
   if (locationKeys.length !== routerKeys.length) {
@@ -87,6 +89,7 @@ const getRouterByLocation = location => {
     ...route,
     key: route.name,
     params: compareLocation(route.keys, location).params,
+    hash: compareLocation(route.keys, location).hash,
     query: convertStringToQuery(location.search)
   } : null
 }

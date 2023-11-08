@@ -31,9 +31,44 @@ function stop(id) {
   })
 }
 
+function access(id) {
+  return request({
+    url: global.endpoint.QUICK_SHARE_ACCESS.replace(':id', id),
+    method: 'get',
+  })
+}
+
+function submit(id, data) {
+  return request({
+    url: global.endpoint.QUICK_SHARE_PUBLIC.replace(':id', id),
+    method: 'post',
+    data
+  })
+}
+
+function check_access(id, data) {
+  return request({
+    url: global.endpoint.QUICK_SHARE_ACCESS.replace(':id', id),
+    method: 'post',
+    data
+  })
+}
+
+function send_otp(id, data) {
+  return request({
+    url: global.endpoint.QUICK_SHARE_OTP.replace(':id', id),
+    method: 'post',
+    data
+  })
+}
+
 export default {
   list,
   get,
   create,
-  stop
+  stop,
+  access,
+  submit,
+  send_otp,
+  check_access
 }

@@ -1,6 +1,5 @@
 export default {
-  LOCKER_URL: 'https://locker.io/',
-  QUICK_SHARE_URL: 'https://locker.io/',
+  LOCKER_URL: 'https://locker.io',
   LOCKER_LINK: 'https://support.locker.io/articles/Import-and-Export-data-5ddd61fc597544f38361f47841eebccb',
   BITWARDEN_LINK: 'https://support.locker.io/articles/Import-from-Bitwarden-7ef22c6d93f34e1581991adc8eedb027',
   LASTPASS_LINK: 'https://support.locker.io/articles/Import-from-LastPass-e5e86298c03d4eb180d19dec78e3db11',

@@ -144,11 +144,11 @@ const BreachScanner = (props) => {
                     className="mb-2"
                     dangerouslySetInnerHTML={{ __html: b.description }}
                   />
-                  <div class="setting-description">
+                  <div className="setting-description">
                     <p className="font-semibold">
                       { t('security_tools.data_breach_scanner.compromised_data') }:
                     </p>
-                    <ul class="list-disc list-inside">
+                    <ul className="list-disc list-inside">
                       {
                         b.data_classes.map((d, index) => <li key={index}>
                           {d}

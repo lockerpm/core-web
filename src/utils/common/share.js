@@ -12,7 +12,7 @@ const isExpired = (send) => {
 const getPublicShareUrl = (send) => {
   const accessId = send.accessId;
   const key = Utils.fromBufferToUrlB64(send.key)
-  return `${window.location.origin}/shares/${accessId}#${encodeURIComponent(
+  return `${window.location.origin}/quick-shares/${accessId}#${encodeURIComponent(
     key
   )}`
 }

@@ -53,6 +53,9 @@ export default {
 
   QUICK_SHARES: `${FLAT_FORM}/quick_shares`,
   QUICK_SHARE: `${FLAT_FORM}/quick_shares/:id`,
+  QUICK_SHARE_ACCESS: `${FLAT_FORM}/quick_shares/:id/access`,
+  QUICK_SHARE_PUBLIC: `${FLAT_FORM}/quick_shares/:id/public`,
+  QUICK_SHARE_OTP: `${FLAT_FORM}/quick_shares/:id/otp`,
 
   CIPHER: `${FLAT_FORM}/ciphers/:id`,
   CIPHER_USE: `${FLAT_FORM}/ciphers/:id/use`,

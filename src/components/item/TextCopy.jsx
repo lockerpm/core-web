@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Typography,
   Input
@@ -6,7 +6,14 @@ import {
 
 import { useTranslation } from "react-i18next";
 import { gray } from '@ant-design/colors';
-import { CopyOutlined, CheckOutlined } from '@ant-design/icons';
+import {
+  CopyOutlined,
+  CheckOutlined,
+  EyeOutlined,
+  EyeInvisibleOutlined
+} from '@ant-design/icons';
+
+import common from "../../utils/common";
 
 const TextCopyItem = (props) => {
   const {
@@ -17,11 +24,17 @@ const TextCopyItem = (props) => {
     color = '',
     limited = true,
     showIcon = false,
-    display = null
+    display = null,
+    show = null
   } = props;
 
   const { t } = useTranslation()
   const [isHover, setIsHover] = useState(false)
+  const [showText, setShowText] = useState(show)
+
+  useEffect(() => {
+    setShowText(show)
+  }, [show])
 
   const icons = useMemo(() => {
     if ((isHover || showIcon) && !!value) {
@@ -38,6 +51,28 @@ const TextCopyItem = (props) => {
 
   const DisplayValue = useMemo(() => {
     if (value) {
+      if (show != null) {
+        return <div
+          style={{ color: color || gray[6] }}
+          className={`flex items-center justify-${isPassword ? 'between' : align} w-full`}
+        >
+          <p
+            className={`${limited ? 'text-limited' : ''}`}
+            title={common.formatText(value, showText)}
+            style={{ marginBottom: 0 }}
+          >
+            {common.formatText(value, showText)}
+          </p>
+          <span
+            className="ml-2 cursor-pointer"
+            onClick={() => setShowText(!showText)}
+          >
+            {
+              !showText ? <EyeOutlined /> : <EyeInvisibleOutlined />
+            }
+          </span>
+        </div>
+      }
       if (isPassword) {
         return <Input.Password
           className={`p-0 text-${align} mr-2`}
@@ -54,7 +89,7 @@ const TextCopyItem = (props) => {
       </div>
     }
     return <></>
-  }, [value, isPassword, align])
+  }, [value, isPassword, align, show, showText])
 
   return (
     <Typography.Text

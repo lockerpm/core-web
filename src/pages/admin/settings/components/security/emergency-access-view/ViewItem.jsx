@@ -35,7 +35,7 @@ function ViewItem(props) {
       >
         <ListItemDetails
           cipher={item}
-          isEmergencyAccess={true}
+          isPublic={true}
         />
       </Drawer>
     </div>

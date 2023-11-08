@@ -53,6 +53,15 @@ export default {
     }
   ],
 
+  PUBLIC_ROUTERS: [
+    {
+      name: keys.QUICK_SHARE_DETAIL,
+      path: '/quick-shares/:id',
+      element: 'QuickShareDetail',
+      not_auth: true
+    }
+  ],
+
   ADMIN_ROUTERS: [
     {
       name: keys.ADMIN_ERROR,

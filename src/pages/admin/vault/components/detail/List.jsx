@@ -26,7 +26,8 @@ const ListItemDetails = (props) => {
     className,
     cipher,
     loading,
-    isEmergencyAccess = false
+    showText = true,
+    isPublic = false
   } = props;
   const { t } = useTranslation();
 
@@ -42,6 +43,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.login.username}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -51,6 +53,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.login.password}
             showIcon={true}
+            show={showText}
             isPassword={true}
           />
         },
@@ -63,7 +66,10 @@ const ListItemDetails = (props) => {
             showIcon={true}
             align="between"
             display={
-              <DisplayOtp notes={cipher.login.totp}/>
+              <DisplayOtp
+                notes={cipher.login.totp}
+                showText={showText}
+              />
             }
           />
         },
@@ -81,6 +87,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.login.uri}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -94,6 +101,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.card.cardholderName}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -103,6 +111,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.card.brand}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -112,6 +121,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.card.number}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -121,6 +131,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.card.expMonth}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -130,6 +141,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.card.expYear}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -139,6 +151,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.card.code}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -165,6 +178,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.cryptoWallet.username}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -174,6 +188,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.cryptoWallet.password}
             showIcon={true}
+            show={showText}
             isPassword={true}
           />
         },
@@ -191,6 +206,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.cryptoWallet.address}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -200,6 +216,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.cryptoWallet.privateKey}
             showIcon={true}
+            show={showText}
             isPassword={true}
           />
         },
@@ -213,7 +230,7 @@ const ListItemDetails = (props) => {
             display={
               <SeedPhrase
                 className="w-3/4"
-                value={cipher.cryptoWallet.seed}
+                value={common.formatText(cipher.cryptoWallet.seed, showText)} 
                 readOnly={true}
               />
             }
@@ -249,6 +266,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.title ? t(`common.${cipher.identity.title}`) : ''}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -258,6 +276,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.firstName}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -267,6 +286,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.lastName}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -276,6 +296,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.username}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -285,6 +306,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.company}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -294,6 +316,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.email}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -303,6 +326,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.phone}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -312,6 +336,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.ssn}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -321,6 +346,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.passportNumber}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -330,6 +356,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.licenseNumber}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -339,6 +366,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.address1}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -348,6 +376,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.address2}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -357,6 +386,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.city}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -366,6 +396,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.state}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -375,6 +406,7 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.postalCode}
             showIcon={true}
+            show={showText}
             align="between"
           />
         },
@@ -384,13 +416,14 @@ const ListItemDetails = (props) => {
           value: <TextCopy
             value={cipher.identity.country}
             showIcon={true}
+            show={showText}
             align="between"
           />
         }
       ]
     }
     return []
-  }, [cipher])
+  }, [cipher, showText])
 
   const data = useMemo(() => {
     if (!cipher) {
@@ -403,6 +436,7 @@ const ListItemDetails = (props) => {
         value: <TextCopy
           value={cipher?.name}
           showIcon={true}
+          show={showText}
           align="between"
         />
       },
@@ -413,6 +447,7 @@ const ListItemDetails = (props) => {
         value: <TextCopy
           value={cipher?.notes}
           showIcon={true}
+          show={showText}
           align="between"
         />
       },
@@ -422,13 +457,14 @@ const ListItemDetails = (props) => {
         value: <TextCopy
           value={f.value}
           showIcon={true}
+          show={showText}
           align="between"
         />
       })),
       {
         key: 'owner',
         name: t('roles.owner'),
-        hide: isEmergencyAccess,
+        hide: isPublic,
         value: <div>
           {
             common.isOwner(cipher) ? t('common.me') : common.getOrganization(cipher.organizationId)?.name || null
@@ -438,7 +474,7 @@ const ListItemDetails = (props) => {
       {
         key: 'folder',
         name: t('common.folder'),
-        hide: isEmergencyAccess,
+        hide: isPublic,
         value: cipher.folderId ? <FolderName
           item={{ id: cipher.folderId }}
           showItems={false}
@@ -447,7 +483,7 @@ const ListItemDetails = (props) => {
       {
         key: 'created_time',
         name: t('common.created_time'),
-        hide: isEmergencyAccess,
+        hide: isPublic,
         value: <TextCopy
           value={common.timeFromNow(cipher.creationDate)}
           showIcon={true}
@@ -457,7 +493,7 @@ const ListItemDetails = (props) => {
       {
         key: 'updated_time',
         name: t('common.updated_time'),
-        hide: isEmergencyAccess,
+        hide: isPublic,
         value: <TextCopy
           value={common.timeFromNow(cipher.revisionDate)}
           showIcon={true}
@@ -467,14 +503,15 @@ const ListItemDetails = (props) => {
       {
         key: 'shared_with',
         name: t('shares.shared_with'),
-        hide: !cipher?.organizationId || isEmergencyAccess,
+        hide: !cipher?.organizationId || isPublic,
         value: <SharedWith cipher={cipher}/>
       },
     ].filter((c) => !c.hide).map((c) => { delete c.hide; return c })
   }, [
     cipher,
     cipherTypeData,
-    isEmergencyAccess
+    isPublic,
+    showText
   ])
 
   return (

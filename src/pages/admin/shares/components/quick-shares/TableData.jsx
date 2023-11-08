@@ -116,7 +116,7 @@ const TableData = (props) => {
       pagination={false}
       rowKey={(record) => record?.id}
       size="small"
-      scroll={{ x: 1024 }}
+      scroll={{ x: 1128 }}
     />
   );
 }
