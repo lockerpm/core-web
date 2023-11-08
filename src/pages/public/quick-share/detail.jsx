@@ -98,7 +98,7 @@ const QuickShareDetail = () => {
   return (
     <div className="public-page">
       <Row style={{ height: 'calc(100vh - 50px)' }}>
-        <Col lg={18} md={15}>
+        <Col lg={18} md={15} sm={24} xs={24}>
           <div className="max-w-2xl mx-auto px-6 py-6">
             <div className="text-center mb-6">
               <Image
@@ -129,7 +129,7 @@ const QuickShareDetail = () => {
             </Spin>
           </div>
         </Col>
-        <Col lg={6} md={9}>
+        <Col lg={6} md={9} sm={24} xs={24}>
           <Right />
         </Col>
       </Row>
