@@ -46,6 +46,7 @@ function AdminLayout(props) {
 
   const accessToken = authServices.access_token()
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`);
+  console.log(1, `${global.endpoint.WS_SYNC}?token=${accessToken}`, lastMessage);
 
   useEffect(() => {
     if (lastMessage) {

@@ -11,20 +11,19 @@ import {
 
 import AuthLogo from '../../assets/images/logos/auth-logo.svg'
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { useNavigate } from 'react-router-dom';
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
+import coreServices from "../../services/core";
+import commonServices from "../../services/common";
 
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import global from "../../config/global";
 
 const SingIn = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const [form] = Form.useForm();
@@ -32,7 +31,6 @@ const SingIn = () => {
   const username = Form.useWatch('username', form);
   
   const [callingAPI, setCallingAPI] = useState(false);
-  const [authMethod, setAuthMethod] = useState(null);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -41,44 +39,23 @@ const SingIn = () => {
     })
   }, [])
 
-  useEffect(() => {
-    setAuthMethod(null)
-  }, [username])
-
   const handleSubmit = async (values) => {
     setCallingAPI(true)
-    if (!authMethod) {
-      await handleAuthMethod(values)
-    } else {
-      await handleSignIn(values)
-    }
+    await userServices.users_session({
+      password: values.password,
+      email: values.username
+    }).then(async (response) => {
+      authServices.update_access_token_type(response.token_type)
+      authServices.update_access_token(response.access_token);
+      await commonServices.fetch_user_info();
+      await coreServices.unlock({...response, password: values.password, username: values.username })
+      await commonServices.sync_data()
+      global.navigate(global.keys.VAULT)
+    }).catch((error) => {
+      global.pushError(error)
+    });
     setCallingAPI(false)
   }
-
-  const handleAuthMethod = async (values) => {
-    setCallingAPI(true)
-    await authServices.auth_method({
-      username: values.username
-    }).then(async (response) => {
-      setAuthMethod(response)
-    }).catch((error) => {
-      global.pushError(error)
-    });
-  }
-
-  const handleSignIn = async (values) => {
-    await authServices.login({
-      ...values,
-      language: locale
-    }).then(async (response) => {
-      authServices.update_access_token(response.token)
-      global.navigate(global.keys.LOCK)
-    }).catch((error) => {
-      global.pushError(error)
-    });
-  }
-
-
 
   return (
     <div
@@ -122,6 +99,7 @@ const SingIn = () => {
                 name="username"
                 rules={[
                   global.rules.REQUIRED(t('auth_pages.username')),
+                  global.rules.INVALID(t('auth_pages.username'), 'EMAIL'),
                 ]}
               >
                 <Input
@@ -130,20 +108,18 @@ const SingIn = () => {
                   disabled={callingAPI}
                 />
               </Form.Item>
-              {
-                authMethod && <Form.Item
-                  name="password"
-                  rules={[
-                    global.rules.REQUIRED(t('auth_pages.password')),
-                  ]}
-                >
-                  <Input.Password
-                    placeholder={t('auth_pages.password')}
-                    size="large"
-                    disabled={callingAPI}
-                  />
-                </Form.Item>
-              }
+              <Form.Item
+                name="password"
+                rules={[
+                  global.rules.REQUIRED(t('auth_pages.password')),
+                ]}
+              >
+                <Input.Password
+                  placeholder={t('auth_pages.password')}
+                  size="large"
+                  disabled={callingAPI}
+                />
+              </Form.Item>
               <Button
                 className="w-full"
                 size="large"
@@ -152,7 +128,7 @@ const SingIn = () => {
                 loading={callingAPI}
                 disabled={!username}
               >
-                { authMethod ? t('button.sign_in') : t('button.continue')}
+                {t('button.sign_in')}
               </Button>
             </Form>
           </Card>

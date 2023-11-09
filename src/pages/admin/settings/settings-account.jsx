@@ -27,13 +27,10 @@ const AccountDetails = (props) => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.auth.userInfo)
-  const usersMe = useSelector((state) => state.auth.usersMe)
 
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
-  const [avatar, setAvatar] = useState(null);
-  const [avatarFile, setAvatarFile] = useState(null);
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       key: 'personal_info',
       title: t('account_details.personal_info'),
@@ -51,48 +48,30 @@ const AccountDetails = (props) => {
   useEffect(() => {
     form.setFieldsValue({
       email: userInfo.email,
-      username: userInfo.username,
-      full_name: userInfo.full_name,
+      name: userInfo.name,
       language: userInfo.language,
-      timeout: usersMe.timeout,
-      timeout_action: usersMe.timeout_action
+      timeout: userInfo.timeout,
+      timeout_action: userInfo.timeout_action
     })
-    setAvatar(userInfo.avatar)
-  }, [userInfo, usersMe])
+  }, [userInfo])
 
   const handleCancel = () => {
     form.setFieldsValue({
       email: userInfo.email,
-      username: userInfo.username,
-      full_name: userInfo.full_name,
+      name: userInfo.full_name,
       language: userInfo.language,
-      timeout: usersMe.timeout,
-      timeout_action: usersMe.timeout_action
-    })
-    setAvatar(userInfo.avatar)
-  }
-
-  const handleUploadFile = async (values) => {
-    await userServices.upload_avatar({
-      avatar: avatarFile
-    }).then(async (response) => {
-      await handleUpdateAccount({
-        ...values,
-        avatarUrl: response.avatar
-      })
-    }).catch((error) => {
-      global.pushError(error)
+      timeout: userInfo.timeout,
+      timeout_action: userInfo.timeout_action
     })
   }
 
   const handleUpdateAccount = async (values) => {
     await userServices.update({
-      username: userInfo.username,
-      full_name: values.full_name,
-      avatar: values.avatarUrl || null
+      email: userInfo.email,
+      name: values.name,
     }).then(() => {
       global.pushSuccess(t('notification.success.account_details.updated'))
-      dispatch(storeActions.updateUserInfo({ ...userInfo, ...values, avatar }))
+      dispatch(storeActions.updateUserInfo({ ...userInfo, ...values }))
     }).catch((error) => {
       global.pushError(error)
     })
@@ -101,11 +80,7 @@ const AccountDetails = (props) => {
   const handleSaveDetails = () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true)
-      if (avatarFile) {
-        await handleUploadFile(values)
-      } else {
-        await handleUpdateAccount(values)
-      }
+      await handleUpdateAccount(values)
       setCallingAPI(false)
     })
   }

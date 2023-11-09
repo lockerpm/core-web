@@ -46,6 +46,10 @@ const Authenticator = (props) => {
     return !allCiphers.find((c) => !c.isDeleted && c.type === CipherType.TOTP)
   }, [allCiphers])
 
+  const cipherType = useMemo(() => {
+    return common.cipherTypeInfo('listRouter', currentPage.name)
+  }, [JSON.stringify(currentPage)])
+
   useEffect(() => {
     fetchCiphers();
   }, [params.searchText, allCiphers])
@@ -150,7 +154,7 @@ const Authenticator = (props) => {
       {
         filteredData.total == 0 ? <NoCipher
           className={'mt-4'}
-          type={CipherType.TOTP}
+          cipherType={cipherType}
           loading={syncing || loading}
           isEmpty={isEmpty}
           onCreate={() => handleOpenForm()}

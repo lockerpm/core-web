@@ -140,7 +140,7 @@
     "select": "Please select",
     "enter": "Please enter",
     "ip": "Please enter new IPs address",
-    "username": "Enter Email or Username",
+    "username": "Enter your email",
     "password": "Enter your password",
     "code": "Hope that you got the code...",
     "otp": "Enter the 6-digit code",
@@ -497,9 +497,9 @@
   },
   "lock": {
     "title": "Sign in to your account",
-    "description": "Enter your Master Password to unlock",
-    "master_password": "Master Password",
-    "master_password_hint": "Get Master Password hint",
+    "description": "Enter your Password to unlock",
+    "password": "Password",
+    "master_password_hint": "Get Password hint",
     "unlock": "Unlock"
   },
   "create_master_password": {

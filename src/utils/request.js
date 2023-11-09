@@ -15,8 +15,6 @@ service.interceptors.request.use(
 
     config.headers['Content-Type'] = 'application/json'
     config.headers['Authorization'] = `${accessTokenType} ${accessToken}`
-    config.headers['CF-Access-Client-Id'] = process.env.REACT_APP_CLIENT_ID
-    config.headers['CF-Access-Client-Secret'] = process.env.REACT_APP_CLIENT_SECRET
     return config
   },
   error => {

@@ -7,13 +7,6 @@ const updateUserInfo = userInfo => {
   }
 }
 
-const updateUsersMe = usersMe => {
-  return {
-    type: actionTypes.SET_USERS_ME,
-    payload: usersMe,
-  }
-}
-
 const updateFactor2 = factor2 => {
   return {
     type: actionTypes.SET_FACTOR2,
@@ -23,6 +16,5 @@ const updateFactor2 = factor2 => {
 
 export default {
   updateUserInfo,
-  updateUsersMe,
   updateFactor2,
 }

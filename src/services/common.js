@@ -2,11 +2,24 @@ import global from '../config/global'
 import storeActions from '../store/actions'
 import common from '../utils/common'
 
+import userServices from './user'
+import authServices from './auth'
 import syncServices from './sync'
 import folderServices from './folder'
 import sharingServices from './sharing'
 import quickShareServices from './quick-share'
 import enterpriseServices from './enterprise'
+
+const fetch_user_info = async () => {
+  await userServices.users_me().then((response) => {
+    global.store.dispatch(storeActions.updateUserInfo(response))
+    if (!response.is_pwd_manager) {
+      global.navigate(global.keys.CREATE_MASTER_PASSWORD)
+    }
+  }).catch(async () => {
+    await authServices.logout();
+  })
+}
 
 async function list_ciphers(params, ciphers = null) {
   let result = await global.jsCore.searchService.searchCiphers(
@@ -342,73 +355,74 @@ async function leave_share(item) {
 
 async function sync_data_by_ws(message) {
   global.store.dispatch(storeActions.updateSyncing(true))
-    console.log(message);
-    if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
-      await sync_profile(),
+  console.log(message);
+  if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
+    await sync_profile(),
+    await Promise.all([
+      sync_collections(),
+      sync_folders(),
+    ])
+    if (['cipher_invitation', 'cipher_share'].includes(message.type)) {
       await Promise.all([
-        sync_collections(),
-        sync_folders(),
+        get_invitations(),
+        get_my_shares()
       ])
-      if (['cipher_invitation', 'cipher_share'].includes(message.type)) {
-        await Promise.all([
-          get_invitations(),
-          get_my_shares()
-        ])
+    }
+    if (message.type === 'cipher_share') {
+      if (message.data.id) {
+        await sync_items([message.data.id])
       }
-      if (message.type === 'cipher_share') {
-        if (message.data.id) {
-          await sync_items([message.data.id])
-        }
-        if (message.data.ids) {
-          await sync_items(message.data.ids)
-        }
-      }
-    } else if (message.type.includes('cipher')) {
-      if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
-        if (message.type === 'cipher_update') {
-          await sync_profile();
-        }
-        if (message.data.id) {
-          await sync_items([message.data.id])
-        }
-        if (message.data.ids) {
-          await sync_items(message.data.ids)
-        }
-      } else if (message.type.includes('cipher_delete_permanent')) {
-        await global.jsCore.cipherService.delete(message.data.ids);
-        await get_all_ciphers();
-      } else {
-        await sync_data();
-      }
-    } else if (message.type.includes('folder')) {
-      if (message.type.includes('update')) {
-        const res = await syncServices.sync_folder(message.data.id);
-        await global.jsCore.folderService.upsert([res])
-        await get_all_folders();
-      } else if (message.type.includes('delete')) {
-        await global.jsCore.folderService.delete(message.data.ids);
-        await get_all_folders();
-      } else {
-        await sync_data();
-      }
-    } else if (message.type.includes('collection')) {
-      if (message.type.includes('update')) {
-        if (message.data.id) {
-          const res = await syncServices.sync_collection(message.data.id);
-          await global.jsCore.collectionService.upsert([res])
-          await get_all_collections();
-        }
-      } else if (message.type.includes('delete')) {
-        await global.jsCore.collectionService.delete(message.data.ids);
-        await get_all_collections();
-      } else {
-        await sync_data();
+      if (message.data.ids) {
+        await sync_items(message.data.ids)
       }
     }
-    global.store.dispatch(storeActions.updateSyncing(false))
+  } else if (message.type.includes('cipher')) {
+    if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
+      if (message.type === 'cipher_update') {
+        await sync_profile();
+      }
+      if (message.data.id) {
+        await sync_items([message.data.id])
+      }
+      if (message.data.ids) {
+        await sync_items(message.data.ids)
+      }
+    } else if (message.type.includes('cipher_delete_permanent')) {
+      await global.jsCore.cipherService.delete(message.data.ids);
+      await get_all_ciphers();
+    } else {
+      await sync_data();
+    }
+  } else if (message.type.includes('folder')) {
+    if (message.type.includes('update')) {
+      const res = await syncServices.sync_folder(message.data.id);
+      await global.jsCore.folderService.upsert([res])
+      await get_all_folders();
+    } else if (message.type.includes('delete')) {
+      await global.jsCore.folderService.delete(message.data.ids);
+      await get_all_folders();
+    } else {
+      await sync_data();
+    }
+  } else if (message.type.includes('collection')) {
+    if (message.type.includes('update')) {
+      if (message.data.id) {
+        const res = await syncServices.sync_collection(message.data.id);
+        await global.jsCore.collectionService.upsert([res])
+        await get_all_collections();
+      }
+    } else if (message.type.includes('delete')) {
+      await global.jsCore.collectionService.delete(message.data.ids);
+      await get_all_collections();
+    } else {
+      await sync_data();
+    }
+  }
+  global.store.dispatch(storeActions.updateSyncing(false))
 }
 
 export default {
+  fetch_user_info,
   clear_data,
   sync_data,
   sync_profile,

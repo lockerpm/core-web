@@ -5,12 +5,7 @@ const FLAT_FORM = `${API_URL}/v3/cystack_platform/pm`
 const WS_FLAT_FORM = `${WS_URL}/cystack_platform/pm`
 
 export default {
-  ME: `${API_URL}/v3/sso/me`,
-
-  AUTH: `${API_URL}/v3/sso/auth`,
-  AUTH_METHOD: `${API_URL}/v3/sso/auth/method`,
   AUTH_OTP: `${API_URL}/v3/sso/auth/otp`,
-  ACCESS_TOKEN: `${API_URL}/v3/sso/access_token`,
 
   LOGOUT: `${API_URL}/v3/users/logout`,
 

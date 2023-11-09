@@ -39,7 +39,7 @@ function DropdownMenu() {
         color: 'var(--sidebar-menu-active-background-color)'
       }}
     >
-      {userInfo?.full_name?.slice(0, 1)?.toUpperCase() || 'S'}
+      {userInfo?.name?.slice(0, 1)?.toUpperCase() || 'S'}
     </Avatar>
   }, [userInfo])
 
@@ -48,7 +48,7 @@ function DropdownMenu() {
       key: 'account',
       icon: AvatarIcon,
       label: <div className='account-info'>
-        <div>{userInfo?.full_name}</div>
+        <div>{userInfo?.name}</div>
       </div>,
     },
     {

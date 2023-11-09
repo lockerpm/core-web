@@ -35,10 +35,10 @@ const PersonalInfo = (props) => {
         </Col>
         <Col lg={12} md={12} sm={12} xs={24}>
           <Form.Item
-            name={'full_name'}
+            name={'name'}
             className="mb-0"
             label={
-              <p className="font-semibold">{t("common.full_name")}</p>
+              <p className="font-semibold">{t("common.name")}</p>
             }
           >
             <Input

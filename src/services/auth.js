@@ -13,22 +13,6 @@ function device_id() {
   return device_id
 }
 
-function auth_method(data) {
-  return request({
-    url: global.endpoint.AUTH_METHOD,
-    method: 'post',
-    data: data
-  })
-}
-
-async function login(data = {}) {
-  return request({
-    url: global.endpoint.AUTH,
-    method: 'post',
-    data: data
-  })
-}
-
 async function login_by_otp(data = {}) {
   const payload = await coreServices.login_payload(data)
   return request({
@@ -97,8 +81,6 @@ async function logout() {
 
 export default {
   device_id,
-  auth_method,
-  login,
   login_by_otp,
   update_access_token,
   update_access_token_type,

@@ -14,8 +14,6 @@ service.interceptors.request.use(
     const accessTokenType = authServices.access_token_type() || 'Bearer'
     config.headers['Content-Type'] = 'multipart/form-data'
     config.headers['Authorization'] = `${accessTokenType} ${accessToken}`
-    config.headers['CF-Access-Client-Id'] = process.env.REACT_APP_CLIENT_ID
-    config.headers['CF-Access-Client-Secret'] = process.env.REACT_APP_CLIENT_SECRET
     return config
   },
   error => {

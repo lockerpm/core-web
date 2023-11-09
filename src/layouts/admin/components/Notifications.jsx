@@ -67,6 +67,7 @@ function Notifications() {
         <Button
           type="primary"
           ghost
+          onClick={() => markAsReadAll()}
         >
           {t('notifications.mark_all_as_read')}
         </Button>
@@ -224,8 +225,8 @@ function Notifications() {
         selectedKeys: notifications.filter((n) => !n.read).map((n) => n.id),
         onClick: dropdownClick,
         style: {
-          width: 400,
-          height: 600,
+          maxWidth: 400,
+          maxHeight: 600,
           padding: 0,
           overflow: 'auto'
         }
@@ -237,7 +238,6 @@ function Notifications() {
         <Button
           shape="circle"
           icon={<BellOutlined />}
-          onClick={() => markAsReadAll()}
         />
       </Badge>
     </Dropdown>

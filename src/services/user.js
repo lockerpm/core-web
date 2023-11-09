@@ -46,16 +46,17 @@ async function users_session(data) {
   const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
   const key = await global.jsCore.cryptoService.makeKey(
-    data.masterPassword,
+    data.password,
     data.email,
     0,
     100000
   )
-  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.masterPassword, key)
+  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
   return await request({
     url: global.endpoint.USERS_SESSION,
     method: "post",
     data: {
+      email: data.email,
       client_id: global.constants.CLIENT_ID,
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),

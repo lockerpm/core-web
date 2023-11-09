@@ -102,7 +102,7 @@ const CreateMasterPassword = () => {
                       {userInfo?.email.slice(0, 1)?.toUpperCase()}
                     </Avatar>
                   }
-                  value={userInfo?.full_name}
+                  value={userInfo?.name}
                   size="large"
                   readOnly={true}
                 />
@@ -110,11 +110,11 @@ const CreateMasterPassword = () => {
               <Form.Item
                 name="masterPassword"
                 rules={[
-                  RULES.REQUIRED(t('lock.master_password')),
+                  RULES.REQUIRED(t('lock.password')),
                 ]}
               >
                 <Input.Password
-                  placeholder={t('lock.master_password')}
+                  placeholder={t('lock.password')}
                   size="large"
                   disabled={callingAPI || logging}
                   onPressEnter={handleCreateMasterPassword}

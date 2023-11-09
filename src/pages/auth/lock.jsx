@@ -17,11 +17,9 @@ import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import RULES from '../../config/rules'
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
-
-import storeActions from "../../store/actions";
 
 import coreServices from "../../services/core";
 import commonServices from "../../services/common";
@@ -33,7 +31,6 @@ import global from "../../config/global";
 
 const Lock = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [callingAPI, setCallingAPI] = useState(false);
@@ -47,37 +44,17 @@ const Lock = () => {
   const query = common.convertStringToQuery(window.location.search);
 
   useEffect(() => {
-    fetchMe();
-    fetchUsersMe();
+    commonServices.fetch_user_info();
   }, [])
-
-  const fetchMe = async () => {
-    await userServices.me().then((response) => {
-      dispatch(storeActions.updateUserInfo(response))
-    }).catch(async () => {
-      await authServices.logout();
-    })
-  }
-
-  const fetchUsersMe = async () => {
-    await userServices.users_me().then((response) => {
-      dispatch(storeActions.updateUsersMe(response))
-      if (!response.is_pwd_manager) {
-        global.navigate(global.keys.CREATE_MASTER_PASSWORD)
-      }
-    }).catch(async () => {
-      await authServices.logout();
-    })
-  }
 
   const handleUnlock = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true)
       await userServices.users_session({
-        masterPassword: values.masterPassword,
+        password: values.password,
         email: userInfo.email
       }).then(async (response) => {
-        await coreServices.unlock({...response, password: values.masterPassword, username: userInfo.email })
+        await coreServices.unlock({...response, password: values.password, username: userInfo.email })
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         await commonServices.sync_data()
         navigate(returnUrl);
@@ -144,29 +121,26 @@ const Lock = () => {
                         {userInfo?.email.slice(0, 1)?.toUpperCase()}
                       </Avatar>
                     }
-                    value={userInfo?.full_name}
+                    value={userInfo?.name}
                     size="large"
                     readOnly={true}
                   />
                 </Form.Item>
               </div>
               <Form.Item
-                name="masterPassword"
+                name="password"
                 noStyle
                 rules={[
-                  RULES.REQUIRED(t('lock.master_password')),
+                  RULES.REQUIRED(t('lock.password')),
                 ]}
               >
                 <Input.Password
-                  placeholder={t('lock.master_password')}
+                  placeholder={t('lock.password')}
                   size="large"
                   disabled={callingAPI || logging}
                   onPressEnter={handleUnlock}
                 />
               </Form.Item>
-              <p className="font-semibold text-primary mt-2 cursor-pointer">
-                {t('lock.master_password_hint')}
-              </p>
             </Form>
             <Row gutter={[8, 0]}>
               <Col span={12}>
