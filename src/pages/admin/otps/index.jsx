@@ -102,7 +102,7 @@ const Authenticator = (props) => {
     setLoading(false);
   }
 
-  const handleOpenForm = (item = null, cloneMode = false) => {
+  const handleOpenForm = (item = null) => {
     setSelectedItem(item);
     setFormVisible(true);
   }
@@ -110,7 +110,7 @@ const Authenticator = (props) => {
   const deleteItem = (cipher) => {
     global.confirm(() => {
       cipherServices.permanent_delete({ ids: [cipher.id] }).then(async () => {
-        global.pushSuccess(t('notification.success.cipher.deleted'));
+        global.pushSuccess(t('notification.success.cipher.permanently_delete'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,

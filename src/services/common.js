@@ -354,21 +354,22 @@ async function leave_share(item) {
 }
 
 async function sync_data_by_ws(message) {
-  global.store.dispatch(storeActions.updateSyncing(true))
   console.log(message);
-  if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(message.type)) {
+  const eventType = message.event;
+  global.store.dispatch(storeActions.updateSyncing(true))
+  if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(eventType)) {
     await sync_profile(),
     await Promise.all([
       sync_collections(),
       sync_folders(),
     ])
-    if (['cipher_invitation', 'cipher_share'].includes(message.type)) {
+    if (['cipher_invitation', 'cipher_share'].includes(eventType)) {
       await Promise.all([
         get_invitations(),
         get_my_shares()
       ])
     }
-    if (message.type === 'cipher_share') {
+    if (eventType === 'cipher_share') {
       if (message.data.id) {
         await sync_items([message.data.id])
       }
@@ -376,9 +377,9 @@ async function sync_data_by_ws(message) {
         await sync_items(message.data.ids)
       }
     }
-  } else if (message.type.includes('cipher')) {
-    if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(message.type)) {
-      if (message.type === 'cipher_update') {
+  } else if (eventType.includes('cipher')) {
+    if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(eventType)) {
+      if (eventType === 'cipher_update') {
         await sync_profile();
       }
       if (message.data.id) {
@@ -387,31 +388,31 @@ async function sync_data_by_ws(message) {
       if (message.data.ids) {
         await sync_items(message.data.ids)
       }
-    } else if (message.type.includes('cipher_delete_permanent')) {
+    } else if (eventType.includes('cipher_delete_permanent')) {
       await global.jsCore.cipherService.delete(message.data.ids);
       await get_all_ciphers();
     } else {
       await sync_data();
     }
-  } else if (message.type.includes('folder')) {
-    if (message.type.includes('update')) {
+  } else if (eventType.includes('folder')) {
+    if (eventType.includes('update')) {
       const res = await syncServices.sync_folder(message.data.id);
       await global.jsCore.folderService.upsert([res])
       await get_all_folders();
-    } else if (message.type.includes('delete')) {
+    } else if (eventType.includes('delete')) {
       await global.jsCore.folderService.delete(message.data.ids);
       await get_all_folders();
     } else {
       await sync_data();
     }
-  } else if (message.type.includes('collection')) {
-    if (message.type.includes('update')) {
+  } else if (eventType.includes('collection')) {
+    if (eventType.includes('update')) {
       if (message.data.id) {
         const res = await syncServices.sync_collection(message.data.id);
         await global.jsCore.collectionService.upsert([res])
         await get_all_collections();
       }
-    } else if (message.type.includes('delete')) {
+    } else if (eventType.includes('delete')) {
       await global.jsCore.collectionService.delete(message.data.ids);
       await get_all_collections();
     } else {
