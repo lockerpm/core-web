@@ -355,7 +355,7 @@ async function leave_share(item) {
 
 async function sync_data_by_ws(message) {
   console.log(message);
-  const eventType = message.event;
+  const eventType = message.type;
   global.store.dispatch(storeActions.updateSyncing(true))
   if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(eventType)) {
     await sync_profile(),

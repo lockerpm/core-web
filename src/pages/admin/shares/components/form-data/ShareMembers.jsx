@@ -108,15 +108,17 @@ function ShareMembers(props) {
 
   const searchMembersGroups = async () => {
     setSearching(true)
-    const result = await enterpriseServices.list_groups_members(
-      teams[0].id,
-      { query: memberGroupSearchText }
-    );
-    setMembers(result.members.filter(m => m.email !== userInfo.email))
-    if (menuTypes.CIPHERS === menuType) {
-      setGroups(result.groups.map(g => ({ ...g, type: 'group' })))
-    } else {
-      setGroups([])
+    if (teams.length > 0) {
+      const result = await enterpriseServices.list_groups_members(
+        teams[0]?.id,
+        { query: memberGroupSearchText }
+      );
+      setMembers(result.members.filter(m => m.email !== userInfo.email))
+      if (menuTypes.CIPHERS === menuType) {
+        setGroups(result.groups.map(g => ({ ...g, type: 'group' })))
+      } else {
+        setGroups([])
+      }
     }
     setSearching(false)
   }

@@ -51,7 +51,7 @@ function AdminLayout(props) {
     if (lastMessage) {
       const strData = lastMessage?.data.split("'").join('"')
       const messageData = JSON.parse(strData)
-      if (messageData.event) {
+      if (messageData.event === 'sync') {
         commonServices.sync_data_by_ws(messageData)
       }
     }
