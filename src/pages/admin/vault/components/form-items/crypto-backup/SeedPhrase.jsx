@@ -32,7 +32,7 @@ function SeedPhrase(props) {
   useEffect(() => {
     const words = value?.split(' ')
     while (words.length < MIN_WORD_COUNT) {
-      words.push(' ')
+      words.push('')
     }
     setNewValue(words)
   }, [value])
@@ -42,9 +42,8 @@ function SeedPhrase(props) {
     onChange(words.join(' '))
   }
 
-  const handleChangeWord = (value, index) => {
-    const validValue = value.trim().split(' ').join('')
-    const words = newValue.map((v, i) => i === index ? validValue : v)
+  const handleChangeWord = (newV, index) => {
+    const words = newValue.map((v, i) => i === index ? newV : v)
     onChange(words.join(' '))
   }
 

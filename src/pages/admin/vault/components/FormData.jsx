@@ -108,7 +108,10 @@ function FormData(props) {
   }
 
   const editCipher = async (values) => {
-    const cipher = common.convertFormToCipher({ ...values, type: type });
+    const cipher = {
+      ...common.convertFormToCipher({ ...values, type: type }),
+      organizationId: item.organizationId
+    };
     const passwordStrength = values.password ? commonServices.password_strength(values.password) : {};
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,

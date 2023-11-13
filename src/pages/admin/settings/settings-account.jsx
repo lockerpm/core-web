@@ -27,6 +27,7 @@ const AccountDetails = (props) => {
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.auth.userInfo)
+  const locale = useSelector((state) => state.system.locale)
 
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
@@ -49,7 +50,7 @@ const AccountDetails = (props) => {
     form.setFieldsValue({
       email: userInfo.email,
       name: userInfo.name,
-      language: userInfo.language,
+      language: locale,
       timeout: userInfo.timeout,
       timeout_action: userInfo.timeout_action
     })
@@ -59,7 +60,7 @@ const AccountDetails = (props) => {
     form.setFieldsValue({
       email: userInfo.email,
       name: userInfo.full_name,
-      language: userInfo.language,
+      language: locale,
       timeout: userInfo.timeout,
       timeout_action: userInfo.timeout_action
     })

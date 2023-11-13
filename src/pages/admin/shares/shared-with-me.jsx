@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { } from '@lockerpm/design';
+import { Badge } from '@lockerpm/design';
 import {
   LockOutlined,
   FolderOutlined
@@ -36,7 +36,6 @@ const SharedWithMe = (props) => {
   const invitations = useSelector((state) => state.share.invitations)
 
   const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
-  const [callingAPI, setCallingAPI] = useState(false);
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -44,6 +43,14 @@ const SharedWithMe = (props) => {
     orderDirection: 'desc',
     searchText: '',
   });
+
+  const invitedCount = useMemo(() => {
+    const invitedItems = invitations.filter((i) => i.status === global.constants.STATUS.INVITED)
+    return {
+      cipher: invitedItems.filter((i) => i.item_type === 'cipher').length,
+      folder: invitedItems.filter((i) => i.item_type === 'folder').length
+    }
+  }, [invitations])
 
   const items = useMemo(() => {
     if (menuType === menuTypes.CIPHERS) {
@@ -131,7 +138,6 @@ const SharedWithMe = (props) => {
 
   const handleLeaveShare = async (item) => {
     global.confirm(async () => {
-      setCallingAPI(true)
       try {
         await commonServices.leave_share(item)
         global.pushSuccess(t('notification.success.sharing.leave_group_success'));
@@ -144,7 +150,6 @@ const SharedWithMe = (props) => {
       } catch (error) {
         global.pushError(error)
       }
-      setCallingAPI(false)
     }, {
       title: t('common.warning'),
       content: t('shares.leave_question'),
@@ -168,12 +173,18 @@ const SharedWithMe = (props) => {
         menus={[
           {
             key: menuTypes.CIPHERS,
-            label: t('common.items'),
+            label: <span>
+              <span>{t('common.items')}</span>
+              <Badge className="ml-2" count={invitedCount.cipher} />
+            </span>,
             icon: <LockOutlined />
           },
           {
             key: menuTypes.FOLDERS,
-            label: t('common.folders'),
+            label: <span>
+              <span>{t('common.folders')}</span>
+              <Badge className="ml-2" count={invitedCount.folder} />
+            </span>,
             icon: <FolderOutlined />
           }
         ]}

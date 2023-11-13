@@ -369,7 +369,7 @@
       "timeout": "Timeout",
       "timeout_desc": "Automatically locks the app after a chosen period of device inactivity.",
       "timeout_action": "Timeout Action",
-      "timeout_action_lock_desc": "A locked vault requires that you re-enter your master password to access it again.",
+      "timeout_action_lock_desc": "A locked vault requires that you re-enter your password to access it again.",
       "timeout_action_logout_desc": "A logged out vault requires that you re-authenticate to access it again."
     },
     "danger_zone": {
@@ -760,7 +760,7 @@
     "file_content": "File content",
     "import_description": "Transfer passwords and other items from browser or files.",
     "export": "Export Items",
-    "export_description": "Enter your master password to export your vault data.",
+    "export_description": "Enter your password to export your vault data.",
     "choose_format": "Choose a file format:",
     "upload_file": "Upload a file from your computer",
     "confirm": "{{type}}",

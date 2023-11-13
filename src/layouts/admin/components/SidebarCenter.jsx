@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Menu } from '@lockerpm/design';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Menu, Badge } from '@lockerpm/design';
 import '../css/components/SidebarCenter.scss';
 import { useSelector } from 'react-redux';
 import {
@@ -13,12 +13,19 @@ import global from '../../../config/global';
 function SidebarCenter(props) {
   const { collapsed } = props
   const currentPage = useSelector((state) => state.system.currentPage);
+  const invitations = useSelector((state) => state.share.invitations);
+
+  const [openKeys, setOpenKeys] = useState([])
 
   const { t } = useTranslation();
 
   const menus = useMemo(() => {
     return global.menus.ADMIN_MENUS
   }, [])
+
+  const invitedCount = useMemo(() => {
+    return invitations.filter((i) => i.status === global.constants.STATUS.INVITED).length
+  }, [invitations])
 
   const currentMenu = useMemo(() => {
     if (currentPage) {
@@ -39,10 +46,22 @@ function SidebarCenter(props) {
     return menus
       .filter((m) => !m.parent)
       .map((m) => {
-        const children = menus.filter((c) => c.parent === m.key && c.isChildren).map((ch) => ({ key: ch.key, label: ch.label }))
-        return { ...m, children: children.length > 0 ? children : null }
+        const children = menus
+          .filter((c) => c.parent === m.key && c.isChildren)
+          .map((ch) => ({
+            key: ch.key,
+            label: ch.label,
+          }))
+        return {
+          ...m,
+          children: children.length > 0 ? children : null
+        }
       })
   }, [currentMenu, menus])
+
+  useEffect(() => {
+    setOpenKeys(sidebarMenus.filter((m) => m.children).map((m) => m.key))
+  }, [sidebarMenus])
 
   const handleMenuClick = (menu) => {
     const menuInfo = menus.find((m) => m.key === menu.key)
@@ -72,17 +91,27 @@ function SidebarCenter(props) {
         />
       }
       <Menu
-        defaultOpenKeys={sidebarMenus.filter((m) => m.children).map((m) => m.key)}
+        openKeys={openKeys}
         selectedKeys={[currentPage?.parent || currentPage?.key]}
         mode="inline"
         collapsed={collapsed.toString()}
         items={sidebarMenus.map((m) => ({
           key: m.key,
-          label: m.label,
           icon: m.icon,
-          children: m.children,
+          label: m.key === global.keys.SHARES && !openKeys.includes(global.keys.SHARES) ? <div className='w-full'>
+            <span className='mr-2'>{m.label}</span>
+            <Badge count={invitedCount} />
+          </div> : m.label,
+          children: m.children ? m.children.map((ch) => ({
+            key: ch.key,
+            label: ch.key === global.keys.SHARED_WITH_ME ? <div className='w-full'>
+              <span className='mr-2'>{ch.label}</span>
+              <Badge count={invitedCount} />
+            </div> : ch.label,
+          })) : null,
         }))}
         onClick={handleMenuClick}
+        onOpenChange={setOpenKeys}
       />
     </div>
   );

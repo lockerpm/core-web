@@ -214,6 +214,7 @@ const sync_items = async (cipherIds) => {
   const requests = cipherIds.map((id) => syncServices.sync_cipher(id))
   await Promise.all(requests).then(async (response) => {
     await global.jsCore.cipherService.upsert(response)
+  }).catch(() => {
   })
   await get_all_ciphers();
   global.store.dispatch(storeActions.updateSyncing(false))

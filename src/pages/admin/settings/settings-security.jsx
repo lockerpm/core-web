@@ -1,19 +1,16 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { } from "react";
 import { Divider } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
 import { AdminHeader } from "../../../components";
 import ChangePassword from "./components/security/ChangePassword";
-import ChangeMasterPassword from "./components/security/ChangeMasterPassword";
 import TwoFA from "./components/security/TwoFA";
 import EmergencyAccess from "./components/security/EmergencyAccess";
 import ManageSessions from "./components/security/ManageSessions";
 
-import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import { } from '../../../utils/common';
-
 
 const Security = (props) => {
   const { } = props;
@@ -26,8 +23,6 @@ const Security = (props) => {
         actions={[]}
       />
       <ChangePassword className="mt-4" />
-      <Divider />
-      <ChangeMasterPassword />
       <Divider />
       <TwoFA />
       <Divider />

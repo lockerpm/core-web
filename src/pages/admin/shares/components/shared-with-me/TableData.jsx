@@ -57,9 +57,9 @@ const TableData = (props) => {
         key: 'owner',
         width: 150,
         align: 'left',
-        render: (_, record) => <p>
-          {record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
-        </p>
+        render: (_, record) => <TextCopy
+          value={record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
+        />
       },
       {
         title: t('common.type'),

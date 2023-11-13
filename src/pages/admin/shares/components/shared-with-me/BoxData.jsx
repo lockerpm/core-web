@@ -78,9 +78,9 @@ const BoxData = (props) => {
         >
           <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('roles.owner')}:</p>
-            <p>
-              {record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
-            </p>
+            <TextCopy
+              value={record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
+            />
           </div>
           {
             !isFolder && <div className="flex items-center mb-2">

@@ -20,7 +20,7 @@ function update(id, data = {}) {
 function read_all(params = {}) {
   return request({
     url: global.endpoint.NOTIFICATIONS_READ_ALL,
-    method: 'put',
+    method: 'get',
     params
   })
 }
