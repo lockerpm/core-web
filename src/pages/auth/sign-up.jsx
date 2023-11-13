@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './css/auth.scss';
 
 import {
@@ -12,16 +12,17 @@ import {
 import AuthLogo from '../../assets/images/logos/auth-logo.svg'
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import userServices from "../../services/user";
+import authServices from "../../services/auth";
 import coreServices from "../../services/core";
+import commonServices from "../../services/common";
 
 import global from "../../config/global";
 
 const SingUp = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const [form] = Form.useForm();
@@ -29,8 +30,20 @@ const SingUp = () => {
 
   const handleSignUp = async (values) => {
     setCallingAPI(true)
-    await userServices.sign_up(values).then(async (response) => {
-      await coreServices.unlock({ ...response, ...values })
+    await userServices.register(values).then(async () => {
+      await userServices.users_session({
+        password: values.password,
+        email: values.username
+      }).then(async (response) => {
+        authServices.update_access_token_type(response.token_type)
+        authServices.update_access_token(response.access_token);
+        await commonServices.fetch_user_info();
+        await coreServices.unlock({...response, ...values })
+        await commonServices.sync_data()
+        global.navigate(global.keys.VAULT)
+      }).catch((error) => {
+        global.pushError(error)
+      });
     }).catch((error) => {
       global.pushError(error)
     });
@@ -74,7 +87,8 @@ const SingUp = () => {
                 {
                   username: null,
                   password: null,
-                  confirm_password: null
+                  confirm_password: null,
+                  password_hint: null
                 }
               }
               onFinish={handleSignUp}
@@ -129,6 +143,15 @@ const SingUp = () => {
                   disabled={callingAPI}
                 />
               </Form.Item>
+              <Form.Item
+                name="password_hint"
+              >
+                <Input.Password
+                  placeholder={t('auth_pages.password_hint')}
+                  size="large"
+                  disabled={callingAPI}
+                />
+              </Form.Item>
               <Button
                 className="w-full mt-6"
                 size="large"
@@ -140,6 +163,18 @@ const SingUp = () => {
               </Button>
             </Form>
           </Card>
+        </div>
+        <div className="mt-4 text-center">
+          <span>
+            {t('auth_pages.sign_up.note')}
+            <Button
+              type="link"
+              className="font-semibold"
+              onClick={() => global.navigate(global.keys.SIGN_IN)}
+            >
+              {t('auth_pages.sign_in.label')}
+            </Button>
+          </span>
         </div>
       </div>
     </div>

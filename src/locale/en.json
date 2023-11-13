@@ -282,11 +282,16 @@
     "password": "Password",
     "otp": "OTP code",
     "confirm_password": "Confirm Password",
+    "password_hint": "Password Hint",
     "sign_in": {
-      "title": "Welcome back!"
+      "title": "Welcome back!",
+      "label": "Log in",
+      "note": "Don't have an account yet?"
     },
     "sign_up": {
-      "title": "Create admin account"
+      "title": "Create admin account",
+      "label": "Sign Up",
+      "note": "Already have an account?"
     },
     "otp_code": {
       "title": "Enter 2FA Code",

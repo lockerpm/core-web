@@ -2,14 +2,8 @@ import request from '../utils/request'
 
 import coreServices from './core'
 import authServices from './auth'
+import commonServices from './common'
 import global from '../config/global'
-
-async function me() {
-  return request({
-    url: global.endpoint.ME,
-    method: 'get',
-  })
-}
 
 async function users_me() {
   return request({
@@ -42,14 +36,22 @@ async function revoke_all_devices(hashedPassword) {
   })
 }
 
+async function check_exist_email(data) {
+  return request({
+    url: global.endpoint.USERS_EXIST,
+    method: 'post',
+    data
+  })
+}
+
 async function users_session(data) {
   const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
   const key = await global.jsCore.cryptoService.makeKey(
     data.password,
     data.email,
-    0,
-    100000
+    global.constants.CORE_JS_INFO.KDF,
+    global.constants.CORE_JS_INFO.KDF_ITERATIONS
   )
   const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
   return await request({
@@ -106,12 +108,61 @@ async function change_password(data = {}) {
   })
 }
 
+async function check_exist() {
+  let exist = false
+  try {
+    const response = await request({
+      url: global.endpoint.USERS_EXIST,
+      method: 'get',
+    })
+    exist = response.exist
+  } catch (error) {
+    exist = false
+  }
+  if (exist) {
+    authServices.redirect_login();
+  } else {
+    global.navigate(global.keys.SIGN_UP)
+  }
+}
+
+async function register(data) {
+  const makeKey = await coreServices.make_key(data.username, data.password)
+  const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
+  const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
+  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
+  const { score } = commonServices.password_strength(data.password)
+  let payload = {
+    email: data.username,
+    kdf: global.constants.CORE_JS_INFO.KDF,
+    kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS,
+    master_password_hash: hashedPassword,
+    master_password_hint: data.password_hint || "",
+    key: encKey[1].encryptedString,
+    keys: {
+      public_key: keys[0],
+      encrypted_private_key: keys[1].encryptedString,
+    },
+    score: score,
+    trial_plan: null,
+    is_trial_promotion: false,
+    enterprise_name: null
+  }
+  return await request({
+    url: global.endpoint.USERS_REGISTER,
+    method: "post",
+    data: payload
+  });
+}
+
 export default {
-  me,
   users_me,
   users_me_devices,
   remove_device,
   users_session,
   change_password,
-  revoke_all_devices
+  revoke_all_devices,
+  check_exist,
+  register,
+  check_exist_email
 }

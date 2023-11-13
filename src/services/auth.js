@@ -58,8 +58,6 @@ async function redirect_login() {
   let isAdmin = !!global.routers.ADMIN_ROUTERS.find((r) => r.name === currentPage?.name)
   if (access_token()) {
     global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
-  } else {
-    global.navigate(global.keys.SIGN_IN)
   }
 }
 

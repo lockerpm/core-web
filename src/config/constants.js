@@ -86,6 +86,10 @@ export default {
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
   PAGE_SIZE: 50,
+  CORE_JS_INFO: {
+    KDF: 0,
+    KDF_ITERATIONS: 100000
+  },
   LANGUAGES: [
     {
       value: 'en',

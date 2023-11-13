@@ -48,7 +48,7 @@ const SingIn = () => {
       authServices.update_access_token_type(response.token_type)
       authServices.update_access_token(response.access_token);
       await commonServices.fetch_user_info();
-      await coreServices.unlock({...response, password: values.password, username: values.username })
+      await coreServices.unlock({...response, ...values })
       await commonServices.sync_data()
       global.navigate(global.keys.VAULT)
     }).catch((error) => {
@@ -132,6 +132,18 @@ const SingIn = () => {
               </Button>
             </Form>
           </Card>
+        </div>
+        <div className="mt-4 text-center">
+          <span>
+            {t('auth_pages.sign_in.note')}
+            <Button
+              type="link"
+              className="font-semibold"
+              onClick={() => global.navigate(global.keys.SIGN_UP)}
+            >
+              {t('auth_pages.sign_up.label')}
+            </Button>
+          </span>
         </div>
       </div>
     </div>

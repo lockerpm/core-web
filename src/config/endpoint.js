@@ -5,17 +5,21 @@ const FLAT_FORM = `${API_URL}/v3/cystack_platform/pm`
 const WS_FLAT_FORM = `${WS_URL}/cystack_platform/pm`
 
 export default {
+  WS_SYNC: `${WS_FLAT_FORM}/sync`,
+
   AUTH_OTP: `${API_URL}/v3/sso/auth/otp`,
 
   LOGOUT: `${API_URL}/v3/users/logout`,
+  EXIST: `${API_URL}/v3/users/exist`,
 
   USERS_ME: `${FLAT_FORM}/users/me`,
+  USERS_EXIST: `${FLAT_FORM}/users/exist`,
+  USERS_REGISTER: `${FLAT_FORM}/users/register`,
   USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,
   USERS_ME_DEVICE: `${FLAT_FORM}/users/me/devices/:device_id`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
   USERS_SESSION_REVOKE_ALL: `${FLAT_FORM}/users/session/revoke_all`,
 
-  WS_SYNC: `${WS_FLAT_FORM}/sync`,
 
   SYNC: `${FLAT_FORM}/sync`,
   SYNC_COUNT: `${FLAT_FORM}/sync/count`,

@@ -24,7 +24,7 @@ function Notifications() {
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const [callingAPI, setCallingAPI] = useState(false);
-  const [total, setTotal] = useState(0);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
@@ -51,12 +51,17 @@ function Notifications() {
   }
 
   const featData = async () => {
-    await notificationServices.list({ scope: 'pwdmanager' }).then((response) => {
-      setNotifications(response.results)
-      setTotal(response.unread_count)
-    }).catch(() => {
+    const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
+    if (!isLocked) {
+      await notificationServices.list({ scope: 'pwdmanager' }).then((response) => {
+        setNotifications(response.results)
+        setUnreadCount(response.unread_count)
+      }).catch(() => {
+        setNotifications([])
+      })
+    } else {
       setNotifications([])
-    })
+    }
   }
 
   const items = useMemo(() => {
@@ -64,13 +69,15 @@ function Notifications() {
       type: 'group',
       label: <div className='flex items-center justify-between'>
         <p className='font-semibold'>{t('notifications.title')}</p>
-        <Button
-          type="primary"
-          ghost
-          onClick={() => markAsReadAll()}
-        >
-          {t('notifications.mark_all_as_read')}
-        </Button>
+        {
+          unreadCount > 0 && <Button
+            type="primary"
+            ghost
+            onClick={() => markAsReadAll()}
+          >
+            {t('notifications.mark_all_as_read')}
+          </Button>
+        }
       </div>,
       children: notifications.map((n) => {
         return {
@@ -227,14 +234,14 @@ function Notifications() {
         style: {
           maxWidth: 400,
           maxHeight: 600,
-          padding: 0,
+          padding: '8px 0',
           overflow: 'auto'
         }
       }}
       placement="bottomRight"
       trigger={'click'}
     >
-      <Badge count={total}>
+      <Badge count={unreadCount}>
         <Button
           shape="circle"
           icon={<BellOutlined />}

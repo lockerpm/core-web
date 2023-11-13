@@ -6,7 +6,7 @@ export default {
     {
       name: keys.AUTHENTICATE,
       path: '/authenticate',
-      element: 'Authenticate',
+      element: 'Authenticate'
     },
     {
       name: keys.SIGN_IN,
@@ -30,11 +30,6 @@ export default {
       name: keys.OTP_CODE,
       path: '/otp-code',
       element: 'OtpCode',
-    },
-    {
-      name: keys.CREATE_MASTER_PASSWORD,
-      path: '/create-master-password',
-      element: 'CreateMasterPassword',
     },
   ],
 

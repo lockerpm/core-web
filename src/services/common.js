@@ -13,9 +13,6 @@ import enterpriseServices from './enterprise'
 const fetch_user_info = async () => {
   await userServices.users_me().then((response) => {
     global.store.dispatch(storeActions.updateUserInfo(response))
-    if (!response.is_pwd_manager) {
-      global.navigate(global.keys.CREATE_MASTER_PASSWORD)
-    }
   }).catch(async () => {
     await authServices.logout();
   })
@@ -180,7 +177,7 @@ async function sync_data(syncing = true) {
   const size = 500;
   const maxCount = syncCount.count.ciphers || 0
   const request = []
-  for (let page = 1; page <= Math.ceil(maxCount / size); page += 1) {
+  for (let page = 1; page <= (Math.ceil(maxCount / size) || 1); page += 1) {
     request.push(syncServices.sync({ page, size }))
   }
   await Promise.all(request).then(async (result) => {

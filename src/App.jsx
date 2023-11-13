@@ -25,6 +25,7 @@ import PublicLayout from './layouts/public'
 import systemServices from './services/system'
 import storeActions from './store/actions'
 import authServices from './services/auth'
+import userServices from './services/user'
 
 import i18n from './config/i18n'
 import global from './config/global'
@@ -70,13 +71,10 @@ const App = () => {
   const currentPage = useSelector(state => state.system.currentPage)
 
   useEffect(() => {
-    const currentPage = common.getRouterByLocation(location)
+    userServices.check_exist();
     const locale = systemServices.get_language()
     dispatch(storeActions.changeLanguage(locale))
     i18n.changeLanguage(locale)
-    if (currentPage.type === 'admin') {
-      authServices.redirect_login()
-    }
     initJsCore()
   }, [])
 
