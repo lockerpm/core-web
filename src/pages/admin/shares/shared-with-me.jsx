@@ -141,6 +141,15 @@ const SharedWithMe = (props) => {
       try {
         await commonServices.leave_share(item)
         global.pushSuccess(t('notification.success.sharing.leave_group_success'));
+        if (item.isCollection) {
+          const collectionCiphers = allCiphers.filter((c) => c.folderId === item.id)
+          await global.jsCore.cipherService.delete(collectionCiphers.map(c => c.id))
+          await global.jsCore.collectionService.delete(item.id)
+          await commonServices.get_all_collections();
+        } else {
+          await global.jsCore.cipherService.delete([item.id])
+        }
+        await commonServices.get_all_ciphers();
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,

@@ -352,7 +352,6 @@ async function leave_share(item) {
 }
 
 async function sync_data_by_ws(message) {
-  console.log(message);
   const eventType = message.type;
   global.store.dispatch(storeActions.updateSyncing(true))
   if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(eventType)) {
@@ -361,12 +360,10 @@ async function sync_data_by_ws(message) {
       sync_collections(),
       sync_folders(),
     ])
-    if (['cipher_invitation', 'cipher_share'].includes(eventType)) {
-      await Promise.all([
-        get_invitations(),
-        get_my_shares()
-      ])
-    }
+    await Promise.all([
+      get_invitations(),
+      get_my_shares()
+    ])
     if (eventType === 'cipher_share') {
       if (message.data.id) {
         await sync_items([message.data.id])

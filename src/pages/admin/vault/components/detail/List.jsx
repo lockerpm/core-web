@@ -91,6 +91,16 @@ const ListItemDetails = (props) => {
             align="between"
           />
         },
+        {
+          key: 'notes',
+          name: t('cipher.notes'),
+          value: <TextCopy
+            value={cipher?.notes}
+            showIcon={true}
+            show={showText}
+            align="between"
+          />
+        },
       ]
     }
     if (cipher.type === CipherType.Card) {
@@ -155,6 +165,16 @@ const ListItemDetails = (props) => {
             align="between"
           />
         },
+        {
+          key: 'notes',
+          name: t('cipher.notes'),
+          value: <TextCopy
+            value={cipher?.notes}
+            showIcon={true}
+            show={showText}
+            align="between"
+          />
+        },
       ]
     }
     if (cipher.type === CipherType.CryptoWallet) {
@@ -162,7 +182,7 @@ const ListItemDetails = (props) => {
         {
           key: 'wallet_app',
           name: t('cipher.crypto_backup.wallet_app'),
-          value: cipher.cryptoWallet.walletApp ? <div>
+          value: cipher.cryptoWallet.walletApp?.name ? <div>
             <Image
               className={'mr-2'}
               style={{ width: 28, height: 28 }}
@@ -255,6 +275,16 @@ const ListItemDetails = (props) => {
               })
             }
           </Space>
+        },
+        {
+          key: 'notes',
+          name: t('cipher.notes'),
+          value: <TextCopy
+            value={cipher?.cryptoWallet?.notes}
+            showIcon={true}
+            show={showText}
+            align="between"
+          />
         },
       ]
     }
@@ -419,10 +449,31 @@ const ListItemDetails = (props) => {
             show={showText}
             align="between"
           />
-        }
+        },
+        {
+          key: 'notes',
+          name: t('cipher.notes'),
+          value: <TextCopy
+            value={cipher?.notes}
+            showIcon={true}
+            show={showText}
+            align="between"
+          />
+        },
       ]
     }
-    return []
+    return [
+      {
+        key: 'notes',
+        name: t('cipher.notes'),
+        value: <TextCopy
+          value={cipher?.notes}
+          showIcon={true}
+          show={showText}
+          align="between"
+        />
+      },
+    ]
   }, [cipher, showText])
 
   const data = useMemo(() => {
@@ -441,16 +492,6 @@ const ListItemDetails = (props) => {
         />
       },
       ...cipherTypeData,
-      {
-        key: 'notes',
-        name: t('cipher.notes'),
-        value: <TextCopy
-          value={cipher?.notes}
-          showIcon={true}
-          show={showText}
-          align="between"
-        />
-      },
       ...(cipher.fields || []).map((f) => ({
         key: f.key,
         name: f.name,

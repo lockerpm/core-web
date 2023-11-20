@@ -61,7 +61,7 @@ const convertCipherToForm = (cipher = {}) => {
       ...f,
       value: f.type === FieldType.Date ? time.convertCipherFieldDate(f.value) : f.value
     })) || [],
-    folderId: cipher.folderId || '',
+    folderId: cipher.folderId || cipher?.folderId || cipher?.collectionIds[0] || '',
     notes: cipher.notes || '',
   }
   if (cipher.type === CipherType.Login) {

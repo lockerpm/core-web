@@ -77,6 +77,7 @@ const ShareCiphers = (props) => {
         visible={formVisible}
         item={selectedItem}
         cloneMode={cloneMode}
+        cipherType={common.cipherTypeInfo('type', selectedItem?.type)}
         folderId={currentPage.params.folder_id}
         setCloneMode={setCloneMode}
         onClose={() => {

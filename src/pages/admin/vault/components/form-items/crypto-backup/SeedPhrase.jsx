@@ -43,8 +43,15 @@ function SeedPhrase(props) {
   }
 
   const handleChangeWord = (newV, index) => {
-    const words = newValue.map((v, i) => i === index ? newV : v)
-    onChange(words.join(' '))
+    const newVArray = newV?.trim().split(' ');
+    const maxLength = newValue.length > (index + newVArray.length) ? newValue.length : (index + newVArray.length)
+    const leftArray = newValue.slice(0, index);
+    const rightArray = newValue.slice(index + newVArray.length, maxLength);
+
+    if (newVArray.length) {
+      const words = [...leftArray, ...newVArray, ...rightArray]
+      onChange(words.slice(0, MAX_WORD_COUNT).join(' '))
+    }
   }
 
   const handleRemoveWord = (index) => {

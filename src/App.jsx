@@ -71,6 +71,7 @@ const App = () => {
   const currentPage = useSelector(state => state.system.currentPage)
 
   useEffect(() => {
+    const currentPage = common.getRouterByLocation(location)
     userServices.check_exist();
     const locale = systemServices.get_language()
     dispatch(storeActions.changeLanguage(locale))

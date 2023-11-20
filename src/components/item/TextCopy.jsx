@@ -51,6 +51,13 @@ const TextCopyItem = (props) => {
 
   const DisplayValue = useMemo(() => {
     if (value) {
+      if (isPassword && showText) {
+        return <Input.Password
+          className={`p-0 text-${align} mr-2`}
+          value={value}
+          bordered={false}
+        />
+      }
       if (show != null) {
         return <div
           style={{ color: color || gray[6] }}
@@ -72,13 +79,6 @@ const TextCopyItem = (props) => {
             }
           </span>
         </div>
-      }
-      if (isPassword) {
-        return <Input.Password
-          className={`p-0 text-${align} mr-2`}
-          value={value}
-          bordered={false}
-        />
       }
       return <div
         className={`${limited ? 'text-limited' : ''}`}
