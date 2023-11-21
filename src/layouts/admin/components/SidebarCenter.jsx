@@ -99,15 +99,15 @@ function SidebarCenter(props) {
           key: m.key,
           icon: m.icon,
           label: m.key === global.keys.SHARES && !openKeys.includes(global.keys.SHARES) ? <div className='w-full'>
-            <span className='mr-2'>{m.label}</span>
+            <span className='mr-2'>{t(m.label)}</span>
             <Badge count={invitedCount} />
-          </div> : m.label,
+          </div> : t(m.label),
           children: m.children ? m.children.map((ch) => ({
             key: ch.key,
             label: ch.key === global.keys.SHARED_WITH_ME ? <div className='w-full'>
-              <span className='mr-2'>{ch.label}</span>
+              <span className='mr-2'>{t(ch.label)}</span>
               <Badge count={invitedCount} />
-            </div> : ch.label,
+            </div> : t(ch.label),
           })) : null,
         }))}
         onClick={handleMenuClick}

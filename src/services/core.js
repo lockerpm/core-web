@@ -1,4 +1,5 @@
 import global from '../config/global';
+import { ConstantsService } from '../core-js/src/services/constants.service';
 
 async function clear_keys() {
   await global.jsCore.cryptoService.clearKeys()
@@ -41,6 +42,7 @@ async function unlock(data) {
     await global.jsCore.cryptoService.setKeyHash(hashedPassword)
     await global.jsCore.cryptoService.setEncKey(data.key)
     await global.jsCore.cryptoService.setEncPrivateKey(data.private_key)
+    await global.jsCore.storageService.save(ConstantsService.lastActiveKey, new Date().getTime())
   }
 }
 

@@ -17,7 +17,6 @@ import global from '../../../../../config/global';
 
 function CardForm(props) {
   const {
-    form,
     disabled = false
   } = props
   const { t } = useTranslation()

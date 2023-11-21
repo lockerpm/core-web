@@ -17,8 +17,6 @@ import {
 import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from "react-i18next";
 
-import global from '../../../../../../config/global';
-
 function TwoFAFormData(props) {
   const {
     visible = false,

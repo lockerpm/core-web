@@ -14,6 +14,8 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import global from '../../../../../../config/global';
+import userServices from '../../../../../../services/user';
+import authServices from '../../../../../../services/auth';
 
 function ChangePasswordFormData(props) {
   const {
@@ -24,6 +26,8 @@ function ChangePasswordFormData(props) {
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
 
+  const userInfo = useSelector((state) => state.auth.userInfo)
+
   useEffect(() => {
     form.resetFields();
     setCallingAPI(false);
@@ -33,10 +37,21 @@ function ChangePasswordFormData(props) {
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
+      await userServices.change_password({
+        username: userInfo.email,
+        ...values,
+      }).then(async () => {
+        global.pushSuccess(t('notification.success.change_password.changed'));
+        onClose();
+        authServices.logout();
+      }).catch((error) => {
+        global.pushError(error)
+      })
       setCallingAPI(false);
-      onClose();
     })
   }
+
+
 
   return (
     <div className={props.className}>
@@ -103,9 +118,10 @@ function ChangePasswordFormData(props) {
               global.rules.LATEST_LENGTH(t('change_password.confirm_new_password'), 8),
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (value && getFieldValue('new_password') !== value) {
+                  if (value && value.length >= 8 && getFieldValue('new_password') !== value) {
                     return Promise.reject(new Error(t('validation.passwords_not_match')));
                   }
+                  return Promise.resolve()
                 },
               }),
             ]}
@@ -113,6 +129,15 @@ function ChangePasswordFormData(props) {
             <Input.Password
               disabled={callingAPI}
               placeholder={t('placeholder.enter')}
+            />
+          </Form.Item>
+          <Form.Item
+            name="password_hint"
+            label={t('auth_pages.password_hint')}
+          >
+            <Input.Password
+              placeholder={t('placeholder.enter')}
+              disabled={callingAPI}
             />
           </Form.Item>
         </Form>

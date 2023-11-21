@@ -40,14 +40,14 @@ global.store = store
 const Locales = props => {
   const localeIntl = {
     locale: props.locale,
-    messages: props.locale === 'en' ? en : vi,
+    messages: props.locale === constants.LANGUAGE.EN ? en : vi,
   }
   moment.locale(props.locale)
   
   return (
     <IntlProvider {...localeIntl}>
       <ConfigProvider
-        locale={props.locale === 'en' ? en_US : vi_VN}
+        locale={props.locale === constants.LANGUAGE.EN ? en_US : vi_VN}
       >
         {props.children}
       </ConfigProvider>

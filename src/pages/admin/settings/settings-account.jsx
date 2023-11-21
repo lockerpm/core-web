@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   List,
@@ -19,60 +19,46 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import userServices from "../../../services/user";
+
 import global from "../../../config/global";
-import storeActions from "../../../store/actions";
+import commonServices from "../../../services/common";
 
 const AccountDetails = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.auth.userInfo)
-  const locale = useSelector((state) => state.system.locale)
 
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
-  const [data] = useState([
-    {
-      key: 'personal_info',
-      title: t('account_details.personal_info'),
-    },
-    {
-      key: 'preferences',
-      title: t('account_details.preferences.title')
-    },
-    {
-      key: 'danger_zone',
-      title: t('account_details.danger_zone.title')
-    },
-  ]);
 
   useEffect(() => {
     form.setFieldsValue({
       email: userInfo.email,
       name: userInfo.name,
-      language: locale,
+      language: userInfo.language,
       timeout: userInfo.timeout,
-      timeout_action: userInfo.timeout_action
     })
   }, [userInfo])
 
   const handleCancel = () => {
     form.setFieldsValue({
       email: userInfo.email,
-      name: userInfo.full_name,
-      language: locale,
+      name: userInfo.name,
+      language: userInfo.language,
       timeout: userInfo.timeout,
-      timeout_action: userInfo.timeout_action
     })
   }
 
   const handleUpdateAccount = async (values) => {
-    await userServices.update({
+    await userServices.update_users_me({
       email: userInfo.email,
-      name: values.name,
+      full_name: values.name,
+      language: values.language,
+      timeout: values.timeout
     }).then(() => {
-      global.pushSuccess(t('notification.success.account_details.updated'))
-      dispatch(storeActions.updateUserInfo({ ...userInfo, ...values }))
+      commonServices.fetch_user_info();
+      global.pushSuccess(t('notification.success.account_details.updated'));
     }).catch((error) => {
       global.pushError(error)
     })
@@ -100,7 +86,22 @@ const AccountDetails = (props) => {
       >
         <List
           itemLayout="horizontal"
-          dataSource={data}
+          dataSource={
+            [
+              {
+                key: 'personal_info',
+                title: t('account_details.personal_info'),
+              },
+              {
+                key: 'preferences',
+                title: t('account_details.preferences.title')
+              },
+              {
+                key: 'danger_zone',
+                title: t('account_details.danger_zone.title')
+              },
+            ]
+          }
           footer={<div className="flex justify-end">
             <Button
               className="mr-2"

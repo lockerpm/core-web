@@ -15,7 +15,8 @@ function LayoutBreadcrumb() {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const [menus, setMenus] = useState([])
+  const [menus, setMenus] = useState([]);
+  const locale = useSelector((state) => state.system.locale);
   const currentPage = useSelector((state) => state.system.currentPage);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const allFolders = useSelector((state) => state.folder.allFolders);
@@ -23,23 +24,25 @@ function LayoutBreadcrumb() {
 
   useEffect(() => {
     if (location) {
-      const brRouters = common.getRoutersByLocation(location);
+      const brRouters = common.getRoutersByLocation(location).map((r) => ({ ...r, label: t(r.label) }));
       const lastRouter = brRouters.slice(-1)[0];
       if (lastRouter) {
         let lastRouters = [lastRouter]
         if (lastRouter.children) {
+          const children = lastRouter.children.find((m) => m.key === currentPage.name)
           lastRouters = [
             {
               ...lastRouter.children[0],
-              label: lastRouter.label
+              label: t(lastRouter.label)
             },
             {
-              ...lastRouter.children.find((m) => m.key === currentPage.name)
+              ...children,
+              label: t(children.label)
             }
           ]
         }
         if (lastRouter.parent && !common.isEmpty(lastRouter.params)) {
-          let label = lastRouter.label || t('common.detail')
+          let label = t(lastRouter.label) || t('common.detail')
           if (lastRouter.parent == global.keys.FOLDERS) {
             label = allFolders.find((f) => f.id == lastRouter.params.folder_id)?.name || t('common.detail')
           } else if (lastRouter.params.cipher_id) {
@@ -62,7 +65,7 @@ function LayoutBreadcrumb() {
         setMenus(brRouters);
       }
     }
-  }, [location, currentPage, allFolders, allCiphers])
+  }, [location, currentPage, allFolders, allCiphers, locale])
 
   const items = useMemo(() => {
     const breadcrumbRouters = menus.map((m, index) => ({
@@ -92,8 +95,7 @@ function LayoutBreadcrumb() {
   }, [menus, currentPage, userInfo])
 
   return (
-    <Breadcrumb className='flex items-center' items={items}>
-    </Breadcrumb>
+    <Breadcrumb className='flex items-center' items={items} />
   )
 }
 

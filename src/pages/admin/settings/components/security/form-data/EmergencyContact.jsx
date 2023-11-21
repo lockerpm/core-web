@@ -133,8 +133,8 @@ function EmergencyContactFormData(props) {
                   value={u.value}
                 >
                   <div>
-                    <p className='font-semibold'>{u.label}</p>
-                    <small>{u.description}</small>
+                    <p className='font-semibold'>{t(u.label)}</p>
+                    <small>{t(u.description)}</small>
                   </div>
                 </Radio>)
               }
@@ -153,7 +153,12 @@ function EmergencyContactFormData(props) {
             <Select
               className='w-full'
               placeholder={t('placeholder.select')}
-              options={global.constants.WAIT_TIMES}
+              options={global.constants.WAIT_TIMES
+                .map((o) => ({
+                  ...o,
+                  label: t(o.label, {number:  o.value}) })
+                )
+              }
             />
           </Form.Item>
           <p>{t('security.emergency_access.emergency_contact.wait_time_description')}</p>

@@ -31,7 +31,10 @@ const Preferences = (props) => {
           >
             <Select
               style={{ width: 150 }}
-              options={global.constants.LANGUAGES}
+              options={global.constants.LANGUAGES.map((o) => ({
+                ...o,
+                label: t(o.label)
+              }))}
             />
           </Form.Item>
         </div>
@@ -47,7 +50,10 @@ const Preferences = (props) => {
           >
             <Select
               style={{ width: 160 }}
-              options={global.constants.VAULT_TIMEOUTS}
+              options={global.constants.VAULT_TIMEOUTS.map((o) => ({
+                ...o,
+                label: t(o.label)
+              }))}
             />
           </Form.Item>
         </div>
@@ -67,7 +73,7 @@ const Preferences = (props) => {
             >
               <Select
                 style={{ width: 90 }}
-                options={global.constants.VAULT_TIMEOUT_ACTIONS}
+                options={global.constants.VAULT_TIMEOUT_ACTIONS.map((a) => ({ ...a, label: t(a.label) }))}
               />
             </Form.Item>
           </div>

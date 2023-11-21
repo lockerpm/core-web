@@ -103,7 +103,7 @@ const BoxData = (props) => {
               (() => {
                 const status = common.getStatus(record.status)
                 return <Tag color={status.color}>
-                  {status.label}
+                  {t(status?.label)}
                 </Tag>
               })()
             }
@@ -113,7 +113,7 @@ const BoxData = (props) => {
             {
               (() => {
                 const permission = common.getSharePermission(record.share_type)
-                return permission.label
+                return t(permission.label)
               })()
             }
           </div>

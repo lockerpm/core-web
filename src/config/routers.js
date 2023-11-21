@@ -1,5 +1,4 @@
 import keys from './keys'
-import { Trans } from 'react-i18next'
 
 export default {
   AUTH_ROUTERS: [
@@ -176,14 +175,14 @@ export default {
       parent: keys.SECURITY_TOOLS,
       path: '/security-tools/password-health',
       element: 'PasswordHealth',
-      label: <Trans i18nKey='security_tools.password_health.title'/>,
+      label: 'security_tools.password_health.title',
     },
     {
       name: keys.BREACH_SCANNER,
       parent: keys.SECURITY_TOOLS,
       path: '/security-tools/breach-scanner',
       element: 'BreachScanner',
-      label: <Trans i18nKey='security_tools.data_breach_scanner.title'/>,
+      label: 'security_tools.data_breach_scanner.title',
     },
     {
       name: keys.SETTINGS_ACCOUNT,
@@ -204,7 +203,7 @@ export default {
       name: keys.EMERGENCY_ACCESS_VIEW,
       path: '/settings/emergency-access/:contact_id',
       element: 'EmergencyAccessView',
-      label: <Trans i18nKey='emergency_access_view.title'/>,
+      label: 'emergency_access_view.title',
       parent: keys.SETTINGS_SECURITY,
     },
     {

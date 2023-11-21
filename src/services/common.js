@@ -9,10 +9,17 @@ import folderServices from './folder'
 import sharingServices from './sharing'
 import quickShareServices from './quick-share'
 import enterpriseServices from './enterprise'
+import systemServices from './system'
+
+import i18n from '../config/i18n'
 
 const fetch_user_info = async () => {
-  await userServices.users_me().then((response) => {
-    global.store.dispatch(storeActions.updateUserInfo(response))
+  await userServices.users_me().then(async (response) => {
+    await global.jsCore.vaultTimeoutService.setVaultTimeoutOptions(response.timeout, response.timeout_action);
+    global.store.dispatch(storeActions.updateUserInfo(response));
+    global.store.dispatch(storeActions.changeLanguage(response.language || global.constants.LANGUAGE.EN));
+    systemServices.update_language(response.language || global.constants.LANGUAGE.EN);
+    i18n.changeLanguage(response.language || global.constants.LANGUAGE.EN);
   }).catch(async () => {
     await authServices.logout();
   })
@@ -172,7 +179,6 @@ async function get_teams() {
 
 async function sync_data(syncing = true) {
   global.store.dispatch(storeActions.updateSyncing(syncing));
-  await clear_data();
   const syncCount = await syncServices.sync_count();
   const size = 500;
   const maxCount = syncCount.count.ciphers || 0
@@ -355,23 +361,7 @@ async function sync_data_by_ws(message) {
   const eventType = message.type;
   global.store.dispatch(storeActions.updateSyncing(true))
   if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(eventType)) {
-    await sync_profile(),
-    await Promise.all([
-      sync_collections(),
-      sync_folders(),
-    ])
-    await Promise.all([
-      get_invitations(),
-      get_my_shares()
-    ])
-    if (eventType === 'cipher_share') {
-      if (message.data.id) {
-        await sync_items([message.data.id])
-      }
-      if (message.data.ids) {
-        await sync_items(message.data.ids)
-      }
-    }
+    await sync_data();
   } else if (eventType.includes('cipher')) {
     if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(eventType)) {
       if (eventType === 'cipher_update') {

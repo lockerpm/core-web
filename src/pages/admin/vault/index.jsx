@@ -256,7 +256,7 @@ const Vault = (props) => {
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
       <AdminHeader
-        title={cipherType.title}
+        title={t(cipherType.title)}
         total={filteredData.total}
         actions={[
           {

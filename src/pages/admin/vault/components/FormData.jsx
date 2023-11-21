@@ -70,6 +70,13 @@ function FormData(props) {
     }
   }, [visible, cipherType])
 
+  useEffect(() => {
+    const formData = common.convertCipherToForm({
+      type: type,
+      folderId: folderId || '',
+    })
+    form.setFieldsValue(formData)
+  }, [type])
 
   const handleSave = async () => {
     form.validateFields().then(async (values) => {

@@ -90,7 +90,7 @@ const TableData = (props) => {
         render: (_, record) => {
           const status = common.getStatus(record.status)
           return <Tag color={status.color}>
-            {status.label}
+            {t(status?.label)}
           </Tag>
         }
       },
@@ -102,7 +102,7 @@ const TableData = (props) => {
         align: 'center',
         render: (_, record) => {
           const permission = common.getSharePermission(record.share_type)
-          return permission.label
+          return t(permission.label)
         }
       },
       {

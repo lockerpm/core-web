@@ -2,6 +2,10 @@
   ol {
     li {
       font-size: 14px;
+      .ant-breadcrumb-link {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

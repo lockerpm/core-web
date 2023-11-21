@@ -64,7 +64,7 @@ const TableData = (props) => {
           const days = common.getEmergencyAccessDays(record)
           return <div className="flex items-center justify-center">
             <Tag color={status?.color}>
-              {status?.label}
+              {t(status?.label)}
             </Tag>
             {
               status.value === global.constants.STATUS.RECOVERY_INITIATED && <Tooltip
@@ -87,7 +87,7 @@ const TableData = (props) => {
         render: (_, record) => {
           const status = common.getAccess(record.type)
           return <Tag color={status?.color}>
-            {status?.label}
+            {t(status?.label)}
           </Tag>
         }
       },

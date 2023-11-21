@@ -25,6 +25,7 @@ const Filter = (props) => {
     setParams = () => { }
   } = props;
 
+  const locale = useSelector((state) => state.system.locale);
   const [searchText, setSearchText] = useState(params.searchText)
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Filter = (props) => {
     return global.constants.SORT_OPTIONS.map((o) => ({
       key: o.key,
       label: <p className={o.key === selectedSortOption?.key ? 'text-primary' : ''}>
-        {o.label}
+        {t(o.label)}
       </p>,
       onClick: () => setParams({
         ...params,
@@ -50,7 +51,7 @@ const Filter = (props) => {
         orderDirection: o.orderDirection
       })
     }))
-  }, [selectedSortOption, params])
+  }, [selectedSortOption, params, locale])
 
   return (
     <Row

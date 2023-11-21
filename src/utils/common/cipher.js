@@ -74,7 +74,7 @@ const convertCipherToForm = (cipher = {}) => {
     result = {
       ...result,
       ...cipher.cryptoWallet,
-      walletApp: cipher.cryptoWallet?.walletApp?.alias || '',
+      walletApp: cipher.cryptoWallet?.walletApp?.alias || null,
       networks: cipher.cryptoWallet?.networks?.map((n) => n.alias) || [],
       notes: cipher.cryptoWallet?.notes || ''
     }
@@ -82,6 +82,7 @@ const convertCipherToForm = (cipher = {}) => {
     result = {
       ...result,
       ...(cipher.card || new CardView()),
+      expMonth: cipher?.card?.expMonth || ''
     }
   } else if (cipher.type === CipherType.Identity) {
     result = {
@@ -270,14 +271,14 @@ const quickShareForRequest = async (data) => {
   return sendRequest
 }
 
-const createEncryptedMasterPw = async (masterPw, encKey) => {
+const createEncryptedMasterPw = async (masterPw, encKey = null) => {
   const cipher = new CipherView()
   cipher.type = CipherType.Login
   const loginData = new LoginView()
-  loginData.username = 'locker.io'
+  loginData.username = Utils.getDomain(window.location.origin);
   loginData.password = masterPw
   const uriView = new LoginUriView()
-  uriView.uri = 'https://locker.io'
+  uriView.uri = window.location.origin,
   loginData.uris = [uriView]
   cipher.login = loginData
   cipher.name = 'Locker Master Password'

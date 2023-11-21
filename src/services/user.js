@@ -4,11 +4,20 @@ import coreServices from './core'
 import authServices from './auth'
 import commonServices from './common'
 import global from '../config/global'
+import common from '../utils/common'
 
 async function users_me() {
   return request({
     url: global.endpoint.USERS_ME,
     method: 'get',
+  })
+}
+
+async function update_users_me(data = {}) {
+  return request({
+    url: global.endpoint.USERS_ME,
+    method: 'put',
+    data
   })
 }
 
@@ -69,40 +78,35 @@ async function users_session(data) {
 }
 
 async function change_password(data = {}) {
-  const storedKeyHash = await global.jsCore.cryptoService.getKeyHash() || null
+  const makeKey =  await coreServices.make_key(data.username, data.password)
+  const password = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
+  
+  const mewMakeKey = await coreServices.make_key(data.username, data.new_password)
+  const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
+  
 
-  const oldMakeKey = data.password ? await coreServices.make_key(data.username, data.password) : null
-  const password = data.password ? await global.jsCore.cryptoService.hashPassword(data.password, oldMakeKey) : storedKeyHash
-
-  const makeKey = await coreServices.make_key(data.username, data.new_password)
-  const new_password = await global.jsCore.cryptoService.hashPassword(data.new_password, makeKey)
-  const confirm_new_password = await global.jsCore.cryptoService.hashPassword(data.confirm_new_password, makeKey)
-
-  let payload = {
-    password: password || '',
-    new_password,
-    confirm_new_password,
-  }
-  if (password) {
-    const encKey = await global.jsCore.cryptoService.remakeEncKey(makeKey)
-    payload = {
-      ...payload,
-      new_key: encKey[1].encryptedString,
-    }
+  let encKey = null
+  const existingEncKey = await global.jsCore.cryptoService.getEncKey();
+  if (existingEncKey) {
+    encKey = await global.jsCore.cryptoService.remakeEncKey(mewMakeKey)
   } else {
-    const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
-    const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
-    payload = {
-      ...payload,
-      is_check_password: data.is_check_password,
-      new_key: encKey[1].encryptedString,
-      new_public_key: keys[0],
-      new_private_key: keys[1].encryptedString,
-    }
+    encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
+  }
+
+  const masterPasswordCipher = await common.createEncryptedMasterPw(newPassword)
+  const { score } = commonServices.password_strength(data.new_password)
+
+  const payload = {
+    key: encKey[1].encryptedString,
+    master_password_hash: password,
+    new_master_password_hash: newPassword,
+    new_master_password_hint: data.password_hint || '',
+    score: score,
+    master_password_cipher: masterPasswordCipher
   }
 
   return request({
-    url: global.endpoint.USERS_CHANGE_PASSWORD,
+    url: global.endpoint.USERS_ME_PASSWORD,
     method: 'post',
     data: payload
   })
@@ -157,6 +161,7 @@ async function register(data) {
 
 export default {
   users_me,
+  update_users_me,
   users_me_devices,
   remove_device,
   users_session,

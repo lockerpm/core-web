@@ -66,9 +66,22 @@ function AdminLayout(props) {
     convertSize()
   }, [location])
 
+  useEffect(() => {
+    setInterval(() => {
+      checkVaultTimeOut()
+    }, [5 * 1000])
+  }, [])
+
   window.addEventListener("resize", (event) => {
     convertSize()
   });
+
+  const checkVaultTimeOut = async () => {
+    const isLocked = await global.jsCore?.vaultTimeoutService.isLocked();
+    if (isLocked) {
+      await authServices.redirect_login();
+    }
+  }
 
   const convertSize = () => {
     if (window.innerWidth <= 768) {

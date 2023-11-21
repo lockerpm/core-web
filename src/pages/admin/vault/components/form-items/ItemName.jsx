@@ -32,7 +32,7 @@ function Name(props) {
           <Select
             className='w-full'
             disabled={disabled}
-            options={cipherTypes.map((t) => ({ value: t.type, label: t.name }))}
+            options={cipherTypes.map((type) => ({ value: type.type, label: t(type.name) }))}
           />
         </Form.Item>
       }

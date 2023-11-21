@@ -1,4 +1,3 @@
-import { Trans } from 'react-i18next'
 import { CipherType } from '../core-js/src/enums'
 import { FieldType } from '../core-js/src/enums/fieldType'
 
@@ -63,6 +62,11 @@ const ACCESS_TYPE = {
   TAKEOVER: 'takeover',
 }
 
+const LANGUAGE = {
+  VI: 'vi',
+  EN: 'en',
+}
+
 const NOTIFICATION_TYPE = {
   ITEM_SHARING: 'item_sharing',
   MEMBER_TO_GROUP_SHARE: 'member_to_group_share',
@@ -82,6 +86,7 @@ export default {
   MENU_TYPES,
   ACCESS_TYPE,
   NOTIFICATION_TYPE,
+  LANGUAGE,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
@@ -92,12 +97,12 @@ export default {
   },
   LANGUAGES: [
     {
-      value: 'en',
-      label: <Trans i18nKey='common.english' />,
+      value: LANGUAGE.EN,
+      label: 'common.english',
     },
     {
-      value: 'vi',
-      label: <Trans i18nKey='common.vietnamese' />,
+      value: LANGUAGE.VI,
+      label: 'common.vietnamese',
     },
   ],
   IMPORT_FILE_TYPES: [],
@@ -125,7 +130,7 @@ export default {
       icon: require('../assets/images/icons/ciphers/vault.svg'),
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
-      title: <Trans i18nKey={'inventory.all_items'}/>,
+      title: 'inventory.all_items',
       name: <></>,
       isCreate: false
     },
@@ -135,8 +140,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/login.svg'),
       listRouter: keys.PASSWORDS,
       detailRouter: keys.PASSWORD_DETAIL,
-      title: <Trans i18nKey={'sidebar.passwords'}/>,
-      name: <Trans i18nKey={'cipher.types.password'}/>,
+      title: 'sidebar.passwords',
+      name: 'cipher.types.password',
       isCreate: true,
     },
     {
@@ -145,8 +150,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/secure-note.svg'),
       listRouter: keys.NOTES,
       detailRouter: keys.NOTE_DETAIL,
-      title: <Trans i18nKey={'sidebar.notes'}/>,
-      name: <Trans i18nKey={'cipher.types.note'}/>,
+      title: 'sidebar.notes',
+      name: 'cipher.types.note',
       isCreate: true,
     },
     {
@@ -155,8 +160,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/card.svg'),
       listRouter: keys.CARDS,
       detailRouter: keys.CARD_DETAIL,
-      title: <Trans i18nKey={'sidebar.cards'}/>,
-      name: <Trans i18nKey={'cipher.types.card'}/>,
+      title: 'sidebar.cards',
+      name: 'cipher.types.card',
       isCreate: true,
     },
     {
@@ -165,8 +170,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/crypto-wallet.svg'),
       listRouter: keys.CRYPTO_BACKUPS,
       detailRouter: keys.CRYPTO_BACKUP_DETAIL,
-      title: <Trans i18nKey={'sidebar.crypto_backups'}/>,
-      name: <Trans i18nKey={'cipher.types.crypto_backup'}/>,
+      title: 'sidebar.crypto_backups',
+      name: 'cipher.types.crypto_backup',
       isCreate: true,
     },
     {
@@ -175,8 +180,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/identity.svg'),
       listRouter: keys.IDENTITIES,
       detailRouter: keys.IDENTITY_DETAIL,
-      title: <Trans i18nKey={'sidebar.identities'}/>,
-      name: <Trans i18nKey={'cipher.types.identity'}/>,
+      title: 'sidebar.identities',
+      name: 'cipher.types.identity',
       isCreate: true,
     },
     {
@@ -184,7 +189,7 @@ export default {
       type: CipherType.TOTP,
       icon: require('../assets/images/icons/ciphers/authenticator.svg'),
       listRouter: keys.AUTHENTICATOR,
-      title: <Trans i18nKey={'sidebar.authenticator'}/>,
+      title: 'sidebar.authenticator',
       isCreate: false
     },
     {
@@ -193,8 +198,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/login.svg'),
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
-      title: <Trans i18nKey={''}/>,
-      name: <Trans i18nKey={'cipher.types.master_password'}/>,
+      title: '',
+      name: 'cipher.types.master_password',
       isCreate: false
     },
     {
@@ -203,8 +208,8 @@ export default {
       icon: require('../assets/images/icons/ciphers/trash.svg'),
       listRouter: keys.TRASH,
       detailRouter: keys.TRASH_DETAIL,
-      title: <Trans i18nKey={'sidebar.trash'}/>,
-      name: <Trans i18nKey={'cipher.types.trash'}/>,
+      title: 'sidebar.trash',
+      name: 'cipher.types.trash',
       isCreate: false,
       isDeleted: true
     }
@@ -363,25 +368,25 @@ export default {
       key: 'name_ascending',
       orderField: 'name',
       orderDirection: 'asc',
-      label: <Trans i18nKey={'sort_options.name_ascending'}/>,
+      label: 'sort_options.name_ascending',
     },
     {
       key: 'name_descending',
       orderField: 'name',
       orderDirection: 'desc',
-      label: <Trans i18nKey={'sort_options.name_descending'}/>,
+      label: 'sort_options.name_descending',
     },
     {
       key: 'time_ascending',
       orderField: 'revisionDate',
       orderDirection: 'asc',
-      label: <Trans i18nKey={'sort_options.time_ascending'}/>,
+      label: 'sort_options.time_ascending',
     },
     {
       key: 'time_descending',
       orderField: 'revisionDate',
       orderDirection: 'desc',
-      label: <Trans i18nKey={'sort_options.time_descending'}/>,
+      label: 'sort_options.time_descending',
     }
   ],
   FIELD_TYPES: [
@@ -452,47 +457,47 @@ export default {
   STATUSES: [
     {
       value: STATUS.PENDING,
-      label: <Trans i18nKey={'statuses.pending'}/>,
+      label: 'statuses.pending',
       color: 'default'
     },
     {
       value: STATUS.CONFIRMED,
-      label: <Trans i18nKey={'statuses.confirmed'}/>,
+      label: 'statuses.confirmed',
       color: 'success'
     },
     {
       value: STATUS.ACCEPTED,
-      label: <Trans i18nKey={'statuses.accepted'}/>,
+      label: 'statuses.accepted',
       color: 'processing'
     },
     {
       value: STATUS.INVITED,
-      label: <Trans i18nKey={'statuses.invited'}/>,
+      label: 'statuses.invited',
       color: 'warning'
     },
     {
       value: STATUS.EXPIRED,
-      label: <Trans i18nKey={'statuses.expired'}/>,
+      label: 'statuses.expired',
       color: 'error'
     },
     {
       value: STATUS.REJECT,
-      label: <Trans i18nKey={'statuses.reject'}/>,
+      label: 'statuses.reject',
       color: 'error'
     },
     {
       value: STATUS.RECOVERY_INITIATED,
-      label: <Trans i18nKey={'statuses.recovery_initiated'}/>,
+      label: 'statuses.recovery_initiated',
       color: 'default'
     },
     {
       value: STATUS.RECOVERY_APPROVED,
-      label: <Trans i18nKey={'statuses.recovery_approved'}/>,
+      label: 'statuses.recovery_approved',
       color: 'success'
     },
     {
       value: STATUS.SHARED,
-      label: <Trans i18nKey={'statuses.shared'}/>,
+      label: 'statuses.shared',
       color: 'success'
     },
   ],
@@ -500,92 +505,92 @@ export default {
     {
       value: PERMISSION.EDIT,
       role: PERMISSION_ROLE.ADMIN,
-      label: <Trans i18nKey={'permissions.editable'}/>,
+      label: 'permissions.editable',
     },
     {
       value: PERMISSION.VIEW,
       role: PERMISSION_ROLE.MEMBER,
-      label: <Trans i18nKey={'permissions.viewable'}/>,
+      label: 'permissions.viewable',
     },
   ],
   VAULT_TIMEOUTS: [
     {
       value: 1,
-      label: <Trans i18nKey={'timeouts.one_minute'}/>,
+      label: 'timeouts.one_minute',
     },
     {
       value: 5,
-      label: <Trans i18nKey={'timeouts.five_minutes'}/>,
+      label: 'timeouts.five_minutes',
     },
     {
       value: 15,
-      label: <Trans i18nKey={'timeouts.fifteen_minutes'}/>,
+      label: 'timeouts.fifteen_minutes',
     },
     {
       value: 30,
-      label: <Trans i18nKey={'timeouts.thirty_minutes'}/>,
+      label: 'timeouts.thirty_minutes',
     },
     {
       value: 60,
-      label: <Trans i18nKey={'timeouts.one_hour'}/>,
+      label: 'timeouts.one_hour',
     },
     {
       value: 60 * 4,
-      label: <Trans i18nKey={'timeouts.four_hours'}/>,
+      label: 'timeouts.four_hours',
     },
     {
       value: 60 * 24 * 14,
-      label: <Trans i18nKey={'timeouts.two_weeks'}/>,
+      label: 'timeouts.two_weeks',
     },
     {
       value: -1,
-      label: <Trans i18nKey={'timeouts.on_refresh'}/>,
+      label: 'timeouts.on_refresh',
     }
   ],
   VAULT_TIMEOUT_ACTIONS: [
     {
       value: 'lock',
-      label: <Trans i18nKey={'button.lock'}/>,
+      label: 'button.lock',
     },
     {
       value: 'logOut',
-      label: <Trans i18nKey={'button.logout'}/>,
+      label: 'button.logout',
     },
   ],
   USER_ACCESSES: [
     {
       value: ACCESS_TYPE.VIEW,
       color: 'success',
-      label: <Trans i18nKey={'security.emergency_access.emergency_contact.view'}/>,
-      description: <Trans i18nKey={'security.emergency_access.emergency_contact.view_description'}/>,
+      label: 'security.emergency_access.emergency_contact.view',
+      description: 'security.emergency_access.emergency_contact.view_description',
     },
     {
       value: ACCESS_TYPE.TAKEOVER,
       color: 'processing',
-      label: <Trans i18nKey={'security.emergency_access.emergency_contact.takeover'}/>,
-      description: <Trans i18nKey={'security.emergency_access.emergency_contact.takeover_description'}/>
+      label: 'security.emergency_access.emergency_contact.takeover',
+      description: 'security.emergency_access.emergency_contact.takeover_description'
     },
   ],
   WAIT_TIMES: [
     {
       value: 1,
-      label: <Trans i18nKey={'common.one_day'}/>,
+      label: 'common.one_day',
     },
     {
       value: 2,
-      label: <Trans i18nKey={'common.days_number'} values={{ number: 2 }}/>,
+      label: 'common.days_number',
     },
     {
       value: 7,
-      label: <Trans i18nKey={'common.days_number'} values={{ number: 7 }}/>,
+      label: 'common.days_number',
     },
     {
       value: 14,
-      label: <Trans i18nKey={'common.days_number'} values={{ number: 14 }}/>,
+      label: 'common.days_number',
     },
     {
       value: 30,
-      label: <Trans i18nKey={'common.days_number'} values={{ number: 30 }}/>,
+      label: 'common.days_number',
     },
   ],
   CLIENTS: [

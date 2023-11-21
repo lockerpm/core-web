@@ -22,6 +22,7 @@ function DropdownMenu() {
   const { t } = useTranslation();
   const userInfo = useSelector((state) => state.auth.userInfo);
   const isCloud = useSelector((state) => state.system.isCloud);
+  const locale = useSelector((state) => state.system.locale);
 
   const AvatarIcon = useMemo((size = 32) => {
     if (userInfo?.avatar) {
@@ -43,41 +44,6 @@ function DropdownMenu() {
     </Avatar>
   }, [userInfo])
 
-  const items = [
-    {
-      key: 'account',
-      icon: AvatarIcon,
-      label: <div className='account-info'>
-        <div>{userInfo?.name}</div>
-      </div>,
-    },
-    {
-      key: 'language',
-      label: <span>
-        <span className='font-semibold'>{t('common.language')}:</span> <span>English (US)</span>
-      </span>,
-      children: global.constants.LANGUAGES.map((l) => ({
-        key: l.value,
-        label: l.label,
-      }))
-    },
-    {
-      type: 'divider',
-    },
-    {
-      key: 'lock',
-      icon: <LockOutlined />,
-      label: <span>{t('sidebar.lock_your_account')}</span>
-    },
-    {
-      key: 'logout',
-      danger: true,
-      icon: <LogoutOutlined />,
-      label: <span>{t('sidebar.logout')}</span>
-    },
-  ]
-
-
   const dropdownClick = async (item) => {
     if (item.key === 'account') {
       if (isCloud) {
@@ -95,7 +61,42 @@ function DropdownMenu() {
   return (
     <Dropdown
       menu={{
-        items,
+        items: [
+          {
+            key: 'account',
+            icon: AvatarIcon,
+            label: <div className='account-info'>
+              <div>{userInfo?.name}</div>
+            </div>,
+          },
+          {
+            key: 'language',
+            label: <span>
+              <span className='font-semibold'>
+                {t('common.language')}:</span> <span>
+                  {t(global.constants.LANGUAGES.find((l, index) => l.value === locale || index === 0).label)}
+                </span>
+            </span>,
+            children: global.constants.LANGUAGES.map((l) => ({
+              key: l.value,
+              label: t(l.label),
+            }))
+          },
+          {
+            type: 'divider',
+          },
+          {
+            key: 'lock',
+            icon: <LockOutlined />,
+            label: <span>{t('sidebar.lock_your_account')}</span>
+          },
+          {
+            key: 'logout',
+            danger: true,
+            icon: <LogoutOutlined />,
+            label: <span>{t('sidebar.logout')}</span>
+          },
+        ],
         defaultSelectedKeys: [],
         onClick: dropdownClick
       }}

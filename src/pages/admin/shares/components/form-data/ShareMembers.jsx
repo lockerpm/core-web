@@ -326,7 +326,7 @@ function ShareMembers(props) {
                         value={item.role}
                         className='mr-2'
                         style={{ width: 100 }}
-                        options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: p.label }))}
+                        options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: t(p.label) }))}
                         onChange={(v) => handleChangePermission(item, v)}
                       />
                       <div style={{ width: 80 }}>
@@ -344,7 +344,7 @@ function ShareMembers(props) {
                             }
                             const status = item.status ? common.getStatus(item.status) : null
                             if (status) {
-                              return <Tag color={status.color}>{status.label}</Tag>
+                              return <Tag color={status.color}>{t(status?.label)}</Tag>
                             }
                           })()
                         }
