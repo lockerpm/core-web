@@ -7,7 +7,10 @@ const WS_FLAT_FORM = `${WS_URL}/cystack_platform/pm`
 export default {
   WS_SYNC: `${WS_FLAT_FORM}/sync`,
 
-  AUTH_OTP: `${API_URL}/v3/sso/auth/otp`,
+  SSO_AUTH_OTP: `${API_URL}/v3/sso/auth/otp`,
+  SSO_ME_FACTOR2: `${API_URL}/v3/sso/me/factor2`,
+  SSO_ME_FACTOR2_ACTIVATE: `${API_URL}/v3/sso/me/factor2/activate`,
+  SSO_ME_FACTOR2_ACTIVATE_CODE: `${API_URL}/v3/sso/me/factor2/activate_code`,
 
   LOGOUT: `${API_URL}/v3/users/logout`,
   EXIST: `${API_URL}/v3/users/exist`,
@@ -15,9 +18,11 @@ export default {
   USERS_ME: `${FLAT_FORM}/users/me`,
   USERS_EXIST: `${FLAT_FORM}/users/exist`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
+  USERS_SESSION_OTP: `${FLAT_FORM}/users/session/otp`,
   USERS_REGISTER: `${FLAT_FORM}/users/register`,
   USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,
   USERS_ME_PASSWORD: `${FLAT_FORM}/users/me/password`,
+  USERS_ME_BLOCK_BY_2FA: `${FLAT_FORM}/users/me/block_by_2fa`,
   USERS_ME_DEVICE: `${FLAT_FORM}/users/me/devices/:device_id`,
   USERS_SESSION_REVOKE_ALL: `${FLAT_FORM}/users/session/revoke_all`,
 
@@ -92,7 +97,6 @@ export default {
   EMERGENCY_ACCESS_REINVITE: `${FLAT_FORM}/emergency_access/:contact_id/reinvite`,
   EMERGENCY_ACCESS_TAKEOVER: `${FLAT_FORM}/emergency_access/:contact_id/takeover`,
   EMERGENCY_ACCESS_PASSWORD: `${FLAT_FORM}/emergency_access/:contact_id/password`,
-  EMERGENCY_ACCESS_ID_PASSWORD: `${FLAT_FORM}/emergency_access/:contact_id/id_password`,
   EMERGENCY_ACCESS_VIEW: `${FLAT_FORM}/emergency_access/:contact_id/view`,
 
   IMPORT_FOLDERS: `${FLAT_FORM}/import/folders`,

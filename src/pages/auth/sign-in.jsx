@@ -19,6 +19,8 @@ import userServices from "../../services/user";
 import coreServices from "../../services/core";
 import commonServices from "../../services/common";
 
+import storeActions from "../../store/actions";
+
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import global from "../../config/global";
@@ -45,12 +47,21 @@ const SingIn = () => {
       password: values.password,
       email: values.username
     }).then(async (response) => {
-      authServices.update_access_token_type(response.token_type)
-      authServices.update_access_token(response.access_token);
-      await commonServices.fetch_user_info();
-      await coreServices.unlock({...response, ...values })
-      await commonServices.sync_data()
-      global.navigate(global.keys.VAULT)
+      if (response.is_factor2) {
+        global.store.dispatch(storeActions.updateFactor2({
+          ...response,
+          password: values.password,
+          email: values.username
+        }));
+        global.navigate(global.keys.OTP_CODE)
+      } else {
+        authServices.update_access_token_type(response.token_type)
+        authServices.update_access_token(response.access_token);
+        await commonServices.fetch_user_info();
+        await coreServices.unlock({...response, ...values })
+        await commonServices.sync_data()
+        global.navigate(global.keys.VAULT)
+      }
     }).catch((error) => {
       global.pushError(error)
     });

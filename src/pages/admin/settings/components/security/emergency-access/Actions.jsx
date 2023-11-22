@@ -27,7 +27,6 @@ const Actions = (props) => {
     fetchTrusted = () => {},
     fetchGranted = () => {},
     onResetPassword = () => {},
-    onResetMasterPassword = () => {}
   } = props;
 
   const reinvite = async () => {
@@ -178,12 +177,6 @@ const Actions = (props) => {
         hide: contact?.status !== global.constants.STATUS.RECOVERY_APPROVED || contact?.type !== global.constants.ACCESS_TYPE.VIEW,
         label: <span className="text-primary">{t('security.emergency_access.actions.view')}</span>,
         onClick: () => global.navigate(global.keys.EMERGENCY_ACCESS_VIEW, { contact_id: contact.id })
-      },
-      {
-        key: 'reset_master_pw',
-        hide: contact?.status !== global.constants.STATUS.RECOVERY_APPROVED || contact?.type !== global.constants.ACCESS_TYPE.TAKEOVER,
-        label: t('security.emergency_access.actions.reset_their_lmp'),
-        onClick: () => onResetMasterPassword(contact)
       },
       {
         key: 'reset_pw',

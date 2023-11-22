@@ -70,14 +70,6 @@ function FormData(props) {
     }
   }, [visible, cipherType])
 
-  useEffect(() => {
-    const formData = common.convertCipherToForm({
-      type: type,
-      folderId: folderId || '',
-    })
-    form.setFieldsValue(formData)
-  }, [type])
-
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
@@ -176,6 +168,13 @@ function FormData(props) {
             cipherTypes={cipherTypes}
             cipherType={cipherType}
             disabled={callingAPI}
+            onChange={(v) => {
+              const formData = common.convertCipherToForm({
+                type: v,
+                folderId: folderId || '',
+              })
+              form.setFieldsValue(formData)
+            }}
           />
           <div className='mb-4'>
             {

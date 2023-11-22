@@ -230,8 +230,7 @@
         "reinvited": "{{user}} has been reinvited",
         "confirmed": "{{user}} has been confirmed",
         "approved": "Emergency access approved",
-        "takeover_master_password": "Master Password reset for {{user}}. You can now login Vault using the new Master Password.",
-        "takeover_password": "Password reset for {{user}}. You can now login Locker using the new password."
+        "takeover_password": "Password reset for {{user}}. You can now login Vault using the new Password."
       },
       "manage_sessions": {
         "logout_device": "The device has been logged!",
@@ -296,7 +295,9 @@
     "otp_code": {
       "title": "Enter 2FA Code",
       "description": "Enter the 6-digit code sent to your registered device",
-      "remember_device": "Remember this device"
+      "remember_device": "Remember this device",
+      "sign_in_account": "Sign in to your account",
+      "verify_identity": "Verify your identity"
     }
   },
   "error_pages": {
@@ -349,6 +350,9 @@
       "description": "You’ve been invited to become an emergency contact for {{owner}}.",
       "access_type": "Access type: {{type}}"
     }
+  },
+  "password_confirm": {
+    "confirm_note": "Enter your password to confirm"
   },
   "change_password": {
     "title": "Change Password",
@@ -411,32 +415,9 @@
     "action": "Click or drag",
     "description": "file to this area to upload",
     "note": "SVG, PNG, JPG or GIF (max. 800x400px)",
-    "invalid": "Invalid! File is image SVG, PNG, JPG or GIF",
+    "invalid": "Invalid! File type is {{type}}",
     "large": "File size is very large! Please select file has size 800x400px",
     "content_invalid": "File content is invalid."
-  },
-  "2fa": {
-    "title": "Setup Two Factor Authentication",
-    "description": "After entering your password, you’ll be asked for a second authentication step.",
-    "name": "App Authentication",
-    "name_description": "Keep your account extra secure with a second login step.",
-    "enter_code": "Enter the code that was generated here",
-    "step1": {
-      "title": "Download Locker Password Manager",
-      "description": "Download the Locker Password Manager app for your mobile phone, desktop computer, or install it in your browser extension."
-    },
-    "step2": {
-      "title": "Write down this following key",
-      "description": "Write down this key <key>{{key}}</key> on the paper and store it safe in Locker note. You will need it if you lose or change your device."
-    },
-    "step3": {
-      "title": "Go to OTP tab in Locker Password Manager app",
-      "description": "Open the Locker Password Manager app and navigate to the OTP tab. Scan QR barcode revealed below with the Locker App."
-    },
-    "step4": {
-      "title": "Enter Authentication code",
-      "description": "The Authentication code given by your Locker app in the box."
-    }
   },
   "email_setting": {
     "title": "Email Settings",
@@ -506,13 +487,6 @@
     "password": "Password",
     "master_password_hint": "Get Password hint",
     "unlock": "Unlock"
-  },
-  "create_master_password": {
-    "title": "Create Master Password",
-    "description": "The Master Password is the key to unlock your Locker. This is the only password you need to remember to access all other passwords stored in the Locker. Please do not share this password with anyone.",
-    "confirm_master_password": "Confirm Master Password",
-    "master_password_hint": "Master Password hint (Optional)",
-    "note": "CyStack cannot view, cannot store, nor can it recover your Master Password in case you forget or lose it."
   },
   "inventory": {
     "all_items": "All items",
@@ -616,7 +590,7 @@
       "card": "Card",
       "crypto_backup": "Crypto Backup",
       "identity": "Identity",
-      "master_password": "Master Password",
+      "master_password": "Password",
       "otp": "OTP"
     },
     "custom_fields": {
@@ -764,7 +738,6 @@
     "choose_format": "Choose a file format:",
     "upload_file": "Upload a file from your computer",
     "confirm": "{{type}}",
-    "confirm_note": "Enter your password to confirm",
     "popular": "Popular",
     "others": "Others",
     "copy_paste_file_contents": "or copy/paste the import file contents",
@@ -793,20 +766,44 @@
       "title": "Account Password",
       "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan."
     },
-    "change_master_password": {
-      "title": "Master Password",
-      "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan.",
-      "action": "Change Master Password",
-      "current_master_password": "Current Master Password",
-      "new_master_password": "New Master Password",
-      "re_new_master_password": "Re-Enter new Master Password",
-      "hint": "Hint (Optional)"
-    },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",
       "turn_on": "Turn on 2-step verification",
-      "turn_off": "Turn off 2-step verification"
+      "turn_off": "Turn off 2-step verification",
+      "setup_on": "Two-step authentication is",
+      "your_second_step": "Your second step",
+      "your_second_step_description": "After entering your password, you'll be asked for a second verification step.",
+      "email_otp": {
+        "name": "Authentication Email",
+        "description": "We'll ask for a security code if we notice a login from an unusual device.",
+        "send_code": "Send code via email",
+        "have_code": "I have a code",
+        "enter_code": "Enter verification code here",
+        "sent_to": "An email has been sent to {{email}}"
+      },
+      "smart_otp": {
+        "description": "Keep your account extra secure with a second login step.",
+        "name": "App Authentication",
+        "name_description": "Keep your account extra secure with a second login step.",
+        "enter_code": "Enter the code that was generated here",
+        "step1": {
+          "title": "Download Locker Password Manager",
+          "description": "Download the Locker Password Manager app for your mobile phone, desktop computer, or install it in your browser extension."
+        },
+        "step2": {
+          "title": "Write down this following key",
+          "description": "Write down this key <key>{{key}}</key> on the paper and store it safe in Locker note. You will need it if you lose or change your device."
+        },
+        "step3": {
+          "title": "Go to OTP tab in Locker Password Manager app",
+          "description": "Open the Locker Password Manager app and navigate to the OTP tab. Scan QR barcode revealed below with the Locker App."
+        },
+        "step4": {
+          "title": "Enter Authentication code",
+          "description": "The Authentication code given by your Locker app in the box."
+        }
+      }
     },
     "emergency_access": {
       "title": "Emergency Access",
@@ -824,7 +821,6 @@
         "accept": "Accept",
         "request_access": "Request access",
         "view": "View",
-        "reset_their_lmp": "Reset their Locker Master Password",
         "reset_their_lp": "Reset their Locker Password",
         "reinvite": "Resend invitation",
         "reject": "Reject",
@@ -836,7 +832,7 @@
         "view": "View",
         "view_description": "They can view all your vault items",
         "takeover": "Takeover",
-        "takeover_description": "They can reset your Master Password",
+        "takeover_description": "They can reset your Password",
         "wait_time": "Wait Time",
         "wait_time_description": "Time required before automatically granting access."
       },
@@ -844,8 +840,8 @@
         "title": "Takeover",
         "new_id_password": "New Locker ID password",
         "re_new_id_password": "Re-Enter new Locker ID password",
-        "new_master_password": "Enter new Master Password",
-        "re_new_master_password": "Re-Enter new Master Password"
+        "new_master_password": "Enter new Password",
+        "re_new_master_password": "Re-Enter new Password"
       }
     },
     "manage_sessions": {
@@ -853,7 +849,7 @@
       "description": "",
       "logout": "Log out of all devices",
       "log_out_of": "Log out of this {{device_name}}",
-      "log_out_of_description": "This will remove access to your Locker Account from the device. Enter Master Password to confirm.",
+      "log_out_of_description": "This will remove access to your Locker Account from the device. Enter Password to confirm.",
       "log_out_all": "Deauthorize Sessions",
       "log_out_all_description": "Concerned your account is logged in on another device? Proceed below to deauthorize all computers or devices that you have previously used. This security step is recommended if you previously used a public computer or accidentally saved your password on a device that isn't yours.",
       "log_out_all_note": "Proceeding will also log you out of your current session, requiring you to log back in."

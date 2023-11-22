@@ -55,7 +55,7 @@ const UploadAvatar = (props) => {
       const isJpgOrPng = fileType.includes('image');
 
       if (!isJpgOrPng) {
-        message.error(t('drag_upload.invalid'));
+        message.error(t('drag_upload.invalid', { type: 'IMAGE' }));
       }
       onChangeFile(file)
       const reader = new FileReader();

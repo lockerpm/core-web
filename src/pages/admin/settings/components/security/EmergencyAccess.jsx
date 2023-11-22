@@ -12,7 +12,6 @@ import {
 
 import TableData from "./emergency-access/TableData";
 import ResetPasswordFormData from "./form-data/ResetPassword";
-import ResetMasterPasswordFormData from "./form-data/ResetMasterPassword";
 import EmergencyContactFormData from "./form-data/EmergencyContact";
 
 
@@ -42,7 +41,6 @@ const EmergencyAccess = (props) => {
   const [listTrusted, setListTrusted] = useState([]);
   const [listGranted, setListGranted] = useState([]);
   const [resetPasswordVisible, setResetPasswordVisible] = useState(false);
-  const [resetMasterPasswordVisible, setResetMasterPasswordVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
@@ -94,12 +92,6 @@ const EmergencyAccess = (props) => {
     setResetPasswordVisible(true);
   }
 
-  const handleResetMasterPassword = (item = null) => {
-    setSelectedItem(item);
-    setResetMasterPasswordVisible(true);
-  }
-
-
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -107,13 +99,15 @@ const EmergencyAccess = (props) => {
           className="flex text-primary cursor-pointer"
           onClick={() => setExpand(!expand)}
         >
-          <p className="font-semibold text-xl mr-1">
+          <p className="font-semibold text-xl mr-2">
             {t('security.emergency_access.title')}
           </p>
-          <Badge
-            className="flex items-center mr-2"
-            count={pendingRequests}
-          />
+          {
+            !!pendingRequests && <Badge
+              className="flex items-center mr-2"
+              count={pendingRequests}
+            />
+          }
           {
             expand ? <DownOutlined /> : <RightOutlined />
           }
@@ -166,7 +160,6 @@ const EmergencyAccess = (props) => {
               fetchTrusted={fetchTrusted}
               fetchGranted={fetchGranted}
               onResetPassword={handleResetPassword}
-              onResetMasterPassword={handleResetMasterPassword}
             />
           </div>
         </div>
@@ -181,14 +174,6 @@ const EmergencyAccess = (props) => {
         item={selectedItem}
         onClose={() => {
           setResetPasswordVisible(false);
-          setSelectedItem(null);
-        }}
-      />
-      <ResetMasterPasswordFormData
-        visible={resetMasterPasswordVisible}
-        item={selectedItem}
-        onClose={() => {
-          setResetMasterPasswordVisible(false);
           setSelectedItem(null);
         }}
       />

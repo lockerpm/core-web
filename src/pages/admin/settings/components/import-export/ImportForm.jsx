@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   Form,
   Space,
@@ -21,11 +21,11 @@ import { useTranslation } from "react-i18next";
 import global from '../../../../../config/global';
 import common from '../../../../../utils/common';
 import importServices from '../../../../../services/import';
+import commonServices from '../../../../../services/common';
 
 import { FolderRequest } from '../../../../../core-js/src/models/request';
 import { KvpRequest } from '../../../../../core-js/src/models/request/kvpRequest';
 import { ImportCiphersRequest } from '../../../../../core-js/src/models/request/importCiphersRequest';
-import { CipherMapper } from '../../../../../core-js/src/constants';
 
 function ImportForm(props) {
   const {
@@ -65,16 +65,20 @@ function ImportForm(props) {
     })
   }, [visible])
 
+  const acceptFileType = useMemo(() => {
+    const option = [...featuredImportOptions, ...regularImportOptions].find((o) => o.id == format);
+    return option?.name?.split('(')[1]?.split(')')[0] || '*'
+  }, [format])
+
   const uploadProps = {
     name: 'file',
     showUploadList: false,
-    accept: `.${format}`,
+    accept: `.${acceptFileType}`,
     beforeUpload: async (file) => {
       const fileType = file.type;
-      const isFormat = fileType.includes(format);
-
+      const isFormat = fileType.includes(acceptFileType);
       if (!isFormat) {
-        message.error(t('drag_upload.invalid'));
+        message.error(t('drag_upload.invalid', {type: acceptFileType}));
       } else {
         setSelectedFile(file)
       }
@@ -113,7 +117,7 @@ function ImportForm(props) {
       if (selectedFile) {
         try {
           const fContent = await getFileContents(selectedFile)
-          if (!fContent) {
+          if (fContent) {
             content = fContent
           }
         } catch {}
@@ -148,7 +152,8 @@ function ImportForm(props) {
                 total: importResponse.totalCipherImport
               })
             )
-            
+            await commonServices.sync_data();
+            onClose();
           } catch (error) {
             global.pushError(error)
           }

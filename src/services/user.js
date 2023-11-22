@@ -77,6 +77,32 @@ async function users_session(data) {
   });
 }
 
+async function users_session_otp(data) {
+  const deviceId = authServices.device_id();
+  global.jsCore.cryptoService.clearKeys();
+  const key = await global.jsCore.cryptoService.makeKey(
+    data.password,
+    data.email,
+    global.constants.CORE_JS_INFO.KDF,
+    global.constants.CORE_JS_INFO.KDF_ITERATIONS
+  )
+  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
+  return await request({
+    url: global.endpoint.USERS_SESSION_OTP,
+    method: "post",
+    data: {
+      email: data.email,
+      client_id: global.constants.CLIENT_ID,
+      password: hashedPassword,
+      device_name: global.jsCore.platformUtilsService.getDeviceString(),
+      device_type: global.jsCore.platformUtilsService.getDevice(),
+      device_identifier: deviceId,
+      method: data.method,
+      otp: data.otp
+    }
+  });
+}
+
 async function change_password(data = {}) {
   const makeKey =  await coreServices.make_key(data.username, data.password)
   const password = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
@@ -165,6 +191,7 @@ export default {
   users_me_devices,
   remove_device,
   users_session,
+  users_session_otp,
   change_password,
   revoke_all_devices,
   check_exist,

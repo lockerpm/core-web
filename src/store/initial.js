@@ -15,7 +15,6 @@ export default {
   auth: {
     userInfo: null,
     factor2: null,
-    loginInfo: null
   },
   sync: {
     isLocked: true,

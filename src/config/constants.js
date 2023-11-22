@@ -76,6 +76,16 @@ const NOTIFICATION_TYPE = {
   MARKETING: 'marketing'
 }
 
+const USER_TYPE = {
+  PERSONAL: 'personal',
+  ENTERPRISE: 'enterprise',
+}
+
+const FACTOR2_IDENTITY = {
+  MAIL: 'mail',
+  SMART_OTP: 'smart_otp',
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
@@ -87,6 +97,8 @@ export default {
   ACCESS_TYPE,
   NOTIFICATION_TYPE,
   LANGUAGE,
+  USER_TYPE,
+  FACTOR2_IDENTITY,
   ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
   SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',

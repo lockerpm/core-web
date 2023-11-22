@@ -12,18 +12,34 @@ function device_id() {
   return device_id
 }
 
-async function login_by_otp(data = {}) {
-  const payload = await coreServices.login_payload(data)
+async function get_factor2() {
   return request({
-    url: global.endpoint.AUTH_OTP,
+    url: global.endpoint.SSO_ME_FACTOR2,
+    method: 'get',
+  })
+}
+
+async function update_factor2(data) {
+  return request({
+    url: global.endpoint.SSO_ME_FACTOR2,
     method: 'post',
-    data: {
-      ...data,
-      ...payload,
-      client_id: 'web',
-      device_id: device_id(),
-      device_name: global.jsCore.platformUtilsService.getDeviceString()
-    }
+    data
+  })
+}
+
+async function factor2_activate(data) {
+  return request({
+    url: global.endpoint.SSO_ME_FACTOR2_ACTIVATE,
+    method: 'post',
+    data
+  })
+}
+
+async function factor2_activate_code(data) {
+  return request({
+    url: global.endpoint.SSO_ME_FACTOR2_ACTIVATE_CODE,
+    method: 'post',
+    data
   })
 }
 
@@ -65,6 +81,8 @@ async function redirect_login() {
     } else {
       global.navigate(global.keys.SIGN_IN)
     }
+  } else if (currentPage.name === global.keys.OTP_CODE) {
+    global.navigate(global.keys.SIGN_IN)
   }
 }
 
@@ -86,7 +104,10 @@ async function logout() {
 
 export default {
   device_id,
-  login_by_otp,
+  get_factor2,
+  update_factor2,
+  factor2_activate,
+  factor2_activate_code,
   update_access_token,
   update_access_token_type,
   access_token,

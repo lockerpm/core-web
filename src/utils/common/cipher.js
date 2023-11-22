@@ -54,6 +54,10 @@ const cipherTypeInfo = (key = 'type', value, type = null) => {
 }
 
 const convertCipherToForm = (cipher = {}) => {
+  const allFolders = global.store.getState().folder.allFolders;
+  const allCollections = global.store.getState().collection.allCollections;
+  const folderId = cipher?.folderId || (cipher?.collectionIds ? cipher?.collectionIds[0] || '' : '');
+  const folder = [...allFolders, ...allCollections].find((f) => f.id === folderId);
   let result = {
     type: cipher.type,
     name: cipher.name || '',
@@ -61,7 +65,7 @@ const convertCipherToForm = (cipher = {}) => {
       ...f,
       value: f.type === FieldType.Date ? time.convertCipherFieldDate(f.value) : f.value
     })) || [],
-    folderId: cipher?.folderId || cipher?.folderId || (cipher?.collectionIds ? cipher?.collectionIds[0] || '' : ''),
+    folderId: folder?.id || '',
     notes: cipher.notes || '',
   }
   if (cipher.type === CipherType.Login) {

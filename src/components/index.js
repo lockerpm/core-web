@@ -15,6 +15,8 @@ import ItemInput from './item/ItemInput'
 import ImageIcon from './item/ImageIcon'
 import SearchText from './item/SearchText'
 
+import PasswordConfirmModal from './modals/PasswordConfirm'
+
 export {
   AdminHeader,
   UploadFile,
@@ -31,5 +33,7 @@ export {
   SearchText,
   GeneratePassword,
   PasswordStrength,
-  GeneratePasswordContent
+  GeneratePasswordContent,
+
+  PasswordConfirmModal
 }

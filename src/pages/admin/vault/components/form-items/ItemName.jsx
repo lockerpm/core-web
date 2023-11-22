@@ -13,7 +13,12 @@ import { useTranslation } from "react-i18next";
 import global from '../../../../../config/global';
 
 function Name(props) {
-  const { cipherType, cipherTypes, disabled = false } = props
+  const {
+    cipherType,
+    cipherTypes,
+    disabled = false,
+    onChange = () => {}
+  } = props
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -33,6 +38,7 @@ function Name(props) {
             className='w-full'
             disabled={disabled}
             options={cipherTypes.map((type) => ({ value: type.type, label: t(type.name) }))}
+            onChange={onChange}
           />
         </Form.Item>
       }

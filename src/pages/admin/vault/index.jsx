@@ -84,7 +84,7 @@ const Vault = (props) => {
   useEffect(() => {
     setSelectedRowKeys([]);
     fetchCiphers();
-  }, [params.searchText, allCiphers, JSON.stringify(cipherType)])
+  }, [currentPage.name, params.searchText, allCiphers, JSON.stringify(cipherType)])
 
   useEffect(() => {
     setParams({

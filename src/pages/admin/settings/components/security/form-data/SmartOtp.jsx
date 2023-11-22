@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import {
-  Form,
   Space,
   Button,
   Drawer,
@@ -14,43 +13,54 @@ import QRCode from "react-qr-code";
 import {
 } from '@ant-design/icons';
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { Trans, useTranslation } from "react-i18next";
 
-function TwoFAFormData(props) {
+import authServices from '../../../../../../services/auth';
+import global from '../../../../../../config/global';
+
+function SmartOtpFormData(props) {
   const {
     visible = false,
+    factor2 = {},
+    onReload = () => {},
     onClose = () => {},
   } = props
   const { t } = useTranslation()
-  const factor2 = useSelector((state) => state.auth.factor2);
 
-  const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [otp, setOtp] = useState('')
 
   const smartOtp = useMemo(() => {
-    return factor2?.user_factor2_infos?.find((i) => i.method === 'smart_otp')
+    return factor2?.smart_otp
   }, [factor2])
 
   useEffect(() => {
-    form.resetFields();
     setCallingAPI(false);
+    setOtp('')
   }, [visible])
 
 
   const handleSave = async () => {
-    form.validateFields().then(async (values) => {
-      setCallingAPI(true);
-      setCallingAPI(false);
+    setCallingAPI(true);
+    await authServices.update_factor2({
+      method: global.constants.FACTOR2_IDENTITY.SMART_OTP,
+      otp: otp
+    }).then(() => {
+      global.pushSuccess(t('notification.success.factor2.enabled'));
+      onReload();
       onClose();
+    }).catch((error) => {
+      global.pushError(error)
     })
+    setCallingAPI(false);
   }
+
 
   return (
     <div className={props.className}>
       <Drawer
-        title={t('security.two_fa.title')}
+        title={t('security.two_fa.smart_otp.name')}
         placement="right"
         onClose={onClose}
         open={visible}
@@ -63,26 +73,34 @@ function TwoFAFormData(props) {
             >
               {t('button.cancel')}
             </Button>
-            <Button
-              type="primary"
-              loading={callingAPI}
-              onClick={handleSave}
-            >
-              { t('button.enable') } 
-            </Button>
-            <Button
-              type="primary"
-              loading={callingAPI}
-              onClick={handleSave}
-            >
-              { t('button.disable') } 
-            </Button>
+            {
+              smartOtp?.is_activate && <Button
+                type="primary"
+                loading={callingAPI}
+                disabled={!otp}
+                onClick={handleSave}
+              >
+                { t('button.disable') } 
+              </Button>
+            }
+            {
+              !smartOtp?.is_activate && <Button
+                type="primary"
+                loading={callingAPI}
+                disabled={!otp}
+                onClick={handleSave}
+              >
+                { t('button.enable') } 
+              </Button>
+            }
           </Space>
         }
       >
-        <p className='mb-2'>{t('security.two_fa.description')}</p>
+        <p className='mb-4'>
+          {t('security.two_fa.smart_otp.description')}
+        </p>
         {
-          !smartOtp?.is_active && <div>
+          !smartOtp?.is_activate && <div>
             <Steps
               direction="vertical"
               className="steps-2fa"
@@ -95,13 +113,13 @@ function TwoFAFormData(props) {
                 >
                   <Collapse.Panel
                     header={<p className="font-semibold">
-                      {t(`2fa.step${step}.title`)}
+                      {t(`security.two_fa.smart_otp.step${step}.title`)}
                     </p>}
                     key="1"
                   >
                     {
-                      step !== 2 ? t(`2fa.step${step}.description`) : <Trans
-                        i18nKey={`2fa.step${step}.description`}
+                      step !== 2 ? t(`security.two_fa.smart_otp.step${step}.description`) : <Trans
+                        i18nKey={`security.two_fa.smart_otp.step${step}.description`}
                         values={{
                           key: smartOtp?.secret,
                         }}
@@ -114,17 +132,19 @@ function TwoFAFormData(props) {
                 </Collapse>,
               }))}
             />
-            <div className="mb-4"> 
-              <QRCode
-                size={200}
-                level="H"
-                value={smartOtp?.uri || 'dsvdsdvds'}
-              />
-            </div>
+            {
+              smartOtp?.url && <div className="mb-4"> 
+                <QRCode
+                  size={200}
+                  level="H"
+                  value={smartOtp?.url}
+                />
+              </div>
+            }
           </div>
         }
         <p className="font-semibold">
-          {t('2fa.enter_code')}
+          {t('security.two_fa.smart_otp.enter_code')}
         </p>
         <Input
           value={otp}
@@ -138,4 +158,4 @@ function TwoFAFormData(props) {
   );
 }
 
-export default TwoFAFormData;
+export default SmartOtpFormData;

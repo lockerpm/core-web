@@ -10,14 +10,14 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import ExportConfirmModal from "./ExportConfirm";
 import {
+  PasswordConfirmModal
 } from '../../../../../components'
 
 import global from "../../../../../config/global";
 
 import {
-  ExportOutlined
+  ExportOutlined,
 } from "@ant-design/icons";
 
 import { } from '@ant-design/colors';
@@ -241,6 +241,7 @@ const Export = (props) => {
       fileName
     )
     global.pushSuccess(t('notification.success.import_export.exported'));
+    setConfirmVisible(false);
     setCallingAPI(false);
   }
 
@@ -296,8 +297,10 @@ const Export = (props) => {
           </div>
         </Col>
       </Row>
-      <ExportConfirmModal
+      <PasswordConfirmModal
         visible={confirmVisible}
+        title={t('import_export.confirm', { type: t('import_export.export') })}
+        okText={t('button.export')}
         onConfirm={() => handleExport()}
         onClose={() => setConfirmVisible(false)}
       />

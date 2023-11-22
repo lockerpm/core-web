@@ -26,6 +26,8 @@ import commonServices from "../../services/common";
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
 
+import storeActions from "../../store/actions";
+
 import common from "../../utils/common";
 import global from "../../config/global";
 
@@ -54,10 +56,19 @@ const Lock = () => {
         password: values.password,
         email: userInfo.email
       }).then(async (response) => {
-        await coreServices.unlock({...response, password: values.password, username: userInfo.email })
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
-        await commonServices.sync_data()
-        navigate(returnUrl);
+        if (response.is_factor2) {
+          global.store.dispatch(storeActions.updateFactor2({
+            ...response,
+            email: userInfo.email,
+            password: values.password,
+          }));
+          global.navigate(global.keys.OTP_CODE, {}, {return_url: returnUrl})
+        } else {
+          await coreServices.unlock({...response, password: values.password, username: userInfo.email })
+          await commonServices.sync_data()
+          navigate(returnUrl);
+        }
       }).catch((error) => {
         global.pushError(error)
       });

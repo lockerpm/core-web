@@ -5,23 +5,21 @@ import {
   Input
 } from '@lockerpm/design';
 
-import {
-  InfoCircleFilled
-} from "@ant-design/icons";
-
 import { } from 'react-redux';
+import { orange } from '@ant-design/colors';
 
 import { useTranslation } from "react-i18next";
+import { InfoCircleFilled } from "@ant-design/icons";
 
-import { orange } from '@ant-design/colors';
-import global from "../../../../../config/global";
-import authServices from "../../../../../services/auth";
+import global from "../../config/global";
+import authServices from "../../services/auth";
 
-const ExportConfirmModal = (props) => {
+const PasswordConfirmModal = (props) => {
   const { t } = useTranslation()
   const {
     visible = false,
-    isImport = false,
+    title = '',
+    okText = '',
     onConfirm = () => {},
     onClose = () => {},
   } = props;
@@ -34,14 +32,13 @@ const ExportConfirmModal = (props) => {
     form.resetFields()
   }, [visible])
 
-  const handleExport = async () => {
+  const handleConfirm = async () => {
     form.validateFields().then(async () => {
       setCallingAPI(true)
       const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
       const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
       if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
-        onConfirm();
-        onClose();
+        onConfirm(keyHash);
       } else {
         authServices.logout();
       }
@@ -57,14 +54,14 @@ const ExportConfirmModal = (props) => {
             color: orange[5]
           }}/>
           <p className="ml-2">
-            {t('import_export.confirm', { type: isImport ? t('import_export.import') : t('import_export.export') })}
+            {title}
           </p>
         </div>
       }
       open={visible}
       width={360}
-      okText={t('button.export')}
-      onOk={() => handleExport()}
+      okText={okText}
+      onOk={() => handleConfirm()}
       onCancel={() => onClose()}
       okButtonProps={{
         loading: callingAPI,
@@ -75,11 +72,11 @@ const ExportConfirmModal = (props) => {
       }}
     >
       <p className="mb-2">
-        {t('import_export.confirm_note')}
+        {t('password_confirm.confirm_note')}
       </p>
       <Form
         form={form}
-        onFinish={handleExport}
+        onFinish={handleConfirm}
       >
         <Form.Item
           name={'password'}
@@ -98,4 +95,4 @@ const ExportConfirmModal = (props) => {
   );
 }
 
-export default ExportConfirmModal;
+export default PasswordConfirmModal;

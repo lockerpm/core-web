@@ -103,14 +103,6 @@ async function password(contactId, data) {
   })
 }
 
-async function id_password(contactId, data) {
-  return request({
-    url: global.endpoint.EMERGENCY_ACCESS_ID_PASSWORD.replace(':contact_id', contactId),
-    method: 'post',
-    data
-  })
-}
-
 async function view(contactId) {
   return request({
     url: global.endpoint.EMERGENCY_ACCESS_VIEW.replace(':contact_id', contactId),
@@ -133,6 +125,5 @@ export default {
   reinvite,
   takeover,
   password,
-  id_password,
   view
 }
