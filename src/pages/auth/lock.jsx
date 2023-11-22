@@ -56,17 +56,17 @@ const Lock = () => {
         password: values.password,
         email: userInfo.email
       }).then(async (response) => {
-        const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         if (response.is_factor2) {
           global.store.dispatch(storeActions.updateFactor2({
             ...response,
             email: userInfo.email,
             password: values.password,
           }));
-          global.navigate(global.keys.OTP_CODE, {}, {return_url: returnUrl})
+          global.navigate(global.keys.OTP_CODE, {}, {return_url: query?.return_url})
         } else {
           await coreServices.unlock({...response, password: values.password, username: userInfo.email })
-          await commonServices.sync_data()
+          await commonServices.sync_data();
+          const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
           navigate(returnUrl);
         }
       }).catch((error) => {

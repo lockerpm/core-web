@@ -85,7 +85,7 @@ const TwoFA = (props) => {
             type='primary'
             ghost
             icon={<MinusCircleOutlined />}
-            onClick={() => {}}
+            onClick={() => setConfirmVisible(true)}
           >
             {t('security.two_fa.turn_off')}
           </Button>
@@ -185,7 +185,7 @@ const TwoFA = (props) => {
         visible={confirmVisible}
         title={t('security.two_fa.turn_off')}
         okText={t('common.confirm')}
-        onConfirm={() => handleTurnOff()}
+        onConfirm={handleTurnOff}
         onClose={() => setConfirmVisible(false)}
       />
     </div>

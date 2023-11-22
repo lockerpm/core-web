@@ -16,10 +16,11 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 
-import AuthLogo from '../../assets/images/logos/auth-logo.svg'
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useNavigate } from 'react-router-dom';
+
+import AuthLogo from '../../assets/images/logos/auth-logo.svg';
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
@@ -28,11 +29,14 @@ import commonServices from "../../services/common";
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import global from "../../config/global";
+import common from "../../utils/common";
 
 import { green } from '@ant-design/colors';
 
 const OtpCode = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const locale = useSelector((state) => state.system.locale);
   const factor2 = useSelector((state) => state.auth.factor2);
 
@@ -40,6 +44,8 @@ const OtpCode = () => {
   const [callingAPI, setCallingAPI] = useState(false);
   const [step, setStep] = useState(0);
   const [identity, setIdentity] = useState(null);
+
+  const query = common.convertStringToQuery(window.location.search);
 
   useEffect(() => {
     setIdentity(factor2?.methods[0]?.method)
@@ -71,8 +77,9 @@ const OtpCode = () => {
           username: factor2.email,
           password: factor2.password
         })
-        await commonServices.sync_data()
-        global.navigate(global.keys.VAULT)
+        await commonServices.sync_data();
+        const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
+        navigate(returnUrl);
       }).catch((error) => {
         global.pushError(error)
       })
