@@ -86,7 +86,7 @@ const BoxData = (props) => {
             !isFolder && <div className="flex items-center mb-2">
               <p className="font-semibold mr-2">{t('common.type')}:</p>
               <p>
-                {common.cipherTypeInfo('type', record.cipher_type || record.type).name}
+                {t(common.cipherTypeInfo('type', record.cipher_type || record.type).name)}
               </p>
             </div>
           }

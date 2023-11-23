@@ -285,7 +285,7 @@ const createEncryptedMasterPw = async (masterPw, encKey = null) => {
   uriView.uri = window.location.origin,
   loginData.uris = [uriView]
   cipher.login = loginData
-  cipher.name = 'Locker Master Password'
+  cipher.name = 'Locker Password'
   const cipherEnc = await global.jsCore.cipherService.encrypt(cipher, encKey)
   const data = new CipherRequest(cipherEnc)
   data.type = CipherType.MasterPassword

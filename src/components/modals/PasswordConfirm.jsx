@@ -20,11 +20,12 @@ const PasswordConfirmModal = (props) => {
     visible = false,
     title = '',
     okText = '',
+    callingAPI = false,
     onConfirm = () => {},
     onClose = () => {},
   } = props;
   const [form] = Form.useForm();
-  const [callingAPI, setCallingAPI] = useState(false);
+  const [checking, setChecking] = useState(false);
 
   const password = Form.useWatch('password', form);
 
@@ -34,7 +35,7 @@ const PasswordConfirmModal = (props) => {
 
   const handleConfirm = async () => {
     form.validateFields().then(async () => {
-      setCallingAPI(true)
+      setChecking(true)
       const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
       const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
       if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
@@ -42,7 +43,7 @@ const PasswordConfirmModal = (props) => {
       } else {
         authServices.logout();
       }
-      setCallingAPI(false);
+      setChecking(false);
     })
   }
 
@@ -64,11 +65,11 @@ const PasswordConfirmModal = (props) => {
       onOk={() => handleConfirm()}
       onCancel={() => onClose()}
       okButtonProps={{
-        loading: callingAPI,
+        loading: checking || callingAPI,
         disabled: !password
       }}
       cancelButtonProps={{
-        disabled: callingAPI
+        disabled: checking || callingAPI
       }}
     >
       <p className="mb-2">
@@ -87,7 +88,7 @@ const PasswordConfirmModal = (props) => {
           <Input.Password
             autoFocus={true}
             placeholder={t('placeholder.enter')}
-            disabled={callingAPI}
+            disabled={checking || callingAPI}
           />
         </Form.Item>
       </Form>

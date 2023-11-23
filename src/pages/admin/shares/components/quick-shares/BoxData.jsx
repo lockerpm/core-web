@@ -67,7 +67,7 @@ const BoxData = (props) => {
           <div className="flex items-center mb-2">
             <p className="font-semibold mr-2">{t('common.type')}:</p>
             {
-              common.cipherTypeInfo('type', record.cipher.type).name
+              t(common.cipherTypeInfo('type', record.cipher.type).name)
             }
           </div>
           <div className="flex items-center mb-2">

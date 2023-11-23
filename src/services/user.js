@@ -53,6 +53,32 @@ async function check_exist_email(data) {
   })
 }
 
+async function purge_data(data) {
+  return request({
+    url: global.endpoint.USERS_ME_PURGE,
+    method: 'post',
+    data
+  })
+}
+
+async function check_exist() {
+  let exist = false
+  try {
+    const response = await request({
+      url: global.endpoint.USERS_EXIST,
+      method: 'get',
+    })
+    exist = response.exist
+  } catch (error) {
+    exist = false
+  }
+  if (exist) {
+    authServices.redirect_login();
+  } else {
+    global.navigate(global.keys.SIGN_UP)
+  }
+}
+
 async function users_session(data) {
   const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
@@ -138,24 +164,6 @@ async function change_password(data = {}) {
   })
 }
 
-async function check_exist() {
-  let exist = false
-  try {
-    const response = await request({
-      url: global.endpoint.USERS_EXIST,
-      method: 'get',
-    })
-    exist = response.exist
-  } catch (error) {
-    exist = false
-  }
-  if (exist) {
-    authServices.redirect_login();
-  } else {
-    global.navigate(global.keys.SIGN_UP)
-  }
-}
-
 async function register(data) {
   const makeKey = await coreServices.make_key(data.username, data.password)
   const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
@@ -196,5 +204,6 @@ export default {
   revoke_all_devices,
   check_exist,
   register,
-  check_exist_email
+  check_exist_email,
+  purge_data
 }

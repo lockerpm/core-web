@@ -43,6 +43,7 @@ const TwoFA = (props) => {
   const [smartOtpVisible, setSmartOtpVisible] = useState(false);
   const [mailOtpVisible, setMailOtpVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
+  const [callingAPI, setCallingAPI] = useState(false);
 
   const [factor2, setFactor2] = useState(null);
   const [expand, setExpand] = useState(false);
@@ -57,6 +58,7 @@ const TwoFA = (props) => {
   }
 
   const handleTurnOff = async (password) => {
+    setCallingAPI(true);
     await authServices.factor2_activate({ password }).then(() => {
       global.pushSuccess(t('notification.success.factor2.disabled'));
       getFactor2();
@@ -64,6 +66,7 @@ const TwoFA = (props) => {
     }).catch((error) => {
       global.pushError(error)
     })
+    setCallingAPI(false);
   }
 
   return (
@@ -184,6 +187,7 @@ const TwoFA = (props) => {
       <PasswordConfirmModal
         visible={confirmVisible}
         title={t('security.two_fa.turn_off')}
+        callingAPI={callingAPI}
         okText={t('common.confirm')}
         onConfirm={handleTurnOff}
         onClose={() => setConfirmVisible(false)}

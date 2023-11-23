@@ -99,8 +99,6 @@ export default {
   LANGUAGE,
   USER_TYPE,
   FACTOR2_IDENTITY,
-  ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
-  SERVICE_SCOPE: 'secret',
   CLIENT_ID: 'web',
   PAGE_SIZE: 50,
   CORE_JS_INFO: {

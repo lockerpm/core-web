@@ -20,6 +20,7 @@ export default {
   USERS_SESSION: `${FLAT_FORM}/users/session`,
   USERS_SESSION_OTP: `${FLAT_FORM}/users/session/otp`,
   USERS_REGISTER: `${FLAT_FORM}/users/register`,
+  USERS_ME_PURGE: `${FLAT_FORM}/users/me/purge`,
   USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,
   USERS_ME_PASSWORD: `${FLAT_FORM}/users/me/password`,
   USERS_ME_BLOCK_BY_2FA: `${FLAT_FORM}/users/me/block_by_2fa`,

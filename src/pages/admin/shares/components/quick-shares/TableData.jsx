@@ -61,7 +61,7 @@ const TableData = (props) => {
         key: 'name',
         width: 100,
         align: 'left',
-        render: (_, record) => common.cipherTypeInfo('type', record.cipher.type).name
+        render: (_, record) => t(common.cipherTypeInfo('type', record.cipher.type).name)
       },
       {
         title: t('shares.quick_shares.sharing_time'),

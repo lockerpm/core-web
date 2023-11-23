@@ -68,7 +68,7 @@ const TableData = (props) => {
         width: 100,
         align: 'left',
         hide: isFolder,
-        render: (_, record) => common.cipherTypeInfo('type', record.cipher_type || record.type).name
+        render: (_, record) => t(common.cipherTypeInfo('type', record.cipher_type || record.type).name)
       },
       {
         title: t('common.updated_time'),

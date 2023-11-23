@@ -17,15 +17,6 @@ async function make_key(username, password) {
   return ''
 }
 
-async function login_payload(data) {
-  const makeKey = await make_key(data.username, data.password)
-  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
-  return {
-    username: data.username,
-    password: hashedPassword,
-  }
-}
-
 async function unlock(data) {
   if (global.jsCore) {
     await clear_keys()
@@ -70,7 +61,6 @@ async function logout () {
 export default {
   clear_keys,
   make_key,
-  login_payload,
   unlock,
   lock,
   logout,

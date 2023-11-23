@@ -183,7 +183,8 @@
         "changed": "Your password has been changed."
       },
       "account_details": {
-        "updated": "Account details has been updated."
+        "updated": "Account details has been updated.",
+        "purged": "Your vault has been purged!"
       },
       "factor2": {
         "enabled": "Tow Factor Authentication has been enabled",
@@ -381,7 +382,8 @@
       "delete_data": "Delete Locker data",
       "delete_data_desc": "Delete all data in your Locker account. Your Locker account still remains.",
       "delete_account": "Delete account",
-      "delete_account_desc": "Delete your Locker account permanently."
+      "delete_account_desc": "Delete your Locker account permanently.",
+      "delete_all_account_items": "Delete all account items"
     }
   },
   "security_control": {
