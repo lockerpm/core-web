@@ -190,7 +190,7 @@
         "enabled": "Tow Factor Authentication has been enabled",
         "disabled": "Tow Factor Authentication has been disabled"
       },
-      "email_setting": {
+      "email_settings": {
         "updated": "Mail plugin has been set up success.",
         "reset": "Mail setting reset successfully.",
         "send_test": "Send test email successfully."
@@ -275,7 +275,12 @@
     "security": "Security",
     "notifications": "Notifications",
     "shared_with_me": "Shared With Me",
-    "my_shared_items": "My Shared Items"
+    "my_shared_items": "My Shared Items",
+    "enterprise": "Enterprise Manager",
+    "enterprise_dashboard": "Enterprise Dashboard",
+    "companies": "Companies",
+    "email_settings": "Email Settings",
+    "sso_configuration": "SSO Configuration"
   },
   "auth_pages": {
     "username": "Email",
@@ -420,68 +425,6 @@
     "invalid": "Invalid! File type is {{type}}",
     "large": "File size is very large! Please select file has size 800x400px",
     "content_invalid": "File content is invalid."
-  },
-  "email_setting": {
-    "title": "Email Settings",
-    "description": "Integrate with an Email service Provider to enable email notifications for your group members.",
-    "email_provider": {
-      "title": "Email Provider",
-      "description": "Choose an Email Provider that you want to use for email sending."
-    },
-    "set_up_integration": {
-      "title": "Set up Integration"
-    },
-    "general": {
-      "from_email": "From email",
-      "from_email_placeholder": "Default address that emails will be sent from",
-      "from_name": "From name",
-      "from_name_placeholder": "Default name that emails will be sent from"
-    },
-    "smtp": {
-      "title": "SMTP",
-      "provider": "SMTP Provider",
-      "description": "The SMTP Credentials will be stored in your database. A few important expectations about your server:",
-      "description1": "It must support LOGIN authentication",
-      "description2": "It must support TLS 1.0 or higher",
-      "note": "Need help to integrate with SMTP?",
-      "note_link": "Follow our instructions.",
-      "host": "Host",
-      "host_placeholder": "Your SMTP Host",
-      "port": "Port",
-      "port_placeholder": "SMTP Port",
-      "port_description": "Common ports for SMTP transmission are 25, 465, 587.",
-      "username": "Username",
-      "username_placeholder": "Your SMTP Username",
-      "password": "Password",
-      "password_placeholder": "Your SMTP Password "
-    },
-    "amazon_ses": {
-      "title": "Amazon SES"
-    },
-    "send_grid": {
-      "title": "SendGrid",
-      "api_key": "API Key",
-      "api_key_placeholder": "SendGrid’s API Key",
-      "domain": "Domain/Subdomain",
-      "domain_placeholder": "Domain/Subdomain configured in SendGrid" 
-    },
-    "sendinblue": {
-      "title": "Sendinblue"
-    },
-    "google": {
-      "title": "Google"
-    },
-    "outlook": {
-      "title": "Outlook"
-    },
-    "send_test": {
-      "title": "Send test email",
-      "description": "Enter an email address to send a test email to"
-    },
-    "reset": {
-      "title": "Reset Email Plugin?",
-      "description": "Are you sure to reset? All changes you have made will be reset and your users will no longer receive emails."
-    }
   },
   "lock": {
     "title": "Sign in to your account",
@@ -944,5 +887,79 @@
       "action": "Send code",
       "resend": "Resend code"
     }
+  },
+  "enterprise_dashboard": {
+    "title": "Enterprise Dashboard",
+    "description": "Statistic of all companies"
+  },
+  "companies": {
+    "title": "Companies",
+    "description": "All companies"
+  },
+  "email_settings": {
+    "title": "Email Settings",
+    "description": "Integrate with an Email service Provider to enable email notifications for your group members.",
+    "email_provider": {
+      "title": "Email Provider",
+      "description": "Choose an Email Provider that you want to use for email sending."
+    },
+    "set_up_integration": {
+      "title": "Set up Integration"
+    },
+    "general": {
+      "from_email": "From email",
+      "from_email_placeholder": "Default address that emails will be sent from",
+      "from_name": "From name",
+      "from_name_placeholder": "Default name that emails will be sent from"
+    },
+    "smtp": {
+      "title": "SMTP",
+      "provider": "SMTP Provider",
+      "description": "The SMTP Credentials will be stored in your database. A few important expectations about your server:",
+      "description1": "It must support LOGIN authentication",
+      "description2": "It must support TLS 1.0 or higher",
+      "note": "Need help to integrate with SMTP?",
+      "note_link": "Follow our instructions.",
+      "host": "Host",
+      "host_placeholder": "Your SMTP Host",
+      "port": "Port",
+      "port_placeholder": "SMTP Port",
+      "port_description": "Common ports for SMTP transmission are 25, 465, 587.",
+      "username": "Username",
+      "username_placeholder": "Your SMTP Username",
+      "password": "Password",
+      "password_placeholder": "Your SMTP Password "
+    },
+    "amazon_ses": {
+      "title": "Amazon SES"
+    },
+    "send_grid": {
+      "title": "SendGrid",
+      "api_key": "API Key",
+      "api_key_placeholder": "SendGrid’s API Key",
+      "domain": "Domain/Subdomain",
+      "domain_placeholder": "Domain/Subdomain configured in SendGrid" 
+    },
+    "sendinblue": {
+      "title": "Sendinblue"
+    },
+    "google": {
+      "title": "Google"
+    },
+    "outlook": {
+      "title": "Outlook"
+    },
+    "send_test": {
+      "title": "Send test email",
+      "description": "Enter an email address to send a test email to"
+    },
+    "reset": {
+      "title": "Reset Email Plugin?",
+      "description": "Are you sure to reset? All changes you have made will be reset and your users will no longer receive emails."
+    }
+  },
+  "sso_configuration": {
+    "title": "OAuth Configuration",
+    "description": "Configuration OAuth to require users log in using SSO"
   }
 }  

@@ -9,7 +9,11 @@ import {
   UserOutlined,
   ImportOutlined,
   BellOutlined,
-  FolderOutlined
+  FolderOutlined,
+  DashboardOutlined,
+  ProjectOutlined,
+  MailOutlined,
+  KeyOutlined
 } from '@ant-design/icons'
 
 import keys from './keys'
@@ -132,6 +136,32 @@ export default {
       parent: keys.SETTINGS,
       icon: <BellOutlined />,
       label: 'sidebar.notifications',
+    },
+
+    // Enterprise
+    {
+      key: keys.ENTERPRISE_DASHBOARD,
+      parent: keys.ENTERPRISE,
+      icon: <DashboardOutlined />,
+      label: 'sidebar.enterprise_dashboard',
+    },
+    {
+      key: keys.COMPANIES,
+      parent: keys.ENTERPRISE,
+      icon: <ProjectOutlined />,
+      label: 'sidebar.companies',
+    },
+    {
+      key: keys.EMAIL_SETTINGS,
+      parent: keys.ENTERPRISE,
+      icon: <MailOutlined />,
+      label: 'sidebar.email_settings',
+    },
+    {
+      key: keys.SSO_CONFIGURATION,
+      parent: keys.ENTERPRISE,
+      icon: <KeyOutlined />,
+      label: 'sidebar.sso_configuration',
     },
   ]
 } 

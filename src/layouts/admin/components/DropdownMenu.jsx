@@ -15,7 +15,8 @@ import global from '../../../config/global';
 
 import {
   LogoutOutlined,
-  LockOutlined
+  LockOutlined,
+  GroupOutlined
 } from '@ant-design/icons'
 
 function DropdownMenu() {
@@ -55,6 +56,8 @@ function DropdownMenu() {
       authServices.logout();
     } else if (item.key === 'lock') {
       await authServices.redirect_login();
+    } else if (item.key === 'enterprise') {
+      global.navigate(global.keys.ENTERPRISE_DASHBOARD)
     }
   }
 
@@ -83,6 +86,12 @@ function DropdownMenu() {
             }))
           },
           {
+            key: 'enterprise',
+            icon: <GroupOutlined />,
+            label: <span>{t('sidebar.enterprise')}</span>,
+            hide: false
+          },
+          {
             type: 'divider',
           },
           {
@@ -96,7 +105,7 @@ function DropdownMenu() {
             icon: <LogoutOutlined />,
             label: <span>{t('sidebar.logout')}</span>
           },
-        ],
+        ].filter((i) => !i.hide).map((i) => { delete i.hide; return i }),
         defaultSelectedKeys: [],
         onClick: dropdownClick
       }}

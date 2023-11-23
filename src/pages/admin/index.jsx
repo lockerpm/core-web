@@ -14,6 +14,11 @@ import SettingsSecurity from './settings/settings-security'
 import SettingsNotifications from './settings/settings-notifications'
 import EmergencyAccessView from './settings/emergency-access-view'
 
+import Enterprise from './enterprise'
+import Companies from './enterprise/companies'
+import EmailSettings from './enterprise/email-settings'
+import SSOConfiguration from './enterprise/sso-configuration'
+
 import AdminErrorPage from './errors'
 
 export default {
@@ -32,6 +37,11 @@ export default {
   SettingsSecurity,
   SettingsNotifications,
   EmergencyAccessView,
+
+  Enterprise,
+  Companies,
+  EmailSettings,
+  SSOConfiguration,
 
   AdminErrorPage
 }

@@ -211,5 +211,27 @@ export default {
       path: '/settings/notifications',
       element: 'SettingsNotifications',
     },
+
+    // Enterprise
+    {
+      name: keys.ENTERPRISE_DASHBOARD,
+      path: '/enterprise',
+      element: 'Enterprise',
+    },
+    {
+      name: keys.COMPANIES,
+      path: '/enterprise/companies',
+      element: 'Companies',
+    },
+    {
+      name: keys.EMAIL_SETTINGS,
+      path: '/enterprise/email-settings',
+      element: 'EmailSettings',
+    },
+    {
+      name: keys.SSO_CONFIGURATION,
+      path: '/enterprise/sso-configuration',
+      element: 'SSOConfiguration',
+    },
   ],
 }
