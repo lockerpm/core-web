@@ -77,7 +77,8 @@ async function redirect_login() {
   }
   if (isAdmin) {
     if (access_token()) {
-      global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
+      const isError = currentPage.name === global.keys.ADMIN_ERROR
+      global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError ? `${window.location.pathname}${window.location.search}` : '/') })
     } else {
       global.navigate(global.keys.SIGN_IN)
     }

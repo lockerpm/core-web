@@ -2,6 +2,7 @@ const API_URL = process.env.REACT_APP_API_URL
 const WS_URL = process.env.REACT_APP_WS_URL
 
 const FLAT_FORM = `${API_URL}/v3/cystack_platform/pm`
+const ADMIN = `${API_URL}/admin`
 const WS_FLAT_FORM = `${WS_URL}/cystack_platform/pm`
 
 export default {
@@ -14,6 +15,8 @@ export default {
 
   LOGOUT: `${API_URL}/v3/users/logout`,
   EXIST: `${API_URL}/v3/users/exist`,
+
+  RESOURCES_MAIL_PROVIDERS: `${FLAT_FORM}/resources/mail_providers`,
 
   USERS_ME: `${FLAT_FORM}/users/me`,
   USERS_EXIST: `${FLAT_FORM}/users/exist`,
@@ -104,4 +107,8 @@ export default {
   IMPORT_CIPHERS: `${FLAT_FORM}/import/ciphers`,
 
   TOOLS_BREACH: `${FLAT_FORM}/tools/breach`,
+
+  // Admin
+  MAIL_CONFIGURATION: `${ADMIN}/mail_configuration`,
+  MAIL_CONFIGURATION_TEST: `${ADMIN}/mail_configuration/test`,
 }

@@ -629,5 +629,57 @@ export default {
       name: 'Other Application',
       icon: <DesktopOutlined />
     }
+  ],
+  SMTP_PROVIDERS: [
+    {
+      name: 'Other SMTP provider',
+      host: '',
+      port: ''
+    },
+    {
+      name: 'Gmail',
+      host: 'smtp.gmail.com',
+      port: '587'
+    },
+    {
+      name: 'Microsoft Outlook',
+      host: 'smtp.office365.com',
+      port: '587'
+    },
+    {
+      name: 'Yahoo',
+      host: 'smtp.mail.yahoo.com',
+      port: '587'
+    },
+    {
+      name: 'Mailtrap Email Sending',
+      host: 'live.smtp.mailtrap.io',
+      port: '587'
+    },
+    {
+      name: 'Mailgun',
+      host: 'mtp.mailgun.org',
+      port: '587'
+    },
+    {
+      name: 'Apple mail',
+      host: 'smtp.mail.me.com',
+      port: '587'
+    },
+    {
+      name: 'Mandrill',
+      host: 'smtp.mandrillapp.com',
+      port: '587'
+    },
+    {
+      name: 'SparkPost',
+      host: 'mtp.sparkpostmail.com',
+      port: '587'
+    },
+    {
+      name: 'Postmark',
+      host: 'smtp.postmarkapp.com',
+      port: '587'
+    },
   ]
 }

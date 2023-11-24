@@ -11,9 +11,6 @@ import {
 
 import { } from 'react-redux';
 
-import {
-} from '../../../../../utils/common';
-
 import { useTranslation } from "react-i18next";
 
 import { green } from '@ant-design/colors';
@@ -24,7 +21,6 @@ const SendModal = (props) => {
   const { t } = useTranslation()
   const {
     visible = false,
-    selectedWorkspace = {},
     onClose = () => {},
   } = props;
   const [form] = Form.useForm();
@@ -39,7 +35,7 @@ const SendModal = (props) => {
   const handleSendMail = async () => {
     form.validateFields().then(async () => {
       setCallingAPI(true);
-      await mailConfigServices.send_test(selectedWorkspace?.id, { email: testEmail }).then(async () => {
+      await mailConfigServices.send_test({ email: testEmail }).then(async () => {
         global.pushSuccess(t('notification.success.email_settings.send_test'))
         onClose();
       }).catch((error) => {

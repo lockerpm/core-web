@@ -31,7 +31,7 @@ function Notifications() {
     featData()
     setInterval(() => {
       featData();
-    }, [1000 * 30])
+    }, 1000 * 30)
   }, [])
 
   const getNotificationIcon = (type) => {
@@ -53,14 +53,16 @@ function Notifications() {
   const featData = async () => {
     const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
     if (!isLocked) {
-      await notificationServices.list({ scope: 'pwdmanager' }).then((response) => {
-        setNotifications(response.results)
-        setUnreadCount(response.unread_count)
+      await notificationServices.list({ paging: 0, scope: 'pwdmanager' }).then((response) => {
+        setNotifications(response);
+        setUnreadCount(response.filter((r) => !r.read).length);
       }).catch(() => {
         setNotifications([])
+        setUnreadCount(0)
       })
     } else {
       setNotifications([])
+      setUnreadCount(0)
     }
   }
 

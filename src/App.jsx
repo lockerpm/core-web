@@ -50,7 +50,7 @@ const App = () => {
     )
   }
   global.pushError = error => {
-    const message = error?.response?.data?.message || error?.message
+    const message = common.getErrorMessage(error)
     global.notification(
       'error',
       t('notification.error.title'),

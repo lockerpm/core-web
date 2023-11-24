@@ -173,7 +173,7 @@ async function get_invitations() {
 }
 
 async function get_teams() {
-  const teams = await enterpriseServices.list_teams();
+  const teams = await enterpriseServices.list_teams({ paging: 0 });
   await global.store.dispatch(storeActions.updateTeams(teams))
 }
 

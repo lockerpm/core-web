@@ -152,6 +152,15 @@ const getToken = (email) => {
   }
 }
 
+const getErrorMessage = (error) => {
+  const errorData = error.response.data;
+  const errorKeys = Object.keys(errorData.details)
+  if (errorKeys.length > 0) {
+    return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]]
+  }
+  return errorData.message
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -171,5 +180,6 @@ export default {
   getSharePermission,
   getEmergencyAccessDays,
   getClientInfo,
-  getToken
+  getToken,
+  getErrorMessage
 }

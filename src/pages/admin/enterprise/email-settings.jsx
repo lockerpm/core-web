@@ -24,8 +24,8 @@ import SendEmailModal from "./components/email-settings/SendEmail";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-// import mailConfigServices from "../../../services/mail-config";
-// import resourceServices from "../../../services/resource";
+import mailConfigServices from "../../../services/mail-config";
+import resourceServices from "../../../services/resource";
 
 import common from "../../../utils/common";
 import global from "../../../config/global";
@@ -58,22 +58,22 @@ const EmailSetting = (props) => {
   }
 
   const fetchMailProviders = async () => {
-    // await resourceServices.list_mail_providers().then((response) => {
-    //   setMailProviders(response)
-    // }).catch(() => {
-    //   setMailProviders(null)
-    // })
+    await resourceServices.list_mail_providers().then((response) => {
+      setMailProviders(response)
+    }).catch(() => {
+      setMailProviders([])
+    })
   }
 
   const fetchMailConfiguration = async () => {
-    // await mailConfigServices.get(selectedWorkspace?.id).then((response) => {
-    //   const config = response && !common.isEmpty(response) ? response : null;
-    //   setSelectedProvider(config?.mail_provider || 'smtp')
-    //   setMailConfig(config)
-    // }).catch(() => {
-    //   setSelectedProvider('smtp')
-    //   setMailConfig(null)
-    // })
+    await mailConfigServices.get().then((response) => {
+      const config = response && !common.isEmpty(response) ? response : null;
+      setSelectedProvider(config?.mail_provider || 'smtp')
+      setMailConfig(config)
+    }).catch(() => {
+      setSelectedProvider('smtp')
+      setMailConfig(null)
+    })
   }
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const EmailSetting = (props) => {
       setEditable(true)
       const formValues = {
         from_email: '',
-        from_name: 'Locker Secrets',
+        from_name: 'Locker Password Manager',
       }
       if (selectedProvider === 'smtp') {
         form.setFieldsValue({
@@ -155,14 +155,14 @@ const EmailSetting = (props) => {
         mail_provider_options: options
       }
       setCallingAPI(true);
-      // await mailConfigServices.update(selectedWorkspace?.id, payload).then(async () => {
-      //   global.pushSuccess(t('notification.success.email_settings.updated'))
-      //   await fetchMailConfiguration();
-      //   setCallingAPI(false);
-      // }).catch((error) => {
-      //   setCallingAPI(false);
-      //   global.pushError(error)
-      // })
+      await mailConfigServices.update(payload).then(async () => {
+        global.pushSuccess(t('notification.success.email_settings.updated'))
+        await fetchMailConfiguration();
+        setCallingAPI(false);
+      }).catch((error) => {
+        setCallingAPI(false);
+        global.pushError(error)
+      })
     })
   }
 
@@ -182,12 +182,12 @@ const EmailSetting = (props) => {
         danger: true
       },
       onOk: () => {
-        // mailConfigServices.remove(selectedWorkspace?.id).then(async () => {
-        //   global.pushSuccess(t('notification.success.email_settings.reset'));
-        //   await fetchMailConfiguration();
-        // }).catch((error) => {
-        //   global.pushError(error)
-        // });
+        mailConfigServices.remove().then(async () => {
+          global.pushSuccess(t('notification.success.email_settings.reset'));
+          await fetchMailConfiguration();
+        }).catch((error) => {
+          global.pushError(error)
+        });
       }
     })
   };
@@ -293,7 +293,6 @@ const EmailSetting = (props) => {
       </Spin>
       <SendEmailModal
         visible={sendVisible}
-        selectedWorkspace={{}}
         onClose={() => setSendVisible(false)}
       />
     </div>
