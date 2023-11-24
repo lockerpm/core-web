@@ -65,7 +65,7 @@ const SingIn = () => {
         className="auth-page"
       >
         <div
-          className="sign-in w-[600px]"
+          className="sign-in"
           style={{
             backgroundImage: `url(${AuthBgImage})`,
             backgroundSize: 'contain',

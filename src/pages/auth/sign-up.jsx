@@ -53,7 +53,7 @@ const SingUp = () => {
   return (
     <div className="auth-page">
       <div
-        className="sign-up w-[600px]"
+        className="sign-up"
         style={{
           backgroundImage: `url(${AuthBgImage})`,
           backgroundSize: 'contain',
