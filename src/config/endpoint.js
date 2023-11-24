@@ -16,12 +16,14 @@ export default {
   LOGOUT: `${API_URL}/v3/users/logout`,
   EXIST: `${API_URL}/v3/users/exist`,
 
+  RESOURCES_SERVER_TYPE: `${API_URL}/v3/resources/server_type`,
   RESOURCES_MAIL_PROVIDERS: `${FLAT_FORM}/resources/mail_providers`,
 
   USERS_ME: `${FLAT_FORM}/users/me`,
   USERS_EXIST: `${FLAT_FORM}/users/exist`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
   USERS_SESSION_OTP: `${FLAT_FORM}/users/session/otp`,
+  USERS_PRELOGIN: `${FLAT_FORM}/users/prelogin`,
   USERS_REGISTER: `${FLAT_FORM}/users/register`,
   USERS_ME_PURGE: `${FLAT_FORM}/users/me/purge`,
   USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,

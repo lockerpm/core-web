@@ -50,6 +50,14 @@ const updateCollapsed = data => {
   }
 }
 
+const updateServerType = data => {
+  return {
+    type: actionTypes.SET_SERVER_TYPE,
+    payload: data,
+  }
+}
+
+
 const updateIsCloud = data => {
   return {
     type: actionTypes.SET_IS_CLOUD,
@@ -73,6 +81,7 @@ export default {
   updateIsColumn,
   updateIsScrollToTop,
   updateCollapsed,
+  updateServerType,
   updateIsCloud,
   updateCacheData
 }

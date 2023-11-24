@@ -62,21 +62,18 @@ async function purge_data(data) {
 }
 
 async function check_exist() {
-  let exist = false
-  try {
-    const response = await request({
-      url: global.endpoint.USERS_EXIST,
-      method: 'get',
-    })
-    exist = response.exist
-  } catch (error) {
-    exist = false
-  }
-  if (exist) {
-    authServices.redirect_login();
-  } else {
-    global.navigate(global.keys.SIGN_UP)
-  }
+  return request({
+    url: global.endpoint.USERS_EXIST,
+    method: 'get',
+  });
+}
+
+async function users_prelogin(data) {
+  return request({
+    url: global.endpoint.USERS_PRELOGIN,
+    method: 'post',
+    data
+  })
 }
 
 async function users_session(data) {
@@ -203,6 +200,7 @@ export default {
   change_password,
   revoke_all_devices,
   check_exist,
+  users_prelogin,
   register,
   check_exist_email,
   purge_data

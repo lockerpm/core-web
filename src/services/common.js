@@ -10,8 +10,23 @@ import sharingServices from './sharing'
 import quickShareServices from './quick-share'
 import enterpriseServices from './enterprise'
 import systemServices from './system'
+import resourceServices from './resource'
 
 import i18n from '../config/i18n'
+
+const init_server = async () => {
+  global.store.dispatch(storeActions.toggleLoading(true))
+  const serverType = await resourceServices.get_server_type();
+  global.store.dispatch(storeActions.updateServerType(serverType.server_type))
+  const checkExist = await userServices.check_exist();
+  const exist = checkExist?.exist || false
+  if (exist) {
+    await authServices.redirect_login();
+  } else {
+    global.navigate(global.keys.SIGN_UP)
+  }
+  global.store.dispatch(storeActions.toggleLoading(false))
+}
 
 const fetch_user_info = async () => {
   await userServices.users_me().then(async (response) => {
@@ -408,6 +423,7 @@ async function sync_data_by_ws(message) {
 }
 
 export default {
+  init_server,
   fetch_user_info,
   clear_data,
   sync_data,

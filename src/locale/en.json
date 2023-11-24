@@ -291,7 +291,15 @@
     "sign_in": {
       "title": "Welcome back!",
       "label": "Log in",
-      "note": "Don't have an account yet?"
+      "note": "Don't have an account yet?",
+      "single_sign_on": "Single Sign-On"
+    },
+    "password_less": {
+      "note1": "This account is set up with password less login, which requires you to install the desktop app.",
+      "note2": "You may need to contact your Admin for support.",
+      "note3": "Sign in on your desktop app to continue.",
+      "download_desktop": "Download desktop app",
+      "sign_in_desktop": "Sign in on desktop app"
     },
     "sign_up": {
       "title": "Create admin account",

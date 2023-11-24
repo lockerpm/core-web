@@ -25,7 +25,7 @@ import PublicLayout from './layouts/public'
 import systemServices from './services/system'
 import storeActions from './store/actions'
 import authServices from './services/auth'
-import userServices from './services/user'
+import commonServices from './services/common'
 
 import i18n from './config/i18n'
 import global from './config/global'
@@ -71,7 +71,7 @@ const App = () => {
   const currentPage = useSelector(state => state.system.currentPage)
 
   useEffect(() => {
-    userServices.check_exist();
+    commonServices.init_server();
     const locale = systemServices.get_language()
     dispatch(storeActions.changeLanguage(locale))
     i18n.changeLanguage(locale)

@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './css/auth.scss';
 
 import {
   Image,
-  Card,
-  Input,
-  Form,
-  Button,
+  Spin
 } from '@lockerpm/design';
 
 import AuthLogo from '../../assets/images/logos/auth-logo.svg'
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+
+import Personal from "./components/sign-in/Personal";
+import Enterprise from "./components/sign-in/Enterprise";
+
+import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
@@ -21,27 +23,16 @@ import commonServices from "../../services/common";
 
 import storeActions from "../../store/actions";
 
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
-
 import global from "../../config/global";
 
 const SingIn = () => {
   const { t } = useTranslation();
-  const locale = useSelector((state) => state.system.locale);
-  const [form] = Form.useForm();
+  const isLoading = useSelector((state) => state.system.isLoading);
+  const serverType = useSelector((state) => state.system.serverType);
 
-  const username = Form.useWatch('username', form);
-  
   const [callingAPI, setCallingAPI] = useState(false);
 
-  useEffect(() => {
-    form.setFieldsValue({
-      username: null,
-      password: null
-    })
-  }, [])
-
-  const handleSubmit = async (values) => {
+  const handleSignIn = async (values) => {
     setCallingAPI(true)
     await userServices.users_session({
       password: values.password,
@@ -69,95 +60,46 @@ const SingIn = () => {
   }
 
   return (
-    <div
-      className="auth-page"
-    >
+    <Spin spinning={isLoading}>
       <div
-        className="sign-in w-[600px]"
-        style={{
-          backgroundImage: `url(${AuthBgImage})`,
-          backgroundSize: 'contain',
-          paddingTop: 62,
-          height: 'max-content'
-        }}
+        className="auth-page"
       >
-        <div className="flex items-center justify-center mb-8">
-          <Image
-            className='icon-logo'
-            src={AuthLogo}
-            preview={false}
-            height={48}
-          />
-        </div>
-        <div className="flex items-center justify-center">
-          <Card
-            className="w-[400px]"
-            bodyStyle={{
-              padding: '32px'
-            }}
-          >
-            <div className="w-full flex items-center justify-between mb-4">
-              <p className="text-2xl font-semibold">
-                { t('auth_pages.sign_in.title') }
-              </p>
+        <div
+          className="sign-in w-[600px]"
+          style={{
+            backgroundImage: `url(${AuthBgImage})`,
+            backgroundSize: 'contain',
+            paddingTop: 62,
+            height: 'max-content'
+          }}
+        >
+          <div className="flex items-center justify-center mb-8">
+            <Image
+              className='icon-logo'
+              src={AuthLogo}
+              preview={false}
+              height={48}
+            />
+          </div>
+          {
+            !isLoading && <div>
+              {
+                serverType === global.constants.SERVER_TYPE.PERSONAL && <Personal
+                  loading={callingAPI}
+                  onSubmit={handleSignIn}
+                />
+              }
+              {
+                serverType === global.constants.SERVER_TYPE.ENTERPRISE && <Enterprise
+                  loading={callingAPI}
+                  onSubmit={handleSignIn}
+                />
+              }
             </div>
-            <Form
-              form={form}
-              key={locale}
-              onFinish={handleSubmit}
-            >
-              <Form.Item
-                name="username"
-                rules={[
-                  global.rules.REQUIRED(t('auth_pages.username')),
-                  global.rules.INVALID(t('auth_pages.username'), 'EMAIL'),
-                ]}
-              >
-                <Input
-                  placeholder={t('placeholder.username')}
-                  size="large"
-                  disabled={callingAPI}
-                />
-              </Form.Item>
-              <Form.Item
-                name="password"
-                rules={[
-                  global.rules.REQUIRED(t('auth_pages.password')),
-                ]}
-              >
-                <Input.Password
-                  placeholder={t('auth_pages.password')}
-                  size="large"
-                  disabled={callingAPI}
-                />
-              </Form.Item>
-              <Button
-                className="w-full"
-                size="large"
-                type="primary"
-                htmlType="submit"
-                loading={callingAPI}
-                disabled={!username}
-              >
-                {t('button.sign_in')}
-              </Button>
-            </Form>
-          </Card>
-        </div>
-        <div className="mt-4 text-center">
-          <span>
-            {t('auth_pages.sign_in.note')}
-            <Button
-              type="link"
-              className="font-semibold"
-              onClick={() => global.navigate(global.keys.SIGN_UP)}
-            >
-              {t('auth_pages.sign_up.label')}
-            </Button>
-          </span>
+          }
         </div>
       </div>
-    </div>
+    </Spin>
   );
 }
 

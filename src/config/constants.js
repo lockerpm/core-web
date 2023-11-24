@@ -81,6 +81,11 @@ const USER_TYPE = {
   ENTERPRISE: 'enterprise',
 }
 
+const SERVER_TYPE = {
+  PERSONAL: 'personal',
+  ENTERPRISE: 'enterprise',
+}
+
 const FACTOR2_IDENTITY = {
   MAIL: 'mail',
   SMART_OTP: 'smart_otp',
@@ -98,6 +103,7 @@ export default {
   NOTIFICATION_TYPE,
   LANGUAGE,
   USER_TYPE,
+  SERVER_TYPE,
   FACTOR2_IDENTITY,
   CLIENT_ID: 'web',
   PAGE_SIZE: 50,

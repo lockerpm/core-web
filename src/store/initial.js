@@ -1,4 +1,4 @@
-import systemService from '../services/system'
+import systemService from '../services/system';
 
 export default {
   system: {
@@ -10,6 +10,7 @@ export default {
     isScrollToTop: false,
     collapsed: false,
     isCloud: false,
+    serverType: null,
     cacheData: systemService.get_cache()
   },
   auth: {

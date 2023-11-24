@@ -70,20 +70,15 @@ function access_token_type() {
 async function redirect_login() {
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(window.location)
-  let isAdmin = !!global.routers.ADMIN_ROUTERS.find((r) => r.name === currentPage?.name);
-  if (!currentPage) {
-    logout();
-    return;
-  }
-  if (isAdmin) {
-    if (access_token()) {
-      const isError = currentPage.name === global.keys.ADMIN_ERROR
-      global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError ? `${window.location.pathname}${window.location.search}` : '/') })
-    } else {
+  if (access_token()) {
+    const isError = currentPage?.name === global.keys.ADMIN_ERROR
+    const isAdmin = currentPage?.type === 'admin'
+    global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError && isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
+  } else {
+    const serverType = global.store.getState().system.serverType;
+    if (currentPage?.name !== global.keys.SIGN_UP || serverType !== global.constants.SERVER_TYPE.PERSONAL) {
       global.navigate(global.keys.SIGN_IN)
     }
-  } else if (currentPage.name === global.keys.OTP_CODE) {
-    global.navigate(global.keys.SIGN_IN)
   }
 }
 
