@@ -57,10 +57,10 @@
     "access_date": "Access date",
     "email": "Email",
     "username": "Username",
-    "on": "On", 
+    "on": "On",
     "off": "Off",
     "no": "No.",
-    "coming_soon": "Coming Soon", 
+    "coming_soon": "Coming Soon",
     "results": "Results",
     "no_file_chosen": "No file chosen",
     "name": "Name",
@@ -108,7 +108,7 @@
     "regenerate": "Regenerate",
     "import": "Import",
     "export": "Export",
-    "download": "Download", 
+    "download": "Download",
     "new_member": "New Member",
     "lock": "Lock",
     "logout": "Log out",
@@ -125,6 +125,7 @@
     "new_item": "New item",
     "new_folder": "New folder",
     "new_share": "New share",
+    "new_company": "New company",
     "share": "Share",
     "view": "View",
     "copy_link": "Copy link",
@@ -248,7 +249,7 @@
       "title": "Warning"
     }
   },
-  "sidebar": { 
+  "sidebar": {
     "account_setting": "Setting",
     "lock_your_account": "Lock your account",
     "logout": "Log out",
@@ -878,7 +879,7 @@
     "teams": "Teams",
     "privacy_policy": "Privacy Policy",
     "reveal_information": "Reveal Information",
-    "hide_information": "Hide Information", 
+    "hide_information": "Hide Information",
     "not_fond": {
       "title": "Sorry, there is no item to view.",
       "description": {
@@ -902,7 +903,10 @@
   },
   "companies": {
     "title": "Companies",
-    "description": "All companies"
+    "add": "New Company",
+    "edit": "Edit company info",
+    "name": "Company Name",
+    "subtitle": "Subtitle"
   },
   "email_settings": {
     "title": "Email Settings",
@@ -946,7 +950,7 @@
       "api_key": "API Key",
       "api_key_placeholder": "SendGrid’s API Key",
       "domain": "Domain/Subdomain",
-      "domain_placeholder": "Domain/Subdomain configured in SendGrid" 
+      "domain_placeholder": "Domain/Subdomain configured in SendGrid"
     },
     "sendinblue": {
       "title": "Sendinblue"
@@ -970,4 +974,4 @@
     "title": "OAuth Configuration",
     "description": "Configuration OAuth to require users log in using SSO"
   }
-}  
+}

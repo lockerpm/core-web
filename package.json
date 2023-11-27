@@ -93,6 +93,7 @@
   },
   "scripts": {
     "start": "set HTTPS=true&&env-cmd -e development craco start",
+    "start:mac": "HTTPS=true env-cmd -e development craco start",
     "build:dev": "env-cmd -e development craco build",
     "build:stg": "env-cmd -e staging craco build",
     "build": "craco build",
