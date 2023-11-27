@@ -9,8 +9,6 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import PasswordLess from "./PasswordLess";
-
 import global from "../../../../config/global";
 
 import userServices from "../../../../services/user";

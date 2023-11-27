@@ -42,5 +42,13 @@ export default {
   },
   enterprise: {
     teams: []
+  },
+  service: {
+    isReady: false,
+    requireDesktop: false,
+    requirePairing: false,
+    isConnected: false,
+    approveCode: null,
+    pairingConfirmed: false
   }
 }

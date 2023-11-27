@@ -7,6 +7,7 @@ import collectionActions from './collection'
 import organizationActions from './organization'
 import shareActions from './share'
 import enterpriseActions from './enterprise'
+import serviceActions from './service'
 
 export default {
   ...authActions,
@@ -17,5 +18,6 @@ export default {
   ...collectionActions,
   ...organizationActions,
   ...shareActions,
-  ...enterpriseActions
+  ...enterpriseActions,
+  ...serviceActions
 }
