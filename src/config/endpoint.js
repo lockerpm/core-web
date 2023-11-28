@@ -32,7 +32,6 @@ export default {
   USERS_ME_DEVICE: `${FLAT_FORM}/users/me/devices/:device_id`,
   USERS_SESSION_REVOKE_ALL: `${FLAT_FORM}/users/session/revoke_all`,
 
-
   SYNC: `${FLAT_FORM}/sync`,
   SYNC_COUNT: `${FLAT_FORM}/sync/count`,
   SYNC_PROFILE: `${FLAT_FORM}/sync/profile`,
@@ -77,7 +76,7 @@ export default {
   CIPHERS_MOVE: `${FLAT_FORM}/ciphers/move`,
   CIPHERS_PERMANENT_DELETE: `${FLAT_FORM}/ciphers/permanent_delete`,
 
-  FOLDERS:  `${FLAT_FORM}/folders`,
+  FOLDERS: `${FLAT_FORM}/folders`,
   FOLDER: `${FLAT_FORM}/folders/:id`,
 
   ENTERPRISES: `${FLAT_FORM}/enterprises`,
@@ -113,4 +112,6 @@ export default {
   // Admin
   MAIL_CONFIGURATION: `${ADMIN}/mail_configuration`,
   MAIL_CONFIGURATION_TEST: `${ADMIN}/mail_configuration/test`,
+
+  SSO_CONFIGURATION: `${ADMIN}/sso_configuration`,
 }
