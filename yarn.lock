@@ -9287,9 +9287,9 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-locker-client-service@./packages/locker-client-service-0.0.9.tgz:
-  version "0.0.9"
-  resolved "./packages/locker-client-service-0.0.9.tgz#06e2ef399fac67e7474b2add0b057fe5b6711759"
+locker-client-service@./packages/locker-client-service-0.0.10.tgz:
+  version "0.0.10"
+  resolved "./packages/locker-client-service-0.0.10.tgz#04d5e9db676621f54fb73290f1033132f8307266"
   dependencies:
     axios "^1.6.2"
     eventemitter3 "^5.0.1"

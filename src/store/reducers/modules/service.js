@@ -13,8 +13,16 @@ const service = (state = initial.service, action) => {
   return { ...state, isConnected: action.payload }
     case actionTypes.SET_APPROVE_CODE:
   return { ...state, approveCode: action.payload }
-    case actionTypes.SET_PAIRING_CONFIRMED:
-  return { ...state, pairingConfirmed: action.payload }
+  case actionTypes.SET_CLIENT_ID:
+    return { ...state, clientId: action.payload }
+  case actionTypes.SET_CLIENT_TYPE:
+    return { ...state, clientType: action.payload }
+  case actionTypes.SET_PAIRING_CONFIRMED:
+    return { ...state, pairingConfirmed: action.payload }
+  case actionTypes.SET_IS_TOUCH:
+    return { ...state, isTouch: action.payload }
+  case actionTypes.SET_IS_FINGERPRINT:
+    return { ...state, isFingerprint: action.payload }
   default:
     return state
   }

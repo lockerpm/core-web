@@ -10,7 +10,11 @@ import {
   PasswordConfirmModal
 } from '../../../../../components'
 
-import FormData from "./passwordless/FormData";
+import ConfirmParingModal from "./passwordless/ConfirmParing";
+import FormDataModal from "./passwordless/FormData";
+
+import userServices from "../../../../../services/user";
+import commonServices from "../../../../../services/common";
 
 import {
   DownOutlined,
@@ -22,33 +26,49 @@ import {
 
 import { green } from '@ant-design/colors';
 
-const Passwordless = (props) => {
+const FormData = (props) => {
   const { 
     className = '',
   } = props;
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
-  const isCloud = useSelector((state) => state.system.isCloud);
-  const isReady = useSelector((state) => state.service.isReady);
+  const isDesktop = useSelector((state) => state.system.isDesktop);
+  const isConnected = useSelector((state) => state.service.isConnected);
 
   const [confirmVisible, setConfirmVisible] = useState(false);
+  const [pairingVisible, setPairingVisible] = useState(false); 
   const [formVisible, setFormVisible] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
+  const [password, setPassword] = useState(null);
 
   const [expand, setExpand] = useState(false);
 
   useEffect(() => {
   }, [])
 
-  const handleConfirm = async (password) => {
+  const handleConfirm = async (passwordHash, password) => {
+    setPassword(password);
+    setConfirmVisible(false);
+    if (isDesktop || service.pairingService?.hasKey) {
+      setFormVisible(true)
+    } else {
+      setPairingVisible(true)
+    }
+  }
+
+  const handleTurnOnPwl = async (newPassword) => {
     setCallingAPI(true);
-    // await authServices.factor2_activate({ password }).then(() => {
-    //   global.pushSuccess(t('notification.success.factor2.disabled'));
-    //   getFactor2();
-    //   setConfirmVisible(false);
-    // }).catch((error) => {
-    //   global.pushError(error)
-    // })
+    await userServices.change_password({
+      username: userInfo.email,
+      password: password,
+      new_password: newPassword,
+      login_method: 'passwordless'
+    }).then(async () => {
+      global.pushSuccess(t('notification.success.change_password.changed'));
+      await commonServices.fetch_user_info();
+    }).catch((error) => {
+      global.pushError(error)
+    })
     setCallingAPI(false);
   }
 
@@ -71,22 +91,21 @@ const Passwordless = (props) => {
           </p>
         }
         {
-          isReady && <Button
+          isConnected && <Button
             type='primary'
             ghost
             icon={<UsbOutlined />}
-            onClick={() => setFormVisible(true)}
+            onClick={() => setConfirmVisible(true)}
           >
             {userInfo.is_passwordless ? t('security.passwordless.turn_off') : t('security.passwordless.turn_on')}
           </Button>
         }
-        
       </div>
       <p className="mt-1">
         {t('security.passwordless.description')}
       </p>
       {
-        !isReady && <Button
+        !isConnected && <Button
           type='primary'
           className="mt-4"
           icon={<DownloadOutlined />}
@@ -114,17 +133,34 @@ const Passwordless = (props) => {
       <PasswordConfirmModal
         visible={confirmVisible}
         title={t('security.two_fa.turn_off')}
-        callingAPI={callingAPI}
-        okText={t('common.confirm')}
+        okText={t('button.confirm')}
         onConfirm={handleConfirm}
         onClose={() => setConfirmVisible(false)}
       />
-      <FormData
-        visible={formVisible}
-        onClose={() => setFormVisible(false)}
-      />
+      {
+        isConnected && <ConfirmParingModal
+          visible={pairingVisible}
+          onConfirm={() => {
+            setPairingVisible(false);
+            setFormVisible(true)
+          }}
+          onClose={() => setPairingVisible(false)}
+        />
+      }
+      {
+        formVisible && isConnected && <FormDataModal
+          changing={callingAPI}
+          visible={formVisible}
+          onConfirm={handleTurnOnPwl}
+          onError={() => {
+            setFormVisible(false);
+            setPairingVisible(true)
+          }}
+          onClose={() => setFormVisible(false)}
+        />
+      }
     </div>
   );
 }
 
-export default Passwordless;
+export default FormData;

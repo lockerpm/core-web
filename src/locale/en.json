@@ -83,7 +83,8 @@
     "username_or_email": "Email address or Username",
     "password_strength": "Password Strength",
     "me": "Me",
-    "otp_code": "OTP code"
+    "otp_code": "OTP code",
+    "successfully": "Successfully"
   },
   "button": {
     "add": "Add",
@@ -129,7 +130,9 @@
     "view": "View",
     "copy_link": "Copy link",
     "ok": "OK",
-    "remove": "Remove"
+    "remove": "Remove",
+    "close": "Close",
+    "confirm": "Confirm"
   },
   "placeholder": {
     "name": "Enter name",
@@ -362,7 +365,17 @@
     "confirm_note": "Enter your password to confirm"
   },
   "passwordless": {
-    "confirm_note": "Enter your password to confirm"
+    "confirm_pairing": "Confirm pairing",
+    "pairing_required": "Desktop app pairing is required. On the desktop app, confirm the code below.",
+    "confirm_code": "Confirm if the code in your browser matches the below",
+    "reset_code": "Reset code",
+    "open_desktop": "Please download or open Locker Desktop App",
+    "connect_key": "Connect the key you want to add as a secondary key",
+    "no_key_found": "No key found",
+    "scan_fingerprint": "Scan your fingerprint",
+    "enter_key_pin": "Enter your security key PIN",
+    "touch_key": "Touch your security key",
+    "reload_devices": "Reload list devices"
   },
   "change_password": {
     "title": "Change Password",
@@ -716,10 +729,10 @@
       "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan."
     },
     "passwordless": {
-      "title": "Passwordless Unlock",
+      "title": "Passwordless Login",
       "description": "Use a FIDO2 security key to unlock your vault. Desktop app installation is required.",
-      "turn_on": "Turn on Passwordless Unlock",
-      "turn_off": "Turn off Passwordless Unlock",
+      "turn_on": "Turn on Passwordless Login",
+      "turn_off": "Turn off Passwordless Login",
       "security_keys_added": "Security keys added",
       "add_new_key": "Add new key",
       "download_desktop_app": "Download desktop app"

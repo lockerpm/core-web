@@ -51,8 +51,6 @@ function ChangePasswordFormData(props) {
     })
   }
 
-
-
   return (
     <div className={props.className}>
       <Drawer

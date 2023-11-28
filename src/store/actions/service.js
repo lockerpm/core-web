@@ -35,10 +35,38 @@ const updateApproveCode = approveCode => {
   }
 }
 
+const updateClientId = clientId => {
+  return {
+    type: actionTypes.SET_CLIENT_ID,
+    payload: clientId,
+  }
+}
+
+const updateClientType = clientType => {
+  return {
+    type: actionTypes.SET_CLIENT_TYPE,
+    payload: clientType,
+  }
+}
+
 const updatePairingConfirmed = pairingConfirmed => {
   return {
     type: actionTypes.SET_PAIRING_CONFIRMED,
     payload: pairingConfirmed,
+  }
+}
+
+const updateIsTouch = isTouch => {
+  return {
+    type: actionTypes.SET_IS_TOUCH,
+    payload: isTouch,
+  }
+}
+
+const updateIsFingerprint = isFingerprint => {
+  return {
+    type: actionTypes.SET_IS_FINGERPRINT,
+    payload: isFingerprint,
   }
 }
 
@@ -48,5 +76,9 @@ export default {
   updateRequirePairing,
   updateIsConnected,
   updateApproveCode,
+  updateClientId,
+  updateClientType,
   updatePairingConfirmed,
+  updateIsTouch,
+  updateIsFingerprint,
 }

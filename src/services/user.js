@@ -151,7 +151,8 @@ async function change_password(data = {}) {
     new_master_password_hash: newPassword,
     new_master_password_hint: data.password_hint || '',
     score: score,
-    master_password_cipher: masterPasswordCipher
+    master_password_cipher: masterPasswordCipher,
+    login_method: data.login_method || ''
   }
 
   return request({

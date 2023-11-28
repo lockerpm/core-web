@@ -26,8 +26,6 @@ class WebStorageService implements StorageService {
   }
 
   getSecure(key: string) {
-    // Web client should only keep in memory
-    // return Promise.resolve(this.secureStorage[key] || null);
     try {
       return Promise.resolve(JSON.parse(sessionStorage.getItem(`secure___${key}`) || '') || null)
     } catch (error) {
@@ -35,14 +33,10 @@ class WebStorageService implements StorageService {
     }
   }
   setSecure(key: string, data: any) {
-    // Web client should only keep in memory
-    // this.secureStorage[key] = data;
     sessionStorage.setItem(`secure___${key}`, JSON.stringify(data))
     return Promise.resolve()
   }
   deleteSecure(key: string) {
-    // Web client should only keep in memory
-    // this.secureStorage[key] = undefined;
     sessionStorage.removeItem(`secure___${key}`)
     return Promise.resolve()
   }
@@ -53,7 +47,7 @@ const webStorageService = new WebStorageService()
 const service = new WebService({
   storageService: webStorageService,
   logLevel: 2,
-  baseApiUrl: process.env.REACT_APP_API_URL,
+  baseApiUrl: `${process.env.REACT_APP_API_URL}/v3`,
   clientType: 'web',
 })
 

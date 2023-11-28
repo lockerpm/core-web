@@ -11,6 +11,7 @@ export default {
     collapsed: false,
     isCloud: false,
     serverType: null,
+    isDesktop: false,
     cacheData: systemService.get_cache()
   },
   auth: {
@@ -49,6 +50,8 @@ export default {
     requirePairing: false,
     isConnected: false,
     approveCode: null,
+    clientId: null,
+    clientType: null,
     pairingConfirmed: false
   }
 }

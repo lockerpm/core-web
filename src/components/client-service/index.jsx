@@ -5,13 +5,11 @@ import storeActions from '../../store/actions'
 
 import { useSelector } from 'react-redux'
 
-function ClientService() {
-  const isReady = useSelector((state) => state.service.isReady);
-  const isConnected = useSelector((state) => state.service.isConnected);
-  const approveCode = useSelector((state) => state.service.approveCode);
-  
-  const [msg, setMsg] = useState('')
+let reconnect = null;
 
+function ClientService() {
+  const isConnected = useSelector((state) => state.service.isConnected);
+  
   useEffect(() => {
     service.on('serviceReady', () => {
       global.store.dispatch(storeActions.updateIsReady(true))
@@ -31,49 +29,41 @@ function ClientService() {
     })
     service.on('pairingConfirmation', (data) => {
       global.store.dispatch(storeActions.updateApproveCode(data.approveCode));
+      global.store.dispatch(storeActions.updateClientId(data.clientId));
+      global.store.dispatch(storeActions.updateClientType(data.clientType));
     })
     service.on('pairingConfirmed', () => {
       global.store.dispatch(storeActions.updatePairingConfirmed(true));
     })
+    service.on('fidoRequestTouch', () => {
+      global.store.dispatch(storeActions.updateIsTouch(true));
+    })
+    service.on('fidoRequestFingerprint', () => {
+      global.store.dispatch(storeActions.updateIsFingerprint(true));
+    })
     service.on('userLogin', (data) => {
-      setMsg(`User ${data.email} just login`)
+      // setMsg(`User ${data.email} just login`)
     })
     service.on('userLogout', (data) => {
-      setMsg(`User ${data.email} just logout`)
+      // setMsg(`User ${data.email} just logout`)
     })
   }, [])
 
   useEffect(() => {
-    setInterval(async () => {
-      if (!isConnected) {
-        // await service.resetSocket();
-      }
-    }, 2000);
-  }, [isConnected])
-
-  const loadCurrentUser = async () => {
-    try {
-      const user = await service.getCurrentUser();
-      console.log(user);
-    } catch (error) {
-      setMsg('pls open desktop')
+    if (!reconnect && !isConnected) {
+      reconnect = setInterval(() => {
+        service.resetSocket();
+      }, 3000)
     }
-  }
+    if (reconnect && isConnected) {
+      clearInterval(reconnect)
+      reconnect = null
+    }
+  }, [isConnected])
 
   return (
     <>
-     {/* {
-       !isReady && <div className="client-service">
-          <div>
-            <h1>Service status: {isReady ? 'Ready' : 'Not Ready'}</h1>
-            <h1>Desktop status: {isConnected ? 'Connected' : 'Not Connected'}</h1>
-            <h2 style={{ color: 'red' }}>Error: {msg}</h2>
-            <h3>Approve code: {approveCode}</h3>
-          </div>
-        </div>
-      } */}
     </>
-    
   )
 }
 

@@ -39,7 +39,7 @@ const PasswordConfirmModal = (props) => {
       const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
       const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
       if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
-        onConfirm(keyHash);
+        onConfirm(keyHash, password);
       } else {
         authServices.logout();
       }

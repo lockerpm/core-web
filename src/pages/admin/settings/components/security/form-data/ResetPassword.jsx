@@ -103,7 +103,7 @@ function ResetMasterPasswordFormData(props) {
               loading={callingAPI}
               onClick={handleConfirm}
             >
-            { t('common.confirm') } 
+            { t('button.confirm') } 
             </Button>
           </Space>
         }
