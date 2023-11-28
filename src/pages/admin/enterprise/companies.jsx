@@ -17,6 +17,8 @@ import common from "../../../utils/common"
 
 import global from "../../../config/global"
 
+import companyService from "../../../services/company"
+
 const Companies = (props) => {
   const { t } = useTranslation()
   const location = useLocation()
@@ -40,6 +42,22 @@ const Companies = (props) => {
       description: "Test2",
     },
   ])
+
+  const getAllCompanies = async () => {
+    await companyService
+      .get_companies()
+      .then((response) => {
+        setCompanies(response)
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  useEffect(() => {
+    getAllCompanies()
+  }, [])
 
   const [formVisible, setFormVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
