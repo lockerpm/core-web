@@ -85,7 +85,7 @@ const DeauthorizeSessionsModal = (props) => {
       }
       open={visible}
       width={500}
-      okText={t('common.confirm')}
+      okText={t('button.confirm')}
       onOk={() => handleConfirm()}
       onCancel={() => onClose()}
       okButtonProps={{

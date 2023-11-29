@@ -188,7 +188,7 @@ const TwoFA = (props) => {
         visible={confirmVisible}
         title={t('security.two_fa.turn_off')}
         callingAPI={callingAPI}
-        okText={t('common.confirm')}
+        okText={t('button.confirm')}
         onConfirm={handleTurnOff}
         onClose={() => setConfirmVisible(false)}
       />

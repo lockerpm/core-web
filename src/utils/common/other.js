@@ -153,12 +153,15 @@ const getToken = (email) => {
 }
 
 const getErrorMessage = (error) => {
-  const errorData = error.response.data;
-  const errorKeys = Object.keys(errorData.details)
-  if (errorKeys.length > 0) {
-    return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]]
+  const errorData = error?.response?.data || null;
+  if (errorData?.details) {
+    const errorKeys = Object.keys(errorData.details)
+    if (errorKeys.length > 0) {
+      return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]]
+    }
+    return errorData.message
   }
-  return errorData.message
+  return errorData?.message || error.toString();
 }
 
 export default {

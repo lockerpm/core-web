@@ -39,6 +39,7 @@ function ChangePasswordFormData(props) {
       setCallingAPI(true);
       await userServices.change_password({
         username: userInfo.email,
+        login_method: 'password',
         ...values,
       }).then(async () => {
         global.pushSuccess(t('notification.success.change_password.changed'));
@@ -50,8 +51,6 @@ function ChangePasswordFormData(props) {
       setCallingAPI(false);
     })
   }
-
-
 
   return (
     <div className={props.className}>

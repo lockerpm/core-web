@@ -7,6 +7,7 @@ import share from './share'
 import collection from './collection'
 import organization from './organization'
 import enterprise from './enterprise'
+import service from './service'
 
 export default {
   auth,
@@ -18,4 +19,5 @@ export default {
   collection,
   organization,
   enterprise,
+  service
 }

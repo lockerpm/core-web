@@ -83,7 +83,8 @@
     "username_or_email": "Email address or Username",
     "password_strength": "Password Strength",
     "me": "Me",
-    "otp_code": "OTP code"
+    "otp_code": "OTP code",
+    "successfully": "Successfully"
   },
   "button": {
     "add": "Add",
@@ -130,7 +131,11 @@
     "view": "View",
     "copy_link": "Copy link",
     "ok": "OK",
-    "remove": "Remove"
+    "remove": "Remove",
+    "close": "Close",
+    "confirm": "Confirm",
+    "download_desktop_app": "Download desktop app",
+    "open_desktop_app": "Open desktop app"
   },
   "placeholder": {
     "name": "Enter name",
@@ -295,13 +300,6 @@
       "note": "Don't have an account yet?",
       "single_sign_on": "Single Sign-On"
     },
-    "password_less": {
-      "note1": "This account is set up with password less login, which requires you to install the desktop app.",
-      "note2": "You may need to contact your Admin for support.",
-      "note3": "Sign in on your desktop app to continue.",
-      "download_desktop": "Download desktop app",
-      "sign_in_desktop": "Sign in on desktop app"
-    },
     "sign_up": {
       "title": "Create admin account",
       "label": "Sign Up",
@@ -368,6 +366,23 @@
   },
   "password_confirm": {
     "confirm_note": "Enter your password to confirm"
+  },
+  "passwordless": {
+    "confirm_pairing": "Confirm pairing",
+    "pairing_required": "Desktop app pairing is required. On the desktop app, confirm the code below.",
+    "confirm_code": "Confirm if the code in your browser matches the below",
+    "reset_code": "Reset code",
+    "open_desktop": "Please download or open Locker Desktop App",
+    "connect_key": "Connect the key you want to add as a secondary key",
+    "no_key_found": "No key found",
+    "scan_fingerprint": "Scan your fingerprint",
+    "enter_key_pin": "Enter your security key PIN",
+    "touch_key": "Touch your security key",
+    "reload_devices": "Reload list devices",
+    "choose_a_key": "Choose a key to verify yourself",
+    "new_password": "Enter new Password",
+    "connect_key_to_login": "Passwordless login is required for this account. Connect to a security key to set up passwordless login.",
+    "install_desktop": "This account is set up with passwordless login, which requires you to install the desktop app."
   },
   "change_password": {
     "title": "Change Password",
@@ -440,7 +455,8 @@
     "description": "Enter your Password to unlock",
     "password": "Password",
     "master_password_hint": "Get Password hint",
-    "unlock": "Unlock"
+    "unlock": "Unlock",
+    "connect_key": "Connect to your security key"
   },
   "inventory": {
     "all_items": "All items",
@@ -720,6 +736,16 @@
       "title": "Account Password",
       "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan."
     },
+    "passwordless": {
+      "title": "Passwordless Login",
+      "description": "Use a FIDO2 security key to unlock your vault. Desktop app installation is required.",
+      "turn_on": "Turn on Passwordless Login",
+      "turn_off": "Turn off Passwordless Login",
+      "security_keys_added": "Security keys added",
+      "add_new_key": "Add new key"
+    },
+    "mobile_passwordless": {
+    },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",
@@ -728,7 +754,7 @@
       "setup_on": "Two-step authentication is",
       "your_second_step": "Your second step",
       "your_second_step_description": "After entering your password, you'll be asked for a second verification step.",
-      "email_otp": {
+      "email_otp": {                            
         "name": "Authentication Email",
         "description": "We'll ask for a security code if we notice a login from an unusual device.",
         "send_code": "Send code via email",
