@@ -95,7 +95,7 @@ async function logout() {
   }
   await coreServices.logout()
   localStorage.removeItem('access_token')
-  global.navigate(global.keys.SIGN_IN)
+  global.navigate(global.keys.SIGN_IN);
 }
 
 export default {

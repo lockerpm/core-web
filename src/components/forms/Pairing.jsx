@@ -25,6 +25,7 @@ const PairingForm = (props) => {
 
   const isDesktop = useSelector((state) => state.system.isDesktop)
   const isConnected = useSelector((state) => state.service.isConnected)
+  const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
   const approveCode = useSelector((state) => state.service.approveCode)
   const requireDesktop = useSelector((state) => state.service.requireDesktop)
   const pairingConfirmed = useSelector((state) => state.service.pairingConfirmed)
@@ -61,7 +62,7 @@ const PairingForm = (props) => {
   return (
     <div className="pairing-form text-center">
       {
-        isConnected && <div>
+        isDesktopConnected && <div>
           <p className="mb-10 mt-6 text-left">
             {t(isDesktop ? 'passwordless.confirm_code' : 'passwordless.pairing_required')}
           </p>
@@ -100,11 +101,6 @@ const PairingForm = (props) => {
               {t('passwordless.reset_code')}
             </Button>
           }
-          {
-            requireDesktop && <p className="text-danger mt-4">
-              {'passwordless.open_desktop'}
-            </p>
-          }
         </div>
       }
       {
@@ -117,6 +113,19 @@ const PairingForm = (props) => {
             onClick={() => service.sendPairingRequest()}
           >
             {t('button.download_desktop_app')}
+          </Button>
+        </div>
+      }
+      {
+        isConnected && !isDesktopConnected && <div>
+          <p className="mb-10 mt-6">{t('passwordless.open_desktop')}</p>
+          <Button
+            type="primary"
+            size="large"
+            className="w-full"
+            onClick={() => {}}
+          >
+            {t('button.open_desktop_app')}
           </Button>
         </div>
       }

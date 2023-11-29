@@ -49,6 +49,7 @@ export default {
     requireDesktop: false,
     requirePairing: false,
     isConnected: false,
+    isDesktopConnected: false,
     approveCode: null,
     clientId: null,
     clientType: null,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Button,
+  List
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
@@ -11,21 +12,23 @@ import {
 } from '../../../../../components'
 
 import FormDataModal from "./passwordless/FormData";
+import NewKeyModal from "./passwordless/NewKey";
 
 import userServices from "../../../../../services/user";
 import authServices from "../../../../../services/auth";
-import passwordlessServices from "../../../../../services/passwordless";
 
 import {
   DownOutlined,
   RightOutlined,
   UsbOutlined,
   PlusOutlined,
-  DownloadOutlined
+  DownloadOutlined,
+  DeleteOutlined
 } from "@ant-design/icons";
 
 import { green } from '@ant-design/colors';
 import global from "../../../../../config/global";
+import common from "../../../../../utils/common";
 
 const FormData = (props) => {
   const { 
@@ -37,27 +40,21 @@ const FormData = (props) => {
 
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
+  const [newKeyVisible, setNewKeyVisible] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
   const [password, setPassword] = useState(null);
 
   const [expand, setExpand] = useState(false);
-  const [credential, setCredential] = useState(null);
+  const [backupKeys, setBackupKeys] = useState([]);
 
   useEffect(() => {
-    getPwlCredential();
+    getBackupKeys();
   }, [])
 
-  const getPwlCredential = async () => {
-    const credential = await passwordlessServices.get_credential();
-    setCredential(credential || null)
-  }
-
-  const handlePasswordlessAction = () => {
-    if (userInfo?.login_method === 'passwordless') {
-      setFormVisible(true)
-    } else {
-      setConfirmVisible(true)
-    }
+  const getBackupKeys = async () => {
+    await service.setApiToken(authServices.access_token());
+    const response = await service.listBackupPasswordless();
+    setBackupKeys(response || [])
   }
 
   const handleConfirmPassword = async (passwordHash, password) => {
@@ -98,6 +95,13 @@ const FormData = (props) => {
     setCallingAPI(false);
   }
 
+  const handleAddedKey = async () => {
+    setCallingAPI(true);
+    await getBackupKeys();
+    setNewKeyVisible(false);
+    setCallingAPI(false);
+  }
+
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -121,7 +125,7 @@ const FormData = (props) => {
             type='primary'
             ghost
             icon={<UsbOutlined />}
-            onClick={() => handlePasswordlessAction()}
+            onClick={() => setConfirmVisible(true)}
           >
             { t('security.passwordless.turn_on') }
           </Button>
@@ -131,7 +135,7 @@ const FormData = (props) => {
             type='primary'
             ghost
             icon={<UsbOutlined />}
-            onClick={() => handlePasswordlessAction()}
+            onClick={() => setFormVisible(true)}
           >
             {t('security.passwordless.turn_off')}
           </Button>
@@ -155,15 +159,43 @@ const FormData = (props) => {
             <p className="font-semibold" style={{ fontSize: 16 }}>
               {t('security.passwordless.security_keys_added')}
             </p>
-            <Button
-              type='text'
-              ghost
-              icon={<PlusOutlined />}
-              onClick={() => {}}
-            >
-              {t('security.passwordless.add_new_key')}
-            </Button>
+            {
+              backupKeys.length < global.constants.MAX_KEY_BACKUP && <Button
+                type='primary'
+                ghost
+                icon={<PlusOutlined />}
+                onClick={() => setNewKeyVisible(true)}
+              >
+                {t('security.passwordless.add_new_key')}
+              </Button>
+            }
           </div>
+          <List
+            className="mt-4"
+            itemLayout="horizontal"
+            dataSource={backupKeys}
+            renderItem={(item, index) => (
+              <List.Item
+                actions={[
+                  <Button
+                    danger
+                    type="text"
+                    icon={<DeleteOutlined />}
+                    onClick={() => {}}
+                  >
+                  </Button>
+                ]}
+              >
+                <div className="flex items-center">
+                  <UsbOutlined className="mr-4" style={{ fontSize: 28 }}/>
+                  <div>
+                    <p className="font-semibold">{item.name}</p>
+                    <p>{t('common.updated_time')}: {common.convertDateTime(item.creation_date)}</p>
+                  </div>
+                </div>
+              </List.Item>
+            )}
+          />
         </div>
       }
       <PasswordConfirmModal
@@ -179,6 +211,14 @@ const FormData = (props) => {
           visible={formVisible}
           onConfirm={userInfo?.login_method === 'passwordless' ? handleTurnOffPwl : handleTurnOnPwl}
           onClose={() => setFormVisible(false)}
+        />
+      }
+      {
+        newKeyVisible && isConnected && <NewKeyModal
+          changing={callingAPI}
+          visible={newKeyVisible}
+          onConfirm={() => handleAddedKey()}
+          onClose={() => setNewKeyVisible(false)}
         />
       }
     </div>

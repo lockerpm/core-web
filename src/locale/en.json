@@ -371,7 +371,7 @@
     "pairing_required": "Desktop app pairing is required. On the desktop app, confirm the code below.",
     "confirm_code": "Confirm if the code in your browser matches the below",
     "reset_code": "Reset code",
-    "open_desktop": "Please download or open Locker Desktop App",
+    "open_desktop": "Passwordless login is required for this account. Please open Locker Desktop App",
     "connect_key": "Connect the key you want to add as a secondary key",
     "no_key_found": "No key found",
     "scan_fingerprint": "Scan your fingerprint",
@@ -744,6 +744,16 @@
       "add_new_key": "Add new key"
     },
     "mobile_passwordless": {
+      "title": "Mobile passwordless login",
+      "description": "Scan a QR code to log in to the mobile app when passwordless login is enabled.",
+      "action": "Scan QR code"
+    },
+    "cross_platform_sync": {
+      "title": "Cross-platform sync",
+      "description": "Enable login sync for your account across the web app, extension, and desktop app on the same device. Desktop app installation is required.",
+      "turn_on": "Turn on sync",
+      "turn_off": "Turn off sync",
+      "question": "Are you sure you want to {{action}}?"
     },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",

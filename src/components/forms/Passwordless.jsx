@@ -30,6 +30,7 @@ const PasswordlessForm = (props) => {
     changing = false,
     isLogin = false,
     userInfo = {},
+    isAddKey = false,
     onConfirm = () => {},
     onError = () => {},
     onClose = () => {}
@@ -64,33 +65,36 @@ const PasswordlessForm = (props) => {
       setDevices(devices);
       setSelectedDevice(devices[0] || null)
     } catch (error) {
-      service.resetGRPCPorts();
+      service.resetBackgroundService();
       onError();
     }
     setLoading(false)
   }
 
   const handleContinue = async (pin = null) => {
-    setStep(2);
-    if (isLogin || userInfo?.login_method === 'passwordless') {
-      getPwl();
+    if ((isLogin || userInfo?.login_method === 'passwordless') && !isAddKey) {
+      await getPwl();
     } else {
       setPin(pin);
       await service.setApiToken(authServices.access_token());
-      setPwl();
+      if (isAddKey) {
+        await setBackupPwl();
+      } else {
+        await setPwl();
+      }
     }
   }
 
   const setPwl = async () => {
     setCallingAPI(true)
     try {
+      setStep(2);
       const response = await service.setNewPasswordless({
         email: userInfo.email,
         name: selectedDevice.name,
         devicePath: selectedDevice.path,
         pin: pin
       })
-      setStep(2);
       resetState();
       setPasswordless(response)
       await onConfirm(response)
@@ -98,7 +102,33 @@ const PasswordlessForm = (props) => {
       setStep(1);
       setPasswordless(null);
       global.pushError(error);
-      service.resetGRPCPorts();
+      service.resetBackgroundService();
+      resetState();
+    }
+    setCallingAPI(false)
+  }
+
+  const setBackupPwl = async () => {
+    setCallingAPI(true)
+    try {
+      setStep(2);
+      const encKey = await global.jsCore.cryptoService.getEncKey();
+      const response = await service.setBackupPasswordless({
+        email: userInfo.email,
+        name: selectedDevice.name,
+        devicePath: selectedDevice.path,
+        deviceName: selectedDevice.name,
+        currentEncKey: encKey.key,
+        pin: pin
+      })
+      resetState();
+      setPasswordless(response);
+      await onConfirm();
+    } catch (error) {
+      setStep(1);
+      setPasswordless(null);
+      global.pushError(error);
+      service.resetBackgroundService();
       resetState();
     }
     setCallingAPI(false)
@@ -107,12 +137,12 @@ const PasswordlessForm = (props) => {
   const getPwl = async () => {
     setCallingAPI(true)
     try {
+      setStep(2);
       const response = await service.getPasswordless({
         email: userInfo.email,
         devicePath: selectedDevice.path,
         pin: pin
       })
-      setStep(2);
       resetState();
       setPasswordless(response)
       await onConfirm(response)
@@ -120,7 +150,7 @@ const PasswordlessForm = (props) => {
       setStep(1);
       setPasswordless(null);
       global.pushError(error);
-      service.resetGRPCPorts();
+      service.resetBackgroundService();
       resetState();
     }
     setCallingAPI(false)

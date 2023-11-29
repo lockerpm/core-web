@@ -3,16 +3,22 @@ import './client-service.scss'
 import global from '../../config/global'
 import storeActions from '../../store/actions'
 
+import authServices from '../../services/auth'
+
 import { useSelector } from 'react-redux'
 
-let reconnect = null;
-
 function ClientService() {
-  const isConnected = useSelector((state) => state.service.isConnected);
-  
+  const userInfo = useSelector((state) => state.auth.userInfo);
+
   useEffect(() => {
     service.on('serviceReady', () => {
       global.store.dispatch(storeActions.updateIsReady(true))
+    })
+    service.on('serviceConnected', () => {
+      global.store.dispatch(storeActions.updateIsConnected(true));
+    })
+    service.on('serviceDisconnected', () => {
+      global.store.dispatch(storeActions.updateIsConnected(false));
     })
     service.on('requireDesktopOpen', () => {
       global.store.dispatch(storeActions.updateRequireDesktop(true))
@@ -21,10 +27,10 @@ function ClientService() {
       global.store.dispatch(storeActions.updateRequirePairing(true))
     })
     service.on('desktopConnected', () => {
-      global.store.dispatch(storeActions.updateIsConnected(true));
+      global.store.dispatch(storeActions.updateIsDesktopConnected(true));
     })
     service.on('desktopDisconnected', () => {
-      global.store.dispatch(storeActions.updateIsConnected(false));
+      global.store.dispatch(storeActions.updateIsDesktopConnected(false));
     })
     service.on('pairingConfirmation', (data) => {
       global.store.dispatch(storeActions.updateApproveCode(data.approveCode));
@@ -43,22 +49,13 @@ function ClientService() {
     service.on('userLogin', (data) => {
       // setMsg(`User ${data.email} just login`)
     })
-    service.on('userLogout', (data) => {
-      // setMsg(`User ${data.email} just logout`)
+    service.on('userLogout', async (data) => {
+      if (data.email === userInfo?.email && userInfo?.sync_all_platforms) {
+        await service.logout();
+        authServices.logout();
+      }
     })
-  }, [])
-
-  useEffect(() => {
-    if (!reconnect && !isConnected) {
-      reconnect = setInterval(() => {
-        service.resetSocket();
-      }, 2000)
-    }
-    if (reconnect && isConnected) {
-      clearInterval(reconnect)
-      reconnect = null
-    }
-  }, [isConnected])
+  }, [userInfo])
 
   return (
     <></>

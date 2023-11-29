@@ -70,6 +70,13 @@ const updateIsFingerprint = isFingerprint => {
   }
 }
 
+const updateIsDesktopConnected = isDesktopConnected => {
+  return {
+    type: actionTypes.SET_IS_DESKTOP_CONNECTED,
+    payload: isDesktopConnected,
+  }
+}
+
 export default {
   updateIsReady,
   updateRequireDesktop,
@@ -81,4 +88,5 @@ export default {
   updatePairingConfirmed,
   updateIsTouch,
   updateIsFingerprint,
+  updateIsDesktopConnected,
 }

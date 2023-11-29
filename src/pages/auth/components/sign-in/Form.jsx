@@ -22,7 +22,6 @@ const SignInForm = (props) => {
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const isDesktop = useSelector((state) => state.system.isDesktop)
-  const isConnected = useSelector((state) => state.service.isConnected)
 
   const [preLogin, setPreLogin] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
@@ -127,6 +126,7 @@ const SignInForm = (props) => {
                 isLogin={true}
                 onConfirm={() => setIsPair(false)}
               /> : <PasswordlessForm
+                changing={loading}
                 isLogin={true}
                 userInfo={preLogin}
                 onError={() => setIsPair(true)}

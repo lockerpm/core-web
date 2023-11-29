@@ -23,6 +23,8 @@ const service = (state = initial.service, action) => {
     return { ...state, isTouch: action.payload }
   case actionTypes.SET_IS_FINGERPRINT:
     return { ...state, isFingerprint: action.payload }
+  case actionTypes.SET_IS_DESKTOP_CONNECTED:
+    return { ...state, isDesktopConnected: action.payload }
   default:
     return state
   }
