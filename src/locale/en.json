@@ -743,6 +743,8 @@
       "security_keys_added": "Security keys added",
       "add_new_key": "Add new key"
     },
+    "mobile_passwordless": {
+    },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",
