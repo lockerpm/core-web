@@ -36,6 +36,7 @@ const PasswordlessForm = (props) => {
     onClose = () => {}
   } = props;
 
+  const isDesktop = useSelector(state => state.system.isDesktop)
   const isTouch = useSelector(state => state.service.isTouch)
   const isFingerprint = useSelector(state => state.service.isFingerprint)
 
@@ -53,6 +54,14 @@ const PasswordlessForm = (props) => {
     getDeviceKeys();
   }, [])
 
+  const resetService = () => {
+    if (isDesktop) {
+      service.resetGRPC();
+    } else {
+      service.resetBackgroundService();
+    }
+  }
+
   const resetState = () => {
     global.store.dispatch(storeActions.updateIsTouch(false));
     global.store.dispatch(storeActions.updateIsFingerprint(false))
@@ -65,7 +74,7 @@ const PasswordlessForm = (props) => {
       setDevices(devices);
       setSelectedDevice(devices[0] || null)
     } catch (error) {
-      service.resetBackgroundService();
+      resetService();
       onError();
     }
     setLoading(false)
@@ -102,7 +111,7 @@ const PasswordlessForm = (props) => {
       setStep(1);
       setPasswordless(null);
       global.pushError(error);
-      service.resetBackgroundService();
+      resetService();
       resetState();
     }
     setCallingAPI(false)
@@ -128,7 +137,7 @@ const PasswordlessForm = (props) => {
       setStep(1);
       setPasswordless(null);
       global.pushError(error);
-      service.resetBackgroundService();
+      resetService();
       resetState();
     }
     setCallingAPI(false)
@@ -150,7 +159,7 @@ const PasswordlessForm = (props) => {
       setStep(1);
       setPasswordless(null);
       global.pushError(error);
-      service.resetBackgroundService();
+      resetService();
       resetState();
     }
     setCallingAPI(false)
