@@ -22,7 +22,6 @@ function ClientService() {
     })
     service.on('desktopConnected', () => {
       global.store.dispatch(storeActions.updateIsConnected(true));
-      global.store.dispatch(storeActions.updateIsReady(service.isReady))
     })
     service.on('desktopDisconnected', () => {
       global.store.dispatch(storeActions.updateIsConnected(false));
@@ -53,7 +52,7 @@ function ClientService() {
     if (!reconnect && !isConnected) {
       reconnect = setInterval(() => {
         service.resetSocket();
-      }, 3000)
+      }, 2000)
     }
     if (reconnect && isConnected) {
       clearInterval(reconnect)
@@ -62,8 +61,7 @@ function ClientService() {
   }, [isConnected])
 
   return (
-    <>
-    </>
+    <></>
   )
 }
 

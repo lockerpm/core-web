@@ -8,6 +8,7 @@ import GeneratePasswordContent from './generate-password/components/Content'
 
 import PairingForm from './forms/Pairing'
 import PasswordlessForm from './forms/Passwordless'
+import ChangePasswordForm from './forms/ChangePassword'
 
 import FilterTime from './item/FilterTime'
 import Pagination from './item/Pagination'
@@ -32,6 +33,7 @@ export {
 
   PairingForm,
   PasswordlessForm,
+  ChangePasswordForm,
   
   FilterTime,
   Pagination,

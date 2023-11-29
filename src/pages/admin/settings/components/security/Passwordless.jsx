@@ -10,11 +10,11 @@ import {
   PasswordConfirmModal
 } from '../../../../../components'
 
-import ConfirmParingModal from "./passwordless/ConfirmParing";
 import FormDataModal from "./passwordless/FormData";
 
 import userServices from "../../../../../services/user";
-import commonServices from "../../../../../services/common";
+import authServices from "../../../../../services/auth";
+import passwordlessServices from "../../../../../services/passwordless";
 
 import {
   DownOutlined,
@@ -25,6 +25,7 @@ import {
 } from "@ant-design/icons";
 
 import { green } from '@ant-design/colors';
+import global from "../../../../../config/global";
 
 const FormData = (props) => {
   const { 
@@ -32,28 +33,37 @@ const FormData = (props) => {
   } = props;
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
-  const isDesktop = useSelector((state) => state.system.isDesktop);
   const isConnected = useSelector((state) => state.service.isConnected);
 
   const [confirmVisible, setConfirmVisible] = useState(false);
-  const [pairingVisible, setPairingVisible] = useState(false); 
   const [formVisible, setFormVisible] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
   const [password, setPassword] = useState(null);
 
   const [expand, setExpand] = useState(false);
+  const [credential, setCredential] = useState(null);
 
   useEffect(() => {
+    getPwlCredential();
   }, [])
 
-  const handleConfirm = async (passwordHash, password) => {
-    setPassword(password);
-    setConfirmVisible(false);
-    if (isDesktop || service.pairingService?.hasKey) {
+  const getPwlCredential = async () => {
+    const credential = await passwordlessServices.get_credential();
+    setCredential(credential || null)
+  }
+
+  const handlePasswordlessAction = () => {
+    if (userInfo?.login_method === 'passwordless') {
       setFormVisible(true)
     } else {
-      setPairingVisible(true)
+      setConfirmVisible(true)
     }
+  }
+
+  const handleConfirmPassword = async (passwordHash, password) => {
+    setPassword(password);
+    setConfirmVisible(false);
+    setFormVisible(true);
   }
 
   const handleTurnOnPwl = async (newPassword) => {
@@ -65,7 +75,23 @@ const FormData = (props) => {
       login_method: 'passwordless'
     }).then(async () => {
       global.pushSuccess(t('notification.success.change_password.changed'));
-      await commonServices.fetch_user_info();
+      authServices.logout();
+    }).catch((error) => {
+      global.pushError(error)
+    })
+    setCallingAPI(false);
+  }
+
+  const handleTurnOffPwl = async (data) => {
+    setCallingAPI(true);
+    await userServices.change_password({
+      username: userInfo.email,
+      password: data.password,
+      new_password: data.new_password,
+      login_method: 'password'
+    }).then(async () => {
+      global.pushSuccess(t('notification.success.change_password.changed'));
+      authServices.logout();
     }).catch((error) => {
       global.pushError(error)
     })
@@ -76,7 +102,7 @@ const FormData = (props) => {
     <div className={className}>
       <div className="flex justify-between">
         {
-          userInfo.is_passwordless ? <div
+          userInfo?.login_method === 'passwordless' ? <div
             className="flex text-primary cursor-pointer"
             onClick={() => setExpand(!expand)}
           >
@@ -91,13 +117,23 @@ const FormData = (props) => {
           </p>
         }
         {
-          isConnected && <Button
+          isConnected && userInfo?.login_method !== 'passwordless' && <Button
             type='primary'
             ghost
             icon={<UsbOutlined />}
-            onClick={() => setConfirmVisible(true)}
+            onClick={() => handlePasswordlessAction()}
           >
-            {userInfo.is_passwordless ? t('security.passwordless.turn_off') : t('security.passwordless.turn_on')}
+            { t('security.passwordless.turn_on') }
+          </Button>
+        }
+        {
+          isConnected && userInfo?.login_method === 'passwordless' && !userInfo.is_require_passwordless && <Button
+            type='primary'
+            ghost
+            icon={<UsbOutlined />}
+            onClick={() => handlePasswordlessAction()}
+          >
+            {t('security.passwordless.turn_off')}
           </Button>
         }
       </div>
@@ -110,7 +146,7 @@ const FormData = (props) => {
           className="mt-4"
           icon={<DownloadOutlined />}
         >
-          {t('security.passwordless.download_desktop_app')}
+          {t('button.download_desktop_app')}
         </Button>
       }
       {
@@ -134,28 +170,14 @@ const FormData = (props) => {
         visible={confirmVisible}
         title={t('security.two_fa.turn_off')}
         okText={t('button.confirm')}
-        onConfirm={handleConfirm}
+        onConfirm={handleConfirmPassword}
         onClose={() => setConfirmVisible(false)}
       />
-      {
-        isConnected && <ConfirmParingModal
-          visible={pairingVisible}
-          onConfirm={() => {
-            setPairingVisible(false);
-            setFormVisible(true)
-          }}
-          onClose={() => setPairingVisible(false)}
-        />
-      }
       {
         formVisible && isConnected && <FormDataModal
           changing={callingAPI}
           visible={formVisible}
-          onConfirm={handleTurnOnPwl}
-          onError={() => {
-            setFormVisible(false);
-            setPairingVisible(true)
-          }}
+          onConfirm={userInfo?.login_method === 'passwordless' ? handleTurnOffPwl : handleTurnOnPwl}
           onClose={() => setFormVisible(false)}
         />
       }

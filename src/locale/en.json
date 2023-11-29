@@ -132,7 +132,9 @@
     "ok": "OK",
     "remove": "Remove",
     "close": "Close",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "download_desktop_app": "Download desktop app",
+    "open_desktop_app": "Open desktop app"
   },
   "placeholder": {
     "name": "Enter name",
@@ -375,7 +377,11 @@
     "scan_fingerprint": "Scan your fingerprint",
     "enter_key_pin": "Enter your security key PIN",
     "touch_key": "Touch your security key",
-    "reload_devices": "Reload list devices"
+    "reload_devices": "Reload list devices",
+    "choose_a_key": "Choose a key to verify yourself",
+    "new_password": "Enter new Password",
+    "connect_key_to_login": "Passwordless login is required for this account. Connect to a security key to set up passwordless login.",
+    "install_desktop": "This account is set up with passwordless login, which requires you to install the desktop app."
   },
   "change_password": {
     "title": "Change Password",
@@ -448,7 +454,8 @@
     "description": "Enter your Password to unlock",
     "password": "Password",
     "master_password_hint": "Get Password hint",
-    "unlock": "Unlock"
+    "unlock": "Unlock",
+    "connect_key": "Connect to your security key"
   },
   "inventory": {
     "all_items": "All items",
@@ -734,8 +741,7 @@
       "turn_on": "Turn on Passwordless Login",
       "turn_off": "Turn off Passwordless Login",
       "security_keys_added": "Security keys added",
-      "add_new_key": "Add new key",
-      "download_desktop_app": "Download desktop app"
+      "add_new_key": "Add new key"
     },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",

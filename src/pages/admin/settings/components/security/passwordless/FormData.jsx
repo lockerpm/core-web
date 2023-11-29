@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React, { useState } from "react";
 import {
   Modal,
 } from '@lockerpm/design';
@@ -9,19 +9,21 @@ import { } from '@ant-design/colors';
 import { useTranslation } from "react-i18next";
 import { } from "@ant-design/icons";
 
-import { PasswordlessForm } from "../../../../../../components";
+import { PairingForm, PasswordlessForm, ChangePasswordForm } from "../../../../../../components";
 
 const FormDataModal = (props) => {
   const { t } = useTranslation()
   const {
     visible = false,
     changing = false,
-    onError = () => {},
     onConfirm = () => {},
     onClose = () => {},
   } = props;
 
-  const userInfo = useSelector(state => state.auth.userInfo)
+  const userInfo = useSelector(state => state.auth.userInfo);
+
+  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey)
+  const [password, setPassword] = useState(null)
 
   return (
     <Modal
@@ -29,16 +31,37 @@ const FormDataModal = (props) => {
         userInfo.is_passwordless ? t('security.passwordless.turn_off') : t('security.passwordless.turn_on')
       }
       open={visible}
-      width={400}
+      onCancel={onClose}
+      width={360}
       footer={false}
-      onCancel={() => onClose()}
     >
-      <PasswordlessForm
-        changing={changing}
-        onConfirm={onConfirm}
-        onError={onError}
-        onClose={onClose}
-      />
+      {
+        isPair ? <PairingForm
+          isLogin={true}
+          onConfirm={() => setIsPair(false)}
+        /> : <div>
+          {
+            password ? <ChangePasswordForm
+              changing={changing}
+              onSave={(values) => onConfirm({
+                password,
+                ...values
+              })}
+            /> : <PasswordlessForm
+              changing={changing}
+              userInfo={userInfo}
+              onError={() => setIsPair(true)}
+              onConfirm={(password) => {
+                if (userInfo?.login_method === 'passwordless') {
+                  setPassword(password);
+                } else {
+                  onConfirm(password)
+                }
+              }}
+            />
+          }
+        </div>
+      }
     </Modal>
   );
 }

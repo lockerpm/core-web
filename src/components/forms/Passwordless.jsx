@@ -28,12 +28,13 @@ const PasswordlessForm = (props) => {
   const { t } = useTranslation()
   const {
     changing = false,
+    isLogin = false,
+    userInfo = {},
     onConfirm = () => {},
     onError = () => {},
     onClose = () => {}
   } = props;
 
-  const userInfo = useSelector(state => state.auth.userInfo)
   const isTouch = useSelector(state => state.service.isTouch)
   const isFingerprint = useSelector(state => state.service.isFingerprint)
 
@@ -46,11 +47,15 @@ const PasswordlessForm = (props) => {
   const [callingAPI, setCallingAPI] = useState(false)
 
   useEffect(() => {
-    global.store.dispatch(storeActions.updateIsTouch(false))
-    global.store.dispatch(storeActions.updateIsFingerprint(false))
-    setPasswordless(null)
+    resetState();
+    setPasswordless(null);
     getDeviceKeys();
   }, [])
+
+  const resetState = () => {
+    global.store.dispatch(storeActions.updateIsTouch(false));
+    global.store.dispatch(storeActions.updateIsFingerprint(false))
+  }
 
   const getDeviceKeys = async () => {
     setLoading(true)
@@ -65,11 +70,15 @@ const PasswordlessForm = (props) => {
     setLoading(false)
   }
 
-  const setApiToken = async () => {
-    await service.setApiToken(authServices.access_token());
-    setPin(null);
+  const handleContinue = async (pin = null) => {
     setStep(2);
-    setPwl();
+    if (isLogin || userInfo?.login_method === 'passwordless') {
+      getPwl();
+    } else {
+      setPin(pin);
+      await service.setApiToken(authServices.access_token());
+      setPwl();
+    }
   }
 
   const setPwl = async () => {
@@ -82,6 +91,7 @@ const PasswordlessForm = (props) => {
         pin: pin
       })
       setStep(2);
+      resetState();
       setPasswordless(response)
       await onConfirm(response)
     } catch (error) {
@@ -89,21 +99,51 @@ const PasswordlessForm = (props) => {
       setPasswordless(null);
       global.pushError(error);
       service.resetGRPCPorts();
+      resetState();
     }
-    global.store.dispatch(storeActions.updateIsTouch(false));
-    global.store.dispatch(storeActions.updateIsFingerprint(false))
+    setCallingAPI(false)
+  }
+
+  const getPwl = async () => {
+    setCallingAPI(true)
+    try {
+      const response = await service.getPasswordless({
+        email: userInfo.email,
+        devicePath: selectedDevice.path,
+        pin: pin
+      })
+      setStep(2);
+      resetState();
+      setPasswordless(response)
+      await onConfirm(response)
+    } catch (error) {
+      setStep(1);
+      setPasswordless(null);
+      global.pushError(error);
+      service.resetGRPCPorts();
+      resetState();
+    }
     setCallingAPI(false)
   }
 
   return (
-    <Spin spinning={loading || changing}>
+    <Spin spinning={loading}>
       <div className="passwordless-form text-center">
         {
           step === 0 && <div>
-            <p className="my-6">{t('passwordless.connect_key')}</p>
+            {
+              isLogin && <p className={`my-6 text-left`}>
+                {t('passwordless.connect_key_to_login')}
+              </p>
+            }
+            {
+              !isLogin && <p className={`my-6 text-left`}>
+                {userInfo?.login_method === 'passwordless' ? t('passwordless.choose_a_key') : t('passwordless.connect_key')}
+              </p>
+            }
             {
               devices.length === 0 && <Card
-                bodyStyle={{ padding: '12px 24px' }}
+                bodyStyle={{ padding: '9px 24px' }}
               >
                 {t('passwordless.no_key_found')}
               </Card>
@@ -112,7 +152,7 @@ const PasswordlessForm = (props) => {
               devices.map((d, index) => <Card
                 className="mt-4 cursor-pointer"
                 key={index}
-                bodyStyle={{ padding: '12px 24px' }}
+                bodyStyle={{ padding: '9px 24px' }}
                 style={{ borderColor: selectedDevice?.path == d.path ? green[7] : ''  }}
                 onClick={() => setSelectedDevice(d)}
               >
@@ -138,7 +178,7 @@ const PasswordlessForm = (props) => {
               type="primary"
               size="large"
               disabled={!selectedDevice}
-              onClick={setApiToken}
+              onClick={() => handleContinue(null)}
             >
               {t('button.continue')}
             </Button>
@@ -147,7 +187,7 @@ const PasswordlessForm = (props) => {
         {
           step !== 0 && <Card
             className="mt-10"
-            bodyStyle={{ padding: '12px 24px' }}
+            bodyStyle={{ padding: '9px 24px' }}
             style={{ borderColor: green[7]  }}
           >
             <div className="flex items-center">
@@ -174,7 +214,7 @@ const PasswordlessForm = (props) => {
               type="primary"
               size="large"
               disabled={!pin?.trim()}
-              onClick={() => setPwl()}
+              onClick={() => handleContinue(pin)}
               loading={callingAPI}
             >
               {t('button.continue')}
@@ -203,13 +243,18 @@ const PasswordlessForm = (props) => {
               />
               <p className="text-xl mt-4">{t('common.successfully')}</p>
             </Card>
-            <Button
-              className="mt-10 w-full"
-              size="large"
-              onClick={() => onClose()}
-            >
-              {t('button.close')}
-            </Button>
+            {
+              changing && <Spin className="mt-4"></Spin>
+            }
+            {
+              !isLogin && !userInfo?.login_method === 'passwordless' && !changing && <Button
+                className="mt-10 w-full"
+                size="large"
+                onClick={() => onClose()}
+              >
+                {t('button.close')}
+              </Button>
+            }
           </div>
         }
       </div>

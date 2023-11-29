@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import global from "../../../../config/global";
 
 import userServices from "../../../../services/user";
+import { PairingForm, PasswordlessForm } from "../../../../components";
 
 const SignInForm = (props) => {
   const {
@@ -20,9 +21,12 @@ const SignInForm = (props) => {
   } = props;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
+  const isDesktop = useSelector((state) => state.system.isDesktop)
+  const isConnected = useSelector((state) => state.service.isConnected)
 
   const [preLogin, setPreLogin] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
+  const [isPair, setIsPair] = useState(false)
 
   const [form] = Form.useForm();
 
@@ -46,6 +50,11 @@ const SignInForm = (props) => {
     await userServices.users_prelogin({ email: values.username }).then((response) => {
       // check password less
       setPreLogin(response)
+      if (response.login_method === 'passwordless') {
+        if (!isDesktop) {
+          setIsPair(!service.pairingService.hasKey)
+        }
+      }
     }).catch((error) => {
       setPreLogin(null)
       global.pushError(error)
@@ -61,41 +70,74 @@ const SignInForm = (props) => {
         onFinish={handleSubmit}
         disabled={loading || callingAPI}
       >
-        <Form.Item
-          name="username"
-          rules={[
-            global.rules.REQUIRED(t('auth_pages.username')),
-            global.rules.INVALID(t('auth_pages.username'), 'EMAIL'),
-          ]}
-        >
-          <Input
-            placeholder={t('placeholder.username')}
-            size="large"
-            onChange={() => setPreLogin(null)}
-          />
-        </Form.Item>
         {
-          preLogin && <Form.Item
-            name="password"
+          preLogin?.login_method !== 'passwordless' && <Form.Item
+            name="username"
             rules={[
-              global.rules.REQUIRED(t('auth_pages.password')),
+              global.rules.REQUIRED(t('auth_pages.username')),
+              global.rules.INVALID(t('auth_pages.username'), 'EMAIL'),
             ]}
           >
-            <Input.Password
-              placeholder={t('auth_pages.password')}
+            <Input
+              placeholder={t('placeholder.username')}
               size="large"
+              onChange={() => setPreLogin(null)}
             />
           </Form.Item>
         }
-        <Button
-          className="w-full"
-          size="large"
-          type="primary"
-          htmlType="submit"
-          loading={loading || callingAPI}
-        >
-          { preLogin ? t('button.sign_in') : t('button.continue')}
-        </Button>
+        {
+          !preLogin && <Button
+            className="w-full"
+            size="large"
+            type="primary"
+            htmlType="submit"
+            loading={loading || callingAPI}
+          >
+            {t('button.continue')}
+          </Button>
+        }
+        {
+          preLogin?.login_method === 'password' && <div>
+            <Form.Item
+              name="password"
+              rules={[
+                global.rules.REQUIRED(t('auth_pages.password')),
+              ]}
+            >
+              <Input.Password
+                placeholder={t('auth_pages.password')}
+                size="large"
+              />
+            </Form.Item>
+            <Button
+              className="w-full"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              loading={loading || callingAPI}
+            >
+              {t('button.sign_in')}
+            </Button>
+          </div>
+        }
+        {
+          preLogin?.login_method === 'passwordless' && <div>
+            {
+              isPair ? <PairingForm
+                isLogin={true}
+                onConfirm={() => setIsPair(false)}
+              /> : <PasswordlessForm
+                isLogin={true}
+                userInfo={preLogin}
+                onError={() => setIsPair(true)}
+                onConfirm={(password) => handleSubmit({
+                  username: preLogin.email,
+                  password
+                })}
+              />
+            }
+          </div>
+        }
       </Form>
     </div>
   );
