@@ -382,7 +382,9 @@
     "choose_a_key": "Choose a key to verify yourself",
     "new_password": "Enter new Password",
     "connect_key_to_login": "Passwordless login is required for this account. Connect to a security key to set up passwordless login.",
-    "install_desktop": "This account is set up with passwordless login, which requires you to install the desktop app."
+    "install_desktop": "This account is set up with passwordless login, which requires you to install the desktop app.",
+    "sync_open_desktop": "Cross platform sync is enabled for this account. Please open Locker Desktop App",
+    "sync_install_desktop": "Cross platform sync is enabled for this account, which requires you to install the desktop app."
   },
   "change_password": {
     "title": "Change Password",

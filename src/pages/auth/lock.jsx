@@ -201,6 +201,7 @@ const Lock = () => {
                 <div>
                   {
                     isPair && <PairingForm
+                      userInfo={userInfo}
                       callingAPI={callingAPI}
                       onConfirm={() => handlePairConfirm()}
                     />

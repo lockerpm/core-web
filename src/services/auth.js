@@ -68,7 +68,9 @@ function access_token_type() {
 }
 
 async function redirect_login() {
-  await service.lock();
+  if (global.store.getState().service.isDesktopConnected) {
+    await service.lock();
+  }
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(window.location)
   if (access_token()) {

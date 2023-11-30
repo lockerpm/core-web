@@ -37,6 +37,7 @@ const FormDataModal = (props) => {
     >
       {
         isPair ? <PairingForm
+          userInfo={userInfo}
           isLogin={true}
           onConfirm={() => setIsPair(false)}
         /> : <div>

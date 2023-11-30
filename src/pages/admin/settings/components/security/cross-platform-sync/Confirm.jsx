@@ -36,6 +36,7 @@ const ConfirmModal = (props) => {
       {
         isPair ? <PairingForm
           callingAPI={callingAPI}
+          userInfo={userInfo}
           onConfirm={() => {
             if (userInfo.login_method === 'passwordless') {
               setIsPair(false)

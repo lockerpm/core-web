@@ -152,6 +152,7 @@ const SignInForm = (props) => {
           step === 2 && <div>
             {
               isPair && <PairingForm
+                userInfo={preLogin}
                 isLogin={true}
                 onConfirm={() => handlePairConfirm()}
               />
