@@ -37,7 +37,7 @@ const FormData = (props) => {
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
   const isConnected = useSelector((state) => state.service.isConnected);
-  const isDesktop = useSelector((state) => state.service.isDesktop);
+  const isDesktop = useSelector((state) => state.system.isDesktop);
 
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
