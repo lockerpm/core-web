@@ -37,6 +37,7 @@ const FormData = (props) => {
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
   const isConnected = useSelector((state) => state.service.isConnected);
+  const isDesktop = useSelector((state) => state.service.isDesktop);
 
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
@@ -121,7 +122,7 @@ const FormData = (props) => {
           </p>
         }
         {
-          isConnected && userInfo?.login_method !== 'passwordless' && <Button
+          (isConnected || isDesktop) && userInfo?.login_method !== 'passwordless' && <Button
             type='primary'
             ghost
             icon={<UsbOutlined />}
@@ -131,7 +132,7 @@ const FormData = (props) => {
           </Button>
         }
         {
-          isConnected && userInfo?.login_method === 'passwordless' && !userInfo.is_require_passwordless && <Button
+          (isConnected || isDesktop) && userInfo?.login_method === 'passwordless' && !userInfo.is_require_passwordless && <Button
             type='primary'
             ghost
             icon={<UsbOutlined />}
@@ -145,7 +146,7 @@ const FormData = (props) => {
         {t('security.passwordless.description')}
       </p>
       {
-        !isConnected && <Button
+        !(isConnected || isDesktop) && <Button
           type='primary'
           className="mt-4"
           icon={<DownloadOutlined />}
