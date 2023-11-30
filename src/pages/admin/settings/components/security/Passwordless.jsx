@@ -26,7 +26,6 @@ import {
   DeleteOutlined
 } from "@ant-design/icons";
 
-import { green } from '@ant-design/colors';
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
@@ -207,7 +206,7 @@ const FormData = (props) => {
         onClose={() => setConfirmVisible(false)}
       />
       {
-        formVisible && isConnected && <FormDataModal
+        formVisible && (isConnected || isDesktop) && <FormDataModal
           changing={callingAPI}
           visible={formVisible}
           onConfirm={userInfo?.login_method === 'passwordless' ? handleTurnOffPwl : handleTurnOnPwl}
@@ -215,7 +214,7 @@ const FormData = (props) => {
         />
       }
       {
-        newKeyVisible && isConnected && <NewKeyModal
+        newKeyVisible && (isConnected || isDesktop) && <NewKeyModal
           changing={callingAPI}
           visible={newKeyVisible}
           onConfirm={() => handleAddedKey()}
