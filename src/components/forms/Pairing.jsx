@@ -75,7 +75,7 @@ const PairingForm = (props) => {
             approveCode ? <Button
               type="primary"
               className="w-full"
-              disabled={!pairingConfirmed}
+              disabled={!isDesktop && !pairingConfirmed}
               size="large"
               onClick={() => { !isDesktop ? confirmDesktopPairing() : confirmClient() }}
             >
