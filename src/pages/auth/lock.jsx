@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import './css/auth.scss';
 
 import {
@@ -38,14 +38,17 @@ const Lock = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const isDesktop = useSelector((state) => state.system.isDesktop)
+  const locale = useSelector((state) => state.system.locale);
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  const isLoading = useSelector((state) => state.system.isLoading);
+
+  const [loading, setLoading] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
   const [logging, setLogging] = useState(false);
   const [isPair, setIsPair] = useState(false)
   const [form] = Form.useForm();
-
-  const locale = useSelector((state) => state.system.locale);
-  const userInfo = useSelector((state) => state.auth.userInfo);
-  const isLoading = useSelector((state) => state.system.isLoading);
+  const [serviceUser, setServiceUser] = useState(false)
 
   const query = common.convertStringToQuery(window.location.search);
 
@@ -53,27 +56,43 @@ const Lock = () => {
     commonServices.fetch_user_info();
   }, [])
 
+  useEffect(() => {
+    if (userInfo?.email) {
+      getServiceUser();
+    }
+  }, [userInfo?.email])
+
+  const description = useMemo(() => {
+    if (userInfo?.sync_all_platforms) {
+      return t('lock.cross_platform_sync_enable')
+    }
+    return userInfo?.login_method === 'passwordless' ? t('lock.connect_key') : t('lock.description')
+  }, [userInfo])
+
   const handleUnlock = async () => {
-    form.validateFields().then(async (values) => {
-      await handleSubmit(values)
-    })
+    if (serviceUser) {
+      await handleSubmit(serviceUser)
+    } else {
+      form.validateFields().then(async (values) => {
+        await handleSubmit(values)
+      })
+    }
   }
 
   const handleSubmit = async (values) => {
     setCallingAPI(true)
-    await userServices.users_session({
-      password: values.password,
-      email: userInfo.email
-    }).then(async (response) => {
+    const payload = {
+      ...values,
+      keyB64: values.key,
+      email: userInfo.email,
+      username: userInfo.email
+    }
+    await userServices.users_session(payload).then(async (response) => {
       if (response.is_factor2) {
-        global.store.dispatch(storeActions.updateFactor2({
-          ...response,
-          email: userInfo.email,
-          password: values.password,
-        }));
+        global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
         global.navigate(global.keys.OTP_CODE, {}, {return_url: query?.return_url})
       } else {
-        await coreServices.unlock({...response, password: values.password, username: userInfo.email })
+        await coreServices.unlock({...response, ...payload })
         await commonServices.sync_data();
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         navigate(returnUrl);
@@ -84,6 +103,39 @@ const Lock = () => {
     setCallingAPI(false)
   }
 
+  const getServiceUser = async () => {
+    setLoading(true);
+    if (userInfo?.sync_all_platforms || userInfo.login_method === 'passwordless') {
+      setIsPair(!isDesktop && !service.pairingService?.hasKey)
+      if (userInfo.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
+        try {
+          const serviceUser = await service.getCurrentUser();
+          if (serviceUser?.email === userInfo.email) {
+            setServiceUser(serviceUser)
+          }
+        } catch (error) {
+          commonServices.reset_service();
+        }
+      }
+    }
+    setLoading(false)
+  }
+
+  const handlePairConfirm = async () => {
+    setIsPair(false)
+    if (userInfo?.sync_all_platforms) {
+      try {
+        const serviceUser = await service.getCurrentUser();
+        if (serviceUser?.email === userInfo.email) {
+          setServiceUser(serviceUser)
+          await handleSubmit(serviceUser)
+        }
+      } catch (error) {
+        commonServices.reset_service();
+      }
+    }
+  }
+
   const handleLogout = async () => {
     setLogging(true);
     await authServices.logout();
@@ -91,7 +143,7 @@ const Lock = () => {
   }
 
   return (
-    <Spin spinning={isLoading}>
+    <Spin spinning={isLoading || loading}>
       <div
         className="lock-page"
       >
@@ -125,36 +177,37 @@ const Lock = () => {
                 </p>
               </div>
               <p className="mb-6 mt-2">
-                { userInfo?.login_method === 'passwordless' ? t('lock.connect_key') : t('lock.description') }
+                {description}
               </p>
               <Form
                 form={form}
                 key={locale}
               >
-                <div className="mb-4">
-                  <Form.Item>
-                    <Input
-                      placeholder={t('auth_pages.username')}
-                      prefix={
-                        <Avatar
-                          src={userInfo?.avatar}
-                        >
-                          {userInfo?.email.slice(0, 1)?.toUpperCase()}
-                        </Avatar>
-                      }
-                      value={userInfo?.name}
-                      size="large"
-                      readOnly={true}
+                <Form.Item>
+                  <Input
+                    placeholder={t('auth_pages.username')}
+                    prefix={
+                      <Avatar
+                        src={userInfo?.avatar}
+                      >
+                        {userInfo?.email.slice(0, 1)?.toUpperCase()}
+                      </Avatar>
+                    }
+                    value={userInfo?.name}
+                    size="large"
+                    readOnly={true}
+                  />
+                </Form.Item>
+                <div>
+                  {
+                    isPair && <PairingForm
+                      callingAPI={callingAPI}
+                      onConfirm={() => handlePairConfirm()}
                     />
-                  </Form.Item>
-                </div>
-                {
-                  userInfo?.login_method === 'passwordless' ? <div>
-                    {
-                      isPair ? <PairingForm
-                        isLogin={true}
-                        onConfirm={() => setIsPair(false)}
-                      /> : <PasswordlessForm
+                  }
+                  {
+                    userInfo?.login_method === 'passwordless' && !isPair && !serviceUser && <div>
+                      <PasswordlessForm
                         changing={callingAPI}
                         isUnlock={true}
                         userInfo={userInfo}
@@ -163,37 +216,42 @@ const Lock = () => {
                           password
                         })}
                       />
-                    }
-                    {
-                      !callingAPI && <Button
-                        className="w-full mt-6"
-                        size="large"
-                        htmlType="submit"
-                        loading={logging}
-                        onClick={() => handleLogout()}
+                      {
+                        !callingAPI && <Button
+                          className="w-full mt-6"
+                          size="large"
+                          htmlType="submit"
+                          loading={logging}
+                          onClick={() => handleLogout()}
+                        >
+                          {t('sidebar.logout')}
+                        </Button>
+                      }
+                    </div>
+                  }
+                  {
+                    userInfo?.login_method === 'password' && !isPair && !serviceUser && <div className="mb-6">
+                      <Form.Item
+                        name="password"
+                        noStyle
+                        rules={[
+                          RULES.REQUIRED(t('lock.password')),
+                        ]}
                       >
-                        {t('sidebar.logout')}
-                      </Button>
-                    }
-                  </div> : <div>
-                    <Form.Item
-                      name="password"
-                      noStyle
-                      rules={[
-                        RULES.REQUIRED(t('lock.password')),
-                      ]}
-                    >
-                      <Input.Password
-                        placeholder={t('lock.password')}
-                        size="large"
-                        disabled={callingAPI || logging}
-                        onPressEnter={handleUnlock}
-                      />
-                    </Form.Item>
-                    <Row gutter={[8, 0]}>
+                        <Input.Password
+                          placeholder={t('lock.password')}
+                          size="large"
+                          disabled={callingAPI || logging}
+                          onPressEnter={handleUnlock}
+                        />
+                      </Form.Item>
+                    </div>
+                  }
+                  {
+                    !isPair && (serviceUser || userInfo?.login_method === 'password') && <Row gutter={[8, 0]}>
                       <Col span={12}>
                         <Button
-                          className="w-full mt-6"
+                          className="w-full"
                           size="large"
                           htmlType="submit"
                           disabled={callingAPI}
@@ -205,7 +263,7 @@ const Lock = () => {
                       </Col>
                       <Col span={12}>
                         <Button
-                          className="w-full mt-6"
+                          className="w-full"
                           size="large"
                           type="primary"
                           htmlType="submit"
@@ -217,8 +275,8 @@ const Lock = () => {
                         </Button>
                       </Col>
                     </Row>
-                  </div>
-                }
+                  }
+                </div>
               </Form>
             </Card>
           </div>

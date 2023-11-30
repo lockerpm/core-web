@@ -19,6 +19,7 @@ import storeActions from "../../store/actions";
 const PairingForm = (props) => {
   const { t } = useTranslation()
   const {
+    callingAPI = false,
     onConfirm = () => {}
   } = props;
 
@@ -77,6 +78,7 @@ const PairingForm = (props) => {
               className="w-full"
               disabled={!isDesktop && !pairingConfirmed}
               size="large"
+              loading={callingAPI}
               onClick={() => { !isDesktop ? confirmDesktopPairing() : confirmClient() }}
             >
               {t('button.confirm')}
@@ -90,15 +92,29 @@ const PairingForm = (props) => {
             </Button>
           }
           {
-            isDesktop && <Button
-              type="link"
-              className="mt-6 w-full"
-              icon={<ReloadOutlined />}
-              onClick={() => resetClient}
-            >
-              {t('passwordless.reset_code')}
-            </Button>
+            approveCode && <div>
+              {
+                isDesktop ? <Button
+                  type="text"
+                  size="large"
+                  className="mt-2 w-full"
+                  icon={<ReloadOutlined />}
+                  onClick={() => resetClient}
+                >
+                  {t('passwordless.reset_code')}
+                </Button> : <Button
+                  type="text"
+                  size="large"
+                  className="mt-2 w-full"
+                  icon={<ReloadOutlined />}
+                  onClick={() => service.sendPairingRequest()}
+                >
+                  {t('passwordless.repair')}
+                </Button>
+              }
+            </div>
           }
+          
         </div>
       }
       {

@@ -371,6 +371,7 @@
     "pairing_required": "Desktop app pairing is required. On the desktop app, confirm the code below.",
     "confirm_code": "Confirm if the code in your browser matches the below",
     "reset_code": "Reset code",
+    "repair": "Repair",
     "open_desktop": "Passwordless login is required for this account. Please open Locker Desktop App",
     "connect_key": "Connect the key you want to add as a secondary key",
     "no_key_found": "No key found",
@@ -455,7 +456,8 @@
     "password": "Password",
     "master_password_hint": "Get Password hint",
     "unlock": "Unlock",
-    "connect_key": "Connect to your security key"
+    "connect_key": "Connect to your security key",
+    "cross_platform_sync_enable": "Your account enabled Cross-platform sync"
   },
   "inventory": {
     "all_items": "All items",

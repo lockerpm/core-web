@@ -5,7 +5,9 @@ import storeActions from '../../store/actions'
 
 import authServices from '../../services/auth'
 
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+
+let reconnect = null
 
 function ClientService() {
   const userInfo = useSelector((state) => state.auth.userInfo);
@@ -36,6 +38,7 @@ function ClientService() {
       global.store.dispatch(storeActions.updateApproveCode(data.approveCode));
       global.store.dispatch(storeActions.updateClientId(data.clientId));
       global.store.dispatch(storeActions.updateClientType(data.clientType));
+      global.store.dispatch(storeActions.updatePairingConfirmed(false));
     })
     service.on('pairingConfirmed', () => {
       global.store.dispatch(storeActions.updatePairingConfirmed(true));
@@ -48,6 +51,11 @@ function ClientService() {
     })
     service.on('userLogin', (data) => {
       // setMsg(`User ${data.email} just login`)
+    })
+    service.on('userLock', async (data) => {
+      if (data.email === userInfo?.email && userInfo?.sync_all_platforms) {
+        authServices.redirect_login();
+      }
     })
     service.on('userLogout', async (data) => {
       if (data.email === userInfo?.email && userInfo?.sync_all_platforms) {
