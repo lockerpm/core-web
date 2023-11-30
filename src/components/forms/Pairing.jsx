@@ -19,7 +19,6 @@ import storeActions from "../../store/actions";
 const PairingForm = (props) => {
   const { t } = useTranslation()
   const {
-    isLogin = false,
     onConfirm = () => {}
   } = props;
 
@@ -27,7 +26,6 @@ const PairingForm = (props) => {
   const isConnected = useSelector((state) => state.service.isConnected)
   const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
   const approveCode = useSelector((state) => state.service.approveCode)
-  const requireDesktop = useSelector((state) => state.service.requireDesktop)
   const pairingConfirmed = useSelector((state) => state.service.pairingConfirmed)
   const clientId = useSelector((state) => state.service.clientId);
   const clientType = useSelector((state) => state.service.clientType);
@@ -62,7 +60,7 @@ const PairingForm = (props) => {
   return (
     <div className="pairing-form text-center">
       {
-        isDesktopConnected && <div>
+        (isDesktopConnected || isDesktop) && <div>
           <p className="mb-10 mt-6 text-left">
             {t(isDesktop ? 'passwordless.confirm_code' : 'passwordless.pairing_required')}
           </p>
@@ -104,7 +102,7 @@ const PairingForm = (props) => {
         </div>
       }
       {
-        !isConnected && <div>
+        !isConnected && !isDesktop && <div>
           <p className="mb-10 mt-6">{t('passwordless.install_desktop')}</p>
           <Button
             type="primary"
@@ -117,7 +115,7 @@ const PairingForm = (props) => {
         </div>
       }
       {
-        isConnected && !isDesktopConnected && <div>
+        isConnected && !isDesktopConnected && !isDesktop && <div>
           <p className="mb-10 mt-6">{t('passwordless.open_desktop')}</p>
           <Button
             type="primary"

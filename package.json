@@ -93,7 +93,7 @@
     "zxcvbn": "^4.4.2"
   },
   "scripts": {
-    "start": "set HTTPS=true&&env-cmd -e development craco start",
+    "start": "set PORT=3002 && set HTTPS=true&&env-cmd -e development craco start",
     "start:mac": "HTTPS=true env-cmd -e development craco start",
     "build:dev": "env-cmd -e development craco build",
     "build:stg": "env-cmd -e staging craco build",
