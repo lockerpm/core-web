@@ -7,8 +7,6 @@ import authServices from '../../services/auth'
 
 import { useSelector } from 'react-redux';
 
-let reconnect = null
-
 function ClientService() {
   const userInfo = useSelector((state) => state.auth.userInfo);
 
