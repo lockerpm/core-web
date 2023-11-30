@@ -68,11 +68,6 @@ function access_token_type() {
 }
 
 async function redirect_login() {
-  if (
-    global.store.getState().system.isDesktop || (global.store.getState().service.isDesktopConnected && service.pairingService?.hasKey))
-  {
-    await service.lock();
-  }
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(window.location)
   if (access_token()) {
