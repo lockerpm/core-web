@@ -21,8 +21,9 @@ const FormDataModal = (props) => {
   } = props;
 
   const userInfo = useSelector(state => state.auth.userInfo);
+  const isDesktop = useSelector((state) => state.system.isDesktop);
 
-  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey)
+  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey && !isDesktop)
   const [password, setPassword] = useState(null)
 
   return (
