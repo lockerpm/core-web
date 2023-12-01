@@ -17,6 +17,8 @@ import common from "../../../utils/common"
 
 import global from "../../../config/global"
 
+import companyService from "../../../services/company"
+
 const Companies = (props) => {
   const { t } = useTranslation()
   const location = useLocation()
@@ -41,6 +43,22 @@ const Companies = (props) => {
     },
   ])
 
+  const getAllCompanies = async () => {
+    await companyService
+      .get_companies()
+      .then((response) => {
+        setCompanies(response.results)
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  useEffect(() => {
+    getAllCompanies()
+  }, [])
+
   const [formVisible, setFormVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [params, setParams] = useState({
@@ -64,7 +82,7 @@ const Companies = (props) => {
   }, [currentPage?.query?.searchText, syncing])
 
   const filteredData = useMemo(() => {
-    return common.paginationAndSortData(companies, params, params.orderField, params.orderDirection, [
+    return common.paginationAndSortData([...companies], params, params.orderField, params.orderDirection, [
       (f) => f.id,
       (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
     ])
