@@ -29,7 +29,7 @@ import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
 const FormData = (props) => {
-  const { 
+  const {
     className = '',
   } = props;
   const { t } = useTranslation();
@@ -54,7 +54,7 @@ const FormData = (props) => {
     setBackupKeys(response || [])
   }
 
-  const handleConfirmPassword = async (passwordHash, password) => {
+  const handleConfirmPassword = async (password) => {
     setPassword(password);
     setConfirmVisible(false);
     setFormVisible(true);
@@ -124,7 +124,7 @@ const FormData = (props) => {
             icon={<UsbOutlined />}
             onClick={() => setConfirmVisible(true)}
           >
-            { t('security.passwordless.turn_on') }
+            {t('security.passwordless.turn_on')}
           </Button>
         }
         {
@@ -170,13 +170,13 @@ const FormData = (props) => {
                     danger
                     type="text"
                     icon={<DeleteOutlined />}
-                    onClick={() => {}}
+                    onClick={() => { }}
                   >
                   </Button>
                 ]}
               >
                 <div className="flex items-center">
-                  <UsbOutlined className="mr-4" style={{ fontSize: 28 }}/>
+                  <UsbOutlined className="mr-4" style={{ fontSize: 28 }} />
                   <div>
                     <p className="font-semibold">{item.name}</p>
                     <p>{t('common.updated_time')}: {common.convertDateTime(item.creation_date)}</p>
