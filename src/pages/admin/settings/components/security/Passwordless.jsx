@@ -22,7 +22,6 @@ import {
   RightOutlined,
   UsbOutlined,
   PlusOutlined,
-  DownloadOutlined,
   DeleteOutlined
 } from "@ant-design/icons";
 
@@ -35,8 +34,6 @@ const FormData = (props) => {
   } = props;
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
-  const isConnected = useSelector((state) => state.service.isConnected);
-  const isDesktop = useSelector((state) => state.system.isDesktop);
 
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
@@ -121,7 +118,7 @@ const FormData = (props) => {
           </p>
         }
         {
-          (isConnected || isDesktop) && userInfo?.login_method !== 'passwordless' && <Button
+          userInfo?.login_method === 'password' && <Button
             type='primary'
             ghost
             icon={<UsbOutlined />}
@@ -131,10 +128,11 @@ const FormData = (props) => {
           </Button>
         }
         {
-          (isConnected || isDesktop) && userInfo?.login_method === 'passwordless' && !userInfo.is_require_passwordless && <Button
+          userInfo?.login_method === 'passwordless' && <Button
             type='primary'
             ghost
             icon={<UsbOutlined />}
+            disabled={userInfo.is_require_passwordless}
             onClick={() => setFormVisible(true)}
           >
             {t('security.passwordless.turn_off')}
@@ -144,15 +142,6 @@ const FormData = (props) => {
       <p className="mt-1">
         {t('security.passwordless.description')}
       </p>
-      {
-        !(isConnected || isDesktop) && <Button
-          type='primary'
-          className="mt-4"
-          icon={<DownloadOutlined />}
-        >
-          {t('button.download_desktop_app')}
-        </Button>
-      }
       {
         expand && <div className="mt-4">
           <div className="flex items-center justify-between mb-2">
@@ -200,13 +189,14 @@ const FormData = (props) => {
       }
       <PasswordConfirmModal
         visible={confirmVisible}
-        title={t('security.two_fa.turn_off')}
+        title={userInfo.password_method === 'passwordless' ? t('security.passwordless.turn_off') : t('security.passwordless.turn_on')}
         okText={t('button.confirm')}
+        requireDesktop={true}
         onConfirm={handleConfirmPassword}
         onClose={() => setConfirmVisible(false)}
       />
       {
-        formVisible && (isConnected || isDesktop) && <FormDataModal
+        formVisible && <FormDataModal
           changing={callingAPI}
           visible={formVisible}
           onConfirm={userInfo?.login_method === 'passwordless' ? handleTurnOffPwl : handleTurnOnPwl}
@@ -214,7 +204,7 @@ const FormData = (props) => {
         />
       }
       {
-        newKeyVisible && (isConnected || isDesktop) && <NewKeyModal
+        newKeyVisible && <NewKeyModal
           changing={callingAPI}
           visible={newKeyVisible}
           onConfirm={() => handleAddedKey()}

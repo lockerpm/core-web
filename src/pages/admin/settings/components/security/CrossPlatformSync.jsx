@@ -10,8 +10,6 @@ import {
   PasswordConfirmModal
 } from '../../../../../components';
 
-import ConfirmModal from "./cross-platform-sync/Confirm";
-
 import userServices from "../../../../../services/user";
 import commonServices from "../../../../../services/common";
 
@@ -28,35 +26,25 @@ const CrossPlatformSync = (props) => {
   const { t } = useTranslation();
 
   const userInfo = useSelector(state => state.auth.userInfo);
-  const isDesktop = useSelector(state => state.system.isDesktop);
 
-  const [password, setPassword] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
   const [confirmVisible, setConfirmVisible] = useState(false)
 
   const action = useMemo(() => {
     return userInfo.sync_all_platforms ? t('security.cross_platform_sync.turn_off') : t('security.cross_platform_sync.turn_on')
   }, [userInfo])
 
-  const onConfirmPassword = async (keyHash, password) => {
-    setPassword(password)
-    if (service.pairingService?.hasKey || isDesktop) {
-      await toggleSyncPlatforms();
-      await serviceLogin(password, !userInfo.sync_all_platforms);
-      setConfirmVisible(false);
-    } else {
-      setConfirmVisible(true);
-    }
-    setConfirmPasswordVisible(false);
-  }
-
-  const onConfirm = async (data) => {
+  const onConfirm = async (password) => {
     setCallingAPI(true);
     await toggleSyncPlatforms();
-    await serviceLogin(data || password, !userInfo.sync_all_platforms);
-    setConfirmVisible(true);
+    if (!userInfo.sync_all_platforms) {
+      await commonServices.service_login({
+        email: userInfo.email,
+        password: password
+      })
+    }
     setCallingAPI(false);
+    setConfirmVisible(false);
   }
 
   const toggleSyncPlatforms = async () => {
@@ -71,23 +59,6 @@ const CrossPlatformSync = (props) => {
     })
   }
 
-  const serviceLogin = async (password, sync_all_platforms) => {
-    if (sync_all_platforms) {
-      await commonServices.service_login({
-        email: userInfo.email,
-        password
-      })
-    }
-  }
-
-  const handleOpenConfirmModal = () => {
-    if (userInfo.login_method === 'password') {
-      setConfirmPasswordVisible(true)
-    } else {
-      setConfirmVisible(true)
-    }
-  }
-
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -98,7 +69,7 @@ const CrossPlatformSync = (props) => {
           type='primary'
           ghost
           icon={<RedoOutlined />}
-          onClick={() => handleOpenConfirmModal()}
+          onClick={() => setConfirmVisible(true)}
         >
           {action}
         </Button>
@@ -108,14 +79,9 @@ const CrossPlatformSync = (props) => {
       </p>
       <PasswordConfirmModal
         title={action}
-        visible={confirmPasswordVisible}
-        onClose={() => setConfirmPasswordVisible(false)}
-        onConfirm={onConfirmPassword}
-      />
-      <ConfirmModal
-        action={action}
         callingAPI={callingAPI}
         visible={confirmVisible}
+        requireDesktop={!userInfo.sync_all_platforms}
         onClose={() => setConfirmVisible(false)}
         onConfirm={onConfirm}
       />

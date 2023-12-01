@@ -5,14 +5,12 @@ const service = (state = initial.service, action) => {
   switch (action.type) {
   case actionTypes.SET_IS_READY:
     return { ...state, isReady: action.payload }
-    case actionTypes.SET_REQUIRE_DESKTOP:
-  return { ...state, requireDesktop: action.payload }
-      case actionTypes.SET_REQUIRE_PAIRING:
-  return { ...state, requirePairing: action.payload }
-    case actionTypes.SET_IS_CONNECTED:
-  return { ...state, isConnected: action.payload }
-    case actionTypes.SET_APPROVE_CODE:
-  return { ...state, approveCode: action.payload }
+  case actionTypes.SET_REQUIRE_PAIRING:
+    return { ...state, requirePairing: action.payload }
+  case actionTypes.SET_IS_CONNECTED:
+    return { ...state, isConnected: action.payload }
+  case actionTypes.SET_APPROVE_CODE:
+    return { ...state, approveCode: action.payload }
   case actionTypes.SET_CLIENT_ID:
     return { ...state, clientId: action.payload }
   case actionTypes.SET_CLIENT_TYPE:

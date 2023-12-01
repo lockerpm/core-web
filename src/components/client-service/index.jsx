@@ -19,9 +19,6 @@ function ClientService() {
   service.on('serviceDisconnected', () => {
     global.store.dispatch(storeActions.updateIsConnected(false));
   })
-  service.on('requireDesktopOpen', () => {
-    global.store.dispatch(storeActions.updateRequireDesktop(true))
-  })
   service.on('requirePairing', () => {
     global.store.dispatch(storeActions.updateRequirePairing(true))
   })

@@ -22,14 +22,15 @@ const FormDataModal = (props) => {
 
   const userInfo = useSelector(state => state.auth.userInfo);
   const isDesktop = useSelector((state) => state.system.isDesktop);
+  const isConnected = useSelector((state) => state.service.isConnected);
 
-  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey && !isDesktop)
+  const [isPair, setIsPair] = useState(!isConnected || (!service.pairingService?.hasKey && !isDesktop))
   const [password, setPassword] = useState(null)
 
   return (
     <Modal
       title={
-        userInfo.is_passwordless ? t('security.passwordless.turn_off') : t('security.passwordless.turn_on')
+        userInfo.password_method === 'passwordless' ? t('security.passwordless.turn_off') : t('security.passwordless.turn_on')
       }
       open={visible}
       onCancel={onClose}

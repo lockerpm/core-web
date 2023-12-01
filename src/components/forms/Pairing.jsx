@@ -19,7 +19,6 @@ import storeActions from "../../store/actions";
 const PairingForm = (props) => {
   const { t } = useTranslation()
   const {
-    userInfo = {},
     callingAPI = false,
     onConfirm = () => {}
   } = props;
@@ -62,7 +61,7 @@ const PairingForm = (props) => {
   return (
     <div className="pairing-form text-center">
       {
-        (isDesktopConnected || isDesktop) && <div>
+        isConnected && (isDesktopConnected || isDesktop) && <div>
           <p className="mb-10 mt-6 text-left">
             {t(isDesktop ? 'passwordless.confirm_code' : 'passwordless.pairing_required')}
           </p>
@@ -121,7 +120,7 @@ const PairingForm = (props) => {
       {
         !isConnected && !isDesktop && <div>
           <p className="mb-10 mt-6">
-            {userInfo.sync_all_platforms ? t('passwordless.sync_install_desktop') : t('passwordless.install_desktop')}
+            { t('passwordless.install_desktop')}
           </p>
           <Button
             type="primary"
@@ -136,7 +135,7 @@ const PairingForm = (props) => {
       {
         isConnected && !isDesktopConnected && !isDesktop && <div>
           <p className="mb-10 mt-6">
-            {userInfo.sync_all_platforms ? t('passwordless.sync_open_desktop') :  t('passwordless.open_desktop')}
+            { t('passwordless.open_desktop')}
           </p>
           <Button
             type="primary"

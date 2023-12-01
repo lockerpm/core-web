@@ -46,7 +46,6 @@ export default {
   },
   service: {
     isReady: false,
-    requireDesktop: false,
     requirePairing: false,
     isConnected: false,
     isDesktopConnected: false,

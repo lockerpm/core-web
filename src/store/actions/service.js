@@ -7,13 +7,6 @@ const updateIsReady = isReady => {
   }
 }
 
-const updateRequireDesktop = requireDesktop => {
-  return {
-    type: actionTypes.SET_REQUIRE_DESKTOP,
-    payload: requireDesktop,
-  }
-}
-
 const updateRequirePairing = requirePairing => {
   return {
     type: actionTypes.SET_REQUIRE_PAIRING,
@@ -79,7 +72,6 @@ const updateIsDesktopConnected = isDesktopConnected => {
 
 export default {
   updateIsReady,
-  updateRequireDesktop,
   updateRequirePairing,
   updateIsConnected,
   updateApproveCode,
