@@ -117,6 +117,8 @@ const Lock = () => {
           commonServices.reset_service();
         }
       }
+    } else {
+      setIsPair(false)
     }
     setLoading(false)
   }
