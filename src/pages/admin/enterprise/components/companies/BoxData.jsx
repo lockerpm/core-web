@@ -1,14 +1,18 @@
 import React, { useMemo } from "react"
-import { Collapse } from "@lockerpm/design"
+import { Collapse, Avatar, Space, Button } from "@lockerpm/design"
 
 import {} from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy } from "../../../../../components"
+import { TextCopy, RouterLink } from "../../../../../components"
 
 import common from "../../../../../utils/common"
+import global from "../../../../../config/global"
 
-import {} from "@ant-design/icons"
+import {
+  EditOutlined,
+  DeleteOutlined
+} from "@ant-design/icons"
 
 const BoxData = (props) => {
   const { t } = useTranslation()
@@ -20,8 +24,6 @@ const BoxData = (props) => {
     params = {},
     onUpdate = () => {},
     onDelete = () => {},
-    onStop = () => {},
-    onShare = () => {},
   } = props
 
   const boxData = useMemo(() => {
@@ -42,9 +44,22 @@ const BoxData = (props) => {
           key={record.id}
           header={
             <div className='flex align-items justify-between'>
-              <p className='font-semibold'>{record.name}</p>
-              // action
-              <></>
+              <div className="flex items-center">
+                <Avatar shape="square" src={record.avatar}/>
+                <div className="ml-2">
+                  <RouterLink
+                    className={'font-semibold'}
+                    label={record.name}
+                    routerName={global.keys.COMPANY_DASHBOARD}
+                    routerParams={{ company_id: record.id }}
+                  />
+                  <p className='font-semibold'>{record.enterprise_name}</p>
+                </div>
+              </div>
+              <Space size={[8, 8]}>
+                <Button type='text' size='small' icon={<EditOutlined />} onClick={() => onUpdate(record)} />
+                <Button type='text' size='small' danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} />
+              </Space>
             </div>
           }
         >
@@ -54,11 +69,11 @@ const BoxData = (props) => {
           </div>
           <div className='flex items-center mb-2'>
             <p className='font-semibold mr-2'>{t("common.created_time")}:</p>
-            <TextCopy value={common.timeFromNow(record.creationDate)} />
+            <TextCopy value={common.timeFromNow(record.creation_date)} />
           </div>
           <div className='flex items-center'>
             <p className='font-semibold mr-2'>{t("common.updated_time")}:</p>
-            <TextCopy value={common.timeFromNow(record.revisionDate)} />
+            <TextCopy value={common.timeFromNow(record.revision_date || record.creation_date)} />
           </div>
         </Collapse.Panel>
       ))}

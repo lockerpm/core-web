@@ -1,14 +1,15 @@
 import React, { useMemo } from "react"
-import { Table, Space, Button } from "@lockerpm/design"
+import { Table, Space, Button, Avatar } from "@lockerpm/design"
 
 import {} from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy } from "../../../../../components"
+import { TextCopy, RouterLink } from "../../../../../components"
 
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 
 import common from "../../../../../utils/common"
+import global from "../../../../../config/global"
 
 const TableData = (props) => {
   const { t } = useTranslation()
@@ -29,9 +30,17 @@ const TableData = (props) => {
         key: "name",
         align: "left",
         render: (_, record) => (
-          <div>
-            <p className='font-semibold'>{record.name}</p>
-            <p className='mt-1'>{record.description}</p>
+          <div className="flex items-center">
+            <Avatar shape="square" src={record.avatar}/>
+            <div className="ml-2">
+              <RouterLink
+                className={'font-semibold'}
+                label={record.name}
+                routerName={global.keys.COMPANY_DASHBOARD}
+                routerParams={{ company_id: record.id }}
+              />
+              <p className='mt-1'>{record.enterprise_name}</p>
+            </div>
           </div>
         ),
       },
@@ -41,7 +50,7 @@ const TableData = (props) => {
         key: "creationDate",
         align: "center",
         width: 200,
-        render: (_, record) => <TextCopy value={common.timeFromNow(record.creationDate)} align={"center"} />,
+        render: (_, record) => <TextCopy value={common.timeFromNow(record.creation_date)} align={"center"} />,
       },
       {
         title: t("common.updated_time"),
@@ -49,7 +58,7 @@ const TableData = (props) => {
         key: "revisionDate",
         align: "center",
         width: 200,
-        render: (_, record) => <TextCopy value={common.timeFromNow(record.revisionDate)} align={"center"} />,
+        render: (_, record) => <TextCopy value={common.timeFromNow(record.revision_date || record.creation_date)} align={"center"} />,
       },
       {
         title: t("common.actions"),

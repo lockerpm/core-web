@@ -45,7 +45,7 @@ const Companies = (props) => {
 
   const getAllCompanies = async () => {
     await companyService
-      .get_companies()
+      .list()
       .then((response) => {
         setCompanies(response.results)
         console.log(response)
@@ -109,19 +109,19 @@ const Companies = (props) => {
     setFormVisible(true)
   }
 
-  const deleteItem = (folder) => {
+  const deleteItem = (company) => {
     global.confirm(async () => {
-      try {
-        global.pushSuccess(t("notification.success.folder.deleted"))
+      companyService.remove(company.id).then(() => {
+        global.pushSuccess(t("notification.success.company.deleted"))
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
             page: params.page - 1,
           })
         }
-      } catch (error) {
+      }).catch((error) => {
         global.pushError(error)
-      }
+      })
     })
   }
 
@@ -172,7 +172,12 @@ const Companies = (props) => {
       {filteredData.total > global.constants.PAGE_SIZE && !isMobile && (
         <Pagination params={params} total={filteredData.total} onChange={handleChangePage} />
       )}
-      <FormData visible={formVisible} item={selectedItem} onClose={() => setFormVisible(false)} />
+      <FormData
+        visible={formVisible}
+        item={selectedItem}
+        onReload={getAllCompanies}
+        onClose={() => setFormVisible(false)}
+      />
     </div>
   )
 }

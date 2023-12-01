@@ -1,14 +1,14 @@
 import request from "../utils/request"
 import global from "../config/global"
 
-function get_companies() {
+function list() {
   return request({
     url: global.endpoint.COMPANIES,
     method: "get",
   })
 }
 
-function create_company(data = {}) {
+function create(data = {}) {
   return request({
     url: global.endpoint.COMPANIES,
     method: "post",
@@ -16,15 +16,24 @@ function create_company(data = {}) {
   })
 }
 
-function get_company_by_id(id) {
+function update(id, data = {}) {
   return request({
     url: global.endpoint.COMPANY.replace(":id", id),
-    method: "get",
+    method: "put",
+    data
+  })
+}
+
+function remove(id) {
+  return request({
+    url: global.endpoint.COMPANY.replace(":id", id),
+    method: "delete",
   })
 }
 
 export default {
-  get_companies,
-  create_company,
-  get_company_by_id,
+  list,
+  create,
+  update,
+  remove
 }

@@ -13,7 +13,9 @@ import {
   DashboardOutlined,
   ProjectOutlined,
   MailOutlined,
-  KeyOutlined
+  KeyOutlined,
+  GroupOutlined,
+  MessageOutlined
 } from '@ant-design/icons'
 
 import keys from './keys'
@@ -162,6 +164,38 @@ export default {
       parent: keys.ENTERPRISE,
       icon: <KeyOutlined />,
       label: 'sidebar.sso_configuration',
+    },
+
+    // Enterprise detail
+    {
+      key: keys.COMPANY_DASHBOARD,
+      parent: keys.COMPANY,
+      icon: <ProjectOutlined />,
+      label: 'sidebar.company_dashboard',
+    },
+    {
+      key: keys.COMPANY_USERS,
+      parent: keys.COMPANY,
+      icon: <UserOutlined />,
+      label: 'sidebar.company_users',
+    },
+    {
+      key: keys.COMPANY_GROUPS,
+      parent: keys.COMPANY,
+      icon: <GroupOutlined />,
+      label: 'sidebar.company_groups',
+    },
+    {
+      key: keys.COMPANY_POLICY,
+      parent: keys.COMPANY,
+      icon: <ProjectOutlined />,
+      label: 'sidebar.company_policy',
+    },
+    {
+      key: keys.COMPANY_ACTIVITY_LOGS,
+      parent: keys.COMPANY,
+      icon: <MessageOutlined />,
+      label: 'sidebar.company_activity_logs',
     },
   ]
 } 

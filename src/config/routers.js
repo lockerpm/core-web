@@ -229,9 +229,35 @@ export default {
       element: 'EmailSettings',
     },
     {
-      name: keys.SSO_CONFIGURATION,
+      name: keys.SSO_CONFIGURATION, 
       path: '/enterprise/sso-configuration',
       element: 'SSOConfiguration',
+    },
+    // Enterprise detail
+    {
+      name: keys.COMPANY_DASHBOARD,
+      path: '/enterprise/companies/:company_id',
+      element: 'CompanyDashboard',
+    },
+    {
+      name: keys.COMPANY_USERS,
+      path: '/enterprise/companies/:company_id/users',
+      element: 'CompanyUsers',
+    },
+    {
+      name: keys.COMPANY_GROUPS,
+      path: '/enterprise/companies/:company_id/groups',
+      element: 'CompanyGroups',
+    },
+    {
+      name: keys.COMPANY_POLICY,
+      path: '/enterprise/companies/:company_id/policy',
+      element: 'CompanyPolicy',
+    },
+    {
+      name: keys.COMPANY_ACTIVITY_LOGS,
+      path: '/enterprise/companies/:company_id/activity-logs',
+      element: 'CompanyActivityLogs',
     },
   ],
 }

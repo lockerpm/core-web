@@ -7,9 +7,15 @@ import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import global from "../../../../../config/global"
+import companyServices from "../../../../../services/company"
 
 function FormData(props) {
-  const { visible = false, item = null, onClose = () => {}, callback = () => {} } = props
+  const {
+    visible = false,
+    item = null,
+    onClose = () => {},
+    onReload = () => {}
+  } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false)
@@ -40,9 +46,23 @@ function FormData(props) {
     })
   }
 
-  const createCompany = async (values) => {}
+  const createCompany = async (values) => {
+    await companyServices.create(values).then(() => {
+      global.pushSuccess(t('notification.success.company.created'))
+      onReload()
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
 
-  const editCompany = async (values) => {}
+  const editCompany = async (values) => {
+    await companyServices.update(item.id, values).then(() => {
+      global.pushSuccess(t('notification.success.company.created'))
+      onReload()
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
 
   return (
     <div className={props.className}>
@@ -72,7 +92,7 @@ function FormData(props) {
             <Input placeholder={t("placeholder.enter")} disabled={callingAPI} />
           </Form.Item>
           <Form.Item
-            name={"subtitle"}
+            name={"enterprise_name"}
             className='mb-2'
             label={<p className='font-semibold'>{t("companies.subtitle")}</p>}
             rules={[global.rules.REQUIRED(t("companies.subtitle"))]}

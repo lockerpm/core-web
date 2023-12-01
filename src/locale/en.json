@@ -248,6 +248,11 @@
       },
       "quick_share_detail": {
         "check_mail": "Please check your mail."
+      },
+      "company": {
+        "created": "The new company has been added.",
+        "updated": "The company information has been updated.",
+        "deleted": "The company has been deleted."
       }
     },
     "warning": {
@@ -283,10 +288,15 @@
     "shared_with_me": "Shared With Me",
     "my_shared_items": "My Shared Items",
     "enterprise": "Enterprise Manager",
-    "enterprise_dashboard": "Enterprise Dashboard",
+    "enterprise_dashboard": "Dashboard",
     "companies": "Companies",
     "email_settings": "Email Settings",
-    "sso_configuration": "SSO Configuration"
+    "sso_configuration": "SSO Configuration",
+    "company_dashboard": "Dashboard",
+    "company_users": "Users",
+    "company_groups": "Groups",
+    "company_policy": "Policy",
+    "company_activity_logs": "Activity Logs"
   },
   "auth_pages": {
     "username": "Email",
@@ -1023,5 +1033,25 @@
       "enter_secret": "Enter secret",
       "enter_scopes": "Read or ..."
     }
+  },
+  "company_dashboard": {
+    "title": "Dashboard",
+    "description": "Statistic of company"
+  },
+  "company_users": {
+    "title": "Users",
+    "description": "Users of company"
+  },
+  "company_groups": {
+    "title": "Groups",
+    "description": "Groups of company"
+  },
+  "company_policy": {
+    "title": "Policy",
+    "description": "Policy of company"
+  },
+  "company_activity_logs": {
+    "title": "Activity Logs",
+    "description": "Activity Logs of company"
   }
 }

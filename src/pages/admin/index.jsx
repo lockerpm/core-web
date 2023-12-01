@@ -19,6 +19,12 @@ import Companies from './enterprise/companies'
 import EmailSettings from './enterprise/email-settings'
 import SSOConfiguration from './enterprise/sso-configuration'
 
+import CompanyDashboard from './company'
+import CompanyUsers from './company/users'
+import CompanyGroups from './company/groups'
+import CompanyPolicy from './company/policy'
+import CompanyActivityLogs from './company/activity-logs'
+
 import AdminErrorPage from './errors'
 
 export default {
@@ -42,6 +48,12 @@ export default {
   Companies,
   EmailSettings,
   SSOConfiguration,
+
+  CompanyDashboard,
+  CompanyUsers,
+  CompanyGroups,
+  CompanyPolicy,
+  CompanyActivityLogs,
 
   AdminErrorPage
 }

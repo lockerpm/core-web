@@ -118,5 +118,5 @@ export default {
   SSO_CONFIGURATION: `${ADMIN}/sso_configuration`,
 
   COMPANIES: `${ADMIN}/enterprises`,
-  COMPANY: `${ADMIN}/enterprises/:id`,
+  COMPANY: `${FLAT_FORM}/enterprises/:id`,
 }
