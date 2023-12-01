@@ -88,6 +88,8 @@ const SignInForm = (props) => {
         } else {
           setStep(2)
         }
+      } else {
+        setStep(2)
       }
     }).catch((error) => {
       setPreLogin(null)
