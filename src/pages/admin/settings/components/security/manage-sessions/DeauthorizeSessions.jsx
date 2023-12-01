@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
-  Modal,
-  Form,
-  Input
 } from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
 
 import { } from 'react-redux';
+import { PasswordConfirmModal } from "../../../../../../components";
 
 import { useTranslation } from "react-i18next";
 
@@ -27,38 +25,30 @@ const DeauthorizeSessionsModal = (props) => {
     onConfirm = () => {},
     onClose = () => {},
   } = props;
-  const [form] = Form.useForm();
+
   const [callingAPI, setCallingAPI] = useState(false);
 
-  const password = Form.useWatch('password', form);
-
-  useEffect(() => {
-    form.resetFields()
-  }, [visible])
-
-  const handleConfirm = async () => {
-    form.validateFields().then(async () => {
-      setCallingAPI(true)
-      const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
-      const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
-      if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
-        if (device) {
-          await deauthorizeDevice();
-          if (device.device_identifier === authServices.device_id()) {
-            await authServices.redirect_login();
-          } else {
-            onConfirm();
-            onClose();
-          }
-        } else {
-          await deauthorizeSessions(keyHash);
+  const handleConfirm = async (password) => {
+    setCallingAPI(true)
+    const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
+    const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
+    if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
+      if (device) {
+        await deauthorizeDevice();
+        if (device.device_identifier === authServices.device_id()) {
           await authServices.redirect_login();
+        } else {
+          onConfirm();
+          onClose();
         }
       } else {
-        authServices.logout();
+        await deauthorizeSessions(keyHash);
+        await authServices.redirect_login();
       }
-      setCallingAPI(false);
-    })
+    } else {
+      authServices.logout();
+    }
+    setCallingAPI(false);
   }
 
   const deauthorizeDevice = async () => {
@@ -78,26 +68,15 @@ const DeauthorizeSessionsModal = (props) => {
   }
 
   return (
-    <Modal
+    <PasswordConfirmModal
+      visible={visible}
+      danger={true}
+      width={500}
       title={device
         ? t('security.manage_sessions.log_out_of', { device_name: common.getClientInfo(device).name })
         : t('security.manage_sessions.log_out_all')
       }
-      open={visible}
-      width={500}
-      okText={t('common.confirm')}
-      onOk={() => handleConfirm()}
-      onCancel={() => onClose()}
-      okButtonProps={{
-        loading: callingAPI,
-        disabled: !password,
-        danger: true
-      }}
-      cancelButtonProps={{
-        disabled: callingAPI
-      }}
-    >
-      {
+      description={
         device ? <p className="mb-2">
           {t('security.manage_sessions.log_out_of_description')}
         </p> : <div className="mb-2">
@@ -109,26 +88,11 @@ const DeauthorizeSessionsModal = (props) => {
           </p>
         </div>
       }
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleConfirm}
-      >
-        <Form.Item
-          name={'password'}
-          label={t('auth_pages.password')}
-          rules={[
-            global.rules.REQUIRED(t('auth_pages.password')),
-          ]}
-        >
-          <Input.Password
-            autoFocus={true}
-            placeholder={t('placeholder.enter')}
-            disabled={callingAPI}
-          />
-        </Form.Item>
-      </Form>
-    </Modal>
+      callingAPI={callingAPI}
+      okText={t('button.confirm')}
+      onConfirm={handleConfirm}
+      onClose={() => onClose()}
+    />
   );
 }
 

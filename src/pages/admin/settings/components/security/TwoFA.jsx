@@ -58,8 +58,11 @@ const TwoFA = (props) => {
   }
 
   const handleTurnOff = async (password) => {
+    const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
     setCallingAPI(true);
-    await authServices.factor2_activate({ password }).then(() => {
+    await authServices.factor2_activate({
+      password: keyHash
+    }).then(() => {
       global.pushSuccess(t('notification.success.factor2.disabled'));
       getFactor2();
       setConfirmVisible(false);
@@ -188,7 +191,7 @@ const TwoFA = (props) => {
         visible={confirmVisible}
         title={t('security.two_fa.turn_off')}
         callingAPI={callingAPI}
-        okText={t('common.confirm')}
+        okText={t('button.confirm')}
         onConfirm={handleTurnOff}
         onClose={() => setConfirmVisible(false)}
       />

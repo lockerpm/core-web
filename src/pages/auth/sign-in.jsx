@@ -34,24 +34,28 @@ const SingIn = () => {
 
   const handleSignIn = async (values) => {
     setCallingAPI(true)
-    await userServices.users_session({
+    const payload = {
       password: values.password,
-      email: values.username
-    }).then(async (response) => {
+      username: values.username,
+      email: values.username,
+      hashedPassword: values.hashedPassword,
+      keyB64: values.keyB64,
+      sync_all_platforms: values.sync_all_platforms
+    }
+    await userServices.users_session(payload).then(async (response) => {
       if (response.is_factor2) {
-        global.store.dispatch(storeActions.updateFactor2({
-          ...response,
-          password: values.password,
-          email: values.username
-        }));
+        global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
         global.navigate(global.keys.OTP_CODE)
       } else {
         authServices.update_access_token_type(response.token_type)
         authServices.update_access_token(response.access_token);
         await commonServices.fetch_user_info();
-        await coreServices.unlock({...response, ...values })
-        await commonServices.sync_data()
-        global.navigate(global.keys.VAULT)
+        await coreServices.unlock({...response, ...payload });
+        await commonServices.sync_data();
+        if (values.sync_all_platforms) {
+          await commonServices.service_login(payload);
+        }
+        global.navigate(global.keys.VAULT);
       }
     }).catch((error) => {
       global.pushError(error)

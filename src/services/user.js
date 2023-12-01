@@ -79,13 +79,11 @@ async function users_prelogin(data) {
 async function users_session(data) {
   const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
-  const key = await global.jsCore.cryptoService.makeKey(
-    data.password,
-    data.email,
-    global.constants.CORE_JS_INFO.KDF,
-    global.constants.CORE_JS_INFO.KDF_ITERATIONS
-  )
-  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
+  let hashedPassword = data?.hashedPassword || null;
+  if (data.password) {
+    const key = await coreServices.make_key(data.email, data.password)
+    hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
+  }
   return await request({
     url: global.endpoint.USERS_SESSION,
     method: "post",
@@ -103,13 +101,11 @@ async function users_session(data) {
 async function users_session_otp(data) {
   const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
-  const key = await global.jsCore.cryptoService.makeKey(
-    data.password,
-    data.email,
-    global.constants.CORE_JS_INFO.KDF,
-    global.constants.CORE_JS_INFO.KDF_ITERATIONS
-  )
-  const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
+  let hashedPassword = data?.hashedPassword || null;
+  if (data.password) {
+    const key = await coreServices.make_key(data.email, data.password)
+    hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
+  }
   return await request({
     url: global.endpoint.USERS_SESSION_OTP,
     method: "post",
@@ -151,7 +147,8 @@ async function change_password(data = {}) {
     new_master_password_hash: newPassword,
     new_master_password_hint: data.password_hint || '',
     score: score,
-    master_password_cipher: masterPasswordCipher
+    master_password_cipher: masterPasswordCipher,
+    login_method: data.login_method
   }
 
   return request({

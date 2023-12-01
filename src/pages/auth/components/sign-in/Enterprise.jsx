@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import SignInForm from "./Form";
 
 import {
+  ArrowLeftOutlined
 } from "@ant-design/icons";
 
 const Enterprise = (props) => {
@@ -36,7 +37,15 @@ const Enterprise = (props) => {
             padding: '32px'
           }}
         >
-          <div className="w-full flex items-center justify-between mb-6">
+          <div className="w-full flex items-center mb-6">
+            {
+              step > 0 && <Button
+                className="mr-2"
+                type={'text'}
+                icon={<ArrowLeftOutlined />}
+                onClick={() => setStep(step - 1)}
+              />
+            }
             <p className="text-2xl font-semibold">
               { t('auth_pages.sign_in.title') }
             </p>
@@ -53,21 +62,13 @@ const Enterprise = (props) => {
             </Button>
           }
           {
-            step === 1 && <div>
+            step > 0 && <div>
               <SignInForm
                 loading={loading}
+                step={step}
                 onSubmit={onSubmit}
+                setStep={setStep}
               />
-              {
-                !loading && <Button
-                  type='text'
-                  className="w-full mt-3 text-primary"
-                  size="large"
-                  onClick={() => setStep(0)}
-                >
-                  {t('button.go_back')}
-                </Button>
-              }
             </div>
           }
         </Card>

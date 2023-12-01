@@ -21,6 +21,8 @@ const system = (state = initial.system, action) => {
     return { ...state, cacheData: action.payload }
   case actionTypes.SET_IS_CLOUD:
     return { ...state, isCloud: action.payload }
+  case actionTypes.SET_IS_DESKTOP:
+    return { ...state, isDesktop: action.payload }
   case actionTypes.SET_SERVER_TYPE:
     return { ...state, serverType: action.payload }
   default:

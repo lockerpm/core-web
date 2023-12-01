@@ -339,7 +339,7 @@ function ShareMembers(props) {
                                 disabled={callingAPI}
                                 onClick={() => handleConfirmMember(item)}
                               >
-                                {t('common.confirm')}
+                                {t('button.confirm')}
                               </Button>
                             }
                             const status = item.status ? common.getStatus(item.status) : null

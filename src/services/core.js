@@ -1,5 +1,7 @@
 import global from '../config/global';
 import { ConstantsService } from '../core-js/src/services/constants.service';
+import { SymmetricCryptoKey } from '../core-js/src/models/domain';
+import { Utils } from '../core-js/src/misc/utils';
 
 async function clear_keys() {
   await global.jsCore.cryptoService.clearKeys()
@@ -20,8 +22,12 @@ async function make_key(username, password) {
 async function unlock(data) {
   if (global.jsCore) {
     await clear_keys()
-    const makeKey = await make_key(data.username, data.password)
-    const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
+    let hashedPassword = data?.hashedPassword;
+    let makeKey = data?.keyB64 ? new SymmetricCryptoKey(Utils.fromB64ToArray(data?.keyB64).buffer) : null
+    if (data.password) {
+      makeKey = await make_key(data.username, data.password)
+      hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
+    }
     await global.jsCore.tokenService.setTokens(data.access_token, null)
     await global.jsCore.userService.setInformation(
       global.jsCore.tokenService.getUserId(),

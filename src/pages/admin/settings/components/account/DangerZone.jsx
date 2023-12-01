@@ -27,7 +27,8 @@ const DangerZone = (props) => {
 
   const handlePurgeData = async (password) => {
     setCallingAPI(true);
-    await userServices.purge_data({ master_password_hash: password })
+    const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
+    await userServices.purge_data({ master_password_hash: keyHash })
       .then(async () => {
         global.pushSuccess(t('notification.success.account_details.purged'));
         await commonServices.sync_data();

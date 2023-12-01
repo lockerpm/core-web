@@ -107,6 +107,7 @@ export default {
   FACTOR2_IDENTITY,
   CLIENT_ID: 'web',
   PAGE_SIZE: 50,
+  MAX_KEY_BACKUP: 3,
   CORE_JS_INFO: {
     KDF: 0,
     KDF_ITERATIONS: 100000

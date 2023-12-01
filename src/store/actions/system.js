@@ -73,6 +73,13 @@ const updateCacheData = data => {
   }
 }
 
+const updateIsDesktop = data => {
+  return {
+    type: actionTypes.SET_IS_DESKTOP,
+    payload: data,
+  }
+}
+
 export default {
   changeLanguage,
   toggleLoading,
@@ -83,5 +90,6 @@ export default {
   updateCollapsed,
   updateServerType,
   updateIsCloud,
-  updateCacheData
+  updateCacheData,
+  updateIsDesktop
 }

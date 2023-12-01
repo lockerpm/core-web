@@ -109,9 +109,14 @@ export default {
 
   TOOLS_BREACH: `${FLAT_FORM}/tools/breach`,
 
+  PASSWORDLESS_CREDENTIAL: `${FLAT_FORM}/passwordless/credential`,
+
   // Admin
   MAIL_CONFIGURATION: `${ADMIN}/mail_configuration`,
   MAIL_CONFIGURATION_TEST: `${ADMIN}/mail_configuration/test`,
 
   SSO_CONFIGURATION: `${ADMIN}/sso_configuration`,
+
+  COMPANIES: `${ADMIN}/enterprises`,
+  COMPANY: `${ADMIN}/enterprises/:id`,
 }

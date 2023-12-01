@@ -3,7 +3,7 @@ import {
   Button,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -21,6 +21,8 @@ const ChangePassword = (props) => {
   } = props;
   const { t } = useTranslation();
   const [formVisible, setFormVisible] = useState(false);
+  
+  const userInfo = useSelector(state => state.auth.userInfo);
 
   return (
     <div className={className}>
@@ -31,6 +33,7 @@ const ChangePassword = (props) => {
         <Button
           type='primary'
           ghost
+          disabled={userInfo.is_require_passwordless || userInfo?.login_method === 'passwordless'}
           icon={<KeyOutlined />}
           onClick={() => setFormVisible(true)}
         >

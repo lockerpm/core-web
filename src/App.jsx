@@ -3,6 +3,7 @@ import { Layout, Modal, notification } from '@lockerpm/design'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { ClientService } from './components'
 
 import {
   ExclamationCircleOutlined
@@ -32,8 +33,10 @@ import global from './config/global'
 import jsCore from './core-js/index'
 
 import pages from './pages'
+import { service } from './service'
 
 const App = () => {
+  window.service = service
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -113,7 +116,8 @@ const App = () => {
   }
 
   return (
-    <Layout>
+    <Layout className='main-layout'>
+      <ClientService />
       {
         currentPage?.type === 'admin' && userInfo && <AdminLayout
           routers={global.routers.ADMIN_ROUTERS}

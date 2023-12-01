@@ -2,6 +2,7 @@ import global from '../config/global'
 import storeActions from '../store/actions'
 import common from '../utils/common'
 
+import coreServices from './core'
 import userServices from './user'
 import authServices from './auth'
 import syncServices from './sync'
@@ -422,6 +423,31 @@ async function sync_data_by_ws(message) {
   global.store.dispatch(storeActions.updateSyncing(false))
 }
 
+function reset_service() {
+  if (global.store.getState().service.isConnected) {
+    if (global.store.getState().system.isDesktop) {
+      service.resetGRPC();
+    } else {
+      service.resetBackgroundService();
+    }
+  }
+}
+
+async function service_login(data) {
+  let hashedPassword = data?.hashedPassword
+  let key = data?.keyB64
+  if (data.password) {
+    const makeKey = await coreServices.make_key(data.email, data.password)
+    hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
+    key = makeKey.keyB64
+  }
+  await service.login({
+    email: data.email,
+    key: key,
+    hashedPassword: hashedPassword
+  })
+}
+
 export default {
   init_server,
   fetch_user_info,
@@ -451,5 +477,7 @@ export default {
   delete_folder,
   leave_share,
   get_sends,
-  sync_data_by_ws
+  sync_data_by_ws,
+  reset_service,
+  service_login
 }
