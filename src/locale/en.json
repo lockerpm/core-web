@@ -1010,6 +1010,18 @@
   },
   "sso_configuration": {
     "title": "OAuth Configuration",
-    "description": "Configuration OAuth to require users log in using SSO"
+    "description": "Configuration OAuth to require users log in using SSO",
+    "oauth-authorization-url": "OAuth authorization URL",
+    "oauth-token-url": "OAuth token URL",
+    "api-url": "API URL providing user details when authenticated",
+    "oauth-appication-id": "OAuth application ID",
+    "oauth-application-secret": "OAuth application secret",
+    "oauth-scopes": "OAuth scopes to request",
+    "placeholder": {
+      "https": "https://",
+      "enter_id": "Enter ID",
+      "enter_secret": "Enter secret",
+      "enter_scopes": "Read or ..."
+    }
   }
 }
