@@ -131,7 +131,7 @@ const Actions = (props) => {
           key: 'confirm',
           hide: contact?.status !== global.constants.STATUS.ACCEPTED,
           label: <span style={{ color: green[5] }}>
-            {t('common.confirm')}
+            {t('button.confirm')}
           </span>,
           onClick: () => confirm()
         },

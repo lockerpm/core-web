@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import './css/index.scss';
+import './upload-file.scss';
 import {
   LoadingOutlined,
   PlusOutlined

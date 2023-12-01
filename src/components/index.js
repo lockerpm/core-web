@@ -1,9 +1,14 @@
+import ClientService from './client-service'
 import AdminHeader from './admin-header'
 import UploadFile from './upload-file'
 import Editor from './editor'
 import GeneratePassword from './generate-password'
 import PasswordStrength from './generate-password/components/PasswordStrength'
 import GeneratePasswordContent from './generate-password/components/Content'
+
+import PairingForm from './forms/Pairing'
+import PasswordlessForm from './forms/Passwordless'
+import ChangePasswordForm from './forms/ChangePassword'
 
 import FilterTime from './item/FilterTime'
 import Pagination from './item/Pagination'
@@ -18,9 +23,17 @@ import SearchText from './item/SearchText'
 import PasswordConfirmModal from './modals/PasswordConfirm'
 
 export {
+  ClientService,
   AdminHeader,
   UploadFile,
   Editor,
+  GeneratePassword,
+  PasswordStrength,
+  GeneratePasswordContent,
+
+  PairingForm,
+  PasswordlessForm,
+  ChangePasswordForm,
   
   FilterTime,
   Pagination,
@@ -31,9 +44,7 @@ export {
   ItemInput,
   ImageIcon,
   SearchText,
-  GeneratePassword,
-  PasswordStrength,
-  GeneratePasswordContent,
 
-  PasswordConfirmModal
+
+  PasswordConfirmModal,
 }

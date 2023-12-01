@@ -9,22 +9,26 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import PasswordLess from "./PasswordLess";
-
 import global from "../../../../config/global";
 
 import userServices from "../../../../services/user";
+import commonServices from "../../../../services/common";
+import { PairingForm, PasswordlessForm } from "../../../../components";
 
 const SignInForm = (props) => {
   const {
     loading,
-    onSubmit = () => {}
+    step = 1,
+    onSubmit = () => {},
+    setStep = () => {}
   } = props;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
+  const isDesktop = useSelector((state) => state.system.isDesktop)
 
   const [preLogin, setPreLogin] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
+  const [isPair, setIsPair] = useState(false)
 
   const [form] = Form.useForm();
 
@@ -35,9 +39,24 @@ const SignInForm = (props) => {
     })
   }, [])
 
+  useEffect(() => {
+    if (step === 1) {
+      setPreLogin(null);
+      setCallingAPI(false);
+      setIsPair(false)
+      form.setFieldsValue({
+        username: null,
+        password: null
+      })
+    }
+  }, [step])
+
   const handleSubmit = (values) => {
     if (preLogin) {
-      onSubmit(values)
+      onSubmit({
+        ...values,
+        sync_all_platforms: preLogin.sync_all_platforms
+      })
     } else {
       handlePrelogin(values)
     }
@@ -45,14 +64,56 @@ const SignInForm = (props) => {
 
   const handlePrelogin = async (values) => {
     setCallingAPI(true)
-    await userServices.users_prelogin({ email: values.username }).then((response) => {
-      // check password less
+    await userServices.users_prelogin({ email: values.username }).then(async (response) => {
       setPreLogin(response)
+      // check sync_all_platforms
+      if (response.sync_all_platforms || response.login_method === 'passwordless') {
+        setIsPair(!isDesktop && !service.pairingService?.hasKey)
+        if (response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
+          try {
+            const serviceUser = await service.getCurrentUser();
+            if (serviceUser?.email === response.email) {
+              await onSubmit({
+                username: serviceUser?.email,
+                hashedPassword: serviceUser?.hashedPassword,
+                keyB64: serviceUser?.key
+              })
+            } else {
+              setStep(2)
+            }
+          } catch (error) {
+            commonServices.reset_service();
+            setStep(2)
+          }
+        } else {
+          setStep(2)
+        }
+      } else {
+        setStep(2)
+      }
     }).catch((error) => {
       setPreLogin(null)
       global.pushError(error)
     })
     setCallingAPI(false)
+  }
+
+  const handlePairConfirm = async () => {
+    setIsPair(false)
+    if (preLogin?.sync_all_platforms) {
+      try {
+        const serviceUser = await service.getCurrentUser();
+        if (serviceUser?.email === preLogin.email) {
+          await onSubmit({
+            username: serviceUser?.email,
+            hashedPassword: serviceUser?.hashedPassword,
+            keyB64: serviceUser?.key
+          })
+        }
+      } catch (error) {
+        commonServices.reset_service();
+      }
+    }
   }
 
   return (
@@ -63,41 +124,79 @@ const SignInForm = (props) => {
         onFinish={handleSubmit}
         disabled={loading || callingAPI}
       >
-        <Form.Item
-          name="username"
-          rules={[
-            global.rules.REQUIRED(t('auth_pages.username')),
-            global.rules.INVALID(t('auth_pages.username'), 'EMAIL'),
-          ]}
-        >
-          <Input
-            placeholder={t('placeholder.username')}
-            size="large"
-            onChange={() => setPreLogin(null)}
-          />
-        </Form.Item>
-        {
-          preLogin && <Form.Item
-            name="password"
+        <div>
+          <Form.Item
+            name="username"
             rules={[
-              global.rules.REQUIRED(t('auth_pages.password')),
+              global.rules.REQUIRED(t('auth_pages.username')),
+              global.rules.INVALID(t('auth_pages.username'), 'EMAIL'),
             ]}
           >
-            <Input.Password
-              placeholder={t('auth_pages.password')}
+            <Input
+              placeholder={t('placeholder.username')}
               size="large"
+              onChange={() => setPreLogin(null)}
             />
           </Form.Item>
+          {
+            step === 1 && <Button
+              className="w-full"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              loading={loading || callingAPI}
+            >
+              {t('button.continue')}
+            </Button>
+          }
+        </div>
+        {
+          step === 2 && <div>
+            {
+              isPair && <PairingForm
+                userInfo={preLogin}
+                isLogin={true}
+                onConfirm={() => handlePairConfirm()}
+              />
+            }
+            {
+              !isPair && preLogin.login_method === 'passwordless' && <PasswordlessForm
+                changing={loading}
+                isLogin={true}
+                userInfo={preLogin}
+                onError={() => setIsPair(true)}
+                onConfirm={(password) => handleSubmit({
+                  username: preLogin.email,
+                  password
+                })}
+              />
+            }
+            {
+              !isPair && preLogin?.login_method === 'password' && <div>
+                <Form.Item
+                  name="password"
+                  rules={[
+                    global.rules.REQUIRED(t('auth_pages.password')),
+                  ]}
+                >
+                  <Input.Password
+                    placeholder={t('auth_pages.password')}
+                    size="large"
+                  />
+                </Form.Item>
+                <Button
+                  className="w-full"
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  loading={loading || callingAPI}
+                >
+                  {t('button.sign_in')}
+                </Button>
+              </div>
+            }
+          </div>
         }
-        <Button
-          className="w-full"
-          size="large"
-          type="primary"
-          htmlType="submit"
-          loading={loading || callingAPI}
-        >
-          { preLogin ? t('button.sign_in') : t('button.continue')}
-        </Button>
       </Form>
     </div>
   );

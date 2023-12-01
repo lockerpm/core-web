@@ -93,9 +93,13 @@ async function logout() {
       
     }
   }
+  const userInfo = global.store.getState().auth.userInfo
+  if ((global.store.getState().service.isConnected || global.store.getState().system.isDesktop) && userInfo?.sync_all_platforms) {
+    await service.logout();
+  }
   await coreServices.logout()
   localStorage.removeItem('access_token')
-  global.navigate(global.keys.SIGN_IN)
+  global.navigate(global.keys.SIGN_IN);
 }
 
 export default {

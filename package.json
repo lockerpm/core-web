@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "apexcharts": "^3.37.2",
-    "axios": "^0.27.2",
+    "axios": "^1.6.2",
     "babel-plugin-import": "^1.13.5",
     "big-integer": "^1.6.51",
     "browser-hrtime": "^1.1.8",
@@ -48,6 +48,7 @@
     "i18next": "^22.5.0",
     "js-cookie": "^3.0.1",
     "kalend": "^0.15.3",
+    "locker-client-service": "^0.0.13",
     "lodash": "^4.17.21",
     "lunr": "^2.3.9",
     "moment": "^2.29.4",
@@ -92,7 +93,7 @@
     "zxcvbn": "^4.4.2"
   },
   "scripts": {
-    "start": "set HTTPS=true&&env-cmd -e development craco start",
+    "start": "set PORT=3002 && set HTTPS=true&&env-cmd -e development craco start",
     "start:mac": "HTTPS=true env-cmd -e development craco start",
     "build:dev": "env-cmd -e development craco build",
     "build:stg": "env-cmd -e staging craco build",

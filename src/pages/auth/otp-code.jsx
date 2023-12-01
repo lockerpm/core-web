@@ -61,22 +61,18 @@ const OtpCode = () => {
 
   const handleVerify2FA = async () => {
     form.validateFields().then(async (values) => {
-      setCallingAPI(true)
-      await userServices.users_session_otp({
-        email: factor2.email,
-        password: factor2.password,
+      const payload = {
+        ...factor2,
         method: identity,
         otp: values.otp,
         save_device: values.save_device || false,
-      }).then(async (response) => {
+      }
+      setCallingAPI(true)
+      await userServices.users_session_otp(payload).then(async (response) => {
         authServices.update_access_token_type(response.token_type)
         authServices.update_access_token(response.access_token);
         await commonServices.fetch_user_info();
-        await coreServices.unlock({
-          ...response,
-          username: factor2.email,
-          password: factor2.password
-        })
+        await coreServices.unlock({ ...response, ...payload })
         await commonServices.sync_data();
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         navigate(returnUrl);

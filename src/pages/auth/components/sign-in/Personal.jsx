@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React, { useState } from "react";
 
 import {
   Card,
@@ -10,6 +10,10 @@ import { useTranslation } from "react-i18next";
 
 import SignInForm from "./Form";
 
+import {
+  ArrowLeftOutlined
+} from "@ant-design/icons";
+
 import global from "../../../../config/global";
 
 const Personal = (props) => {
@@ -18,6 +22,8 @@ const Personal = (props) => {
     onSubmit = () => {}
   } = props;
   const { t } = useTranslation();
+
+  const [step, setStep] = useState(1);
 
   return (
     <div className="sign-in-personal">
@@ -28,14 +34,24 @@ const Personal = (props) => {
             padding: '32px'
           }}
         >
-          <div className="w-full flex items-center justify-between mb-6">
+          <div className="w-full flex items-center mb-6">
+            {
+              step > 1 && <Button
+                className="mr-2"
+                type={'text'}
+                icon={<ArrowLeftOutlined />}
+                onClick={() => setStep(step - 1)}
+              />
+            }
             <p className="text-2xl font-semibold">
               { t('auth_pages.sign_in.title') }
             </p>
           </div>
           <SignInForm
             loading={loading}
+            step={step}
             onSubmit={onSubmit}
+            setStep={setStep}
           />
         </Card>
       </div>

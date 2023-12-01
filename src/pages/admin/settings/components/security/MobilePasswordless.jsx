@@ -9,13 +9,11 @@ import { useTranslation } from "react-i18next";
 import {
 } from '../../../../../components'
 
-import ChangePasswordFormData from "./form-data/ChangePassword";
-
 import {
-  KeyOutlined,
+  QrcodeOutlined,
 } from "@ant-design/icons";
 
-const ChangePassword = (props) => {
+const MobilePasswordless = (props) => {
   const {
     className = '',
   } = props;
@@ -28,27 +26,22 @@ const ChangePassword = (props) => {
     <div className={className}>
       <div className="flex justify-between">
         <p className="font-semibold text-xl">
-          {t('security.change_password.title')}
+          {t('security.mobile_passwordless.title')}
         </p>
         <Button
           type='primary'
           ghost
-          disabled={userInfo.is_require_passwordless || userInfo?.login_method === 'passwordless'}
-          icon={<KeyOutlined />}
+          icon={<QrcodeOutlined />}
           onClick={() => setFormVisible(true)}
         >
-          {t('change_password.title')}
+          {t('security.mobile_passwordless.action')}
         </Button>
       </div>
       <p className="mt-1">
-        {t('security.change_password.description')}
+        {t('security.mobile_passwordless.description')}
       </p>
-      <ChangePasswordFormData
-        visible={formVisible}
-        onClose={() => setFormVisible(false)}
-      />
     </div>
   );
 }
 
-export default ChangePassword;
+export default MobilePasswordless;

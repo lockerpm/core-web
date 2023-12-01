@@ -11,6 +11,7 @@ export default {
     collapsed: false,
     isCloud: false,
     serverType: null,
+    isDesktop: false,
     cacheData: systemService.get_cache()
   },
   auth: {
@@ -42,5 +43,15 @@ export default {
   },
   enterprise: {
     teams: []
+  },
+  service: {
+    isReady: false,
+    requirePairing: false,
+    isConnected: false,
+    isDesktopConnected: false,
+    approveCode: null,
+    clientId: null,
+    clientType: null,
+    pairingConfirmed: false
   }
 }

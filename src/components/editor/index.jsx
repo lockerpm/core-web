@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './css/index.scss';
+import './editor.scss';
 
 import {
 } from "@ant-design/icons";
