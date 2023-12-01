@@ -28,6 +28,8 @@ const CrossPlatformSync = (props) => {
   const { t } = useTranslation();
 
   const userInfo = useSelector(state => state.auth.userInfo);
+  const isDesktop = useSelector(state => state.system.isDesktop);
+
   const [password, setPassword] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
@@ -39,7 +41,7 @@ const CrossPlatformSync = (props) => {
 
   const onConfirmPassword = async (keyHash, password) => {
     setPassword(password)
-    if (service.pairingService?.hasKey) {
+    if (service.pairingService?.hasKey || isDesktop) {
       await toggleSyncPlatforms();
       await serviceLogin(password, !userInfo.sync_all_platforms);
       setConfirmVisible(false);
