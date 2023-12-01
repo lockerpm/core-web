@@ -47,7 +47,7 @@ const Companies = (props) => {
     await companyService
       .get_companies()
       .then((response) => {
-        setCompanies(response)
+        setCompanies(response.results)
         console.log(response)
       })
       .catch((error) => {
@@ -82,7 +82,7 @@ const Companies = (props) => {
   }, [currentPage?.query?.searchText, syncing])
 
   const filteredData = useMemo(() => {
-    return common.paginationAndSortData(companies, params, params.orderField, params.orderDirection, [
+    return common.paginationAndSortData([...companies], params, params.orderField, params.orderDirection, [
       (f) => f.id,
       (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
     ])
