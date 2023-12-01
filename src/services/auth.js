@@ -94,7 +94,7 @@ async function logout() {
     }
   }
   const userInfo = global.store.getState().auth.userInfo
-  if (global.store.getState().service.isConnected && userInfo?.sync_all_platforms) {
+  if ((global.store.getState().service.isConnected || global.store.getState().system.isDesktop) && userInfo?.sync_all_platforms) {
     await service.logout();
   }
   await coreServices.logout()
