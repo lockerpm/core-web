@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
   Button,
-  List
+  List,
+  Tooltip
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
@@ -128,15 +129,19 @@ const FormData = (props) => {
           </Button>
         }
         {
-          userInfo?.login_method === 'passwordless' && <Button
-            type='primary'
-            ghost
-            icon={<UsbOutlined />}
-            disabled={userInfo.is_require_passwordless}
-            onClick={() => setFormVisible(true)}
+          userInfo?.login_method === 'passwordless' && <Tooltip
+            title={userInfo.is_require_passwordless ? t('security.passwordless.require_passwordless') : ''}
           >
-            {t('security.passwordless.turn_off')}
-          </Button>
+            <Button
+              type='primary'
+              ghost
+              icon={<UsbOutlined />}
+              disabled={userInfo.is_require_passwordless}
+              onClick={() => setFormVisible(true)}
+            >
+              {t('security.passwordless.turn_off')}
+            </Button>
+          </Tooltip>
         }
       </div>
       <p className="mt-1">

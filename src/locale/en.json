@@ -754,7 +754,8 @@
       "turn_on": "Turn on Passwordless Login",
       "turn_off": "Turn off Passwordless Login",
       "security_keys_added": "Security keys added",
-      "add_new_key": "Add new key"
+      "add_new_key": "Add new key",
+      "require_passwordless": "Passwordless login is required within your business and cannot be turn off."
     },
     "mobile_passwordless": {
       "title": "Mobile passwordless login",
