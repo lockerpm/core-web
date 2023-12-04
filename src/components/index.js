@@ -1,7 +1,6 @@
 import ClientService from './client-service'
 import AdminHeader from './admin-header'
 import UploadFile from './upload-file'
-import Editor from './editor'
 import GeneratePassword from './generate-password'
 import PasswordStrength from './generate-password/components/PasswordStrength'
 import GeneratePasswordContent from './generate-password/components/Content'
@@ -26,7 +25,6 @@ export {
   ClientService,
   AdminHeader,
   UploadFile,
-  Editor,
   GeneratePassword,
   PasswordStrength,
   GeneratePasswordContent,
