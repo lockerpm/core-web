@@ -9,22 +9,12 @@ import { TextCopy, RouterLink } from "../../../../../components"
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-import {
-  EditOutlined,
-  DeleteOutlined
-} from "@ant-design/icons"
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 
 const BoxData = (props) => {
   const { t } = useTranslation()
 
-  const {
-    loading = false,
-    className = "",
-    data = [],
-    params = {},
-    onUpdate = () => {},
-    onDelete = () => {},
-  } = props
+  const { loading = false, className = "", data = [], params = {}, onUpdate = () => {}, onDelete = () => {} } = props
 
   const boxData = useMemo(() => {
     return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
@@ -44,11 +34,10 @@ const BoxData = (props) => {
           key={record.id}
           header={
             <div className='flex align-items justify-between'>
-              <div className="flex items-center">
-                <Avatar shape="square" src={record.avatar}/>
-                <div className="ml-2">
+              <div className='flex items-center'>
+                <div className='ml-2'>
                   <RouterLink
-                    className={'font-semibold'}
+                    className={"font-semibold"}
                     label={record.name}
                     routerName={global.keys.COMPANY_DASHBOARD}
                     routerParams={{ company_id: record.id }}

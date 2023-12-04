@@ -85,7 +85,8 @@
     "me": "Me",
     "otp_code": "OTP code",
     "successfully": "Successfully",
-    "group": "Group"
+    "group": "Group",
+    "password_strength": "Password Strength"
   },
   "button": {
     "add": "Add",

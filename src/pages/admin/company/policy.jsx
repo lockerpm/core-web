@@ -4,7 +4,7 @@ import { PlusOutlined } from "@ant-design/icons"
 
 import { AdminHeader } from "../../../components"
 import Filter from "./components/policy/Filter"
-import NoUser from "./components/policy/NoUser"
+import NoPolicy from "./components/policy/NoPolicy"
 import TableData from "./components/policy/TableData"
 import BoxData from "./components/policy/BoxData"
 import FormData from "./components/policy/FormData"
@@ -27,33 +27,25 @@ const CompanyPolicy = (props) => {
   const syncing = useSelector((state) => state.sync.syncing)
   const isMobile = useSelector((state) => state.system.isMobile)
 
-  const [users, setUsers] = useState([
+  const [policies, setPolicies] = useState([
     {
       id: 1,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      role: "Admin",
+      name: "Policy 1",
+      description: "Policy description 1",
       status: "Active",
-      group: "Group 1",
-      password_strength: "Strong",
-      created_time: "2021-08-10 10:00:00",
     },
     {
       id: 2,
-      name: "Alex Doe",
-      email: "alexdoe@gmail.com",
-      role: "Admin",
-      status: "Active",
-      group: "Group 1",
-      password_strength: "Weak",
-      created_time: "2021-08-10 10:00:00",
+      name: "Policy 2",
+      description: "Policy description 2",
+      status: "Inactive",
     },
   ])
 
-  const getAllUsers = async () => {}
+  const getAllPolicies = async () => {}
 
   useEffect(() => {
-    getAllUsers()
+    getAllPolicies()
   }, [])
 
   const [formVisible, setFormVisible] = useState(false)
@@ -67,7 +59,7 @@ const CompanyPolicy = (props) => {
   })
 
   const isEmpty = useMemo(() => {
-    return users.length === 0
+    return policies.length === 0
   }, [])
 
   useEffect(() => {
@@ -79,11 +71,11 @@ const CompanyPolicy = (props) => {
   }, [currentPage?.query?.searchText, syncing])
 
   const filteredData = useMemo(() => {
-    return common.paginationAndSortData([...users], params, params.orderField, params.orderDirection, [
+    return common.paginationAndSortData([...policies], params, params.orderField, params.orderDirection, [
       (f) => f.id,
       (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
     ])
-  }, [users, JSON.stringify(params)])
+  }, [policies, JSON.stringify(params)])
 
   useEffect(() => {
     setParams({
@@ -129,7 +121,7 @@ const CompanyPolicy = (props) => {
         <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
       )}
       {filteredData.total == 0 ? (
-        <NoUser className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+        <NoPolicy className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
       ) : (
         <>
           {isMobile ? (
@@ -156,7 +148,7 @@ const CompanyPolicy = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
-        onReload={getAllUsers}
+        onReload={getAllPolicies}
         onClose={() => setFormVisible(false)}
       />
     </div>

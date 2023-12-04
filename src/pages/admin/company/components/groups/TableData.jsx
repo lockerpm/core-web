@@ -39,7 +39,7 @@ const TableData = (props) => {
                 routerName={global.keys.COMPANY_DASHBOARD}
                 routerParams={{ company_id: record.id }}
               />
-              <p className='mt-1'>{record.email}</p>
+              <p className='mt-1'>{record.description}</p>
             </div>
           </div>
         ),

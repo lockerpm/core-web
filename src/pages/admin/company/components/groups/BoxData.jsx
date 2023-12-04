@@ -43,7 +43,7 @@ const BoxData = (props) => {
                     routerName={global.keys.COMPANY_DASHBOARD}
                     routerParams={{ company_id: record.id }}
                   />
-                  <p className='font-semibold'>{record.enterprise_name}</p>
+                  <p className='font-semibold'>{record.description}</p>
                 </div>
               </div>
               <Space size={[8, 8]}>

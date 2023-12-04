@@ -4,7 +4,7 @@ import { PlusOutlined } from "@ant-design/icons"
 
 import { AdminHeader } from "../../../components"
 import Filter from "./components/groups/Filter"
-import NoUser from "./components/groups/NoUser"
+import NoGroup from "./components/groups/NoGroup"
 import TableData from "./components/groups/TableData"
 import BoxData from "./components/groups/BoxData"
 import FormData from "./components/groups/FormData"
@@ -30,23 +30,15 @@ const CompanyGroups = (props) => {
   const [users, setUsers] = useState([
     {
       id: 1,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      role: "Admin",
+      name: "Group 1",
+      description: "Group description 1",
       status: "Active",
-      group: "Group 1",
-      password_strength: "Strong",
-      created_time: "2021-08-10 10:00:00",
     },
     {
       id: 2,
-      name: "Alex Doe",
-      email: "alexdoe@gmail.com",
-      role: "Admin",
+      name: "Group 2",
+      description: "Group description 2",
       status: "Active",
-      group: "Group 1",
-      password_strength: "Weak",
-      created_time: "2021-08-10 10:00:00",
     },
   ])
 
@@ -129,7 +121,7 @@ const CompanyGroups = (props) => {
         <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
       )}
       {filteredData.total == 0 ? (
-        <NoUser className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+        <NoGroup className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
       ) : (
         <>
           {isMobile ? (

@@ -4,10 +4,8 @@ import { PlusOutlined } from "@ant-design/icons"
 
 import { AdminHeader } from "../../../components"
 import Filter from "./components/activity-logs/Filter"
-import NoUser from "./components/activity-logs/NoUser"
 import TableData from "./components/activity-logs/TableData"
 import BoxData from "./components/activity-logs/BoxData"
-import FormData from "./components/activity-logs/FormData"
 
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
@@ -27,37 +25,25 @@ const CompanyActivityLogs = (props) => {
   const syncing = useSelector((state) => state.sync.syncing)
   const isMobile = useSelector((state) => state.system.isMobile)
 
-  const [users, setUsers] = useState([
+  const [activityLogs, setActivityLogs] = useState([
     {
       id: 1,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      role: "Admin",
-      status: "Active",
-      group: "Group 1",
-      password_strength: "Strong",
-      created_time: "2021-08-10 10:00:00",
+      name: "Activity Log 1",
+      description: "Log description 1",
     },
     {
       id: 2,
-      name: "Alex Doe",
-      email: "alexdoe@gmail.com",
-      role: "Admin",
-      status: "Active",
-      group: "Group 1",
-      password_strength: "Weak",
-      created_time: "2021-08-10 10:00:00",
+      name: "Activity Log 2",
+      description: "Log description 2",
     },
   ])
 
-  const getAllUsers = async () => {}
+  const getAllActivityLogs = async () => {}
 
   useEffect(() => {
-    getAllUsers()
+    getAllActivityLogs()
   }, [])
 
-  const [formVisible, setFormVisible] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(null)
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -67,7 +53,7 @@ const CompanyActivityLogs = (props) => {
   })
 
   const isEmpty = useMemo(() => {
-    return users.length === 0
+    return activityLogs.length === 0
   }, [])
 
   useEffect(() => {
@@ -79,11 +65,11 @@ const CompanyActivityLogs = (props) => {
   }, [currentPage?.query?.searchText, syncing])
 
   const filteredData = useMemo(() => {
-    return common.paginationAndSortData([...users], params, params.orderField, params.orderDirection, [
+    return common.paginationAndSortData([...activityLogs], params, params.orderField, params.orderDirection, [
       (f) => f.id,
       (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
     ])
-  }, [users, JSON.stringify(params)])
+  }, [activityLogs, JSON.stringify(params)])
 
   useEffect(() => {
     setParams({
@@ -101,64 +87,18 @@ const CompanyActivityLogs = (props) => {
     })
   }
 
-  const handleOpenForm = (item = null) => {
-    setSelectedItem(item)
-    setFormVisible(true)
-  }
-
-  const deleteItem = (item) => {}
-
   return (
     <div className='company_users layout-content'>
-      <AdminHeader
-        title={t("company_activity_logs.title")}
-        subtitle={t("company_activity_logs.description")}
-        actions={[
-          {
-            key: "add",
-            label: t("button.new_user"),
-            type: "primary",
-            icon: <PlusOutlined />,
-            disabled: syncing,
-            click: () => handleOpenForm(),
-          },
-        ]}
-      />
+      <AdminHeader title={t("company_activity_logs.title")} subtitle={t("company_activity_logs.description")} />
 
       {!isEmpty && (
         <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
       )}
-      {filteredData.total == 0 ? (
-        <NoUser className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+      {isMobile ? (
+        <BoxData className='mt-4' loading={syncing} data={filteredData.result} params={params} />
       ) : (
-        <>
-          {isMobile ? (
-            <BoxData
-              className='mt-4'
-              loading={syncing}
-              data={filteredData.result}
-              params={params}
-              onUpdate={handleOpenForm}
-              onDelete={deleteItem}
-            />
-          ) : (
-            <TableData
-              className='mt-4'
-              loading={syncing}
-              data={filteredData.result}
-              params={params}
-              onUpdate={handleOpenForm}
-              onDelete={deleteItem}
-            />
-          )}
-        </>
+        <TableData className='mt-4' loading={syncing} data={filteredData.result} params={params} />
       )}
-      <FormData
-        visible={formVisible}
-        item={selectedItem}
-        onReload={getAllUsers}
-        onClose={() => setFormVisible(false)}
-      />
     </div>
   )
 }

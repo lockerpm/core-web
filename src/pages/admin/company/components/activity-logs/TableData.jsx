@@ -31,27 +31,11 @@ const TableData = (props) => {
         align: "left",
         render: (_, record) => (
           <div className='flex items-center'>
-            <Avatar shape='square' src={record.avatar} />
             <div className='ml-2'>
-              <RouterLink
-                className={"font-semibold"}
-                label={record.name}
-                routerName={global.keys.COMPANY_DASHBOARD}
-                routerParams={{ company_id: record.id }}
-              />
-              <p className='mt-1'>{record.email}</p>
+              <p>{record.name}</p>
             </div>
           </div>
         ),
-      },
-
-      {
-        title: t("common.status"),
-        dataIndex: "status",
-        key: "status",
-        align: "center",
-        width: 100,
-        render: (_, record) => <TextCopy value={record.status} align={"center"} />,
       },
       {
         title: t("common.created_time"),
@@ -60,20 +44,6 @@ const TableData = (props) => {
         align: "center",
         width: 200,
         render: (_, record) => <TextCopy value={common.timeFromNow(record.creation_date)} align={"center"} />,
-      },
-      {
-        title: t("common.actions"),
-        dataIndex: "actions",
-        key: "actions",
-        align: "right",
-        fixed: "right",
-        width: 100,
-        render: (_, record) => (
-          <Space size={[8, 8]}>
-            <Button type='text' size='small' icon={<EditOutlined />} onClick={() => onUpdate(record)} />
-            <Button type='text' size='small' danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} />
-          </Space>
-        ),
       },
     ].filter((c) => !c.hide)
   }, [])

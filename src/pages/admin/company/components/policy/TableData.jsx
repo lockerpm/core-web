@@ -31,7 +31,6 @@ const TableData = (props) => {
         align: "left",
         render: (_, record) => (
           <div className='flex items-center'>
-            <Avatar shape='square' src={record.avatar} />
             <div className='ml-2'>
               <RouterLink
                 className={"font-semibold"}
@@ -39,7 +38,7 @@ const TableData = (props) => {
                 routerName={global.keys.COMPANY_DASHBOARD}
                 routerParams={{ company_id: record.id }}
               />
-              <p className='mt-1'>{record.email}</p>
+              <p className='mt-1'>{record.description}</p>
             </div>
           </div>
         ),
