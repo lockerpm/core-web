@@ -69,7 +69,7 @@ const SignInForm = (props) => {
       setPreLogin(response)
       // check sync_all_platforms
       if (response.sync_all_platforms || response.login_method === 'passwordless') {
-        setIsPair((userInfo?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
+        setIsPair((response?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
         if (isConnected && response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
           try {
             const serviceUser = await service.getCurrentUser();
