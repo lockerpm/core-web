@@ -1,3 +1,4 @@
+import React from 'react'
 import { CipherType } from '../core-js/src/enums'
 import { FieldType } from '../core-js/src/enums/fieldType'
 
@@ -148,7 +149,7 @@ export default {
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
       title: 'inventory.all_items',
-      name: <></>,
+      name: '',
       isCreate: false
     },
     {
