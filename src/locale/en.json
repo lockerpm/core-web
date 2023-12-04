@@ -81,10 +81,12 @@
     "days_number": "{{number}} days",
     "one_day": "1 day",
     "username_or_email": "Email address or Username",
-    "password_strength": "Password Strength",
+    "password": "Password",
     "me": "Me",
     "otp_code": "OTP code",
-    "successfully": "Successfully"
+    "successfully": "Successfully",
+    "group": "Group",
+    "password_strength": "Password Strength"
   },
   "button": {
     "add": "Add",
@@ -135,7 +137,8 @@
     "close": "Close",
     "confirm": "Confirm",
     "download_desktop_app": "Download desktop app",
-    "open_desktop_app": "Open desktop app"
+    "open_desktop_app": "Open desktop app",
+    "new_user": "New user"
   },
   "placeholder": {
     "name": "Enter name",
@@ -253,6 +256,13 @@
         "created": "The new company has been added.",
         "updated": "The company information has been updated.",
         "deleted": "The company has been deleted."
+      },
+      "company_users": {
+        "created": "The new user has been added.",
+        "updated": "The user information has been updated.",
+        "deleted": "The user has been deleted.",
+        "file_uploaded": "The file has been uploaded.",
+        "file_uploaded_error": "Fail to upload file."
       }
     },
     "warning": {
@@ -777,7 +787,7 @@
       "setup_on": "Two-step authentication is",
       "your_second_step": "Your second step",
       "your_second_step_description": "After entering your password, you'll be asked for a second verification step.",
-      "email_otp": {                            
+      "email_otp": {
         "name": "Authentication Email",
         "description": "We'll ask for a security code if we notice a login from an unusual device.",
         "send_code": "Send code via email",
@@ -1041,7 +1051,13 @@
   },
   "company_users": {
     "title": "Users",
-    "description": "Users of company"
+    "description": "Users of company",
+    "user_email": "User name",
+    "role": "Role",
+    "upload_file": "Upload file",
+    "upload_file_guide": "or Upload file of users (CSV format)",
+    "add": "New user",
+    "edit": "Edit user info"
   },
   "company_groups": {
     "title": "Groups",
