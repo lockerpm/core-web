@@ -1,5 +1,6 @@
 import request from '../utils/request'
 import coreServices from './core'
+import commonServices from './common'
 import global from '../config/global'
 import common from '../utils/common'
 
@@ -93,12 +94,12 @@ async function logout() {
       
     }
   }
+  await coreServices.logout();
   const userInfo = global.store.getState().auth.userInfo
-  if ((global.store.getState().service.isConnected || global.store.getState().system.isDesktop) && userInfo?.sync_all_platforms) {
-    await service.logout();
+  if (userInfo?.sync_all_platforms) {
+    await commonServices.service_logout();
   }
-  await coreServices.logout()
-  localStorage.removeItem('access_token')
+  localStorage.removeItem('access_token');
   global.navigate(global.keys.SIGN_IN);
 }
 

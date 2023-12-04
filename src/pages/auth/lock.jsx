@@ -38,6 +38,7 @@ const Lock = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const isConnected = useSelector((state) => state.service.isConnected)
   const isDesktop = useSelector((state) => state.system.isDesktop)
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
@@ -94,6 +95,9 @@ const Lock = () => {
       } else {
         await coreServices.unlock({...response, ...payload })
         await commonServices.sync_data();
+        if (userInfo.sync_all_platforms) {
+          await commonServices.service_login(payload);
+        }
         const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
         navigate(returnUrl);
       }
@@ -106,7 +110,7 @@ const Lock = () => {
   const getServiceUser = async () => {
     setLoading(true);
     if (userInfo?.sync_all_platforms || userInfo.login_method === 'passwordless') {
-      setIsPair(!isDesktop && !service.pairingService?.hasKey)
+      setIsPair((userInfo?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
       if (userInfo.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
         try {
           const serviceUser = await service.getCurrentUser();

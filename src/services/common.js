@@ -434,18 +434,26 @@ function reset_service() {
 }
 
 async function service_login(data) {
-  let hashedPassword = data?.hashedPassword
-  let key = data?.keyB64
-  if (data.password) {
-    const makeKey = await coreServices.make_key(data.email, data.password)
-    hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
-    key = makeKey.keyB64
+  if (global.store.getState().service.isConnected && (service.pairingService?.hasKey || global.store.getState().system.isDesktop)) {
+    let hashedPassword = data?.hashedPassword
+    let key = data?.keyB64
+    if (data.password) {
+      const makeKey = await coreServices.make_key(data.email, data.password)
+      hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
+      key = makeKey.keyB64
+    }
+    await service.login({
+      email: data.email,
+      key: key,
+      hashedPassword: hashedPassword
+    })
   }
-  await service.login({
-    email: data.email,
-    key: key,
-    hashedPassword: hashedPassword
-  })
+}
+
+async function service_logout() {
+  if (global.store.getState().service.isConnected && (service.pairingService?.hasKey || global.store.getState().system.isDesktop)) {
+    await service.logout();
+  }
 }
 
 export default {
@@ -479,5 +487,6 @@ export default {
   get_sends,
   sync_data_by_ws,
   reset_service,
-  service_login
+  service_login,
+  service_logout
 }
