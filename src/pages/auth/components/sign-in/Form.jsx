@@ -24,7 +24,8 @@ const SignInForm = (props) => {
   } = props;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
-  const isDesktop = useSelector((state) => state.system.isDesktop)
+  const isDesktop = useSelector((state) => state.system.isDesktop);
+  const isConnected = useSelector((state) => state.service.isConnected);
 
   const [preLogin, setPreLogin] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
@@ -68,8 +69,8 @@ const SignInForm = (props) => {
       setPreLogin(response)
       // check sync_all_platforms
       if (response.sync_all_platforms || response.login_method === 'passwordless') {
-        setIsPair(!isDesktop && !service.pairingService?.hasKey)
-        if (response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
+        setIsPair((userInfo?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
+        if (isConnected && response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
           try {
             const serviceUser = await service.getCurrentUser();
             if (serviceUser?.email === response.email) {

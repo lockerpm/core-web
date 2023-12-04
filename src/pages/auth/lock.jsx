@@ -111,7 +111,7 @@ const Lock = () => {
     setLoading(true);
     if (userInfo?.sync_all_platforms || userInfo.login_method === 'passwordless') {
       setIsPair((userInfo?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
-      if (userInfo.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
+      if (isConnected && userInfo.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === userInfo.email) {
