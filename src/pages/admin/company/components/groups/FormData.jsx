@@ -16,6 +16,7 @@ function FormData(props) {
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false)
+  const companyId = useSelector((state) => state.company.id)
 
   useEffect(() => {
     if (visible) {
@@ -44,9 +45,8 @@ function FormData(props) {
   }
 
   const createGroup = async (values) => {
-    const enterpriseId = common.getRouterByLocation(location).params.company_id
     await companyGroupService
-      .create(enterpriseId, values)
+      .create(companyId, values)
       .then(() => {
         global.pushSuccess(t("notification.success.company_groups.created"))
         onReload()
@@ -57,9 +57,8 @@ function FormData(props) {
   }
 
   const editGroup = async (values) => {
-    const enterpriseId = common.getRouterByLocation(location).params.company_id
     await companyGroupService
-      .update(enterpriseId, item.id, values)
+      .update(companyId, item.id, values)
       .then(() => {
         global.pushSuccess(t("notification.success.company_groups.updated"))
         onReload()

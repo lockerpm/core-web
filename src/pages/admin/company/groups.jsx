@@ -27,21 +27,9 @@ const CompanyGroups = (props) => {
 
   const currentPage = common.getRouterByLocation(location)
   const isMobile = useSelector((state) => state.system.isMobile)
+  const companyId = useSelector((state) => state.company.id)
 
-  const [groups, setGroups] = useState([
-    {
-      id: 1,
-      name: "Group 1",
-      description: "Group description 1",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Group 2",
-      description: "Group description 2",
-      status: "Active",
-    },
-  ])
+  const [groups, setGroups] = useState([])
   const [loading, setLoading] = useState(false)
   const [formVisible, setFormVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
@@ -55,9 +43,8 @@ const CompanyGroups = (props) => {
 
   const getAllGroups = async () => {
     setLoading(true)
-    const enterpriseId = common.getRouterByLocation(location).params.company_id
     await companyGroupService
-      .list(enterpriseId)
+      .list(companyId)
       .then((response) => {
         setGroups(response.results)
       })
@@ -112,10 +99,9 @@ const CompanyGroups = (props) => {
   }
 
   const deleteItem = (group) => {
-    const enterpriseId = common.getRouterByLocation(location).params.company_id
     global.confirm(async () => {
       companyGroupService
-        .remove(enterpriseId, group.id)
+        .remove(companyId, group.id)
         .then(() => {
           global.pushSuccess(t("notification.success.company_groups.deleted"))
           if (filteredData.length === 1 && params.page > 1) {

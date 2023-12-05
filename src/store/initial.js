@@ -1,8 +1,8 @@
-import systemService from '../services/system';
+import systemService from "../services/system"
 
 export default {
   system: {
-    locale: 'en',
+    locale: "en",
     isLoading: false,
     currentPage: {},
     isMobile: false,
@@ -12,7 +12,7 @@ export default {
     isCloud: false,
     serverType: null,
     isDesktop: false,
-    cacheData: systemService.get_cache()
+    cacheData: systemService.get_cache(),
   },
   auth: {
     userInfo: null,
@@ -22,27 +22,27 @@ export default {
     isLocked: true,
     isSync: false,
     syncing: false,
-    syncProfile: null
+    syncProfile: null,
   },
   share: {
     myShares: [],
     invitations: [],
-    sends: []
+    sends: [],
   },
   cipher: {
-    allCiphers: []
+    allCiphers: [],
   },
   organization: {
-    allOrganizations: []
+    allOrganizations: [],
   },
   folder: {
-    allFolders: []
+    allFolders: [],
   },
   collection: {
-    allCollections: []
+    allCollections: [],
   },
   enterprise: {
-    teams: []
+    teams: [],
   },
   service: {
     isReady: false,
@@ -52,6 +52,9 @@ export default {
     approveCode: null,
     clientId: null,
     clientType: null,
-    pairingConfirmed: false
-  }
+    pairingConfirmed: false,
+  },
+  company: {
+    id: null,
+  },
 }
