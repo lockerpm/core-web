@@ -27,21 +27,36 @@ function SidebarCenter(props) {
     return invitations.filter((i) => i.status === global.constants.STATUS.INVITED).length
   }, [invitations])
 
-  const currentMenu = useMemo(() => {
+  const backMenu = useMemo(() => {
     if (currentPage) {
-      return menus.find((m) => {
+      const currentMenu = menus.find((m) => {
         if (currentPage.parent) {
           return m.key === currentPage.parent && m.parent && !m.isChildren
         }
         return m.key === currentPage.name && m.parent && !m.isChildren
       })
+      if (currentMenu) {
+        let backRouterKey = global.keys.VAULT
+        if (currentMenu.parent === global.keys.COMPANY) {
+          backRouterKey = global.keys.COMPANIES
+        }
+        return {
+          ...currentMenu,
+          back: {
+            ...common.getRouterByName(backRouterKey),
+            label: t('common.back'),
+            icon: <LeftOutlined />
+          }
+        }
+      }
+      return null
     }
     return null
   }, [currentPage, menus])
 
   const sidebarMenus = useMemo(() => {
-    if (currentMenu) {
-      return menus.filter((m) => m.parent === currentMenu.parent)
+    if (backMenu) {
+      return menus.filter((m) => m.parent === backMenu.parent)
     }
     return menus
       .filter((m) => !m.parent)
@@ -57,7 +72,7 @@ function SidebarCenter(props) {
           children: children.length > 0 ? children : null
         }
       })
-  }, [currentMenu, menus])
+  }, [backMenu, menus])
 
   useEffect(() => {
     setOpenKeys(sidebarMenus.filter((m) => m.children).map((m) => m.key))
@@ -71,22 +86,22 @@ function SidebarCenter(props) {
     } else {
       routerInfo = global.routers.ADMIN_ROUTERS.find((r) => r.name === menu.key)
     }
-    global.navigate(routerInfo.name);
+    if (backMenu?.parent === global.keys.COMPANY) {
+      global.navigate(routerInfo.name, { company_id: currentPage?.params?.company_id });
+    } else {
+      global.navigate(routerInfo.name);
+    }
   }
 
   return (
     <div className={'admin-layout-sidebar-center'}>
       {
-        currentMenu && <Menu
+        backMenu && <Menu
           defaultOpenKeys={[]}
           selectedKeys={[]}
           mode="inline"
           collapsed={collapsed.toString()}
-          items={[{
-            ...common.getRouterByName('VAULT'),
-            label: t('common.back'),
-            icon: <LeftOutlined />
-          }]}
+          items={[backMenu?.back]}
           onClick={handleMenuClick}
         />
       }
