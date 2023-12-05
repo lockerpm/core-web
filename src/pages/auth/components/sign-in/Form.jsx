@@ -136,7 +136,7 @@ const SignInForm = (props) => {
             <Input
               placeholder={t('placeholder.username')}
               size="large"
-              onChange={() => setPreLogin(null)}
+              onChange={() => setStep(1)}
             />
           </Form.Item>
           {
