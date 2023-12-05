@@ -126,7 +126,7 @@ const PairingForm = (props) => {
             type="primary"
             size="large"
             className="w-full"
-            onClick={() => service.sendPairingRequest()}
+            onClick={() => {}}
           >
             {t('button.download_desktop_app')}
           </Button>

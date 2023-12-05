@@ -3,8 +3,6 @@ import initial from '../../initial'
 
 const service = (state = initial.service, action) => {
   switch (action.type) {
-  case actionTypes.SET_IS_READY:
-    return { ...state, isReady: action.payload }
   case actionTypes.SET_REQUIRE_PAIRING:
     return { ...state, requirePairing: action.payload }
   case actionTypes.SET_IS_CONNECTED:

@@ -1,12 +1,5 @@
 import actionTypes from '../actionTypes'
 
-const updateIsReady = isReady => {
-  return {
-    type: actionTypes.SET_IS_READY,
-    payload: isReady,
-  }
-}
-
 const updateRequirePairing = requirePairing => {
   return {
     type: actionTypes.SET_REQUIRE_PAIRING,
@@ -71,7 +64,6 @@ const updateIsDesktopConnected = isDesktopConnected => {
 }
 
 export default {
-  updateIsReady,
   updateRequirePairing,
   updateIsConnected,
   updateApproveCode,

@@ -7,11 +7,16 @@ import authServices from '../../services/auth'
 
 import { useSelector } from 'react-redux';
 
+let resetConnectionInterval = null
+let connectSocketInterval = null
+
 function ClientService() {
   const userInfo = useSelector((state) => state.auth.userInfo);
+  const isConnected = useSelector((state) => state.service.isConnected);
+  const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected);
 
   service.on('serviceReady', () => {
-    global.store.dispatch(storeActions.updateIsReady(true))
+    global.store.dispatch(storeActions.updateIsConnected(service.gprcService.isReady));
   })
   service.on('serviceConnected', () => {
     global.store.dispatch(storeActions.updateIsConnected(true));
@@ -57,6 +62,28 @@ function ClientService() {
       authServices.logout();
     }
   })
+
+  useEffect(() => {
+    if (isConnected) {
+      clearInterval(resetConnectionInterval);
+      resetConnectionInterval = null;
+    } else {
+      resetConnectionInterval = setInterval(async () => {
+        await service.gprcService?.resetConnection()
+      }, 2000)
+    }
+  }, [isConnected])
+
+  useEffect(() => {
+    if (isDesktopConnected) {
+      clearInterval(connectSocketInterval);
+      connectSocketInterval = null;
+    } else {
+      connectSocketInterval = setInterval(async () => {
+        await service.socketService?.connectSocket()
+      }, 2000)
+    }
+  }, [isDesktopConnected])
 
   return (
     <></>

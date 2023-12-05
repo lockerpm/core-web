@@ -45,7 +45,6 @@ export default {
     teams: []
   },
   service: {
-    isReady: false,
     requirePairing: false,
     isConnected: false,
     isDesktopConnected: false,
