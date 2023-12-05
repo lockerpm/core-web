@@ -99,7 +99,7 @@ const PairingForm = (props) => {
                   size="large"
                   className="mt-2 w-full"
                   icon={<ReloadOutlined />}
-                  onClick={() => resetClient}
+                  onClick={() => resetClient()}
                 >
                   {t('passwordless.reset_code')}
                 </Button> : <Button
