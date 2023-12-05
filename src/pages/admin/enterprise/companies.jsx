@@ -25,40 +25,10 @@ const Companies = (props) => {
   const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
-  const syncing = useSelector((state) => state.sync.syncing)
   const isMobile = useSelector((state) => state.system.isMobile)
 
-  const [companies, setCompanies] = useState([
-    {
-      id: 1,
-      name: "Test1",
-      subtitle: "Test1",
-      description: "Test1",
-    },
-    {
-      id: 2,
-      name: "Test2",
-      subtitle: "Test2",
-      description: "Test2",
-    },
-  ])
-
-  const getAllCompanies = async () => {
-    await companyService
-      .list()
-      .then((response) => {
-        setCompanies(response.results)
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  useEffect(() => {
-    getAllCompanies()
-  }, [])
-
+  const [companies, setCompanies] = useState([])
+  const [loading, setLoading] = useState(false)
   const [formVisible, setFormVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [params, setParams] = useState({
@@ -68,6 +38,23 @@ const Companies = (props) => {
     orderDirection: "desc",
     searchText: currentPage?.query?.searchText,
   })
+
+  const getAllCompanies = async () => {
+    setLoading(true)
+    await companyService
+      .list()
+      .then((response) => {
+        setCompanies(response.results)
+      })
+      .catch((error) => {
+        global.pushError(error)
+      })
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getAllCompanies()
+  }, [])
 
   const isEmpty = useMemo(() => {
     return companies.length === 0
@@ -79,7 +66,7 @@ const Companies = (props) => {
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.searchText, syncing])
+  }, [currentPage?.query?.searchText])
 
   const filteredData = useMemo(() => {
     return common.paginationAndSortData([...companies], params, params.orderField, params.orderDirection, [
@@ -111,17 +98,20 @@ const Companies = (props) => {
 
   const deleteItem = (company) => {
     global.confirm(async () => {
-      companyService.remove(company.id).then(() => {
-        global.pushSuccess(t("notification.success.company.deleted"))
-        if (filteredData.length === 1 && params.page > 1) {
-          setParams({
-            ...params,
-            page: params.page - 1,
-          })
-        }
-      }).catch((error) => {
-        global.pushError(error)
-      })
+      companyService
+        .remove(company.id)
+        .then(() => {
+          global.pushSuccess(t("notification.success.company.deleted"))
+          if (filteredData.length === 1 && params.page > 1) {
+            setParams({
+              ...params,
+              page: params.page - 1,
+            })
+          }
+        })
+        .catch((error) => {
+          global.pushError(error)
+        })
     })
   }
 
@@ -136,22 +126,22 @@ const Companies = (props) => {
             label: t("button.new_company"),
             type: "primary",
             icon: <PlusOutlined />,
-            disabled: syncing,
+            disabled: loading,
             click: () => handleOpenForm(),
           },
         ]}
       />
       {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
+        <Filter className={"mt-2"} params={params} loading={loading} setParams={(v) => setParams({ ...v, page: 1 })} />
       )}
       {filteredData.total == 0 ? (
-        <NoCompany className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+        <NoCompany className={"mt-4"} loading={loading} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
       ) : (
         <>
           {isMobile ? (
             <BoxData
               className='mt-4'
-              loading={syncing}
+              loading={loading}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
@@ -160,7 +150,7 @@ const Companies = (props) => {
           ) : (
             <TableData
               className='mt-4'
-              loading={syncing}
+              loading={loading}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}

@@ -13,6 +13,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 
+import companyGroupService from "../../../services/company-group"
+
 import common from "../../../utils/common"
 
 import global from "../../../config/global"
@@ -24,10 +26,9 @@ const CompanyGroups = (props) => {
   const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
-  const syncing = useSelector((state) => state.sync.syncing)
   const isMobile = useSelector((state) => state.system.isMobile)
 
-  const [users, setUsers] = useState([
+  const [groups, setGroups] = useState([
     {
       id: 1,
       name: "Group 1",
@@ -41,13 +42,7 @@ const CompanyGroups = (props) => {
       status: "Active",
     },
   ])
-
-  const getAllUsers = async () => {}
-
-  useEffect(() => {
-    getAllUsers()
-  }, [])
-
+  const [loading, setLoading] = useState(false)
   const [formVisible, setFormVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [params, setParams] = useState({
@@ -58,8 +53,26 @@ const CompanyGroups = (props) => {
     searchText: currentPage?.query?.searchText,
   })
 
+  const getAllGroups = async () => {
+    setLoading(true)
+    const enterpriseId = common.getRouterByLocation(location).params.company_id
+    await companyGroupService
+      .list(enterpriseId)
+      .then((response) => {
+        setGroups(response.results)
+      })
+      .catch((error) => {
+        global.pushError(error)
+      })
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getAllGroups()
+  }, [])
+
   const isEmpty = useMemo(() => {
-    return users.length === 0
+    return groups.length === 0
   }, [])
 
   useEffect(() => {
@@ -68,14 +81,14 @@ const CompanyGroups = (props) => {
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.searchText, syncing])
+  }, [currentPage?.query?.searchText])
 
   const filteredData = useMemo(() => {
-    return common.paginationAndSortData([...users], params, params.orderField, params.orderDirection, [
+    return common.paginationAndSortData([...groups], params, params.orderField, params.orderDirection, [
       (f) => f.id,
       (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
     ])
-  }, [users, JSON.stringify(params)])
+  }, [groups, JSON.stringify(params)])
 
   useEffect(() => {
     setParams({
@@ -98,7 +111,26 @@ const CompanyGroups = (props) => {
     setFormVisible(true)
   }
 
-  const deleteItem = (item) => {}
+  const deleteItem = (group) => {
+    const enterpriseId = common.getRouterByLocation(location).params.company_id
+    global.confirm(async () => {
+      companyGroupService
+        .remove(enterpriseId, group.id)
+        .then(() => {
+          global.pushSuccess(t("notification.success.company_groups.deleted"))
+          if (filteredData.length === 1 && params.page > 1) {
+            setParams({
+              ...params,
+              page: params.page - 1,
+            })
+          }
+          getAllGroups()
+        })
+        .catch((error) => {
+          global.pushError(error)
+        })
+    })
+  }
 
   return (
     <div className='company_users layout-content'>
@@ -108,26 +140,26 @@ const CompanyGroups = (props) => {
         actions={[
           {
             key: "add",
-            label: t("button.new_user"),
+            label: t("button.new_group"),
             type: "primary",
             icon: <PlusOutlined />,
-            disabled: syncing,
+            disabled: loading,
             click: () => handleOpenForm(),
           },
         ]}
       />
 
       {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
+        <Filter className={"mt-2"} params={params} loading={loading} setParams={(v) => setParams({ ...v, page: 1 })} />
       )}
       {filteredData.total == 0 ? (
-        <NoGroup className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+        <NoGroup className={"mt-4"} loading={loading} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
       ) : (
         <>
           {isMobile ? (
             <BoxData
               className='mt-4'
-              loading={syncing}
+              loading={loading}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
@@ -136,7 +168,7 @@ const CompanyGroups = (props) => {
           ) : (
             <TableData
               className='mt-4'
-              loading={syncing}
+              loading={loading}
               data={filteredData.result}
               params={params}
               onUpdate={handleOpenForm}
@@ -148,7 +180,7 @@ const CompanyGroups = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
-        onReload={getAllUsers}
+        onReload={getAllGroups}
         onClose={() => setFormVisible(false)}
       />
     </div>
