@@ -100,6 +100,18 @@ const FormData = (props) => {
     setCallingAPI(false);
   }
 
+  const handleRemoveKey = async (keyId) => {
+    global.confirm(async () => {
+      try {
+        await service.setApiToken(authServices.access_token())
+        await service.deleteBackupPasswordless(keyId)
+        await getBackupKeys();
+      } catch (error) {
+        global.pushError(error)
+      }
+    })
+  }
+
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -175,7 +187,7 @@ const FormData = (props) => {
                     danger
                     type="text"
                     icon={<DeleteOutlined />}
-                    onClick={() => { }}
+                    onClick={() => handleRemoveKey(item.id)}
                   >
                   </Button>
                 ]}
