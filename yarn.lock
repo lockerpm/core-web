@@ -9274,10 +9274,10 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-locker-client-service@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/locker-client-service/-/locker-client-service-0.0.14.tgz#17951cb0d95105a00e4cb1aa1a88ece90ae138e0"
-  integrity sha512-+jWpv1wwYJAin+6HrJ/QRsAKyR9+accoJxiQizoBjsU8Vhzy8YFB6CZ6FMzDpmelhgYc3RzGlN57YvsghHu7qA==
+locker-client-service@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/locker-client-service/-/locker-client-service-0.0.15.tgz#20af50cad06cf3d1a696d14e9d7c70ea430606a0"
+  integrity sha512-bQZF0bNFBheR5lDfyU6rAKxqZw1KwglAK3WRcG3/kUDoAUkn3r3gEPKR4vwXt6SzYLtyEDe+/8/NlC1tQvT5bQ==
   dependencies:
     axios "^1.6.2"
     eventemitter3 "^5.0.1"
