@@ -13,6 +13,9 @@ const convertTime = time => {
 }
 
 const timeFromNow = time => {
+  if (!time) {
+    return ''
+  }
   if (time && typeof time === 'number') {
     return dayjs(time * 1000).fromNow()
   }

@@ -31,15 +31,15 @@ const TableData = (props) => {
         align: "left",
         render: (_, record) => (
           <div className='flex items-center'>
-            <Avatar shape='square' src={record.avatar} />
+            <Avatar src={record.avatar} />
             <div className='ml-2'>
               <RouterLink
                 className={"font-semibold"}
-                label={record.name}
+                label={record.full_name}
                 routerName={global.keys.ENTERPRISE_DASHBOARD}
                 routerParams={{ enterprise_id: record.id }}
               />
-              <p className='mt-1'>{record.email}</p>
+              <p className='text-xs'>{record.email}</p>
             </div>
           </div>
         ),
@@ -82,7 +82,7 @@ const TableData = (props) => {
         key: "creationDate",
         align: "center",
         width: 200,
-        render: (_, record) => <TextCopy value={common.timeFromNow(record.creation_date)} align={"center"} />,
+        render: (_, record) => <TextCopy value={common.timeFromNow(record.access_time)} align={"center"} />,
       },
       {
         title: t("common.actions"),
