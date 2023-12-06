@@ -119,4 +119,7 @@ export default {
 
   COMPANIES: `${ADMIN}/enterprises`,
   COMPANY: `${FLAT_FORM}/enterprises/:id`,
+
+  COMPANY_GROUPS: `${FLAT_FORM}/enterprises/:enterprise_id/groups`,
+  COMPANY_GROUP: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id`,
 }

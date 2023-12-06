@@ -31,7 +31,6 @@ const TableData = (props) => {
         align: "left",
         render: (_, record) => (
           <div className='flex items-center'>
-            <Avatar shape='square' src={record.avatar} />
             <div className='ml-2'>
               <RouterLink
                 className={"font-semibold"}
@@ -39,19 +38,18 @@ const TableData = (props) => {
                 routerName={global.keys.COMPANY_DASHBOARD}
                 routerParams={{ company_id: record.id }}
               />
-              <p className='mt-1'>{record.description}</p>
             </div>
           </div>
         ),
       },
 
       {
-        title: t("common.status"),
-        dataIndex: "status",
-        key: "status",
+        title: t("common.number_members"),
+        dataIndex: "numberMembers",
+        key: "numberMembers",
         align: "center",
         width: 100,
-        render: (_, record) => <TextCopy value={record.status} align={"center"} />,
+        render: (_, record) => <TextCopy value={record.number_members} align={"center"} />,
       },
       {
         title: t("common.created_time"),
@@ -60,6 +58,16 @@ const TableData = (props) => {
         align: "center",
         width: 200,
         render: (_, record) => <TextCopy value={common.timeFromNow(record.creation_date)} align={"center"} />,
+      },
+      {
+        title: t("common.updated_time"),
+        dataIndex: "revisionDate",
+        key: "revisionDate",
+        align: "center",
+        width: 200,
+        render: (_, record) => (
+          <TextCopy value={common.timeFromNow(record.revision_date || record.creation_date)} align={"center"} />
+        ),
       },
       {
         title: t("common.actions"),
