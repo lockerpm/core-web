@@ -196,7 +196,7 @@ const PasswordlessForm = (props) => {
               </Card>)
             }
             <Button
-              className="mt-4 w-full"
+              className="mt-4 w-full text-sm"
               type="text"
               size="large"
               icon={<RedoOutlined />}

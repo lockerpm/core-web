@@ -770,7 +770,13 @@
     "mobile_passwordless": {
       "title": "Mobile passwordless login",
       "description": "Scan a QR code to log in to the mobile app when passwordless login is enabled.",
-      "action": "Scan QR code"
+      "action": "Scan QR code",
+      "enter_code":"Enter verification code here",
+      "code": "OTP Code",
+      "point_phone": "Point your phone camera to the QR Code below to confirm Login",
+      "expire_in": "QR Code Expire in: {{expireCountdown}}s",
+      "expired": "QR Code Expired",
+      "passwordless_disabled": "Passwordless login is disabled"
     },
     "cross_platform_sync": {
       "title": "Cross-platform sync",
