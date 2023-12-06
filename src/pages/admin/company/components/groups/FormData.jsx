@@ -7,13 +7,16 @@ import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import global from "../../../../../config/global"
-import companyServices from "../../../../../services/company"
+import companyGroupService from "../../../../../services/company-group"
+
+import common from "../../../../../utils/common"
 
 function FormData(props) {
   const { visible = false, item = null, onClose = () => {}, onReload = () => {} } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false)
+  const companyId = useSelector((state) => state.company.id)
 
   useEffect(() => {
     if (visible) {
@@ -32,20 +35,20 @@ function FormData(props) {
     form.validateFields().then(async (values) => {
       setCallingAPI(true)
       if (!item?.id) {
-        await createCompany(values)
+        await createGroup(values)
       } else {
-        await editCompany(values)
+        await editGroup(values)
       }
       setCallingAPI(false)
       onClose()
     })
   }
 
-  const createCompany = async (values) => {
-    await companyServices
-      .create(values)
+  const createGroup = async (values) => {
+    await companyGroupService
+      .create(companyId, values)
       .then(() => {
-        global.pushSuccess(t("notification.success.company.created"))
+        global.pushSuccess(t("notification.success.company_groups.created"))
         onReload()
       })
       .catch((error) => {
@@ -53,49 +56,22 @@ function FormData(props) {
       })
   }
 
-  const editCompany = async (values) => {
-    await companyServices
-      .update(item.id, values)
+  const editGroup = async (values) => {
+    await companyGroupService
+      .update(companyId, item.id, values)
       .then(() => {
-        global.pushSuccess(t("notification.success.company.created"))
+        global.pushSuccess(t("notification.success.company_groups.updated"))
         onReload()
       })
       .catch((error) => {
         global.pushError(error)
       })
   }
-
-  const formProps = {
-    name: "file",
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList)
-      }
-      if (info.file.status === "done") {
-        global.pushSuccess(t("notification.success.company_users.file_uploaded"))
-      } else if (info.file.status === "error") {
-        global.pushError(t("notification.error.company_users.file_upload_failed"))
-      }
-    },
-  }
-
-  const onChange = (value) => {
-    console.log(`selected ${value}`)
-  }
-  const onSearch = (value) => {
-    console.log("search:", value)
-  }
-
-  const filterOption = (input, option) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
 
   return (
     <div className={props.className}>
       <Drawer
-        title={t(`company_users.${item ? "edit" : "add"}`)}
+        title={t(`company_groups.${item ? "edit" : "add"}`)}
         placement='right'
         onClose={onClose}
         open={visible}
@@ -112,39 +88,12 @@ function FormData(props) {
       >
         <Form form={form} layout='vertical' labelAlign={"left"}>
           <Form.Item
-            name={"user_email"}
+            name={"name"}
             className='mb-2'
-            label={<p className='font-semibold'>{t("company_users.user_email")}</p>}
-            rules={[global.rules.REQUIRED(t("company_users.user_email"))]}
+            label={<p className='font-semibold'>{t("company_groups.group_name")}</p>}
+            rules={[global.rules.REQUIRED(t("company_groups.group_name"))]}
           >
             <Input placeholder={t("placeholder.enter")} disabled={callingAPI} />
-          </Form.Item>
-          <Form.Item name={"role"} className='mb-2' label={<p className='font-semibold'>{t("company_users.role")}</p>}>
-            <Select
-              showSearch
-              placeholder={t("placeholder.enter")}
-              optionFilterProp='children'
-              onChange={onChange}
-              onSearch={onSearch}
-              filterOption={filterOption}
-              disabled={callingAPI}
-              options={[
-                {
-                  value: "admin",
-                  label: "Admin",
-                },
-                {
-                  value: "user",
-                  label: "User",
-                },
-              ]}
-            />
-          </Form.Item>
-          <Form.Item name={"description"} className='mb-2'>
-            <p className='mb-2 mt-4'>{t("company_users.upload_file_guide")}</p>
-            <Upload {...props}>
-              <Button icon={<UploadOutlined />}>{t("company_users.upload_file")}</Button>
-            </Upload>
           </Form.Item>
         </Form>
       </Drawer>

@@ -86,7 +86,8 @@
     "otp_code": "OTP code",
     "successfully": "Successfully",
     "group": "Group",
-    "password_strength": "Password Strength"
+    "password_strength": "Password Strength",
+    "number_members": "Number of members"
   },
   "button": {
     "add": "Add",
@@ -138,7 +139,8 @@
     "confirm": "Confirm",
     "download_desktop_app": "Download desktop app",
     "open_desktop_app": "Open desktop app",
-    "new_user": "New user"
+    "new_user": "New user",
+    "new_group": "New group"
   },
   "placeholder": {
     "name": "Enter name",
@@ -263,6 +265,11 @@
         "deleted": "The user has been deleted.",
         "file_uploaded": "The file has been uploaded.",
         "file_uploaded_error": "Fail to upload file."
+      },
+      "company_groups": {
+        "created": "The new group has been added.",
+        "updated": "The group information has been updated.",
+        "deleted": "The group has been deleted."
       }
     },
     "warning": {
@@ -1058,7 +1065,7 @@
   "company_users": {
     "title": "Users",
     "description": "Users of company",
-    "user_email": "User name",
+    "user_email": "User email",
     "role": "Role",
     "upload_file": "Upload file",
     "upload_file_guide": "or Upload file of users (CSV format)",
@@ -1067,7 +1074,10 @@
   },
   "company_groups": {
     "title": "Groups",
-    "description": "Groups of company"
+    "description": "Groups of company",
+    "group_name": "Group name",
+    "add": "New group",
+    "edit": "Edit group info"
   },
   "company_policy": {
     "title": "Policy",
