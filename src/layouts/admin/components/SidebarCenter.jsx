@@ -37,8 +37,8 @@ function SidebarCenter(props) {
       })
       if (currentMenu) {
         let backRouterKey = global.keys.VAULT
-        if (currentMenu.parent === global.keys.COMPANY) {
-          backRouterKey = global.keys.COMPANIES
+        if (currentMenu.parent === global.keys.ENTERPRISE) {
+          backRouterKey = global.keys.ENTERPRISES
         }
         return {
           ...currentMenu,
@@ -86,8 +86,8 @@ function SidebarCenter(props) {
     } else {
       routerInfo = global.routers.ADMIN_ROUTERS.find((r) => r.name === menu.key)
     }
-    if (backMenu?.parent === global.keys.COMPANY) {
-      global.navigate(routerInfo.name, { company_id: currentPage?.params?.company_id });
+    if (backMenu?.parent === global.keys.ENTERPRISE) {
+      global.navigate(routerInfo.name, { enterprise_id: currentPage?.params?.enterprise_id });
     } else {
       global.navigate(routerInfo.name);
     }

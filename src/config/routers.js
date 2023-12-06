@@ -212,52 +212,48 @@ export default {
       element: 'SettingsNotifications',
     },
 
-    // Enterprise
+    // Enterprises
     {
-      name: keys.ENTERPRISE_DASHBOARD,
-      path: '/enterprise',
-      element: 'Enterprise',
-    },
-    {
-      name: keys.COMPANIES,
-      path: '/enterprise/companies',
-      element: 'Companies',
+      name: keys.ENTERPRISES,
+      path: '/enterprises',
+      element: 'Enterprises',
     },
     {
       name: keys.EMAIL_SETTINGS,
-      path: '/enterprise/email-settings',
+      path: '/enterprises/email-settings',
       element: 'EmailSettings',
     },
     {
-      name: keys.SSO_CONFIGURATION, 
-      path: '/enterprise/sso-configuration',
+      name: keys.SSO_CONFIGURATION,
+      path: '/enterprises/sso-configuration',
       element: 'SSOConfiguration',
     },
+
     // Enterprise detail
     {
-      name: keys.COMPANY_DASHBOARD,
-      path: '/enterprise/companies/:company_id',
-      element: 'CompanyDashboard',
+      name: keys.ENTERPRISE_DASHBOARD,
+      path: '/enterprises/:enterprise_id/dashboard',
+      element: 'EnterpriseDashboard',
     },
     {
-      name: keys.COMPANY_USERS,
-      path: '/enterprise/companies/:company_id/users',
-      element: 'CompanyUsers',
+      name: keys.ENTERPRISE_MEMBERS,
+      path: '/enterprises/:enterprise_id/users',
+      element: 'EnterpriseMembers',
     },
     {
-      name: keys.COMPANY_GROUPS,
-      path: '/enterprise/companies/:company_id/groups',
-      element: 'CompanyGroups',
+      name: keys.ENTERPRISE_GROUPS,
+      path: '/enterprises/:enterprise_id/groups',
+      element: 'EnterpriseGroups',
     },
     {
-      name: keys.COMPANY_POLICY,
-      path: '/enterprise/companies/:company_id/policy',
-      element: 'CompanyPolicy',
+      name: keys.ENTERPRISE_POLICIES,
+      path: '/enterprises/:enterprise_id/policy',
+      element: 'EnterprisePolicies',
     },
     {
-      name: keys.COMPANY_ACTIVITY_LOGS,
-      path: '/enterprise/companies/:company_id/activity-logs',
-      element: 'CompanyActivityLogs',
+      name: keys.ENTERPRISE_ACTIVITY_LOGS,
+      path: '/enterprises/:enterprise_id/activity-logs',
+      element: 'EnterpriseActivityLogs',
     },
   ],
 }

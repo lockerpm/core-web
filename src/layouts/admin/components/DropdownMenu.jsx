@@ -57,7 +57,7 @@ function DropdownMenu() {
     } else if (item.key === 'lock') {
       await authServices.redirect_login();
     } else if (item.key === 'enterprise') {
-      global.navigate(global.keys.ENTERPRISE_DASHBOARD)
+      global.navigate(global.keys.ENTERPRISES)
     }
   }
 
@@ -77,8 +77,8 @@ function DropdownMenu() {
             label: <span>
               <span className='font-semibold'>
                 {t('common.language')}:</span> <span>
-                  {t(global.constants.LANGUAGES.find((l, index) => l.value === locale || index === 0).label)}
-                </span>
+                {t(global.constants.LANGUAGES.find((l, index) => l.value === locale || index === 0).label)}
+              </span>
             </span>,
             children: global.constants.LANGUAGES.map((l) => ({
               key: l.value,

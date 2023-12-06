@@ -79,10 +79,6 @@ export default {
   FOLDERS: `${FLAT_FORM}/folders`,
   FOLDER: `${FLAT_FORM}/folders/:id`,
 
-  ENTERPRISES: `${FLAT_FORM}/enterprises`,
-  ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,
-  ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
-
   NOTIFICATIONS: `${API_URL}/v3/notifications`,
   NOTIFICATION: `${API_URL}/v3/notifications/:notification_id`,
   NOTIFICATIONS_READ_ALL: `${API_URL}/v3/notifications/read_all`,
@@ -111,15 +107,18 @@ export default {
 
   PASSWORDLESS_CREDENTIAL: `${FLAT_FORM}/passwordless/credential`,
 
+  ENTERPRISES: `${FLAT_FORM}/enterprises`,
+  ENTERPRISE: `${FLAT_FORM}/enterprises/:enterprise_id`,
+  ENTERPRISE_GROUPS: `${FLAT_FORM}/enterprises/:enterprise_id/groups`,
+  ENTERPRISE_GROUP: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id`,
+  ENTERPRISE_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/members`,
+  ENTERPRISE_MEMBER: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:member_id`,
+  ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,
+  ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
+
   // Admin
+  ADMIN_ENTERPRISES: `${ADMIN}/enterprises`,
   MAIL_CONFIGURATION: `${ADMIN}/mail_configuration`,
   MAIL_CONFIGURATION_TEST: `${ADMIN}/mail_configuration/test`,
-
   SSO_CONFIGURATION: `${ADMIN}/sso_configuration`,
-
-  COMPANIES: `${ADMIN}/enterprises`,
-  COMPANY: `${FLAT_FORM}/enterprises/:id`,
-
-  COMPANY_GROUPS: `${FLAT_FORM}/enterprises/:enterprise_id/groups`,
-  COMPANY_GROUP: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id`,
 }

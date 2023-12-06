@@ -54,7 +54,6 @@ function AdminLayout(props) {
 
   useEffect(() => {
     dispatch(storeActions.updateIsScrollToTop(false))
-    dispatch(storeActions.updateCompanyId(common.getRouterByLocation(location).params.company_id))
     convertSize()
   }, [location])
 
@@ -126,9 +125,8 @@ function AdminLayout(props) {
             </Layout.Sider>
           )}
           <Layout
-            className={`admin-layout-center ${collapsed ? "admin-layout-center-collapsed" : ""} ${
-              isMobile ? "mobile" : ""
-            }`}
+            className={`admin-layout-center ${collapsed ? "admin-layout-center-collapsed" : ""} ${isMobile ? "mobile" : ""
+              }`}
           >
             <Layout.Header style={{ padding: 0 }}>
               <Header

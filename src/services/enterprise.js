@@ -24,8 +24,42 @@ function list_user_group_members(groupId) {
   })
 }
 
+function list() {
+  return request({
+    url: global.endpoint.ADMIN_ENTERPRISES,
+    method: "get",
+  })
+}
+
+function create(data = {}) {
+  return request({
+    url: global.endpoint.ADMIN_ENTERPRISES,
+    method: "post",
+    data,
+  })
+}
+
+function update(id, data = {}) {
+  return request({
+    url: global.endpoint.ENTERPRISE.replace(":enterprise_id", id),
+    method: "put",
+    data
+  })
+}
+
+function remove(id) {
+  return request({
+    url: global.endpoint.ENTERPRISE.replace(":enterprise_id", id),
+    method: "delete",
+  })
+}
+
 export default {
   list_teams,
   list_groups_members,
-  list_user_group_members
+  list_user_group_members,
+  list,
+  create,
+  update,
+  remove
 }

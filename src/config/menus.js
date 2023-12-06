@@ -81,7 +81,7 @@ export default {
       icon: <MobileOutlined />,
       label: 'sidebar.authenticator',
     },
-    
+
     {
       key: keys.SHARES,
       router: keys.SHARED_WITH_ME,
@@ -143,60 +143,54 @@ export default {
 
     // Enterprise
     {
-      key: keys.ENTERPRISE_DASHBOARD,
-      parent: keys.ENTERPRISE,
-      icon: <DashboardOutlined />,
-      label: 'sidebar.enterprise_dashboard',
-    },
-    {
-      key: keys.COMPANIES,
-      parent: keys.ENTERPRISE,
+      key: keys.ENTERPRISES,
+      parent: keys.ENTERPRISES,
       icon: <ProjectOutlined />,
-      label: 'sidebar.companies',
+      label: 'sidebar.enterprises',
     },
     {
       key: keys.EMAIL_SETTINGS,
-      parent: keys.ENTERPRISE,
+      parent: keys.ENTERPRISES,
       icon: <MailOutlined />,
       label: 'sidebar.email_settings',
     },
     {
       key: keys.SSO_CONFIGURATION,
-      parent: keys.ENTERPRISE,
+      parent: keys.ENTERPRISES,
       icon: <KeyOutlined />,
       label: 'sidebar.sso_configuration',
     },
 
     // Enterprise detail
     {
-      key: keys.COMPANY_DASHBOARD,
-      parent: keys.COMPANY,
-      icon: <ProjectOutlined />,
-      label: 'sidebar.company_dashboard',
+      key: keys.ENTERPRISE_DASHBOARD,
+      parent: keys.ENTERPRISE,
+      icon: <DashboardOutlined />,
+      label: 'sidebar.enterprise_dashboard',
     },
     {
-      key: keys.COMPANY_USERS,
-      parent: keys.COMPANY,
+      key: keys.ENTERPRISE_MEMBERS,
+      parent: keys.ENTERPRISE,
       icon: <UserOutlined />,
-      label: 'sidebar.company_users',
+      label: 'sidebar.enterprise_members',
     },
     {
-      key: keys.COMPANY_GROUPS,
-      parent: keys.COMPANY,
+      key: keys.ENTERPRISE_GROUPS,
+      parent: keys.ENTERPRISE,
       icon: <GroupOutlined />,
-      label: 'sidebar.company_groups',
+      label: 'sidebar.enterprise_groups',
     },
     {
-      key: keys.COMPANY_POLICY,
-      parent: keys.COMPANY,
+      key: keys.ENTERPRISE_POLICIES,
+      parent: keys.ENTERPRISE,
       icon: <ProjectOutlined />,
-      label: 'sidebar.company_policy',
+      label: 'sidebar.enterprise_policies',
     },
     {
-      key: keys.COMPANY_ACTIVITY_LOGS,
-      parent: keys.COMPANY,
+      key: keys.ENTERPRISE_ACTIVITY_LOGS,
+      parent: keys.ENTERPRISE,
       icon: <MessageOutlined />,
-      label: 'sidebar.company_activity_logs',
+      label: 'sidebar.enterprise_activity_logs',
     },
   ]
 } 

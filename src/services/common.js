@@ -228,7 +228,7 @@ async function sync_data(syncing = true) {
 function password_strength(password) {
   return global.jsCore.passwordGenerationService.passwordStrength(password, [
     'cystack'
-  ]) || { score: 0}
+  ]) || { score: 0 }
 }
 
 const sync_items = async (cipherIds) => {
@@ -256,7 +256,7 @@ async function stop_sharing_cipher(cipher) {
   if (memberId) {
     await sharingServices.stop_sharing_member(
       cipher.organizationId,
-      memberId, 
+      memberId,
       {
         folder: null,
         cipher: { ...data, id: cipher.id }
@@ -309,7 +309,7 @@ async function stop_sharing_folder(folder) {
   if (memberId) {
     await sharingServices.stop_sharing_member(
       folder.organizationId,
-      memberId, 
+      memberId,
       payload
     )
   } else {

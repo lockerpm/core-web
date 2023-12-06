@@ -52,8 +52,5 @@ export default {
     clientId: null,
     clientType: null,
     pairingConfirmed: false,
-  },
-  company: {
-    id: null,
-  },
+  }
 }

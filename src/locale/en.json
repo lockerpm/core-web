@@ -129,7 +129,7 @@
     "new_item": "New item",
     "new_folder": "New folder",
     "new_share": "New share",
-    "new_company": "New company",
+    "new_enterprise": "New company",
     "share": "Share",
     "view": "View",
     "copy_link": "Copy link",
@@ -163,7 +163,8 @@
     "url": "https://",
     "field_name": "Field name",
     "wallet_app": "Select a wallet app",
-    "networks": "Select networks"
+    "networks": "Select networks",
+    "select_users": "Enter email to select users"
   },
   "validation": {
     "required": "{{name}} is required.",
@@ -254,19 +255,17 @@
       "quick_share_detail": {
         "check_mail": "Please check your mail."
       },
-      "company": {
+      "enterprise": {
         "created": "The new company has been added.",
         "updated": "The company information has been updated.",
         "deleted": "The company has been deleted."
       },
-      "company_users": {
+      "enterprise_members": {
         "created": "The new user has been added.",
         "updated": "The user information has been updated.",
-        "deleted": "The user has been deleted.",
-        "file_uploaded": "The file has been uploaded.",
-        "file_uploaded_error": "Fail to upload file."
+        "deleted": "The user has been deleted."
       },
-      "company_groups": {
+      "enterprise_groups": {
         "created": "The new group has been added.",
         "updated": "The group information has been updated.",
         "deleted": "The group has been deleted."
@@ -305,15 +304,14 @@
     "shared_with_me": "Shared With Me",
     "my_shared_items": "My Shared Items",
     "enterprise": "Enterprise Manager",
-    "enterprise_dashboard": "Dashboard",
-    "companies": "Companies",
+    "enterprises": "Companies",
     "email_settings": "Email Settings",
     "sso_configuration": "SSO Configuration",
-    "company_dashboard": "Dashboard",
-    "company_users": "Users",
-    "company_groups": "Groups",
-    "company_policy": "Policy",
-    "company_activity_logs": "Activity Logs"
+    "enterprise_dashboard": "Dashboard",
+    "enterprise_members": "Users",
+    "enterprise_groups": "Groups",
+    "enterprise_policies": "Policies",
+    "enterprise_activity_logs": "Activity Logs"
   },
   "auth_pages": {
     "username": "Email",
@@ -778,7 +776,7 @@
       "title": "Mobile passwordless login",
       "description": "Scan a QR code to log in to the mobile app when passwordless login is enabled.",
       "action": "Scan QR code",
-      "enter_code":"Enter verification code here",
+      "enter_code": "Enter verification code here",
       "code": "OTP Code",
       "point_phone": "Point your phone camera to the QR Code below to confirm Login",
       "expire_in": "QR Code Expire in: {{expireCountdown}}s",
@@ -969,11 +967,7 @@
       "resend": "Resend code"
     }
   },
-  "enterprise_dashboard": {
-    "title": "Enterprise Dashboard",
-    "description": "Statistic of all companies"
-  },
-  "companies": {
+  "enterprises": {
     "title": "Companies",
     "add": "New Company",
     "edit": "Edit company info",
@@ -1058,33 +1052,37 @@
       "enter_scopes": "Read or ..."
     }
   },
-  "company_dashboard": {
-    "title": "Dashboard",
-    "description": "Statistic of company"
+  "enterprise_dashboard": {
+    "title": "Dashboard"
   },
-  "company_users": {
+  "enterprise_members": {
     "title": "Users",
-    "description": "Users of company",
     "user_email": "User email",
     "role": "Role",
     "upload_file": "Upload file",
     "upload_file_guide": "or Upload file of users (CSV format)",
     "add": "New user",
-    "edit": "Edit user info"
+    "edit": "Edit user info",
+    "no_data": {
+      "title": "Add your first company user",
+      "description": "Add an user to manage."
+    }
   },
-  "company_groups": {
+  "enterprise_groups": {
     "title": "Groups",
-    "description": "Groups of company",
     "group_name": "Group name",
     "add": "New group",
-    "edit": "Edit group info"
+    "edit": "Edit group info",
+    "users": "Group users",
+    "no_data": {
+      "title": "Add your first company group",
+      "description": "Add an group to manage users."
+    }
   },
-  "company_policy": {
-    "title": "Policy",
-    "description": "Policy of company"
+  "enterprise_policies": {
+    "title": "Policies"
   },
-  "company_activity_logs": {
-    "title": "Activity Logs",
-    "description": "Activity Logs of company"
+  "enterprise_activity_logs": {
+    "title": "Activity Logs"
   }
 }
