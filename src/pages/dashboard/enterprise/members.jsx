@@ -76,9 +76,9 @@ const EnterpriseMembers = (props) => {
   const getAllMembers = async () => {
     setLoading(true)
     await enterpriseMemberServices
-      .list(enterpriseId)
+      .list(enterpriseId, { paging: 0 })
       .then((response) => {
-        setMembers(response.results)
+        setMembers(response)
       })
       .catch((error) => {
         setMembers([])
@@ -121,7 +121,10 @@ const EnterpriseMembers = (props) => {
   }
 
   return (
-    <div className='enterprise_members layout-content'>
+    <div
+      className='enterprise_members layout-content'
+      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
+    >
       <AdminHeader
         title={t("enterprise_members.title")}
         total={members.length}

@@ -115,7 +115,10 @@ const Enterprises = (props) => {
   }
 
   return (
-    <div className='vault layout-content' onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}>
+    <div
+      className='vault layout-content'
+      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
+    >
       <AdminHeader
         title={t("enterprises.title")}
         total={filteredData.total}

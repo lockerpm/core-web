@@ -1,19 +1,26 @@
 import React, { useMemo } from "react"
-import { Table, Space, Button, Avatar } from "@lockerpm/design"
+import { Table, Avatar } from "@lockerpm/design"
 
-import {} from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import { TextCopy, RouterLink } from "../../../../../components"
 
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
+import { } from "@ant-design/icons"
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
 const TableData = (props) => {
   const { t } = useTranslation()
-  const { loading = false, className = "", data = [], params = {}, onUpdate = () => {}, onDelete = () => {} } = props
+  const {
+    loading = false,
+    className = "",
+    data = [],
+    params = {}
+  } = props
+
+  const locale = useSelector((state) => state.system.locale)
 
   const columns = useMemo(() => {
     return [
@@ -25,25 +32,52 @@ const TableData = (props) => {
         width: 50,
       },
       {
-        title: t("common.name"),
+        title: t("common.user"),
         dataIndex: "title",
         key: "name",
         align: "left",
+        width: 350,
         render: (_, record) => (
           <div className='flex items-center'>
+            <Avatar src={record.user?.avatar} />
             <div className='ml-2'>
-              <p>{record.name}</p>
+              <RouterLink
+                className={"font-semibold"}
+                label={record.user?.name || record.user?.email}
+                routerName={global.keys.ENTERPRISE_DASHBOARD}
+                routerParams={{ enterprise_id: record.id }}
+              />
+              <p className='text-xs'>{record.user?.email}</p>
             </div>
           </div>
         ),
       },
       {
-        title: t("common.created_time"),
+        title: t("common.action"),
+        dataIndex: "action",
+        key: "action",
+        align: "left",
+        render: (_, record) => (
+          <div className='flex items-center'>
+            <p>{record.description[locale]}</p>
+          </div>
+        ),
+      },
+      {
+        title: t("common.time"),
         dataIndex: "creationDate",
         key: "creationDate",
         align: "center",
         width: 200,
-        render: (_, record) => <TextCopy value={common.timeFromNow(record.creation_date)} align={"center"} />,
+        render: (_, record) => <TextCopy value={common.convertDateTime(record.creation_date)} align={"center"} />,
+      },
+      {
+        title: t("common.ip_address"),
+        dataIndex: "ip_address",
+        key: "ip_address",
+        align: "left",
+        width: 150,
+        render: (_, record) => <TextCopy value={record.ip_address} />,
       },
     ].filter((c) => !c.hide)
   }, [])

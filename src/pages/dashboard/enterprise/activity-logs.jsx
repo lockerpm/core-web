@@ -11,9 +11,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 
-import common from "../../../utils/common"
+import enterpriseActivityServices from "../../../services/enterprise-activity"
 
+import common from "../../../utils/common"
 import global from "../../../config/global"
+import dayjs from 'dayjs'
 
 const EnterpriseActivityLogs = (props) => {
   const { } = props
@@ -22,28 +24,61 @@ const EnterpriseActivityLogs = (props) => {
   const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
-  const syncing = useSelector((state) => state.sync.syncing)
+  const enterpriseId = currentPage?.params.enterprise_id
   const isMobile = useSelector((state) => state.system.isMobile)
 
   const [activityLogs, setActivityLogs] = useState([])
-
-  const getAllActivityLogs = async () => { }
-
-  useEffect(() => {
-    getAllActivityLogs()
-  }, [])
-
+  const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState(0)
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
-    orderField: "revisionDate",
-    orderDirection: "desc",
-    searchText: currentPage?.query?.searchText,
+    action: '',
+    acting_member_ids: [],
+    type: 'all',
+    time_option: 'all_time',
+    dates: []
   })
 
-  const isEmpty = useMemo(() => {
-    return activityLogs.length === 0
-  }, [])
+  const payload = useMemo(() => {
+    setActivityLogs([])
+    const defaultPayload = {
+      page: params.page,
+      size: params.size,
+      action: params.action,
+      acting_member_ids: params.acting_member_ids.join(',')
+    }
+    if (params.dates?.length > 0) {
+      return {
+        ...defaultPayload,
+        from: params.dates[0] ? dayjs(params.dates[0]).unix() : '',
+        to: params.dates[0] ? dayjs(params.dates[1]).unix() : '',
+      }
+    }
+    return defaultPayload
+  }, [params])
+
+  const getAllActivityLogs = async () => {
+    setLoading(true)
+    await enterpriseActivityServices
+      .list(enterpriseId, payload)
+      .then((response) => {
+        setActivityLogs(response.results)
+        setTotal(response.count)
+      })
+      .catch((error) => {
+        global.pushError(error)
+        setActivityLogs([])
+        setTotal(0)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
+  useEffect(() => {
+    getAllActivityLogs()
+  }, [params])
 
   useEffect(() => {
     setParams({
@@ -51,14 +86,7 @@ const EnterpriseActivityLogs = (props) => {
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.searchText, syncing])
-
-  const filteredData = useMemo(() => {
-    return common.paginationAndSortData([...activityLogs], params, params.orderField, params.orderDirection, [
-      (f) => f.id,
-      (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
-    ])
-  }, [activityLogs, JSON.stringify(params)])
+  }, [currentPage?.query?.searchText])
 
   useEffect(() => {
     setParams({
@@ -77,16 +105,40 @@ const EnterpriseActivityLogs = (props) => {
   }
 
   return (
-    <div className='enterprise_members layout-content'>
-      <AdminHeader title={t("enterprise_activity_logs.title")} />
-      {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
-      )}
-      {isMobile ? (
-        <BoxData className='mt-4' loading={syncing} data={filteredData.result} params={params} />
-      ) : (
-        <TableData className='mt-4' loading={syncing} data={filteredData.result} params={params} />
-      )}
+    <div
+      className='enterprise_members layout-content'
+      onScroll={(e) => common.scrollEnd(e, params, total, setParams)}
+    >
+      <AdminHeader
+        title={t("enterprise_activity_logs.title")}
+        total={total}
+      />
+      <Filter
+        className={"mt-2"}
+        params={params}
+        loading={loading}
+        setParams={(v) => setParams({ ...v, page: 1 })}
+      />
+      {
+        isMobile ? <BoxData
+          className='mt-4'
+          loading={loading}
+          data={activityLogs}
+          params={params}
+        /> : <TableData
+          className='mt-4'
+          loading={loading}
+          data={activityLogs}
+          params={params}
+        />
+      }
+      {
+        total > global.constants.PAGE_SIZE && !isMobile && <Pagination
+          params={params}
+          total={total}
+          onChange={handleChangePage}
+        />
+      }
     </div>
   )
 }

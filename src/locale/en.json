@@ -8,6 +8,7 @@
     "updated_time": "Updated Time",
     "created_by": "Created by",
     "title": "Title",
+    "action": "Action",
     "actions": "Actions",
     "type": "Type",
     "here": "here",
@@ -87,7 +88,8 @@
     "successfully": "Successfully",
     "group": "Group",
     "password_strength": "Password Strength",
-    "number_members": "Number of members"
+    "number_members": "Number of members",
+    "user": "User"
   },
   "button": {
     "add": "Add",
@@ -1108,6 +1110,14 @@
     "title": "Policies"
   },
   "enterprise_activity_logs": {
-    "title": "Activity Logs"
+    "title": "Activity Logs",
+    "all_actions": "All actions",
+    "actions": {
+      "member_status": "Member status",
+      "role_changes": "Role changes",
+      "policy_violations": "Policy violations",
+      "user_login": "User login",
+      "sharing": "Sharing"
+    }
   }
 }
