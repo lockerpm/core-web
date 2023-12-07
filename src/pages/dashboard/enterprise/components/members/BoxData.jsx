@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import { Collapse, Avatar, Space, Button } from "@lockerpm/design"
 
-import { } from "react-redux"
+import {} from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import { TextCopy, RouterLink } from "../../../../../components"
@@ -9,22 +9,12 @@ import { TextCopy, RouterLink } from "../../../../../components"
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-import {
-  EditOutlined,
-  DeleteOutlined
-} from "@ant-design/icons"
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 
 const BoxData = (props) => {
   const { t } = useTranslation()
 
-  const {
-    loading = false,
-    className = "",
-    data = [],
-    params = {},
-    onUpdate = () => { },
-    onDelete = () => { },
-  } = props
+  const { loading = false, className = "", data = [], params = {}, onUpdate = () => {}, onDelete = () => {} } = props
 
   const boxData = useMemo(() => {
     return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
@@ -44,16 +34,11 @@ const BoxData = (props) => {
           key={record.id}
           header={
             <div className='flex align-items justify-between'>
-              <div className="flex items-center">
-                <Avatar shape="square" src={record.avatar} />
-                <div className="ml-2">
-                  <RouterLink
-                    className={'font-semibold'}
-                    label={record.name}
-                    routerName={global.keys.ENTERPRISE_DASHBOARD}
-                    routerParams={{ enterprise_id: record.id }}
-                  />
-                  <p className='font-semibold'>{record.enterprise_name}</p>
+              <div className='flex items-center'>
+                <Avatar shape='square' src={record.avatar} />
+                <div className='ml-2'>
+                  <p className='font-semibold'>{record.full_name}</p>
+                  <p>{record.email}</p>
                 </div>
               </div>
               <Space size={[8, 8]}>

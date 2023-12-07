@@ -115,6 +115,7 @@ export default {
   ENTERPRISE_MEMBER: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:member_id`,
   ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,
   ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
+  ENTERPRISE_ACTIVITY: `${FLAT_FORM}/enterprises/:enterprise_id/activity`,
 
   // Admin
   ADMIN_ENTERPRISES: `${ADMIN}/enterprises`,

@@ -36,16 +36,12 @@ const BoxData = (props) => {
             <div className='flex align-items justify-between'>
               <div className='flex items-center'>
                 <div className='ml-2'>
-                  <p>{record.name}</p>
+                  <p>{record.description.en}</p>
                 </div>
               </div>
             </div>
           }
         >
-          <div className='flex items-center mb-2'>
-            <p className='font-semibold mr-2'>{t("common.description")}:</p>
-            <TextCopy value={common.timeFromNow(record.description)} />
-          </div>
           <div className='flex items-center mb-2'>
             <p className='font-semibold mr-2'>{t("common.created_time")}:</p>
             <TextCopy value={common.timeFromNow(record.creation_date)} />

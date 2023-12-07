@@ -25,14 +25,14 @@ const TableData = (props) => {
         width: 50,
       },
       {
-        title: t("common.name"),
-        dataIndex: "title",
-        key: "name",
+        title: t("common.description"),
+        dataIndex: "description",
+        key: "description",
         align: "left",
         render: (_, record) => (
           <div className='flex items-center'>
             <div className='ml-2'>
-              <p>{record.name}</p>
+              <p>{record.description.en}</p>
             </div>
           </div>
         ),
