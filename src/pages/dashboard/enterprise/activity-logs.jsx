@@ -15,6 +15,7 @@ import enterpriseActivityServices from "../../../services/enterprise-activity"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
+import dayjs from 'dayjs'
 
 const EnterpriseActivityLogs = (props) => {
   const { } = props
@@ -32,13 +33,35 @@ const EnterpriseActivityLogs = (props) => {
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
+    action: '',
+    acting_member_ids: [],
+    type: 'all',
+    time_option: 'all_time',
     dates: []
   })
+
+  const payload = useMemo(() => {
+    setActivityLogs([])
+    const defaultPayload = {
+      page: params.page,
+      size: params.size,
+      action: params.action,
+      acting_member_ids: params.acting_member_ids.join(',')
+    }
+    if (params.dates?.length > 0) {
+      return {
+        ...defaultPayload,
+        from: params.dates[0] ? dayjs(params.dates[0]).unix() : '',
+        to: params.dates[0] ? dayjs(params.dates[1]).unix() : '',
+      }
+    }
+    return defaultPayload
+  }, [params])
 
   const getAllActivityLogs = async () => {
     setLoading(true)
     await enterpriseActivityServices
-      .list(enterpriseId, params)
+      .list(enterpriseId, payload)
       .then((response) => {
         setActivityLogs(response.results)
         setTotal(response.count)
@@ -56,10 +79,6 @@ const EnterpriseActivityLogs = (props) => {
   useEffect(() => {
     getAllActivityLogs()
   }, [params])
-
-  const isEmpty = useMemo(() => {
-    return activityLogs.length === 0
-  }, [activityLogs])
 
   useEffect(() => {
     setParams({
@@ -94,14 +113,12 @@ const EnterpriseActivityLogs = (props) => {
         title={t("enterprise_activity_logs.title")}
         total={total}
       />
-      {
-        !isEmpty && <Filter
-          className={"mt-2"}
-          params={params}
-          loading={loading}
-          setParams={(v) => setParams({ ...v, page: 1 })}
-        />
-      }
+      <Filter
+        className={"mt-2"}
+        params={params}
+        loading={loading}
+        setParams={(v) => setParams({ ...v, page: 1 })}
+      />
       {
         isMobile ? <BoxData
           className='mt-4'

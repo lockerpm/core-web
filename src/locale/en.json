@@ -1111,7 +1111,8 @@
   },
   "enterprise_activity_logs": {
     "title": "Activity Logs",
-    "action_types": {
+    "all_actions": "All actions",
+    "actions": {
       "member_status": "Member status",
       "role_changes": "Role changes",
       "policy_violations": "Policy violations",

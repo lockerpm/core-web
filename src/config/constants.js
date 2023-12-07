@@ -92,6 +92,14 @@ const FACTOR2_IDENTITY = {
   SMART_OTP: 'smart_otp',
 }
 
+const ACTIVITY_LOG_ACTION = {
+  MEMBER_CHANGES: 'member_changes',
+  ROLE_CHANGES: 'role_changes',
+  POLICY_CHANGES: 'policy_violations',
+  USER_LOGIN: 'user_login',
+  SHARE: 'share'
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
@@ -109,6 +117,7 @@ export default {
   CLIENT_ID: 'web',
   PAGE_SIZE: 50,
   MAX_KEY_BACKUP: 3,
+  ACTIVITY_LOG_ACTION,
   CORE_JS_INFO: {
     KDF: 0,
     KDF_ITERATIONS: 100000
@@ -688,6 +697,28 @@ export default {
       name: 'Postmark',
       host: 'smtp.postmarkapp.com',
       port: '587'
+    },
+  ],
+  ACTIVITY_LOG_ACTIONS: [
+    {
+      value: ACTIVITY_LOG_ACTION.MEMBER_CHANGES,
+      label: 'enterprise_activity_logs.actions.member_status',
+    },
+    {
+      value: ACTIVITY_LOG_ACTION.ROLE_CHANGES,
+      label: 'enterprise_activity_logs.actions.role_changes',
+    },
+    {
+      value: ACTIVITY_LOG_ACTION.POLICY_CHANGES,
+      label: 'enterprise_activity_logs.actions.policy_violations',
+    },
+    {
+      value: ACTIVITY_LOG_ACTION.USER_LOGIN,
+      label: 'enterprise_activity_logs.actions.user_login',
+    },
+    {
+      value: ACTIVITY_LOG_ACTION.SHARE,
+      label: 'enterprise_activity_logs.actions.sharing',
     },
   ]
 }
