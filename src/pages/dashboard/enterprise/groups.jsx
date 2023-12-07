@@ -78,9 +78,9 @@ const EnterpriseGroups = (props) => {
   const getAllGroups = async () => {
     setLoading(true)
     await enterpriseGroupServices
-      .list(enterpriseId)
+      .list(enterpriseId, { paging: 0 })
       .then((response) => {
-        setGroups(response.results)
+        setGroups(response)
       })
       .catch((error) => {
         setGroups([])
@@ -128,7 +128,10 @@ const EnterpriseGroups = (props) => {
   }
 
   return (
-    <div className='enterprise_members layout-content'>
+    <div
+      className='enterprise_members layout-content'
+      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
+    >
       <AdminHeader
         title={t("enterprise_groups.title")}
         total={groups.length}

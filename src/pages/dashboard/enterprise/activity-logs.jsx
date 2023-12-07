@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react"
-import {} from "@lockerpm/design"
-import {} from "@ant-design/icons"
+import { } from "@lockerpm/design"
+import { } from "@ant-design/icons"
 
 import { AdminHeader, Pagination } from "../../../components"
 import Filter from "./components/activity-logs/Filter"
@@ -17,7 +17,7 @@ import common from "../../../utils/common"
 import global from "../../../config/global"
 
 const EnterpriseActivityLogs = (props) => {
-  const {} = props
+  const { } = props
   const { t } = useTranslation()
   const location = useLocation()
   const dispatch = useDispatch()
@@ -28,23 +28,25 @@ const EnterpriseActivityLogs = (props) => {
 
   const [activityLogs, setActivityLogs] = useState([])
   const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState(0)
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
-    orderField: "revisionDate",
-    orderDirection: "desc",
-    searchText: currentPage?.query?.searchText,
+    dates: []
   })
 
   const getAllActivityLogs = async () => {
     setLoading(true)
     await enterpriseActivityServices
-      .list(enterpriseId)
+      .list(enterpriseId, params)
       .then((response) => {
         setActivityLogs(response.results)
+        setTotal(response.count)
       })
       .catch((error) => {
         global.pushError(error)
+        setActivityLogs([])
+        setTotal(0)
       })
       .finally(() => {
         setLoading(false)
@@ -53,11 +55,11 @@ const EnterpriseActivityLogs = (props) => {
 
   useEffect(() => {
     getAllActivityLogs()
-  }, [])
+  }, [params])
 
   const isEmpty = useMemo(() => {
     return activityLogs.length === 0
-  }, [])
+  }, [activityLogs])
 
   useEffect(() => {
     setParams({
@@ -66,13 +68,6 @@ const EnterpriseActivityLogs = (props) => {
       searchText: currentPage?.query?.searchText,
     })
   }, [currentPage?.query?.searchText])
-
-  const filteredData = useMemo(() => {
-    return common.paginationAndSortData([...activityLogs], params, params.orderField, params.orderDirection, [
-      (f) => f.id,
-      (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
-    ])
-  }, [activityLogs, JSON.stringify(params)])
 
   useEffect(() => {
     setParams({
@@ -91,16 +86,42 @@ const EnterpriseActivityLogs = (props) => {
   }
 
   return (
-    <div className='enterprise_members layout-content'>
-      <AdminHeader title={t("enterprise_activity_logs.title")} />
-      {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={loading} setParams={(v) => setParams({ ...v, page: 1 })} />
-      )}
-      {isMobile ? (
-        <BoxData className='mt-4' loading={loading} data={filteredData.result} params={params} />
-      ) : (
-        <TableData className='mt-4' loading={loading} data={filteredData.result} params={params} />
-      )}
+    <div
+      className='enterprise_members layout-content'
+      onScroll={(e) => common.scrollEnd(e, params, total, setParams)}
+    >
+      <AdminHeader
+        title={t("enterprise_activity_logs.title")}
+        total={total}
+      />
+      {
+        !isEmpty && <Filter
+          className={"mt-2"}
+          params={params}
+          loading={loading}
+          setParams={(v) => setParams({ ...v, page: 1 })}
+        />
+      }
+      {
+        isMobile ? <BoxData
+          className='mt-4'
+          loading={loading}
+          data={activityLogs}
+          params={params}
+        /> : <TableData
+          className='mt-4'
+          loading={loading}
+          data={activityLogs}
+          params={params}
+        />
+      }
+      {
+        total > global.constants.PAGE_SIZE && !isMobile && <Pagination
+          params={params}
+          total={total}
+          onChange={handleChangePage}
+        />
+      }
     </div>
   )
 }
