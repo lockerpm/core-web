@@ -1053,7 +1053,32 @@
     }
   },
   "enterprise_dashboard": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "adoption_rate": {
+      "title": "Adoption Rate",
+      "confirmed": "Accepted",
+      "requested": "Requested",
+      "invited": "No Response",
+      "total": "Total invitation",
+      "manage_pending_members": "Manage pending members"
+    },
+    "news": {
+      "title": "News",
+      "users_blocked": "Users being blocked by failed logins"
+    },
+    "user_login": {
+      "title": "User logins by time",
+      "user": "User"
+    },
+    "password_security": {
+      "title": "Password Security",
+      "weak_password": "Users with weak Password",
+      "more_than_weak_passwords": "Users with more than 10 weak passwords",
+      "leaked_account": "Users with at least 1 leaked account"
+    },
+    "users_blocked": {
+      "title": "Users blocked by failed logins"
+    }
   },
   "enterprise_members": {
     "title": "Users",

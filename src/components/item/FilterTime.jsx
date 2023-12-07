@@ -9,7 +9,7 @@ import {
   DownOutlined
 } from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import common from '../../utils/common';
@@ -57,7 +57,7 @@ const FilterTime = (props) => {
         onChange={(v) => changeCustomTime(v)}
         size="medium"
         allowClear={false}
-        className="mr-m filter-filed__m"
+        className="mr-2 filter-filed__m"
         placement="bottomRight"
       />,
     },

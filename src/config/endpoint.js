@@ -109,6 +109,7 @@ export default {
 
   ENTERPRISES: `${FLAT_FORM}/enterprises`,
   ENTERPRISE: `${FLAT_FORM}/enterprises/:enterprise_id`,
+  ENTERPRISE_DASHBOARD: `${FLAT_FORM}/enterprises/:enterprise_id/dashboard`,
   ENTERPRISE_GROUPS: `${FLAT_FORM}/enterprises/:enterprise_id/groups`,
   ENTERPRISE_GROUP: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id`,
   ENTERPRISE_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/members`,
