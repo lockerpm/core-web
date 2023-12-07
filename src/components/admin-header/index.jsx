@@ -46,10 +46,10 @@ const AdminHeader = (props) => {
           justify-between
         `}
         style={{
-          height: (isMobile || description) ? 'auto' : `${60}px`
+          height: (isMobile || description) ? 'auto' : `${60}px`,
         }}
       >
-        <Col lg={actions.length > 0 ? 16 : 20} className="admin-header__left flex items-center">
+        <Col lg={actions.length > 0 ? 16 : 12} className="admin-header__left flex items-center">
           <div>
             <Logo />
           </div>
@@ -76,7 +76,7 @@ const AdminHeader = (props) => {
             }
           </div>
         </Col>
-        <Col lg={actions.length > 0 ? 8 : 4} className="admin-header__right" align="right">
+        <Col lg={actions.length > 0 ? 8 : 12} className="admin-header__right" align="right">
           <Row gutter={[8, 8]} justify="end">
             {
               actions.filter((a) => !a.hide).map((a) =>
@@ -95,9 +95,9 @@ const AdminHeader = (props) => {
                   </Button>
                 </Col>
               )}
-              {
-                <Right />
-              }
+            {
+              <Right />
+            }
           </Row>
         </Col>
       </Row>

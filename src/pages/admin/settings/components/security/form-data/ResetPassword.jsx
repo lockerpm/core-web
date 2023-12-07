@@ -25,7 +25,7 @@ function ResetMasterPasswordFormData(props) {
   const {
     item = null,
     visible = false,
-    onClose = () => {},
+    onClose = () => { },
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
@@ -68,6 +68,7 @@ function ResetMasterPasswordFormData(props) {
       const payload = {
         key: encKey[1].encryptedString,
         new_master_password_hash: masterPasswordHash,
+        login_method: 'password',
         score: passwordStrength.score,
         master_password_cipher: encMasterPwItem
       }
@@ -103,7 +104,7 @@ function ResetMasterPasswordFormData(props) {
               loading={callingAPI}
               onClick={handleConfirm}
             >
-            { t('button.confirm') } 
+              {t('button.confirm')}
             </Button>
           </Space>
         }

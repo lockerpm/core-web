@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  PasswordConfirmModal
 } from '../../../../../components';
 
 import QrCodeModal from "./mobile-passwordless/QrCode";
@@ -23,9 +22,8 @@ const MobilePasswordless = (props) => {
   } = props;
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
-  
+
   const [formVisible, setFormVisible] = useState(false);
-  const [confirmVisible, setConfirmVisible] = useState(false);
 
   return (
     <div className={className}>
@@ -41,7 +39,7 @@ const MobilePasswordless = (props) => {
             ghost
             icon={<QrcodeOutlined />}
             disabled={userInfo.login_method !== 'passwordless'}
-            onClick={() => setConfirmVisible(true)}
+            onClick={() => setFormVisible(true)}
           >
             {t('security.mobile_passwordless.action')}
           </Button>
@@ -50,15 +48,6 @@ const MobilePasswordless = (props) => {
       <p className="mt-1">
         {t('security.mobile_passwordless.description')}
       </p>
-      <PasswordConfirmModal
-        title={t('security.mobile_passwordless.action')}
-        visible={confirmVisible}
-        onClose={() => setConfirmVisible(false)}
-        onConfirm={() => {
-          setConfirmVisible(false);
-          setFormVisible(true)
-        }}
-      />
       {
         formVisible && <QrCodeModal
           visible={formVisible}
