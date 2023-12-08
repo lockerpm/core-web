@@ -100,6 +100,13 @@ const ACTIVITY_LOG_ACTION = {
   SHARE: 'share'
 }
 
+const USER_ROLE = {
+  SUPPER_ADMIN: 'supper_admin',
+  PRIMARY_ADMIN: 'primary_admin',
+  ADMIN: 'admin',
+  MEMBER: 'member',
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
@@ -118,6 +125,7 @@ export default {
   PAGE_SIZE: 50,
   MAX_KEY_BACKUP: 3,
   ACTIVITY_LOG_ACTION,
+  USER_ROLE,
   CORE_JS_INFO: {
     KDF: 0,
     KDF_ITERATIONS: 100000
@@ -720,5 +728,23 @@ export default {
       value: ACTIVITY_LOG_ACTION.SHARE,
       label: 'enterprise_activity_logs.actions.sharing',
     },
+  ],
+  USER_ROLES: [
+    {
+      value: USER_ROLE.SUPPER_ADMIN,
+      label: 'roles.supper_admin',
+    },
+    {
+      value: USER_ROLE.PRIMARY_ADMIN,
+      label: 'roles.primary_admin',
+    },
+    {
+      value: USER_ROLE.ADMIN,
+      label: 'roles.admin',
+    },
+    {
+      value: USER_ROLE.MEMBER,
+      label: 'roles.member',
+    }
   ]
 }

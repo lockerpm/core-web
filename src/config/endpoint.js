@@ -112,6 +112,7 @@ export default {
   ENTERPRISE_DASHBOARD: `${FLAT_FORM}/enterprises/:enterprise_id/dashboard`,
   ENTERPRISE_GROUPS: `${FLAT_FORM}/enterprises/:enterprise_id/groups`,
   ENTERPRISE_GROUP: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id`,
+  ENTERPRISE_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id/members`,
   ENTERPRISE_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/members`,
   ENTERPRISE_MEMBER: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:member_id`,
   ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,

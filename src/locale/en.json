@@ -90,6 +90,7 @@
     "password_strength": "Password Strength",
     "number_members": "Number of members",
     "user": "User",
+    "members": "members",
     "configuration": "Configuration",
     "characters": "characters",
     "second": "second",
@@ -278,7 +279,8 @@
       "enterprise_groups": {
         "created": "The new group has been added.",
         "updated": "The group information has been updated.",
-        "deleted": "The group has been deleted."
+        "deleted": "The group has been deleted.",
+        "users_updated": "The group users has been updated."
       },
       "policy": {
         "updated": "The policy has been changed "
@@ -366,7 +368,8 @@
     }
   },
   "roles": {
-    "owner": "Owner",
+    "supper_admin": "Supper Admin",
+    "primary_admin": "Primary Admin",
     "admin": "Admin",
     "member": "Member"
   },
@@ -1137,6 +1140,7 @@
     "add": "New group",
     "edit": "Edit group info",
     "users": "Group users",
+    "users_of_group": "List users of groups",
     "no_data": {
       "title": "Add your first company group",
       "description": "Add an group to manage users."

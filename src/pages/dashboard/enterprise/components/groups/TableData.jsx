@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
-import { Table, Space, Button } from "@lockerpm/design"
+import { Table, Space, Button, Tooltip, Avatar } from "@lockerpm/design"
 
-import {} from "react-redux"
+import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import { TextCopy } from "../../../../../components"
@@ -17,9 +17,9 @@ const TableData = (props) => {
     className = "",
     data = [],
     params = {},
-    onUpdate = () => {},
-    onUsers = () => {},
-    onDelete = () => {}
+    onUpdate = () => { },
+    onUsers = () => { },
+    onDelete = () => { }
   } = props
 
   const columns = useMemo(() => {
@@ -41,12 +41,28 @@ const TableData = (props) => {
         ),
       },
       {
+        title: t("common.created_by"),
+        dataIndex: "created_by",
+        key: "created_by",
+        align: "center",
+        width: 120,
+        render: (_, record) => (
+          <Tooltip title={record.created_by.full_name}>
+            <Avatar
+              src={record.created_by.avatar}
+            >
+              {record.created_by.full_name.slice(0, 1)?.toUpperCase()}
+            </Avatar>
+          </Tooltip>
+        ),
+      },
+      {
         title: t("common.number_members"),
         dataIndex: "numberMembers",
         key: "numberMembers",
         align: "center",
         width: 200,
-        render: (_, record) => <TextCopy value={`${record.number_members}`} align={"center"} />,
+        render: (_, record) => <TextCopy value={`${record.number_members} ${t('common.members')}`} align={"center"} />,
       },
       {
         title: t("common.created_time"),

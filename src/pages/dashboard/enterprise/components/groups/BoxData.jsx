@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
-import { Collapse, Space, Button } from "@lockerpm/design"
+import { Collapse, Space, Button, Avatar } from "@lockerpm/design"
 
-import {} from "react-redux"
+import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import { TextCopy } from "../../../../../components"
@@ -18,9 +18,9 @@ const BoxData = (props) => {
     className = "",
     data = [],
     params = {},
-    onUpdate = () => {},
-    onUsers = () => {},
-    onDelete = () => {} 
+    onUpdate = () => { },
+    onUsers = () => { },
+    onDelete = () => { }
   } = props
 
   const boxData = useMemo(() => {
@@ -54,6 +54,21 @@ const BoxData = (props) => {
             </div>
           }
         >
+          <div className='flex items-center mb-2'>
+            <p className='font-semibold mr-2'>{t("common.created_by")}:</p>
+            <div className="flex items-center">
+              <Avatar
+                src={record.created_by.avatar}
+                size={28}
+              >
+                {record.created_by.full_name.slice(0, 1)?.toUpperCase()}
+              </Avatar>
+              <p className="ml-2">
+                {record.created_by.full_name}
+              </p>
+            </div>
+          </div>
+
           <div className='flex items-center mb-2'>
             <p className='font-semibold mr-2'>{t("common.number_members")}:</p>
             <TextCopy value={record.number_members} />

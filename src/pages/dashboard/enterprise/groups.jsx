@@ -193,6 +193,7 @@ const EnterpriseGroups = (props) => {
       />
       <FormUsers
         visible={usersVisible}
+        enterpriseId={enterpriseId}
         item={selectedItem}
         onReload={getAllGroups}
         onClose={() => setUsersVisible(false)}

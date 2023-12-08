@@ -32,9 +32,27 @@ function remove(enterprise_id, group_id) {
   })
 }
 
+function list_users(enterprise_id, group_id, params = {}) {
+  return request({
+    url: global.endpoint.ENTERPRISE_GROUP_MEMBERS.replace(":enterprise_id", enterprise_id).replace(":group_id", group_id),
+    method: "get",
+    params
+  })
+}
+
+function update_users(enterprise_id, group_id, data = {}) {
+  return request({
+    url: global.endpoint.ENTERPRISE_GROUP_MEMBERS.replace(":enterprise_id", enterprise_id).replace(":group_id", group_id),
+    method: "put",
+    data
+  })
+}
+
 export default {
   list,
   create,
   update,
   remove,
+  list_users,
+  update_users
 }
