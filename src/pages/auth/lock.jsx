@@ -93,6 +93,8 @@ const Lock = () => {
         global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
         global.navigate(global.keys.OTP_CODE, {}, { return_url: query?.return_url })
       } else {
+        authServices.update_access_token_type(response.token_type)
+        authServices.update_access_token(response.access_token);
         await coreServices.unlock({ ...response, ...payload })
         await commonServices.sync_data();
         if (userInfo.sync_all_platforms) {
