@@ -46,6 +46,7 @@ const Filter = (props) => {
               mode="multiple"
               allowClear
               placeholder={t('enterprise_activity_logs.all_users')}
+              maxTagCount={1}
               onChange={(v) => setParams({ ...params, acting_member_ids: v })}
               options={[
                 ...members.map((m) => ({
