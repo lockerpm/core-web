@@ -423,12 +423,12 @@ async function sync_data_by_ws(message) {
   global.store.dispatch(storeActions.updateSyncing(false))
 }
 
-function reset_service() {
+async function reset_service() {
   if (global.store.getState().service.isConnected) {
     if (global.store.getState().system.isDesktop) {
-      service.resetGRPC();
+      await service.resetGRPC();
     } else {
-      service.resetBackgroundService();
+      await service.resetBackgroundService();
     }
   }
 }

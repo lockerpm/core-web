@@ -91,9 +91,9 @@ const Lock = () => {
     await userServices.users_session(payload).then(async (response) => {
       if (response.is_factor2) {
         global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
-        global.navigate(global.keys.OTP_CODE, {}, {return_url: query?.return_url})
+        global.navigate(global.keys.OTP_CODE, {}, { return_url: query?.return_url })
       } else {
-        await coreServices.unlock({...response, ...payload })
+        await coreServices.unlock({ ...response, ...payload })
         await commonServices.sync_data();
         if (userInfo.sync_all_platforms) {
           await commonServices.service_login(payload);
@@ -118,7 +118,7 @@ const Lock = () => {
             setServiceUser(serviceUser)
           }
         } catch (error) {
-          commonServices.reset_service();
+          await commonServices.reset_service();
         }
       }
     } else {
@@ -137,7 +137,7 @@ const Lock = () => {
           await handleSubmit(serviceUser)
         }
       } catch (error) {
-        commonServices.reset_service();
+        await commonServices.reset_service();
       }
     }
   }
@@ -179,7 +179,7 @@ const Lock = () => {
             >
               <div className="w-full flex items-center justify-between">
                 <p className="text-2xl font-semibold">
-                  { t('lock.title') }
+                  {t('lock.title')}
                 </p>
               </div>
               <p className="mb-6 mt-2">
@@ -206,11 +206,22 @@ const Lock = () => {
                 </Form.Item>
                 <div>
                   {
-                    isPair && <PairingForm
-                      userInfo={userInfo}
-                      callingAPI={callingAPI}
-                      onConfirm={() => handlePairConfirm()}
-                    />
+                    isPair && <div>
+                      <PairingForm
+                        userInfo={userInfo}
+                        callingAPI={callingAPI}
+                        onConfirm={() => handlePairConfirm()}
+                      />
+                      <Button
+                        className="w-full mt-6"
+                        size="large"
+                        htmlType="submit"
+                        loading={logging}
+                        onClick={() => handleLogout()}
+                      >
+                        {t('sidebar.logout')}
+                      </Button>
+                    </div>
                   }
                   {
                     userInfo?.login_method === 'passwordless' && !isPair && !serviceUser && <div>

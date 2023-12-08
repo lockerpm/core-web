@@ -50,7 +50,7 @@ const SingIn = () => {
         authServices.update_access_token_type(response.token_type)
         authServices.update_access_token(response.access_token);
         await commonServices.fetch_user_info();
-        await coreServices.unlock({...response, ...payload });
+        await coreServices.unlock({ ...response, ...payload });
         await commonServices.sync_data();
         if (values.sync_all_platforms) {
           await commonServices.service_login(payload);
@@ -59,8 +59,9 @@ const SingIn = () => {
       }
     }).catch((error) => {
       global.pushError(error)
+    }).finally(() => {
+      setCallingAPI(false)
     });
-    setCallingAPI(false)
   }
 
   return (

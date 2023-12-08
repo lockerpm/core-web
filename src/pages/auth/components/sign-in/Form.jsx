@@ -19,8 +19,8 @@ const SignInForm = (props) => {
   const {
     loading,
     step = 1,
-    onSubmit = () => {},
-    setStep = () => {}
+    onSubmit = () => { },
+    setStep = () => { }
   } = props;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
@@ -46,7 +46,6 @@ const SignInForm = (props) => {
       setCallingAPI(false);
       setIsPair(false)
       form.setFieldsValue({
-        username: null,
         password: null
       })
     }
@@ -67,7 +66,6 @@ const SignInForm = (props) => {
     setCallingAPI(true)
     await userServices.users_prelogin({ email: values.username }).then(async (response) => {
       setPreLogin(response)
-      // check sync_all_platforms
       if (response.sync_all_platforms || response.login_method === 'passwordless') {
         setIsPair((response?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
         if (isConnected && response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
@@ -83,7 +81,7 @@ const SignInForm = (props) => {
               setStep(2)
             }
           } catch (error) {
-            commonServices.reset_service();
+            console.log(error);
             setStep(2)
           }
         } else {
@@ -112,7 +110,7 @@ const SignInForm = (props) => {
           })
         }
       } catch (error) {
-        commonServices.reset_service();
+        await commonServices.reset_service();
       }
     }
   }

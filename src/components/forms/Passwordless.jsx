@@ -66,8 +66,7 @@ const PasswordlessForm = (props) => {
       setDevices(devices);
       setSelectedDevice(devices[0] || null)
     } catch (error) {
-      commonServices.reset_service();
-      onError();
+      redirectByError(error)
     }
     setLoading(false)
   }
@@ -89,7 +88,6 @@ const PasswordlessForm = (props) => {
   const setPwl = async () => {
     setCallingAPI(true)
     try {
-      setStep(2);
       const response = await service.setNewPasswordless({
         email: userInfo.email,
         name: selectedDevice.name,
@@ -97,7 +95,7 @@ const PasswordlessForm = (props) => {
         devicePath: selectedDevice.path,
         pin: pin
       })
-      resetState();
+      setStep(2);
       setPasswordless(response)
       await onConfirm(response)
     } catch (error) {
@@ -109,7 +107,6 @@ const PasswordlessForm = (props) => {
   const setBackupPwl = async () => {
     setCallingAPI(true)
     try {
-      setStep(2);
       const encKey = await global.jsCore.cryptoService.getEncKey();
       const response = await service.setBackupPasswordless({
         email: userInfo.email,
@@ -119,7 +116,7 @@ const PasswordlessForm = (props) => {
         currentEncKey: encKey.key,
         pin: pin
       })
-      resetState();
+      setStep(2);
       setPasswordless(response);
       await onConfirm();
     } catch (error) {
@@ -131,13 +128,12 @@ const PasswordlessForm = (props) => {
   const getPwl = async () => {
     setCallingAPI(true)
     try {
-      setStep(2);
       const response = await service.getPasswordless({
         email: userInfo.email,
         devicePath: selectedDevice.path,
         pin: pin
       })
-      resetState();
+      setStep(2);
       setPasswordless(response)
       await onConfirm(response)
     } catch (error) {
@@ -146,20 +142,30 @@ const PasswordlessForm = (props) => {
     setCallingAPI(false)
   }
 
-  const redirectByError = (error) => {
-    console.log(error);
-    // setStep(1);
-    // setPasswordless(null);
-    // global.pushError(error);
-    // commonServices.reset_service();
-    // resetState();
+  const redirectByError = async (error) => {
+    global.pushError(t(`passwordless.errors.${error.code}`))
+    resetState()
+    setPasswordless(null)
+    setPin(null)
+    if (['2007', '2003', '2009'].includes(error.code)) {
+      setStep(1);
+    } else if (['2008'].includes(error.code)) {
+      setStep(0);
+    } else if (['5001', '5002'].includes(error.code)) {
+      await commonServices.reset_service();
+      setStep(0);
+    } else if (['0000', '2001'].includes(error.code)) {
+      await commonServices.reset_service();
+      setStep(0);
+      await getDeviceKeys();
+    }
   }
 
   return (
     <Spin spinning={loading}>
       <div className="passwordless-form text-center">
         {
-          step === 0 && <div>
+          step === 0 && !callingAPI && !changing && <div>
             {
               isLogin && <p className={`my-6 text-left`}>
                 {t('passwordless.connect_key_to_login')}
@@ -251,7 +257,7 @@ const PasswordlessForm = (props) => {
           </div>
         }
         {
-          (isTouch || isFingerprint) && <div className="mt-10">
+          (isTouch || isFingerprint) && !passwordless && <div className="mt-10">
             <p className="mt-6 text-left">
               {isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
             </p>
