@@ -16,7 +16,7 @@ function ClientService() {
   const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected);
 
   service.on('serviceReady', () => {
-    global.store.dispatch(storeActions.updateIsConnected(service.gprcService.isReady));
+    global.store.dispatch(storeActions.updateIsConnected(service.grpcService?.isReady));
   })
   service.on('serviceConnected', () => {
     global.store.dispatch(storeActions.updateIsConnected(true));
@@ -69,7 +69,7 @@ function ClientService() {
       resetConnectionInterval = null;
     } else {
       resetConnectionInterval = setInterval(async () => {
-        await service.gprcService?.resetConnection()
+        await service.grpcService?.resetConnection()
       }, 2000)
     }
   }, [isConnected])

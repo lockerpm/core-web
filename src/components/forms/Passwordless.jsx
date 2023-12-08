@@ -101,11 +101,7 @@ const PasswordlessForm = (props) => {
       setPasswordless(response)
       await onConfirm(response)
     } catch (error) {
-      setStep(1);
-      setPasswordless(null);
-      global.pushError(error);
-      commonServices.reset_service();
-      resetState();
+      redirectByError(error)
     }
     setCallingAPI(false)
   }
@@ -127,11 +123,7 @@ const PasswordlessForm = (props) => {
       setPasswordless(response);
       await onConfirm();
     } catch (error) {
-      setStep(1);
-      setPasswordless(null);
-      global.pushError(error);
-      commonServices.reset_service();
-      resetState();
+      redirectByError(error)
     }
     setCallingAPI(false)
   }
@@ -149,13 +141,18 @@ const PasswordlessForm = (props) => {
       setPasswordless(response)
       await onConfirm(response)
     } catch (error) {
-      setStep(1);
-      setPasswordless(null);
-      global.pushError(error);
-      commonServices.reset_service();
-      resetState();
+      redirectByError(error)
     }
     setCallingAPI(false)
+  }
+
+  const redirectByError = (error) => {
+    console.log(error);
+    // setStep(1);
+    // setPasswordless(null);
+    // global.pushError(error);
+    // commonServices.reset_service();
+    // resetState();
   }
 
   return (
