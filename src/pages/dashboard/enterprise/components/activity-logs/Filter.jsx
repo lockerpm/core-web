@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Row, Col, Select } from "@lockerpm/design"
+import React, { } from "react"
+import { Row, Col, Select, Avatar } from "@lockerpm/design"
 import { FilterTime } from "../../../../../components"
 import { } from "@ant-design/icons"
 
@@ -14,6 +14,7 @@ const Filter = (props) => {
     className = "",
     params = {},
     loading = false,
+    members = [],
     setParams = () => { }
   } = props
 
@@ -26,12 +27,10 @@ const Filter = (props) => {
               className="w-full"
               value={params.action}
               disabled={loading}
+              allowClear
+              placeholder={t('enterprise_activity_logs.all_actions')}
               onChange={(v) => setParams({ ...params, action: v })}
               options={[
-                {
-                  label: t('enterprise_activity_logs.all_actions'),
-                  value: ''
-                },
                 ...global.constants.ACTIVITY_LOG_ACTIONS.map((o) => ({
                   ...o,
                   label: t(o.label)
@@ -43,7 +42,21 @@ const Filter = (props) => {
             <Select
               className="w-full"
               disabled={loading}
-              options={[]}
+              value={params.acting_member_ids}
+              mode="multiple"
+              allowClear
+              placeholder={t('enterprise_activity_logs.all_users')}
+              maxTagCount={1}
+              onChange={(v) => setParams({ ...params, acting_member_ids: v })}
+              options={[
+                ...members.map((m) => ({
+                  value: m.id,
+                  label: <div className='flex items-center'>
+                    <Avatar src={m.avatar} size={24} />
+                    <p className='text-xs ml-2'>{m.email}</p>
+                  </div>
+                }))
+              ]}
             />
           </Col>
         </Row>

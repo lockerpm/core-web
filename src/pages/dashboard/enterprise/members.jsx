@@ -30,6 +30,7 @@ const EnterpriseMembers = (props) => {
   const enterpriseId = currentPage?.params.enterprise_id
 
   const [loading, setLoading] = useState(false)
+  const [members, setMembers] = useState([])
   const [formVisible, setFormVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [params, setParams] = useState({
@@ -39,8 +40,6 @@ const EnterpriseMembers = (props) => {
     orderDirection: "desc",
     searchText: currentPage?.query?.searchText,
   })
-
-  const [members, setMembers] = useState([])
 
   useEffect(() => {
     getAllMembers()
