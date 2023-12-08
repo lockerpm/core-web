@@ -1112,6 +1112,7 @@
   "enterprise_activity_logs": {
     "title": "Activity Logs",
     "all_actions": "All actions",
+    "all_users": "All users",
     "actions": {
       "member_status": "Member status",
       "role_changes": "Role changes",
