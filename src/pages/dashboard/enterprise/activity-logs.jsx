@@ -92,7 +92,6 @@ const EnterpriseActivityLogs = (props) => {
       })
       .catch((error) => {
         setMembers([])
-        global.pushError(error)
       })
   }
 

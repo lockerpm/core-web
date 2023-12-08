@@ -85,6 +85,45 @@ const convertCipherFieldDate = (date) => {
   return dayjs(newDate.join('-'))
 }
 
+const displayTimes = (second) => {
+  if (second === 1) {
+    return {
+      value: 1,
+      label: 'second'
+    }
+  }
+  if (second > 1 && second < 60) {
+    return {
+      value: second,
+      label: 'seconds'
+    }
+  }
+  if (second === 60) {
+    return {
+      value: 1,
+      label: 'minute'
+    }
+  }
+  if (second > 60 && second < 60 * 60) {
+    return {
+      value: second / 60,
+      label: 'minutes'
+    }
+  }
+  if (second === 60 * 60) {
+    return {
+      value: 1,
+      label: 'hour'
+    }
+  }
+  if (second > 60 * 60) {
+    return {
+      value: second / (60 * 60),
+      label: 'hours'
+    }
+  }
+}
+
 export default {
   convertTime,
   timeFromNow,
@@ -94,5 +133,6 @@ export default {
   getCurrentWeekday,
   convertDateNow,
   getTimeByOption,
-  convertCipherFieldDate
+  convertCipherFieldDate,
+  displayTimes
 }

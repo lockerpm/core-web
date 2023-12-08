@@ -12,13 +12,18 @@ import { gray } from "@ant-design/colors"
 
 const NoEnterprise = (props) => {
   const { t } = useTranslation()
-  const { className = "", loading = false, isEmpty = false, onCreate = () => { } } = props
+  const {
+    className = "",
+    loading = false,
+    isEmpty = false,
+    onCreate = () => { }
+  } = props
   return (
-    <Spin spinning={loading} style={{ minHeight: 100 }}>
-      {!loading && (
-        <>
-          {isEmpty ? (
-            <div className={`text-center ${className}`}>
+    <Spin spinning={loading}>
+      {
+        !loading ? <>
+          {
+            isEmpty ? <div className={`text-center ${className}`}>
               <ImageIcon name='folder' width={48} height={48} />
               <p className='text-xl font-semibold mt-4'>{t("inventory.folders.title")}</p>
               <p className='text-sm mt-2' style={{ color: gray[1] }}>
@@ -27,12 +32,9 @@ const NoEnterprise = (props) => {
               <Button className='mt-6' type='primary' ghost onClick={onCreate}>
                 {t("inventory.folders.add")}
               </Button>
-            </div>
-          ) : (
-            <NoData />
-          )}
-        </>
-      )}
+            </div> : <NoData />
+          }
+        </> : <div style={{ minHeight: 100 }} />}
     </Spin>
   )
 }

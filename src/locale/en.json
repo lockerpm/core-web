@@ -89,7 +89,15 @@
     "group": "Group",
     "password_strength": "Password Strength",
     "number_members": "Number of members",
-    "user": "User"
+    "user": "User",
+    "configuration": "Configuration",
+    "characters": "characters",
+    "second": "second",
+    "minute": "minute",
+    "hour": "hour",
+    "seconds": "seconds",
+    "minutes": "minutes",
+    "hours": "hours"
   },
   "button": {
     "add": "Add",
@@ -271,6 +279,9 @@
         "created": "The new group has been added.",
         "updated": "The group information has been updated.",
         "deleted": "The group has been deleted."
+      },
+      "policy": {
+        "updated": "The policy has been changed "
       }
     },
     "warning": {
@@ -1107,7 +1118,51 @@
     }
   },
   "enterprise_policies": {
-    "title": "Policies"
+    "title": "Policies",
+    "password_requirements": {
+      "title": "Password requirements",
+      "description": "Force users to use strong password.",
+      "modal": {
+        "description": "Set password requirements for your members. These rules apply to all passwords in their vault.",
+        "minimum_password_length": "Minimum password length",
+        "password_complexity": "Password complexity",
+        "requires_lowercase": "Requires lowercase",
+        "requires_uppercase": "Requires UPPERCASE",
+        "requires_digit": "Requires digit",
+        "requires_special_character": "Requires special character"
+      }
+    },
+    "block_failed_logins": {
+      "title": "Block failed logins",
+      "description": "Block user when there are multiple failed login attempts.",
+      "modal": {
+        "description": "Block users from logging in Locker when there are too many failed logins.",
+        "block_when": "Block a user when there are:",
+        "how_long": "How long do you want to block user from logging in?",
+        "receive_an_email": "Receive an email when a member gets blocked",
+        "do_not_notify_me": "Do not notify me",
+        "failed_login_attempts": "failed login attempts"
+      }
+    },
+    "passwordless_login": {
+      "title": "Passwordless login",
+      "description": "Users are forced to use passwordless to login to Locker.",
+      "modal": {
+        "description": "Require users to login using passwordless method (currently FIDO2 standard).",
+        "choose_password_or_passwordless": "User can choose Passwordless or Password",
+        "only_allow_passwordless": "Only allow passwordless (Password is disabled)"
+      }
+    },
+    "log_in_with_2fa": {
+      "title": "Log in with 2FA",
+      "description": "Users are forced to use 2FA to login to Locker for the first time on new devices.",
+      "modal": {
+        "description": "Require users to use Two-Factor Authentication (2FA) to log in to their locker accounts for the first time on new devices.",
+        "description1": "When turned on, users are forced to use an authenticator of their choices (ex: Google Authenticator, Authy, Locker,...)",
+        "only_admin_and_primary_admin": "Only Admin and Primary Admin",
+        "apply_to_all_users": "Apply to all users"
+      }
+    }
   },
   "enterprise_activity_logs": {
     "title": "Activity Logs",

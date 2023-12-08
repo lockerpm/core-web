@@ -12,13 +12,18 @@ import { gray } from "@ant-design/colors"
 
 const NoEnterprise = (props) => {
   const { t } = useTranslation()
-  const { className = "", loading = false, isEmpty = false, onCreate = () => { } } = props
+  const {
+    className = "",
+    loading = false,
+    isEmpty = false,
+    onCreate = () => { }
+  } = props
   return (
-    <Spin spinning={loading} style={{ minHeight: 100 }}>
-      {!loading && (
-        <>
-          {isEmpty ? (
-            <div className={`text-center ${className}`}>
+    <Spin spinning={loading}>
+      {
+        !loading ? <>
+          {
+            isEmpty ? <div className={`text-center ${className}`}>
               <GroupOutlined className="text-gray" style={{ fontSize: 48 }} />
               <p className='text-xl font-semibold mt-4'>{t("enterprise_groups.no_data.title")}</p>
               <p className='text-sm mt-2' style={{ color: gray[1] }}>
@@ -27,12 +32,10 @@ const NoEnterprise = (props) => {
               <Button className='mt-6' type='primary' ghost onClick={onCreate}>
                 {t("enterprise_groups.add")}
               </Button>
-            </div>
-          ) : (
-            <NoData />
-          )}
-        </>
-      )}
+            </div> : <NoData />
+          }
+        </> : <div style={{ minHeight: 100 }} />
+      }
     </Spin>
   )
 }

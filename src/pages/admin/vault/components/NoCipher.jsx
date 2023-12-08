@@ -27,13 +27,13 @@ const NoCipher = (props) => {
     cipherType = null,
     isEmpty = false,
     isTrash = false,
-    onCreate = () => {}
+    onCreate = () => { }
   } = props;
 
   return (
-    <Spin spinning={loading} style={{ minHeight: 100 }}>
+    <Spin spinning={loading}>
       {
-        !loading && <>
+        !loading ? <>
           {
             isEmpty ? <div
               className={`text-center ${className}`}
@@ -62,7 +62,7 @@ const NoCipher = (props) => {
               }
             </div> : <NoData />
           }
-        </>
+        </> : <div style={{ minHeight: 100 }} />
       }
     </Spin>
   );

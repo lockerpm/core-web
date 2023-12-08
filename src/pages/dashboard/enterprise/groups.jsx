@@ -32,7 +32,7 @@ const EnterpriseGroups = (props) => {
   const enterpriseId = currentPage?.params.enterprise_id
 
   const [groups, setGroups] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [formVisible, setFormVisible] = useState(false)
   const [usersVisible, setUsersVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
@@ -151,7 +151,7 @@ const EnterpriseGroups = (props) => {
       {!isEmpty && (
         <Filter className={"mt-2"} params={params} loading={loading} setParams={(v) => setParams({ ...v, page: 1 })} />
       )}
-      {filteredData.total == 0 ? (
+      {filteredData.total === 0 ? (
         <NoGroup className={"mt-4"} loading={loading} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
       ) : (
         <>

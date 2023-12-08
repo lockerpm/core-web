@@ -32,9 +32,9 @@ const PasswordlessForm = (props) => {
     isLogin = false,
     userInfo = {},
     isAddKey = false,
-    onConfirm = () => {},
-    onError = () => {},
-    onClose = () => {}
+    onConfirm = () => { },
+    onError = () => { },
+    onClose = () => { }
   } = props;
 
   const isTouch = useSelector(state => state.service.isTouch)
@@ -93,6 +93,7 @@ const PasswordlessForm = (props) => {
       const response = await service.setNewPasswordless({
         email: userInfo.email,
         name: selectedDevice.name,
+        deviceName: selectedDevice.name,
         devicePath: selectedDevice.path,
         pin: pin
       })
@@ -184,11 +185,11 @@ const PasswordlessForm = (props) => {
                 className="mt-4 cursor-pointer"
                 key={index}
                 bodyStyle={{ padding: '9px 24px' }}
-                style={{ borderColor: selectedDevice?.path == d.path ? green[7] : ''  }}
+                style={{ borderColor: selectedDevice?.path == d.path ? green[7] : '' }}
                 onClick={() => setSelectedDevice(d)}
               >
                 <div className="flex items-center">
-                  <UsbOutlined style={{ fontSize: 20 }}/>
+                  <UsbOutlined style={{ fontSize: 20 }} />
                   <p className="font-semibold ml-2">
                     {t(d.name)}
                   </p>
@@ -219,10 +220,10 @@ const PasswordlessForm = (props) => {
           step !== 0 && <Card
             className="mt-10"
             bodyStyle={{ padding: '9px 24px' }}
-            style={{ borderColor: green[7]  }}
+            style={{ borderColor: green[7] }}
           >
             <div className="flex items-center">
-              <UsbOutlined style={{ fontSize: 20 }}/>
+              <UsbOutlined style={{ fontSize: 20 }} />
               <p className="font-semibold ml-2">
                 {t(selectedDevice.name)}
               </p>
@@ -255,7 +256,7 @@ const PasswordlessForm = (props) => {
         {
           (isTouch || isFingerprint) && <div className="mt-10">
             <p className="mt-6 text-left">
-              { isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
+              {isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
             </p>
             <Card className="mt-2">
               <ImageIcon

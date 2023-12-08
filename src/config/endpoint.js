@@ -118,6 +118,12 @@ export default {
   ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
   ENTERPRISE_ACTIVITY: `${FLAT_FORM}/enterprises/:enterprise_id/activity`,
 
+  ENTERPRISE_POLICY: `${FLAT_FORM}/enterprises/:enterprise_id/policy`,
+  ENTERPRISE_POLICY_PASSWORD_REQUIREMENT: `${FLAT_FORM}/enterprises/:enterprise_id/policy/password_requirement`,
+  ENTERPRISE_POLICY_BLOCK_FAILED_LOGIN: `${FLAT_FORM}/enterprises/:enterprise_id/policy/block_failed_login`,
+  ENTERPRISE_POLICY_PASSWORD_PASSWORLESS: `${FLAT_FORM}/enterprises/:enterprise_id/policy/passwordless`,
+  ENTERPRISE_POLICY_PASSWORD_2FA: `${FLAT_FORM}/enterprises/:enterprise_id/policy/2fa`,
+
   // Admin
   ADMIN_ENTERPRISES: `${ADMIN}/enterprises`,
   MAIL_CONFIGURATION: `${ADMIN}/mail_configuration`,
