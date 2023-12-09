@@ -9,9 +9,9 @@ function list(enterprise_id, params = {}) {
   })
 }
 
-function create(enterprise_id, data = {}) {
+function create_members(enterprise_id, data = {}) {
   return request({
-    url: global.endpoint.ENTERPRISE_MEMBERS.replace(":enterprise_id", enterprise_id),
+    url: global.endpoint.ENTERPRISE_MEMBERS_MULTIPLE.replace(":enterprise_id", enterprise_id),
     method: "post",
     data,
   })
@@ -25,6 +25,21 @@ function update(enterprise_id, member_id, data = {}) {
   })
 }
 
+function activated(enterprise_id, member_id, data = {}) {
+  return request({
+    url: global.endpoint.ENTERPRISE_MEMBER_ACTIVATED.replace(":enterprise_id", enterprise_id).replace(":member_id", member_id),
+    method: "put",
+    data,
+  })
+}
+
+function reinvite(enterprise_id, member_id) {
+  return request({
+    url: global.endpoint.ENTERPRISE_MEMBER_REINVITE.replace(":enterprise_id", enterprise_id).replace(":member_id", member_id),
+    method: "post",
+  })
+}
+
 function remove(enterprise_id, member_id) {
   return request({
     url: global.endpoint.ENTERPRISE_MEMBER.replace(":enterprise_id", enterprise_id).replace(":member_id", member_id),
@@ -34,7 +49,9 @@ function remove(enterprise_id, member_id) {
 
 export default {
   list,
-  create,
+  create_members,
   update,
+  activated,
+  reinvite,
   remove,
 }

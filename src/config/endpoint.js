@@ -110,11 +110,17 @@ export default {
   ENTERPRISES: `${FLAT_FORM}/enterprises`,
   ENTERPRISE: `${FLAT_FORM}/enterprises/:enterprise_id`,
   ENTERPRISE_DASHBOARD: `${FLAT_FORM}/enterprises/:enterprise_id/dashboard`,
+
   ENTERPRISE_GROUPS: `${FLAT_FORM}/enterprises/:enterprise_id/groups`,
   ENTERPRISE_GROUP: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id`,
   ENTERPRISE_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id/members`,
+
   ENTERPRISE_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/members`,
-  ENTERPRISE_MEMBER: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:member_id`,
+  ENTERPRISE_MEMBERS_MULTIPLE: `${FLAT_FORM}/enterprises/:enterprise_id/members/multiple`,
+  ENTERPRISE_MEMBER: `${FLAT_FORM}/enterprises/:enterprise_id/members/:member_id`,
+  ENTERPRISE_MEMBER_REINVITE: `${FLAT_FORM}/enterprises/:enterprise_id/members/:member_id/reinvite`,
+  ENTERPRISE_MEMBER_ACTIVATED: `${FLAT_FORM}/enterprises/:enterprise_id/members/:member_id/activated`,
+
   ENTERPRISES_USER_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/user_groups/:group_id/members`,
   ENTERPRISES_MEMBERS_GROUPS_SEARCH: `${FLAT_FORM}/enterprises/:organization_id/members_groups/search`,
   ENTERPRISE_ACTIVITY: `${FLAT_FORM}/enterprises/:enterprise_id/activity`,

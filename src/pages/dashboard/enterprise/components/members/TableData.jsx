@@ -1,19 +1,27 @@
 import React, { useMemo } from "react"
-import { Table, Space, Button, Avatar } from "@lockerpm/design"
+import { Table, Space, Avatar, Tag, Select } from "@lockerpm/design"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, RouterLink } from "../../../../../components"
-
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
+import { TextCopy, PasswordStrength } from "../../../../../components"
+import Actions from "./Actions"
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
 const TableData = (props) => {
   const { t } = useTranslation()
-  const { loading = false, className = "", data = [], params = {}, onUpdate = () => { }, onDelete = () => { } } = props
+  const {
+    className = "",
+    loading = false,
+    enterpriseId,
+    mailConfig = null,
+    data = [],
+    params = {},
+    onDelete = () => { },
+    onReload = () => { }
+  } = props
 
   const columns = useMemo(() => {
     return [
@@ -29,17 +37,13 @@ const TableData = (props) => {
         dataIndex: "title",
         key: "name",
         align: "left",
+        width: 300,
         render: (_, record) => (
           <div className='flex items-center'>
             <Avatar src={record.avatar} />
             <div className='ml-2'>
-              <RouterLink
-                className={"font-semibold"}
-                label={record.full_name}
-                routerName={global.keys.ENTERPRISE_DASHBOARD}
-                routerParams={{ enterprise_id: record.id }}
-              />
-              <p className='text-xs'>{record.email}</p>
+              <p className='font-semibold'>{record.full_name}</p>
+              <p>{record.email}</p>
             </div>
           </div>
         ),
@@ -49,24 +53,56 @@ const TableData = (props) => {
         dataIndex: "role",
         key: "role",
         align: "center",
-        width: 100,
-        render: (_, record) => <TextCopy value={record.role} align={"center"} />,
+        width: 160,
+        render: (_, record) => <Select
+          className="w-full"
+          value={record.role}
+          bordered={false}
+          options={
+            global.constants.USER_ROLES
+              .filter((r) => !r.hide)
+              .map((r) => ({
+                value: r.value,
+                label: (() => {
+                  const role = common.getUserRole(r.value)
+                  return <div className="h-full">
+                    <Tag color={role.color}>
+                      {t(role?.label)}
+                    </Tag>
+                  </div>
+                })()
+              })
+              )
+          }
+        />
+
       },
       {
         title: t("common.status"),
         dataIndex: "status",
         key: "status",
         align: "center",
-        width: 100,
-        render: (_, record) => <TextCopy value={record.status} align={"center"} />,
+        width: 120,
+        render: (_, record) => {
+          const status = common.getStatus(record.status)
+          return <Tag color={status.color}>
+            {t(status?.label)}
+          </Tag>
+        }
       },
       {
         title: t("common.group"),
         dataIndex: "group",
         key: "group",
         align: "center",
-        width: 100,
-        render: (_, record) => <TextCopy value={record.group} align={"center"} />,
+        width: 200,
+        render: (_, record) => <Space size={[4, 4]} wrap>
+          {
+            record.groups.map((g, index) => <Tag key={index}>
+              {g}
+            </Tag>)
+          }
+        </Space>,
       },
       {
         title: t("common.password"),
@@ -74,12 +110,15 @@ const TableData = (props) => {
         key: "password_strength",
         align: "center",
         width: 100,
-        render: (_, record) => <TextCopy value={record.password_strength} align={"center"} />,
+        render: (_, record) => <PasswordStrength
+          score={record.security_score}
+          showProgress={false}
+        />,
       },
       {
-        title: t("common.created_time"),
-        dataIndex: "creationDate",
-        key: "creationDate",
+        title: t("common.joined_at"),
+        dataIndex: "access_time",
+        key: "access_time",
         align: "center",
         width: 200,
         render: (_, record) => <TextCopy value={common.timeFromNow(record.access_time)} align={"center"} />,
@@ -90,13 +129,14 @@ const TableData = (props) => {
         key: "actions",
         align: "right",
         fixed: "right",
-        width: 100,
-        render: (_, record) => (
-          <Space size={[8, 8]}>
-            <Button type='text' size='small' icon={<EditOutlined />} onClick={() => onUpdate(record)} />
-            <Button type='text' size='small' danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} />
-          </Space>
-        ),
+        width: 80,
+        render: (_, record) => <Actions
+          item={record}
+          enterpriseId={enterpriseId}
+          mailConfig={mailConfig}
+          onDelete={onDelete}
+          onReload={onReload}
+        />,
       },
     ].filter((c) => !c.hide)
   }, [])

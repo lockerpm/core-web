@@ -98,7 +98,8 @@
     "hour": "hour",
     "seconds": "seconds",
     "minutes": "minutes",
-    "hours": "hours"
+    "hours": "hours",
+    "joined_at": "Joined at"
   },
   "button": {
     "add": "Add",
@@ -151,7 +152,8 @@
     "download_desktop_app": "Download desktop app",
     "open_desktop_app": "Open desktop app",
     "new_user": "New user",
-    "new_group": "New group"
+    "new_group": "New group",
+    "resend_invitation": "Resend invitation"
   },
   "placeholder": {
     "name": "Enter name",
@@ -274,7 +276,8 @@
       "enterprise_members": {
         "created": "The new user has been added.",
         "updated": "The user information has been updated.",
-        "deleted": "The user has been deleted."
+        "deleted": "The user has been deleted.",
+        "reinvited": "The invite email send successfully"
       },
       "enterprise_groups": {
         "created": "The new group has been added.",
@@ -383,6 +386,7 @@
     "shared": "Shared",
     "rejected": "Rejected",
     "pending": "Pending",
+    "requested": "Requested",
     "recovery_initiated": "Recovery Initiated",
     "recovery_approved": "Recovery Approved"
   },
@@ -1127,11 +1131,24 @@
     "role": "Role",
     "upload_file": "Upload file",
     "upload_file_guide": "or Upload file of users (CSV format)",
-    "add": "New user",
+    "add": "Invite user",
     "edit": "Edit user info",
-    "no_data": {
-      "title": "Add your first company user",
-      "description": "Add an user to manage."
+    "all_roles": "All roles",
+    "all_statuses": "All statuses",
+    "tabs": {
+      "active": "Active licenses",
+      "pending": "Pending members",
+      "disabled": "Disabled members",
+      "blocked": "Blocked members"
+    },
+    "form": {
+      "title": "Invite people to company",
+      "username_description": "Email of new member",
+      "role_description": "Role of new member(s)",
+      "full_name_description": "Full name of new member",
+      "new_member_info": "New member information",
+      "new_member_description": "The password(s) will be displayed once. Copy or download to share with the right people. You may skip this step if you've set up <mail>{{mail}}</mail> to send email invitations",
+      "new_member_invite": "If you have set up {{mail}}, the new member(s) will receive an invitation via their email address"
     }
   },
   "enterprise_groups": {

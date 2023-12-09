@@ -28,6 +28,8 @@ function AdminLayout(props) {
   const { routers, pages } = props
   const dispatch = useDispatch()
   const location = useLocation()
+
+  const syncing = useSelector((state) => state.sync.syncing)
   const isMobile = useSelector((state) => state.system.isMobile)
   const collapsed = useSelector((state) => state.system.collapsed)
   const currentPage = useSelector((state) => state.system.currentPage)
@@ -69,7 +71,7 @@ function AdminLayout(props) {
 
   const checkVaultTimeOut = async () => {
     const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
-    if (isLocked) {
+    if (isLocked && currentPage.type === 'admin') {
       await authServices.redirect_login()
     }
   }

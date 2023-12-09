@@ -47,6 +47,7 @@ const STATUS = {
   INVITED: 'invited',
   EXPIRED: 'expired',
   REJECT: 'rejected',
+  REQUESTED: 'requested',
   RECOVERY_INITIATED: 'recovery_initiated',
   RECOVERY_APPROVED: 'recovery_approved',
   SHARED: null
@@ -733,18 +734,25 @@ export default {
     {
       value: USER_ROLE.SUPPER_ADMIN,
       label: 'roles.supper_admin',
+      hide: true,
+      color: 'success'
     },
     {
       value: USER_ROLE.PRIMARY_ADMIN,
       label: 'roles.primary_admin',
+      color: 'success'
     },
     {
       value: USER_ROLE.ADMIN,
       label: 'roles.admin',
+      color: 'processing',
+      form: true
     },
     {
       value: USER_ROLE.MEMBER,
       label: 'roles.member',
+      color: 'default',
+      form: true
     }
   ]
 }

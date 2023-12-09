@@ -3,11 +3,13 @@ import { } from "@lockerpm/design"
 import { PlusOutlined } from "@ant-design/icons"
 
 import { AdminHeader, Pagination } from "../../../components"
+
+import MenuTabs from "./components/members/MenuTabs";
 import Filter from "./components/members/Filter"
-import NoMember from "./components/members/NoMember"
 import TableData from "./components/members/TableData"
 import BoxData from "./components/members/BoxData"
 import FormData from "./components/members/FormData"
+import Review from "./components/members/Review";
 
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
@@ -16,6 +18,7 @@ import { useLocation } from "react-router-dom"
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
+import mailConfigServices from "../../../services/mail-config";
 import enterpriseMemberServices from "../../../services/enterprise-member"
 
 const EnterpriseMembers = (props) => {
@@ -30,20 +33,74 @@ const EnterpriseMembers = (props) => {
   const enterpriseId = currentPage?.params.enterprise_id
 
   const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState(0)
   const [members, setMembers] = useState([])
   const [formVisible, setFormVisible] = useState(false)
+  const [reviewVisible, setReviewVisible] = useState(false);
+  const [newMembers, setNewMembers] = useState([]);
+  const [mailConfig, setMailConfig] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedTab, setSelectedTab] = useState(currentPage.query?.tab || 'active');
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
-    orderField: "revisionDate",
-    orderDirection: "desc",
     searchText: currentPage?.query?.searchText,
+    role: '',
+    status: ''
   })
 
+  const getPayload = () => {
+    const p = {
+      page: params.page,
+      size: params.size,
+      q: params.searchText,
+      role: params.role,
+      primary_admin: params.role === global.constants.USER_ROLE.PRIMARY_ADMIN ? 1 : '',
+      admin: params.role === global.constants.USER_ROLE.ADMIN ? 1 : '',
+      member: params.role === global.constants.USER_ROLE.MEMBER ? 1 : '',
+      statuses: global.constants.STATUS.CONFIRMED,
+      is_activated: 1,
+      block_login: 0,
+    }
+    if (selectedTab === 'pending') {
+      return {
+        ...p,
+        status: params.status,
+        statuses: `${global.constants.STATUS.REQUESTED},${global.constants.STATUS.INVITED}`
+      }
+    }
+    if (selectedTab === 'disabled') {
+      return {
+        ...p,
+        is_activated: 0,
+      }
+    }
+    if (selectedTab === 'blocked') {
+      return {
+        ...p,
+        block_login: 1,
+      }
+    }
+    return p
+  }
+
   useEffect(() => {
-    getAllMembers()
+    fetchMailConfiguration()
   }, [])
+
+  useEffect(() => {
+    getMembers()
+  }, [JSON.stringify(params), selectedTab])
+
+  useEffect(() => {
+    setParams({
+      ...params,
+      page: 1,
+      searchText: '',
+      role: '',
+      status: ''
+    })
+  }, [selectedTab])
 
   useEffect(() => {
     setParams({
@@ -61,23 +118,22 @@ const EnterpriseMembers = (props) => {
     })
   }, [isMobile])
 
-  const isEmpty = useMemo(() => {
-    return members.length === 0
-  }, [members])
+  const fetchMailConfiguration = async () => {
+    await mailConfigServices.get(enterpriseId).then((response) => {
+      const config = response && !common.isEmpty(response) ? response : null;
+      setMailConfig(config)
+    }).catch(() => {
+      setMailConfig(null)
+    })
+  }
 
-  const filteredData = useMemo(() => {
-    return common.paginationAndSortData([...members], params, params.orderField, params.orderDirection, [
-      (f) => f.id,
-      (f) => (params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || "") : true),
-    ])
-  }, [members, JSON.stringify(params)])
-
-  const getAllMembers = async () => {
+  const getMembers = async () => {
     setLoading(true)
     await enterpriseMemberServices
-      .list(enterpriseId, { paging: 0 })
+      .list(enterpriseId, getPayload())
       .then((response) => {
-        setMembers(response)
+        setMembers(response.results)
+        setTotal(response.count)
       })
       .catch((error) => {
         setMembers([])
@@ -99,19 +155,24 @@ const EnterpriseMembers = (props) => {
     setFormVisible(true)
   }
 
+  const handleOpenReview = (members = []) => {
+    setNewMembers(members);
+    setReviewVisible(true)
+  }
+
   const deleteItem = (item) => {
     global.confirm(async () => {
       enterpriseMemberServices
-        .remove(item.enterprise_id, group.id)
+        .remove(enterpriseId, item.id)
         .then(() => {
           global.pushSuccess(t("notification.success.enterprise_members.deleted"))
-          if (filteredData.length === 1 && params.page > 1) {
+          if (members.length === 1 && params.page > 1) {
             setParams({
               ...params,
               page: params.page - 1,
             })
           }
-          getAllGroups()
+          getMembers()
         })
         .catch((error) => {
           global.pushError(error)
@@ -122,64 +183,74 @@ const EnterpriseMembers = (props) => {
   return (
     <div
       className='enterprise_members layout-content'
-      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
+      onScroll={(e) => common.scrollEnd(e, params, total, setParams)}
     >
       <AdminHeader
         title={t("enterprise_members.title")}
-        total={members.length}
+        total={total}
         actions={[
           {
             key: "add",
-            label: t("button.new_user"),
+            label: t("enterprise_members.add"),
             type: "primary",
-            hide: members.length === 0,
             icon: <PlusOutlined />,
             disabled: loading,
             click: () => handleOpenForm(),
           },
         ]}
       />
-      {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={loading} setParams={(v) => setParams({ ...v, page: 1 })} />
-      )}
-      {filteredData.total == 0 ? (
-        <NoMember className={"mt-4"} loading={loading} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
-      ) : (
-        <>
-          {isMobile ? (
-            <BoxData
-              className='mt-4'
-              loading={loading}
-              data={filteredData.result}
-              params={params}
-              onUpdate={handleOpenForm}
-              onDelete={deleteItem}
-            />
-          ) : (
-            <TableData
-              className='mt-4'
-              loading={loading}
-              data={filteredData.result}
-              params={params}
-              onUpdate={handleOpenForm}
-              onDelete={deleteItem}
-            />
-          )}
-        </>
-      )}
-      {filteredData.total > global.constants.PAGE_SIZE && !isMobile && (
-        <Pagination
+      <MenuTabs
+        activeTab={selectedTab}
+        onChange={(v) => setSelectedTab(v)}
+      />
+      <Filter
+        params={params}
+        loading={loading}
+        activeTab={selectedTab}
+        setParams={(v) => setParams({ ...v, page: 1 })}
+      />
+      {
+        isMobile ? <BoxData
+          className='mt-4'
+          loading={loading}
+          enterpriseId={enterpriseId}
+          data={members}
+          params={params}
+          mailConfig={mailConfig}
+          onDelete={deleteItem}
+          onReload={() => getMembers()}
+        /> : <TableData
+          className='mt-4'
+          loading={loading}
+          enterpriseId={enterpriseId}
+          data={members}
+          params={params}
+          mailConfig={mailConfig}
+          onDelete={deleteItem}
+          onReload={() => getMembers()}
+        />
+      }
+      {
+        total > global.constants.PAGE_SIZE && !isMobile && <Pagination
           params={params}
           total={filteredData.total}
           onChange={handleChangePage}
         />
-      )}
+      }
       <FormData
         visible={formVisible}
         item={selectedItem}
-        onReload={getAllMembers}
+        onReload={getMembers}
+        onReview={handleOpenReview}
         onClose={() => setFormVisible(false)}
       />
+      <Review
+        visible={reviewVisible}
+        members={newMembers}
+        mailConfig={mailConfig}
+        onClose={() => setReviewVisible(false)}
+      />
+
     </div>
   )
 }

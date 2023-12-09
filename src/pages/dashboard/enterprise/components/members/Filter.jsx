@@ -1,57 +1,34 @@
-import React, { useMemo, useState, useEffect } from "react"
-import { Row, Col, Input, Dropdown, Select } from "@lockerpm/design"
+import React, { useState, useEffect } from "react"
+import { Row, Col, Input, Select } from "@lockerpm/design"
 
-import { SearchOutlined, CaretDownOutlined } from "@ant-design/icons"
+import { SearchOutlined } from "@ant-design/icons"
 
-import { useSelector } from "react-redux"
+import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import global from "../../../../../config/global"
 
 const Filter = (props) => {
   const { t } = useTranslation()
-  const { className = "", params = {}, loading = false, setParams = () => { } } = props
+  const {
+    className = "",
+    params = {},
+    loading = false,
+    activeTab = '',
+    setParams = () => { }
+  } = props
 
-  const locale = useSelector((state) => state.system.locale)
   const [searchText, setSearchText] = useState(params.searchText)
 
   useEffect(() => {
     setSearchText(params.searchText)
   }, [params.searchText])
 
-  const selectedSortOption = useMemo(() => {
-    return global.constants.SORT_OPTIONS.find(
-      (o) => o.orderField === params.orderField && o.orderDirection === params.orderDirection
-    )
-  }, [params])
-
-  const sortMenus = useMemo(() => {
-    return global.constants.SORT_OPTIONS.map((o) => ({
-      key: o.key,
-      label: <p className={o.key === selectedSortOption?.key ? "text-primary" : ""}>{t(o.label)}</p>,
-      onClick: () =>
-        setParams({
-          ...params,
-          orderField: o.orderField,
-          orderDirection: o.orderDirection,
-        }),
-    }))
-  }, [selectedSortOption, params, locale])
-
-  const onChange = (value) => {
-    console.log(`selected ${value}`)
-  }
-  const onSearch = (value) => {
-    console.log("search:", value)
-  }
-
-  const filterOption = (input, option) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-
   return (
     <Row className={`filter ${className}`} justify={"space-between"} gutter={[0, 8]}>
-      <Col lg={12} span={12} className='w-full'>
+      <Col lg={16} span={16} xs={24} className='w-full'>
         <Row justify={"left"} gutter={[12, 12]}>
-          <Col xl={12} lg={12} md={12} xs={24}>
+          <Col lg={8} md={8} sm={24} xs={24}>
             <Input
               prefix={<SearchOutlined />}
               value={searchText}
@@ -67,49 +44,61 @@ const Filter = (props) => {
               onPressEnter={() => setParams({ ...params, searchText })}
             />
           </Col>
-          <Col xl={8} lg={8} md={8} xs={24}>
+          <Col lg={8} md={8} sm={12} xs={24}>
             <Select
               className='w-full'
-              showSearch
-              placeholder='Role'
               optionFilterProp='children'
-              onChange={onChange}
-              onSearch={onSearch}
-              filterOption={filterOption}
+              value={params.role}
+              onChange={(v) => {
+                setParams({
+                  ...params,
+                  role: v,
+                })
+              }}
               options={[
                 {
-                  value: "admin",
-                  label: "Admin",
+                  value: '',
+                  label: t('enterprise_members.all_roles'),
                 },
-                {
-                  value: "user",
-                  label: "User",
-                },
-                {
-                  value: "none",
-                  label: "None",
-                },
+                ...global.constants.USER_ROLES.filter((r) => !r.hide).map((r) => ({
+                  value: r.value,
+                  label: t(r.label)
+                }))
               ]}
             />
           </Col>
+          {
+            activeTab === 'pending' && <Col lg={8} md={8} sm={12} xs={24}>
+              <Select
+                className='w-full'
+                optionFilterProp='children'
+                value={params.status}
+                onChange={(v) => {
+                  setParams({
+                    ...params,
+                    status: v,
+                  })
+                }}
+                options={[
+                  {
+                    value: '',
+                    label: t('enterprise_members.all_statuses'),
+                  },
+                  {
+                    value: global.constants.STATUS.INVITED,
+                    label: t('statuses.invited'),
+                  },
+                  {
+                    value: global.constants.STATUS.REQUESTED,
+                    label: t('statuses.requested'),
+                  },
+                ]}
+              />
+            </Col>
+          }
         </Row>
       </Col>
-      <Col lg={12} span={12} className='w-full'>
-        <Row justify={"end"} gutter={[12, 12]}>
-          <Col>
-            <Dropdown.Button
-              icon={<CaretDownOutlined />}
-              trigger={["click"]}
-              disabled={loading}
-              menu={{
-                items: sortMenus,
-                selectedKeys: [],
-              }}
-            >
-              {t("sort_options.sort_by")}
-            </Dropdown.Button>
-          </Col>
-        </Row>
+      <Col lg={8} span={8} className='w-full'>
       </Col>
     </Row>
   )

@@ -1,118 +1,186 @@
-import React, { useMemo, useState, useRef, useEffect } from "react"
-import { Form, Space, Button, Drawer, Input, message, Upload, Select } from "@lockerpm/design"
+import React, { useEffect, useState } from 'react';
+import {
+  Form,
+  Space,
+  Button,
+  Drawer,
+  Select
+} from '@lockerpm/design';
+import {
+  ItemInput,
+} from '../../../../../components'
+import {
+} from '@ant-design/icons';
 
-import { UploadOutlined } from "@ant-design/icons"
-
-import { useSelector } from "react-redux"
-import { useTranslation } from "react-i18next"
-
-import global from "../../../../../config/global"
+import { useSelector } from 'react-redux';
+import { useTranslation, Trans } from "react-i18next";
+import global from '../../../../../config/global';
+import enterpriseMemberServices from '../../../../../services/enterprise-member';
 
 function FormData(props) {
-  const { visible = false, item = null, onClose = () => { }, onReload = () => { } } = props
+  const {
+    visible = false,
+    enterpriseId,
+    onClose = () => { },
+    onReload = () => { },
+    onReview = () => { },
+  } = props
   const { t } = useTranslation()
-  const [form] = Form.useForm()
-  const [callingAPI, setCallingAPI] = useState(false)
+
+  const [form] = Form.useForm();
+  const [callingAPI, setCallingAPI] = useState(false);
+  const [enterpriseMembers, setEnterpriseMembers] = useState([]);
+
+  const usernames = Form.useWatch('usernames', form) || [];
 
   useEffect(() => {
-    if (visible) {
-      if (item?.id) {
-        form.setFieldsValue(item)
-      } else {
-        form.setFieldsValue({ name: "", subtitle: "", description: "" })
-      }
-    } else {
-      form.resetFields()
-      setCallingAPI(false)
-    }
+    fetchWsMembers();
+  }, [])
+
+  useEffect(() => {
+    form.setFieldsValue({
+      usernames: [],
+      role: global.constants.USER_ROLE.MEMBER
+    })
   }, [visible])
 
-  const handleSave = async () => {
-    form.validateFields().then(async (values) => {
-      setCallingAPI(true)
-      if (!item?.id) {
-        await createEnterprise(values)
-      } else {
-        await editEnterprise(values)
-      }
-      setCallingAPI(false)
-      onClose()
+  const fetchWsMembers = () => {
+    enterpriseMemberServices.list(enterpriseId, { paging: 0 }).then((response) => {
+      setEnterpriseMembers(response);
+    }).catch(() => {
+      setEnterpriseMembers([])
     })
   }
 
-  const createEnterprise = async (values) => {
+  const getNewMembers = async () => {
+    const options = {
+      length: 16,
+      uppercase: true,
+      lowercase: true,
+      number: true,
+      special: true,
+      ambiguous: false
+    }
+    const requests = usernames.map(async (u) => ({
+      username: u,
+      password: await global.jsCore.passwordGenerationService.generatePassword(options)
+    }))
+    return await Promise.all(requests)
   }
 
-  const editEnterprise = async (values) => {
+  const handleSave = async () => {
+    form.validateFields().then(async () => {
+      setCallingAPI(true);
+      const members = await getNewMembers();
+      await enterpriseMemberServices.create_members(enterpriseId, {
+        members
+      }).then(() => {
+        onReload();
+        fetchWsMembers();
+        onClose();
+        onReview(members)
+      }).catch((error) => {
+        global.pushError(error)
+      })
+      setCallingAPI(false);
+    })
   }
 
-  const onChange = (value) => {
-    console.log(`selected ${value}`)
+  const handleClose = () => {
+    form.resetFields();
+    onClose()
   }
-  const onSearch = (value) => {
-    console.log("search:", value)
-  }
-
-  const filterOption = (input, option) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
 
   return (
     <div className={props.className}>
       <Drawer
-        title={t(`enterprise_members.${item ? "edit" : "add"}`)}
-        placement='right'
-        onClose={onClose}
+        title={t('enterprise_members.form.title')}
+        placement="right"
+        onClose={handleClose}
         open={visible}
         footer={
           <Space className='flex items-center justify-end'>
-            <Button disabled={callingAPI} onClick={onClose}>
-              {t("button.cancel")}
+            <Button
+              disabled={callingAPI}
+              onClick={handleClose}
+            >
+              {t('button.cancel')}
             </Button>
-            <Button type='primary' loading={callingAPI} onClick={handleSave}>
-              {t("button.save")}
+            <Button
+              type="primary"
+              disabled={!usernames.length}
+              loading={callingAPI}
+              onClick={handleSave}
+            >
+              {t('button.create')}
             </Button>
           </Space>
         }
       >
-        <Form form={form} layout='vertical' labelAlign={"left"}>
+        <Form
+          form={form}
+          layout="vertical"
+          labelAlign={'left'}
+        >
           <Form.Item
-            name={"user_email"}
+            name={'usernames'}
             className='mb-2'
-            label={<p className='font-semibold'>{t("enterprise_members.user_email")}</p>}
-            rules={[global.rules.REQUIRED(t("enterprise_members.user_email"))]}
+            rules={[
+              ({ }) => ({
+                validator(_, value) {
+                  const existedUsernames = value.filter((v) => enterpriseMembers.find((m) => m.email === v))
+                  if (existedUsernames.length <= 0) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error(t('validation.existed', { name: t('common.email') })));
+                },
+              })
+            ]}
+            label={<div>
+              <p className='font-bold'>{t('common.email')}</p>
+              <span>{t('enterprise_members.form.username_description')}</span>
+            </div>}
           >
-            <Input placeholder={t("placeholder.enter")} disabled={callingAPI} />
-          </Form.Item>
-          <Form.Item name={"role"} className='mb-2' label={<p className='font-semibold'>{t("enterprise_members.role")}</p>}>
-            <Select
-              showSearch
-              placeholder={t("placeholder.enter")}
-              optionFilterProp='children'
-              onChange={onChange}
-              onSearch={onSearch}
-              filterOption={filterOption}
+            <ItemInput
+              type={'email'}
+              items={enterpriseMembers.map((m) => m.user.username)}
               disabled={callingAPI}
+            />
+          </Form.Item>
+          <Form.Item
+            name={'role'}
+            className='mb-2'
+            rules={[
+              global.rules.REQUIRED(t('enterprise_members.role'))
+            ]}
+            label={<div>
+              <p className='font-bold'>{t('enterprise_members.role')}</p>
+              <span>{t('enterprise_members.form.role_description')}</span>
+            </div>}
+          >
+            <Select
+              className='w-full'
+              placeholder={t('placeholder.select')}
               options={[
-                {
-                  value: "admin",
-                  label: "Admin",
-                },
-                {
-                  value: "user",
-                  label: "User",
-                },
+                ...global.constants.USER_ROLES.filter((r) => r.form).map((r) => ({
+                  value: r.value,
+                  label: t(r.label)
+                }))
               ]}
             />
           </Form.Item>
-          <Form.Item name={"description"} className='mb-2'>
-            <p className='mb-2 mt-4'>{t("enterprise_members.upload_file_guide")}</p>
-            <Upload {...props}>
-              <Button icon={<UploadOutlined />}>{t("enterprise_members.upload_file")}</Button>
-            </Upload>
-          </Form.Item>
+          <div className='mt-4'>
+            <Trans
+              i18nKey='enterprise_members.form.new_member_invite'
+              values={{
+                mail: t('email_setting.title'),
+              }}
+            />
+          </div>
         </Form>
       </Drawer>
     </div>
-  )
+  );
 }
 
-export default FormData
+export default FormData;

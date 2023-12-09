@@ -46,7 +46,7 @@ const getColorByIndex = index => {
   })
   const colorTotal = newColors.length * newColors[0].length
   let i = index
-  if (index >= colorTotal ) {
+  if (index >= colorTotal) {
     i = index - colorTotal
   }
   const key1 = i % newColors.length
@@ -164,6 +164,10 @@ const getErrorMessage = (error) => {
   return errorData?.message || error.toString();
 }
 
+const getUserRole = (role) => {
+  return global.constants.USER_ROLES.find((s) => !s.value || s.value === role)
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -184,5 +188,6 @@ export default {
   getEmergencyAccessDays,
   getClientInfo,
   getToken,
-  getErrorMessage
+  getErrorMessage,
+  getUserRole
 }

@@ -55,39 +55,45 @@ const PasswordStrength = (props) => {
   const { t } = useTranslation();
   const {
     password = '',
+    score,
     showProgress = true
   } = props
   const passwordStrength = useMemo(() => {
-    return commonServices.password_strength(password)
+    if (password) {
+      return commonServices.password_strength(password)
+    }
+    return { score: score }
   }, [password])
 
   const passwordStatus = useMemo(() => {
-    return passwordStatuses.find((s) => s.score === passwordStrength?.score) || {}
+    return passwordStatuses.find((s) => s.score === passwordStrength?.score) || null
   }, [passwordStrength])
   return (
     <div className="w-full flex items-center">
       {
-        showProgress && <Progress
+        showProgress && passwordStatus && <Progress
           className="mb-0"
           percent={passwordStatus.percent}
           showInfo={false}
           strokeColor={passwordStatus.color}
         />
       }
-      <div
-        className={`flex items-center justify-${showProgress ? 'end' : ''}`}
-        style={{
-          color: passwordStatus.color,
-          width: 100
-        }}
-      >
-        <SafetyCertificateOutlined />
-        <small className="ml-1">
-          {t(`generate_password.status.${passwordStatus.label}`)}
-        </small>
-      </div>
+      {
+        passwordStatus && <div
+          className={`flex items-center justify-${showProgress ? 'end' : ''}`}
+          style={{
+            color: passwordStatus.color,
+            width: 100
+          }}
+        >
+          <SafetyCertificateOutlined />
+          <small className="ml-1">
+            {t(`generate_password.status.${passwordStatus.label}`)}
+          </small>
+        </div>
+      }
     </div>
-    
+
   )
 }
 
