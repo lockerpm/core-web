@@ -354,6 +354,10 @@
       "remember_device": "Remember this device",
       "sign_in_account": "Sign in to your account",
       "verify_identity": "Verify your identity"
+    },
+    "authenticate": {
+      "title": "Update Account Information",
+      "description": "Please enter a full name for your account, then create a new password to replace the temporary password given."
     }
   },
   "error_pages": {
@@ -1147,7 +1151,7 @@
       "role_description": "Role of new member(s)",
       "full_name_description": "Full name of new member",
       "new_member_info": "New member information",
-      "new_member_description": "The password(s) will be displayed once. Copy or download to share with the right people. You may skip this step if you've set up <mail>{{mail}}</mail> to send email invitations",
+      "new_member_description": "The password(s) will be displayed once. Copy or download to share with the right people. You may skip this step if you've set up {{mail}} to send email invitations",
       "new_member_invite": "If you have set up {{mail}}, the new member(s) will receive an invitation via their email address"
     }
   },

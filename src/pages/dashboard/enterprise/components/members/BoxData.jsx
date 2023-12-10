@@ -1,14 +1,14 @@
 import React, { useMemo } from "react"
-import { Collapse, Space, Avatar, Tag, Select } from "@lockerpm/design"
+import { Collapse, Space, Avatar, Tag } from "@lockerpm/design"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import { TextCopy, PasswordStrength } from "../../../../../components"
 import Actions from "./Actions"
+import Role from "./Role"
 
 import common from "../../../../../utils/common"
-import global from "../../../../../config/global"
 
 import { } from "@ant-design/icons"
 
@@ -62,26 +62,10 @@ const BoxData = (props) => {
         >
           <div className='flex items-center mb-2'>
             <p className='font-semibold mr-2'>{t("common.role")}:</p>
-            <Select
-              className="w-full"
-              value={record.role}
-              bordered={false}
-              options={
-                global.constants.USER_ROLES
-                  .filter((r) => !r.hide)
-                  .map((r) => ({
-                    value: r.value,
-                    label: (() => {
-                      const role = common.getUserRole(r.value)
-                      return <div className="h-full">
-                        <Tag color={role.color}>
-                          {t(role?.label)}
-                        </Tag>
-                      </div>
-                    })()
-                  })
-                  )
-              }
+            <Role
+              record={record}
+              enterpriseId={enterpriseId}
+              onReload={onReload}
             />
           </div>
           <div className='flex items-center mb-2'>

@@ -24,6 +24,11 @@ function DropdownMenu() {
   const userInfo = useSelector((state) => state.auth.userInfo);
   const isCloud = useSelector((state) => state.system.isCloud);
   const locale = useSelector((state) => state.system.locale);
+  const teams = useSelector((state) => state.enterprise.teams);
+
+  const isEntepriseAdmin = useMemo(() => {
+    return teams[0]?.role?.includes('admin')
+  }, [teams])
 
   const AvatarIcon = useMemo((size = 32) => {
     if (userInfo?.avatar) {
@@ -57,7 +62,11 @@ function DropdownMenu() {
     } else if (item.key === 'lock') {
       await authServices.redirect_login();
     } else if (item.key === 'enterprise') {
-      global.navigate(global.keys.ENTERPRISES)
+      if (userInfo.is_super_admin) {
+        global.navigate(global.keys.ENTERPRISES)
+      } else {
+        global.navigate(global.keys.ENTERPRISE_DASHBOARD, { enterprise_id: teams[0]?.id })
+      }
     }
   }
 
@@ -89,7 +98,7 @@ function DropdownMenu() {
             key: 'enterprise',
             icon: <GroupOutlined />,
             label: <span>{t('sidebar.enterprise')}</span>,
-            hide: false
+            hide: !(userInfo.is_super_admin || isEntepriseAdmin)
           },
           {
             type: 'divider',

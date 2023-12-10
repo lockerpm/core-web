@@ -240,6 +240,7 @@ const EnterpriseMembers = (props) => {
       <FormData
         visible={formVisible}
         item={selectedItem}
+        enterpriseId={enterpriseId}
         onReload={getMembers}
         onReview={handleOpenReview}
         onClose={() => setFormVisible(false)}

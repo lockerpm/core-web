@@ -17,7 +17,7 @@ function ChangePasswordForm(props) {
   const {
     className = '',
     changing = false,
-    onSave = () => {}
+    onSave = () => { }
   } = props
   const { t } = useTranslation();
 

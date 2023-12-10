@@ -15,6 +15,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation, Trans } from "react-i18next";
 import global from '../../../../../config/global';
+import coreServices from '../../../../../services/core';
 import enterpriseMemberServices from '../../../../../services/enterprise-member';
 
 function FormData(props) {
@@ -32,6 +33,7 @@ function FormData(props) {
   const [enterpriseMembers, setEnterpriseMembers] = useState([]);
 
   const usernames = Form.useWatch('usernames', form) || [];
+  const role = Form.useWatch('role', form);
 
   useEffect(() => {
     fetchWsMembers();
@@ -61,10 +63,28 @@ function FormData(props) {
       special: true,
       ambiguous: false
     }
-    const requests = usernames.map(async (u) => ({
-      username: u,
-      password: await global.jsCore.passwordGenerationService.generatePassword(options)
-    }))
+    const requests = usernames.map(async (u) => {
+      const password = await global.jsCore.passwordGenerationService.generatePassword(options)
+      const makeKey = await coreServices.make_key(u, password)
+      const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
+      const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
+      const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
+      return {
+        email: u,
+        password: password,
+        role: role,
+        master_password_hash: hashedPassword,
+        full_name: '',
+        kdf: global.constants.CORE_JS_INFO.KDF,
+        kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS,
+        master_password_hint: '',
+        key: encKey[1].encryptedString,
+        keys: {
+          public_key: keys[0],
+          encrypted_private_key: keys[1].encryptedString,
+        }
+      }
+    })
     return await Promise.all(requests)
   }
 
@@ -143,7 +163,7 @@ function FormData(props) {
           >
             <ItemInput
               type={'email'}
-              items={enterpriseMembers.map((m) => m.user.username)}
+              items={enterpriseMembers.map((m) => m.email)}
               disabled={callingAPI}
             />
           </Form.Item>

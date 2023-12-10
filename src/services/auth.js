@@ -71,7 +71,9 @@ function access_token_type() {
 async function redirect_login() {
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(window.location)
-  if (access_token()) {
+  if (currentPage?.name === global.keys.AUTHENTICATE) {
+    return;
+  } else if (access_token()) {
     const isError = currentPage?.name === global.keys.ADMIN_ERROR
     const isAdmin = currentPage?.type === 'admin'
     global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError && isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
@@ -91,7 +93,7 @@ async function logout() {
         method: 'post',
       })
     } catch (error) {
-      
+
     }
   }
   await coreServices.logout();

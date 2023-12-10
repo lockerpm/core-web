@@ -1,14 +1,14 @@
 import React, { useMemo } from "react"
-import { Table, Space, Avatar, Tag, Select } from "@lockerpm/design"
+import { Table, Space, Avatar, Tag } from "@lockerpm/design"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import { TextCopy, PasswordStrength } from "../../../../../components"
 import Actions from "./Actions"
+import Role from "./Role"
 
 import common from "../../../../../utils/common"
-import global from "../../../../../config/global"
 
 const TableData = (props) => {
   const { t } = useTranslation()
@@ -54,28 +54,11 @@ const TableData = (props) => {
         key: "role",
         align: "center",
         width: 160,
-        render: (_, record) => <Select
-          className="w-full"
-          value={record.role}
-          bordered={false}
-          options={
-            global.constants.USER_ROLES
-              .filter((r) => !r.hide)
-              .map((r) => ({
-                value: r.value,
-                label: (() => {
-                  const role = common.getUserRole(r.value)
-                  return <div className="h-full">
-                    <Tag color={role.color}>
-                      {t(role?.label)}
-                    </Tag>
-                  </div>
-                })()
-              })
-              )
-          }
+        render: (_, record) => <Role
+          record={record}
+          enterpriseId={enterpriseId}
+          onReload={onReload}
         />
-
       },
       {
         title: t("common.status"),

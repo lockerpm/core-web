@@ -102,7 +102,6 @@ const ACTIVITY_LOG_ACTION = {
 }
 
 const USER_ROLE = {
-  SUPPER_ADMIN: 'supper_admin',
   PRIMARY_ADMIN: 'primary_admin',
   ADMIN: 'admin',
   MEMBER: 'member',
@@ -731,12 +730,6 @@ export default {
     },
   ],
   USER_ROLES: [
-    {
-      value: USER_ROLE.SUPPER_ADMIN,
-      label: 'roles.supper_admin',
-      hide: true,
-      color: 'success'
-    },
     {
       value: USER_ROLE.PRIMARY_ADMIN,
       label: 'roles.primary_admin',

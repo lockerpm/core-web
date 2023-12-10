@@ -59,7 +59,7 @@ const TableData = (props) => {
         align: "left",
         render: (_, record) => (
           <div
-            className='flex items-center'
+            className='flex items-center text-limited'
             dangerouslySetInnerHTML={{ __html: record.description[locale]?.replace('<b', '<b style="margin: 0 4px"') }}
           />
         ),

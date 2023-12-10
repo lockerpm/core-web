@@ -116,7 +116,7 @@ export default {
   ENTERPRISE_GROUP_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/groups/:group_id/members`,
 
   ENTERPRISE_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/members`,
-  ENTERPRISE_MEMBERS_MULTIPLE: `${FLAT_FORM}/enterprises/:enterprise_id/members/multiple`,
+  ENTERPRISE_ADD_MEMBERS: `${FLAT_FORM}/enterprises/:enterprise_id/add_members`,
   ENTERPRISE_MEMBER: `${FLAT_FORM}/enterprises/:enterprise_id/members/:member_id`,
   ENTERPRISE_MEMBER_REINVITE: `${FLAT_FORM}/enterprises/:enterprise_id/members/:member_id/reinvite`,
   ENTERPRISE_MEMBER_ACTIVATED: `${FLAT_FORM}/enterprises/:enterprise_id/members/:member_id/activated`,

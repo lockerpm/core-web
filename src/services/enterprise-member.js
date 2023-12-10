@@ -11,7 +11,7 @@ function list(enterprise_id, params = {}) {
 
 function create_members(enterprise_id, data = {}) {
   return request({
-    url: global.endpoint.ENTERPRISE_MEMBERS_MULTIPLE.replace(":enterprise_id", enterprise_id),
+    url: global.endpoint.ENTERPRISE_ADD_MEMBERS.replace(":enterprise_id", enterprise_id),
     method: "post",
     data,
   })

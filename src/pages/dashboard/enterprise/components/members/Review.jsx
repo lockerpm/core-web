@@ -29,7 +29,7 @@ function FormData(props) {
   const handleDownload = async () => {
     const rows = [
       [t('common.email'), t('auth_pages.password')],
-      ...members.map((m) => [m.username, m.password])
+      ...members.map((m) => [m.email, m.password])
     ]
     common.downloadCSV(rows)
     onClose()
@@ -38,7 +38,7 @@ function FormData(props) {
   return (
     <div className={props.className}>
       <Drawer
-        title={t('enterprise_members.new')}
+        title={t('enterprise_members.add')}
         placement="right"
         closable={!!mailConfig}
         open={visible}
@@ -63,7 +63,7 @@ function FormData(props) {
           </p>
           <p className='mb-4'>
             <Trans
-              i18nKey='enterprise_members.new_member_description'
+              i18nKey='enterprise_members.form.new_member_description'
               values={{
                 mail: t('email_settings.title'),
               }}
@@ -72,7 +72,7 @@ function FormData(props) {
           {
             members.map((m, index) => <div key={index}>
               <TextCopy
-                value={m.username}
+                value={m.email}
               />
               <TextCopy
                 isPassword={true}
