@@ -85,7 +85,7 @@ async function redirect_login() {
   }
 }
 
-async function logout() {
+async function logout(query = {}) {
   if (access_token()) {
     try {
       await request({
@@ -102,7 +102,7 @@ async function logout() {
     await commonServices.service_logout();
   }
   localStorage.removeItem('access_token');
-  global.navigate(global.keys.SIGN_IN);
+  global.navigate(global.keys.SIGN_IN, {}, query);
 }
 
 export default {

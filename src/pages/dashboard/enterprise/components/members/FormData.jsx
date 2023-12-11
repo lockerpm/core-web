@@ -81,7 +81,7 @@ function FormData(props) {
         kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS,
         master_password_hint: '',
         key: encKey[1].encryptedString,
-        master_password_score: passwordStrength.core,
+        master_password_score: passwordStrength.score,
         keys: {
           public_key: keys[0],
           encrypted_private_key: keys[1].encryptedString,
@@ -98,7 +98,7 @@ function FormData(props) {
       await enterpriseMemberServices.create_members(enterpriseId, {
         members
       }).then(() => {
-        onReload();
+        onReload(true);
         fetchWsMembers();
         onClose();
         onReview(members)

@@ -188,7 +188,7 @@ async function register(data) {
 }
 
 async function reset_password(data = {}) {
-  const mewMakeKey = await coreServices.make_key(data.email, data.new_password)
+  const mewMakeKey = await coreServices.make_key(data.username, data.new_password)
   const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
   const encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
   const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])

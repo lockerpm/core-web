@@ -59,7 +59,11 @@ const Lock = () => {
 
   useEffect(() => {
     if (userInfo?.email) {
-      getServiceUser();
+      if (userInfo.is_password_changed) {
+        getServiceUser();
+      } else {
+        global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })
+      }
     }
   }, [userInfo?.email])
 

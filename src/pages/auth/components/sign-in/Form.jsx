@@ -14,6 +14,7 @@ import global from "../../../../config/global";
 import userServices from "../../../../services/user";
 import commonServices from "../../../../services/common";
 import { PairingForm, PasswordlessForm } from "../../../../components";
+import common from "../../../../utils/common";
 
 const SignInForm = (props) => {
   const {
@@ -23,6 +24,9 @@ const SignInForm = (props) => {
     setStep = () => { }
   } = props;
   const { t } = useTranslation();
+
+  const currentPage = common.getRouterByLocation(window.location);
+
   const locale = useSelector((state) => state.system.locale);
   const isDesktop = useSelector((state) => state.system.isDesktop);
   const isConnected = useSelector((state) => state.service.isConnected);
@@ -35,7 +39,7 @@ const SignInForm = (props) => {
 
   useEffect(() => {
     form.setFieldsValue({
-      username: null,
+      username: currentPage?.query?.email,
       password: null
     })
   }, [])
@@ -66,7 +70,7 @@ const SignInForm = (props) => {
     setCallingAPI(true)
     await userServices.users_prelogin({ email: values.username }).then(async (response) => {
       setPreLogin(response)
-      if (!response.is_password_changed) {
+      if (!response.is_password_changed || (response.login_method === 'password' && response.require_passwordless)) {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: values.username })
       } else if (response.sync_all_platforms || response.login_method === 'passwordless') {
         setIsPair((response?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)

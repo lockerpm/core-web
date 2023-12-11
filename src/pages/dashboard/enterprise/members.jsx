@@ -124,7 +124,10 @@ const EnterpriseMembers = (props) => {
     })
   }
 
-  const getMembers = async () => {
+  const getMembers = async (isCreated = false) => {
+    if (isCreated) {
+      setSelectedTab('pending')
+    }
     setLoading(true)
     await enterpriseMemberServices
       .list(enterpriseId, getPayload())
@@ -198,7 +201,10 @@ const EnterpriseMembers = (props) => {
       />
       <MenuTabs
         activeTab={selectedTab}
-        onChange={(v) => setSelectedTab(v)}
+        onChange={(v) => {
+          setSelectedTab(v);
+          global.navigate(currentPage.name, currentPage.params, { tab: v })
+        }}
       />
       <Filter
         params={params}

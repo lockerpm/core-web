@@ -27,6 +27,7 @@
   max-height: 100%;
   overflow: auto;
   padding: var(--default-spacing) var(--page-content-spacing);
+  padding-bottom: 48px;
 }
 
 .welcome-page {
@@ -36,6 +37,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 10vw;
+
   &__bottom-left {
     position: absolute;
     bottom: 0px;
@@ -46,11 +48,13 @@
     background-repeat: no-repeat;
     background-position: left 0px bottom 0px;
   }
+
   &__center {
     background-image: url('../images/welcome-bg-cl.svg');
     background-repeat: no-repeat;
     background-position: left 0px top 0px;
     z-index: 100;
+
     &--left {
       background-color: white;
       border-radius: 8px;
@@ -60,6 +64,7 @@
         linear-gradient(rgba(38, 131, 52, 1), rgba(38, 131, 52, 0), rgba(38, 131, 52, 1)) border-box;
     }
   }
+
   &__top-right {
     position: absolute;
     top: 0px;
@@ -77,20 +82,25 @@
     .ant-steps-item-container {
       .ant-steps-item-content {
         padding-bottom: 24px;
+
         .ant-steps-item-title {
           width: 100%;
           padding-inline-end: 0px !important;
+
           .ant-collapse {
             height: 32px;
+
             .ant-collapse-item {
               height: 100%;
+
               .ant-collapse-header {
                 padding: 0;
                 height: 100%;
                 align-items: center;
               }
+
               .ant-collapse-content {
-                .ant-collapse-content-box{
+                .ant-collapse-content-box {
                   padding: 0;
                 }
               }

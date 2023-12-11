@@ -7,7 +7,10 @@ import { useTranslation } from "react-i18next";
 import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
+
 import userServices from "../../services/user";
+import coreServices from "../../services/core";
+import authServices from "../../services/auth";
 
 import global from "../../config/global";
 import common from "../../utils/common";
@@ -25,6 +28,7 @@ const Authenticate = () => {
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
   const [currentPassword, setCurrentPassword] = useState(null)
+  const [userSession, setUserSession] = useState(null)
 
   const [form] = Form.useForm()
 
@@ -57,9 +61,11 @@ const Authenticate = () => {
     setCallingAPI(true)
     const payload = {
       email: currentPage.query?.email,
+      username: currentPage.query?.email,
       password: values.current_password,
     }
-    await userServices.users_session(payload).then(async () => {
+    await userServices.users_session(payload).then(async (response) => {
+      setUserSession({ ...payload, ...response });
       setCurrentPassword(values.current_password)
       setStep(1)
     }).catch((error) => {
@@ -73,13 +79,29 @@ const Authenticate = () => {
 
   const handleSave = async (data) => {
     setCallingAPI(true);
-    if (currentPage?.query?.token) {
-      await userServices.reset_password({
-        email: preLogin.email,
-        new_password: data.new_password,
-        token: currentPage?.query?.token
-      })
-    } else {
+    try {
+      if (currentPage?.query?.token) {
+        await userServices.reset_password({
+          username: preLogin.email,
+          new_password: data.new_password,
+          token: currentPage?.query?.token
+        })
+        global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email })
+      } else {
+        authServices.update_access_token_type(userSession.token_type)
+        authServices.update_access_token(userSession.access_token);
+        await coreServices.unlock(userSession);
+        await userServices.change_password({
+          username: preLogin.email,
+          password: currentPassword,
+          new_password: data.new_password,
+          login_method: preLogin.login_method
+        })
+        authServices.logout({ email: preLogin.email });
+      }
+      global.pushSuccess(t('notification.success.change_password.changed'))
+    } catch (error) {
+      global.pushError(error)
     }
   }
 
@@ -162,10 +184,7 @@ const Authenticate = () => {
                     !isPair && (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) && <PasswordlessForm
                       changing={callingAPI}
                       userInfo={preLogin}
-                      onConfirm={(password) => handleSave({
-                        email: preLogin.email,
-                        new_password: password
-                      })}
+                      onConfirm={(password) => handleSave({ new_password: password })}
                     />
                   }
                   {
