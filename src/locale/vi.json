@@ -1,1 +1,1230 @@
-{}
+{
+  "common": {
+    "app_name": "Locker Password Manager",
+    "app_title": "Locker",
+    "total": "Tất cả",
+    "status": "Status",
+    "created_time": "Thời gian tạo",
+    "updated_time": "Cập nhật lần cuối",
+    "created_by": "Tạo bởi",
+    "title": "Title",
+    "action": "Hành động",
+    "actions": "Hành động",
+    "type": "Loại",
+    "here": "tại đây",
+    "assignee": "Assignee",
+    "products": "Sản phẩm",
+    "no_data": "Không có dữ liệu",
+    "confirm": "Xác nhận",
+    "confirmed": "Đã xác nhận",
+    "warning": "Cảnh báo",
+    "delete_question": "Bạn có chắc chắn muốn xóa?",
+    "information": "Thông tin",
+    "value": "Giá trị",
+    "error": "Lỗi",
+    "all_time": "Tất cả thời gian",
+    "last_week": "Tuần trước",
+    "last_month": "Tháng trước",
+    "custom_time": "Thời gian tùy chỉnh",
+    "public": "Công khai",
+    "private": "Riêng tư",
+    "language": "Ngôn ngữ",
+    "english": "Tiếng Anh (US)",
+    "vietnamese": "Tiếng Việt (VN)",
+    "count": "Đếm",
+    "search_all": "Tìm kiếm tất cả dữ liệu",
+    "back": "Quay lại",
+    "all": "Tất cả",
+    "all_default": "Tất cả (*)",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "users": "Users",
+    "access_type": "Quyền truy cập",
+    "client": "Client",
+    "location": "Địa điểm",
+    "time": "Thời gian",
+    "ip_address": "Địa chỉ IP",
+    "last_used": "Sử dụng lần cuối",
+    "last_ip_address": "Địa chỉ IP cuối cùng",
+    "read": "Đọc",
+    "write": "Đọc và viết",
+    "items": "Mục",
+    "folders": "Thư mục",
+    "description": "Mô tả",
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động",
+    "role": "Vai trò",
+    "full_name": "Tên",
+    "access_date": "Thời gian truy cập",
+    "email": "Email",
+    "username": "Tên người dùng",
+    "on": "Bật",
+    "off": "Tắt",
+    "no": "No.",
+    "coming_soon": "Sắp có mặt",
+    "results": "Kết quả",
+    "no_file_chosen": "Không có tệp nào được chọn",
+    "name": "Tên",
+    "other": "Khác",
+    "length": "Độ dài",
+    "mr": "Ông",
+    "mrs": "Bà",
+    "ms": "Cô",
+    "dr": "Dr",
+    "detail": "Chi tiết",
+    "selected_items": "{{amount}} mục đã chọn",
+    "member": "Thành viên",
+    "folder": "Thư mục",
+    "or": "hoặc",
+    "item": "Mục",
+    "email_addresses": "Địa chỉ email",
+    "receiver": "Người nhận",
+    "days_number": "{{number}} ngày",
+    "one_day": "1 ngày",
+    "username_or_email": "Email hoặc tên người dùng",
+    "password": "Mật khẩu",
+    "me": "Tôi",
+    "otp_code": "Mã OTP",
+    "successfully": "Thành công",
+    "group": "Nhóm",
+    "password_strength": "Độ mạnh mật khẩu",
+    "number_members": "Số lượng thành viên",
+    "user": "Người dùng",
+    "members": "thành viên",
+    "configuration": "Cấu hình",
+    "characters": "ký tự",
+    "second": "giây",
+    "minute": "phút",
+    "hour": "giờ",
+    "seconds": "giây",
+    "minutes": "phút",
+    "hours": "giờ",
+    "joined_at": "Tham gia vào"
+  },
+  "button": {
+    "add": "Thêm",
+    "edit": "Chỉnh sửa",
+    "create": "Tạo",
+    "update": "Cập nhật",
+    "detail": "Chi tiết",
+    "delete": "Xóa",
+    "next": "Tiếp theo",
+    "back": "Quay lại",
+    "review": "Xem lại",
+    "submit": "Gửi",
+    "reset": "Cài lại",
+    "see_more": "Xem thêm",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "go_back": "Quay lại",
+    "sign_in": "Đăng nhập",
+    "sign_up": "Đăng ký",
+    "activate": "Kích hoạt",
+    "deactivate": "Vô hiệu hóa",
+    "regenerate": "Tái tạo",
+    "import": "Nhập",
+    "export": "Xuất",
+    "download": "Tải xuống",
+    "new_member": "Thành viên mới",
+    "lock": "Khóa",
+    "logout": "Đăng xuất",
+    "save_changes": "Lưu thay đổi",
+    "enable": "Bật",
+    "disable": "Tắt",
+    "verify": "Xác nhận",
+    "send_test": "Thử gửi email",
+    "send": "Gửi",
+    "choose_file": "Chọn tệp",
+    "reinvite": "Mời lại",
+    "select": "Chọn",
+    "continue": "Tiếp theo",
+    "new_item": "Mục mới",
+    "new_folder": "Thư mục mới",
+    "new_share": "Chia sẻ mới",
+    "new_enterprise": "Doanh nghiệp mới",
+    "share": "Chia sẻ",
+    "view": "Xem",
+    "copy_link": "Sao chép liên kết",
+    "ok": "OK",
+    "remove": "Xóa",
+    "close": "Đóng",
+    "confirm": "Xác nhận",
+    "download_desktop_app": "Tải ứng dụng máy tính",
+    "open_desktop_app": "Mở ứng dụng máy tính",
+    "new_user": "Người dùng mới",
+    "new_group": "Nhóm mới",
+    "resend_invitation": "Gửi lại lời mời"
+  },
+  "placeholder": {
+    "name": "Nhập tên",
+    "search": "Nhập thông tin muốn tìm...",
+    "description": "Nhập mô tả",
+    "type": "Chọn loại",
+    "value": "Nhập giá trị",
+    "select": "Chọn",
+    "enter": "Nhập",
+    "ip": "Nhập địa chỉ IP mới",
+    "username": "Nhập email của bạn",
+    "password": "Nhập mật khẩu của bạn",
+    "code": "Hãy điền mã OTP bạn có...",
+    "otp": "Nhập mã 6 số",
+    "text": "Văn bản",
+    "email": "example@gmail.com",
+    "phone": "0123456789",
+    "month_year": "MM/YY",
+    "date": "DD/MM/YYYY",
+    "url": "https://",
+    "field_name": "Tên trường",
+    "wallet_app": "Chọn một ví Blockchain",
+    "networks": "Chọn mạng Blockchain",
+    "select_users": "Nhập email để chọn người dùng"
+  },
+  "validation": {
+    "required": "{{name}} là bắt buộc.",
+    "invalid": "{{name}} không hợp lệ.",
+    "existed": "{{name}} đã tồn tại.",
+    "least_length": "Đảm bảo {{name}} có ít nhất {{ min }} ký tự.",
+    "passwords_not_match": "Mật khẩu bạn nhập không trùng khớp!",
+    "key_existed": "khóa bạn nhập đã tồn tại trên môi trường được chọn"
+  },
+  "notification": {
+    "error": {
+      "title": "Lỗi",
+      "message": {
+        "default": "Đã có lỗi xảy ra, vui lòng thử lại lần sau!",
+        "error_occurred": "Đã có lỗi xảy ra"
+      }
+    },
+    "success": {
+      "title": "Thành công",
+      "copied": "Đã sao chép vào bộ nhớ tạm",
+      "member": {
+        "created": "Thành viên mới đã được thêm.",
+        "updated": "Thông tin thành viên đã được cập nhật.",
+        "deleted": "Thành viên đã được xóa.",
+        "reinvited": "Email mời đã được gửi thành công"
+      },
+      "change_password": {
+        "changed": "Mật khẩu của bạn đã được thay đổi."
+      },
+      "account_details": {
+        "updated": "Thông tin tài khoản đã được cập nhật.",
+        "purged": "Kho dữ liệu đã được xóa!"
+      },
+      "factor2": {
+        "enabled": "Xác thực hai lớp đã được bật",
+        "disabled": "Xác thực hai lớp đã được tắt"
+      },
+      "email_settings": {
+        "updated": "SMTP Email đã được thiết lập.",
+        "reset": "Cài đặt email đã được cài lại.",
+        "send_test": "Gửi thử email thành công."
+      },
+      "cipher": {
+        "created": "Mục mới đã được thêm thành công.",
+        "updated": "Thông tin đã được cập nhật.",
+        "deleted": "Mục đã được chuyển vào thùng rác!.",
+        "permanently_delete": "Mục đã được xóa vĩnh viễn.",
+        "restored": "Mục đã được khôi phục!",
+        "moved": "Mục đã được chuyển vào thư mục thành công!"
+      },
+      "folder": {
+        "created": "Thư mục mới đã được thêm thành công.",
+        "updated": "Thông tin đã được cập nhật.",
+        "deleted": "Thư mục đã được xóa."
+      },
+      "sharing": {
+        "accepted": "Lời mời đã được chấp nhận.",
+        "rejected": "Lời mời bị từ chối.",
+        "leave_group_success": "Rời khỏi nhóm chia sẻ thành công.",
+        "confirm_member_success": "Xác nhận thành viên thành công!",
+        "update_share_success": "Cập nhật chia sẻ thành công!",
+        "share_items_success": "Mục đã được chia sẻ!",
+        "share_item_success": "Mục đã được chia sẻ!",
+        "share_folder_success": "Thư mục đã được chia sẻ!",
+        "stop_share_success": "Dừng chia sẻ thành công.",
+        "shared_to_new_member": "Chia sẻ với thành viên mới thành công!"
+      },
+      "notification": {
+        "updated": "Thông báo về email đã được cập nhật!"
+      },
+      "emergency_access": {
+        "accepted": "Quyền truy cập khẩn cấp đã được chấp nhận.",
+        "removed": "Người dùng {{user}} đã được xóa.",
+        "rejected": "Quyền truy cập khẩn cấp bị từ chối.",
+        "invited": "Mời người dùng thành công.",
+        "reinvited": "{{user}} đã được mời lại",
+        "confirmed": "{{user}} đã xác nhận",
+        "approved": "Quyền truy cập đã được phê duyệt",
+        "takeover_password": "Mật khẩu cho {{user}} đã được cài lại. Giờ bạn có thể đăng nhập bằng mật khẩu mới."
+      },
+      "manage_sessions": {
+        "logout_device": "Đã đăng xuất khỏi thiết bị!",
+        "logout_all_devices": "Đã đăng xuất khỏi tất cả thiết bị."
+      },
+      "import_export": {
+        "exported": "Các mục đã đuộc xuất!"
+      },
+      "quick_share_detail": {
+        "check_mail": "Hãy kiểm tra email của bạn."
+      },
+      "enterprise": {
+        "created": "Doanh nghiệp mới đã được thêm.",
+        "updated": "Thông tin doanh nghiệp đã được cập nhật.",
+        "deleted": "Doanh nghiệp đã được xóa."
+      },
+      "enterprise_members": {
+        "created": "Thành viên mới đã được thêm.",
+        "updated": "Thông tin thành viên đã được cập nhật.",
+        "deleted": "Thành viên đã được xóa.",
+        "reinvited": "Email mời đã được gửi thành công"
+      },
+      "enterprise_groups": {
+        "created": "Nhóm mới đã được thêm.",
+        "updated": "Thông tin nhóm đã được cập nhật.",
+        "deleted": "Nhóm đã được xóa.",
+        "users_updated": "Thành viên của nhóm đã được cập nhật."
+      },
+      "policy": {
+        "updated": "Chính sách đã được thay đổi."
+      }
+    },
+    "warning": {
+      "title": "Cảnh báo"
+    }
+  },
+  "sidebar": {
+    "account_setting": "Cài đặt",
+    "lock_your_account": "Khóa tài khoản",
+    "logout": "Đăng xuất",
+    "your_account": "Tài khoản của tôi",
+    "locker_help_center": "Trung tâm trợ giúp",
+    "locker_community_forum": "Diễn đàn cộng đồng Locker",
+    "status_page": "Trang trạng thái",
+    "terms_policy": "Điều khoản & Chính sách",
+    "inventory": "Kho",
+    "all": "Tất cả",
+    "passwords": "Mật khẩu",
+    "notes": "Ghi chú",
+    "cards": "Thẻ",
+    "crypto_backups": "Ví crypto",
+    "identities": "Định danh",
+    "folders": "Thư mục",
+    "authenticator": "Ứng dụng xác thực",
+    "security_tools": "Công cụ bảo mật",
+    "shares": "Chia sẻ",
+    "trash": "Thùng rác",
+    "settings": "Cài đặt",
+    "account": "Tài khoảnn",
+    "import_export": "Nhập/Xuất dữ liệu",
+    "security": "Bảo mật",
+    "notifications": "Thông báo",
+    "shared_with_me": "Chia sẻ với tôi",
+    "my_shared_items": "Mục chia sẻ của tôi",
+    "enterprise": "Quản lý doanh nghiệp",
+    "enterprises": "Doanh nghiệp",
+    "email_settings": "Cài đặt Email",
+    "sso_configuration": "Cấu hình SSO",
+    "enterprise_dashboard": "Trang quản lý doanh nghiệp",
+    "enterprise_members": "Thành viên",
+    "enterprise_groups": "Nhóm",
+    "enterprise_policies": "Chính sách",
+    "enterprise_activity_logs": "Nhật ký hoạt động"
+  },
+  "auth_pages": {
+    "username": "Email",
+    "password": "Mật khẩu",
+    "otp": "Mã OTP",
+    "confirm_password": "Xác nhận mật khẩu",
+    "password_hint": "Gợi ý mật khẩu",
+    "sign_in": {
+      "title": "Chào mừng quay lại!",
+      "label": "Đăng nhập",
+      "note": "Chưa có tài khoản?",
+      "single_sign_on": "Single Sign-On"
+    },
+    "sign_up": {
+      "title": "Tạo tài khoản",
+      "label": "Đăng ký",
+      "note": "Đã có tài khoản?"
+    },
+    "otp_code": {
+      "title": "Nhập mã xác thực",
+      "description": "Nhập mã 6 chữ số được gửi tới thiết bị xác thực của bạn",
+      "remember_device": "Nhớ thiết bị này",
+      "sign_in_account": "Đăng nhập vào tài khoản",
+      "verify_identity": "Xác thực danh tính"
+    },
+    "authenticate": {
+      "title": "Thiết lập lại mật khẩu",
+      "description": "Vui lòng tạo mật khẩu mới thay cho mật khẩu tạm thời.",
+      "note": "Đã có tài khoản?"
+    }
+  },
+  "error_pages": {
+    "admin_error": {
+      "title": "Đã có lỗi xảy ra.",
+      "description": "Chúng tôi gặp phải sự cố và không thể tiếp tục. Bạn có thể hỏi quản trị viên của mình hoặc thử lại sau."
+    },
+    "permission": {
+      "title": "Tài khoản của bạn không có quyền thực hiện chức năng này",
+      "login_other_account": "Đăng nhập vào tài khoản khác"
+    },
+    "page_not_found": {
+      "title": "Page not found",
+      "go_back_dashboard": "Quay lại trang"
+    }
+  },
+  "roles": {
+    "supper_admin": "Quản trị viên cấp cao",
+    "primary_admin": "Quản trị viên chính",
+    "admin": "Quản trị viên",
+    "member": "Thành viên"
+  },
+  "statuses": {
+    "confirmed": "Đã xác nhận",
+    "invited": "Đã mời",
+    "accepted": "Đã chấp nhận",
+    "created": "Đã tạo",
+    "expired": "Đã hết hạn",
+    "accessed": "Đã truy cập",
+    "shared": "Đã chia sẻ",
+    "rejected": "Bị từ chối",
+    "pending": "Đang chờ",
+    "requested": "Đã yêu cầu",
+    "recovery_initiated": "Yêu cầu đã được tạo",
+    "recovery_approved": "Yêu cầu đã được duyệt"
+  },
+  "permissions": {
+    "editable": "Chỉnh sửa",
+    "viewable": "Xem",
+    "only_use": "Chỉ sử dụng"
+  },
+  "sort_options": {
+    "sort_by": "Sort by",
+    "name_ascending": "Tên tăng dần",
+    "name_descending": "Tên giảm dần",
+    "time_ascending": "Thời gian tăng dần",
+    "time_descending": "Thời gian giảm dần"
+  },
+  "notice": {
+    "emergency_access_invitations": {
+      "title": "Bạn có lời mời trở thành liên hệ khẩn cấp",
+      "description": "Bạn được mời trở thành liên hệ khẩn cấp của {{owner}}.",
+      "access_type": "Quyền truy cập: {{type}}"
+    }
+  },
+  "password_confirm": {
+    "confirm_note": "Nhập mật khẩu để xác nhận"
+  },
+  "passwordless": {
+    "confirm_pairing": "Xác nhận ghép đôi",
+    "pairing_required": "Cần phải ghép nối ứng dụng máy tính. Hãy xác nhận mã bên dưới trên ứng dụng máy tính.",
+    "confirm_code": "Xác nhận nếu mã bên dưới trùng khớp với mã trên trình duyệt.",
+    "reset_code": "Lấy mã mới",
+    "repair": "Sửa chữa",
+    "open_desktop": "Vui lòng mở ứng dụng máy tính.",
+    "install_desktop": "Vui lòng cài đặt ứng dụng máy tính.",
+    "connect_key": "Kết nối khóa bảo mật bạn muốn thêm với máy tính.",
+    "no_key_found": "Không tìm thấy khóa nào",
+    "scan_fingerprint": "Quét vân tay của bạn",
+    "enter_key_pin": "Nhập PIN của khóa bảo mật",
+    "touch_key": "Chạm vào khóa bảo mật của bạn",
+    "reload_devices": "Tải lại danh sách thiết bị",
+    "choose_a_key": "Chọn một khóa để xác thực bạn",
+    "new_password": "Nhập mật khẩu mới",
+    "connect_key_to_login": "Tài khoản này yêu cầu đăng nhập không mật khẩu. Kết nối với một khóa bảo mật để thiết lập đăng nhập không mật khẩu.",
+    "errors": {
+      "0000": "Lỗi không xác định",
+      "1000": "Lỗi API",
+      "1001": "Không thể tìm thấy API token",
+      "1002": "Đăng nhập không mật khẩu không được bật",
+      "2001": "Không thế kết nối với phương thức xác thực nhanh",
+      "2002": "Không thể tạo mã xác thực nhanh, khoá bí mật trả về rỗng",
+      "2003": "Mã PIN không hợp lệ",
+      "2004": "Không tìm thấy bên phụ thuộc",
+      "2005": "Không thể tìm thấy mã xác thực hợp lệ trong khoá này",
+      "2006": "Không thể tìm thấy mã xác thực yêu cầu trong khoá này",
+      "2007": "Không thể dùng quét vân tay, vui lòng sử dụng mã PIN",
+      "2008": "PIN validation failed to many times, key is blocked",
+      "2009": "Không thể xác thực vân tay",
+      "3001": "Khách hàng chưa được xác thực.",
+      "3002": "Không có khoá.",
+      "3003": "Không thể mã hoá dữ liệu",
+      "3004": "Không thể giải mã dữ liệu",
+      "3005": "Ứng dụng máy tính chưa được kết nối",
+      "3006": "Ứng dụng máy tính chưa được xác thực",
+      "4001": "Không tìm thấy khách hàng",
+      "4002": "Không thể gửi tin nhắn bảo mật",
+      "5001": "Chương trình chạy ngầm chưa được kết nối",
+      "5002": "Chương trình chạy ngầm không thể giải mã yêu cầu"
+    }
+  },
+  "change_password": {
+    "title": "Đổi mật khẩu",
+    "subtitle": "Nhập mật khẩu hiện tại của bạn.",
+    "your_password": "Mật khẩu của bạn",
+    "current_password": "Mật khẩu hiện tại",
+    "new_password": "Mật khẩu mới",
+    "confirm_new_password": "Nhập lại mật khẩu mới"
+  },
+  "account_details": {
+    "title": "Thông tin tài khoản",
+    "description": "Quản lý chi tiết hồ sơ, tùy chọn tài khoản, bảo mật và quyền riêng tư của tài khoản.",
+    "personal_info": "Thông tin cá nhân",
+    "profile_photo": "Ảnh cá nhân",
+    "preferences": {
+      "title": "Cấu hình chung",
+      "language": "Ngôn ngữ",
+      "timeout": "Hết thời gian",
+      "timeout_desc": "Tự động khóa ứng dụng sau một khoảng thời gian không hoạt động.",
+      "timeout_action": "Hành động",
+      "timeout_action_lock_desc": "Khi khóa, bạn sẽ được yêu cầu nhập Master Password để truy cập lại.",
+      "timeout_action_logout_desc": "Khi đăng xuất, bạn cần đăng nhập lại tài khoản Locker và Master Password để truy cập lại."
+    },
+    "danger_zone": {
+      "title": "Khu vực nguy hiểm",
+      "delete_data": "Xóa dữ liệu",
+      "delete_data_desc": "Xoá toàn bộ dữ liệu tài khoản Locker của bạn. Tài khoản Locker vẫn hoạt động bình thường.",
+      "delete_account": "Xóa tài khoản",
+      "delete_account_desc": "Xoá vĩnh viễn tài khoản Locker của bạn.",
+      "delete_all_account_items": "Xóa tất cả dữ liệu tài khoản."
+    }
+  },
+  "security_control": {
+    "title": "Bảo mật",
+    "description": "Kiểm soát bảo mật và sự riêng tư cho tài khoản."
+  },
+  "email_notifications": {
+    "title": "Thông báo email"
+  },
+  "generate_password": {
+    "title": "Tạo mật khẩu mạnh",
+    "fill_password": "Điền mật khẩu",
+    "copy_password": "Sao chép mật khẩu",
+    "show_options": "Tùy chọn",
+    "options": {
+      "uppercase": "Sử dụng chữ in hoa (A-Z)",
+      "lowercase": "Sử dụng chữ in thường (a-z)",
+      "digits": "Sử dụng số (0-9)",
+      "symbols": "Sử dụng ký tự đặc biệt (@!$%*)",
+      "ambiguous": "Tránh ký tự dễ nhầm lẫn"
+    },
+    "status": {
+      "very_weak": "Rất yếu",
+      "weak": "Yếu",
+      "medium": "Trung bình",
+      "good": "Tốt",
+      "strong": "Mạnh"
+    }
+  },
+  "drag_upload": {
+    "action": "Bấm hoặc kéo",
+    "description": "tệp vào khu vực này để tải lên",
+    "note": "SVG, PNG, JPG hoặc GIF (max. 800x400px)",
+    "invalid": "Không hợp lệ! Định dạng tập tin là {{type}}",
+    "large": "Kích thước tệp quá lớn! Vui lòng chọn tệp có kích thước 800x400px",
+    "content_invalid": "Nội dung tệp không hợp lệ."
+  },
+  "lock": {
+    "title": "Đăng nhập vào tài khoản của bạn",
+    "description": "Nhập mật khẩu",
+    "password": "Mật khẩu",
+    "master_password_hint": "Nhận gợi ý mật khẩu",
+    "unlock": "Mở khóa",
+    "connect_key": "Kết nối với khóa bảo mật của bạn",
+    "cross_platform_sync_enable": "Your account enabled Cross-platform sync"
+  },
+  "inventory": {
+    "all_items": "Tất cả mục",
+    "all_folders": "Tất cả thư mục",
+    "shared": "Chia sẻ trong Locker",
+    "vault": {
+      "title": "Hãy bắt đầu!",
+      "description": "Thêm mục đầu tiên của bạn. Bạn sẽ tìm thấy mục ở đây bất cứ khi nào bạn cần.",
+      "add": "Thêm mục",
+      "edit": "Chỉnh sửa mục"
+    },
+    "identity": {
+      "title": "Điền vào các biểu mẫu nhanh hơn",
+      "description": "Thêm thẻ định danh để Locker giúp bạn điền nhanh hơn.",
+      "add": "Thêm thẻ định danh",
+      "edit": "Chỉnh sửa định danh"
+    },
+    "crypto_backup": {
+      "title": "Thêm sao lưu ví crypto đầu tiên của bạn",
+      "description": "Giữ tài khoản hoặc ví crypto của bạn ở một nơi an toàn.",
+      "add": "Thêm ví crypto",
+      "edit": "Chỉnh sửa ví crypto"
+    },
+    "card": {
+      "title": "Đơn giản hóa việc mua sắm trực tuyến",
+      "description": "Thêm thẻ thanh toán để tự động điền thông tin mỗi khi thanh toán.",
+      "add": "Thêm thẻ thanh toán",
+      "edit": "Chỉnh sửa thẻ"
+    },
+    "note": {
+      "title": "Giải phóng bộ nhớ của bạn",
+      "description": "Lưu mật khẩu Wi-Fi, mã báo động an ninh văn phòng hoặc sinh nhật của bạn bè...",
+      "add": "Thêm ghi chú",
+      "edit": "Chỉnh sửa ghi chú"
+    },
+    "password": {
+      "title": "Hãy bắt đầu!",
+      "description": "Thêm mật khẩu và truy cập mọi lúc, mọi nơi.",
+      "add": "Thêm mật khẩu",
+      "edit": "Chỉnh sửa mật khẩu"
+    },
+    "authenticator": {
+      "title": "Bảo vệ các tài khoản trực tuyến",
+      "description": "Thêm lớp bảo mật bổ sung cho tài khoản trực tuyến của bạn bằng cách thiết lập xác thực hai yếu tố với Locker.",
+      "add": "Thiết lập 2FA",
+      "edit": "Chỉnh sửa OTP"
+    },
+    "folders": {
+      "title": "Tạo thư mục đầu tiên",
+      "description": "Tạo một thư mục để sắp xếp các mục của bạn.",
+      "add": "Tạo thư mục",
+      "edit": "Đổi tên thư mục"
+    },
+    "trash": {
+      "title": "Không có mục nào.",
+      "description": "Tất cả các mục được chuyển vào Thùng rác đều có thể được khôi phục cho đến khi bạn xóa chúng vĩnh viễn."
+    },
+    "actions": {
+      "go_to_web": "Đi tới trang",
+      "copy_username": "Sao chép email/tên người dùng",
+      "copy_password": "Sau chép mật khẩu",
+      "copy_totp": "Sao chép OTP",
+      "copy_note": "Sao chép ghi chú",
+      "copy_seed_phrase": "Sao chép chuỗi khôi phục",
+      "copy_wallet_address": "Sao chép địa chỉ ví",
+      "copy_private_key": "Sao chép khóa bí mật",
+      "copy_password_pin": "Sao chép mật khẩu/PIN",
+      "edit": "Chỉnh sửa",
+      "clone": "Nhân bản",
+      "move_to_folder": "Chuyển vào thư mục",
+      "stop_sharing": "Dừng chia sẻ",
+      "restore": "Khôi phục",
+      "permanently_delete": "Xóa vĩnh viễn",
+      "delete": "Xóa",
+      "share": "Chia sẻ",
+      "leave": "Rời chia sẻ",
+      "accept": "Chấp nhận",
+      "decline": "Từ chối",
+      "copy_link": "Sao chép liên kết"
+    },
+    "move_to": {
+      "title": "Chuyển tới",
+      "description": "Chọn thư mục mà bạn muốn thêm {{amount}} mục đã chọn."
+    }
+  },
+  "cipher": {
+    "type": "Loại mục",
+    "item_name": "Tên mục",
+    "others": "Khác",
+    "notes": "Ghi chú",
+    "select_folder": "Chọn một thư mục",
+    "folder_name": "Tên thư mục",
+    "no_folder": "Không có thư mục nào",
+    "add_folder": "Thêm thư mục",
+    "delete_question": "Bạn thực sự muốn chuyển mục vào thùng rác? Mục này sẽ bị xóa vĩnh viễn sau 30 ngày.",
+    "restore_question": "Bạn có chắc sẽ khôi phục mục này?",
+    "permanently_delete_question": "Bạn có chắc sẽ xóa mục này vĩnh viễn?",
+    "types": {
+      "password": "Mật khẩu",
+      "note": "Ghi chú",
+      "card": "Thẻ",
+      "crypto_backup": "Ví crypto",
+      "identity": "Danh tính",
+      "master_password": "Mật khẩu",
+      "otp": "OTP"
+    },
+    "custom_fields": {
+      "title": "Trường tùy chỉnh",
+      "new": "Trường tùy chỉnh mới",
+      "text": "Văn bản",
+      "hidden_field": "Trường ẩn",
+      "url": "URL",
+      "email": "Email",
+      "date": "Ngày",
+      "month_year": "Tháng / Năm",
+      "phone": "Điện thoại"
+    },
+    "password": {
+      "title": "Thông tin đăng nhập",
+      "username": "Email/Tên đăng nhập",
+      "password": "Mật khẩu",
+      "website": "Địa chỉ website",
+      "setup_otp": "Thiết lập 2FA",
+      "totp": "TOTP",
+      "no_otp": "Không có OTP",
+      "new_otp": "Thêm mới OTP",
+      "existing_otp": "Thiết lập từ OTP có sẵn",
+      "secret_key": "Mã cài đặt hoặc đường dẫn",
+      "select_otp": "Chọn một OTP"
+    },
+    "card": {
+      "title": "Thông tin thẻ",
+      "cardholder_name": "Tên chủ thẻ",
+      "brand": "Nhãn hiệu",
+      "card_number": "Số thẻ",
+      "expiration_month": "Tháng hết hạn",
+      "expiration_year": "Năm hết hạn",
+      "security_code": "Mã bảo mật (CVV)"
+    },
+    "crypto_backup": {
+      "title": "Thông tin ví",
+      "wallet_app": "Ví Blockchain",
+      "username": "Tên người dùng",
+      "password": "Mật khẩu",
+      "pin": "PIN",
+      "wallet_address": "Địa chỉ ví",
+      "private_key": "Khóa bí mật",
+      "seed_phrase": "Chuỗi khôi phục",
+      "networks": "Mạng Blockchain"
+    },
+    "identity": {
+      "personal_title": "Thông tin cá nhân",
+      "title": "Tiêu đề",
+      "first_name": "Tên",
+      "last_name": "Họ",
+      "username": "Tên người dùng",
+      "company": "Công ty",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "social_security_number": "Số an sinh xã hội",
+      "passport_number": "Số hộ chiếu",
+      "license_number": "Số giấy phép lái xe",
+      "contact_title": "Thông tin liên hệ",
+      "address1": "Địa chỉ 1",
+      "address2": "Địa chỉ 2",
+      "city_town": "Thành phố / Thị trấn",
+      "state_province": "Quận / Tỉnh",
+      "zip_postal": "Mã bưu chính",
+      "country": "Quốc gia"
+    },
+    "otp": {
+      "name": "OTP",
+      "secret_key": "Khóa bí mật"
+    }
+  },
+  "shares": {
+    "encrypted_content": "Nội dung mã hóa",
+    "share_type": "Quyền",
+    "share_items": "Chia sẻ mục",
+    "share_item": "Chia sẻ mục",
+    "share_folder": "Chia sẻ thư mục",
+    "leave_question": "Bạn có chắc muốn rời khỏi nhóm chia sẻ này?",
+    "shared_with": "Chia sẻ với",
+    "in_app_shares": {
+      "items": "Mục chia sẻ trong Locker",
+      "folders": "Thư mục chia sẻ trong Locker",
+      "quick_shares": "Mục chia sẻ nhanh"
+    },
+    "no_data": {
+      "title": "Không có mục nào để hiển thị.",
+      "description": "Các mục chia sẻ giữa bạn và người khác sẽ xuất hiện ở đây.",
+      "quick_share_description": "Gửi bản sao chép của mục tới bất kỳ ai qua liên kết, kể cả người không dùng Locker.",
+      "add": "Chia sẻ mới"
+    },
+    "quick_shares": {
+      "sharing_time": "Thời gian chia sẻ",
+      "views": "Lượt hiển thị",
+      "expiration": "Hết hạn",
+      "anyone": "Bất kỳ ai",
+      "nobody": "Không ai",
+      "choose_an_item": "Chọn một mục",
+      "share_with": "Chia sẻ với",
+      "anyone_with_the_link": "Bất kỳ ai có liên kết",
+      "only_invited_people": "Chỉ người được mời",
+      "link_expires_after": "Liên kết hết hạn sau",
+      "unlimited_access": "Không giới hạn lượt hiển thị",
+      "times_access": "Lượt hiển thị",
+      "get_link_to_share": "Nhận liên kết chia sẻ",
+      "email_addresses_share": "Nhập email của người bạn muốn chia sẻ",
+      "email_addresses_share_note": "Người được mời cần xác nhận lại email để xem được mục này.",
+      "expiration_description": "Mục sẽ hết hạn vào {{time}}",
+      "expire_options": {
+        "an_hour": "một giờ",
+        "a_day": "một ngày",
+        "a_week": "một tuần",
+        "14_days": "14 ngày",
+        "a_month": "một tháng",
+        "no_expiration": "Không hết hạn"
+      }
+    },
+    "new_share": {
+      "choose_option": "Chọn cách chia sẻ",
+      "in_app_share_items": "Chia sẻ mục nội bộ",
+      "in_app_share_items_note": "Chia sẻ với người dùng hoặc nhóm người dùng Locker. Họ có thể xem hoặc chỉnh sửa mục của bạn.",
+      "in_app_share_folder": "Chia sẻ thư mục nội bộ",
+      "in_app_share_folder_note": "Chia sẻ với người dùng hoặc nhóm người dùng Locker. Họ có thể xem hoặc chỉnh sửa thư mục của bạn.",
+      "quick_shares": "Chia sẻ nhanh",
+      "get_shareable_link": "Nhận liên kết chia sẻ",
+      "get_shareable_link_note": "GỬi liên kết tới mục của bạn cho bất kỳ ai, kể cả người không dùng Locker. Họ có thể xem mục của bạn.",
+      "choose_items": "Chọn mục",
+      "choose_items_note": "Bạn có thể chọn nhiều mục.",
+      "personal_email_or_group": "Email cá nhân hoặc tên nhóm",
+      "search_inventory": "Tìm trong kho lưu trữ",
+      "personal_email_or_group_placeholder": "Nhập email hoặc tên nhóm để tìm",
+      "choose_folder": "Chọn thư mục",
+      "search_folder": "Tìm thư mục",
+      "personal_email": "Email cá nhân",
+      "personal_email_placeholder": "Nhập email để tìm kiếm"
+    }
+  },
+  "import_export": {
+    "title": "Nhập/Xuất dữ liệu",
+    "description": "Di chuyển dữ liệu vào hoặc ra khỏi Locker.",
+    "import": "Nhập dữ liệu",
+    "file_content": "Nội dung tệp",
+    "import_description": "Di chuyển dữ liệu từ trình duyệt hoặc phần mềm khác sang Locker.",
+    "export": "Xuất dữ liệu",
+    "export_description": "Nhập mật khẩu để xuất dữ liệu.",
+    "choose_format": "Chọn định dạng tệp:",
+    "upload_file": "Tải lên một tệp từ máy tính của bạn",
+    "confirm": "{{type}}",
+    "popular": "Phổ biến",
+    "others": "Khác",
+    "copy_paste_file_contents": "hoặc sao chép/dán nội dung tệp dữ liệu",
+    "instructions": "Hướng dẫn {{name}}",
+    "select_appropriate_file": "Hãy chọn định dạng phù hợp",
+    "incorrect_format": "Dữ liệu không đúng định dạng",
+    "import_failed": "Nhập dữ liệu thất bại",
+    "no_data": "Không có dữ liệu",
+    "import_success": "Đã nhập {{foldersCount}} thư mục, {{ciphersCount}}/{{total}} mục"
+  },
+  "instructions": {
+    "see_details": "Xem hướng dẫn chi tiết trên trang trợ giúp của chúng tôi tại: https://support.locker.io/vi/locker-password-manager/get-started/import-and-export"
+  },
+  "timeouts": {
+    "one_minute": "1 phút",
+    "five_minutes": "5 phút",
+    "fifteen_minutes": "15 phút",
+    "thirty_minutes": "30 phút",
+    "one_hour": "1 giờ",
+    "four_hours": "4 giờ",
+    "two_weeks": "2 tuần",
+    "on_refresh": "Khi tải lại trình duyệt"
+  },
+  "security": {
+    "change_password": {
+      "title": "Mật khẩu",
+      "description": "Tất cả các tài khoản Locker đều được bảo vệ bằng mã hóa AES-256 và công nghệ Zero Knowledge để bảo mật và quyền riêng tư tốt hơn, bất kể gói tài khoản là gì."
+    },
+    "passwordless": {
+      "title": "Đăng nhập không mật khẩu",
+      "description": "Sử dụng khóa bảo mật chuẩn FIDO2 để đăng nhập thay cho mật khẩu. Yêu cầu cài đặt ứng dụng máy tính.",
+      "turn_on": "Bật đăng nhập không mật khẩu",
+      "turn_off": "Tắt đăng nhập không mật khẩu",
+      "security_keys_added": "Khóa bảo mật đã được thêm",
+      "add_new_key": "Thêm khóa mới",
+      "require_passwordless": "Đăng nhập không mật khẩu được yêu cầu luôn bật trong doanh nghiệp và không thể bị tắt."
+    },
+    "mobile_passwordless": {
+      "title": "Đăng nhập không mật khẩu vào điện thoại",
+      "description": "Quét mã QR để đăng nhập vào ứng dụng di động khi đăng nhập không mật khẩu được bật.",
+      "action": "Quét mã QR",
+      "enter_code": "Nhập mã xác thực",
+      "code": "Mã OTP",
+      "point_phone": "Hãy quét mã QR bằng ứng dụng Locker trên điện thoại của bạn.",
+      "expire_in": "Mã QR hết hạn trong: {{expireCountdown}}s",
+      "expired": "Mã QR đã hết hạn",
+      "passwordless_disabled": "Đăng nhập không mật khẩu đã bị tắt"
+    },
+    "cross_platform_sync": {
+      "title": "Đồng bộ đa nền tảng",
+      "description": "Cho phép đồng bộ đăng nhập vào trình duyệt web, tiện ích mở rộng và ứng dụng máy tính ở trên cùng một thiết bị. Yêu cầu cài đặt ứng dụng máy tính.",
+      "turn_on": "Bật đồng bộ",
+      "turn_off": "Tắt đồng bộ",
+      "question": "Bạn có chắc muốn {{action}}?"
+    },
+    "two_fa": {
+      "title": "Xác thực hai lớp (2FA)",
+      "description": "Tăng cường bảo mật bằng cách thiết lập 2FA cho tài khoản Locker của bạn.",
+      "turn_on": "Bật xác thực",
+      "turn_off": "Tắt xác thực",
+      "setup_on": "Xác thực hai lớp là",
+      "your_second_step": "Bước đăng nhập thứ hai của bạn",
+      "your_second_step_description": "Sau khi nhập mật khẩu, bạn sẽ được yêu cầu nhập mã xác thực để đăng nhập vào tài khoản Locker.",
+      "email_otp": {
+        "name": "Email xác thực",
+        "description": "Chúng tôi sẽ yêu cầu mã bảo mật nếu phát hiện đăng nhập từ một thiết bị bất thường.",
+        "send_code": "Gửi mã tới email",
+        "have_code": "Tôi có một mã",
+        "enter_code": "Nhập mã xác thực ở đây",
+        "sent_to": "Một email đã được gửi tới địa chỉ {{email}}"
+      },
+      "smart_otp": {
+        "description": "Giữ tài khoản của bạn thêm bảo mật với một bước đăng nhập bổ sung.",
+        "name": "Ứng dụng xác thực",
+        "name_description": "Giữ tài khoản của bạn thêm bảo mật với một bước đăng nhập bổ sung.",
+        "enter_code": "Nhập mã xác thực trong ứng dụng vào ô dưới đây.",
+        "step1": {
+          "title": "Tải Trình quản lý mật khẩu Locker",
+          "description": "Tải Trình quản lý mật khẩu Locker trên di động hoặc máy tính, hoặc tải tiện ích mở rộng của Locker."
+        },
+        "step2": {
+          "title": "Ghi lại mã dưới đây",
+          "description": "Ghi lại mã dưới đây <key>{{key}}</key> trên giấy, hoặc lưu trữ cẩn thận trong Locker. Bạn sẽ dùng mã này để lấy lại mã nếu bạn mất mã cũ."
+        },
+        "step3": {
+          "title": "Quét mã QR dưới đây.",
+          "description": "Mở ứng dụng Locker Password Manager, vào mục OTP và quét mã QR dưới đây."
+        },
+        "step4": {
+          "title": "Nhập mã OTP",
+          "description": "Nhập mã OTP được tạo ra trên ứng dụng Locker vào ô bên dưới."
+        }
+      }
+    },
+    "emergency_access": {
+      "title": "Truy cập khẩn cấp",
+      "description": "Tính năng này cấp cho phép chủ sở hữu tài khoản Locker khác khả năng truy cập vào kho dữ liệu của bạn trong một số tình huống khẩn cấp.",
+      "add": "Thêm liên hệ",
+      "your_trusted_contacts": "Liên hệ đáng tin cậy",
+      "contacts_that_trusted_you": "Liên hệ đã thêm bạn",
+      "pending_requests": "{{number}} yêu cầu đang chờ",
+      "grantor_recovery_initiated_info": "Người dùng sẽ được tự động cấp quyền truy cập sau {{day}} ngày hoặc khi bạn chấp nhận quyền truy cập.",
+      "grantee_recovery_initiated_info": "Bạn sẽ được tự động cấp quyền truy cập sau {{day}} ngày hoặc khi người dùng chấp nhận quyền truy cập.",
+      "approve_question": "Bạn có chắc chắn muốn phê duyệt quyền truy cập khẩn cấp? Điều này sẽ cho phép {{user}} {{type}} tài khoản của bạn.",
+      "delete_question": "Bạn có chắc muốn xóa liên hệ khẩn cấp này?",
+      "initiate_question": "Bạn có chắc chắn muốn yêu cầu quyền truy cập? Bạn sẽ được cấp quyền truy cập sau {{day}} ngày hoặc bất cứ khi nào người dùng phê duyệt yêu cầu theo cách thủ công.",
+      "actions": {
+        "accept": "Chấp nhận",
+        "request_access": "Yêu cầu truy cập",
+        "view": "Xem",
+        "reset_their_lp": "Đặt lại mật khẩu",
+        "reinvite": "Gửi lại lời mời",
+        "reject": "Từ chối",
+        "approve": "Phê duyệt"
+      },
+      "emergency_contact": {
+        "invite": "Mời liên hệ khẩn cấp",
+        "user_access": "Quyền truy cập",
+        "view": "Xem",
+        "view_description": "Họ có thể xem tất cả mục trong kho dữ liệu của bạn.",
+        "takeover": "Chiếm quyền",
+        "takeover_description": "Họ có thể đặt lại mật khẩu của bạn.",
+        "wait_time": "Thời gian chờ",
+        "wait_time_description": "Thời gian chờ bắt buộc trước khi tự động cấp quyền truy cập."
+      },
+      "takeover": {
+        "title": "Chiếm quyền",
+        "new_id_password": "Mật khẩu Locker ID mới",
+        "re_new_id_password": "Nhập lại mật khẩu Locker ID mới",
+        "new_master_password": "Mật khẩu mới",
+        "re_new_master_password": "Nhập lại mật khẩu mới"
+      }
+    },
+    "manage_sessions": {
+      "title": "Quản lý phiên đăng nhập",
+      "description": "",
+      "logout": "Đăng xuất khỏi tất cả thiết bị",
+      "log_out_of": "Đăng xuất khỏi thiết bị {{device_name}}",
+      "log_out_of_description": "Thao tác này sẽ xóa quyền truy cập vào Tài khoản Locker của bạn khỏi thiết bị này. Nhập mật khẩu để xác nhận.",
+      "log_out_all": "Hủy toàn bộ phiên đăng nhập",
+      "log_out_all_description": "Bạn lo lắng rằng tài khoản của mình đã được đăng nhập trên một thiết bị khác? Thực hiện bên dưới để hủy cấp phép tất cả các máy tính hoặc thiết bị mà bạn đã sử dụng trước đó. Bước bảo mật này được khuyến nghị nếu trước đây bạn đã sử dụng máy tính công cộng hoặc vô tình lưu mật khẩu của mình trên một thiết bị không phải của bạn.",
+      "log_out_all_note": "Quá trình này cũng sẽ đăng xuất bạn khỏi phiên hiện tại, yêu cầu bạn đăng nhập lại."
+    }
+  },
+  "emergency_access_view": {
+    "title": "Xem truy cập khẩn cấp",
+    "description": "Tạo bởi: {{owner}}",
+    "view_item": "Xem mục"
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "mark_all_as_read": "Đánh dấu là đã đọc",
+    "no_notifications": "Không có thông báo mới",
+    "item_no_longer_shared": "Mục này đã bị dừng chia sẻ"
+  },
+  "security_tools": {
+    "title": "Công cụ bảo mật",
+    "description": "Các công cụ nâng cao bảo mật cho dữ liệu của bạn",
+    "password_generate": {
+      "title": "Tạo mật khẩu mạnh",
+      "description": "Tạo một mật khẩu mạnh và ngẫu nhiên cho tài khoản của bạn."
+    },
+    "password_health": {
+      "title": "Sức khỏe mật khẩu",
+      "description": "Xác định các mật khẩu yếu, trùng lặp có thể khiến bạn bị tấn công bởi tội phạm mạng.",
+      "exposed_time": "Exposed Time(s)",
+      "exposed_time_count": "Bị lộ {{count}} lần",
+      "good_news": "Tin tốt",
+      "good_news_details": "Tất cả các mục trong kho dữ liệu của bạn đều có mật khẩu mạnh",
+      "used_time_count": "Sử dụng lại {{count}} lần",
+      "weak_passwords": {
+        "title": "Mật khẩu yếu",
+        "description": "Dễ đoán",
+        "alert_title": "Tìm thấy mật khẩu yếu",
+        "alert_description": "Chúng tôi tìm thấy {{count}} mật khẩu chưa dủ mạnh. Bạn nên sử dụng mật khẩu mạnh hơn."
+      },
+      "reused_passwords": {
+        "title": "Mật khẩu sử dụng lại",
+        "description": "Được sử dụng cho nhiều tài khoản",
+        "alert_title": "Tìm thấy mật khẩu được sử dụng lại",
+        "alert_description": "Chúng tôi tìm thấy {{count}} mật khẩu được sử dụng lại trong kho của bạn. Bạn nên đổi lại chúng."
+      },
+      "exposed_passwords": {
+        "title": "Mật khẩu bị lộ",
+        "description": "Mật khẩu bị lộ là mật khẩu đã được phát hiện trong các vụ vi phạm dữ liệu đã biết, được tin tặc tung ra công khai hoặc bán trên các trang dark web.",
+        "alert_title": "Tìm thấy mật khẩu bị lộ",
+        "alert_description": "Chúng tôi tìm thấy {{count}} mục có mật khẩu bị lộ trong các vụ vi phạm dữ liệu đã biết. Bạn nên đổi mật khẩu mới."
+      }
+    },
+    "data_breach_scanner": {
+      "title": "Cảnh báo lộ dữ liệu",
+      "description": "Kiểm tra xem dữ liệu nhạy cảm của bạn có bị lộ trên internet hay không",
+      "content_title": "Một &quot;breach&quot; là một sự cố trong đó dữ liệu của một trang web bị tin tặc truy cập bất hợp pháp và sau đó bị phát tán công khai. Xem lại các loại dữ liệu đã bị xâm phạm (địa chỉ email, mật khẩu, thẻ tín dụng, v.v.) và thực hiện hành động thích hợp, chẳng hạn như thay đổi mật khẩu.",
+      "input_label": "Kiểm tra bất kỳ địa chỉ email mà bạn sử dụng.",
+      "action": "Kiểm tra",
+      "breach_not_found_details": "{{username}} không được tìm thấy trong sự cố rò rỉ nào.",
+      "alert_title": "Tìm thấy tài khoản bị rò rỉ",
+      "alert_description": "{{username}} được tìm thấy trong {{different_count}} vụ vi phạm dữ liệu.",
+      "compromised_data": "Dữ liệu bị vi phạm",
+      "website": "Trang web",
+      "affected_users": "Số người dùng bị ảnh hưởng",
+      "breach_occurred": "Thời điểm xảy ra sự cố",
+      "added_occurred": "Thời điểm xảy ra sự cố"
+    }
+  },
+  "quick_share_detail": {
+    "title": "Simple and Quick",
+    "description": "Locker Quick Share lets you share sensitive information (including passwords, crypto assets,...) with encryption and a link that automatically expires. So you can keep what you share private and make sure your stuff doesn't stay online forever.",
+    "action": "Try Locker now!",
+    "product_of": "A product of",
+    "copyright": "Copyright © {{year}} Locker.io · All rights reserved.",
+    "teams": "Teams",
+    "privacy_policy": "Privacy Policy",
+    "reveal_information": "Reveal Information",
+    "hide_information": "Hide Information",
+    "not_fond": {
+      "title": "Sorry, there is no item to view.",
+      "description": {
+        "title": "You may find the reason in one of the following cases:",
+        "note1": "The link to view the item expired or reached limited access.",
+        "note2": "The owner stopped sharing the item.",
+        "note3": "The link you've entered is not correct."
+      }
+    },
+    "verify_email": {
+      "title": "You have been shared sensitive data",
+      "description": " You need to verify yourself before viewing the item. Please enter your email to receive an OTP code.",
+      "enter_otp": "Please enter your OTP code.",
+      "action": "Send code",
+      "resend": "Resend code"
+    }
+  },
+  "enterprises": {
+    "title": "Doanh nghiệp",
+    "add": "Doanh nghiệp mới",
+    "edit": "Chỉnh sửa thông tin doanh nghiệp",
+    "name": "Tên doanh nghiệp",
+    "subtitle": "Mô tả"
+  },
+  "email_settings": {
+    "title": "Cài đặt email",
+    "description": "Tích hợp với nhà cung cấp dịch vụ Email để bật thông báo qua email cho người dùng trong tổ chức của bạn.",
+    "email_provider": {
+      "title": "Nhà cung cấp",
+      "description": "Chọn một nhà cung cấp."
+    },
+    "set_up_integration": {
+      "title": "Cài đặt thiết lập"
+    },
+    "general": {
+      "from_email": "Từ email",
+      "from_email_placeholder": "Địa chỉ mặc định sẽ dùng để gửi email",
+      "from_name": "Từ tên",
+      "from_name_placeholder": "Tên mặc định sẽ dùng để gửi email"
+    },
+    "smtp": {
+      "title": "SMTP",
+      "provider": "Nhà cung cấp SMTP",
+      "description": "Thông tin xác thực SMTP sẽ được lưu trữ trong cơ sở dữ liệu của bạn. Một số kỳ vọng về máy chủ của bạn:",
+      "description1": "Phải hỗ trợ xác thực LOGIN",
+      "description2": "Phải hỗ trợ TLS 1.0 trở lên",
+      "note": "Cần giúp đỡ để tích hợp với SMTP?",
+      "note_link": "Làm theo hướng dẫn của chúng tôi tại đây.",
+      "host": "Host",
+      "host_placeholder": "Máy chủ (Host) SMTP của bạn",
+      "port": "Port",
+      "port_placeholder": "SMTP Port",
+      "port_description": "Các cổng (Port) phổ biến để truyền SMTP là 25, 465, 587.",
+      "username": "Tên người dùng",
+      "username_placeholder": "Tên người dùng SMTP của bạn",
+      "password": "Mật khẩu",
+      "password_placeholder": "Mật khẩu SMTP của bạn "
+    },
+    "amazon_ses": {
+      "title": "Amazon SES"
+    },
+    "send_grid": {
+      "title": "SendGrid",
+      "api_key": "Khóa API",
+      "api_key_placeholder": "Khóa API của Sendgrid",
+      "domain": "Tên miền/Tên miền phụ",
+      "domain_placeholder": "Tên miền/tên miền phụ được định cấu hình trong SendGrid"
+    },
+    "sendinblue": {
+      "title": "Sendinblue"
+    },
+    "google": {
+      "title": "Google"
+    },
+    "outlook": {
+      "title": "Outlook"
+    },
+    "send_test": {
+      "title": "Thử gửi email",
+      "description": "Nhập địa chỉ email mà bạn muốn gửi thử một email"
+    },
+    "reset": {
+      "title": "Cài đặt lại Email về ban đầu?",
+      "description": "Bạn có chắc chắn đặt lại không? Tất cả những thay đổi bạn đã thực hiện sẽ được đặt lại và người dùng của bạn sẽ không nhận được email nữa."
+    }
+  },
+  "sso_configuration": {
+    "title": "Cấu hình OAuth",
+    "description": "Cấu hình OAuth để yêu cầu người dùng đăng nhập bằng SSO",
+    "oauth-authorization-url": "URL ủy quyền OAuth",
+    "oauth-token-url": "URL token OAuth",
+    "api-url": "URL API cung cấp thông tin chi tiết người dùng khi được xác thực",
+    "oauth-appication-id": "ID ứng dụng OAuth",
+    "oauth-application-secret": "Secret ứng dụng OAuth",
+    "oauth-scopes": "Phạm vi OAuth yêu cầu",
+    "placeholder": {
+      "https": "https://",
+      "enter_id": "Nhập ID",
+      "enter_secret": "Nhập secret",
+      "enter_scopes": "Đọc hoặc ..."
+    }
+  },
+  "enterprise_dashboard": {
+    "title": "Tổng quan doanh nghiệp",
+    "adoption_rate": {
+      "title": "Tỷ lệ chấp nhận",
+      "confirmed": "Đã chấp nhận",
+      "requested": "Đã yêu cầu",
+      "invited": "Không phản hồi",
+      "total": "Tổng số lời mời",
+      "manage_pending_members": "Quản lý thành viên chờ"
+    },
+    "news": {
+      "title": "Tin tức",
+      "users_blocked": "Người dùng bị chặn do đăng nhập thất bại"
+    },
+    "user_login": {
+      "title": "Đăng nhập người dùng theo thời gian",
+      "user": "Người dùng"
+    },
+    "password_security": {
+      "title": "Bảo mật mật khẩu",
+      "weak_password": "Người dùng có mật khẩu yếu",
+      "more_than_weak_passwords": "Người dùng có hơn 10 mật khẩu yếu",
+      "leaked_account": "Người dùng có ít nhất 1 tài khoản bị lộ thông tin"
+    },
+    "users_blocked": {
+      "title": "Người dùng bị chặn do đăng nhập thất bại"
+    }
+  },
+  "enterprise_members": {
+    "title": "Thành viên",
+    "user_email": "Email thành viên",
+    "role": "Vai trò",
+    "upload_file": "Tải lên tệp",
+    "upload_file_guide": "hoặc Tải lên danh sách thành viên (định dạng CSV)",
+    "add": "Mời người dùng",
+    "edit": "Chỉnh sửa thông tin thành viên",
+    "all_roles": "Tất cả vai trò",
+    "all_statuses": "Tất cả trạng thái",
+    "tabs": {
+      "active": "Giấy phép đang hoạt động",
+      "pending": "Thành viên chờ",
+      "disabled": "Thành viên bị vô hiệu hóa",
+      "blocked": "Thành viên bị chặn"
+    },
+    "form": {
+      "title": "Mời vào công ty",
+      "username_description": "Email của thành viên mới",
+      "role_description": "Vai trò của thành viên mới",
+      "full_name_description": "Tên đầy đủ của thành viên mới",
+      "new_member_info": "Thông tin thành viên mới",
+      "new_member_description": "Mật khẩu sẽ được hiển thị một lần. Sao chép hoặc tải xuống để chia sẻ với những người phù hợp. Bạn có thể bỏ qua bước này nếu bạn đã cài đặt {{mail}} để gửi lời mời qua email",
+      "new_member_invite": "Nếu bạn đã cài đặt {{mail}}, các thành viên mới sẽ nhận được lời mời qua địa chỉ email của họ"
+    }
+  },
+  "enterprise_groups": {
+    "title": "Nhóm",
+    "group_name": "Tên nhóm",
+    "add": "Nhóm mới",
+    "edit": "Chỉnh sửa thông tin nhóm",
+    "users": "Thành viên trong nhóm",
+    "users_of_group": "Danh sách thành viên trong nhóm",
+    "no_data": {
+      "title": "Thêm nhóm doanh nghiệp đầu tiên của bạn",
+      "description": "Thêm nhóm để quản lý người dùng."
+    }
+  },
+  "enterprise_policies": {
+    "title": "Chính sách",
+    "password_requirements": {
+      "title": "Yêu cầu mật khẩu",
+      "description": "Bắt buộc người dùng sử dụng mật khẩu mạnh.",
+      "modal": {
+        "description": "Đặt yêu cầu mật khẩu cho các thành viên của bạn. Những quy tắc này áp dụng cho tất cả mật khẩu trong két của họ.",
+        "minimum_password_length": "Độ dài mật khẩu tối thiểu",
+        "password_complexity": "Độ phức tạp của mật khẩu",
+        "requires_lowercase": "Yêu cầu chữ thường",
+        "requires_uppercase": "Yêu cầu CHỮ HOA",
+        "requires_digit": "Yêu cầu chữ số",
+        "requires_special_character": "Yêu cầu ký tự đặc biệt"
+      }
+    },
+    "block_failed_logins": {
+      "title": "Chặn đăng nhập thất bại",
+      "description": "Chặn người dùng khi có nhiều lần đăng nhập thất bại.",
+      "modal": {
+        "description": "Chặn người dùng đăng nhập Locker khi có quá nhiều lần đăng nhập thất bại.",
+        "block_when": "Chặn người dùng khi có:",
+        "how_long": "Bạn muốn chặn người dùng đăng nhập trong bao lâu?",
+        "receive_an_email": "Nhận email khi có thành viên bị chặn",
+        "do_not_notify_me": "Không thông báo cho tôi",
+        "failed_login_attempts": "lần đăng nhập thất bại"
+      }
+    },
+    "passwordless_login": {
+      "title": "Đăng nhập không cần mật khẩu",
+      "description": "Người dùng bắt buộc phải sử dụng phương thức không cần mật khẩu để đăng nhập vào Locker.",
+      "modal": {
+        "description": "Yêu cầu người dùng đăng nhập bằng phương pháp không cần mật khẩu (hiện tại là tiêu chuẩn FIDO2).",
+        "choose_password_or_passwordless": "Người dùng có thể chọn Đăng nhập không cần mật khẩu hoặc Đăng nhập cần mật khẩu",
+        "only_allow_passwordless": "Chỉ cho phép đăng nhập không mật khẩu (Mật khẩu bị vô hiệu hóa)"
+      }
+    },
+    "log_in_with_2fa": {
+      "title": "Đăng nhập bằng 2FA",
+      "description": "Người dùng bắt buộc phải sử dụng 2FA để đăng nhập vào Locker lần đầu tiên trên thiết bị mới.",
+      "modal": {
+        "description": "Yêu cầu người dùng sử dụng Xác thực Hai Yếu Tố (2FA) để đăng nhập vào tài khoản Locker lần đầu tiên trên thiết bị mới.",
+        "description1": "Khi bật, người dùng bắt buộc phải sử dụng một phương pháp xác thực họ chọn (ví dụ: Google Authenticator, Authy, Locker,...)",
+        "only_admin_and_primary_admin": "Chỉ Quản trị viên và Quản trị viên Chính",
+        "apply_to_all_users": "Áp dụng cho tất cả người dùng"
+      }
+    }
+  },
+  "enterprise_activity_logs": {
+    "title": "Nhật ký hoạt động",
+    "all_actions": "Tất cả hành động",
+    "all_users": "Tất cả người dùng",
+    "actions": {
+      "member_status": "Trạng thái thành viên",
+      "role_changes": "Thay đổi vai trò",
+      "policy_violations": "Vi phạm chính sách",
+      "user_login": "Người dùng đăng nhập",
+      "sharing": "Chia sẻ"
+    }
+  }
+}
