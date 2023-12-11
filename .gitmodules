@@ -1,4 +1,4 @@
 [submodule "src/core-js"]
 	path = src/core-js
-	url = git@git.cystack.org:locker/core-js.git
+	url = https://github.com/lockerpm/core-js.git
   branch = password

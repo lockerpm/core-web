@@ -14,17 +14,33 @@ import {
   ArrowLeftOutlined
 } from "@ant-design/icons";
 
+import ssoConfigServices from "../../../../services/sso-config";
+
 const Enterprise = (props) => {
   const {
     loading,
-    onSubmit = () => {}
+    onSubmit = () => { }
   } = props;
   const { t } = useTranslation();
 
   const [step, setStep] = useState(0);
+  const [existed, setExisted] = useState(false);
+
+  useEffect(() => {
+    checkExist();
+  }, [])
+
+  const checkExist = async () => {
+    const response = await ssoConfigServices.check_exists();
+    setExisted(response?.existed)
+    if (response?.existed) {
+      setStep(0)
+    } else {
+      setStep(1)
+    }
+  }
 
   const handleSingleSignOn = () => {
-    // redirect sso
     setStep(1)
   }
 
@@ -39,7 +55,7 @@ const Enterprise = (props) => {
         >
           <div className="w-full flex items-center mb-6">
             {
-              step > 0 && <Button
+              ((step > 0 && existed) || step > 1) && <Button
                 className="mr-2"
                 type={'text'}
                 icon={<ArrowLeftOutlined />}
@@ -47,7 +63,7 @@ const Enterprise = (props) => {
               />
             }
             <p className="text-2xl font-semibold">
-              { t('auth_pages.sign_in.title') }
+              {t('auth_pages.sign_in.title')}
             </p>
           </div>
           {

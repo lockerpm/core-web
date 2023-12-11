@@ -66,9 +66,9 @@ function FormData(props) {
     const requests = usernames.map(async (u) => {
       const password = await global.jsCore.passwordGenerationService.generatePassword(options)
       const makeKey = await coreServices.make_key(u, password)
+      const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
       const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
       const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
-      const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
       return {
         email: u,
         password: password,

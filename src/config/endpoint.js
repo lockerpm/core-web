@@ -133,7 +133,10 @@ export default {
 
   // Admin
   ADMIN_ENTERPRISES: `${ADMIN}/enterprises`,
+
   MAIL_CONFIGURATION: `${ADMIN}/mail_configuration`,
   MAIL_CONFIGURATION_TEST: `${ADMIN}/mail_configuration/test`,
+
   SSO_CONFIGURATION: `${ADMIN}/sso_configuration`,
+  SSO_CONFIGURATION_CHECK_EXISTS: `${API_URL}/v3/sso_configuration/check_exists`,
 }

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './css/auth.scss';
 
-import { Image, Row, Col } from '@lockerpm/design';
-import { } from 'react-redux';
+import { Image, Row, Col, Button, Input, Avatar } from '@lockerpm/design';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { ChangePasswordForm } from "../../components";
 
@@ -10,16 +10,49 @@ import WelcomeImg from '../../assets/images/welcome.svg';
 import userServices from "../../services/user";
 
 import global from "../../config/global";
+import common from "../../utils/common";
 
 const Authenticate = () => {
   const { t } = useTranslation();
+  const currentPage = common.getRouterByLocation(window.location)
+
+  const isConnected = useSelector((state) => state.service.isConnected)
+  const isDesktop = useSelector((state) => state.system.isDesktop)
+
+  const [preLogin, setPreLogin] = useState(null)
+  const [callingAPI, setCallingAPI] = useState(false)
+  const [isPair, setIsPair] = useState(false)
+
+  useEffect(() => {
+    if (currentPage.query?.email) {
+      handlePrelogin();
+    }
+  }, [])
+
   const handleCancel = async () => {
     userServices.update_account_info(null)
     global.navigate('SIGN_IN', {}, {})
   }
 
-  useEffect(() => {
-  }, [])
+  const handlePrelogin = async () => {
+    setCallingAPI(true)
+    await userServices.users_prelogin({ email: currentPage.query?.email }).then(async (response) => {
+      setPreLogin(response)
+      if (response.login_method === 'passwordless') {
+        setIsPair(!isConnected || (!isDesktop && !service.pairingService?.hasKey))
+      } else {
+        setIsPair(false)
+      }
+    }).catch((error) => {
+      setPreLogin(null)
+      global.pushError(error)
+    })
+    setCallingAPI(false)
+  }
+
+  const handleSave = async () => {
+
+  }
 
   return (
     <div className="welcome-page">
@@ -40,14 +73,40 @@ const Authenticate = () => {
           </Col>
           <Col lg={11} md={24} xs={24}>
             <div className="pl-12">
+              <Input
+                className="mb-6"
+                placeholder={t('auth_pages.username')}
+                prefix={
+                  <Avatar
+                    src={preLogin?.avatar}
+                  >
+                    {preLogin?.email.slice(0, 1)?.toUpperCase()}
+                  </Avatar>
+                }
+                value={preLogin?.name}
+                size="large"
+                readOnly={true}
+              />
               <p className="text-3xl font-semibold">
                 {t('auth_pages.authenticate.title')}
               </p>
               <ChangePasswordForm
-                className={'mt-4'}
+                className={'mt-2'}
                 isAuth={true}
                 onCancel={handleCancel}
               />
+              <div className="mt-4 text-center">
+                <span>
+                  {t('auth_pages.authenticate.note')}
+                  <Button
+                    type="link"
+                    className="font-semibold"
+                    onClick={() => global.navigate(global.keys.SIGN_IN)}
+                  >
+                    {t('auth_pages.sign_in.label')}
+                  </Button>
+                </span>
+              </div>
             </div>
           </Col>
         </Row>

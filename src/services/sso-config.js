@@ -8,14 +8,14 @@ function get() {
   })
 }
 
-function put(data = {}) {
+function check_exists() {
   return request({
-    url: global.endpoint.SSO_CONFIGURATION,
-    method: "put",
-    data,
+    url: global.endpoint.SSO_CONFIGURATION_CHECK_EXISTS,
+    method: "get",
   })
 }
 
 export default {
   get,
+  check_exists
 }

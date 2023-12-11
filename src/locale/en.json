@@ -356,8 +356,9 @@
       "verify_identity": "Verify your identity"
     },
     "authenticate": {
-      "title": "Update Account Information",
-      "description": "Please enter a full name for your account, then create a new password to replace the temporary password given."
+      "title": "Reset password",
+      "description": "Please create a new password to replace the temporary password given.",
+      "note": "Already have an other account?"
     }
   },
   "error_pages": {

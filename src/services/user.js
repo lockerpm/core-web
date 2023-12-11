@@ -123,12 +123,12 @@ async function users_session_otp(data) {
 }
 
 async function change_password(data = {}) {
-  const makeKey =  await coreServices.make_key(data.username, data.password)
+  const makeKey = await coreServices.make_key(data.username, data.password)
   const password = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
-  
+
   const mewMakeKey = await coreServices.make_key(data.username, data.new_password)
   const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
-  
+
 
   let encKey = null
   const existingEncKey = await global.jsCore.cryptoService.getEncKey();
@@ -185,6 +185,32 @@ async function register(data) {
     method: "post",
     data: payload
   });
+}
+
+async function reset_password(data = {}) {
+  const mewMakeKey = await coreServices.make_key(data.email, data.new_password)
+  const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
+  const encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
+  const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
+
+  const masterPasswordCipher = await common.createEncryptedMasterPw(newPassword)
+  const { score } = commonServices.password_strength(data.new_password)
+
+  const payload = {
+    token: data.token,
+    new_password: newPassword,
+    key: encKey[1].encryptedString,
+    master_password_hash: password,
+    new_master_password_hint: data.password_hint || '',
+    score: score,
+    master_password_cipher: masterPasswordCipher
+  }
+
+  return request({
+    url: global.endpoint.USERS_ME_PASSWORD,
+    method: 'post',
+    data: payload
+  })
 }
 
 export default {
