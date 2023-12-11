@@ -25,6 +25,7 @@ export default {
   USERS_SESSION_OTP: `${FLAT_FORM}/users/session/otp`,
   USERS_PRELOGIN: `${FLAT_FORM}/users/prelogin`,
   USERS_REGISTER: `${FLAT_FORM}/users/register`,
+  USERS_RESET_PASSWORD: `${FLAT_FORM}/users/reset_password`,
   USERS_ME_PURGE: `${FLAT_FORM}/users/me/purge`,
   USERS_ME_DEVICES: `${FLAT_FORM}/users/me/devices`,
   USERS_ME_PASSWORD: `${FLAT_FORM}/users/me/password`,

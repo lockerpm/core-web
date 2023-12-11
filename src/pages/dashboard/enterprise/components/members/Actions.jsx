@@ -63,28 +63,20 @@ const Actions = (props) => {
     if (showAction) {
       return [
         {
-          key: 'confirm',
-          hide: item.status !== global.constants.STATUS.REQUESTED,
-          label: <p className="text-primary">
-            {t('button.confirm')}
-          </p>,
-          onClick: () => onUpdate({ status: global.constants.STATUS.CONFIRMED })
-        },
-        {
           key: 'disable',
-          hide: !(item.is_activated && item.status === global.constants.STATUS.CONFIRMED),
+          hide: !(item.is_activated && item.status === global.constants.STATUS.ACCESSED),
           label: t('button.disable'),
           onClick: () => onActivated({ activated: false })
         },
         {
           key: 'enable',
-          hide: !(!item.is_activated && item.status === global.constants.STATUS.CONFIRMED),
+          hide: !(!item.is_activated && item.status === global.constants.STATUS.ACCESSED),
           label: t('button.enable'),
           onClick: () => onActivated({ activated: true })
         },
         {
           key: 'resend_invitation',
-          hide: !(item.status === global.constants.STATUS.INVITED && mailConfig),
+          hide: !(item.status === global.constants.STATUS.CREATED && mailConfig),
           label: t('button.resend_invitation'),
           onClick: () => onResend()
         },

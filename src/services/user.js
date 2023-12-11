@@ -193,21 +193,18 @@ async function reset_password(data = {}) {
   const encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
   const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
 
-  const masterPasswordCipher = await common.createEncryptedMasterPw(newPassword)
-  const { score } = commonServices.password_strength(data.new_password)
-
   const payload = {
     token: data.token,
     new_password: newPassword,
-    key: encKey[1].encryptedString,
-    master_password_hash: password,
-    new_master_password_hint: data.password_hint || '',
-    score: score,
-    master_password_cipher: masterPasswordCipher
+    new_key: encKey[1].encryptedString,
+    keys: {
+      public_key: keys[0],
+      encrypted_private_key: keys[1].encryptedString,
+    },
   }
 
   return request({
-    url: global.endpoint.USERS_ME_PASSWORD,
+    url: global.endpoint.USERS_RESET_PASSWORD,
     method: 'post',
     data: payload
   })
@@ -226,5 +223,6 @@ export default {
   users_prelogin,
   register,
   check_exist_email,
-  purge_data
+  purge_data,
+  reset_password
 }

@@ -69,7 +69,6 @@ const CipherIcon = (props) => {
         height={size}
         src={cipherIcon.src}
         alt={cipherIcon.alt}
-        onError={() => setCipher(null)}
         style={{ filter: isDeleted ? 'grayscale(100%)' : '' }}
       />
     </div>

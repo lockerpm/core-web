@@ -33,7 +33,6 @@ const PasswordlessForm = (props) => {
     userInfo = {},
     isAddKey = false,
     onConfirm = () => { },
-    onError = () => { },
     onClose = () => { }
   } = props;
 

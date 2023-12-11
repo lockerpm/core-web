@@ -13,6 +13,7 @@ import global from '../../../config/global';
 function SidebarCenter(props) {
   const { collapsed } = props
   const currentPage = useSelector((state) => state.system.currentPage);
+  const userInfo = useSelector((state) => state.auth.userInfo);
   const invitations = useSelector((state) => state.share.invitations);
 
   const [openKeys, setOpenKeys] = useState([])
@@ -38,7 +39,9 @@ function SidebarCenter(props) {
       if (currentMenu) {
         let backRouterKey = global.keys.VAULT
         if (currentMenu.parent === global.keys.ENTERPRISE) {
-          backRouterKey = global.keys.ENTERPRISES
+          if (userInfo.is_super_admin) {
+            backRouterKey = global.keys.ENTERPRISES
+          }
         }
         return {
           ...currentMenu,

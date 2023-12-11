@@ -4,7 +4,7 @@ export default {
   AUTH_ROUTERS: [
     {
       name: keys.AUTHENTICATE,
-      path: '/authenticate',
+      path: '/authentication',
       element: 'Authenticate'
     },
     {

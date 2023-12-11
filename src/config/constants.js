@@ -42,8 +42,10 @@ const STATUS_ACTION = {
 
 const STATUS = {
   PENDING: 'pending',
+  CREATED: 'created',
   CONFIRMED: 'confirmed',
   ACCEPTED: 'accepted',
+  ACCESSED: 'accessed',
   INVITED: 'invited',
   EXPIRED: 'expired',
   REJECT: 'rejected',
@@ -496,8 +498,18 @@ export default {
       color: 'default'
     },
     {
+      value: STATUS.CREATED,
+      label: 'statuses.created',
+      color: 'default'
+    },
+    {
       value: STATUS.CONFIRMED,
       label: 'statuses.confirmed',
+      color: 'success'
+    },
+    {
+      value: STATUS.ACCESSED,
+      label: 'statuses.accessed',
       color: 'success'
     },
     {

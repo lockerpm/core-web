@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import './css/auth.scss';
 
-import { Image, Row, Col, Button, Input, Avatar } from '@lockerpm/design';
+import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { ChangePasswordForm } from "../../components";
+import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
 import userServices from "../../services/user";
@@ -20,38 +20,67 @@ const Authenticate = () => {
   const isDesktop = useSelector((state) => state.system.isDesktop)
 
   const [preLogin, setPreLogin] = useState(null)
+  const [step, setStep] = useState(currentPage?.query?.token ? 1 : 0)
+  const [loading, setLoading] = useState(false)
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
+  const [currentPassword, setCurrentPassword] = useState(null)
+
+  const [form] = Form.useForm()
 
   useEffect(() => {
     if (currentPage.query?.email) {
       handlePrelogin();
+    } else {
+      global.navigate(global.keys.SIGN_IN)
     }
   }, [])
 
-  const handleCancel = async () => {
-    userServices.update_account_info(null)
-    global.navigate('SIGN_IN', {}, {})
-  }
-
   const handlePrelogin = async () => {
-    setCallingAPI(true)
+    setLoading(true)
     await userServices.users_prelogin({ email: currentPage.query?.email }).then(async (response) => {
       setPreLogin(response)
-      if (response.login_method === 'passwordless') {
+      if (response.login_method === 'passwordless' || response?.require_passwordless) {
         setIsPair(!isConnected || (!isDesktop && !service.pairingService?.hasKey))
       } else {
         setIsPair(false)
       }
     }).catch((error) => {
+      setIsPair(false)
       setPreLogin(null)
       global.pushError(error)
     })
-    setCallingAPI(false)
+    setLoading(false)
   }
 
-  const handleSave = async () => {
+  const handleFirstSignIn = async (values) => {
+    setCallingAPI(true)
+    const payload = {
+      email: currentPage.query?.email,
+      password: values.current_password,
+    }
+    await userServices.users_session(payload).then(async () => {
+      setCurrentPassword(values.current_password)
+      setStep(1)
+    }).catch((error) => {
+      setCurrentPassword(null)
+      setStep(0)
+      global.pushError(error)
+    }).finally(() => {
+      setCallingAPI(false)
+    });
+  }
 
+  const handleSave = async (data) => {
+    setCallingAPI(true);
+    if (currentPage?.query?.token) {
+      await userServices.reset_password({
+        email: preLogin.email,
+        new_password: data.new_password,
+        token: currentPage?.query?.token
+      })
+    } else {
+    }
   }
 
   return (
@@ -87,14 +116,68 @@ const Authenticate = () => {
                 size="large"
                 readOnly={true}
               />
-              <p className="text-3xl font-semibold">
+              <p className="text-3xl font-semibold mb-2">
                 {t('auth_pages.authenticate.title')}
               </p>
-              <ChangePasswordForm
-                className={'mt-2'}
-                isAuth={true}
-                onCancel={handleCancel}
-              />
+              {
+                step === 0 && <Form
+                  form={form}
+                  layout="vertical"
+                  labelAlign={'left'}
+                  disabled={callingAPI}
+                  onFinish={handleFirstSignIn}
+                >
+                  <Form.Item
+                    name={'current_password'}
+                    label={t('change_password.current_password')}
+                    rules={[
+                      global.rules.REQUIRED(t("change_password.current_password")),
+                    ]}
+                  >
+                    <Input.Password
+                      size='large'
+                      placeholder={t('placeholder.enter')}
+                    />
+                  </Form.Item>
+                  <Button
+                    className="mt-4 w-full"
+                    type="primary"
+                    size="large"
+                    htmlType="submit"
+                    loading={callingAPI}
+                  >
+                    {t('button.continue')}
+                  </Button>
+                </Form>
+              }
+              {
+                step === 1 && <div>
+                  {
+                    isPair && <PairingForm
+                      userInfo={preLogin}
+                      onConfirm={() => setIsPair(false)}
+                    />
+                  }
+                  {
+                    !isPair && (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) && <PasswordlessForm
+                      changing={callingAPI}
+                      userInfo={preLogin}
+                      onConfirm={(password) => handleSave({
+                        email: preLogin.email,
+                        new_password: password
+                      })}
+                    />
+                  }
+                  {
+                    !isPair && preLogin?.login_method === 'password' && <ChangePasswordForm
+                      changing={callingAPI}
+                      showPwh={false}
+                      onSave={handleSave}
+                    />
+                  }
+                </div>
+              }
+
               <div className="mt-4 text-center">
                 <span>
                   {t('auth_pages.authenticate.note')}

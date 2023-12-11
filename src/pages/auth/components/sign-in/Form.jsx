@@ -66,7 +66,9 @@ const SignInForm = (props) => {
     setCallingAPI(true)
     await userServices.users_prelogin({ email: values.username }).then(async (response) => {
       setPreLogin(response)
-      if (response.sync_all_platforms || response.login_method === 'passwordless') {
+      if (!response.is_password_changed) {
+        global.navigate(global.keys.AUTHENTICATE, {}, { email: values.username })
+      } else if (response.sync_all_platforms || response.login_method === 'passwordless') {
         setIsPair((response?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
         if (isConnected && response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
           try {
@@ -163,7 +165,6 @@ const SignInForm = (props) => {
                 changing={loading}
                 isLogin={true}
                 userInfo={preLogin}
-                onError={() => setIsPair(true)}
                 onConfirm={(password) => handleSubmit({
                   username: preLogin.email,
                   password

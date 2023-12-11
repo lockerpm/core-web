@@ -231,7 +231,6 @@ const Lock = () => {
                         changing={callingAPI}
                         isUnlock={true}
                         userInfo={userInfo}
-                        onError={() => setIsPair(true)}
                         onConfirm={(password) => handleSubmit({
                           password
                         })}

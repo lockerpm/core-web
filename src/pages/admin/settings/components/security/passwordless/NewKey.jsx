@@ -16,8 +16,8 @@ const NewKeyModal = (props) => {
   const {
     visible = false,
     changing = false,
-    onConfirm = () => {},
-    onClose = () => {},
+    onConfirm = () => { },
+    onClose = () => { },
   } = props;
 
   const userInfo = useSelector(state => state.auth.userInfo);
@@ -43,7 +43,6 @@ const NewKeyModal = (props) => {
             changing={changing}
             userInfo={userInfo}
             isAddKey={true}
-            onError={() => setIsPair(true)}
             onConfirm={onConfirm}
           />
         </div>

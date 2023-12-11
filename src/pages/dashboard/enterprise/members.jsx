@@ -46,7 +46,6 @@ const EnterpriseMembers = (props) => {
     size: global.constants.PAGE_SIZE,
     searchText: currentPage?.query?.searchText,
     role: '',
-    status: ''
   })
 
   const getPayload = () => {
@@ -58,15 +57,14 @@ const EnterpriseMembers = (props) => {
       primary_admin: params.role === global.constants.USER_ROLE.PRIMARY_ADMIN ? 1 : '',
       admin: params.role === global.constants.USER_ROLE.ADMIN ? 1 : '',
       member: params.role === global.constants.USER_ROLE.MEMBER ? 1 : '',
-      statuses: global.constants.STATUS.CONFIRMED,
+      statuses: global.constants.STATUS.ACCESSED,
       is_activated: 1,
       block_login: 0,
     }
     if (selectedTab === 'pending') {
       return {
         ...p,
-        status: params.status,
-        statuses: `${global.constants.STATUS.REQUESTED},${global.constants.STATUS.INVITED}`
+        statuses: global.constants.STATUS.CREATED
       }
     }
     if (selectedTab === 'disabled') {
@@ -98,7 +96,6 @@ const EnterpriseMembers = (props) => {
       page: 1,
       searchText: '',
       role: '',
-      status: ''
     })
   }, [selectedTab])
 

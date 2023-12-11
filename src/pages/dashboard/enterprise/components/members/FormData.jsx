@@ -12,10 +12,11 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation, Trans } from "react-i18next";
 import global from '../../../../../config/global';
 import coreServices from '../../../../../services/core';
+import commonServices from '../../../../../services/common';
 import enterpriseMemberServices from '../../../../../services/enterprise-member';
 
 function FormData(props) {
@@ -36,10 +37,9 @@ function FormData(props) {
   const role = Form.useWatch('role', form);
 
   useEffect(() => {
-    fetchWsMembers();
-  }, [])
-
-  useEffect(() => {
+    if (visible) {
+      fetchWsMembers();
+    }
     form.setFieldsValue({
       usernames: [],
       role: global.constants.USER_ROLE.MEMBER
@@ -69,6 +69,8 @@ function FormData(props) {
       const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
       const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
       const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
+      const passwordStrength = commonServices.password_strength(password);
+
       return {
         email: u,
         password: password,
@@ -79,6 +81,7 @@ function FormData(props) {
         kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS,
         master_password_hint: '',
         key: encKey[1].encryptedString,
+        master_password_score: passwordStrength.core,
         keys: {
           public_key: keys[0],
           encrypted_private_key: keys[1].encryptedString,

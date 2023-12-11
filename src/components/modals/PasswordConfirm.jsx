@@ -26,8 +26,8 @@ const PasswordConfirmModal = (props) => {
     callingAPI = false,
     width = 360,
     requireDesktop = false,
-    onConfirm = () => {},
-    onClose = () => {},
+    onConfirm = () => { },
+    onClose = () => { },
   } = props;
 
   const userInfo = useSelector(state => state.auth.userInfo);
@@ -40,7 +40,7 @@ const PasswordConfirmModal = (props) => {
   const [timeNow, setTimeNow] = useState(new Date().getTime());
 
   const password = Form.useWatch('password', form);
-  
+
   useEffect(() => {
     form.resetFields();
     setChecking(false);
@@ -68,7 +68,7 @@ const PasswordConfirmModal = (props) => {
         <div className="flex items-center">
           <InfoCircleFilled style={{
             color: orange[5]
-          }}/>
+          }} />
           <p className="ml-2">
             {title}
           </p>
@@ -90,7 +90,7 @@ const PasswordConfirmModal = (props) => {
       }}
     >
       <div key={timeNow}>
-        { 
+        {
           isPair && <PairingForm
             callingAPI={callingAPI}
             userInfo={userInfo}
@@ -129,7 +129,6 @@ const PasswordConfirmModal = (props) => {
             <PasswordlessForm
               changing={callingAPI}
               userInfo={userInfo}
-              onError={() => setIsPair(true)}
               onConfirm={onConfirm}
             />
           </div>

@@ -16,6 +16,7 @@ import global from '../../config/global';
 function ChangePasswordForm(props) {
   const {
     className = '',
+    showPwh = true,
     changing = false,
     onSave = () => { }
   } = props
@@ -74,16 +75,18 @@ function ChangePasswordForm(props) {
             placeholder={t('placeholder.enter')}
           />
         </Form.Item>
-        <Form.Item
-          name="password_hint"
-          label={t('auth_pages.password_hint')}
-        >
-          <Input.Password
-            size='large'
-            placeholder={t('placeholder.enter')}
-            disabled={changing}
-          />
-        </Form.Item>
+        {
+          showPwh && <Form.Item
+            name="password_hint"
+            label={t('auth_pages.password_hint')}
+          >
+            <Input.Password
+              size='large'
+              placeholder={t('placeholder.enter')}
+              disabled={changing}
+            />
+          </Form.Item>
+        }
         <Button
           className="mt-10 w-full"
           type="primary"

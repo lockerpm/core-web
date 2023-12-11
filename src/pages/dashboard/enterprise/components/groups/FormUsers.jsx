@@ -49,7 +49,7 @@ function FormUsers(props) {
   const fetchEnterpriseUsers = async () => {
     setLoading(true);
     await enterpriseMemberServices
-      .list(enterpriseId, { paging: 0, statuses: global.constants.STATUS.CONFIRMED })
+      .list(enterpriseId, { paging: 0, statuses: global.constants.STATUS.ACCESSED })
       .then((response) => {
         setEnterpriseMembers(response);
       }).catch(() => {

@@ -16,8 +16,8 @@ const FormDataModal = (props) => {
   const {
     visible = false,
     changing = false,
-    onConfirm = () => {},
-    onClose = () => {},
+    onConfirm = () => { },
+    onClose = () => { },
   } = props;
 
   const userInfo = useSelector(state => state.auth.userInfo);
@@ -53,7 +53,6 @@ const FormDataModal = (props) => {
             /> : <PasswordlessForm
               changing={changing}
               userInfo={userInfo}
-              onError={() => setIsPair(true)}
               onConfirm={(password) => {
                 if (userInfo?.login_method === 'passwordless') {
                   setPassword(password);

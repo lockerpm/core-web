@@ -67,35 +67,6 @@ const Filter = (props) => {
               ]}
             />
           </Col>
-          {
-            activeTab === 'pending' && <Col lg={8} md={8} sm={12} xs={24}>
-              <Select
-                className='w-full'
-                optionFilterProp='children'
-                value={params.status}
-                onChange={(v) => {
-                  setParams({
-                    ...params,
-                    status: v,
-                  })
-                }}
-                options={[
-                  {
-                    value: '',
-                    label: t('enterprise_members.all_statuses'),
-                  },
-                  {
-                    value: global.constants.STATUS.INVITED,
-                    label: t('statuses.invited'),
-                  },
-                  {
-                    value: global.constants.STATUS.REQUESTED,
-                    label: t('statuses.requested'),
-                  },
-                ]}
-              />
-            </Col>
-          }
         </Row>
       </Col>
       <Col lg={8} span={8} className='w-full'>
