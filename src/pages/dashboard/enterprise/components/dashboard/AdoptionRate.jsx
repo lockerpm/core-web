@@ -24,9 +24,9 @@ const AdoptionRate = (props) => {
 
   const series = useMemo(() => {
     return [
-      data?.members?.status?.confirmed || 0,
+      data?.members?.status?.accessed || 0,
       data?.members?.status?.requested || 0,
-      data?.members?.status?.invited || 0,
+      data?.members?.status?.created || 0,
     ]
   }, [data])
 
@@ -49,9 +49,9 @@ const AdoptionRate = (props) => {
           green[6]
         ]}
         categories={[
-          t('enterprise_dashboard.adoption_rate.confirmed'),
+          t('enterprise_dashboard.adoption_rate.accessed'),
           t('enterprise_dashboard.adoption_rate.requested'),
-          t('enterprise_dashboard.adoption_rate.invited')
+          t('enterprise_dashboard.adoption_rate.created')
         ]}
         series={series}
       />
@@ -60,7 +60,6 @@ const AdoptionRate = (props) => {
           {t('enterprise_dashboard.adoption_rate.total')}: {data?.members?.total}
         </p>
         <p className="font-semibold text-center text-primary cursor-pointer" style={{ width: 200 }}>
-          {t('enterprise_dashboard.adoption_rate.manage_pending_members')}
         </p>
       </div>
     </Card>

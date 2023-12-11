@@ -20,7 +20,6 @@ import common from '../../../../../utils/common';
 function FormData(props) {
   const {
     visible = false,
-    mailConfig = null,
     members = [],
     onClose = () => { },
   } = props
@@ -40,7 +39,6 @@ function FormData(props) {
       <Drawer
         title={t('enterprise_members.add')}
         placement="right"
-        closable={!!mailConfig}
         open={visible}
         onClose={onClose}
         footer={

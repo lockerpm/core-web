@@ -16,7 +16,6 @@ const TableData = (props) => {
     className = "",
     loading = false,
     enterpriseId,
-    mailConfig = null,
     data = [],
     params = {},
     onDelete = () => { },
@@ -116,7 +115,6 @@ const TableData = (props) => {
         render: (_, record) => <Actions
           item={record}
           enterpriseId={enterpriseId}
-          mailConfig={mailConfig}
           onDelete={onDelete}
           onReload={onReload}
         />,

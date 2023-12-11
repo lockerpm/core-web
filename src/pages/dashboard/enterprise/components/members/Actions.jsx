@@ -30,16 +30,6 @@ const Actions = (props) => {
     return item.role !== global.constants.USER_ROLE.PRIMARY_ADMIN && item.email !== userInfo?.email
   }, [item, userInfo])
 
-  const onUpdate = (payload = {}) => {
-    enterpriseMemberServices
-      .update(enterpriseId, item.id, payload).then(() => {
-        global.pushSuccess(t("notification.success.enterprise_members.updated"))
-        onReload()
-      }).catch((error) => {
-        global.pushError(error)
-      })
-  }
-
   const onActivated = (payload = {}) => {
     enterpriseMemberServices
       .activated(enterpriseId, item.id, payload).then(() => {
@@ -52,7 +42,7 @@ const Actions = (props) => {
 
   const onResend = () => {
     enterpriseMemberServices
-      .reinvite(enterpriseId, item.id, payload).then(() => {
+      .reinvite(enterpriseId, item.id).then(() => {
         global.pushSuccess(t("notification.success.enterprise_members.reinvited"))
       }).catch((error) => {
         global.pushError(error)
@@ -76,7 +66,7 @@ const Actions = (props) => {
         },
         {
           key: 'resend_invitation',
-          hide: !(item.status === global.constants.STATUS.CREATED && mailConfig),
+          hide: !(item.status === global.constants.STATUS.CREATED),
           label: t('button.resend_invitation'),
           onClick: () => onResend()
         },

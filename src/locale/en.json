@@ -1106,11 +1106,10 @@
     "title": "Dashboard",
     "adoption_rate": {
       "title": "Adoption Rate",
-      "confirmed": "Accepted",
+      "accessed": "Accessed",
       "requested": "Requested",
-      "invited": "No Response",
-      "total": "Total invitation",
-      "manage_pending_members": "Manage pending members"
+      "created": "Created",
+      "total": "Total users"
     },
     "news": {
       "title": "News",

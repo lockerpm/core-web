@@ -18,7 +18,6 @@ import { useLocation } from "react-router-dom"
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
-import mailConfigServices from "../../../services/mail-config";
 import enterpriseMemberServices from "../../../services/enterprise-member"
 
 const EnterpriseMembers = (props) => {
@@ -38,7 +37,6 @@ const EnterpriseMembers = (props) => {
   const [formVisible, setFormVisible] = useState(false)
   const [reviewVisible, setReviewVisible] = useState(false);
   const [newMembers, setNewMembers] = useState([]);
-  const [mailConfig, setMailConfig] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null)
   const [selectedTab, setSelectedTab] = useState(currentPage.query?.tab || 'active');
   const [params, setParams] = useState({
@@ -48,7 +46,7 @@ const EnterpriseMembers = (props) => {
     role: '',
   })
 
-  const getPayload = () => {
+  const payload = useMemo(() => {
     const p = {
       page: params.page,
       size: params.size,
@@ -57,13 +55,12 @@ const EnterpriseMembers = (props) => {
       primary_admin: params.role === global.constants.USER_ROLE.PRIMARY_ADMIN ? 1 : '',
       admin: params.role === global.constants.USER_ROLE.ADMIN ? 1 : '',
       member: params.role === global.constants.USER_ROLE.MEMBER ? 1 : '',
-      statuses: global.constants.STATUS.ACCESSED,
-      is_activated: 1,
-      block_login: 0,
     }
     if (selectedTab === 'pending') {
       return {
         ...p,
+        is_activated: 1,
+        block_login: 0,
         statuses: global.constants.STATUS.CREATED
       }
     }
@@ -71,20 +68,25 @@ const EnterpriseMembers = (props) => {
       return {
         ...p,
         is_activated: 0,
+        block_login: 0,
+        statuses: global.constants.STATUS.ACCESSED
       }
     }
     if (selectedTab === 'blocked') {
       return {
         ...p,
         block_login: 1,
+        is_activated: 1,
+        statuses: global.constants.STATUS.ACCESSED
       }
     }
-    return p
-  }
-
-  useEffect(() => {
-    fetchMailConfiguration()
-  }, [])
+    return {
+      ...p,
+      is_activated: 1,
+      block_login: 0,
+      statuses: global.constants.STATUS.ACCESSED
+    }
+  }, [params, selectedTab])
 
   useEffect(() => {
     getMembers()
@@ -115,22 +117,13 @@ const EnterpriseMembers = (props) => {
     })
   }, [isMobile])
 
-  const fetchMailConfiguration = async () => {
-    await mailConfigServices.get(enterpriseId).then((response) => {
-      const config = response && !common.isEmpty(response) ? response : null;
-      setMailConfig(config)
-    }).catch(() => {
-      setMailConfig(null)
-    })
-  }
-
   const getMembers = async (isCreated = false) => {
+    setLoading(true)
     if (isCreated) {
       setSelectedTab('pending')
     }
-    setLoading(true)
     await enterpriseMemberServices
-      .list(enterpriseId, getPayload())
+      .list(enterpriseId, { ...payload })
       .then((response) => {
         setMembers(response.results)
         setTotal(response.count)
@@ -164,7 +157,7 @@ const EnterpriseMembers = (props) => {
     global.confirm(async () => {
       enterpriseMemberServices
         .remove(enterpriseId, item.id)
-        .then(() => {
+        .then(async () => {
           global.pushSuccess(t("notification.success.enterprise_members.deleted"))
           if (members.length === 1 && params.page > 1) {
             setParams({
@@ -172,7 +165,7 @@ const EnterpriseMembers = (props) => {
               page: params.page - 1,
             })
           }
-          getMembers()
+          await getMembers()
         })
         .catch((error) => {
           global.pushError(error)
@@ -219,7 +212,6 @@ const EnterpriseMembers = (props) => {
           enterpriseId={enterpriseId}
           data={members}
           params={params}
-          mailConfig={mailConfig}
           onDelete={deleteItem}
           onReload={() => getMembers()}
         /> : <TableData
@@ -228,7 +220,6 @@ const EnterpriseMembers = (props) => {
           enterpriseId={enterpriseId}
           data={members}
           params={params}
-          mailConfig={mailConfig}
           onDelete={deleteItem}
           onReload={() => getMembers()}
         />
@@ -244,14 +235,13 @@ const EnterpriseMembers = (props) => {
         visible={formVisible}
         item={selectedItem}
         enterpriseId={enterpriseId}
-        onReload={getMembers}
+        onReload={() => getMembers()}
         onReview={handleOpenReview}
         onClose={() => setFormVisible(false)}
       />
       <Review
         visible={reviewVisible}
         members={newMembers}
-        mailConfig={mailConfig}
         onClose={() => setReviewVisible(false)}
       />
 

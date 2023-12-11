@@ -20,7 +20,6 @@ const BoxData = (props) => {
     enterpriseId,
     data = [],
     params = {},
-    mailConfig = null,
     onDelete = () => { },
     onReload = () => { }
   } = props
@@ -53,7 +52,6 @@ const BoxData = (props) => {
               <Actions
                 item={record}
                 enterpriseId={enterpriseId}
-                mailConfig={mailConfig}
                 onDelete={onDelete}
                 onReload={onReload}
               />

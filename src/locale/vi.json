@@ -1106,11 +1106,10 @@
     "title": "Tổng quan doanh nghiệp",
     "adoption_rate": {
       "title": "Tỷ lệ chấp nhận",
-      "confirmed": "Đã chấp nhận",
+      "accessed": "Đã truy cập",
       "requested": "Đã yêu cầu",
-      "invited": "Không phản hồi",
-      "total": "Tổng số lời mời",
-      "manage_pending_members": "Quản lý thành viên chờ"
+      "created": "Đã khởi tạo",
+      "total": "Tổng người dùng"
     },
     "news": {
       "title": "Tin tức",
