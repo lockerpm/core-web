@@ -44,9 +44,12 @@ const PasswordConfirmModal = (props) => {
   useEffect(() => {
     form.resetFields();
     setChecking(false);
-    setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey && !isDesktop)));
     setTimeNow(new Date().getTime())
   }, [visible])
+
+  useEffect(() => {
+    setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey && !isDesktop)));
+  }, [isConnected, userInfo, isDesktop])
 
   const handleConfirm = async () => {
     form.validateFields().then(async () => {
@@ -130,6 +133,7 @@ const PasswordConfirmModal = (props) => {
               changing={callingAPI}
               userInfo={userInfo}
               onConfirm={onConfirm}
+              onRepair={() => setIsPair(true)}
             />
           </div>
         }

@@ -76,8 +76,21 @@ async function users_prelogin(data) {
   })
 }
 
+async function users_access_token(token) {
+  return request({
+    url: global.endpoint.USERS_ACCESS_TOKEN,
+    method: 'post',
+    data: {
+      token: token,
+      client_id: global.constants.CLIENT_ID,
+      device_name: global.jsCore.platformUtilsService.getDeviceString(),
+      device_type: global.jsCore.platformUtilsService.getDevice(),
+      device_identifier: authServices.device_id()
+    }
+  })
+}
+
 async function users_session(data) {
-  const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
   if (data.password) {
@@ -93,13 +106,12 @@ async function users_session(data) {
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: deviceId
+      device_identifier: authServices.device_id()
     }
   });
 }
 
 async function users_session_otp(data) {
-  const deviceId = authServices.device_id();
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
   if (data.password) {
@@ -115,7 +127,7 @@ async function users_session_otp(data) {
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: deviceId,
+      device_identifier: authServices.device_id(),
       method: data.method,
       otp: data.otp
     }
@@ -215,6 +227,7 @@ export default {
   update_users_me,
   users_me_devices,
   remove_device,
+  users_access_token,
   users_session,
   users_session_otp,
   change_password,

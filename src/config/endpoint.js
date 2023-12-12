@@ -21,6 +21,7 @@ export default {
 
   USERS_ME: `${FLAT_FORM}/users/me`,
   USERS_EXIST: `${FLAT_FORM}/users/exist`,
+  USERS_ACCESS_TOKEN: `${FLAT_FORM}/users/access_token`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
   USERS_SESSION_OTP: `${FLAT_FORM}/users/session/otp`,
   USERS_PRELOGIN: `${FLAT_FORM}/users/prelogin`,

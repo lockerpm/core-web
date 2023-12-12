@@ -45,6 +45,12 @@ const SignInForm = (props) => {
   }, [])
 
   useEffect(() => {
+    if (preLogin) {
+      handleCheckPwl();
+    }
+  }, [preLogin, isConnected])
+
+  useEffect(() => {
     if (step === 1) {
       setPreLogin(null);
       setCallingAPI(false);
@@ -70,37 +76,39 @@ const SignInForm = (props) => {
     setCallingAPI(true)
     await userServices.users_prelogin({ email: values.username }).then(async (response) => {
       setPreLogin(response)
-      if (!response.is_password_changed || (response.login_method === 'password' && response.require_passwordless)) {
-        global.navigate(global.keys.AUTHENTICATE, {}, { email: values.username })
-      } else if (response.sync_all_platforms || response.login_method === 'passwordless') {
-        setIsPair((response?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
-        if (isConnected && response.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
-          try {
-            const serviceUser = await service.getCurrentUser();
-            if (serviceUser?.email === response.email) {
-              await onSubmit({
-                username: serviceUser?.email,
-                hashedPassword: serviceUser?.hashedPassword,
-                keyB64: serviceUser?.key
-              })
-            } else {
-              setStep(2)
-            }
-          } catch (error) {
-            console.log(error);
-            setStep(2)
-          }
-        } else {
-          setStep(2)
-        }
-      } else {
-        setStep(2)
-      }
     }).catch((error) => {
       setPreLogin(null)
       global.pushError(error)
     })
     setCallingAPI(false)
+  }
+
+  const handleCheckPwl = async () => {
+    if (!preLogin.is_password_changed || (preLogin.login_method === 'password' && preLogin.require_passwordless)) {
+      global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email })
+    } else if (preLogin.sync_all_platforms || preLogin.login_method === 'passwordless') {
+      setIsPair((preLogin?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
+      if (isConnected && preLogin.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
+        try {
+          const serviceUser = await service.getCurrentUser();
+          if (serviceUser?.email === preLogin.email) {
+            await onSubmit({
+              username: serviceUser?.email,
+              hashedPassword: serviceUser?.hashedPassword,
+              keyB64: serviceUser?.key
+            })
+          } else {
+            setStep(2)
+          }
+        } catch (error) {
+          setStep(2)
+        }
+      } else {
+        setStep(2)
+      }
+    } else {
+      setStep(2)
+    }
   }
 
   const handlePairConfirm = async () => {
@@ -169,6 +177,7 @@ const SignInForm = (props) => {
                 changing={loading}
                 isLogin={true}
                 userInfo={preLogin}
+                onRepair={() => setIsPair(true)}
                 onConfirm={(password) => handleSubmit({
                   username: preLogin.email,
                   password

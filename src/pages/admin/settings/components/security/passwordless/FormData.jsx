@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
 } from '@lockerpm/design';
@@ -24,8 +24,13 @@ const FormDataModal = (props) => {
   const isDesktop = useSelector((state) => state.system.isDesktop);
   const isConnected = useSelector((state) => state.service.isConnected);
 
-  const [isPair, setIsPair] = useState(!isConnected || (!service.pairingService?.hasKey && !isDesktop))
+  const [isPair, setIsPair] = useState(false)
   const [password, setPassword] = useState(null)
+
+  useEffect(() => {
+    setIsPair(!isConnected || (!service.pairingService?.hasKey && !isDesktop))
+  }, [isConnected, isDesktop])
+
 
   return (
     <Modal
@@ -53,6 +58,7 @@ const FormDataModal = (props) => {
             /> : <PasswordlessForm
               changing={changing}
               userInfo={userInfo}
+              onRepair={() => setIsPair(true)}
               onConfirm={(password) => {
                 if (userInfo?.login_method === 'passwordless') {
                   setPassword(password);

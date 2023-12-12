@@ -43,7 +43,7 @@ const App = () => {
   const location = useLocation()
 
   notification.config({ placement: 'bottomLeft', duration: 3 })
-  global.notification = (type, message, description) => { notification[type]({ message, description })}
+  global.notification = (type, message, description) => { notification[type]({ message, description }) }
   global.navigate = (name, params = {}, query = {}) => navigatePage(navigate, dispatch, name, params, query)
   global.pushSuccess = message => {
     global.notification(
@@ -60,7 +60,7 @@ const App = () => {
       message || t('notification.error.message.default')
     )
   }
-  global.confirm = (handleOK = () => {}, options = {}) => Modal.confirm({
+  global.confirm = (handleOK = () => { }, options = {}) => Modal.confirm({
     title: options.title || t('common.confirm'),
     icon: <ExclamationCircleOutlined />,
     content: options.content || t('common.delete_question'),

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import './css/auth.scss';
 
 import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
@@ -14,6 +14,7 @@ import authServices from "../../services/auth";
 
 import global from "../../config/global";
 import common from "../../utils/common";
+import jsCore from "../../core-js"
 
 const Authenticate = () => {
   const { t } = useTranslation();
@@ -33,6 +34,9 @@ const Authenticate = () => {
   const [form] = Form.useForm()
 
   useEffect(() => {
+    if (currentPage.query?.token) {
+      getAccessTokenByToken();
+    }
     if (currentPage.query?.email) {
       handlePrelogin();
     } else {
@@ -40,15 +44,42 @@ const Authenticate = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) {
+      setIsPair(!isConnected || (!isDesktop && !service.pairingService?.hasKey))
+    } else {
+      setIsPair(false)
+    }
+  }, [preLogin, isConnected, isDesktop])
+
+  const title = useMemo(() => {
+    if (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) {
+      return t('auth_pages.authenticate.title');
+    }
+    return t('auth_pages.authenticate.setup_pwl');
+  }, [preLogin])
+
+  const description = useMemo(() => {
+    if (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) {
+      return t('auth_pages.authenticate.description');
+    }
+    return t('auth_pages.authenticate.setup_pwl_description')
+  }, [preLogin])
+
+  const getAccessTokenByToken = async () => {
+    global.jsCore = await jsCore();
+    await userServices.users_access_token(currentPage.query?.token).then((response) => {
+      setUserSession(response);
+    }).catch((error) => {
+      setUserSession(null)
+      global.pushError(error);
+    })
+  }
+
   const handlePrelogin = async () => {
     setLoading(true)
     await userServices.users_prelogin({ email: currentPage.query?.email }).then(async (response) => {
       setPreLogin(response)
-      if (response.login_method === 'passwordless' || response?.require_passwordless) {
-        setIsPair(!isConnected || (!isDesktop && !service.pairingService?.hasKey))
-      } else {
-        setIsPair(false)
-      }
     }).catch((error) => {
       setIsPair(false)
       setPreLogin(null)
@@ -95,14 +126,18 @@ const Authenticate = () => {
           username: preLogin.email,
           password: currentPassword,
           new_password: data.new_password,
-          login_method: preLogin.login_method
+          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
         })
+
         authServices.logout({ email: preLogin.email });
       }
       global.pushSuccess(t('notification.success.change_password.changed'))
     } catch (error) {
+      setStep(0)
       global.pushError(error)
     }
+    setUserSession(null)
+    setCallingAPI(false);
   }
 
   return (
@@ -114,32 +149,27 @@ const Authenticate = () => {
             <div className="welcome-page__center--left mt-12 ml-12 h-[340px] flex items-center">
               <div className="w-full text-center px-12">
                 <Image
+                  className="mb-6"
                   src={WelcomeImg}
                 />
-                <p className="mt-3">
-                  {t('auth_pages.authenticate.description')}
+                <div className="flex items-center justify-center">
+                  <Avatar
+                    src={preLogin?.avatar}
+                  >
+                    {preLogin?.email.slice(0, 1)?.toUpperCase()}
+                  </Avatar>
+                  <p className="ml-2 font-semibold">{preLogin?.email}</p>
+                </div>
+                <p className="mt-6">
+                  {description}
                 </p>
               </div>
             </div>
           </Col>
           <Col lg={11} md={24} xs={24}>
             <div className="pl-12">
-              <Input
-                className="mb-6"
-                placeholder={t('auth_pages.username')}
-                prefix={
-                  <Avatar
-                    src={preLogin?.avatar}
-                  >
-                    {preLogin?.email.slice(0, 1)?.toUpperCase()}
-                  </Avatar>
-                }
-                value={preLogin?.name}
-                size="large"
-                readOnly={true}
-              />
-              <p className="text-3xl font-semibold mb-2">
-                {t('auth_pages.authenticate.title')}
+              <p className="text-3xl font-semibold mb-10">
+                {title}
               </p>
               {
                 step === 0 && <Form
@@ -161,6 +191,7 @@ const Authenticate = () => {
                       placeholder={t('placeholder.enter')}
                     />
                   </Form.Item>
+
                   <Button
                     className="mt-4 w-full"
                     type="primary"
@@ -184,11 +215,13 @@ const Authenticate = () => {
                     !isPair && (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) && <PasswordlessForm
                       changing={callingAPI}
                       userInfo={preLogin}
+                      accessToken={userSession?.access_token}
+                      onRepair={() => setIsPair(true)}
                       onConfirm={(password) => handleSave({ new_password: password })}
                     />
                   }
                   {
-                    !isPair && preLogin?.login_method === 'password' && <ChangePasswordForm
+                    !isPair && (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) && <ChangePasswordForm
                       changing={callingAPI}
                       showPwh={false}
                       onSave={handleSave}

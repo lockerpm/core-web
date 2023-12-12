@@ -44,6 +44,7 @@ const NewKeyModal = (props) => {
             userInfo={userInfo}
             isAddKey={true}
             onConfirm={onConfirm}
+            onRepair={() => setIsPair(true)}
           />
         </div>
       }

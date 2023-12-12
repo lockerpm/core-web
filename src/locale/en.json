@@ -356,8 +356,10 @@
       "verify_identity": "Verify your identity"
     },
     "authenticate": {
-      "title": "Reset password",
-      "description": "Please create a new password to replace the temporary password given.",
+      "title": "Update Account Information",
+      "description": "Please enter a full name for your account, then create a new password to replace the temporary password given.",
+      "setup_pwl": "Set up Passwordless login",
+      "setup_pwl_description": "Passwordless Login is required on your account. Set up Passwordless Login to continue.",
       "note": "Already have an other account?"
     }
   },
@@ -425,7 +427,7 @@
     "repair": "Repair",
     "open_desktop": "Desktop app connection is required. Please open Locker Desktop App",
     "install_desktop": "Desktop app installation is required. Please download and install Locker Desktop App",
-    "connect_key": "Connect the key you want to add as a secondary key",
+    "connect_key": "Connect the key you want to add",
     "no_key_found": "No key found",
     "scan_fingerprint": "Scan your fingerprint",
     "enter_key_pin": "Enter your security key PIN",

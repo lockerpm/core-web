@@ -32,6 +32,8 @@ const PasswordlessForm = (props) => {
     isLogin = false,
     userInfo = {},
     isAddKey = false,
+    accessToken = authServices.access_token(),
+    onRepair = () => { },
     onConfirm = () => { },
     onClose = () => { }
   } = props;
@@ -75,7 +77,7 @@ const PasswordlessForm = (props) => {
       await getPwl();
     } else {
       setPin(pin);
-      await service.setApiToken(authServices.access_token());
+      await service.setApiToken(accessToken);
       if (isAddKey) {
         await setBackupPwl();
       } else {
@@ -146,17 +148,22 @@ const PasswordlessForm = (props) => {
     resetState()
     setPasswordless(null)
     setPin(null)
-    if (['2007', '2003', '2009'].includes(error.code)) {
+    if (['0000'].includes(error.code)) {
+      await commonServices.reset_service();
+      setStep(0);
+    } else if (['2007', '2003', '2009'].includes(error.code)) {
       setStep(1);
     } else if (['2008'].includes(error.code)) {
       setStep(0);
     } else if (['5001', '5002'].includes(error.code)) {
       await commonServices.reset_service();
       setStep(0);
-    } else if (['0000', '2001'].includes(error.code)) {
+    } else if (['2001'].includes(error.code)) {
       await commonServices.reset_service();
       setStep(0);
       await getDeviceKeys();
+    } else if (['5003'].includes(error.code)) {
+      onRepair();
     }
   }
 
@@ -219,7 +226,7 @@ const PasswordlessForm = (props) => {
           </div>
         }
         {
-          step !== 0 && <Card
+          (step !== 0 || (isTouch || isFingerprint)) && selectedDevice && <Card
             className="mt-10"
             bodyStyle={{ padding: '9px 24px' }}
             style={{ borderColor: green[7] }}

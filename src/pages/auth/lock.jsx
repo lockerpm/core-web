@@ -65,7 +65,7 @@ const Lock = () => {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })
       }
     }
-  }, [userInfo?.email])
+  }, [userInfo?.email, isConnected])
 
   const description = useMemo(() => {
     if (userInfo?.sync_all_platforms) {
@@ -235,6 +235,7 @@ const Lock = () => {
                         changing={callingAPI}
                         isUnlock={true}
                         userInfo={userInfo}
+                        onRepair={() => setIsPair(true)}
                         onConfirm={(password) => handleSubmit({
                           password
                         })}
