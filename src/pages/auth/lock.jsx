@@ -24,12 +24,8 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
-import coreServices from "../../services/core";
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";
-import userServices from "../../services/user";
-
-import storeActions from "../../store/actions";
 
 import common from "../../utils/common";
 import global from "../../config/global";
@@ -90,26 +86,13 @@ const Lock = () => {
       ...values,
       keyB64: values.key,
       email: userInfo.email,
-      username: userInfo.email
+      username: userInfo.email,
+      sync_all_platforms: userInfo.sync_all_platforms
     }
-    await userServices.users_session(payload).then(async (response) => {
-      if (response.is_factor2) {
-        global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
-        global.navigate(global.keys.OTP_CODE, {}, { return_url: query?.return_url })
-      } else {
-        authServices.update_access_token_type(response.token_type)
-        authServices.update_access_token(response.access_token);
-        await coreServices.unlock({ ...response, ...payload })
-        await commonServices.sync_data();
-        if (userInfo.sync_all_platforms) {
-          await commonServices.service_login(payload);
-        }
-        const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
-        navigate(returnUrl);
-      }
-    }).catch((error) => {
-      global.pushError(error)
-    });
+    await commonServices.unlock_to_vault(payload, query, () => {
+      const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
+      navigate(returnUrl);
+    })
     setCallingAPI(false)
   }
 

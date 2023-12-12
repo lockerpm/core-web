@@ -423,6 +423,31 @@ async function sync_data_by_ws(message) {
   global.store.dispatch(storeActions.updateSyncing(false))
 }
 
+async function unlock_to_vault(payload, query = null, callback = () => { }) {
+  await userServices.users_session(payload).then(async (response) => {
+    if (response.is_factor2) {
+      global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
+      global.navigate(global.keys.OTP_CODE, {}, query || {})
+    } else {
+      authServices.update_access_token_type(response.token_type)
+      authServices.update_access_token(response.access_token);
+      await fetch_user_info();
+      await coreServices.unlock({ ...response, ...payload });
+      await sync_data();
+      if (payload.sync_all_platforms) {
+        await service_login(payload);
+      }
+      if (query) {
+        callback();
+      } else {
+        global.navigate(global.keys.VAULT);
+      }
+    }
+  }).catch((error) => {
+    global.pushError(error)
+  })
+}
+
 async function reset_service() {
   if (global.store.getState().service.isConnected) {
     if (global.store.getState().system.isDesktop) {
@@ -486,6 +511,7 @@ export default {
   leave_share,
   get_sends,
   sync_data_by_ws,
+  unlock_to_vault,
   reset_service,
   service_login,
   service_logout

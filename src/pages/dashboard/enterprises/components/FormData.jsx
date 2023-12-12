@@ -25,7 +25,7 @@ function FormData(props) {
       if (item?.id) {
         form.setFieldsValue(item)
       } else {
-        form.setFieldsValue({ name: "", subtitle: "", description: "" })
+        form.setFieldsValue({ name: "", enterprise_name: "", description: "" })
       }
     } else {
       form.resetFields()

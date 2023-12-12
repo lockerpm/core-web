@@ -207,6 +207,8 @@ async function reset_password(data = {}) {
 
   const payload = {
     token: data.token,
+    full_name: data.full_name,
+    login_method: data.login_method,
     new_password: newPassword,
     new_key: encKey[1].encryptedString,
     keys: {

@@ -25,6 +25,8 @@ import global from "../../config/global";
 const SingUp = () => {
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
+  const serverType = useSelector((state) => state.system.serverType);
+
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
 
@@ -38,7 +40,7 @@ const SingUp = () => {
         authServices.update_access_token_type(response.token_type)
         authServices.update_access_token(response.access_token);
         await commonServices.fetch_user_info();
-        await coreServices.unlock({...response, ...values })
+        await coreServices.unlock({ ...response, ...values })
         await commonServices.sync_data()
         global.navigate(global.keys.VAULT)
       }).catch((error) => {
@@ -77,7 +79,7 @@ const SingUp = () => {
           >
             <div className="w-full flex items-center justify-between mb-4">
               <p className="text-2xl font-semibold">
-                { t('auth_pages.sign_up.title') }
+                {t('auth_pages.sign_up.title')}
               </p>
             </div>
             <Form
@@ -164,18 +166,20 @@ const SingUp = () => {
             </Form>
           </Card>
         </div>
-        <div className="mt-4 text-center">
-          <span>
-            {t('auth_pages.sign_up.note')}
-            <Button
-              type="link"
-              className="font-semibold"
-              onClick={() => global.navigate(global.keys.SIGN_IN)}
-            >
-              {t('auth_pages.sign_in.label')}
-            </Button>
-          </span>
-        </div>
+        {
+          serverType === global.constants.SERVER_TYPE.PERSONAL && <div className="mt-4 text-center">
+            <span>
+              {t('auth_pages.sign_up.note')}
+              <Button
+                type="link"
+                className="font-semibold"
+                onClick={() => global.navigate(global.keys.SIGN_IN)}
+              >
+                {t('auth_pages.sign_in.label')}
+              </Button>
+            </span>
+          </div>
+        }
       </div>
     </div>
   );

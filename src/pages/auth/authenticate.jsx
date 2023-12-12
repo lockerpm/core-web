@@ -11,6 +11,7 @@ import WelcomeImg from '../../assets/images/welcome.svg';
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
 import authServices from "../../services/auth";
+import commonServices from "../../services/common";
 
 import global from "../../config/global";
 import common from "../../utils/common";
@@ -24,25 +25,42 @@ const Authenticate = () => {
   const isDesktop = useSelector((state) => state.system.isDesktop)
 
   const [preLogin, setPreLogin] = useState(null)
-  const [step, setStep] = useState(currentPage?.query?.token ? 1 : 0)
+  const [step, setStep] = useState(0)
   const [loading, setLoading] = useState(false)
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
   const [currentPassword, setCurrentPassword] = useState(null)
+  const [newFullName, setNewFullName] = useState(null)
   const [userSession, setUserSession] = useState(null)
 
   const [form] = Form.useForm()
 
   useEffect(() => {
-    if (currentPage.query?.token) {
-      getAccessTokenByToken();
-    }
-    if (currentPage.query?.email) {
+    if (currentPage?.query?.email) {
       handlePrelogin();
+      if (currentPage?.query?.token) {
+        getAccessTokenByToken();
+      }
     } else {
       global.navigate(global.keys.SIGN_IN)
     }
   }, [])
+
+  useEffect(() => {
+    if (preLogin?.is_password_changed && !(preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
+      global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email });
+      return;
+    }
+    if (currentPage?.query?.token && userSession) {
+      if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+        setStep(2)
+      } else {
+        setStep(1)
+      }
+    } else {
+      setStep(0)
+    }
+  }, [preLogin, userSession])
 
   useEffect(() => {
     if (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) {
@@ -60,19 +78,19 @@ const Authenticate = () => {
   }, [preLogin])
 
   const description = useMemo(() => {
-    if (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) {
+    if ((preLogin?.login_method === 'password' && !preLogin?.require_passwordless) || step === 1) {
       return t('auth_pages.authenticate.description');
     }
     return t('auth_pages.authenticate.setup_pwl_description')
-  }, [preLogin])
+  }, [preLogin, step])
 
   const getAccessTokenByToken = async () => {
     global.jsCore = await jsCore();
     await userServices.users_access_token(currentPage.query?.token).then((response) => {
-      setUserSession(response);
+      setUserSession(response?.access_token);
     }).catch((error) => {
-      setUserSession(null)
-      global.pushError(error);
+      global.notification('error', t('notification.error.title'), t('auth_pages.authenticate.link_invalid'))
+      setUserSession(null);
     })
   }
 
@@ -97,8 +115,12 @@ const Authenticate = () => {
     }
     await userServices.users_session(payload).then(async (response) => {
       setUserSession({ ...payload, ...response });
-      setCurrentPassword(values.current_password)
-      setStep(1)
+      setCurrentPassword(values.current_password);
+      if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+        setStep(2)
+      } else {
+        setStep(1)
+      }
     }).catch((error) => {
       setCurrentPassword(null)
       setStep(0)
@@ -114,13 +136,20 @@ const Authenticate = () => {
       if (currentPage?.query?.token) {
         await userServices.reset_password({
           username: preLogin.email,
+          full_name: data.full_name || preLogin.name,
           new_password: data.new_password,
-          token: currentPage?.query?.token
+          token: currentPage?.query?.token,
+          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
         })
-        global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email })
       } else {
         authServices.update_access_token_type(userSession.token_type)
         authServices.update_access_token(userSession.access_token);
+        if (newFullName) {
+          await userServices.update_users_me({
+            email: preLogin?.email,
+            full_name: newFullName,
+          })
+        }
         await coreServices.unlock(userSession);
         await userServices.change_password({
           username: preLogin.email,
@@ -128,16 +157,24 @@ const Authenticate = () => {
           new_password: data.new_password,
           login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
         })
-
-        authServices.logout({ email: preLogin.email });
       }
-      global.pushSuccess(t('notification.success.change_password.changed'))
+      global.pushSuccess(t('notification.success.change_password.changed'));
+      await handleSignIn(data.new_password)
     } catch (error) {
       setStep(0)
       global.pushError(error)
     }
-    setUserSession(null)
     setCallingAPI(false);
+  }
+
+  const handleSignIn = async (newPassword) => {
+    const payload = {
+      password: newPassword,
+      username: preLogin.email,
+      email: preLogin.email,
+      sync_all_platforms: preLogin.sync_all_platforms
+    }
+    await commonServices.unlock_to_vault(payload)
   }
 
   return (
@@ -191,7 +228,6 @@ const Authenticate = () => {
                       placeholder={t('placeholder.enter')}
                     />
                   </Form.Item>
-
                   <Button
                     className="mt-4 w-full"
                     type="primary"
@@ -204,7 +240,41 @@ const Authenticate = () => {
                 </Form>
               }
               {
-                step === 1 && <div>
+                step === 1 && <Form
+                  form={form}
+                  layout="vertical"
+                  labelAlign={'left'}
+                  disabled={callingAPI}
+                  onFinish={(v) => {
+                    setNewFullName(v.full_name);
+                    setStep(2)
+                  }}
+                >
+                  <Form.Item
+                    name={'full_name'}
+                    label={t('common.full_name')}
+                    rules={[
+                      global.rules.REQUIRED(t("common.full_name")),
+                    ]}
+                  >
+                    <Input
+                      size='large'
+                      placeholder={t('placeholder.enter')}
+                    />
+                  </Form.Item>
+                  <Button
+                    className="mt-4 w-full"
+                    type="primary"
+                    size="large"
+                    htmlType="submit"
+                    loading={callingAPI}
+                  >
+                    {t('button.continue')}
+                  </Button>
+                </Form>
+              }
+              {
+                step === 2 && <div>
                   {
                     isPair && <PairingForm
                       userInfo={preLogin}
@@ -223,13 +293,12 @@ const Authenticate = () => {
                   {
                     !isPair && (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) && <ChangePasswordForm
                       changing={callingAPI}
-                      showPwh={false}
+                      isChange={false}
                       onSave={handleSave}
                     />
                   }
                 </div>
               }
-
               <div className="mt-4 text-center">
                 <span>
                   {t('auth_pages.authenticate.note')}
@@ -248,7 +317,6 @@ const Authenticate = () => {
       </div>
       <div className="welcome-page__top-right"></div>
     </div>
-
   );
 }
 

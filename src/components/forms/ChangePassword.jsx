@@ -16,7 +16,7 @@ import global from '../../config/global';
 function ChangePasswordForm(props) {
   const {
     className = '',
-    showPwh = true,
+    isChange = true,
     changing = false,
     onSave = () => { }
   } = props
@@ -30,15 +30,32 @@ function ChangePasswordForm(props) {
 
   return (
     <div className={className}>
-      <p className='font-semibold text-left mb-4'>
-        {t('passwordless.new_password')}
-      </p>
+      {
+        isChange && <p className='font-semibold text-left mb-4'>
+          {t('passwordless.new_password')}
+        </p>
+      }
       <Form
         form={form}
         layout="vertical"
         labelAlign={'left'}
         onFinish={onSave}
       >
+        {
+          !isChange && <Form.Item
+            name={'full_name'}
+            label={t('common.full_name')}
+            rules={[
+              global.rules.REQUIRED(t("common.full_name")),
+            ]}
+          >
+            <Input
+              disabled={changing}
+              size='large'
+              placeholder={t('placeholder.enter')}
+            />
+          </Form.Item>
+        }
         <Form.Item
           name={'new_password'}
           label={t('change_password.new_password')}
@@ -76,7 +93,7 @@ function ChangePasswordForm(props) {
           />
         </Form.Item>
         {
-          showPwh && <Form.Item
+          isChange && <Form.Item
             name="password_hint"
             label={t('auth_pages.password_hint')}
           >

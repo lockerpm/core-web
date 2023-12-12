@@ -235,7 +235,7 @@ const EnterpriseMembers = (props) => {
         visible={formVisible}
         item={selectedItem}
         enterpriseId={enterpriseId}
-        onReload={() => getMembers()}
+        onReload={getMembers}
         onReview={handleOpenReview}
         onClose={() => setFormVisible(false)}
       />

@@ -16,12 +16,7 @@ import Enterprise from "./components/sign-in/Enterprise";
 
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
-import authServices from "../../services/auth";
-import userServices from "../../services/user";
-import coreServices from "../../services/core";
 import commonServices from "../../services/common";
-
-import storeActions from "../../store/actions";
 
 import global from "../../config/global";
 
@@ -42,26 +37,8 @@ const SingIn = () => {
       keyB64: values.keyB64,
       sync_all_platforms: values.sync_all_platforms
     }
-    await userServices.users_session(payload).then(async (response) => {
-      if (response.is_factor2) {
-        global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
-        global.navigate(global.keys.OTP_CODE)
-      } else {
-        authServices.update_access_token_type(response.token_type)
-        authServices.update_access_token(response.access_token);
-        await commonServices.fetch_user_info();
-        await coreServices.unlock({ ...response, ...payload });
-        await commonServices.sync_data();
-        if (values.sync_all_platforms) {
-          await commonServices.service_login(payload);
-        }
-        global.navigate(global.keys.VAULT);
-      }
-    }).catch((error) => {
-      global.pushError(error)
-    }).finally(() => {
-      setCallingAPI(false)
-    });
+    await commonServices.unlock_to_vault(payload);
+    setCallingAPI(false)
   }
 
   return (

@@ -46,7 +46,7 @@ const webStorageService = new WebStorageService()
 
 const service = new WebService({
   storageService: webStorageService,
-  logLevel: 2,
+  logLevel: 1,
   baseApiUrl: `${process.env.REACT_APP_API_URL}/v3`,
   clientType: 'web',
 })

@@ -360,7 +360,8 @@
       "description": "Please enter a full name for your account, then create a new password to replace the temporary password given.",
       "setup_pwl": "Set up Passwordless login",
       "setup_pwl_description": "Passwordless Login is required on your account. Set up Passwordless Login to continue.",
-      "note": "Already have an other account?"
+      "note": "Already have an other account?",
+      "link_invalid": "Reset password link is invalid. Please enter password to update account information."
     }
   },
   "error_pages": {
