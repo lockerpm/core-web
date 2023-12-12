@@ -51,7 +51,7 @@ const Authenticate = () => {
       global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email });
       return;
     }
-    if (currentPage?.query?.token && userSession) {
+    if (currentPage?.query?.token) {
       if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
         setStep(2)
       } else {
@@ -60,7 +60,7 @@ const Authenticate = () => {
     } else {
       setStep(0)
     }
-  }, [preLogin, userSession])
+  }, [preLogin])
 
   useEffect(() => {
     if (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) {
@@ -89,6 +89,7 @@ const Authenticate = () => {
     await userServices.users_access_token(currentPage.query?.token).then((response) => {
       setUserSession(response?.access_token);
     }).catch((error) => {
+      setStep(0)
       global.notification('error', t('notification.error.title'), t('auth_pages.authenticate.link_invalid'))
       setUserSession(null);
     })
