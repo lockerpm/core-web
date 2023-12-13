@@ -58,7 +58,7 @@ const BoxData = (props) => {
               </div>
               <Space size={[8, 8]}>
                 <Button type='text' size='small' icon={<EditOutlined />} onClick={() => onUpdate(record)} />
-                <Button type='text' size='small' danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} />
+                {/* <Button type='text' size='small' danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} /> */}
               </Space>
             </div>
           }
