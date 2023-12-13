@@ -8,6 +8,8 @@ import GeneratePasswordContent from './generate-password/components/Content'
 import PairingForm from './forms/Pairing'
 import PasswordlessForm from './forms/Passwordless'
 import ChangePasswordForm from './forms/ChangePassword'
+import SmartOtpForm from './forms/SmartOtp'
+import MailOtpForm from './forms/MailOtp'
 
 import FilterTime from './item/FilterTime'
 import Pagination from './item/Pagination'
@@ -32,7 +34,9 @@ export {
   PairingForm,
   PasswordlessForm,
   ChangePasswordForm,
-  
+  SmartOtpForm,
+  MailOtpForm,
+
   FilterTime,
   Pagination,
   Multiple,

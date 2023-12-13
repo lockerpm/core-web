@@ -855,6 +855,7 @@
       "setup_on": "Two-step authentication is",
       "your_second_step": "Your second step",
       "your_second_step_description": "After entering your password, you'll be asked for a second verification step.",
+      "require_2fa": "Two-factor authentication (2FA) is required within your business and cannot be turn off.",
       "email_otp": {
         "name": "Authentication Email",
         "description": "We'll ask for a security code if we notice a login from an unusual device.",

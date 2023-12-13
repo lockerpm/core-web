@@ -35,7 +35,7 @@ const SingIn = () => {
       email: values.username,
       hashedPassword: values.hashedPassword,
       keyB64: values.keyB64,
-      sync_all_platforms: values.sync_all_platforms
+      sync_all_platforms: values.sync_all_platforms,
     }
     await commonServices.unlock_to_vault(payload);
     setCallingAPI(false)

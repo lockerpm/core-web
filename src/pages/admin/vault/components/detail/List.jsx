@@ -294,7 +294,7 @@ const ListItemDetails = (props) => {
           key: 'personal_title',
           name: t('cipher.identity.personal_title'),
           value: <TextCopy
-            value={cipher.identity.title ? t(`common.${cipher.identity.title}`) : ''}
+            value={cipher.identity?.title ? t(`common.${cipher.identity?.title}`) : ''}
             showIcon={true}
             show={showText}
             align="between"
@@ -304,7 +304,7 @@ const ListItemDetails = (props) => {
           key: 'first_name',
           name: t('cipher.identity.first_name'),
           value: <TextCopy
-            value={cipher.identity.firstName}
+            value={cipher.identity?.firstName}
             showIcon={true}
             show={showText}
             align="between"
@@ -314,7 +314,7 @@ const ListItemDetails = (props) => {
           key: 'last_name',
           name: t('cipher.identity.last_name'),
           value: <TextCopy
-            value={cipher.identity.lastName}
+            value={cipher.identity?.lastName}
             showIcon={true}
             show={showText}
             align="between"
@@ -324,7 +324,7 @@ const ListItemDetails = (props) => {
           key: 'username',
           name: t('cipher.identity.username'),
           value: <TextCopy
-            value={cipher.identity.username}
+            value={cipher.identity?.username}
             showIcon={true}
             show={showText}
             align="between"
@@ -334,7 +334,7 @@ const ListItemDetails = (props) => {
           key: 'company',
           name: t('cipher.identity.company'),
           value: <TextCopy
-            value={cipher.identity.company}
+            value={cipher.identity?.company}
             showIcon={true}
             show={showText}
             align="between"
@@ -344,7 +344,7 @@ const ListItemDetails = (props) => {
           key: 'email',
           name: t('cipher.identity.email'),
           value: <TextCopy
-            value={cipher.identity.email}
+            value={cipher.identity?.email}
             showIcon={true}
             show={showText}
             align="between"
@@ -354,7 +354,7 @@ const ListItemDetails = (props) => {
           key: 'phone',
           name: t('cipher.identity.phone'),
           value: <TextCopy
-            value={cipher.identity.phone}
+            value={cipher.identity?.phone}
             showIcon={true}
             show={showText}
             align="between"
@@ -364,7 +364,7 @@ const ListItemDetails = (props) => {
           key: 'social_security_number',
           name: t('cipher.identity.social_security_number'),
           value: <TextCopy
-            value={cipher.identity.ssn}
+            value={cipher.identity?.ssn}
             showIcon={true}
             show={showText}
             align="between"
@@ -374,7 +374,7 @@ const ListItemDetails = (props) => {
           key: 'passport_number',
           name: t('cipher.identity.passport_number'),
           value: <TextCopy
-            value={cipher.identity.passportNumber}
+            value={cipher.identity?.passportNumber}
             showIcon={true}
             show={showText}
             align="between"
@@ -384,7 +384,7 @@ const ListItemDetails = (props) => {
           key: 'license_number',
           name: t('cipher.identity.license_number'),
           value: <TextCopy
-            value={cipher.identity.licenseNumber}
+            value={cipher.identity?.licenseNumber}
             showIcon={true}
             show={showText}
             align="between"
@@ -394,7 +394,7 @@ const ListItemDetails = (props) => {
           key: 'address1',
           name: t('cipher.identity.address1'),
           value: <TextCopy
-            value={cipher.identity.address1}
+            value={cipher.identity?.address1}
             showIcon={true}
             show={showText}
             align="between"
@@ -404,7 +404,7 @@ const ListItemDetails = (props) => {
           key: 'address2',
           name: t('cipher.identity.address2'),
           value: <TextCopy
-            value={cipher.identity.address2}
+            value={cipher.identity?.address2}
             showIcon={true}
             show={showText}
             align="between"
@@ -414,7 +414,7 @@ const ListItemDetails = (props) => {
           key: 'city_town',
           name: t('cipher.identity.city_town'),
           value: <TextCopy
-            value={cipher.identity.city}
+            value={cipher.identity?.city}
             showIcon={true}
             show={showText}
             align="between"
@@ -424,7 +424,7 @@ const ListItemDetails = (props) => {
           key: 'state_province',
           name: t('cipher.identity.state_province'),
           value: <TextCopy
-            value={cipher.identity.state}
+            value={cipher.identity?.state}
             showIcon={true}
             show={showText}
             align="between"
@@ -434,7 +434,7 @@ const ListItemDetails = (props) => {
           key: 'zip_postal',
           name: t('cipher.identity.zip_postal'),
           value: <TextCopy
-            value={cipher.identity.postalCode}
+            value={cipher.identity?.postalCode}
             showIcon={true}
             show={showText}
             align="between"
@@ -444,7 +444,7 @@ const ListItemDetails = (props) => {
           key: 'country',
           name: t('cipher.identity.country'),
           value: <TextCopy
-            value={cipher.identity.country}
+            value={cipher.identity?.country}
             showIcon={true}
             show={showText}
             align="between"

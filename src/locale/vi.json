@@ -854,7 +854,8 @@
         "send_code": "Gửi mã tới email",
         "have_code": "Tôi có một mã",
         "enter_code": "Nhập mã xác thực ở đây",
-        "sent_to": "Một email đã được gửi tới địa chỉ {{email}}"
+        "sent_to": "Một email đã được gửi tới địa chỉ {{email}}",
+        "require_2fa": "Xác thực hai bước được yêu cầu luôn bật trong doanh nghiệp và không thể bị tắt."
       },
       "smart_otp": {
         "description": "Giữ tài khoản của bạn thêm bảo mật với một bước đăng nhập bổ sung.",

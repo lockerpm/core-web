@@ -3,12 +3,12 @@ import {
   Space,
   Button,
   Drawer,
-  Input,
 } from '@lockerpm/design';
 
 import {
-  MailOutlined
 } from '@ant-design/icons';
+
+import { MailOtpForm } from '../../../../../../components';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -20,8 +20,8 @@ function MailOtpFormData(props) {
   const {
     visible = false,
     factor2 = {},
-    onReload = () => {},
-    onClose = () => {},
+    onReload = () => { },
+    onClose = () => { },
   } = props
   const { t } = useTranslation()
   const userInfo = useSelector(state => state.auth.userInfo)
@@ -103,7 +103,7 @@ function MailOtpFormData(props) {
                 loading={callingAPI}
                 onClick={handleNext}
               >
-                { t('button.next') } 
+                {t('button.next')}
               </Button>
             }
             {
@@ -113,7 +113,7 @@ function MailOtpFormData(props) {
                 disabled={!otp}
                 onClick={handleSave}
               >
-                { t('button.disable') } 
+                {t('button.disable')}
               </Button>
             }
             {
@@ -123,7 +123,7 @@ function MailOtpFormData(props) {
                 disabled={!otp}
                 onClick={handleSave}
               >
-                { t('button.enable') } 
+                {t('button.enable')}
               </Button>
             }
           </Space>
@@ -132,43 +132,15 @@ function MailOtpFormData(props) {
         <p className='mb-4'>
           {t('security.two_fa.email_otp.description')}
         </p>
-        {
-          step === 0 && <div>
-            <div className='flex items-center font-semibold justify-between'>
-              <div className='flex items-center'>
-                <MailOutlined />
-                <span className='ml-2'>
-                  {t('security.two_fa.email_otp.send_code')}
-                </span>
-              </div>
-              <Button size="small" onClick={() => setStep(1)}>
-                {t('security.two_fa.email_otp.have_code')}
-              </Button>
-            </div>
-            <p className='mt-2 text-primary'>
-              {userInfo?.email}
-            </p>
-          </div>
-        }
-        {
-          step === 1 && <div>
-            {
-              isSentTo &&  <p className="mb-4">
-                {t('security.two_fa.email_otp.sent_to', { email: userInfo.email })}
-              </p>
-            }
-            <p className="font-semibold">
-              {t('security.two_fa.email_otp.enter_code')}
-            </p>
-            <Input
-              value={otp}
-              className="mt-2"
-              placeholder={t('placeholder.code')}
-              disabled={callingAPI}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-          </div>
-        }
+        <MailOtpForm
+          userInfo={userInfo}
+          step={step}
+          isSentTo={isSentTo}
+          callingAPI={callingAPI}
+          otp={otp}
+          setStep={setStep}
+          setOtp={setOtp}
+        />
       </Drawer>
     </div>
   );

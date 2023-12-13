@@ -4,7 +4,8 @@ import {
   Badge,
   Row,
   Col,
-  Card
+  Card,
+  Tooltip
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
@@ -38,7 +39,6 @@ const TwoFA = (props) => {
   } = props;
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
-  const isCloud = useSelector((state) => state.system.isCloud);
 
   const [smartOtpVisible, setSmartOtpVisible] = useState(false);
   const [mailOtpVisible, setMailOtpVisible] = useState(false);
@@ -72,6 +72,19 @@ const TwoFA = (props) => {
     setCallingAPI(false);
   }
 
+  const openForm = (callback = () => { }, is_activate) => {
+    if (userInfo.is_require_2fa) {
+      const isActivateAll = factor2?.mail_otp?.is_activate && factor2?.smart_otp?.is_activate
+      if (is_activate && !isActivateAll) {
+        global.pushError(t('security.two_fa.require_2fa'))
+      } else {
+        callback()
+      }
+    } else {
+      callback()
+    }
+  }
+
   return (
     <div className={className}>
       <div className="flex justify-between">
@@ -87,14 +100,19 @@ const TwoFA = (props) => {
           }
         </div>
         {
-          factor2?.is_factor2 && <Button
-            type='primary'
-            ghost
-            icon={<MinusCircleOutlined />}
-            onClick={() => setConfirmVisible(true)}
+          factor2?.is_factor2 && <Tooltip
+            title={userInfo?.is_require_2fa ? t('security.two_fa.require_2fa') : ''}
           >
-            {t('security.two_fa.turn_off')}
-          </Button>
+            <Button
+              type='primary'
+              ghost
+              icon={<MinusCircleOutlined />}
+              disabled={userInfo?.is_require_2fa}
+              onClick={() => setConfirmVisible(true)}
+            >
+              {t('security.two_fa.turn_off')}
+            </Button>
+          </Tooltip>
         }
       </div>
       {
@@ -131,7 +149,7 @@ const TwoFA = (props) => {
                     className="w-full cursor-pointer"
                     bodyStyle={{ padding: 16 }}
                     style={{ borderColor: factor2?.mail_otp?.is_activate ? green[6] : '' }}
-                    onClick={() => setMailOtpVisible(true)}
+                    onClick={() => openForm(() => setMailOtpVisible(true), factor2?.mail_otp?.is_activate)}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
@@ -154,7 +172,7 @@ const TwoFA = (props) => {
                   className="w-full cursor-pointer"
                   bodyStyle={{ padding: 16 }}
                   style={{ borderColor: factor2?.smart_otp?.is_activate ? green[6] : '' }}
-                  onClick={() => setSmartOtpVisible(true)}
+                  onClick={() => openForm(() => setSmartOtpVisible(true), factor2?.smart_otp?.is_activate)}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">

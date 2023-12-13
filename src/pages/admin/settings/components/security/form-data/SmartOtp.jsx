@@ -1,20 +1,17 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   Space,
   Button,
   Drawer,
-  Input,
-  Steps,
-  Collapse
 } from '@lockerpm/design';
 
-import QRCode from "react-qr-code";
+import { SmartOtpForm } from '../../../../../../components';
 
 import {
 } from '@ant-design/icons';
 
 import { } from 'react-redux';
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import authServices from '../../../../../../services/auth';
 import global from '../../../../../../config/global';
@@ -23,8 +20,8 @@ function SmartOtpFormData(props) {
   const {
     visible = false,
     factor2 = {},
-    onReload = () => {},
-    onClose = () => {},
+    onReload = () => { },
+    onClose = () => { },
   } = props
   const { t } = useTranslation()
 
@@ -80,7 +77,7 @@ function SmartOtpFormData(props) {
                 disabled={!otp}
                 onClick={handleSave}
               >
-                { t('button.disable') } 
+                {t('button.disable')}
               </Button>
             }
             {
@@ -90,7 +87,7 @@ function SmartOtpFormData(props) {
                 disabled={!otp}
                 onClick={handleSave}
               >
-                { t('button.enable') } 
+                {t('button.enable')}
               </Button>
             }
           </Space>
@@ -99,59 +96,11 @@ function SmartOtpFormData(props) {
         <p className='mb-4'>
           {t('security.two_fa.smart_otp.description')}
         </p>
-        {
-          !smartOtp?.is_activate && <div>
-            <Steps
-              direction="vertical"
-              className="steps-2fa"
-              items={[1, 2, 3, 4].map((step) => ({
-                status: 'process',
-                title: <Collapse
-                  ghost={true}
-                  expandIconPosition={'end'}
-                  defaultActiveKey={["1"]}
-                >
-                  <Collapse.Panel
-                    header={<p className="font-semibold">
-                      {t(`security.two_fa.smart_otp.step${step}.title`)}
-                    </p>}
-                    key="1"
-                  >
-                    {
-                      step !== 2 ? t(`security.two_fa.smart_otp.step${step}.description`) : <Trans
-                        i18nKey={`security.two_fa.smart_otp.step${step}.description`}
-                        values={{
-                          key: smartOtp?.secret,
-                        }}
-                        components={{
-                          key: <b/>
-                        }}
-                      />
-                    }
-                  </Collapse.Panel>
-                </Collapse>,
-              }))}
-            />
-            {
-              smartOtp?.url && <div className="mb-4"> 
-                <QRCode
-                  size={200}
-                  level="H"
-                  value={smartOtp?.url}
-                />
-              </div>
-            }
-          </div>
-        }
-        <p className="font-semibold">
-          {t('security.two_fa.smart_otp.enter_code')}
-        </p>
-        <Input
-          value={otp}
-          className="mt-2"
-          placeholder={t('placeholder.code')}
-          disabled={callingAPI}
-          onChange={(e) => setOtp(e.target.value)}
+        <SmartOtpForm
+          callingAPI={callingAPI}
+          smartOtp={smartOtp}
+          otp={otp}
+          setOtp={setOtp}
         />
       </Drawer>
     </div>

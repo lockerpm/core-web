@@ -4,10 +4,7 @@ import './css/auth.scss';
 import {
   Image,
   Card,
-  Input,
-  Form,
   Button,
-  Checkbox,
   Radio
 } from '@lockerpm/design';
 
@@ -16,6 +13,8 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 
+import { SmartOtpForm, MailOtpForm } from "../../components";
+
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
@@ -23,13 +22,11 @@ import { useNavigate } from 'react-router-dom';
 import AuthLogo from '../../assets/images/logos/auth-logo.svg';
 
 import authServices from "../../services/auth";
-import userServices from "../../services/user";
-import coreServices from "../../services/core";
 import commonServices from "../../services/common";
+
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import global from "../../config/global";
-import common from "../../utils/common";
 
 import { green } from '@ant-design/colors';
 
@@ -37,42 +34,50 @@ const Setup2FA = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const locale = useSelector((state) => state.system.locale);
   const factor2 = useSelector((state) => state.auth.factor2);
 
-  const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
   const [step, setStep] = useState(0);
+  const [mailStep, setMailStep] = useState(0);
   const [identity, setIdentity] = useState(null);
-
-  const query = common.convertStringToQuery(window.location.search);
+  const [isSentTo, setIsSentTo] = useState(false);
+  const [otp, setOtp] = useState('')
 
   useEffect(() => {
     setIdentity(factor2?.mail_otp ? global.constants.FACTOR2_IDENTITY.MAIL : global.constants.FACTOR2_IDENTITY.SMART_OTP)
+    authServices.update_access_token(factor2?.token)
   }, [factor2])
 
   const handleEnabled2FA = async () => {
-    form.validateFields().then(async (values) => {
-      const payload = {
-        ...factor2,
+    setCallingAPI(true);
+    await authServices.update_factor2({
+      method: identity,
+      otp: otp
+    }).then(async () => {
+      global.pushSuccess(t('notification.success.factor2.enabled'));
+      await commonServices.unlock_to_vault(factor2)
+    }).catch((error) => {
+      global.pushError(error)
+    })
+    setCallingAPI(false);
+  }
+
+  const handleNext = async () => {
+    if (identity === global.constants.FACTOR2_IDENTITY.MAIL) {
+      setCallingAPI(true);
+      await authServices.factor2_activate_code({
         method: identity,
-        otp: values.otp,
-        save_device: values.save_device || false,
-      }
-      setCallingAPI(true)
-      await userServices.users_session_otp(payload).then(async (response) => {
-        authServices.update_access_token_type(response.token_type)
-        authServices.update_access_token(response.access_token);
-        await commonServices.fetch_user_info();
-        await coreServices.unlock({ ...response, ...payload })
-        await commonServices.sync_data();
-        const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
-        navigate(returnUrl);
+      }).then(() => {
+        setIsSentTo(true);
+        setStep(1);
+        setMailStep(1);
       }).catch((error) => {
         global.pushError(error)
       })
-      setCallingAPI(false)
-    })
+      setCallingAPI(false);
+    } else {
+      setStep(1)
+    }
   }
 
   return (
@@ -80,7 +85,7 @@ const Setup2FA = () => {
       className="auth-page"
     >
       <div
-        className="otp-code w-[600px]"
+        className="otp-code w-[600px] pb-10"
         style={{
           backgroundImage: `url(${AuthBgImage})`,
           backgroundSize: 'contain',
@@ -98,19 +103,21 @@ const Setup2FA = () => {
         </div>
         <div className="flex items-center justify-center">
           <Card
-            className="w-[400px]"
+            className="w-[600px]"
             bodyStyle={{
               padding: '32px'
             }}
           >
+            <div className="w-full mb-4">
+              <p className="text-2xl font-semibold">
+                {t('auth_pages.setup_2fa.title')}
+              </p>
+              {
+                step === 0 && <p>{t('auth_pages.setup_2fa.description')}</p>
+              }
+            </div>
             {
               step === 0 && <div>
-                <div className="w-full mb-4">
-                  <p className="text-2xl font-semibold">
-                    {t('auth_pages.setup_2fa.title')}
-                  </p>
-                  <p>{t('auth_pages.setup_2fa.description')}</p>
-                </div>
                 <div>
                   <Radio.Group
                     name="radiogroup"
@@ -129,7 +136,7 @@ const Setup2FA = () => {
                           <div className="flex items-center">
                             <MailOutlined />
                             <p className="ml-2">
-                              {t('security.two_fa.smart_otp.name')}
+                              {t('security.two_fa.email_otp.name')}
                             </p>
                           </div>
                         </Radio>
@@ -156,6 +163,25 @@ const Setup2FA = () => {
             }
             {
               step === 1 && <div>
+                {
+                  identity === global.constants.FACTOR2_IDENTITY.MAIL && <MailOtpForm
+                    userInfo={factor2}
+                    step={mailStep}
+                    isSentTo={isSentTo}
+                    callingAPI={callingAPI}
+                    otp={otp}
+                    setStep={setMailStep}
+                    setOtp={setOtp}
+                  />
+                }
+                {
+                  identity === global.constants.FACTOR2_IDENTITY.SMART_OTP && <SmartOtpForm
+                    callingAPI={callingAPI}
+                    smartOtp={factor2?.smart_otp}
+                    otp={otp}
+                    setOtp={setOtp}
+                  />
+                }
               </div>
             }
             <div className="flex items-center">
@@ -179,7 +205,7 @@ const Setup2FA = () => {
                   size="large"
                   type="primary"
                   loading={callingAPI}
-                  onClick={() => setStep(1)}
+                  onClick={() => handleNext()}
                 >
                   {t('button.next')}
                 </Button>
@@ -192,7 +218,7 @@ const Setup2FA = () => {
                   loading={callingAPI}
                   onClick={() => handleEnabled2FA()}
                 >
-                  {t('button.verify')}
+                  {t('button.enable')}
                 </Button>
               }
             </div>

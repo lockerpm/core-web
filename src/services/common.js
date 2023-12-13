@@ -432,7 +432,7 @@ async function unlock_to_vault(payload, query = null, callback = () => { }) {
     if (response.is_factor2) {
       global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
       global.navigate(global.keys.OTP_CODE, {}, query || {})
-    } else if (!response.is_factor2 && !response.access_token) {
+    } else if (!response.is_factor2 && response.token) {
       global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
       global.navigate(global.keys.SETUP_2FA, {}, query || {})
     } else {
