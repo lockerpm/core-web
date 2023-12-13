@@ -362,6 +362,10 @@
       "setup_pwl_description": "Passwordless Login is required on your account. Set up Passwordless Login to continue.",
       "note": "Already have an other account?",
       "link_invalid": "Reset password link is invalid. Please enter password to update account information."
+    },
+    "setup_2fa": {
+      "title": "Setup 2FA",
+      "description": "Two-factor authentication is required. Choose a 2FA method for your account"
     }
   },
   "error_pages": {

@@ -126,7 +126,7 @@ const TwoFA = (props) => {
           <div className="mt-4">
             <Row gutter={[12, 12]}>
               {
-                (isCloud || userInfo?.pwd_user_type === global.constants.USER_TYPE.ENTERPRISE) && <Col lg={12} md={24} xs={24}>
+                factor2?.mail_otp && <Col lg={12} md={24} xs={24}>
                   <Card
                     className="w-full cursor-pointer"
                     bodyStyle={{ padding: 16 }}
@@ -135,15 +135,15 @@ const TwoFA = (props) => {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <MailOutlined style={{ fontSize: 24 }}/>
+                        <MailOutlined style={{ fontSize: 24 }} />
                         <p className="ml-2 font-semibold">
                           {t('security.two_fa.email_otp.name')}
-                        </p> 
+                        </p>
                       </div>
                       {
                         factor2?.mail_otp?.is_activate
-                          ? <CheckCircleOutlined className="text-primary" style={{ fontSize: 20 }}/>
-                          : <MinusCircleOutlined style={{ fontSize: 20 }}/>
+                          ? <CheckCircleOutlined className="text-primary" style={{ fontSize: 20 }} />
+                          : <MinusCircleOutlined style={{ fontSize: 20 }} />
                       }
                     </div>
                   </Card>
@@ -158,15 +158,15 @@ const TwoFA = (props) => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <MobileOutlined style={{ fontSize: 24 }}/>
+                      <MobileOutlined style={{ fontSize: 24 }} />
                       <p className="ml-2 font-semibold">
                         {t('security.two_fa.smart_otp.name')}
-                      </p> 
+                      </p>
                     </div>
                     {
                       factor2?.smart_otp?.is_activate
-                        ? <CheckCircleOutlined className="text-primary" style={{ fontSize: 20 }}/>
-                        : <MinusCircleOutlined style={{ fontSize: 20 }}/>
+                        ? <CheckCircleOutlined className="text-primary" style={{ fontSize: 20 }} />
+                        : <MinusCircleOutlined style={{ fontSize: 20 }} />
                     }
                   </div>
                 </Card>

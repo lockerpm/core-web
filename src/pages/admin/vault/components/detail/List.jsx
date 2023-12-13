@@ -182,21 +182,21 @@ const ListItemDetails = (props) => {
         {
           key: 'wallet_app',
           name: t('cipher.crypto_backup.wallet_app'),
-          value: cipher.cryptoWallet.walletApp?.name ? <div>
+          value: cipher.cryptoWallet?.walletApp?.name ? <div>
             <Image
               className={'mr-2'}
               style={{ width: 28, height: 28 }}
               preview={false}
-              src={cipher.cryptoWallet.walletApp.icon}
+              src={cipher.cryptoWallet?.walletApp.icon}
             />
-            {cipher.cryptoWallet.walletApp.name}
+            {cipher.cryptoWallet?.walletApp.name}
           </div> : <></>
         },
         {
           key: 'username',
           name: t('cipher.password.username'),
           value: <TextCopy
-            value={cipher.cryptoWallet.username}
+            value={cipher.cryptoWallet?.username}
             showIcon={true}
             show={showText}
             align="between"
@@ -206,7 +206,7 @@ const ListItemDetails = (props) => {
           key: 'password',
           name: t('cipher.password.password'),
           value: <TextCopy
-            value={cipher.cryptoWallet.password}
+            value={cipher.cryptoWallet?.password}
             showIcon={true}
             show={showText}
             isPassword={true}
@@ -216,7 +216,7 @@ const ListItemDetails = (props) => {
           key: 'password_strength',
           name: t('common.password_strength'),
           value: <PasswordStrength
-            password={cipher.cryptoWallet.password}
+            password={cipher.cryptoWallet?.password}
             showProgress={false}
           />
         },
@@ -224,7 +224,7 @@ const ListItemDetails = (props) => {
           key: 'wallet_address',
           name: t('cipher.crypto_backup.wallet_address'),
           value: <TextCopy
-            value={cipher.cryptoWallet.address}
+            value={cipher.cryptoWallet?.address}
             showIcon={true}
             show={showText}
             align="between"
@@ -234,7 +234,7 @@ const ListItemDetails = (props) => {
           key: 'private_key',
           name: t('cipher.crypto_backup.private_key'),
           value: <TextCopy
-            value={cipher.cryptoWallet.privateKey}
+            value={cipher.cryptoWallet?.privateKey}
             showIcon={true}
             show={showText}
             isPassword={true}
@@ -244,13 +244,13 @@ const ListItemDetails = (props) => {
           key: 'seed',
           name: t('cipher.crypto_backup.seed_phrase'),
           value: <TextCopy
-            value={cipher.cryptoWallet.seed}
+            value={cipher.cryptoWallet?.seed}
             showIcon={true}
             align="between"
             display={
               <SeedPhrase
                 className="w-3/4"
-                value={common.formatText(cipher.cryptoWallet.seed, showText)} 
+                value={common.formatText(cipher.cryptoWallet?.seed, showText)}
                 readOnly={true}
               />
             }
@@ -261,7 +261,7 @@ const ListItemDetails = (props) => {
           name: t('cipher.crypto_backup.networks'),
           value: <Space size={[16, 16]} wrap>
             {
-              (cipher.cryptoWallet.networks || []).map((n) => {
+              (cipher.cryptoWallet?.networks || []).map((n) => {
                 const network = global.constants.CHAINS.find((network) => n.alias === network.alias)
                 return <div key={network.alias}>
                   <Image
@@ -545,7 +545,7 @@ const ListItemDetails = (props) => {
         key: 'shared_with',
         name: t('shares.shared_with'),
         hide: !cipher?.organizationId || isPublic,
-        value: <SharedWith cipher={cipher}/>
+        value: <SharedWith cipher={cipher} />
       },
     ].filter((c) => !c.hide).map((c) => { delete c.hide; return c })
   }, [
@@ -574,7 +574,7 @@ const ListItemDetails = (props) => {
           </List.Item>
         )}
       />
-      <Divider className="my-1"/>
+      <Divider className="my-1" />
     </div>
   );
 }

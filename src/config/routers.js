@@ -30,6 +30,11 @@ export default {
       path: '/otp-code',
       element: 'OtpCode',
     },
+    {
+      name: keys.SETUP_2FA,
+      path: '/setup-2fa',
+      element: 'Setup2FA',
+    },
   ],
 
   ERROR_ROUTERS: [

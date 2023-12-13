@@ -16,6 +16,10 @@ import resourceServices from './resource'
 import i18n from '../config/i18n'
 
 const init_server = async () => {
+  const currentPage = common.getRouterByLocation(window.location)
+  if (currentPage.type === 'public') {
+    return
+  }
   global.store.dispatch(storeActions.toggleLoading(true))
   const serverType = await resourceServices.get_server_type();
   global.store.dispatch(storeActions.updateServerType(serverType.server_type))
@@ -428,6 +432,9 @@ async function unlock_to_vault(payload, query = null, callback = () => { }) {
     if (response.is_factor2) {
       global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
       global.navigate(global.keys.OTP_CODE, {}, query || {})
+    } else if (!response.is_factor2 && !response.access_token) {
+      global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
+      global.navigate(global.keys.SETUP_2FA, {}, query || {})
     } else {
       authServices.update_access_token_type(response.token_type)
       authServices.update_access_token(response.access_token);
