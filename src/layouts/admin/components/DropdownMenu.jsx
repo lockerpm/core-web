@@ -4,6 +4,7 @@ import {
   Button,
   Dropdown,
   Avatar,
+  Tag
 } from '@lockerpm/design';
 
 import '../css/components/SidebarTop.scss';
@@ -12,6 +13,7 @@ import { useTranslation } from "react-i18next";
 
 import authServices from "../../../services/auth";
 import global from '../../../config/global';
+import common from '../../../utils/common';
 
 import {
   LogoutOutlined,
@@ -29,6 +31,17 @@ function DropdownMenu() {
   const isEntepriseAdmin = useMemo(() => {
     return teams[0]?.role?.includes('admin')
   }, [teams])
+
+  const roleDisplay = useMemo(() => {
+    if (userInfo?.is_super_admin) {
+      return <span>{t('roles.supper_admin')}</span>
+    }
+    if (teams.length === 0) {
+      return <span>{userInfo?.email}</span>
+    }
+    const role = common.getUserRole(teams[0]?.role)
+    return <span>{teams[0]?.name} - {t(role?.label)}</span>
+  }, [teams, userInfo])
 
   const AvatarIcon = useMemo((size = 32) => {
     if (userInfo?.avatar) {
@@ -78,7 +91,8 @@ function DropdownMenu() {
             key: 'account',
             icon: AvatarIcon,
             label: <div className='account-info'>
-              <div>{userInfo?.name}</div>
+              <div className='font-semibold'>{userInfo?.name}</div>
+              <p className='text-gray'>{roleDisplay}</p>
             </div>,
           },
           {

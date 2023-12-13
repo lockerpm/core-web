@@ -42,6 +42,7 @@ export default {
 
   // Enterprise
   SET_TEAMS: "SET_TEAMS",
+  SET_CURRENT_ENTERPRISE: "SET_CURRENT_ENTERPRISE",
 
   // Service
   SET_IS_READY: "SET_IS_READY",

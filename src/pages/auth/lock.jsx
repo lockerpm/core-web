@@ -55,7 +55,7 @@ const Lock = () => {
 
   useEffect(() => {
     if (userInfo?.email) {
-      if (userInfo.is_password_changed) {
+      if (userInfo.is_password_changed && !(userInfo.is_require_passwordless && userInfo.login_method === 'password')) {
         getServiceUser();
       } else {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })

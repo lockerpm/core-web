@@ -7,6 +7,14 @@ const updateTeams = teams => {
   }
 }
 
+const updateCurrentEnterprise = currentEnterprise => {
+  return {
+    type: actionTypes.SET_CURRENT_ENTERPRISE,
+    payload: currentEnterprise,
+  }
+}
+
 export default {
   updateTeams,
+  updateCurrentEnterprise
 }

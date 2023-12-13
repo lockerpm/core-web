@@ -114,7 +114,11 @@ const getRoutersByLocation = location => {
     menus.push(parent)
   }
   if (menu) {
-    menus.push(menu)
+    if (menu.key === route.name) {
+      menus.push({ ...menu, ...route })
+    } else {
+      menus.push(menu)
+    }
   }
   if (route.parent) {
     menus.push(route)

@@ -21,6 +21,7 @@ function LayoutBreadcrumb() {
   const userInfo = useSelector((state) => state.auth.userInfo);
   const allFolders = useSelector((state) => state.folder.allFolders);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const currentEnterprise = useSelector((state) => state.enterprise.currentEnterprise);
 
   useEffect(() => {
     if (location) {
@@ -43,18 +44,32 @@ function LayoutBreadcrumb() {
         }
         if (lastRouter.parent && !common.isEmpty(lastRouter.params)) {
           let label = t(lastRouter.label) || t('common.detail')
-          if (lastRouter.parent == global.keys.FOLDERS) {
-            label = allFolders.find((f) => f.id == lastRouter.params.folder_id)?.name || t('common.detail')
-          } else if (lastRouter.params.cipher_id) {
-            label = allCiphers.find((f) => f.id == lastRouter.params.cipher_id)?.name || t('common.detail')
-          }
-          setMenus([
-            ...brRouters.filter((m) => m.key !== lastRouter.key),
-            {
-              ...lastRouter,
-              label
+          if (currentEnterprise) {
+            setMenus([
+              ...brRouters.filter((m) => m.key !== lastRouter.key),
+              {
+                router: global.keys.ENTERPRISE_DASHBOARD,
+                label: currentEnterprise.name,
+              },
+              {
+                ...lastRouter,
+                label
+              }
+            ]);
+          } else {
+            if (lastRouter.parent == global.keys.FOLDERS) {
+              label = allFolders.find((f) => f.id == lastRouter.params.folder_id)?.name || t('common.detail')
+            } else if (lastRouter.params.cipher_id) {
+              label = allCiphers.find((f) => f.id == lastRouter.params.cipher_id)?.name || t('common.detail')
             }
-          ]);
+            setMenus([
+              ...brRouters.filter((m) => m.key !== lastRouter.key),
+              {
+                ...lastRouter,
+                label
+              }
+            ]);
+          }
         } else {
           setMenus([
             ...brRouters.filter((m) => m.key !== lastRouter.key),
@@ -65,7 +80,7 @@ function LayoutBreadcrumb() {
         setMenus(brRouters);
       }
     }
-  }, [location, currentPage, allFolders, allCiphers, locale])
+  }, [location, currentPage, allFolders, allCiphers, locale, currentEnterprise])
 
   const items = useMemo(() => {
     const breadcrumbRouters = menus.map((m, index) => ({

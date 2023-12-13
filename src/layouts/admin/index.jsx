@@ -19,6 +19,7 @@ import storeActions from "../../store/actions"
 
 import authServices from "../../services/auth"
 import commonServices from "../../services/common"
+import enterpriseServices from "../../services/enterprise"
 
 import global from "../../config/global"
 
@@ -29,11 +30,12 @@ function AdminLayout(props) {
   const dispatch = useDispatch()
   const location = useLocation()
 
-  const syncing = useSelector((state) => state.sync.syncing)
   const isMobile = useSelector((state) => state.system.isMobile)
   const collapsed = useSelector((state) => state.system.collapsed)
   const currentPage = useSelector((state) => state.system.currentPage)
   const isScrollToTop = useSelector((state) => state.system.isScrollToTop)
+  const userInfo = useSelector((state) => state.auth.userInfo)
+  const teams = useSelector((state) => state.enterprise.teams)
 
   const [respCollapsed, setRespCollapsed] = useState(false)
 
@@ -58,6 +60,24 @@ function AdminLayout(props) {
     dispatch(storeActions.updateIsScrollToTop(false))
     convertSize()
   }, [location])
+
+  useEffect(() => {
+    if (currentPage?.params?.enterprise_id) {
+      if (userInfo?.is_super_admin) {
+        enterpriseServices.get(currentPage?.params?.enterprise_id).then((response) => {
+          dispatch(storeActions.updateCurrentEnterprise(response))
+        }).catch(() => {
+          dispatch(storeActions.updateCurrentEnterprise(null))
+        })
+      } else if (teams[0]?.role?.includes('admin')) {
+        dispatch(storeActions.updateCurrentEnterprise(teams[0]))
+      } else {
+        dispatch(storeActions.updateCurrentEnterprise(null))
+      }
+    } else {
+      dispatch(storeActions.updateCurrentEnterprise(null))
+    }
+  }, [currentPage?.params?.enterprise_id, userInfo, teams])
 
   useEffect(() => {
     setInterval(() => {

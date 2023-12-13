@@ -43,6 +43,7 @@ export default {
   },
   enterprise: {
     teams: [],
+    currentEnterprise: null
   },
   service: {
     requirePairing: false,

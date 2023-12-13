@@ -31,6 +31,13 @@ function list() {
   })
 }
 
+function get(id) {
+  return request({
+    url: global.endpoint.ENTERPRISE.replace(":enterprise_id", id),
+    method: "get",
+  })
+}
+
 function dashboard(id, params = {}) {
   return request({
     url: global.endpoint.ENTERPRISE_DASHBOARD.replace(":enterprise_id", id),
@@ -67,6 +74,7 @@ export default {
   list_groups_members,
   list_user_group_members,
   list,
+  get,
   dashboard,
   create,
   update,
