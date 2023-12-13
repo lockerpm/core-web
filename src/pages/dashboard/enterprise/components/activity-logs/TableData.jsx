@@ -17,7 +17,8 @@ const TableData = (props) => {
     loading = false,
     className = "",
     data = [],
-    params = {}
+    params = {},
+    enterpriseId
   } = props
 
   const locale = useSelector((state) => state.system.locale)
@@ -44,8 +45,8 @@ const TableData = (props) => {
               <RouterLink
                 className={"font-semibold"}
                 label={record.user?.name || record.user?.email}
-                routerName={global.keys.ENTERPRISE_DASHBOARD}
-                routerParams={{ enterprise_id: record.id }}
+                routerName={global.keys.ENTERPRISE_MEMBER}
+                routerParams={{ enterprise_id: enterpriseId, member_id: record.id }}
               />
               <p className='text-xs'>{record.user?.email}</p>
             </div>

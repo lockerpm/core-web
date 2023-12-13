@@ -101,6 +101,7 @@ const EnterpriseDashboard = (props) => {
           <UsersBlocked
             loading={loading}
             data={data}
+            enterpriseId={enterpriseId}
           />
         </Col>
       </Row>

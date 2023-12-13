@@ -16,7 +16,8 @@ import { useTranslation } from "react-i18next";
 const UsersBlocked = (props) => {
   const {
     loading = false,
-    data = {}
+    data = {},
+    enterpriseId
   } = props;
 
   const { t } = useTranslation();
@@ -49,8 +50,8 @@ const UsersBlocked = (props) => {
                 <RouterLink
                   className={"font-semibold"}
                   label={item.full_name}
-                  routerName={global.keys.ENTERPRISE_DASHBOARD}
-                  routerParams={{ enterprise_id: item.id }}
+                  routerName={global.keys.ENTERPRISE_MEMBER}
+                  routerParams={{ enterprise_id: enterpriseId, member_id: item.id }}
                 />
                 <p className='text-xs'>{item.email}</p>
               </div>

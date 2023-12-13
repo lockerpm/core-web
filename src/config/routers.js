@@ -246,6 +246,12 @@ export default {
       element: 'EnterpriseMembers',
     },
     {
+      name: keys.ENTERPRISE_MEMBER,
+      path: '/enterprises/:enterprise_id/users/:member_id',
+      parent: keys.ENTERPRISE_MEMBERS,
+      element: 'EnterpriseMember',
+    },
+    {
       name: keys.ENTERPRISE_GROUPS,
       path: '/enterprises/:enterprise_id/groups',
       element: 'EnterpriseGroups',

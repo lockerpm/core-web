@@ -144,11 +144,13 @@ const EnterpriseActivityLogs = (props) => {
           loading={loading}
           data={activityLogs}
           params={params}
+          enterpriseId={enterpriseId}
         /> : <TableData
           className='mt-4'
           loading={loading}
           data={activityLogs}
           params={params}
+          enterpriseId={enterpriseId}
         />
       }
       {
