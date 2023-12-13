@@ -80,12 +80,15 @@ const EnterpriseMembers = (props) => {
         statuses: global.constants.STATUS.ACCESSED
       }
     }
-    return {
-      ...p,
-      is_activated: 1,
-      block_login: 0,
-      statuses: global.constants.STATUS.ACCESSED
+    if (selectedTab === 'active') {
+      return {
+        ...p,
+        is_activated: 1,
+        block_login: 0,
+        statuses: global.constants.STATUS.ACCESSED
+      }
     }
+    return {}
   }, [params, selectedTab])
 
   useEffect(() => {

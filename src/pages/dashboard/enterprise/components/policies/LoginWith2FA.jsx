@@ -42,6 +42,10 @@ const LoginWith2FA = (props) => {
   }, [JSON.stringify(policy), visible])
 
   const handleSave = async (enabled = policy.enabled) => {
+    if (!policy.enabled) {
+      setVisible(true);
+      return;
+    }
     setCallingAPI(true);
     await enterprisePolicyServices.two_fa(enterpriseId, {
       enabled,
@@ -108,7 +112,7 @@ const LoginWith2FA = (props) => {
             <Button
               type="primary"
               loading={callingAPI}
-              onClick={() => handleSave()}
+              onClick={() => handleSave(true)}
             >
               {t('button.save')}
             </Button>

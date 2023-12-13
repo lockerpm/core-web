@@ -43,6 +43,10 @@ const PasswordRequirements = (props) => {
   }, [JSON.stringify(policy), visible])
 
   const handleSave = async (enabled = policy.enabled) => {
+    if (!policy.enabled) {
+      setVisible(true);
+      return;
+    }
     setCallingAPI(true);
     await enterprisePolicyServices.password_requirement(enterpriseId, {
       enabled,
@@ -109,7 +113,7 @@ const PasswordRequirements = (props) => {
             <Button
               type="primary"
               loading={callingAPI}
-              onClick={() => handleSave()}
+              onClick={() => handleSave(true)}
             >
               {t('button.save')}
             </Button>

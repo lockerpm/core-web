@@ -196,7 +196,7 @@ function FormData(props) {
             <Trans
               i18nKey='enterprise_members.form.new_member_invite'
               values={{
-                mail: t('email_setting.title'),
+                mail: t('email_settings.title'),
               }}
             />
           </div>

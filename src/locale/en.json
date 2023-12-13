@@ -1155,7 +1155,7 @@
     },
     "form": {
       "title": "Invite people to company",
-      "username_description": "Email of new member",
+      "username_description": "Add user(s) email and press the Enter key",
       "role_description": "Role of new member(s)",
       "full_name_description": "Full name of new member",
       "new_member_info": "New member information",

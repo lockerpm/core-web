@@ -137,7 +137,7 @@ const Authenticate = () => {
       if (currentPage?.query?.token) {
         await userServices.reset_password({
           username: preLogin.email,
-          full_name: data.full_name || preLogin.name,
+          full_name: data.full_name || newFullName,
           new_password: data.new_password,
           token: currentPage?.query?.token,
           login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
@@ -145,10 +145,10 @@ const Authenticate = () => {
       } else {
         authServices.update_access_token_type(userSession.token_type)
         authServices.update_access_token(userSession.access_token);
-        if (newFullName) {
+        if (newFullName || data.full_name) {
           await userServices.update_users_me({
             email: preLogin?.email,
-            full_name: newFullName,
+            full_name: newFullName || data.full_name,
           })
         }
         await coreServices.unlock(userSession);
