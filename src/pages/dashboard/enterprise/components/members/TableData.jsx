@@ -4,11 +4,12 @@ import { Table, Space, Avatar, Tag } from "@lockerpm/design"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, PasswordStrength } from "../../../../../components"
+import { TextCopy, PasswordStrength, RouterLink } from "../../../../../components"
 import Actions from "./Actions"
 import Role from "./Role"
 
 import common from "../../../../../utils/common"
+import global from "../../../../../config/global"
 
 const TableData = (props) => {
   const { t } = useTranslation()
@@ -41,7 +42,12 @@ const TableData = (props) => {
           <div className='flex items-center'>
             <Avatar src={record.avatar} />
             <div className='ml-2'>
-              <p className='font-semibold'>{record.full_name}</p>
+              <RouterLink
+                className={'font-semibold'}
+                label={record.full_name}
+                routerName={global.keys.ENTERPRISE_MEMBER}
+                routerParams={{ enterprise_id: enterpriseId, member_id: record.id }}
+              />
               <p>{record.email}</p>
             </div>
           </div>

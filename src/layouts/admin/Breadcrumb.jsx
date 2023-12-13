@@ -46,11 +46,11 @@ function LayoutBreadcrumb() {
           let label = t(lastRouter.label) || t('common.detail')
           if (currentEnterprise) {
             setMenus([
-              ...brRouters.filter((m) => m.key !== lastRouter.key),
               {
                 router: global.keys.ENTERPRISE_DASHBOARD,
                 label: currentEnterprise.name,
               },
+              ...brRouters.filter((m) => m.key !== lastRouter.key),
               {
                 ...lastRouter,
                 label
