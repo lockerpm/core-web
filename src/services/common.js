@@ -17,7 +17,7 @@ import i18n from '../config/i18n'
 
 const init_server = async () => {
   const currentPage = common.getRouterByLocation(window.location)
-  if (currentPage.type === 'public') {
+  if (currentPage?.type === 'public') {
     return
   }
   global.store.dispatch(storeActions.toggleLoading(true))
