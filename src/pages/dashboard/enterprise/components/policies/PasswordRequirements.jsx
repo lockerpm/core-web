@@ -43,10 +43,6 @@ const PasswordRequirements = (props) => {
   }, [JSON.stringify(policy), visible])
 
   const handleSave = async (enabled = policy.enabled) => {
-    if (!policy.enabled) {
-      setVisible(true);
-      return;
-    }
     setCallingAPI(true);
     await enterprisePolicyServices.password_requirement(enterpriseId, {
       enabled,
@@ -79,7 +75,13 @@ const PasswordRequirements = (props) => {
           </p>
           <Switch
             checked={policy.enabled}
-            onChange={(v) => handleSave(v)}
+            onChange={(v) => {
+              if (v) {
+                setVisible(true)
+              } else {
+                handleSave(false)
+              }
+            }}
           />
         </div>
         <p className="mb-2">

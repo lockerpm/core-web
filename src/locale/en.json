@@ -99,7 +99,8 @@
     "seconds": "seconds",
     "minutes": "minutes",
     "hours": "hours",
-    "joined_at": "Joined at"
+    "joined_at": "Joined at",
+    "option": "Option"
   },
   "button": {
     "add": "Add",

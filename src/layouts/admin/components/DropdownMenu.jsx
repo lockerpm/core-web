@@ -12,6 +12,9 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import authServices from "../../../services/auth";
+import userServices from '../../../services/user';
+import commonServices from '../../../services/common';
+
 import global from '../../../config/global';
 import common from '../../../utils/common';
 
@@ -80,7 +83,20 @@ function DropdownMenu() {
       } else {
         global.navigate(global.keys.ENTERPRISE_DASHBOARD, { enterprise_id: teams[0]?.id })
       }
+    } else if (item.key === global.constants.LANGUAGE.EN || item.key === global.constants.LANGUAGE.VI) {
+      handleUpdateAccount(item.key)
     }
+  }
+
+  const handleUpdateAccount = async (language) => {
+    await userServices.update_users_me({
+      email: userInfo.email,
+      language: language,
+    }).then(() => {
+      commonServices.fetch_user_info();
+    }).catch((error) => {
+      global.pushError(error)
+    })
   }
 
   return (
