@@ -99,7 +99,8 @@
     "seconds": "giây",
     "minutes": "phút",
     "hours": "giờ",
-    "joined_at": "Tham gia vào"
+    "joined_at": "Tham gia vào",
+    "option": "Chọn"
   },
   "button": {
     "add": "Thêm",
@@ -1148,7 +1149,7 @@
     },
     "form": {
       "title": "Mời vào công ty",
-      "username_description": "Email của thành viên mới",
+      "username_description": "Nhập email người dùng mới, và nhấn phím Enter",
       "role_description": "Vai trò của thành viên mới",
       "full_name_description": "Tên đầy đủ của thành viên mới",
       "new_member_info": "Thông tin thành viên mới",

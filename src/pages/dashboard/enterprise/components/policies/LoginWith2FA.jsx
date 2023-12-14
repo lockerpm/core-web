@@ -42,10 +42,6 @@ const LoginWith2FA = (props) => {
   }, [JSON.stringify(policy), visible])
 
   const handleSave = async (enabled = policy.enabled) => {
-    if (!policy.enabled) {
-      setVisible(true);
-      return;
-    }
     setCallingAPI(true);
     await enterprisePolicyServices.two_fa(enterpriseId, {
       enabled,
@@ -78,7 +74,13 @@ const LoginWith2FA = (props) => {
           </p>
           <Switch
             checked={policy.enabled}
-            onChange={(v) => handleSave(v)}
+            onChange={(v) => {
+              if (v) {
+                setVisible(true)
+              } else {
+                handleSave(false)
+              }
+            }}
           />
         </div>
         <p className="mb-2">
