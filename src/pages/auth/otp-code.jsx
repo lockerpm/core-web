@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
-import AuthLogo from '../../assets/images/logos/auth-logo.svg';
+import Logo from "./components/Logo";
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
@@ -96,14 +96,7 @@ const OtpCode = () => {
           height: 'max-content'
         }}
       >
-        <div className="flex items-center justify-center mb-8">
-          <Image
-            className='icon-logo'
-            src={AuthLogo}
-            preview={false}
-            height={48}
-          />
-        </div>
+        <Logo />
         <div className="flex items-center justify-center">
           <Card
             className="w-[400px]"
@@ -115,52 +108,52 @@ const OtpCode = () => {
               step === 0 && <div>
                 <div className="w-full mb-4">
                   <p className="text-2xl font-semibold">
-                    { t('auth_pages.otp_code.sign_in_account') }
+                    {t('auth_pages.otp_code.sign_in_account')}
                   </p>
-                  <p>{ t('auth_pages.otp_code.verify_identity') }</p>
+                  <p>{t('auth_pages.otp_code.verify_identity')}</p>
                 </div>
                 <div>
-                <Radio.Group
-                  name="radiogroup"
-                  value={identity}
-                  className="w-full"
-                  onChange={(e) => setIdentity(e.target.value)}
-                >
-                  {
-                    mailOtp?.is_active && <Card
-                      className="w-full mb-3 cursor-pointer"
-                      bodyStyle={{ padding: 12 }}
-                      style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.MAIL ? green[6] : '' }}
-                      onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.MAIL)}
-                    >
-                      <Radio value={global.constants.FACTOR2_IDENTITY.MAIL}>
-                        <div className="flex items-center">
-                          <MailOutlined />
-                          <p className="ml-2">
-                            {t('security.two_fa.email_otp.name')}
-                          </p> 
-                        </div>
-                      </Radio>
-                    </Card>
-                  }
-                  {
-                    smartOtp?.is_active && <Card
-                      className="w-full cursor-pointer"
-                      bodyStyle={{ padding: 12 }}
-                      style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.SMART_OTP ? green[6] : '' }}
-                      onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.SMART_OTP)}
-                    >
-                      <Radio value={global.constants.FACTOR2_IDENTITY.SMART_OTP}>
-                      <div className="flex items-center">
-                        <MobileOutlined />
-                        <p className="ml-2">
-                          {t('security.two_fa.smart_otp.name')}
-                        </p> 
-                      </div>
-                      </Radio>
-                    </Card>
-                  }
-                </Radio.Group>
+                  <Radio.Group
+                    name="radiogroup"
+                    value={identity}
+                    className="w-full"
+                    onChange={(e) => setIdentity(e.target.value)}
+                  >
+                    {
+                      mailOtp?.is_active && <Card
+                        className="w-full mb-3 cursor-pointer"
+                        bodyStyle={{ padding: 12 }}
+                        style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.MAIL ? green[6] : '' }}
+                        onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.MAIL)}
+                      >
+                        <Radio value={global.constants.FACTOR2_IDENTITY.MAIL}>
+                          <div className="flex items-center">
+                            <MailOutlined />
+                            <p className="ml-2">
+                              {t('security.two_fa.email_otp.name')}
+                            </p>
+                          </div>
+                        </Radio>
+                      </Card>
+                    }
+                    {
+                      smartOtp?.is_active && <Card
+                        className="w-full cursor-pointer"
+                        bodyStyle={{ padding: 12 }}
+                        style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.SMART_OTP ? green[6] : '' }}
+                        onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.SMART_OTP)}
+                      >
+                        <Radio value={global.constants.FACTOR2_IDENTITY.SMART_OTP}>
+                          <div className="flex items-center">
+                            <MobileOutlined />
+                            <p className="ml-2">
+                              {t('security.two_fa.smart_otp.name')}
+                            </p>
+                          </div>
+                        </Radio>
+                      </Card>
+                    }
+                  </Radio.Group>
                 </div>
               </div>
             }
@@ -168,9 +161,9 @@ const OtpCode = () => {
               step === 1 && <div>
                 <div className="w-full mb-4">
                   <p className="text-2xl font-semibold">
-                    { t('auth_pages.otp_code.title') }
+                    {t('auth_pages.otp_code.title')}
                   </p>
-                  <p>{ t('auth_pages.otp_code.description') }</p>
+                  <p>{t('auth_pages.otp_code.description')}</p>
                 </div>
                 <Form
                   form={form}
