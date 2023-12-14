@@ -9,7 +9,8 @@ import {
   Button
 } from '@lockerpm/design';
 
-import AuthLogo from '../../assets/images/logos/auth-logo.svg'
+import Logo from "./components/Logo";
+
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import { useSelector } from 'react-redux';
@@ -63,13 +64,7 @@ const SingUp = () => {
           height: 'max-content'
         }}
       >
-        <div className="flex items-center justify-center mb-8">
-          <Image
-            className='icon-logo'
-            src={AuthLogo}
-            preview={false}
-          />
-        </div>
+        <Logo />
         <div className="flex items-center justify-center">
           <Card
             className="w-[400px]"

@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import './css/auth.scss';
 
 import {
-  Image,
   Spin
 } from '@lockerpm/design';
 
-import AuthLogo from '../../assets/images/logos/auth-logo.svg'
+import Logo from "./components/Logo";
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -55,14 +54,7 @@ const SingIn = () => {
             height: 'max-content'
           }}
         >
-          <div className="flex items-center justify-center mb-8">
-            <Image
-              className='icon-logo'
-              src={AuthLogo}
-              preview={false}
-              height={48}
-            />
-          </div>
+          <Logo />
           {
             !isLoading && <div>
               {

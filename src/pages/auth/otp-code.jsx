@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
-import AuthLogo from '../../assets/images/logos/auth-logo.svg';
+import Logo from "./components/Logo";
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
@@ -96,14 +96,7 @@ const OtpCode = () => {
           height: 'max-content'
         }}
       >
-        <div className="flex items-center justify-center mb-8">
-          <Image
-            className='icon-logo'
-            src={AuthLogo}
-            preview={false}
-            height={48}
-          />
-        </div>
+        <Logo />
         <div className="flex items-center justify-center">
           <Card
             className="w-[400px]"
