@@ -116,7 +116,7 @@ function DropdownMenu() {
             label: <span>
               <span className='font-semibold'>
                 {t('common.language')}:</span> <span>
-                {t(global.constants.LANGUAGES.find((l, index) => l.value === locale || index === 0).label)}
+                {t(global.constants.LANGUAGES.find((l) => l.value == userInfo?.language).label)}
               </span>
             </span>,
             children: global.constants.LANGUAGES.map((l) => ({
