@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import '../css/index.scss';
-import Logo from '../../../assets/images/logos/black-with-text-logo.svg';
+import Logo from '../../../assets/images/logos/auth-logo.svg';
 
 import common from "../../../utils/common";
 import quickShareServices from "../../../services/quick-share";
