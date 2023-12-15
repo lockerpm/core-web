@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 
 import Logo from "./components/Logo";
-import EnterOtp from "./components/EnterOtp";
+import EnterOtp from "./components/otp-code/EnterOtp";
 
 import authServices from "../../services/auth";
 import userServices from "../../services/user";
@@ -76,6 +76,7 @@ const OtpCode = () => {
               factor2={factor2}
               isAuth={true}
               onVerify={onVerify}
+              onBack={() => global.navigate(global.keys.BACK)}
             />
           </Card>
         </div>

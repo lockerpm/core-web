@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
-import EnterOtp from "./components/EnterOtp";
+import EnterOtp from "./components/otp-code/EnterOtp";
 
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
@@ -49,18 +49,24 @@ const Authenticate = () => {
   }, [])
 
   useEffect(() => {
-    if (preLogin?.is_password_changed && !(preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
-      global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email });
-      return;
-    }
-    if (currentPage?.query?.token) {
-      if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
-        setStep(2)
-      } else {
-        setStep(1)
+    if (preLogin) {
+      if (!preLogin?.is_factor2 && preLogin?.require_2fa) {
+        global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
+        return;
       }
-    } else {
-      setStep(0)
+      if (preLogin?.is_password_changed && !(preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
+        global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email });
+        return;
+      }
+      if (currentPage?.query?.token) {
+        if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+          setStep(2)
+        } else {
+          setStep(1)
+        }
+      } else {
+        setStep(0)
+      }
     }
   }, [preLogin])
 
@@ -102,9 +108,7 @@ const Authenticate = () => {
     await userServices.users_prelogin({ email: currentPage.query?.email }).then(async (response) => {
       setPreLogin(response)
     }).catch((error) => {
-      setIsPair(false)
-      setPreLogin(null)
-      global.pushError(error)
+      global.navigate(global.keys.SIGN_IN, {}, { email: currentPage.query?.email })
     })
     setLoading(false)
   }
@@ -242,6 +246,7 @@ const Authenticate = () => {
                       factor2={factor2}
                       isAuth={true}
                       onVerify={onVerify}
+                      onBack={() => setFactor2(null)}
                     /> : <Form
                       form={form}
                       layout="vertical"

@@ -84,7 +84,9 @@ const SignInForm = (props) => {
   }
 
   const handleCheckPwl = async () => {
-    if (!preLogin.is_password_changed || (preLogin.login_method === 'password' && preLogin.require_passwordless )) {
+    if (!preLogin.is_factor2 && preLogin.require_2fa) {
+      global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email })
+    } else if (!preLogin.is_password_changed || (preLogin.login_method === 'password' && preLogin.require_passwordless)) {
       global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email })
     } else if (preLogin.sync_all_platforms || preLogin.login_method === 'passwordless') {
       setIsPair((preLogin?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)

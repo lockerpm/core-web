@@ -17,7 +17,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from "../../../config/global";
+import global from "../../../../config/global";
 
 import { green } from '@ant-design/colors';
 
@@ -28,7 +28,8 @@ const EnterOtp = (props) => {
     isAuth = false,
     callingAPI = false,
     factor2 = {},
-    onVerify = () => { }
+    onVerify = () => { },
+    onBack = () => { }
   } = props
 
   const locale = useSelector((state) => state.system.locale);
@@ -163,7 +164,7 @@ const EnterOtp = (props) => {
           disabled={callingAPI}
           onClick={() => {
             if (step === 0) {
-              global.navigate(global.keys.BACK);
+              onBack();
             } else {
               setStep(0)
             }
