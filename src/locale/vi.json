@@ -359,7 +359,14 @@
     "authenticate": {
       "title": "Thiết lập lại mật khẩu",
       "description": "Vui lòng tạo mật khẩu mới thay cho mật khẩu tạm thời.",
-      "note": "Đã có tài khoản?"
+      "setup_pwl": "Thiết lập Đăng nhập không cần mật khẩu",
+      "setup_pwl_description": "Đăng nhập không cần mật khẩu được yêu cầu trên tài khoản của bạn. Thiết lập Đăng nhập không cần mật khẩu để tiếp tục.",
+      "note": "Đã có tài khoản khác?",
+      "link_invalid": "Liên kết đặt lại mật khẩu không hợp lệ. Vui lòng nhập mật khẩu để cập nhật thông tin tài khoản."
+    },
+    "setup_2fa": {
+      "title": "Thiết lập Xác thực hai yếu tố",
+      "description": "Xác thực hai yếu tố được yêu cầu. Chọn một phương pháp 2FA cho tài khoản của bạn."
     }
   },
   "error_pages": {
