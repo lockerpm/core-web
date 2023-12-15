@@ -56,10 +56,12 @@ const Lock = () => {
 
   useEffect(() => {
     if (userInfo?.email) {
-      if (userInfo.is_password_changed && !(userInfo.is_require_passwordless && userInfo.login_method === 'password')) {
-        getServiceUser();
-      } else {
+      if (!userInfo?.is_factor2 && userInfo?.require_2fa) {
+        global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
+      } else if (!userInfo.is_password_changed || (userInfo.is_require_passwordless && userInfo.login_method === 'password')) {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })
+      } else {
+        getServiceUser();
       }
     }
   }, [userInfo?.email, isConnected])

@@ -71,7 +71,7 @@ function access_token_type() {
 async function redirect_login() {
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(window.location)
-  if (currentPage?.name === global.keys.AUTHENTICATE) {
+  if ([global.keys.AUTHENTICATE, global.keys.SETUP_2FA].includes(currentPage?.name)) {
     return;
   } else if (access_token()) {
     const isError = currentPage?.name === global.keys.ADMIN_ERROR
