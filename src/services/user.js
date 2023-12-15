@@ -129,6 +129,7 @@ async function users_session_otp(data) {
       device_type: global.jsCore.platformUtilsService.getDevice(),
       device_identifier: authServices.device_id(),
       method: data.method,
+      save_device: data.save_device || false,
       otp: data.otp
     }
   });

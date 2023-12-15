@@ -953,7 +953,7 @@
     "title": "Security Tools",
     "description": "Locker manager security tools",
     "password_generate": {
-      "title": "Password Generate",
+      "title": "Password Generator",
       "description": "Create secure passwords for your accounts"
     },
     "password_health": {
