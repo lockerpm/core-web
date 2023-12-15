@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
+import EnterOtp from "./components/EnterOtp";
 
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
@@ -27,6 +28,7 @@ const Authenticate = () => {
   const [preLogin, setPreLogin] = useState(null)
   const [step, setStep] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [factor2, setFactor2] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
   const [currentPassword, setCurrentPassword] = useState(null)
@@ -115,20 +117,43 @@ const Authenticate = () => {
       password: values.current_password,
     }
     await userServices.users_session(payload).then(async (response) => {
-      setUserSession({ ...payload, ...response });
-      setCurrentPassword(values.current_password);
-      if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
-        setStep(2)
+      if (response.is_factor2) {
+        setFactor2(response)
+        setCurrentPassword(values.current_password);
       } else {
-        setStep(1)
+        setFactor2(null)
+        setUserSession({ ...payload, ...response });
+        setCurrentPassword(values.current_password);
+        if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+          setStep(2)
+        } else {
+          setStep(1)
+        }
       }
     }).catch((error) => {
+      setFactor2(null)
       setCurrentPassword(null)
       setStep(0)
       global.pushError(error)
     }).finally(() => {
       setCallingAPI(false)
     });
+  }
+
+  const onVerify = async (payload) => {
+    setCallingAPI(true)
+    await userServices.users_session_otp(payload).then(async (response) => {
+      setUserSession({ ...payload, ...response });
+      if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+        setStep(2)
+      } else {
+        setStep(1)
+      }
+      setFactor2(null)
+    }).catch((error) => {
+      global.pushError(error)
+    })
+    setCallingAPI(false)
   }
 
   const handleSave = async (data) => {
@@ -210,35 +235,44 @@ const Authenticate = () => {
                 {title}
               </p>
               {
-                step === 0 && <Form
-                  form={form}
-                  layout="vertical"
-                  labelAlign={'left'}
-                  disabled={callingAPI}
-                  onFinish={handleFirstSignIn}
-                >
-                  <Form.Item
-                    name={'current_password'}
-                    label={t('change_password.current_password')}
-                    rules={[
-                      global.rules.REQUIRED(t("change_password.current_password")),
-                    ]}
-                  >
-                    <Input.Password
-                      size='large'
-                      placeholder={t('placeholder.enter')}
-                    />
-                  </Form.Item>
-                  <Button
-                    className="mt-4 w-full"
-                    type="primary"
-                    size="large"
-                    htmlType="submit"
-                    loading={callingAPI}
-                  >
-                    {t('button.continue')}
-                  </Button>
-                </Form>
+                step === 0 && <div>
+                  {
+                    factor2 ? <EnterOtp
+                      callingAPI={callingAPI}
+                      factor2={factor2}
+                      isAuth={true}
+                      onVerify={onVerify}
+                    /> : <Form
+                      form={form}
+                      layout="vertical"
+                      labelAlign={'left'}
+                      disabled={callingAPI}
+                      onFinish={handleFirstSignIn}
+                    >
+                      <Form.Item
+                        name={'current_password'}
+                        label={t('change_password.current_password')}
+                        rules={[
+                          global.rules.REQUIRED(t("change_password.current_password")),
+                        ]}
+                      >
+                        <Input.Password
+                          size='large'
+                          placeholder={t('placeholder.enter')}
+                        />
+                      </Form.Item>
+                      <Button
+                        className="mt-4 w-full"
+                        type="primary"
+                        size="large"
+                        htmlType="submit"
+                        loading={callingAPI}
+                      >
+                        {t('button.continue')}
+                      </Button>
+                    </Form>
+                  }
+                </div>
               }
               {
                 step === 1 && <Form
