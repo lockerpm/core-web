@@ -144,7 +144,12 @@ const PasswordlessForm = (props) => {
   }
 
   const redirectByError = async (error) => {
-    global.pushError(t(`passwordless.errors.${error.code}`))
+    console.log('Error', error);
+    if (error.code) {
+      global.pushError({ message: t(`passwordless.errors.${error.code}`) })
+    } else {
+      global.pushError(error)
+    }
     resetState()
     setPasswordless(null)
     setPin(null)
