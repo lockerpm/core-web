@@ -14,6 +14,7 @@ import PasswordSecurity from "./components/dashboard/PasswordSecurity";
 import UsersBlocked from "./components/dashboard/UsersBlocked";
 
 import { } from 'react-redux';
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import common from "../../../utils/common";
@@ -24,6 +25,7 @@ import dayjs from 'dayjs'
 const EnterpriseDashboard = (props) => {
   const { } = props;
   const { t } = useTranslation();
+  const location = useLocation();
 
   const currentPage = common.getRouterByLocation(location)
   const enterpriseId = currentPage?.params.enterprise_id

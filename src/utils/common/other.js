@@ -55,14 +55,11 @@ const getColorByIndex = index => {
 }
 
 const openNewTab = (link) => {
-  if (!link.match(/^https?:\/\//i)) {
-    link = 'http://' + link
-  }
-  const regex = /^(ftp|http|https):\/\/[^ "]+$/
+  const regex = global.patterns.LINK
   if (regex.test(link)) {
     window.open(link, '_blank')
   } else {
-    this.notify(this.$t('errors.invalid_url'), 'warning')
+    global.pushError(t('validation', { name: 'URL' }))
   }
 }
 

@@ -69,7 +69,7 @@ const TableData = (props) => {
         title: t("common.status"),
         dataIndex: "status",
         key: "status",
-        align: "center",
+        align: "left",
         width: 120,
         render: (_, record) => {
           const status = common.getStatus(record.status)

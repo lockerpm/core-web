@@ -10,7 +10,7 @@ import {
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Logo from "./components/Logo";
 import EnterOtp from "./components/otp-code/EnterOtp";
@@ -27,12 +27,13 @@ import common from "../../utils/common";
 const OtpCode = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const factor2 = useSelector((state) => state.auth.factor2);
 
   const [callingAPI, setCallingAPI] = useState(false);
 
-  const query = common.convertStringToQuery(window.location.search);
+  const query = common.convertStringToQuery(location.search);
 
   const onVerify = async (payload) => {
     setCallingAPI(true)

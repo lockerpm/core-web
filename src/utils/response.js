@@ -13,7 +13,7 @@ export async function handleResponseErrorMessage(err) {
   if ([403, 500, 502].includes(err.response.status)) {
     const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
     if (!isLocked) {
-      const currentPage = common.getRouterByLocation(window.location)
+      const currentPage = common.getRouterByLocation(global.location)
       global.navigate(global.keys.ADMIN_ERROR, currentPage.params || {}, { code: err.response.status })
     }
   }

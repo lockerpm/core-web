@@ -8,6 +8,7 @@ import {
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import global from "../../../../config/global";
 
@@ -24,8 +25,9 @@ const SignInForm = (props) => {
     setStep = () => { }
   } = props;
   const { t } = useTranslation();
+  const location = useLocation();
 
-  const currentPage = common.getRouterByLocation(window.location);
+  const currentPage = common.getRouterByLocation(location);
 
   const locale = useSelector((state) => state.system.locale);
   const isDesktop = useSelector((state) => state.system.isDesktop);

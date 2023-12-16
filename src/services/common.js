@@ -16,7 +16,7 @@ import resourceServices from './resource'
 import i18n from '../config/i18n'
 
 const init_server = async () => {
-  const currentPage = common.getRouterByLocation(window.location)
+  const currentPage = common.getRouterByLocation(global.location)
   if (currentPage?.type === 'public') {
     return
   }
@@ -457,11 +457,7 @@ async function unlock_to_vault(payload, query = null, callback = () => { }) {
 
 async function reset_service() {
   if (global.store.getState().service.isConnected) {
-    if (global.store.getState().system.isDesktop) {
-      await service.resetGRPC();
-    } else {
-      await service.resetBackgroundService();
-    }
+    await service.resetBackgroundService();
   }
 }
 

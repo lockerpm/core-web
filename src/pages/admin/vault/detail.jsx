@@ -26,7 +26,6 @@ const VaultDetail = (props) => {
   const dispatch = useDispatch();
 
   const currentPage = common.getRouterByLocation(location);
-  const syncing = useSelector((state) => state.sync.syncing);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
   const [cloneMode, setCloneMode] = useState(false);

@@ -41,6 +41,7 @@ const App = () => {
   const { t } = useTranslation()
   const location = useLocation()
 
+  global.location = location;
   notification.config({ placement: 'bottomLeft', duration: 3 })
   global.notification = (type, message, description) => { notification[type]({ message, description }) }
   global.navigate = (name, params = {}, query = {}) => navigatePage(navigate, dispatch, name, params, query)
@@ -81,6 +82,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
+    global.location = location;
     const currentPage = common.getRouterByLocation(location)
     dispatch(storeActions.updateCurrentPage(currentPage))
   }, [location])
