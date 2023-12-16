@@ -5,6 +5,7 @@ import { } from "@ant-design/icons"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
+import { useLocation } from "react-router-dom"
 
 import global from "../../../../../config/global"
 import common from "../../../../../utils/common"
@@ -13,9 +14,12 @@ import enterpriseGroupServices from "../../../../../services/enterprise-group"
 function FormData(props) {
   const { visible = false, item = null, onClose = () => { }, onReload = () => { } } = props
   const { t } = useTranslation()
+  const location = useLocation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false)
-  const enterpriseId = common.getRouterByLocation(window.location)?.params?.enterprise_id
+
+  const currentPage = common.getRouterByLocation(location)
+  const enterpriseId = currentPage?.params?.enterprise_id
 
   useEffect(() => {
     if (visible) {

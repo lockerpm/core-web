@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
 import './css/auth.scss';
 
-import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
+import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
 import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
@@ -20,7 +22,9 @@ import jsCore from "../../core-js"
 
 const Authenticate = () => {
   const { t } = useTranslation();
-  const currentPage = common.getRouterByLocation(window.location)
+  const location = useLocation();
+
+  const currentPage = common.getRouterByLocation(location)
 
   const isConnected = useSelector((state) => state.service.isConnected)
   const isDesktop = useSelector((state) => state.system.isDesktop)

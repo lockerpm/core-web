@@ -59,19 +59,11 @@ const getRouterByName = name => {
 }
 
 const compareLocation = (routerKeys, location) => {
-  const isDesktop = global.store.getState().system.isDesktop
   let pathName = location.pathname || location?.toString();
-  let query = {};
-  if (isDesktop && location.protocol) {
-    pathName = location.hash.split('?')[0]?.replace('#', '')
-    query = convertStringToQuery(`?${location.hash.split('?')[1]}`)
-  } else {
-    query = convertStringToQuery(location.search);
-  }
   const locationKeys = pathName.split('/') || []
   const result = {
     params: {},
-    query: query,
+    query: convertStringToQuery(location.search),
     hash: location.hash || null,
     valid: true
   }

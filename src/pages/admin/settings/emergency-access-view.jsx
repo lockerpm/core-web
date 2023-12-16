@@ -10,6 +10,7 @@ import ViewItem from "./components/security/emergency-access-view/ViewItem";
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import { CipherMapper } from "../../../core-js/src/constants";
 import { SymmetricCryptoKey, EncString, Cipher } from "../../../core-js/src/models/domain";
@@ -22,6 +23,7 @@ import emergencyAccessServices from "../../../services/emergency-access";
 const EmergencyAccessView = (props) => {
   const { } = props;
   const { t } = useTranslation();
+  const location = useLocation();
 
   const currentPage = common.getRouterByLocation(location);
   const isMobile = useSelector((state) => state.system.isMobile);

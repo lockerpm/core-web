@@ -70,13 +70,13 @@ function access_token_type() {
 
 async function redirect_login() {
   await coreServices.lock();
-  const currentPage = common.getRouterByLocation(window.location)
+  const currentPage = common.getRouterByLocation(global.location)
   if ([global.keys.AUTHENTICATE, global.keys.SETUP_2FA].includes(currentPage?.name)) {
     return;
   } else if (access_token()) {
     const isError = currentPage?.name === global.keys.ADMIN_ERROR
     const isAdmin = currentPage?.type === 'admin'
-    global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError && isAdmin ? `${window.location.pathname}${window.location.search}` : '/') })
+    global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError && isAdmin ? `${global.location.pathname}${global.location.search}` : '/') })
   } else {
     const serverType = global.store.getState().system.serverType;
     if (currentPage?.name !== global.keys.SIGN_UP || serverType !== global.constants.SERVER_TYPE.PERSONAL) {

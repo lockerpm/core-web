@@ -39,11 +39,11 @@ const Bottom = () => {
       </p>
       <div className="flex-grow md:text-right">
         <a
-          href={`${global.urls.LOCKER_URL}/teams`}
+          href={`${global.urls.LOCKER_URL}/terms`}
           target="_blank"
           className="mr-4"
         >
-            {t('quick_share_detail.teams')}
+            {t('quick_share_detail.terms')}
           </a>
         <a
           href={`${global.urls.LOCKER_URL}/privacy`}

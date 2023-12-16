@@ -4,6 +4,8 @@ import './css/auth.scss';
 import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
 import { PairingForm, PasswordlessForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
@@ -18,6 +20,7 @@ import common from "../../utils/common";
 
 const Setup2FA = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const currentPage = common.getRouterByLocation(location)
   const isConnected = useSelector((state) => state.service.isConnected)
   const isDesktop = useSelector((state) => state.system.isDesktop)

@@ -9,6 +9,7 @@ export default {
   store: {},
   keys: {},
   urls: {},
+  location: {},
   confirm: () => {},
   notification: () => {},
   navigate: () => {},

@@ -4,17 +4,18 @@ import {
   Spin,
   Row,
   Col,
-  Image,
 } from '@lockerpm/design';
 
 import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import '../css/index.scss';
-import Logo from '../../../assets/images/logos/auth-logo.svg';
 
 import common from "../../../utils/common";
 import quickShareServices from "../../../services/quick-share";
+
+import Logo from "../../auth/components/Logo";
 
 import Right from "./components/Right";
 import Bottom from "./components/Bottom";
@@ -26,7 +27,9 @@ import global from "../../../config/global";
 
 const QuickShareDetail = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { t } = useTranslation();
+
   const currentPage = common.getRouterByLocation(location);
   const key = currentPage?.hash?.replace('#', '') || null;
   const id = currentPage?.params?.id || null;
@@ -97,14 +100,11 @@ const QuickShareDetail = () => {
 
   return (
     <div className="public-page">
-      <Row style={{ height: 'calc(100vh - 50px)' }}>
+      <Row>
         <Col lg={18} md={15} sm={24} xs={24}>
           <div className="max-w-2xl mx-auto px-6 py-6">
             <div className="text-center mb-6">
-              <Image
-                src={Logo}
-                preview={false}
-              />
+              <Logo />
             </div>
             <Spin spinning={loading}>
               <div style={{ minHeight: 200 }}>
