@@ -69,7 +69,7 @@ const TableData = (props) => {
         title: t("common.status"),
         dataIndex: "status",
         key: "status",
-        align: "left",
+        align: "center",
         width: 120,
         render: (_, record) => {
           const status = common.getStatus(record.status)
@@ -82,7 +82,7 @@ const TableData = (props) => {
         title: t("common.group"),
         dataIndex: "group",
         key: "group",
-        align: "center",
+        align: "left",
         width: 200,
         render: (_, record) => <Space size={[4, 4]} wrap>
           {
