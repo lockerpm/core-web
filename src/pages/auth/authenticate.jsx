@@ -150,7 +150,11 @@ const Authenticate = () => {
 
   const onVerify = async (payload) => {
     setCallingAPI(true)
-    await userServices.users_session_otp(payload).then(async (response) => {
+    await userServices.users_session_otp({
+      ...payload,
+      email: preLogin?.email,
+      password: currentPassword,
+    }).then(async (response) => {
       setUserSession({ ...payload, ...response });
       if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
         setStep(2)
