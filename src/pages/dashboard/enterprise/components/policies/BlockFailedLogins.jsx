@@ -146,7 +146,7 @@ const BlockFailedLogins = (props) => {
             value={config.failed_login_duration}
             options={block_times.map((o) => ({
               value: o,
-              label: `${common.displayTimes(o).value} ${t(common.displayTimes(o).label)}`
+              label: `${common.displayTimes(o).value} ${t(`common.${common.displayTimes(o).label}`)}`
             }))}
           />
           <p className="mb-2">{t('enterprise_policies.block_failed_logins.modal.how_long')}</p>
@@ -154,7 +154,7 @@ const BlockFailedLogins = (props) => {
             value={config.failed_login_block_time}
             options={logging_times.map((o) => ({
               value: o,
-              label: `${common.displayTimes(o).value} ${t(common.displayTimes(o).label)}`
+              label: `${common.displayTimes(o).value} ${t(`common.${common.displayTimes(o).label}`)}`
             }))}
           />
         </div>
