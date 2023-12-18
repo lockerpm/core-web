@@ -169,6 +169,8 @@ const PasswordlessForm = (props) => {
       await getDeviceKeys();
     } else if (['5003'].includes(error.code)) {
       onRepair();
+    } else {
+      setStep(1)
     }
   }
 
