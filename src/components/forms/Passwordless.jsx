@@ -157,7 +157,11 @@ const PasswordlessForm = (props) => {
       await commonServices.reset_service();
       setStep(0);
     } else if (['2007', '2003', '2009'].includes(error.code)) {
-      setStep(1);
+      if (selectedDevice) {
+        setStep(1);
+      } else {
+        setStep(0)
+      }
     } else if (['2008'].includes(error.code)) {
       setStep(0);
     } else if (['5001', '5002'].includes(error.code)) {
@@ -170,7 +174,11 @@ const PasswordlessForm = (props) => {
     } else if (['5003'].includes(error.code)) {
       onRepair();
     } else {
-      setStep(1)
+      if (selectedDevice) {
+        setStep(1)
+      } else {
+        setStep(0);
+      }
     }
   }
 
