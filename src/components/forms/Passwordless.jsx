@@ -162,7 +162,7 @@ const PasswordlessForm = (props) => {
       } else {
         setStep(0)
       }
-    } else if (['2008'].includes(error.code)) {
+    } else if (['2008', '2005', '2002', '2004', '2006', '2011'].includes(error.code)) {
       setStep(0);
     } else if (['5001', '5002'].includes(error.code)) {
       await commonServices.reset_service();

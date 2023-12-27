@@ -30,9 +30,11 @@ const SSOConfiguration = (props) => {
     await ssoConfigServices.get()
       .then((response) => {
         setSSOConfig(response);
-        form.setFieldsValue(response);
+        setIsEditing(common.isEmpty(response))
+        form.setFieldsValue(response.sso_provider_options);
       })
       .catch((error) => {
+        setIsEditing(common.isEmpty(response))
         global.pushError(error)
         setSSOConfig({})
       })
@@ -44,19 +46,29 @@ const SSOConfiguration = (props) => {
 
   const handleOnSaveButtonClick = () => {
     form.validateFields().then(async (values) => {
-      await ssoConfigServices.put(values)
+      setCallingAPI(true)
+      const payload = {
+        sso_provider: "oauth2",
+        identifier: "vincss_sso",
+        enabled: true,
+        sso_provider_options: {
+          ...values,
+          authority: 'https://vincss-sso.fido2.vn'
+        }
+      }
+      await ssoConfigServices.update(payload)
         .then(() => {
           global.pushSuccess(t("notification.success.cipher.updated"))
+          setIsEditing(false)
         })
         .catch((error) => {
           global.pushError(error)
         })
-      setIsEditing(false)
     })
+    setCallingAPI(false)
   }
 
   const handleOnCancelButtonClick = () => {
-    form.resetFields();
     form.setFieldsValue(ssoConfig);
     setIsEditing(false)
   }
@@ -67,59 +79,76 @@ const SSOConfiguration = (props) => {
       <Form
         form={form}
         layout='vertical'
-        className='mt-8 md:w-3/4 lg:w-3/5'
+        className='mt-4 md:w-3/4 lg:w-3/5'
+        initialValues={{
+          sso_provider: 'oauth2',
+          identifier: 'vincss_sso'
+        }}
         disabled={callingAPI || !isEditing}
       >
         <Form.Item
-          name='oauth-authorization-url'
-          label={t("sso_configuration.oauth-authorization-url")}
-          rules={[global.rules.REQUIRED(t("sso_configuration.oauth-authorization-url"))]}
+          name='authorization_endpoint'
+          label={t("sso_configuration.oauth_authorization_url")}
+          rules={[global.rules.REQUIRED(t("sso_configuration.oauth_authorization_url"))]}
         >
           <Input placeholder={t("sso_configuration.placeholder.https")} />
         </Form.Item>
         <Form.Item
-          name='oauth-token-url'
-          label={t("sso_configuration.oauth-token-url")}
-          rules={[global.rules.REQUIRED(t("sso_configuration.oauth-token-url"))]}
+          name='token_endpoint'
+          label={t("sso_configuration.oauth_token_url")}
+          rules={[global.rules.REQUIRED(t("sso_configuration.oauth_token_url"))]}
         >
           <Input placeholder={t("sso_configuration.placeholder.https")} />
         </Form.Item>
         <Form.Item
-          name='api-url'
-          label={t("sso_configuration.api-url")}
-          rules={[global.rules.REQUIRED(t("sso_configuration.api-url"))]}
+          name='userinfo_endpoint'
+          label={t("sso_configuration.api_url")}
+          rules={[global.rules.REQUIRED(t("sso_configuration.api_url"))]}
         >
           <Input placeholder={t("sso_configuration.placeholder.https")} />
         </Form.Item>
         <Form.Item
-          name='oauth-appication-id'
-          label={t("sso_configuration.oauth-appication-id")}
-          rules={[global.rules.REQUIRED(t("sso_configuration.oauth-appication-id"))]}
+          name='client_id'
+          label={t("sso_configuration.oauth_client_id")}
+          rules={[global.rules.REQUIRED(t("sso_configuration.oauth_client_id"))]}
         >
           <Input placeholder={t("sso_configuration.placeholder.enter_id")} />
         </Form.Item>
         <Form.Item
-          name='oauth-application-secret'
-          label={t("sso_configuration.oauth-application-secret")}
-          rules={[global.rules.REQUIRED(t("sso_configuration.oauth-application-secret"))]}
+          name='client_secret'
+          label={t("sso_configuration.oauth_client_secret")}
+          rules={[global.rules.REQUIRED(t("sso_configuration.oauth_client_secret"))]}
         >
           <Input placeholder={t("sso_configuration.placeholder.enter_secret")} />
         </Form.Item>
         <Form.Item
-          name='oauth-scopes'
-          label={t("sso_configuration.oauth-scopes")}
-          rules={[global.rules.REQUIRED(t("sso_configuration.oauth-scopes"))]}
+          name='scope'
+          label={t("sso_configuration.oauth_scopes")}
         >
           <Input placeholder={t("sso_configuration.placeholder.enter_scopes")} />
+        </Form.Item>
+        <Form.Item
+          name='email_claim_types'
+          label={t("sso_configuration.email_claim_types")}
+        >
+          <Input readOnly placeholder={t("sso_configuration.placeholder.email_claim_types")} />
+        </Form.Item>
+        <Form.Item
+          name='name_claim_types'
+          label={t("sso_configuration.name_claim_types")}
+        >
+          <Input readOnly placeholder={t("sso_configuration.placeholder.name_claim_types")} />
         </Form.Item>
       </Form>
       <div className='md:w-3/4 lg:w-3/5'>
         <Space className='flex items-center justify-end'>
           {
             isEditing ? <>
-              <Button danger onClick={handleOnCancelButtonClick}>
-                {t("button.cancel")}
-              </Button>
+              {
+                !common.isEmpty(ssoConfig) && <Button danger onClick={handleOnCancelButtonClick}>
+                  {t("button.cancel")}
+                </Button>
+              }
               <Button type='primary' onClick={handleOnSaveButtonClick} htmlType='submit'>
                 {t("button.save")}
               </Button>

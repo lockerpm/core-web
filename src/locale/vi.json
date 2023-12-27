@@ -456,6 +456,7 @@
       "2007": "Không thể dùng quét vân tay, vui lòng sử dụng mã PIN",
       "2008": "PIN validation failed to many times, key is blocked",
       "2009": "Không thể xác thực vân tay",
+      "2011": "Hành động FIDO đã hết thời gian chờ",
       "3001": "Khách hàng chưa được xác thực.",
       "3002": "Không có khoá.",
       "3003": "Không thể mã hoá dữ liệu",
@@ -1098,17 +1099,25 @@
   "sso_configuration": {
     "title": "Cấu hình OAuth",
     "description": "Cấu hình OAuth để yêu cầu người dùng đăng nhập bằng SSO",
-    "oauth-authorization-url": "URL ủy quyền OAuth",
-    "oauth-token-url": "URL token OAuth",
-    "api-url": "URL API cung cấp thông tin chi tiết người dùng khi được xác thực",
-    "oauth-appication-id": "ID ứng dụng OAuth",
-    "oauth-application-secret": "Secret ứng dụng OAuth",
-    "oauth-scopes": "Phạm vi OAuth yêu cầu",
+    "sso_provider": "Nhà cung cấp",
+    "identifier": "Định danh",
+    "oauth_authorization_url": "URL ủy quyền OAuth",
+    "oauth_token_url": "URL token OAuth",
+    "api_url": "URL API cung cấp thông tin chi tiết người dùng khi được xác thực",
+    "oauth_client_id": "ID ứng dụng khách OAuth",
+    "oauth_client_secret": "Secret ứng dụng khách OAuth",
+    "oauth_scopes": "Phạm vi OAuth yêu cầu",
+    "email_claim_types": "Các loại yêu cầu email",
+    "name_claim_types": "Các loại yêu cầu tên",
     "placeholder": {
+      "sso_provider": "oauth2",
+      "identifier": "vincss-sso",
       "https": "https://",
       "enter_id": "Nhập ID",
       "enter_secret": "Nhập secret",
-      "enter_scopes": "Đọc hoặc ..."
+      "enter_scopes": "Đọc hoặc ...",
+      "email_claim_types": "EX: email",
+      "name_claim_types": "EX: name"
     }
   },
   "enterprise_dashboard": {

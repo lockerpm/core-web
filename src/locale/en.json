@@ -456,6 +456,7 @@
       "2007": "Cannot use fingerprint, please use PIN instead",
       "2008": "PIN validation failed to many times, key is blocked",
       "2009": "Failed to verify fingerprint",
+      "2011": "FIDO action timed out",
       "3001": "Client is not confirmed",
       "3002": "No key",
       "3003": "Cannot encrypt payload",
@@ -1098,17 +1099,25 @@
   "sso_configuration": {
     "title": "OAuth Configuration",
     "description": "Configuration OAuth to require users log in using SSO",
-    "oauth-authorization-url": "OAuth authorization URL",
-    "oauth-token-url": "OAuth token URL",
-    "api-url": "API URL providing user details when authenticated",
-    "oauth-appication-id": "OAuth application ID",
-    "oauth-application-secret": "OAuth application secret",
-    "oauth-scopes": "OAuth scopes to request",
+    "sso_provider": "Provider",
+    "identifier": "Identifier",
+    "oauth_authorization_url": "OAuth authorization URL",
+    "oauth_token_url": "OAuth token URL",
+    "api_url": "API URL providing user details when authenticated",
+    "oauth_client_id": "OAuth Client ID",
+    "oauth_client_secret": "OAuth Client secret",
+    "oauth_scopes": "OAuth scopes to request",
+    "email_claim_types": "Email claim types",
+    "name_claim_types": "Name claim types",
     "placeholder": {
+      "sso_provider": "oauth2",
+      "identifier": "vincss-sso",
       "https": "https://",
       "enter_id": "Enter ID",
       "enter_secret": "Enter secret",
-      "enter_scopes": "Read or ..."
+      "enter_scopes": "Read or ...",
+      "email_claim_types": "EX: email",
+      "name_claim_types": "EX: name"
     }
   },
   "enterprise_dashboard": {
