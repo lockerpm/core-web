@@ -479,6 +479,9 @@ async function service_login(data) {
 }
 
 async function service_logout() {
+  if (global.store.getState().service.isConnected) {
+    await service.setCacheData(null);
+  }
   if (global.store.getState().service.isConnected && (service.pairingService?.hasKey || global.store.getState().system.isDesktop)) {
     await service.logout();
   }

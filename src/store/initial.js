@@ -17,6 +17,7 @@ export default {
   auth: {
     userInfo: null,
     factor2: null,
+    signInReload: false
   },
   sync: {
     isLocked: true,

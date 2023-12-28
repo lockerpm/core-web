@@ -7,6 +7,8 @@ const userInfo = (state = initial.auth, action) => {
     return { ...state, userInfo: action.payload }
   case actionTypes.SET_FACTOR2:
     return { ...state, factor2: action.payload }
+  case actionTypes.SET_SIGN_IN_RELOAD:
+    return { ...state, signInReload: action.payload }
   default:
     return state
   }

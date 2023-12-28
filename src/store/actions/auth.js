@@ -14,7 +14,15 @@ const updateFactor2 = factor2 => {
   }
 }
 
+const updateSignInReload = isReload => {
+  return {
+    type: actionTypes.SET_SIGN_IN_RELOAD,
+    payload: isReload,
+  }
+}
+
 export default {
   updateUserInfo,
   updateFactor2,
+  updateSignInReload
 }
