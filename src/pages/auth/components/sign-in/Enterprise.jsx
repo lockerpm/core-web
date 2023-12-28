@@ -84,6 +84,8 @@ const Enterprise = (props) => {
           setStep(1)
           redirectToAuthSSO(ssoConfig)
         }
+      } else {
+        setChecking(false)
       }
     } else {
       setSsoConfig(null)
@@ -95,11 +97,13 @@ const Enterprise = (props) => {
   const checkSsoConfig = async () => {
     if (isConnected) {
       if (step === 0) {
+        setChecking(true)
         const cacheData = await service.getCacheData();
         if (cacheData) {
           authServices.update_sso_account({ email: cacheData.email })
           setStep(1);
         }
+        setChecking(false)
       }
     } else {
       setStep(0)
