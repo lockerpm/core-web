@@ -115,9 +115,9 @@ const Enterprise = (props) => {
       if (isConnected) {
         await service.setCacheData({ email: ssoUser.mail })
         if (redirectClientId === 'desktop') {
+          await service.sendCustomMessage({ signInReload: true });
           window.location.replace(`locker-app://`);
         }
-        await service.sendCustomMessage({ signInReload: true })
         authServices.update_redirect_client_id(null);
       } else if (redirectClientId === 'browser') {
         window.postMessage({
