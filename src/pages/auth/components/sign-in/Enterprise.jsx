@@ -167,6 +167,9 @@ const Enterprise = (props) => {
 
   const signOtherAccount = () => {
     authServices.update_sso_account(null);
+    if (isConnected) {
+      service.setCacheData(null)
+    }
     if (isDesktop) {
       setStep(0)
     } else {
