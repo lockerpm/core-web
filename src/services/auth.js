@@ -80,6 +80,14 @@ function sso_account() {
   }
 }
 
+function update_redirect_client_id(client_id) {
+  sessionStorage.setItem('redirect_client_id', client_id)
+}
+
+function redirect_client_id() {
+  return sessionStorage.getItem('redirect_client_id')
+}
+
 async function redirect_login() {
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(global.location)
@@ -88,6 +96,10 @@ async function redirect_login() {
   } else if (access_token()) {
     const isError = currentPage?.name === global.keys.ADMIN_ERROR
     const isAdmin = currentPage?.type === 'admin'
+    const clientId = currentPage?.query?.client_id || redirect_client_id();
+    if (currentPage?.name === global.keys.SIGN_IN && clientId) {
+      return;
+    }
     global.navigate(global.keys.LOCK, {}, { return_url: encodeURIComponent(!isError && isAdmin ? `${global.location.pathname}${global.location.search}` : '/') })
   } else {
     const serverType = global.store.getState().system.serverType;
@@ -130,6 +142,8 @@ export default {
   access_token_type,
   update_sso_account,
   sso_account,
+  update_redirect_client_id,
+  redirect_client_id,
   redirect_login,
   logout
 }

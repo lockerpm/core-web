@@ -29,11 +29,18 @@ const Enterprise = (props) => {
   } = props;
   const location = useLocation()
   const { t } = useTranslation();
-  const isDesktop = useSelector((state) => state.system.isDesktop)
+  const isDesktop = useSelector((state) => state.system.isDesktop);
+  const isConnected = useSelector((state) => state.service.isConnected);
+  const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
+  const signInReload = useSelector((state) => state.auth.signInReload)
+
   const currentPage = common.getRouterByLocation(location);
+
+  const clientId = ['desktop', 'browser'].includes(currentPage?.query?.client_id) ? currentPage?.query?.client_id : null
 
   const [step, setStep] = useState(0);
   const [ssoConfig, setSsoConfig] = useState(null);
+  const [ssoUser, setSsoUser] = useState(null);
   const [existed, setExisted] = useState(false);
   const [checking, setChecking] = useState(false);
 
@@ -43,30 +50,83 @@ const Enterprise = (props) => {
     checkExist();
   }, [])
 
+  useEffect(() => {
+    if (ssoConfig && isDesktop) {
+      checkSsoConfig();
+    }
+  }, [isConnected, isDesktop, ssoConfig, signInReload])
+
+  useEffect(() => {
+    if (ssoUser && !isDesktop) {
+      openOtherClient();
+    }
+  }, [isConnected, ssoUser, isDesktop])
+
   const checkExist = async () => {
     setChecking(true)
     const response = await ssoConfigServices.check_exists();
     setExisted(response?.existed)
     if (response?.existed) {
-      setSsoConfig(response.sso_configuration)
-      if (isDesktop) {
-        setStep(0)
-        setChecking(false)
-      } else {
-        if (ssoAccount?.email) {
+      const ssoConfig = response.sso_configuration;
+      setSsoConfig(ssoConfig)
+      if (!isDesktop) {
+        if (clientId) {
+          authServices.update_sso_account(null);
+          authServices.update_redirect_client_id(clientId);
+          redirectToAuthSSO(ssoConfig);
+        } else if (ssoAccount?.email) {
           setStep(1)
           setChecking(false)
         } else if (currentPage.query?.code) {
-          getUserByCode(response.sso_configuration, currentPage.query?.code)
+          getUserByCode(ssoConfig, currentPage.query?.code)
         } else {
           setChecking(false)
-          redirectToAuthSSO(response.sso_configuration)
+          setStep(1)
+          redirectToAuthSSO(ssoConfig)
         }
       }
     } else {
       setSsoConfig(null)
       setStep(1)
       setChecking(false)
+    }
+  }
+
+  const checkSsoConfig = async () => {
+    if (isConnected) {
+      if (step === 0) {
+        const cacheData = await service.getCacheData();
+        if (cacheData) {
+          authServices.update_sso_account({ email: cacheData.email })
+          setStep(1);
+        }
+      }
+    } else {
+      setStep(0)
+    }
+  }
+
+  const openOtherClient = async () => {
+    const redirectClientId = authServices.redirect_client_id();
+    if (redirectClientId) {
+      if (isConnected) {
+        await service.setCacheData({ email: ssoUser.mail })
+        if (redirectClientId === 'desktop') {
+          setTimeout(async () => {
+            await service.sendCustomMessage({ signInReload: true });
+            if (redirectClientId === 'desktop' && !isDesktopConnected) {
+              window.location.replace(`locker-app://`);
+            }
+          }, 1000);
+        }
+        authServices.update_redirect_client_id(null);
+      } else if (redirectClientId === 'browser') {
+        window.postMessage({
+          command: 'cs-authResult',
+          email: ssoUser.mail
+        })
+        authServices.update_redirect_client_id(null);
+      }
     }
   }
 
@@ -94,18 +154,28 @@ const Enterprise = (props) => {
       code: code,
       redirect_uri: common.ssoRedirectUri()
     }).then((response) => {
-      setStep(1);
+      setSsoUser(response)
       authServices.update_sso_account({ email: response.mail })
+      setStep(1);
     }).catch((error) => {
-      authServices.update_sso_account(null)
+      setSsoUser(null);
+      authServices.update_sso_account(null);
       global.pushError(error)
       redirectToAuthSSO(ssoConfiguration)
     });
     setChecking(false)
   }
 
-  const handleSingleSignOn = () => {
-    redirectToAuthSSO(ssoConfig)
+  const signOtherAccount = () => {
+    authServices.update_sso_account(null);
+    if (isConnected) {
+      service.setCacheData(null)
+    }
+    if (isDesktop) {
+      setStep(0)
+    } else {
+      redirectToAuthSSO(ssoConfig)
+    }
   }
 
   return (
@@ -143,7 +213,7 @@ const Enterprise = (props) => {
                   size="large"
                   type="primary"
                   loading={loading || checking}
-                  onClick={handleSingleSignOn}
+                  onClick={() => redirectToAuthSSO(ssoConfig)}
                 >
                   {t('auth_pages.sign_in.single_sign_on')}
                 </Button>
@@ -167,10 +237,7 @@ const Enterprise = (props) => {
                 <Button
                   type="link"
                   className="font-semibold"
-                  onClick={() => {
-                    authServices.update_sso_account(null);
-                    handleSingleSignOn();
-                  }}
+                  onClick={signOtherAccount}
                 >
                   {t('auth_pages.sign_in.label')}
                 </Button>
