@@ -45,6 +45,15 @@ async function revoke_all_devices(hashedPassword) {
   })
 }
 
+async function on_premise_prelogin(data) {
+  return request({
+    url: global.endpoint.USERS_ON_PREMISE_PRELOGIN,
+    method: 'post',
+    data
+  })
+}
+
+
 async function check_exist_email(data) {
   return request({
     url: global.endpoint.USERS_EXIST,
@@ -235,6 +244,7 @@ export default {
   users_session_otp,
   change_password,
   revoke_all_devices,
+  on_premise_prelogin,
   check_exist,
   users_prelogin,
   register,
