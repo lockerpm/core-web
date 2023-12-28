@@ -165,8 +165,13 @@ const Enterprise = (props) => {
     setChecking(false)
   }
 
-  const handleSingleSignOn = () => {
-    redirectToAuthSSO(ssoConfig)
+  const signOtherAccount = () => {
+    authServices.update_sso_account(null);
+    if (isDesktop) {
+      setStep(0)
+    } else {
+      redirectToAuthSSO(ssoConfig)
+    }
   }
 
   return (
@@ -204,7 +209,7 @@ const Enterprise = (props) => {
                   size="large"
                   type="primary"
                   loading={loading || checking}
-                  onClick={handleSingleSignOn}
+                  onClick={() => redirectToAuthSSO(ssoConfig)}
                 >
                   {t('auth_pages.sign_in.single_sign_on')}
                 </Button>
@@ -228,10 +233,7 @@ const Enterprise = (props) => {
                 <Button
                   type="link"
                   className="font-semibold"
-                  onClick={() => {
-                    authServices.update_sso_account(null);
-                    handleSingleSignOn();
-                  }}
+                  onClick={signOtherAccount}
                 >
                   {t('auth_pages.sign_in.label')}
                 </Button>
