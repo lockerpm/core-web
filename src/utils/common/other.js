@@ -176,6 +176,10 @@ const redirectToAuthSSO = (ssoConfig) => {
   window.location.replace(`${authorize}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`)
 }
 
+const openDesktopApp = () => {
+  window.location.replace(`locker-app://`)
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -199,5 +203,6 @@ export default {
   getErrorMessage,
   getUserRole,
   ssoRedirectUri,
-  redirectToAuthSSO
+  redirectToAuthSSO,
+  openDesktopApp
 }
