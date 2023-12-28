@@ -56,7 +56,7 @@ const Enterprise = (props) => {
       setSsoConfig(response.sso_configuration)
       if (isDesktop) {
         const cacheData = await service.getCacheData();
-        if (signInReload && cacheData) {
+        if (cacheData) {
           authServices.update_sso_account({ email: cacheData.email })
           setStep(1);
         } else {
