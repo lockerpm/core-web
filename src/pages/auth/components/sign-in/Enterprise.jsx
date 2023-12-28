@@ -30,7 +30,8 @@ const Enterprise = (props) => {
   const location = useLocation()
   const { t } = useTranslation();
   const isDesktop = useSelector((state) => state.system.isDesktop);
-  const isConnected = useSelector((state) => state.service.isConnected)
+  const isConnected = useSelector((state) => state.service.isConnected);
+  const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
   const signInReload = useSelector((state) => state.auth.signInReload)
 
   const currentPage = common.getRouterByLocation(location);
@@ -50,7 +51,7 @@ const Enterprise = (props) => {
   }, [])
 
   useEffect(() => {
-    if (ssoConfig) {
+    if (ssoConfig && isDesktop) {
       checkSsoConfig();
     }
   }, [isConnected, isDesktop, ssoConfig, signInReload])
@@ -92,20 +93,16 @@ const Enterprise = (props) => {
   }
 
   const checkSsoConfig = async () => {
-    if (isDesktop) {
-      if (isConnected) {
+    if (isConnected) {
+      if (step === 0) {
         const cacheData = await service.getCacheData();
         if (cacheData) {
           authServices.update_sso_account({ email: cacheData.email })
           setStep(1);
-        } else {
-          setStep(0)
-          setChecking(false)
         }
-      } else {
-        setStep(0)
-        setChecking(false)
       }
+    } else {
+      setStep(0)
     }
   }
 
@@ -115,8 +112,12 @@ const Enterprise = (props) => {
       if (isConnected) {
         await service.setCacheData({ email: ssoUser.mail })
         if (redirectClientId === 'desktop') {
-          await service.sendCustomMessage({ signInReload: true });
-          window.location.replace(`locker-app://`);
+          setTimeout(async () => {
+            await service.sendCustomMessage({ signInReload: true });
+            if (redirectClientId === 'desktop' && !isDesktopConnected) {
+              window.location.replace(`locker-app://`);
+            }
+          }, 1000);
         }
         authServices.update_redirect_client_id(null);
       } else if (redirectClientId === 'browser') {
