@@ -39,6 +39,7 @@ const Enterprise = (props) => {
 
   const [step, setStep] = useState(0);
   const [ssoConfig, setSsoConfig] = useState(null);
+  const [ssoUser, setSsoUser] = useState(null);
   const [existed, setExisted] = useState(false);
   const [checking, setChecking] = useState(false);
 
@@ -46,15 +47,53 @@ const Enterprise = (props) => {
 
   useEffect(() => {
     checkExist();
-  }, [signInReload])
+  }, [])
+
+  useEffect(() => {
+    if (ssoConfig) {
+      checkSsoConfig();
+    }
+  }, [isConnected, isDesktop, ssoConfig, signInReload])
+
+  useEffect(() => {
+    if (ssoUser && !isDesktop) {
+      openOtherClient();
+    }
+  }, [isConnected, ssoUser, isDesktop])
 
   const checkExist = async () => {
     setChecking(true)
     const response = await ssoConfigServices.check_exists();
     setExisted(response?.existed)
     if (response?.existed) {
-      setSsoConfig(response.sso_configuration)
-      if (isDesktop) {
+      const ssoConfig = response.sso_configuration;
+      setSsoConfig(ssoConfig)
+      if (!isDesktop) {
+        if (clientId) {
+          authServices.update_sso_account(null);
+          authServices.update_redirect_client_id(clientId);
+          redirectToAuthSSO(ssoConfig);
+        } else if (ssoAccount?.email) {
+          setStep(1)
+          setChecking(false)
+        } else if (currentPage.query?.code) {
+          getUserByCode(ssoConfig, currentPage.query?.code)
+        } else {
+          setChecking(false)
+          setStep(1)
+          redirectToAuthSSO(ssoConfig)
+        }
+      }
+    } else {
+      setSsoConfig(null)
+      setStep(1)
+      setChecking(false)
+    }
+  }
+
+  const checkSsoConfig = async () => {
+    if (isDesktop) {
+      if (isConnected) {
         const cacheData = await service.getCacheData();
         if (cacheData) {
           authServices.update_sso_account({ email: cacheData.email })
@@ -64,25 +103,29 @@ const Enterprise = (props) => {
           setChecking(false)
         }
       } else {
-        if (clientId) {
-          authServices.update_sso_account(null);
-          authServices.update_redirect_client_id(clientId);
-          redirectToAuthSSO(response.sso_configuration);
-        } else if (ssoAccount?.email) {
-          setStep(1)
-          setChecking(false)
-        } else if (currentPage.query?.code) {
-          getUserByCode(response.sso_configuration, currentPage.query?.code)
-        } else {
-          setChecking(false)
-          setStep(1)
-          redirectToAuthSSO(response.sso_configuration)
-        }
+        setStep(0)
+        setChecking(false)
       }
-    } else {
-      setSsoConfig(null)
-      setStep(1)
-      setChecking(false)
+    }
+  }
+
+  const openOtherClient = async () => {
+    const redirectClientId = authServices.redirect_client_id();
+    if (redirectClientId) {
+      if (isConnected) {
+        await service.setCacheData({ email: ssoUser.mail })
+        if (redirectClientId === 'desktop') {
+          window.location.replace(`locker-app://`);
+        }
+        await service.sendCustomMessage({ signInReload: true })
+        authServices.update_redirect_client_id(null);
+      } else if (redirectClientId === 'browser') {
+        window.postMessage({
+          command: 'cs-authResult',
+          email: ssoUser.mail
+        })
+        authServices.update_redirect_client_id(null);
+      }
     }
   }
 
@@ -110,25 +153,12 @@ const Enterprise = (props) => {
       code: code,
       redirect_uri: common.ssoRedirectUri()
     }).then((response) => {
-      const redirectClientId = authServices.redirect_client_id();
-      if (redirectClientId) {
-        authServices.update_redirect_client_id(null);
-        if (isConnected) {
-          service.setCacheData({ email: response.mail })
-          if (redirectClientId === 'desktop') {
-            window.location.replace(`locker-app://`);
-          }
-        } else if (redirectClientId === 'browser') {
-          window.postMessage({
-            command: 'cs-authResult',
-            email: response.mail
-          })
-        }
-      }
+      setSsoUser(response)
       authServices.update_sso_account({ email: response.mail })
       setStep(1);
     }).catch((error) => {
-      authServices.update_sso_account(null)
+      setSsoUser(null);
+      authServices.update_sso_account(null);
       global.pushError(error)
       redirectToAuthSSO(ssoConfiguration)
     });
