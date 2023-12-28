@@ -55,7 +55,6 @@ const Setup2FA = () => {
     if (preLogin) {
       if (preLogin?.is_factor2 || !preLogin?.require_2fa) {
         if (!preLogin?.is_password_changed || (preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
-          console.log(11111);
           global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
           return;
         }

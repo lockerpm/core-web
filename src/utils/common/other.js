@@ -165,6 +165,17 @@ const getUserRole = (role) => {
   return global.constants.USER_ROLES.find((s) => !s.value || s.value === role)
 }
 
+const ssoRedirectUri = () => {
+  return `${window.location.origin}/sign-in`;
+}
+
+const redirectToAuthSSO = (ssoConfig) => {
+  const redirectUri = ssoRedirectUri();
+  const authorize = ssoConfig.authorization_endpoint;
+  const clientId = ssoConfig.client_id;
+  window.location.replace(`${authorize}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`)
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -186,5 +197,7 @@ export default {
   getClientInfo,
   getToken,
   getErrorMessage,
-  getUserRole
+  getUserRole,
+  ssoRedirectUri,
+  redirectToAuthSSO
 }

@@ -48,10 +48,6 @@ function update_access_token(data) {
   localStorage.setItem('access_token', JSON.stringify(data))
 }
 
-function update_access_token_type(data) {
-  localStorage.setItem('access_token_type', JSON.stringify(data))
-}
-
 function access_token() {
   try {
     return JSON.parse(localStorage.getItem('access_token'))
@@ -60,9 +56,25 @@ function access_token() {
   }
 }
 
+function update_access_token_type(data) {
+  localStorage.setItem('access_token_type', JSON.stringify(data))
+}
+
 function access_token_type() {
   try {
     return JSON.parse(localStorage.getItem('access_token_type'))
+  } catch (_) {
+    return ''
+  }
+}
+
+function update_sso_account(data) {
+  localStorage.setItem('sso_account', JSON.stringify(data))
+}
+
+function sso_account() {
+  try {
+    return JSON.parse(localStorage.getItem('sso_account'))
   } catch (_) {
     return ''
   }
@@ -101,7 +113,8 @@ async function logout(query = {}) {
   if (userInfo?.sync_all_platforms) {
     await commonServices.service_logout();
   }
-  localStorage.removeItem('access_token');
+  update_access_token(null);
+  update_sso_account(null)
   global.navigate(global.keys.SIGN_IN, {}, query);
 }
 
@@ -115,6 +128,8 @@ export default {
   update_access_token_type,
   access_token,
   access_token_type,
+  update_sso_account,
+  sso_account,
   redirect_login,
-  logout,
+  logout
 }

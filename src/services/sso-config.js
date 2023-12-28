@@ -8,6 +8,14 @@ function get() {
   })
 }
 
+function update(data) {
+  return request({
+    url: global.endpoint.SSO_CONFIGURATION,
+    method: "put",
+    data
+  })
+}
+
 function check_exists() {
   return request({
     url: global.endpoint.SSO_CONFIGURATION_CHECK_EXISTS,
@@ -15,7 +23,17 @@ function check_exists() {
   })
 }
 
+function get_user_by_code(data) {
+  return request({
+    url: global.endpoint.SSO_CONFIGURATION_GET_USER,
+    method: "post",
+    data
+  })
+}
+
 export default {
   get,
-  check_exists
+  update,
+  check_exists,
+  get_user_by_code
 }

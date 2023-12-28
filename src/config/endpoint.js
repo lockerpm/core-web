@@ -33,6 +33,7 @@ export default {
   USERS_ME_BLOCK_BY_2FA: `${FLAT_FORM}/users/me/block_by_2fa`,
   USERS_ME_DEVICE: `${FLAT_FORM}/users/me/devices/:device_id`,
   USERS_SESSION_REVOKE_ALL: `${FLAT_FORM}/users/session/revoke_all`,
+  USERS_ON_PREMISE_PRELOGIN: `${FLAT_FORM}/onpremise/prelogin`,
 
   SYNC: `${FLAT_FORM}/sync`,
   SYNC_COUNT: `${FLAT_FORM}/sync/count`,
@@ -140,5 +141,6 @@ export default {
   MAIL_CONFIGURATION_TEST: `${ADMIN}/mail_configuration/test`,
 
   SSO_CONFIGURATION: `${ADMIN}/sso_configuration`,
+  SSO_CONFIGURATION_GET_USER: `${API_URL}/v3/sso_configuration/get_user`,
   SSO_CONFIGURATION_CHECK_EXISTS: `${API_URL}/v3/sso_configuration/check_exists`,
 }
