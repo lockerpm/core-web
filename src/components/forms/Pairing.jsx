@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { } from '@ant-design/colors';
 
 import { useTranslation } from "react-i18next";
+import common from "../../utils/common";
 
 import {
   ReloadOutlined
@@ -141,7 +142,7 @@ const PairingForm = (props) => {
             type="primary"
             size="large"
             className="w-full"
-            onClick={() => {}}
+            onClick={() => common.openDesktopApp()}
           >
             {t('button.open_desktop_app')}
           </Button>

@@ -115,7 +115,7 @@ const Enterprise = (props) => {
           setTimeout(async () => {
             await service.sendCustomMessage({ signInReload: true });
             if (redirectClientId === 'desktop' && !isDesktopConnected) {
-              window.location.replace(`locker-app://`);
+              common.openDesktopApp();
             }
           }, 1000);
         }
