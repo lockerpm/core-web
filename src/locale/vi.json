@@ -1103,6 +1103,7 @@
     "identifier": "Định danh",
     "oauth_authorization_url": "URL ủy quyền OAuth",
     "oauth_token_url": "URL token OAuth",
+    "redirect_behavior": "Hành vi chuyển hướng",
     "api_url": "URL API cung cấp thông tin chi tiết người dùng khi được xác thực",
     "oauth_client_id": "ID ứng dụng khách OAuth",
     "oauth_client_secret": "Secret ứng dụng khách OAuth",

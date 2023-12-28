@@ -6,15 +6,21 @@ import {
   Button,
 } from '@lockerpm/design';
 
+import {
+  UserOutlined
+} from '@ant-design/icons'
+
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import global from "../../../../config/global";
+import { PairingForm, PasswordlessForm } from "../../../../components";
 
 import userServices from "../../../../services/user";
 import commonServices from "../../../../services/common";
-import { PairingForm, PasswordlessForm } from "../../../../components";
+import authServices from "../../../../services/auth";
+
+import global from "../../../../config/global";
 import common from "../../../../utils/common";
 
 const SignInForm = (props) => {
@@ -33,6 +39,9 @@ const SignInForm = (props) => {
   const isDesktop = useSelector((state) => state.system.isDesktop);
   const isConnected = useSelector((state) => state.service.isConnected);
 
+  const ssoAccount = authServices.sso_account();
+  const email = ssoAccount?.email;
+
   const [preLogin, setPreLogin] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
@@ -41,9 +50,12 @@ const SignInForm = (props) => {
 
   useEffect(() => {
     form.setFieldsValue({
-      username: currentPage?.query?.email,
+      username: email || currentPage?.query?.email,
       password: null
     })
+    if (email || currentPage?.query?.email) {
+      handlePrelogin({ username: email || currentPage?.query?.email });
+    }
   }, [])
 
   useEffect(() => {
@@ -152,6 +164,8 @@ const SignInForm = (props) => {
             <Input
               placeholder={t('placeholder.username')}
               size="large"
+              readOnly={email}
+              prefix={email ? <UserOutlined /> : <></>}
               onChange={() => setStep(1)}
             />
           </Form.Item>

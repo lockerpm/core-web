@@ -51,6 +51,7 @@ const SingIn = () => {
             backgroundImage: `url(${AuthBgImage})`,
             backgroundSize: 'contain',
             paddingTop: 62,
+            paddingBottom: 16,
             height: 'max-content'
           }}
         >

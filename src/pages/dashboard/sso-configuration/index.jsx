@@ -51,21 +51,18 @@ const SSOConfiguration = (props) => {
         sso_provider: "oauth2",
         identifier: "vincss_sso",
         enabled: true,
-        sso_provider_options: {
-          ...values,
-          authority: 'https://vincss-sso.fido2.vn'
-        }
+        sso_provider_options: values
       }
       await ssoConfigServices.update(payload)
         .then(() => {
           global.pushSuccess(t("notification.success.cipher.updated"))
-          setIsEditing(false)
         })
         .catch((error) => {
           global.pushError(error)
         })
+      setIsEditing(false)
+      setCallingAPI(false)
     })
-    setCallingAPI(false)
   }
 
   const handleOnCancelButtonClick = () => {
@@ -149,7 +146,7 @@ const SSOConfiguration = (props) => {
                   {t("button.cancel")}
                 </Button>
               }
-              <Button type='primary' onClick={handleOnSaveButtonClick} htmlType='submit'>
+              <Button type='primary' loading={callingAPI} onClick={handleOnSaveButtonClick} htmlType='submit'>
                 {t("button.save")}
               </Button>
             </> : <Button type='primary' onClick={handleOnEditButtonClick}>

@@ -1103,6 +1103,7 @@
     "identifier": "Identifier",
     "oauth_authorization_url": "OAuth authorization URL",
     "oauth_token_url": "OAuth token URL",
+    "redirect_behavior": "Redirect behavior",
     "api_url": "API URL providing user details when authenticated",
     "oauth_client_id": "OAuth Client ID",
     "oauth_client_secret": "OAuth Client secret",
