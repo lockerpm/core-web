@@ -48,21 +48,23 @@ const Passkey = (props) => {
     }
   }
 
-  const handleAddedKey = async () => {
+  const handleAddNewKey = async (name) => {
     setCallingAPI(true);
-    await getBackupKeys();
-    setNewKeyVisible(false);
+    await service.setApiToken(authServices.access_token());
+    const encKey = await global.jsCore.cryptoService.getEncKey();
+    await service.setBackupPasswordlessUsingPasskey({
+      email: userInfo.email,
+      name: userInfo.name,
+      currentEncKey: encKey.key,
+      passkeyName: name
+    }).then(() => {
+      getBackupKeys();
+      setNewKeyVisible(false);
+    }).catch((error) => {
+      console.log(error);
+      global.pushError(error)
+    });
     setCallingAPI(false);
-  }
-
-  const handleAddNewKey = async () => {
-    const passkeyType = await service.getPasswordlessUsingPasskey();
-    // await service.setApiToken(authServices.access_token());
-    // const passkeyType = await service.setBackupPasswordlessUsingPasskey({
-    //   email: userInfo.email,
-    //   name: userInfo.full_name,
-    // });
-    console.log(passkeyType);
   }
 
   const handleRemoveKey = async (keyId) => {
@@ -96,7 +98,7 @@ const Passkey = (props) => {
             type='primary'
             ghost
             icon={<PlusOutlined />}
-            onClick={() => handleAddNewKey()}
+            onClick={() => setNewKeyVisible(true)}
           >
             {t('security.passkey.add_new_key')}
           </Button>
@@ -138,7 +140,7 @@ const Passkey = (props) => {
         newKeyVisible && <NewPasskeyModal
           callingAPI={callingAPI}
           visible={newKeyVisible}
-          onConfirm={(name) => handleAddedKey(name)}
+          onConfirm={(name) => handleAddNewKey(name)}
           onClose={() => setNewKeyVisible(false)}
         />
       }

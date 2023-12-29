@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { } from "react";
 import {
   Modal,
+  Form,
+  Input
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { } from '@ant-design/colors';
 
 import { useTranslation } from "react-i18next";
 import { } from "@ant-design/icons";
 
-import { PairingForm, PasswordlessForm } from "../../../../../../components";
+import global from "../../../../../../config/global";
 
 const NewPassKeyModal = (props) => {
   const { t } = useTranslation()
@@ -20,13 +22,26 @@ const NewPassKeyModal = (props) => {
     onClose = () => { },
   } = props;
 
+  const [form] = Form.useForm();
+
+  const handleConfirm = async () => {
+    form.validateFields().then(async (values) => {
+      onConfirm(values.passkeyName)
+    })
+  }
   return (
     <Modal
       title={t('security.passkey.add_new_key')}
       open={visible}
       onCancel={onClose}
       width={360}
-      footer={false}
+      okButtonProps={{
+        loading: callingAPI,
+      }}
+      cancelButtonProps={{
+        disabled: callingAPI
+      }}
+      onOk={() => handleConfirm()}
     >
       <div>
         <div className="mb-2">
@@ -34,18 +49,18 @@ const NewPassKeyModal = (props) => {
         </div>
         <Form
           form={form}
+          disabled={callingAPI}
           onFinish={handleConfirm}
         >
           <Form.Item
-            name={'password'}
+            name={'passkeyName'}
             rules={[
-              global.rules.REQUIRED(t('auth_pages.password')),
+              global.rules.REQUIRED(t('common.name')),
             ]}
           >
-            <Input.Password
+            <Input
               autoFocus={true}
               placeholder={t('placeholder.enter')}
-              disabled={checking || callingAPI}
             />
           </Form.Item>
         </Form>

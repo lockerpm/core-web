@@ -70,20 +70,24 @@ function ClientService() {
     } else {
       resetConnectionInterval = setInterval(async () => {
         await service.grpcService?.resetConnection()
-      }, 2000)
+      }, 3000)
     }
   }, [isConnected])
 
   useEffect(() => {
-    if (isDesktopConnected) {
-      clearInterval(connectSocketInterval);
-      connectSocketInterval = null;
+    if (isConnected) {
+      if (isDesktopConnected) {
+        clearInterval(connectSocketInterval);
+        connectSocketInterval = null;
+      } else {
+        connectSocketInterval = setInterval(async () => {
+          await service.socketService?.connectSocket()
+        }, 3000)
+      }
     } else {
-      connectSocketInterval = setInterval(async () => {
-        await service.socketService?.connectSocket()
-      }, 2000)
+      clearInterval(connectSocketInterval);
     }
-  }, [isDesktopConnected])
+  }, [isDesktopConnected, isConnected])
 
   return (
     <></>

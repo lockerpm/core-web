@@ -829,6 +829,7 @@
     "passkey": {
       "title": "Passkeys",
       "add_new_key": "Add new passkey",
+      "add_new_key_description": "Passkey name",
       "description": "Use Facial recognition, Fingerprint recognition or Computer PIN to unlock your vault. Available on web browser."
     }, 
     "passwordless": {
