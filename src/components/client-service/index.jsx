@@ -68,9 +68,9 @@ function ClientService() {
       clearInterval(resetConnectionInterval);
       resetConnectionInterval = null;
     } else {
-      // resetConnectionInterval = setInterval(async () => {
-      //   await service.grpcService?.resetConnection()
-      // }, 2000)
+      resetConnectionInterval = setInterval(async () => {
+        await service.grpcService?.resetConnection()
+      }, 2000)
     }
   }, [isConnected])
 
@@ -79,9 +79,9 @@ function ClientService() {
       clearInterval(connectSocketInterval);
       connectSocketInterval = null;
     } else {
-      // connectSocketInterval = setInterval(async () => {
-      //   await service.socketService?.connectSocket()
-      // }, 2000)
+      connectSocketInterval = setInterval(async () => {
+        await service.socketService?.connectSocket()
+      }, 2000)
     }
   }, [isDesktopConnected])
 

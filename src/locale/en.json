@@ -818,29 +818,35 @@
     "on_refresh": "On Browser Reload"
   },
   "security": {
+    "unlock_methods": {
+      "title": "Unlock methods",
+      "description": "Unlock your Vault with Master Password, Passkeys or Security keys. You can use all methods available."
+    },
     "change_password": {
       "title": "Account Password",
       "description": "All Locker accounts are protected with AES-256 encryption and Zero Knowledge technology for better security and privacy, regardless of account plan."
     },
+    "passkey": {
+      "title": "Passkeys",
+      "add_new_key": "Add new passkey",
+      "description": "Use Facial recognition, Fingerprint recognition or Computer PIN to unlock your vault. Available on web browser."
+    }, 
     "passwordless": {
-      "title": "Passwordless Login",
-      "description": "Use a FIDO2 security key to unlock your vault. Desktop app installation is required.",
-      "turn_on": "Turn on Passwordless Login",
-      "turn_off": "Turn off Passwordless Login",
+      "title": "Security Keys",
+      "description": "Authenticate with a physical security key to unlock your vault (you can add up to 4 keys). Desktop app installation is required.",
       "security_keys_added": "Security keys added",
       "add_new_key": "Add new key",
       "require_passwordless": "Passwordless login is required within your business and cannot be turn off."
     },
     "mobile_passwordless": {
       "title": "Mobile passwordless login",
-      "description": "Scan a QR code to log in to the mobile app when passwordless login is enabled.",
+      "description": "Scan a QR code to log in to the mobile app.",
       "action": "Scan QR code",
       "enter_code": "Enter verification code here",
       "code": "OTP Code",
       "point_phone": "Point your phone camera to the QR Code below to confirm Login",
       "expire_in": "QR Code Expire in: {{expireCountdown}}s",
-      "expired": "QR Code Expired",
-      "passwordless_disabled": "Passwordless login is disabled"
+      "expired": "QR Code Expired"
     },
     "cross_platform_sync": {
       "title": "Cross-platform sync",

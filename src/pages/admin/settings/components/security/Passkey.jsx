@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   Button,
   List,
+  Tooltip
 } from '@lockerpm/design';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-} from '../../../../../components'
-
-import NewKeyModal from "./passwordless/NewKey";
+import NewPasskeyModal from "./passwordless/NewPasskey";
 import authServices from "../../../../../services/auth";
 
 import {
@@ -24,11 +22,13 @@ import {
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
-const Passwordless = (props) => {
+const Passkey = (props) => {
   const {
     className = '',
   } = props;
   const { t } = useTranslation();
+  const userInfo = useSelector(state => state.auth.userInfo)
+  const isConnected = useSelector(state => state.service.isConnected)
 
   const [newKeyVisible, setNewKeyVisible] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -38,12 +38,14 @@ const Passwordless = (props) => {
 
   useEffect(() => {
     getBackupKeys();
-  }, [])
+  }, [isConnected])
 
   const getBackupKeys = async () => {
-    await service.setApiToken(authServices.access_token());
-    const response = await service.listBackupPasswordless();
-    setBackupKeys(response || [])
+    if (isConnected) {
+      await service.setApiToken(authServices.access_token());
+      const response = await service.listBackupPasswordless();
+      setBackupKeys(response || [])
+    }
   }
 
   const handleAddedKey = async () => {
@@ -51,6 +53,16 @@ const Passwordless = (props) => {
     await getBackupKeys();
     setNewKeyVisible(false);
     setCallingAPI(false);
+  }
+
+  const handleAddNewKey = async () => {
+    const passkeyType = await service.getPasswordlessUsingPasskey();
+    // await service.setApiToken(authServices.access_token());
+    // const passkeyType = await service.setBackupPasswordlessUsingPasskey({
+    //   email: userInfo.email,
+    //   name: userInfo.full_name,
+    // });
+    console.log(passkeyType);
   }
 
   const handleRemoveKey = async (keyId) => {
@@ -73,7 +85,7 @@ const Passwordless = (props) => {
           onClick={() => setExpand(!expand)}
         >
           <p className="font-semibold text-xl mr-2">
-            {t('security.passwordless.title')}
+            {t('security.passkey.title')}
           </p>
           {
             expand ? <DownOutlined /> : <RightOutlined />
@@ -84,14 +96,14 @@ const Passwordless = (props) => {
             type='primary'
             ghost
             icon={<PlusOutlined />}
-            onClick={() => setNewKeyVisible(true)}
+            onClick={() => handleAddNewKey()}
           >
-            {t('security.passwordless.add_new_key')}
+            {t('security.passkey.add_new_key')}
           </Button>
         }
       </div>
       <p className="mt-1">
-        {t('security.passwordless.description')}
+        {t('security.passkey.description')}
       </p>
       {
         expand && <div className="mt-4">
@@ -123,10 +135,10 @@ const Passwordless = (props) => {
         </div>
       }
       {
-        newKeyVisible && <NewKeyModal
-          changing={callingAPI}
+        newKeyVisible && <NewPasskeyModal
+          callingAPI={callingAPI}
           visible={newKeyVisible}
-          onConfirm={() => handleAddedKey()}
+          onConfirm={(name) => handleAddedKey(name)}
           onClose={() => setNewKeyVisible(false)}
         />
       }
@@ -134,4 +146,4 @@ const Passwordless = (props) => {
   );
 }
 
-export default Passwordless;
+export default Passkey;

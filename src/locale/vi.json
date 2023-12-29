@@ -833,14 +833,13 @@
     },
     "mobile_passwordless": {
       "title": "Đăng nhập không mật khẩu vào điện thoại",
-      "description": "Quét mã QR để đăng nhập vào ứng dụng di động khi đăng nhập không mật khẩu được bật.",
+      "description": "Quét mã QR để đăng nhập vào ứng dụng di động.",
       "action": "Quét mã QR",
       "enter_code": "Nhập mã xác thực",
       "code": "Mã OTP",
       "point_phone": "Hãy quét mã QR bằng ứng dụng Locker trên điện thoại của bạn.",
       "expire_in": "Mã QR hết hạn trong: {{expireCountdown}}s",
-      "expired": "Mã QR đã hết hạn",
-      "passwordless_disabled": "Đăng nhập không mật khẩu đã bị tắt"
+      "expired": "Mã QR đã hết hạn"
     },
     "cross_platform_sync": {
       "title": "Đồng bộ đa nền tảng",

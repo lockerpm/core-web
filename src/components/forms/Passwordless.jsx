@@ -39,6 +39,7 @@ const PasswordlessForm = (props) => {
   } = props;
 
   const isTouch = useSelector(state => state.service.isTouch)
+  const isConnected = useSelector(state => state.service.isConnected)
   const isFingerprint = useSelector(state => state.service.isFingerprint)
 
   const [selectedDevice, setSelectedDevice] = useState(null)
@@ -52,8 +53,11 @@ const PasswordlessForm = (props) => {
   useEffect(() => {
     resetState();
     setPasswordless(null);
-    getDeviceKeys();
   }, [])
+
+  useEffect(() => {
+    getDeviceKeys();
+  }, [isConnected])
 
   const resetState = () => {
     global.store.dispatch(storeActions.updateIsTouch(false));
@@ -61,15 +65,17 @@ const PasswordlessForm = (props) => {
   }
 
   const getDeviceKeys = async () => {
-    setLoading(true)
-    try {
-      const devices = await service.getFidoDeviceList() || [];
-      setDevices(devices);
-      setSelectedDevice(devices[0] || null)
-    } catch (error) {
-      redirectByError(error)
+    if (isConnected) {
+      setLoading(true)
+      try {
+        const devices = await service.getFidoDeviceList() || [];
+        setDevices(devices);
+        setSelectedDevice(devices[0] || null)
+      } catch (error) {
+        redirectByError(error)
+      }
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const handleContinue = async (pin = null) => {
