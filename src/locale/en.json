@@ -342,7 +342,10 @@
       "title": "Welcome back!",
       "label": "Log in",
       "note": "Don't have an account yet?",
-      "single_sign_on": "Single Sign-On"
+      "single_sign_on": "Single Sign-On",
+      "or_login_with": "or unlock with",
+      "your_passkey": "Your passkey",
+      "your_security_key": "Your security key"
     },
     "sign_up": {
       "title": "Create admin account",
@@ -439,9 +442,11 @@
     "enter_key_pin": "Enter your security key PIN",
     "touch_key": "Touch your security key",
     "reload_devices": "Reload list devices",
+    "reload_keys": "Reload keys",
     "choose_a_key": "Choose a key to verify yourself",
     "new_password": "Enter new Password",
-    "connect_key_to_login": "Passwordless login is required for this account. Connect to a security key to set up passwordless login.",
+    "connect_security_key_to_login": "Connect to a security key.",
+    "connect_passkey_to_login": "Connect to a passkey.",
     "errors": {
       "0000": "Unspecified error",
       "1000": "API error",

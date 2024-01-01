@@ -43,32 +43,34 @@ const FormDataModal = (props) => {
       footer={false}
     >
       {
-        isPair ? <PairingForm
+        isPair && <PairingForm
           userInfo={userInfo}
           isLogin={true}
           onConfirm={() => setIsPair(false)}
-        /> : <div>
-          {
-            password ? <ChangePasswordForm
-              changing={changing}
-              onSave={(values) => onConfirm({
-                password,
-                ...values
-              })}
-            /> : <PasswordlessForm
-              changing={changing}
-              userInfo={userInfo}
-              onRepair={() => setIsPair(true)}
-              onConfirm={(password) => {
-                if (userInfo?.login_method === 'passwordless') {
-                  setPassword(password);
-                } else {
-                  onConfirm(password)
-                }
-              }}
-            />
-          }
-        </div>
+        />
+      }
+      {
+        !isPair && !password && <PasswordlessForm
+          changing={changing}
+          userInfo={userInfo}
+          onRepair={() => setIsPair(true)}
+          onConfirm={(password) => {
+            if (userInfo?.login_method === 'passwordless') {
+              setPassword(password);
+            } else {
+              onConfirm(password)
+            }
+          }}
+        />
+      }
+      {
+        !isPair && password && <ChangePasswordForm
+          changing={changing}
+          onSave={(values) => onConfirm({
+            password,
+            ...values
+          })}
+        />
       }
     </Modal>
   );

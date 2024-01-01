@@ -441,7 +441,8 @@
     "reload_devices": "Tải lại danh sách thiết bị",
     "choose_a_key": "Chọn một khóa để xác thực bạn",
     "new_password": "Nhập mật khẩu mới",
-    "connect_key_to_login": "Tài khoản này yêu cầu đăng nhập không mật khẩu. Kết nối với một khóa bảo mật để thiết lập đăng nhập không mật khẩu.",
+    "connect_security_key_to_login": "Kết nối với một khóa bảo mật.",
+    "connect_passkey_to_login": "Kết nối với với một passkey",
     "errors": {
       "0000": "Lỗi không xác định",
       "1000": "Lỗi API",
