@@ -3,8 +3,7 @@ import { Divider } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
 import { AdminHeader } from "../../../components";
-import ChangePassword from "./components/security/ChangePassword";
-import Passwordless from "./components/security/Passwordless";
+import UnlockMethods from "./components/security/UnlockMethods";
 import MobilePasswordless from "./components/security/MobilePasswordless";
 import CrossPlatformSync from "./components/security/CrossPlatformSync";
 import TwoFA from "./components/security/TwoFA";
@@ -26,9 +25,7 @@ const Security = (props) => {
         subtitle={t('security_control.description')}
         actions={[]}
       />
-      <ChangePassword className="mt-4" />
-      <Divider />
-      <Passwordless />
+      <UnlockMethods className="mt-4" />
       <Divider />
       <MobilePasswordless />
       <Divider />

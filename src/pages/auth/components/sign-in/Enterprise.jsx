@@ -145,11 +145,12 @@ const Enterprise = (props) => {
   })
 
   const redirectToAuthSSO = (ssoConfiguration) => {
-    if (ssoConfiguration.sso_provider_options.authorization_endpoint) {
-      common.redirectToAuthSSO(ssoConfiguration.sso_provider_options)
-    } else {
-      setStep(1)
-    }
+    setStep(1)
+    // if (ssoConfiguration.sso_provider_options.authorization_endpoint) {
+    //   common.redirectToAuthSSO(ssoConfiguration.sso_provider_options)
+    // } else {
+    //   setStep(1)
+    // }
   }
 
   const getUserByCode = async (ssoConfiguration, code) => {

@@ -102,6 +102,7 @@ const Lock = () => {
 
   const getServiceUser = async () => {
     setLoading(true);
+    console.log(userInfo);
     if (userInfo?.sync_all_platforms || userInfo.login_method === 'passwordless') {
       setIsPair((userInfo?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
       if (isConnected && userInfo.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {

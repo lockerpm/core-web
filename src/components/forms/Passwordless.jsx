@@ -34,11 +34,11 @@ const PasswordlessForm = (props) => {
     isAddKey = false,
     accessToken = authServices.access_token(),
     onRepair = () => { },
-    onConfirm = () => { },
-    onClose = () => { }
+    onConfirm = () => { }
   } = props;
 
   const isTouch = useSelector(state => state.service.isTouch)
+  const isConnected = useSelector(state => state.service.isConnected)
   const isFingerprint = useSelector(state => state.service.isFingerprint)
 
   const [selectedDevice, setSelectedDevice] = useState(null)
@@ -52,8 +52,11 @@ const PasswordlessForm = (props) => {
   useEffect(() => {
     resetState();
     setPasswordless(null);
-    getDeviceKeys();
   }, [])
+
+  useEffect(() => {
+    getDeviceKeys();
+  }, [isConnected])
 
   const resetState = () => {
     global.store.dispatch(storeActions.updateIsTouch(false));
@@ -61,15 +64,17 @@ const PasswordlessForm = (props) => {
   }
 
   const getDeviceKeys = async () => {
-    setLoading(true)
-    try {
-      const devices = await service.getFidoDeviceList() || [];
-      setDevices(devices);
-      setSelectedDevice(devices[0] || null)
-    } catch (error) {
-      redirectByError(error)
+    if (isConnected) {
+      setLoading(true)
+      try {
+        const devices = await service.getFidoDeviceList() || [];
+        setDevices(devices);
+        setSelectedDevice(devices[0] || null)
+      } catch (error) {
+        redirectByError(error)
+      }
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const handleContinue = async (pin = null) => {
@@ -189,7 +194,7 @@ const PasswordlessForm = (props) => {
           step === 0 && !callingAPI && !changing && <div>
             {
               isLogin && <p className={`my-6 text-left`}>
-                {t('passwordless.connect_key_to_login')}
+                {t('passwordless.connect_security_key_to_login')}
               </p>
             }
             {
@@ -221,7 +226,7 @@ const PasswordlessForm = (props) => {
               </Card>)
             }
             <Button
-              className="mt-4 w-full text-sm"
+              className="mt-4 w-full"
               type="text"
               size="large"
               icon={<RedoOutlined />}
@@ -301,15 +306,6 @@ const PasswordlessForm = (props) => {
             </Card>
             {
               changing && <Spin className="mt-4"></Spin>
-            }
-            {
-              !isLogin && !userInfo?.login_method === 'passwordless' && !changing && <Button
-                className="mt-10 w-full"
-                size="large"
-                onClick={() => onClose()}
-              >
-                {t('button.close')}
-              </Button>
             }
           </div>
         }

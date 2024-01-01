@@ -101,6 +101,19 @@ const PasswordConfirmModal = (props) => {
           />
         }
         {
+          !isPair && userInfo?.login_method === 'passwordless' && <div>
+            <div className="mb-2">
+              {description || t('password_confirm.confirm_note')}
+            </div>
+            <PasswordlessForm
+              changing={callingAPI}
+              userInfo={userInfo}
+              onConfirm={onConfirm}
+              onRepair={() => setIsPair(true)}
+            />
+          </div>
+        }
+        {
           !isPair && userInfo?.login_method === 'password' && <div>
             <div className="mb-2">
               {description || t('password_confirm.confirm_note')}
@@ -122,19 +135,6 @@ const PasswordConfirmModal = (props) => {
                 />
               </Form.Item>
             </Form>
-          </div>
-        }
-        {
-          !isPair && userInfo?.login_method === 'passwordless' && <div>
-            <div className="mb-2">
-              {description || t('password_confirm.confirm_note')}
-            </div>
-            <PasswordlessForm
-              changing={callingAPI}
-              userInfo={userInfo}
-              onConfirm={onConfirm}
-              onRepair={() => setIsPair(true)}
-            />
           </div>
         }
       </div>
