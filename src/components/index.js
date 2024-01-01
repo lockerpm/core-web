@@ -8,6 +8,7 @@ import GeneratePasswordContent from './generate-password/components/Content'
 import PairingForm from './forms/Pairing'
 import PasswordlessForm from './forms/Passwordless'
 import ChangePasswordForm from './forms/ChangePassword'
+import PasskeyForm from './forms/Passkey'
 import SmartOtpForm from './forms/SmartOtp'
 import MailOtpForm from './forms/MailOtp'
 
@@ -34,6 +35,7 @@ export {
   PairingForm,
   PasswordlessForm,
   ChangePasswordForm,
+  PasskeyForm,
   SmartOtpForm,
   MailOtpForm,
 
