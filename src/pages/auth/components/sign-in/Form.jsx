@@ -65,7 +65,13 @@ const SignInForm = (props) => {
     if (preLogin) {
       handleCheckPwl();
     }
-  }, [preLogin, isConnected])
+  }, [preLogin, isConnected]);
+
+  useEffect(() => {
+    if (step === 2 && preLogin?.require_passwordless && isDesktop) {
+      selectOtherMethod('security_key');
+    }
+  }, [preLogin, isDesktop, step]);
 
   useEffect(() => {
     if (step === 1) {
@@ -148,6 +154,16 @@ const SignInForm = (props) => {
     }
   }
 
+  const selectOtherMethod = (method) => {
+    setStep(3);
+    setOtherMethod(method);
+    if (method === 'security_key' && !isDesktop) {
+      setIsPair(isConnected && !service.pairingService?.hasKey);
+    } else {
+      setIsPair(false)
+    }
+  }
+
   return (
     <div className="sign-in-form">
       <Form
@@ -217,43 +233,43 @@ const SignInForm = (props) => {
                 </Button>
               </div>
             }
-            <div>
-              {
-                !preLogin?.require_passwordless && <p className="my-4 text-center">
-                  {t('auth_pages.sign_in.or_login_with')}
-                </p>
-              }
-              {
-                !isDesktop && <Button
-                  className="w-full mb-4"
+            {
+              !preLogin?.require_passwordless || !isDesktop && <div>
+                {
+                  !preLogin?.require_passwordless && <p className="my-4 text-center">
+                    {t('auth_pages.sign_in.or_login_with')}
+                  </p>
+                }
+                {
+                  !isDesktop && <Button
+                    className="w-full mb-4"
+                    size="large"
+                    ghost
+                    type="primary"
+                    icon={<KeyOutlined />}
+                    disabled={loading || callingAPI}
+                    onClick={() => {
+                      selectOtherMethod('passkey');
+                    }}
+                  >
+                    {t('auth_pages.sign_in.your_passkey')}
+                  </Button>
+                }
+                <Button
+                  className="w-full"
                   size="large"
                   ghost
                   type="primary"
-                  icon={<KeyOutlined />}
+                  icon={<UsbOutlined />}
                   disabled={loading || callingAPI}
                   onClick={() => {
-                    setStep(3);
-                    setOtherMethod('passkey');
+                    selectOtherMethod('security_key');
                   }}
                 >
-                  {t('auth_pages.sign_in.your_passkey')}
+                  {t('auth_pages.sign_in.your_security_key')}
                 </Button>
-              }
-              <Button
-                className="w-full"
-                size="large"
-                ghost
-                type="primary"
-                icon={<UsbOutlined />}
-                disabled={loading || callingAPI}
-                onClick={() => {
-                  setStep(3);
-                  setOtherMethod('security_key')
-                }}
-              >
-                {t('auth_pages.sign_in.your_security_key')}
-              </Button>
-            </div>
+              </div>
+            }
           </div>
         }
         {
