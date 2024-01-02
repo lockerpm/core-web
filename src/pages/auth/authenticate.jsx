@@ -11,6 +11,12 @@ import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../compone
 import WelcomeImg from '../../assets/images/welcome.svg';
 import EnterOtp from "./components/otp-code/EnterOtp";
 
+import {
+  ArrowLeftOutlined,
+  KeyOutlined,
+  UsbOutlined
+} from '@ant-design/icons'
+
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
 import authServices from "../../services/auth";
@@ -18,7 +24,7 @@ import commonServices from "../../services/common";
 
 import global from "../../config/global";
 import common from "../../utils/common";
-import jsCore from "../../core-js"
+import jsCore from "../../core-js"   
 
 const Authenticate = () => {
   const { t } = useTranslation();
@@ -38,6 +44,7 @@ const Authenticate = () => {
   const [currentPassword, setCurrentPassword] = useState(null)
   const [newFullName, setNewFullName] = useState(null)
   const [userSession, setUserSession] = useState(null)
+  const [otherMethod, setOtherMethod] = useState('')
 
   const [form] = Form.useForm()
 
@@ -63,7 +70,7 @@ const Authenticate = () => {
         return;
       }
       if (currentPage?.query?.token) {
-        if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+        if (preLogin?.is_password_changed) {
           setStep(2)
         } else {
           setStep(1)
@@ -75,12 +82,13 @@ const Authenticate = () => {
   }, [preLogin])
 
   useEffect(() => {
-    if (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) {
-      setIsPair(!isConnected || (!isDesktop && !service.pairingService?.hasKey))
-    } else {
-      setIsPair(false)
+    if (step === 1) {
+      setOtherMethod('');
+      form.setFieldValue('passkeyName', null)
+    } else if (step === 2 && isDesktop) {
+      selectOtherMethod()
     }
-  }, [preLogin, isConnected, isDesktop])
+  }, [step, isDesktop, isConnected])
 
   const title = useMemo(() => {
     if (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) {
@@ -117,6 +125,16 @@ const Authenticate = () => {
     setLoading(false)
   }
 
+  const selectOtherMethod = (method) => {
+    setOtherMethod(method);
+    setStep(3);
+    if (method === 'security_key' && !isDesktop) {
+      setIsPair(!isConnected || !service.pairingService?.hasKey);
+    } else {
+      setIsPair(false)
+    }
+  }
+
   const handleFirstSignIn = async (values) => {
     setCallingAPI(true)
     const payload = {
@@ -130,9 +148,12 @@ const Authenticate = () => {
         setCurrentPassword(values.current_password);
       } else {
         setFactor2(null)
-        setUserSession({ ...payload, ...response });
+        setUserSession({
+          ...payload,
+          access_token: response.access_token || response.token,
+        });
         setCurrentPassword(values.current_password);
-        if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+        if (preLogin?.is_password_changed) {
           setStep(2)
         } else {
           setStep(1)
@@ -156,7 +177,7 @@ const Authenticate = () => {
       password: currentPassword,
     }).then(async (response) => {
       setUserSession({ ...payload, ...response });
-      if (preLogin?.is_password_changed || (preLogin?.login_method === 'password' && !preLogin?.require_passwordless)) {
+      if (preLogin?.is_password_changed) {
         setStep(2)
       } else {
         setStep(1)
@@ -215,6 +236,24 @@ const Authenticate = () => {
     await commonServices.unlock_to_vault(payload)
   }
 
+  const setPasswordLessByPasskey = async (values) => {
+    try {
+      setCallingAPI(true);
+      await service.setApiToken(userSession?.access_token);
+      const response = await service.setNewPasswordlessUsingPasskey({
+        email: preLogin.email,
+        name: newFullName || preLogin.name,
+        passkeyName: values.passkeyName,
+      })
+      handleSave({
+        new_password: response
+      })
+    } catch (error) {
+      global.pushError(error)
+      setCallingAPI(false);
+    }
+  }
+
   return (
     <div className="welcome-page">
       <div className="welcome-page__bottom-left"></div>
@@ -243,9 +282,19 @@ const Authenticate = () => {
           </Col>
           <Col lg={11} md={24} xs={24}>
             <div className="pl-12">
-              <p className="text-3xl font-semibold mb-10">
-                {title}
-              </p>
+              <div className="w-full flex items-center mb-10">
+                {
+                  step > 1 && <Button
+                    className="mr-2"
+                    type={'text'}
+                    icon={<ArrowLeftOutlined />}
+                    onClick={() => setStep(step - 1)}
+                  />
+                }
+                <p className="text-3xl font-semibold">
+                  {title}
+                </p>
+              </div>
               {
                 step === 0 && <div>
                   {
@@ -324,20 +373,50 @@ const Authenticate = () => {
               {
                 step === 2 && <div>
                   {
-                    isPair && <PairingForm
-                      userInfo={preLogin}
-                      onConfirm={() => setIsPair(false)}
-                    />
-                  }
-                  {
-                    !isPair && (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) && <ChangePasswordForm
+                    !preLogin?.require_passwordless && <ChangePasswordForm
                       changing={callingAPI}
                       isChange={false}
                       onSave={handleSave}
                     />
                   }
                   {
-                    !isPair && (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) && <PasswordlessForm
+                    preLogin?.require_passwordless && !isDesktop && <div>
+                      <Button
+                        className="w-full mb-4"
+                        size="large"
+                        ghost
+                        type="primary"
+                        icon={<KeyOutlined />}
+                        disabled={loading || callingAPI}
+                        onClick={() => selectOtherMethod('passkey')}
+                      >
+                        {t('auth_pages.sign_in.your_passkey')}
+                      </Button>
+                      <Button
+                        className="w-full"
+                        size="large"
+                        ghost
+                        type="primary"
+                        icon={<UsbOutlined />}
+                        disabled={loading || callingAPI}
+                        onClick={() => selectOtherMethod('security_key')}
+                      >
+                        {t('auth_pages.sign_in.your_security_key')}
+                      </Button>
+                    </div>
+                  }
+                </div>
+              }
+              {
+                step === 3 && otherMethod === 'security_key' && <div>
+                  {
+                    isPair && <PairingForm
+                      userInfo={preLogin}
+                      onConfirm={() => setIsPair(false)}
+                    />
+                  }
+                  {
+                    !isPair && preLogin?.require_passwordless && <PasswordlessForm
                       changing={callingAPI}
                       userInfo={preLogin}
                       accessToken={userSession?.access_token}
@@ -345,6 +424,39 @@ const Authenticate = () => {
                       onConfirm={(password) => handleSave({ new_password: password })}
                     />
                   }
+                </div>
+              }
+              {
+                step === 3 && otherMethod === 'passkey' && <div>
+                  <Form
+                    form={form}
+                    layout="vertical"
+                    disabled={callingAPI}
+                    onFinish={setPasswordLessByPasskey}
+                  >
+                    <Form.Item
+                      name={'passkeyName'}
+                      label={t('security.passkey.add_new_key_description')}
+                      rules={[
+                        global.rules.REQUIRED(t('common.name')),
+                      ]}
+                    >
+                      <Input
+                        size="large"
+                        autoFocus={true}
+                        placeholder={t('placeholder.enter')}
+                      />
+                    </Form.Item>
+                    <Button
+                      className="mt-4 w-full"
+                      type="primary"
+                      size="large"
+                      htmlType="submit"
+                      loading={callingAPI}
+                    >
+                      {t('button.continue')}
+                    </Button>
+                  </Form>
                 </div>
               }
               <div className="mt-4 text-center">
