@@ -325,9 +325,7 @@ const Lock = () => {
                                   type="primary"
                                   icon={<KeyOutlined />}
                                   disabled={loading || callingAPI}
-                                  onClick={() => {
-                                    selectOtherMethod('passkey');
-                                  }}
+                                  onClick={() => selectOtherMethod('passkey')}
                                 >
                                   {t('auth_pages.sign_in.your_passkey')}
                                 </Button>
@@ -339,9 +337,7 @@ const Lock = () => {
                                 type="primary"
                                 icon={<UsbOutlined />}
                                 disabled={loading || callingAPI}
-                                onClick={() => {
-                                  selectOtherMethod('security_key');
-                                }}
+                                onClick={() => selectOtherMethod('security_key')}
                               >
                                 {t('auth_pages.sign_in.your_security_key')}
                               </Button>
