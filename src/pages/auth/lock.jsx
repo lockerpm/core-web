@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from "react";
 import './css/auth.scss';
 
 import {
-  Image,
   Card,
   Input,
   Form,
@@ -13,7 +12,13 @@ import {
   Spin
 } from '@lockerpm/design';
 
-import { PairingForm, PasswordlessForm } from "../../components";
+import {
+  ArrowLeftOutlined,
+  KeyOutlined,
+  UsbOutlined
+} from "@ant-design/icons";
+
+import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
 
 import Logo from "./components/Logo";
 
@@ -48,6 +53,8 @@ const Lock = () => {
   const [isPair, setIsPair] = useState(false)
   const [form] = Form.useForm();
   const [serviceUser, setServiceUser] = useState(false)
+  const [step, setStep] = useState(0);
+  const [otherMethod, setOtherMethod] = useState('')
 
   const query = common.convertStringToQuery(location.search);
 
@@ -66,6 +73,18 @@ const Lock = () => {
       }
     }
   }, [userInfo?.email, isConnected])
+
+  useEffect(() => {
+    if (step === 1 && userInfo?.login_method === 'passwordless' && isDesktop) {
+      selectOtherMethod('security_key');
+    }
+  }, [userInfo, isDesktop, step]);
+
+  useEffect(() => {
+    if (step === 1) {
+      setIsPair(false)
+    }
+  }, [step, isPair])
 
   const description = useMemo(() => {
     if (userInfo?.sync_all_platforms) {
@@ -102,19 +121,25 @@ const Lock = () => {
 
   const getServiceUser = async () => {
     setLoading(true);
-    if (userInfo?.sync_all_platforms || userInfo.login_method === 'passwordless') {
-      setIsPair((userInfo?.login_method === 'passwordless' || isConnected) && !isDesktop && !service.pairingService?.hasKey)
-      if (isConnected && userInfo.sync_all_platforms && (isDesktop || service.pairingService?.hasKey)) {
+    if (userInfo?.sync_all_platforms) {
+      setIsPair(isConnected && !isDesktop && !service.pairingService?.hasKey)
+      if (isConnected && (isDesktop || service.pairingService?.hasKey)) {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === userInfo.email) {
             setServiceUser(serviceUser)
+          } else {
+            setStep(1)
           }
         } catch (error) {
           await commonServices.reset_service();
+          setStep(1)
         }
+      } else {
+        setStep(1)
       }
     } else {
+      setStep(1)
       setIsPair(false)
     }
     setLoading(false)
@@ -141,6 +166,44 @@ const Lock = () => {
     setLogging(false);
   }
 
+  const selectOtherMethod = (method) => {
+    setStep(2);
+    setOtherMethod(method);
+    if (method === 'security_key' && !isDesktop) {
+      setIsPair(!isConnected || !service.pairingService?.hasKey);
+    } else {
+      setIsPair(false)
+    }
+  }
+
+  const Footer = <Row gutter={[8, 0]}>
+    <Col span={12}>
+      <Button
+        className="w-full"
+        size="large"
+        htmlType="submit"
+        disabled={callingAPI}
+        loading={logging}
+        onClick={() => handleLogout()}
+      >
+        {t('sidebar.logout')}
+      </Button>
+    </Col>
+    <Col span={12}>
+      <Button
+        className="w-full"
+        size="large"
+        type="primary"
+        htmlType="submit"
+        disabled={logging}
+        loading={callingAPI}
+        onClick={handleUnlock}
+      >
+        {t('lock.unlock')}
+      </Button>
+    </Col>
+  </Row>
+
   return (
     <Spin spinning={isLoading || loading}>
       <div
@@ -163,7 +226,15 @@ const Lock = () => {
                 padding: '32px'
               }}
             >
-              <div className="w-full flex items-center justify-between">
+              <div className="w-full flex items-center">
+                {
+                  step > 1 && <Button
+                    className="mr-2"
+                    type={'text'}
+                    icon={<ArrowLeftOutlined />}
+                    onClick={() => setStep(step - 1)}
+                  />
+                }
                 <p className="text-2xl font-semibold">
                   {t('lock.title')}
                 </p>
@@ -185,7 +256,7 @@ const Lock = () => {
                         {userInfo?.email.slice(0, 1)?.toUpperCase()}
                       </Avatar>
                     }
-                    value={userInfo?.name}
+                    value={userInfo?.name || userInfo?.email}
                     size="large"
                     readOnly={true}
                   />
@@ -210,75 +281,111 @@ const Lock = () => {
                     </div>
                   }
                   {
-                    userInfo?.login_method === 'passwordless' && !isPair && !serviceUser && <div>
-                      <PasswordlessForm
-                        changing={callingAPI}
-                        isUnlock={true}
-                        userInfo={userInfo}
-                        onRepair={() => setIsPair(true)}
-                        onConfirm={(password) => handleSubmit({
-                          password
-                        })}
-                      />
+                    serviceUser && !isPair && <div>
+                      {Footer}
+                    </div>
+                  }
+                  {
+                    !serviceUser && !isPair && <div>
                       {
-                        !callingAPI && <Button
-                          className="w-full mt-6"
-                          size="large"
-                          htmlType="submit"
-                          loading={logging}
-                          onClick={() => handleLogout()}
-                        >
-                          {t('sidebar.logout')}
-                        </Button>
+                        step === 1 && <div>
+                          {
+                            userInfo?.login_method === 'password' && <div>
+                              <Form.Item
+                                name="password"
+                                noStyle
+                                rules={[
+                                  RULES.REQUIRED(t('lock.password')),
+                                ]}
+                              >
+                                <Input.Password
+                                  placeholder={t('lock.password')}
+                                  size="large"
+                                  disabled={callingAPI || logging}
+                                  onPressEnter={handleUnlock}
+                                />
+                              </Form.Item>
+                              <div className="mt-6">
+                                {Footer}
+                              </div>
+                            </div>
+                          }
+                          {
+                            (userInfo?.login_method === 'password' || !isDesktop) && <div>
+                              {
+                                userInfo?.login_method === 'password' && <p className="my-4 text-center">
+                                  {t('auth_pages.sign_in.or_login_with')}
+                                </p>
+                              }
+                              {
+                                !isDesktop && <Button
+                                  className="w-full mb-4"
+                                  size="large"
+                                  ghost
+                                  type="primary"
+                                  icon={<KeyOutlined />}
+                                  disabled={loading || callingAPI}
+                                  onClick={() => {
+                                    selectOtherMethod('passkey');
+                                  }}
+                                >
+                                  {t('auth_pages.sign_in.your_passkey')}
+                                </Button>
+                              }
+                              <Button
+                                className="w-full"
+                                size="large"
+                                ghost
+                                type="primary"
+                                icon={<UsbOutlined />}
+                                disabled={loading || callingAPI}
+                                onClick={() => {
+                                  selectOtherMethod('security_key');
+                                }}
+                              >
+                                {t('auth_pages.sign_in.your_security_key')}
+                              </Button>
+                            </div>
+                          }
+                        </div>
+                      }
+                      {
+                        step === 2 && <div>
+                          {
+                            otherMethod === 'security_key' && <PasswordlessForm
+                              changing={callingAPI}
+                              isUnlock={true}
+                              userInfo={userInfo}
+                              onRepair={() => setIsPair(true)}
+                              onConfirm={(password) => handleSubmit({
+                                password
+                              })}
+                            />
+                          }
+                          {
+                            otherMethod === 'passkey' && <PasskeyForm
+                              changing={loading}
+                              isLogin={true}
+                              userInfo={userInfo}
+                              onConfirm={(password) => handleSubmit({
+                                password
+                              })}
+                            />
+                          }
+                          {
+                            !callingAPI && <Button
+                              className="w-full mt-6"
+                              size="large"
+                              htmlType="submit"
+                              loading={logging}
+                              onClick={() => handleLogout()}
+                            >
+                              {t('sidebar.logout')}
+                            </Button>
+                          }
+                        </div>
                       }
                     </div>
-                  }
-                  {
-                    userInfo?.login_method === 'password' && !isPair && !serviceUser && <div className="mb-6">
-                      <Form.Item
-                        name="password"
-                        noStyle
-                        rules={[
-                          RULES.REQUIRED(t('lock.password')),
-                        ]}
-                      >
-                        <Input.Password
-                          placeholder={t('lock.password')}
-                          size="large"
-                          disabled={callingAPI || logging}
-                          onPressEnter={handleUnlock}
-                        />
-                      </Form.Item>
-                    </div>
-                  }
-                  {
-                    !isPair && (serviceUser || userInfo?.login_method === 'password') && <Row gutter={[8, 0]}>
-                      <Col span={12}>
-                        <Button
-                          className="w-full"
-                          size="large"
-                          htmlType="submit"
-                          disabled={callingAPI}
-                          loading={logging}
-                          onClick={() => handleLogout()}
-                        >
-                          {t('sidebar.logout')}
-                        </Button>
-                      </Col>
-                      <Col span={12}>
-                        <Button
-                          className="w-full"
-                          size="large"
-                          type="primary"
-                          htmlType="submit"
-                          disabled={logging}
-                          loading={callingAPI}
-                          onClick={handleUnlock}
-                        >
-                          {t('lock.unlock')}
-                        </Button>
-                      </Col>
-                    </Row>
                   }
                 </div>
               </Form>
