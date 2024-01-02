@@ -34,19 +34,20 @@ const NewKeyModal = (props) => {
       footer={false}
     >
       {
-        isPair ? <PairingForm
+        isPair && <PairingForm
           userInfo={userInfo}
           isLogin={true}
           onConfirm={() => setIsPair(false)}
-        /> : <div>
-          <PasswordlessForm
-            changing={changing}
-            userInfo={userInfo}
-            isAddKey={true}
-            onConfirm={onConfirm}
-            onRepair={() => setIsPair(true)}
-          />
-        </div>
+        />
+      }
+      {
+        !isPair && <PasswordlessForm
+          changing={changing}
+          userInfo={userInfo}
+          isAddKey={true}
+          onConfirm={onConfirm}
+          onRepair={() => setIsPair(true)}
+        />
       }
     </Modal>
   );
