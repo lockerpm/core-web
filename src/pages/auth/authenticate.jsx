@@ -54,7 +54,7 @@ const Authenticate = () => {
 
   useEffect(() => {
     if (preLogin) {
-      if (!preLogin?.is_factor2 && preLogin?.require_2fa) {
+      if (!preLogin?.is_factor2 && preLogin?.require_2fa && preLogin?.is_password_changed) {
         global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
         return;
       }
@@ -330,19 +330,19 @@ const Authenticate = () => {
                     />
                   }
                   {
+                    !isPair && (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) && <ChangePasswordForm
+                      changing={callingAPI}
+                      isChange={false}
+                      onSave={handleSave}
+                    />
+                  }
+                  {
                     !isPair && (preLogin?.login_method === 'passwordless' || preLogin?.require_passwordless) && <PasswordlessForm
                       changing={callingAPI}
                       userInfo={preLogin}
                       accessToken={userSession?.access_token}
                       onRepair={() => setIsPair(true)}
                       onConfirm={(password) => handleSave({ new_password: password })}
-                    />
-                  }
-                  {
-                    !isPair && (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) && <ChangePasswordForm
-                      changing={callingAPI}
-                      isChange={false}
-                      onSave={handleSave}
                     />
                   }
                 </div>

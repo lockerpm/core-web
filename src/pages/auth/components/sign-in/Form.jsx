@@ -236,7 +236,7 @@ const SignInForm = (props) => {
               </div>
             }
             {
-              (preLogin?.login_method === 'passwordless' || !isDesktop) && <div>
+              (preLogin?.login_method === 'password' || !isDesktop) && <div>
                 {
                   preLogin?.login_method === 'password' && <p className="my-4 text-center">
                     {t('auth_pages.sign_in.or_login_with')}
