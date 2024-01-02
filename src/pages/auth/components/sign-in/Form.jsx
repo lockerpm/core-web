@@ -81,8 +81,10 @@ const SignInForm = (props) => {
       form.setFieldsValue({
         password: null
       })
+    } else if (step === 2) {
+      setIsPair(false)
     }
-  }, [step])
+  }, [step, isPair])
 
   const handleSubmit = (values) => {
     if (preLogin) {
@@ -158,7 +160,7 @@ const SignInForm = (props) => {
     setStep(3);
     setOtherMethod(method);
     if (method === 'security_key' && !isDesktop) {
-      setIsPair(isConnected && !service.pairingService?.hasKey);
+      setIsPair(!isConnected || !service.pairingService?.hasKey);
     } else {
       setIsPair(false)
     }
