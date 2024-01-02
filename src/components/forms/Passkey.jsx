@@ -51,7 +51,7 @@ const PasskeyForm = (props) => {
     setCallingAPI(true)
     try {
       const response = await service.getPasswordlessUsingPasskey({
-        email,
+        email: userInfo.email,
         credentialId: selectedPasskey?.credential_id,
         random: selectedPasskey?.random,
       })

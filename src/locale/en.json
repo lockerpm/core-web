@@ -288,6 +288,12 @@
       },
       "policy": {
         "updated": "The policy has been changed "
+      },
+      "passkey": {
+        "added": "The new passkey has been added"
+      },
+      "security_key": {
+        "added": "The new security key has been added"
       }
     },
     "warning": {
