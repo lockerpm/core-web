@@ -49,6 +49,7 @@ const service = new WebService({
   logLevel: 1,
   baseApiUrl: `${process.env.REACT_APP_API_URL}/v3`,
   clientType: 'web',
+  domain: window.location.hostname,
   servicePorts: [14411, 14110, 15611, 14412, 16311, 14514, 14515, 14413, 16310],
 })
 
