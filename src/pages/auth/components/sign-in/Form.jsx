@@ -68,7 +68,7 @@ const SignInForm = (props) => {
   }, [preLogin, isConnected]);
 
   useEffect(() => {
-    if (step === 2 && preLogin?.require_passwordless && isDesktop) {
+    if (step === 2 && preLogin?.login_method === 'passwordless' && isDesktop) {
       selectOtherMethod('security_key');
     }
   }, [preLogin, isDesktop, step]);
@@ -212,7 +212,7 @@ const SignInForm = (props) => {
         {
           step === 2 && !isPair && <div>
             {
-              !preLogin?.require_passwordless && <div>
+              preLogin?.login_method === 'password' && <div>
                 <Form.Item
                   name="password"
                   rules={[
@@ -236,9 +236,9 @@ const SignInForm = (props) => {
               </div>
             }
             {
-              (!preLogin?.require_passwordless || !isDesktop) && <div>
+              (preLogin?.login_method === 'passwordless' || !isDesktop) && <div>
                 {
-                  !preLogin?.require_passwordless && <p className="my-4 text-center">
+                  preLogin?.login_method === 'password' && <p className="my-4 text-center">
                     {t('auth_pages.sign_in.or_login_with')}
                   </p>
                 }

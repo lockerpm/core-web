@@ -44,7 +44,7 @@ const Passkey = (props) => {
     if (isConnected) {
       await service.setApiToken(authServices.access_token());
       const response = await service.listBackupPasswordless();
-      setBackupKeys(response || [])
+      setBackupKeys(response?.filter((k) => k.type !== 'hmac') || [])
     }
   }
 
@@ -58,13 +58,14 @@ const Passkey = (props) => {
       currentEncKey: encKey.key,
       passkeyName: name
     }).then(() => {
+      global.pushSuccess(t('notification.success.passkey.added'))
       getBackupKeys();
       setNewKeyVisible(false);
+      setCallingAPI(false);
     }).catch((error) => {
-      console.log(error);
-      global.pushError(error)
+      global.pushError(error);
+      setCallingAPI(false);
     });
-    setCallingAPI(false);
   }
 
   const handleRemoveKey = async (keyId) => {

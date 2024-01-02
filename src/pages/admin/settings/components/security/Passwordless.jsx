@@ -43,10 +43,11 @@ const Passwordless = (props) => {
   const getBackupKeys = async () => {
     await service.setApiToken(authServices.access_token());
     const response = await service.listBackupPasswordless();
-    setBackupKeys(response || [])
+    setBackupKeys(response?.filter((k) => k.type === 'hmac') || [])
   }
 
   const handleAddedKey = async () => {
+    global.pushSuccess(t('notification.success.security_key.added'))
     setCallingAPI(true);
     await getBackupKeys();
     setNewKeyVisible(false);
