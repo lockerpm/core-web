@@ -16,6 +16,13 @@ function update(data) {
   })
 }
 
+function disable() {
+  return request({
+    url: global.endpoint.SSO_CONFIGURATION,
+    method: "delete",
+  })
+}
+
 function check_exists() {
   return request({
     url: global.endpoint.SSO_CONFIGURATION_CHECK_EXISTS,
@@ -34,6 +41,7 @@ function get_user_by_code(data) {
 export default {
   get,
   update,
+  disable,
   check_exists,
   get_user_by_code
 }

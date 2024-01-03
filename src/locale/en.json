@@ -77,7 +77,7 @@
     "folder": "Folder",
     "or": "or",
     "item": "Item",
-    "email_addresses": "Email addresses",
+    "email_addresses": "Email address",
     "receiver": "Receiver",
     "days_number": "{{number}} days",
     "one_day": "1 day",
@@ -294,6 +294,10 @@
       },
       "security_key": {
         "added": "The new security key has been added"
+      },
+      "sso_configuration": {
+        "updated": "The SSO Configuration has been updated.",
+        "reset": "The SSO Configuration has been reset."
       }
     },
     "warning": {
@@ -983,6 +987,7 @@
       "good_news": "Good News",
       "good_news_details": "All items in your vault with passwords that are strong",
       "used_time_count": "Used {{count}} time(s)",
+      "very_weak": "very weak password(s)",
       "weak_passwords": {
         "title": "Weak passwords",
         "description": "Easy to guess",
@@ -1128,6 +1133,7 @@
     "oauth_scopes": "OAuth scopes to request",
     "email_claim_types": "Email claim types",
     "name_claim_types": "Name claim types",
+    "reset_question": "Are you sure you want to reset config?",
     "placeholder": {
       "sso_provider": "oauth2",
       "identifier": "vincss-sso",

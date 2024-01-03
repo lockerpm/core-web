@@ -21,7 +21,6 @@ const Actions = (props) => {
     className = '',
     item = null,
     enterpriseId,
-    mailConfig = null,
     onDelete = () => { },
     onReload = () => { },
   } = props;

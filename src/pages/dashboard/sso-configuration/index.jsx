@@ -40,11 +40,7 @@ const SSOConfiguration = (props) => {
       })
   }
 
-  const handleOnEditButtonClick = () => {
-    setIsEditing(true)
-  }
-
-  const handleOnSaveButtonClick = () => {
+  const handleSave = () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true)
       const payload = {
@@ -55,7 +51,7 @@ const SSOConfiguration = (props) => {
       }
       await ssoConfigServices.update(payload)
         .then(() => {
-          global.pushSuccess(t("notification.success.cipher.updated"))
+          global.pushSuccess(t("notification.success.sso_configuration.updated"))
         })
         .catch((error) => {
           global.pushError(error)
@@ -65,7 +61,22 @@ const SSOConfiguration = (props) => {
     })
   }
 
-  const handleOnCancelButtonClick = () => {
+  const handleReset = () => {
+    global.confirm(async () => {
+      await ssoConfigServices.disable().then(() => {
+        getSSOConfig();
+        global.pushSuccess(t('notification.success.sso_configuration.reset'))
+      }).catch((error) => {
+        global.pushError(error)
+      })
+    }, {
+      content: t('sso_configuration.reset_question'),
+      okText: t('button.reset'),
+      okButtonProps: { danger: false },
+    })
+  }
+
+  const handleCancel = () => {
     form.setFieldsValue(ssoConfig);
     setIsEditing(false)
   }
@@ -142,16 +153,26 @@ const SSOConfiguration = (props) => {
           {
             isEditing ? <>
               {
-                !common.isEmpty(ssoConfig) && <Button danger onClick={handleOnCancelButtonClick}>
+                !common.isEmpty(ssoConfig) && <Button danger onClick={handleCancel}>
                   {t("button.cancel")}
                 </Button>
               }
-              <Button type='primary' loading={callingAPI} onClick={handleOnSaveButtonClick} htmlType='submit'>
+              <Button type='primary' loading={callingAPI} onClick={handleSave} htmlType='submit'>
                 {t("button.save")}
               </Button>
-            </> : <Button type='primary' onClick={handleOnEditButtonClick}>
-              {t("button.edit")}
-            </Button>
+            </> : <div>
+              {
+                !common.isEmpty(ssoConfig) && <Button
+                  ghost
+                  onClick={handleReset}
+                >
+                  {t("button.reset")}
+                </Button>
+              }
+              <Button type='primary' onClick={() => setIsEditing(true)}>
+                {t("button.edit")}
+              </Button>
+            </div>
           }
         </Space>
       </div>

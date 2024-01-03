@@ -288,6 +288,16 @@
       },
       "policy": {
         "updated": "Chính sách đã được thay đổi."
+      },
+      "passkey": {
+        "added": "Passkey mới đã được thêm"
+      },
+      "security_key": {
+        "added": "Khóa bảo mật đã được thêm"
+      },
+      "sso_configuration": {
+        "updated": "Cấu hình SSO đã được cập nhật.",
+        "reset": "Cấu hình SSO đã được đặt lại."
       }
     },
     "warning": {
@@ -965,6 +975,7 @@
       "good_news": "Tin tốt",
       "good_news_details": "Tất cả các mục trong kho dữ liệu của bạn đều có mật khẩu mạnh",
       "used_time_count": "Sử dụng lại {{count}} lần",
+      "very_weak": "Mật khẩu rất yếu",
       "weak_passwords": {
         "title": "Mật khẩu yếu",
         "description": "Dễ đoán",
@@ -1110,6 +1121,7 @@
     "oauth_scopes": "Phạm vi OAuth yêu cầu",
     "email_claim_types": "Các loại yêu cầu email",
     "name_claim_types": "Các loại yêu cầu tên",
+    "reset_question": "Bạn có chắc chắn muốn đặt lại cấu hình?",
     "placeholder": {
       "sso_provider": "oauth2",
       "identifier": "vincss-sso",
