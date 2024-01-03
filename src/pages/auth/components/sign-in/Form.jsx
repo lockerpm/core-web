@@ -90,7 +90,8 @@ const SignInForm = (props) => {
     if (preLogin) {
       onSubmit({
         ...values,
-        sync_all_platforms: preLogin.sync_all_platforms
+        sync_all_platforms: preLogin.sync_all_platforms,
+        unlock_method: otherMethod
       })
     } else {
       handlePrelogin(values)

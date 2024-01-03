@@ -88,7 +88,16 @@ function redirect_client_id() {
   return sessionStorage.getItem('redirect_client_id')
 }
 
+function update_unlock_method(unlock_method) {
+  sessionStorage.setItem('unlock_method', unlock_method)
+}
+
+function unlock_method() {
+  return sessionStorage.getItem('unlock_method')
+}
+
 async function redirect_login() {
+  update_unlock_method(null)
   await coreServices.lock();
   const currentPage = common.getRouterByLocation(global.location)
   if ([global.keys.AUTHENTICATE, global.keys.SETUP_2FA].includes(currentPage?.name)) {
@@ -125,6 +134,7 @@ async function logout(query = {}) {
   if (userInfo?.sync_all_platforms) {
     await commonServices.service_logout();
   }
+  update_unlock_method(null);
   update_access_token(null);
   update_sso_account(null)
   global.navigate(global.keys.SIGN_IN, {}, query);
@@ -145,5 +155,7 @@ export default {
   update_redirect_client_id,
   redirect_client_id,
   redirect_login,
+  update_unlock_method,
+  unlock_method,
   logout
 }

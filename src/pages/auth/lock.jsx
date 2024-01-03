@@ -110,7 +110,8 @@ const Lock = () => {
       keyB64: values.key,
       email: userInfo.email,
       username: userInfo.email,
-      sync_all_platforms: userInfo.sync_all_platforms
+      sync_all_platforms: userInfo.sync_all_platforms,
+      unlock_method: otherMethod
     }
     await commonServices.unlock_to_vault(payload, query, () => {
       const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';

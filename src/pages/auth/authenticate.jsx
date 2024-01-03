@@ -231,7 +231,8 @@ const Authenticate = () => {
       password: newPassword,
       username: preLogin.email,
       email: preLogin.email,
-      sync_all_platforms: preLogin.sync_all_platforms
+      sync_all_platforms: preLogin.sync_all_platforms,
+      unlock_method: otherMethod
     }
     await commonServices.unlock_to_vault(payload)
   }

@@ -4,7 +4,7 @@ import {
   Form,
   Input
 } from '@lockerpm/design';
-import { PairingForm, PasswordlessForm } from "../../components";
+import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
 
 import { useSelector } from 'react-redux';
 import { orange } from '@ant-design/colors';
@@ -40,6 +40,7 @@ const PasswordConfirmModal = (props) => {
   const [timeNow, setTimeNow] = useState(new Date().getTime());
 
   const password = Form.useWatch('password', form);
+  const unlockMethod = authServices.unlock_method();
 
   useEffect(() => {
     form.resetFields();
@@ -48,7 +49,11 @@ const PasswordConfirmModal = (props) => {
   }, [visible])
 
   useEffect(() => {
-    setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey && !isDesktop)));
+    if (unlockMethod === 'security_key') {
+      setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey && !isDesktop)));
+    } else {
+      setIsPair(false);
+    }
   }, [isConnected, userInfo, isDesktop])
 
   const handleConfirm = async () => {
@@ -67,6 +72,7 @@ const PasswordConfirmModal = (props) => {
 
   return (
     <Modal
+      className="confirm-password"
       title={
         <div className="flex items-center">
           <InfoCircleFilled style={{
@@ -101,40 +107,50 @@ const PasswordConfirmModal = (props) => {
           />
         }
         {
-          !isPair && userInfo?.login_method === 'passwordless' && <div>
+          !isPair && <div>
             <div className="mb-2">
               {description || t('password_confirm.confirm_note')}
             </div>
-            <PasswordlessForm
-              changing={callingAPI}
-              userInfo={userInfo}
-              onConfirm={onConfirm}
-              onRepair={() => setIsPair(true)}
-            />
-          </div>
-        }
-        {
-          !isPair && userInfo?.login_method === 'password' && <div>
-            <div className="mb-2">
-              {description || t('password_confirm.confirm_note')}
-            </div>
-            <Form
-              form={form}
-              onFinish={handleConfirm}
-            >
-              <Form.Item
-                name={'password'}
-                rules={[
-                  global.rules.REQUIRED(t('auth_pages.password')),
-                ]}
-              >
-                <Input.Password
-                  autoFocus={true}
-                  placeholder={t('placeholder.enter')}
-                  disabled={checking || callingAPI}
+            {
+              !unlockMethod && <div>
+                <Form
+                  form={form}
+                  onFinish={handleConfirm}
+                >
+                  <Form.Item
+                    name={'password'}
+                    rules={[
+                      global.rules.REQUIRED(t('auth_pages.password')),
+                    ]}
+                  >
+                    <Input.Password
+                      autoFocus={true}
+                      placeholder={t('placeholder.enter')}
+                      disabled={checking || callingAPI}
+                    />
+                  </Form.Item>
+                </Form>
+              </div>
+            }
+            {
+              unlockMethod === 'security_key' && <div>
+                <PasswordlessForm
+                  changing={callingAPI}
+                  userInfo={userInfo}
+                  onConfirm={onConfirm}
+                  onRepair={() => setIsPair(true)}
                 />
-              </Form.Item>
-            </Form>
+              </div>
+            }
+            {
+              unlockMethod === 'passkey' && <div>
+                <PasskeyForm
+                  changing={callingAPI}
+                  userInfo={userInfo}
+                  onConfirm={onConfirm}
+                />
+              </div>
+            }
           </div>
         }
       </div>

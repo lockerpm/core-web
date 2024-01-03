@@ -119,6 +119,7 @@ const Setup2FA = () => {
           username: preLogin.email,
           email: preLogin.email,
           sync_all_platforms: preLogin.sync_all_platforms,
+          unlock_method: otherMethod
         })
       }
     }).catch((error) => {
