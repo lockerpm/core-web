@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { PairingForm, PasswordlessForm } from "../../components";
+import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
 import Enable from "./components/setup-2fa/Enable";
@@ -31,6 +31,7 @@ const Setup2FA = () => {
   const [factor2, setFactor2] = useState(null)
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
+  const [otherMethod, setOtherMethod] = useState('')
   const [currentPassword, setCurrentPassword] = useState(null)
 
   const [form] = Form.useForm()
@@ -53,8 +54,10 @@ const Setup2FA = () => {
 
   useEffect(() => {
     if (preLogin) {
-      if (preLogin?.is_factor2 || !preLogin?.require_2fa) {
-        if (!preLogin?.is_password_changed || (preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
+      if (!preLogin?.is_password_changed) {
+        global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
+      } else if (preLogin?.is_factor2 || !preLogin?.require_2fa) {
+        if (preLogin?.require_passwordless && preLogin?.login_method === 'password') {
           global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
           return;
         }
@@ -64,12 +67,10 @@ const Setup2FA = () => {
   }, [preLogin])
 
   useEffect(() => {
-    if (preLogin?.login_method === 'passwordless') {
-      setIsPair(!isConnected || (!isDesktop && !service.pairingService?.hasKey))
-    } else {
-      setIsPair(false)
+    if (step === 0 && preLogin?.login_method === 'passwordless' && isDesktop) {
+      selectOtherMethod('security_key');
     }
-  }, [preLogin, isConnected, isDesktop])
+  }, [preLogin, isDesktop, step]);
 
   const handlePrelogin = async () => {
     setLoading(true)
@@ -90,7 +91,7 @@ const Setup2FA = () => {
     }
     await userServices.users_session(payload).then(async (response) => {
       setFactor2(response);
-      setStep(1);
+      setStep(2);
       setCurrentPassword(values.current_password);
     }).catch((error) => {
       setFactor2(null)
@@ -106,7 +107,7 @@ const Setup2FA = () => {
     setCallingAPI(true);
     await authServices.update_factor2(payload).then(async () => {
       global.pushSuccess(t('notification.success.factor2.enabled'));
-      if (!preLogin?.is_password_changed || (preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
+      if (preLogin?.require_passwordless && preLogin?.login_method === 'password') {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
       } else {
         await commonServices.unlock_to_vault({
@@ -120,6 +121,16 @@ const Setup2FA = () => {
       global.pushError(error)
     })
     setCallingAPI(false);
+  }
+
+  const selectOtherMethod = (method) => {
+    setOtherMethod(method);
+    if (method === 'security_key' && !isDesktop) {
+      setIsPair(!isConnected || !service.pairingService?.hasKey);
+    } else {
+      setIsPair(false)
+    }
+    setStep(1);
   }
 
   return (
@@ -187,33 +198,74 @@ const Setup2FA = () => {
                     </Form>
                   }
                   {
-                    preLogin?.login_method === 'passwordless' && <div>
+                    (preLogin?.login_method === 'password' || !isDesktop) && <div>
                       {
-                        isPair && <PairingForm
-                          userInfo={preLogin}
-                          onConfirm={() => setIsPair(false)}
-                        />
+                        preLogin?.login_method === 'password' && <p className="my-4 text-center">
+                          {t('auth_pages.sign_in.or_login_with')}
+                        </p>
                       }
                       {
-                        !isPair && <PasswordlessForm
-                          changing={callingAPI}
-                          userInfo={preLogin}
-                          isLogin={true}
-                          onRepair={() => setIsPair(true)}
-                          onConfirm={(password) => handleSignIn({ current_password: password })}
-                        />
+                        !isDesktop && <Button
+                          className="w-full mb-4"
+                          size="large"
+                          ghost
+                          type="primary"
+                          icon={<KeyOutlined />}
+                          disabled={loading || callingAPI}
+                          onClick={() => selectOtherMethod('passkey')}
+                        >
+                          {t('auth_pages.sign_in.your_passkey')}
+                        </Button>
                       }
+                      <Button
+                        className="w-full"
+                        size="large"
+                        ghost
+                        type="primary"
+                        icon={<UsbOutlined />}
+                        disabled={loading || callingAPI}
+                        onClick={() =>selectOtherMethod('security_key')}
+                      >
+                        {t('auth_pages.sign_in.your_security_key')}
+                      </Button>
                     </div>
                   }
                 </div>
               }
               {
-                step === 1 && <Enable
+                step === 1 && <div>
+                  {
+                    isPair && <PairingForm
+                      userInfo={preLogin}
+                      onConfirm={() => setIsPair(false)}
+                    />
+                  }
+                  {
+                    !isPair && otherMethod === 'security_key' && <PasswordlessForm
+                      changing={callingAPI}
+                      userInfo={preLogin}
+                      isLogin={true}
+                      onRepair={() => setIsPair(true)}
+                      onConfirm={(password) => handleSignIn({ current_password: password })}
+                    />
+                  }
+                  {
+                    !isPair && otherMethod === 'passkey' && <PasskeyForm
+                      changing={loading}
+                      isLogin={true}
+                      userInfo={preLogin}
+                      onConfirm={(password) => handleSignIn({ current_password: password })}
+                    />
+                  }
+                </div>
+              }
+              {
+                step === 2 && <Enable
                   factor2={factor2}
                   callingAPI={callingAPI}
                   setCallingAPI={setCallingAPI}
                   onEnable={enabled2FA}
-                  onBack={() => setStep(0)}
+                  onBack={() => setStep(1)}
                 />
               }
             </div>
