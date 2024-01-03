@@ -150,6 +150,7 @@ const Authenticate = () => {
         setFactor2(null)
         setUserSession({
           ...payload,
+          ...response,
           access_token: response.access_token || response.token,
         });
         setCurrentPassword(values.current_password);
@@ -297,7 +298,13 @@ const Authenticate = () => {
                     className="mr-2"
                     type={'text'}
                     icon={<ArrowLeftOutlined />}
-                    onClick={() => setStep(step - 1)}
+                    onClick={() => {
+                      if (step === 2 && preLogin.is_password_changed) {
+                        setStep(0)
+                      } else {
+                        setStep(step -1 )
+                      }
+                    }}
                   />
                 }
                 <p className="text-3xl font-semibold">
