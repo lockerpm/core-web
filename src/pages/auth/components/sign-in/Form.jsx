@@ -109,7 +109,7 @@ const SignInForm = (props) => {
   }
 
   const handleCheckPwl = async () => {
-    if (!preLogin.is_factor2 && preLogin.require_2fa) {
+    if (!preLogin.is_factor2 && preLogin.require_2fa && preLogin.is_password_changed) {
       global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email })
     } else if (!preLogin.is_password_changed || (preLogin.login_method === 'password' && preLogin.require_passwordless)) {
       global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email })
