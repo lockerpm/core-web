@@ -17,6 +17,7 @@ const Role = (props) => {
   const {
     record = null,
     enterpriseId,
+    className = 'w-full',
     onReload = () => { },
   } = props;
   const { t } = useTranslation()
@@ -51,7 +52,7 @@ const Role = (props) => {
 
   return (
     <Select
-      className="w-full"
+      className={className}
       value={record.role}
       bordered={false}
       onChange={(v) => onUpdate(v)}

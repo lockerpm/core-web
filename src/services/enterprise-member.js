@@ -9,6 +9,13 @@ function list(enterprise_id, params = {}) {
   })
 }
 
+function get(enterprise_id, member_id) {
+  return request({
+    url: global.endpoint.ENTERPRISE_MEMBER.replace(":enterprise_id", enterprise_id).replace(":member_id", member_id),
+    method: "get",
+  })
+}
+
 function create_members(enterprise_id, data = {}) {
   return request({
     url: global.endpoint.ENTERPRISE_ADD_MEMBERS.replace(":enterprise_id", enterprise_id),
@@ -49,6 +56,7 @@ function remove(enterprise_id, member_id) {
 
 export default {
   list,
+  get,
   create_members,
   update,
   activated,
