@@ -12,6 +12,7 @@ import {
 
 import userServices from "../../../../../services/user";
 import commonServices from "../../../../../services/common";
+import authServices from "../../../../../services/auth";
 
 import {
   RedoOutlined,
@@ -40,7 +41,8 @@ const CrossPlatformSync = (props) => {
     if (!userInfo.sync_all_platforms) {
       await commonServices.service_login({
         email: userInfo.email,
-        password: password
+        password: password,
+        unlock_method: authServices.unlock_method()
       })
     }
     setCallingAPI(false);

@@ -20,6 +20,7 @@ import common from "../../../../../utils/common";
 import global from "../../../../../config/global";
 
 import enterprisePolicyServices from "../../../../../services/enterprise-policy";
+import commonServices from "../../../../../services/common";
 
 const PasswordlessLogin = (props) => {
   const {
@@ -46,13 +47,14 @@ const PasswordlessLogin = (props) => {
     await enterprisePolicyServices.passwordless(enterpriseId, {
       enabled,
       ...config,
-    }).then(() => {
+    }).then(async () => {
       global.pushSuccess(t('notification.success.policy.updated'))
       onUpdated({
         enabled,
         policy_type: policy.policy_type,
         config: config
       })
+      await commonServices.fetch_user_info();
       setVisible(false);
     }).catch((error) => {
       global.pushError(error)

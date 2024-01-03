@@ -54,7 +54,7 @@ const Lock = () => {
   const [form] = Form.useForm();
   const [serviceUser, setServiceUser] = useState(false)
   const [step, setStep] = useState(0);
-  const [otherMethod, setOtherMethod] = useState('')
+  const [otherMethod, setOtherMethod] = useState(null)
 
   const query = common.convertStringToQuery(location.search);
 
@@ -104,13 +104,14 @@ const Lock = () => {
   }
 
   const handleSubmit = async (values) => {
-    setCallingAPI(true)
+    setCallingAPI(true);
     const payload = {
       ...values,
       keyB64: values.key,
       email: userInfo.email,
       username: userInfo.email,
-      sync_all_platforms: userInfo.sync_all_platforms
+      sync_all_platforms: userInfo.sync_all_platforms,
+      unlock_method: values.unlock_method || otherMethod
     }
     await commonServices.unlock_to_vault(payload, query, () => {
       const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
@@ -127,7 +128,9 @@ const Lock = () => {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === userInfo.email) {
-            setServiceUser(serviceUser)
+            const cacheData = await service.getCacheData();
+            setOtherMethod(cacheData?.unlock_method || null);
+            setServiceUser(serviceUser);
           } else {
             setStep(1)
           }
@@ -151,8 +154,10 @@ const Lock = () => {
       try {
         const serviceUser = await service.getCurrentUser();
         if (serviceUser?.email === userInfo.email) {
+          const cacheData = await service.getCacheData();
+          setOtherMethod(cacheData?.unlock_method || null);
           setServiceUser(serviceUser)
-          await handleSubmit(serviceUser)
+          await handleSubmit({ ...serviceUser, unlock_method: cacheData?.unlock_method })
         }
       } catch (error) {
         await commonServices.reset_service();
@@ -350,7 +355,7 @@ const Lock = () => {
                           {
                             otherMethod === 'security_key' && <PasswordlessForm
                               changing={callingAPI}
-                              isUnlock={true}
+                              isLogin={true}
                               userInfo={userInfo}
                               onRepair={() => setIsPair(true)}
                               onConfirm={(password) => handleSubmit({

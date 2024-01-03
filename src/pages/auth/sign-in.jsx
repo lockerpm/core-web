@@ -29,12 +29,8 @@ const SingIn = () => {
   const handleSignIn = async (values) => {
     setCallingAPI(true)
     const payload = {
-      password: values.password,
-      username: values.username,
-      email: values.username,
-      hashedPassword: values.hashedPassword,
-      keyB64: values.keyB64,
-      sync_all_platforms: values.sync_all_platforms,
+      ...values,
+      email: values.username
     }
     await commonServices.unlock_to_vault(payload);
     setCallingAPI(false)

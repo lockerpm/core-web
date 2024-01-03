@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState } from "react";
 import './css/auth.scss';
 
 import {
@@ -12,14 +12,11 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 import Logo from "./components/Logo";
 import EnterOtp from "./components/otp-code/EnterOtp";
 
-import authServices from "../../services/auth";
-import userServices from "../../services/user";
-import coreServices from "../../services/core";
 import commonServices from "../../services/common";
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 
 import global from "../../config/global";
 import common from "../../utils/common";
@@ -37,20 +34,12 @@ const OtpCode = () => {
 
   const onVerify = async (payload) => {
     setCallingAPI(true)
-    await userServices.users_session_otp(payload).then(async (response) => {
-      authServices.update_access_token_type(response.token_type)
-      authServices.update_access_token(response.access_token);
-      await commonServices.fetch_user_info();
-      await coreServices.unlock({ ...response, ...payload })
-      await commonServices.sync_data();
+    await commonServices.unlock_to_vault({ ...payload, is_otp: true }, query, () => {
       const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
       navigate(returnUrl);
-    }).catch((error) => {
-      global.pushError(error)
     })
     setCallingAPI(false)
   }
-
   return (
     <div
       className="auth-page"
