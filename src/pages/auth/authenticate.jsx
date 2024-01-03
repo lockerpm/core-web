@@ -254,6 +254,14 @@ const Authenticate = () => {
     }
   }
 
+  const signOtherAccount = () => {
+    authServices.update_sso_account(null);
+    if (isConnected) {
+      service.setCacheData(null)
+    }
+    global.navigate(global.keys.SIGN_IN)
+  }
+
   return (
     <div className="welcome-page">
       <div className="welcome-page__bottom-left"></div>
@@ -465,7 +473,7 @@ const Authenticate = () => {
                   <Button
                     type="link"
                     className="font-semibold"
-                    onClick={() => global.navigate(global.keys.SIGN_IN)}
+                    onClick={() => signOtherAccount()}
                   >
                     {t('auth_pages.sign_in.label')}
                   </Button>

@@ -27,6 +27,7 @@ const SingUp = () => {
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const serverType = useSelector((state) => state.system.serverType);
+  const isConnected = useSelector((state) => state.service.isConnected)
 
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
@@ -51,6 +52,14 @@ const SingUp = () => {
       global.pushError(error)
     });
     setCallingAPI(false)
+  }
+
+  const signOtherAccount = () => {
+    authServices.update_sso_account(null);
+    if (isConnected) {
+      service.setCacheData(null)
+    }
+    global.navigate(global.keys.SIGN_IN)
   }
 
   return (
@@ -168,7 +177,7 @@ const SingUp = () => {
               <Button
                 type="link"
                 className="font-semibold"
-                onClick={() => global.navigate(global.keys.SIGN_IN)}
+                onClick={() => signOtherAccount()}
               >
                 {t('auth_pages.sign_in.label')}
               </Button>

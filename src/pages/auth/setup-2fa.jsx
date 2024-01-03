@@ -10,6 +10,10 @@ import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
 import Enable from "./components/setup-2fa/Enable";
+import {
+  KeyOutlined,
+  UsbOutlined
+} from "@ant-design/icons";
 
 import userServices from "../../services/user";
 import authServices from "../../services/auth";
@@ -133,6 +137,14 @@ const Setup2FA = () => {
     setStep(1);
   }
 
+  const signOtherAccount = () => {
+    authServices.update_sso_account(null);
+    if (isConnected) {
+      service.setCacheData(null)
+    }
+    global.navigate(global.keys.SIGN_IN)
+  }
+
   return (
     <div className="welcome-page">
       <div className="welcome-page__bottom-left"></div>
@@ -200,8 +212,8 @@ const Setup2FA = () => {
                   {
                     (preLogin?.login_method === 'password' || !isDesktop) && <div>
                       {
-                        preLogin?.login_method === 'password' && <p className="my-4 text-center">
-                          {t('auth_pages.sign_in.or_login_with')}
+                        preLogin?.login_method === 'passwordless' && <p className="mb-2 font-semibold">
+                          {t('change_password.current_password')}
                         </p>
                       }
                       {
@@ -268,6 +280,18 @@ const Setup2FA = () => {
                   onBack={() => setStep(1)}
                 />
               }
+            </div>
+            <div className="mt-4 text-center">
+              <span>
+                {t('auth_pages.authenticate.note')}
+                <Button
+                  type="link"
+                  className="font-semibold"
+                  onClick={() => signOtherAccount()}
+                >
+                  {t('auth_pages.sign_in.label')}
+                </Button>
+              </span>
             </div>
           </Col>
         </Row>
