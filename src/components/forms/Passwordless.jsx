@@ -137,7 +137,8 @@ const PasswordlessForm = (props) => {
       const response = await service.getPasswordless({
         email: userInfo.email,
         devicePath: selectedDevice.path,
-        pin: pin
+        pin: pin,
+        onlyBackup: userInfo.login_method === 'password'
       })
       setStep(2);
       setPasswordless(response)

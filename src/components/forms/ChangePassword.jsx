@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   Form,
   Input,
@@ -16,13 +16,13 @@ import global from '../../config/global';
 function ChangePasswordForm(props) {
   const {
     className = '',
-    isChange = true,
+    isReset = true,
     changing = false,
     onSave = () => { }
   } = props
   const { t } = useTranslation();
 
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
 
   useEffect(() => {
     form.resetFields();
@@ -31,7 +31,7 @@ function ChangePasswordForm(props) {
   return (
     <div className={className}>
       {
-        isChange && <p className='font-semibold text-left mb-4'>
+        !isReset && <p className='font-semibold text-left mb-4'>
           {t('passwordless.new_password')}
         </p>
       }
@@ -42,7 +42,7 @@ function ChangePasswordForm(props) {
         onFinish={onSave}
       >
         {
-          !isChange && <Form.Item
+          isReset && <Form.Item
             name={'full_name'}
             label={t('common.full_name')}
             rules={[
@@ -93,7 +93,7 @@ function ChangePasswordForm(props) {
           />
         </Form.Item>
         {
-          isChange && <Form.Item
+          !isReset && <Form.Item
             name="password_hint"
             label={t('auth_pages.password_hint')}
           >

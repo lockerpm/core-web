@@ -108,11 +108,11 @@ const PasswordConfirmModal = (props) => {
         }
         {
           !isPair && <div>
-            <div className="mb-2">
-              {description || t('password_confirm.confirm_note')}
-            </div>
             {
               !unlockMethod && <div>
+                <div className="mb-2">
+                  {description || t('password_confirm.confirm_note')}
+                </div>
                 <Form
                   form={form}
                   onFinish={handleConfirm}

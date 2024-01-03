@@ -440,7 +440,7 @@ async function unlock_to_vault(payload, query = null, callback = () => { }) {
     } else {
       authServices.update_access_token_type(response.token_type)
       authServices.update_access_token(response.access_token);
-      authServices.update_unlock_method(payload.unlock_method)
+      authServices.update_unlock_method(payload.unlock_method);
       await fetch_user_info();
       await coreServices.unlock({ ...response, ...payload });
       await sync_data();
@@ -466,6 +466,8 @@ async function reset_service() {
 
 async function service_login(data) {
   if (global.store.getState().service.isConnected && (service.pairingService?.hasKey || global.store.getState().system.isDesktop)) {
+    const cacheData = await service.getCacheData();
+    await service.setCacheData({ ...cacheData, unlock_method: data.unlock_method })
     let hashedPassword = data?.hashedPassword
     let key = data?.keyB64
     if (data.password) {

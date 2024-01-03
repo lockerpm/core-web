@@ -91,7 +91,7 @@ const SignInForm = (props) => {
       onSubmit({
         ...values,
         sync_all_platforms: preLogin.sync_all_platforms,
-        unlock_method: otherMethod
+        unlock_method: values.unlock_method || otherMethod
       })
     } else {
       handlePrelogin(values)
@@ -120,10 +120,13 @@ const SignInForm = (props) => {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === preLogin.email) {
+            const cacheData = await service.getCacheData();
+            setOtherMethod(cacheData?.unlock_method || null);
             await onSubmit({
               username: serviceUser?.email,
               hashedPassword: serviceUser?.hashedPassword,
-              keyB64: serviceUser?.key
+              keyB64: serviceUser?.key,
+              unlock_method: cacheData?.unlock_method || null
             })
           } else {
             setStep(2)
@@ -145,10 +148,13 @@ const SignInForm = (props) => {
       try {
         const serviceUser = await service.getCurrentUser();
         if (serviceUser?.email === preLogin.email) {
+          const cacheData = await service.getCacheData();
+          setOtherMethod(cacheData?.unlock_method || null);
           await onSubmit({
             username: serviceUser?.email,
             hashedPassword: serviceUser?.hashedPassword,
-            keyB64: serviceUser?.key
+            keyB64: serviceUser?.key,
+            unlock_method: cacheData?.unlock_method || null
           })
         }
       } catch (error) {

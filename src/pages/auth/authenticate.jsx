@@ -384,7 +384,6 @@ const Authenticate = () => {
                   {
                     !preLogin?.require_passwordless && <ChangePasswordForm
                       changing={callingAPI}
-                      isChange={false}
                       onSave={handleSave}
                     />
                   }

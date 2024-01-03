@@ -7,9 +7,10 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
+  PasswordConfirmModal,
 } from '../../../../../components'
 
-import ChangePasswordFormData from "./form-data/ChangePassword";
+import FormDataModal from "./change-password/FormDataModal";
 
 import {
   KeyOutlined,
@@ -20,8 +21,10 @@ const ChangePassword = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
+  const [confirmVisible, setConfirmVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
-  
+  const [currentPassword, setCurrentPassword] = useState(null);
+
   const userInfo = useSelector(state => state.auth.userInfo);
 
   return (
@@ -33,9 +36,9 @@ const ChangePassword = (props) => {
         <Button
           type='primary'
           ghost
-          disabled={userInfo.is_require_passwordless || userInfo?.login_method === 'passwordless'}
+          disabled={userInfo.is_require_passwordless}
           icon={<KeyOutlined />}
-          onClick={() => setFormVisible(true)}
+          onClick={() => setConfirmVisible(true)}
         >
           {t('change_password.title')}
         </Button>
@@ -43,8 +46,20 @@ const ChangePassword = (props) => {
       <p className="mt-1">
         {t('security.change_password.description')}
       </p>
-      <ChangePasswordFormData
+      <PasswordConfirmModal
+        visible={confirmVisible}
+        title={t('change_password.title')}
+        okText={t('button.confirm')}
+        onConfirm={(password) => {
+          setCurrentPassword(password);
+          setConfirmVisible(false);
+          setFormVisible(true)
+        }}
+        onClose={() => setConfirmVisible(false)}
+      />
+      <FormDataModal
         visible={formVisible}
+        currentPassword={currentPassword}
         onClose={() => setFormVisible(false)}
       />
     </div>
