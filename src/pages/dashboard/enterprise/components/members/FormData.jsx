@@ -4,12 +4,15 @@ import {
   Space,
   Button,
   Drawer,
-  Select
+  Select,
+  Upload
 } from '@lockerpm/design';
 import {
   ItemInput,
 } from '../../../../../components'
 import {
+  UploadOutlined,
+  LinkOutlined
 } from '@ant-design/icons';
 
 import { } from 'react-redux';
@@ -32,6 +35,7 @@ function FormData(props) {
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);
   const [enterpriseMembers, setEnterpriseMembers] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const usernames = Form.useWatch('usernames', form) || [];
   const role = Form.useWatch('role', form);
@@ -39,6 +43,7 @@ function FormData(props) {
   useEffect(() => {
     if (visible) {
       fetchWsMembers();
+      setSelectedFile(null)
     }
     form.setFieldsValue({
       usernames: [],
@@ -114,6 +119,48 @@ function FormData(props) {
     onClose()
   }
 
+  const getFileContents = async (file) => {
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsText(file, 'utf-8')
+      reader.onload = evt => {
+        resolve(evt.target.result)
+      }
+      reader.onerror = () => {
+        reject(Error('Error'))
+      }
+    })
+  }
+
+  const uploadProps = {
+    name: 'file',
+    showUploadList: false,
+    accept: `.csv`,
+    beforeUpload: async (file) => {
+      const fileType = file.type;
+      const isFormat = fileType.includes('csv');
+      if (!isFormat) {
+        global.pushError(t('drag_upload.invalid'));
+      } else {
+        setSelectedFile(file)
+        const fileContent = await getFileContents(file);
+        const contentFormat = fileContent?.split('\n') || [];
+        const emails = contentFormat
+          .filter(Boolean).map((d) => d.split(',')[0])
+          .filter(e => {
+            const isEmail = global.patterns.EMAIL.test(e) && !usernames.includes(e);
+            return isEmail
+          })
+        const newUsernames = [...new Set(emails)]
+        if (newUsernames.length === 0) {
+          global.pushError(t('drag_upload.invalid'));
+        } else {
+          form.setFieldValue('usernames', newUsernames )
+        }
+      }
+    },
+  };
+
   return (
     <div className={props.className}>
       <Drawer
@@ -169,6 +216,24 @@ function FormData(props) {
               items={enterpriseMembers.map((m) => m.email)}
               disabled={callingAPI}
             />
+          </Form.Item>
+          <Form.Item
+            label={<div>
+              <p className='font-bold'>{t('import_export.upload_file')} (CSV)</p>
+            </div>}
+          >
+            <div className='flex items-center'>
+              <Upload {...uploadProps}>
+                <Button icon={<UploadOutlined />}>
+                  {t('button.choose_file')}
+                </Button>
+              </Upload>
+              {
+                !selectedFile && <span className='ml-2'>
+                  <i>{t('common.no_file_chosen')}</i>
+                </span>
+              }
+            </div >
           </Form.Item>
           <Form.Item
             name={'role'}
