@@ -352,7 +352,10 @@
       "title": "Chào mừng quay lại!",
       "label": "Đăng nhập",
       "note": "Chưa có tài khoản?",
-      "single_sign_on": "Single Sign-On"
+      "single_sign_on": "Single Sign-On",
+      "or_login_with": "hoặc mở khóa với",
+      "your_passkey": "Khóa của bạn",
+      "your_security_key": "Chìa khóa bảo mật của bạn"
     },
     "sign_up": {
       "title": "Tạo tài khoản",
@@ -449,6 +452,7 @@
     "enter_key_pin": "Nhập PIN của khóa bảo mật",
     "touch_key": "Chạm vào khóa bảo mật của bạn",
     "reload_devices": "Tải lại danh sách thiết bị",
+    "reload_keys": "Tải lại khoá",
     "choose_a_key": "Chọn một khóa để xác thực bạn",
     "new_password": "Nhập mật khẩu mới",
     "connect_security_key_to_login": "Kết nối với một khóa bảo mật.",
@@ -829,18 +833,26 @@
     "on_refresh": "Khi tải lại trình duyệt"
   },
   "security": {
+    "unlock_methods": {
+      "title": "Các phương thức mở khóa",
+      "description": "Mở khóa Vault của bạn bằng Mật khẩu chính, Passkeys hoặc Khóa bảo mật. Bạn có thể sử dụng tất cả các phương thức có sẵn."
+    },
     "change_password": {
-      "title": "Mật khẩu",
-      "description": "Tất cả các tài khoản Locker đều được bảo vệ bằng mã hóa AES-256 và công nghệ Zero Knowledge để bảo mật và quyền riêng tư tốt hơn, bất kể gói tài khoản là gì."
+      "title": "Mật khẩu Tài khoản",
+      "description": "Tất cả tài khoản Locker đều được bảo vệ bằng mã hóa AES-256 và công nghệ Zero Knowledge để đảm bảo an ninh và quyền riêng tư tốt hơn, bất kể kế hoạch tài khoản."
+    },
+    "passkey": {
+      "title": "Passkeys",
+      "add_new_key": "Thêm passkey mới",
+      "add_new_key_description": "Tên passkey",
+      "description": "Sử dụng nhận dạng khuôn mặt, nhận dạng dấu vân tay hoặc PIN máy tính để mở khóa vault của bạn. Có sẵn trên trình duyệt web."
     },
     "passwordless": {
-      "title": "Đăng nhập không mật khẩu",
-      "description": "Sử dụng khóa bảo mật chuẩn FIDO2 để đăng nhập thay cho mật khẩu. Yêu cầu cài đặt ứng dụng máy tính.",
-      "turn_on": "Bật đăng nhập không mật khẩu",
-      "turn_off": "Tắt đăng nhập không mật khẩu",
-      "security_keys_added": "Khóa bảo mật đã được thêm",
+      "title": "Khóa Bảo mật",
+      "description": "Xác thực với khóa bảo mật vật lý để mở khóa vault của bạn (bạn có thể thêm tối đa 4 khóa). Yêu cầu cài đặt ứng dụng cho máy tính.",
+      "security_keys_added": "Đã thêm khóa bảo mật",
       "add_new_key": "Thêm khóa mới",
-      "require_passwordless": "Đăng nhập không mật khẩu được yêu cầu luôn bật trong doanh nghiệp và không thể bị tắt."
+      "require_passwordless": "Đăng nhập không mật khẩu được yêu cầu trong doanh nghiệp của bạn và không thể tắt."
     },
     "mobile_passwordless": {
       "title": "Đăng nhập không mật khẩu vào điện thoại",
@@ -1012,30 +1024,30 @@
     }
   },
   "quick_share_detail": {
-    "title": "Simple and Quick",
-    "description": "Locker Quick Share lets you share sensitive information (including passwords, crypto assets,...) with encryption and a link that automatically expires. So you can keep what you share private and make sure your stuff doesn't stay online forever.",
-    "action": "Try Locker now!",
-    "product_of": "A product of",
-    "copyright": "Copyright © {{year}} Locker.io · All rights reserved.",
-    "terms": "Terms",
-    "privacy_policy": "Privacy Policy",
-    "reveal_information": "Reveal Information",
-    "hide_information": "Hide Information",
+    "title": "Đơn Giản và Nhanh Chóng",
+    "description": "Locker Quick Share cho phép bạn chia sẻ thông tin nhạy cảm (bao gồm mật khẩu, tài sản tiền điện tử,...) được mã hóa và một liên kết tự động hết hạn. Vì vậy, bạn có thể giữ thông tin chia sẻ của mình được riêng tư và đảm bảo rằng dữ liệu bạn không tồn tại trên mạng mãi mãi.",
+    "action": "Thử Locker ngay bây giờ!",
+    "product_of": "Một sản phẩm của",
+    "copyright": "Bản quyền © {{year}} Locker.io · Tất cả các quyền được bảo lưu.",
+    "terms": "Đội ngũ",
+    "privacy_policy": "Chính sách Riêng tư",
+    "reveal_information": "Tiết lộ Thông tin",
+    "hide_information": "Ẩn Thông tin",
     "not_fond": {
-      "title": "Sorry, there is no item to view.",
+      "title": "Xin lỗi, không có mục nào để xem.",
       "description": {
-        "title": "You may find the reason in one of the following cases:",
-        "note1": "The link to view the item expired or reached limited access.",
-        "note2": "The owner stopped sharing the item.",
-        "note3": "The link you've entered is not correct."
+        "title": "Bạn có thể tìm thấy lý do trong một trong các trường hợp sau:",
+        "note1": "Liên kết để xem mục đã hết hạn hoặc đạt giới hạn truy cập.",
+        "note2": "Chủ sở hữu đã ngừng chia sẻ mục.",
+        "note3": "Liên kết bạn đã nhập không chính xác."
       }
     },
     "verify_email": {
-      "title": "You have been shared sensitive data",
-      "description": " You need to verify yourself before viewing the item. Please enter your email to receive an OTP code.",
-      "enter_otp": "Please enter your OTP code.",
-      "action": "Send code",
-      "resend": "Resend code"
+      "title": "Bạn đã được chia sẻ dữ liệu nhạy cảm",
+      "description": "Bạn cần xác minh bản thân trước khi xem mục. Vui lòng nhập email của bạn để nhận mã OTP.",
+      "enter_otp": "Vui lòng nhập mã OTP của bạn.",
+      "action": "Gửi mã",
+      "resend": "Gửi lại mã"
     }
   },
   "enterprises": {
