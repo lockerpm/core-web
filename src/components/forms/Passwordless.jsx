@@ -183,7 +183,6 @@ const PasswordlessForm = (props) => {
       }
     }
     console.log('Error', error);
-    console.log(error.code);
     if (error.code) {
       global.pushError({ message: t(`passwordless.errors.${error.code}`) })
     } else {
