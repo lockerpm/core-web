@@ -145,7 +145,7 @@ const Enterprise = (props) => {
   })
 
   const redirectToAuthSSO = (ssoConfiguration) => {
-    if (ssoConfiguration.sso_provider_options.authorization_endpoint) {
+    if (ssoConfiguration?.sso_provider_options?.authorization_endpoint) {
       common.redirectToAuthSSO(ssoConfiguration.sso_provider_options)
     } else {
       setStep(1)

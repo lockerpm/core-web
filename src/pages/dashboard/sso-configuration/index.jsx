@@ -1,11 +1,17 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { Form, Input, Button, Row, Col, Space } from "@lockerpm/design"
-import { } from "@ant-design/icons"
+import { Form, Input, Button, Space } from "@lockerpm/design"
 
 import { AdminHeader } from "../../../components"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
+
+import {
+  EditOutlined,
+  CheckOutlined,
+  CloseOutlined,
+  RedoOutlined,
+} from "@ant-design/icons";
 
 import ssoConfigServices from "../../../services/sso-config"
 
@@ -34,7 +40,7 @@ const SSOConfiguration = (props) => {
         form.setFieldsValue(response.sso_provider_options);
       })
       .catch((error) => {
-        setIsEditing(common.isEmpty(response))
+        setIsEditing(false)
         global.pushError(error)
         setSSOConfig({})
       })
@@ -72,12 +78,12 @@ const SSOConfiguration = (props) => {
     }, {
       content: t('sso_configuration.reset_question'),
       okText: t('button.reset'),
-      okButtonProps: { danger: false },
+      okButtonProps: { danger: true },
     })
   }
 
   const handleCancel = () => {
-    form.setFieldsValue(ssoConfig);
+    form.setFieldsValue(ssoConfig.sso_provider_options);
     setIsEditing(false)
   }
 
@@ -129,12 +135,12 @@ const SSOConfiguration = (props) => {
         >
           <Input placeholder={t("sso_configuration.placeholder.enter_secret")} />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           name='scope'
           label={t("sso_configuration.oauth_scopes")}
         >
           <Input placeholder={t("sso_configuration.placeholder.enter_scopes")} />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
           name='email_claim_types'
           label={t("sso_configuration.email_claim_types")}
@@ -153,26 +159,44 @@ const SSOConfiguration = (props) => {
           {
             isEditing ? <>
               {
-                !common.isEmpty(ssoConfig) && <Button danger onClick={handleCancel}>
+                !common.isEmpty(ssoConfig) && <Button
+                  danger
+                  icon={<CloseOutlined />}
+                  onClick={handleCancel}
+                >
                   {t("button.cancel")}
                 </Button>
               }
-              <Button type='primary' loading={callingAPI} onClick={handleSave} htmlType='submit'>
+              <Button
+                type='primary'
+                loading={callingAPI}
+                onClick={handleSave}
+                htmlType='submit'
+                icon={<CheckOutlined />}
+              >
                 {t("button.save")}
               </Button>
-            </> : <div>
+            </> : <>
               {
                 !common.isEmpty(ssoConfig) && <Button
+                  type="primary"
+                  icon={<RedoOutlined />}
+                  disabled={callingAPI}
+                  danger
                   ghost
-                  onClick={handleReset}
+                  onClick={() => handleReset()}
                 >
-                  {t("button.reset")}
+                  {t('button.reset')}
                 </Button>
               }
-              <Button type='primary' onClick={() => setIsEditing(true)}>
+              <Button
+                type='primary'
+                icon={<EditOutlined />}
+                onClick={() => setIsEditing(true)}
+              >
                 {t("button.edit")}
               </Button>
-            </div>
+            </>
           }
         </Space>
       </div>
