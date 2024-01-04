@@ -21,7 +21,7 @@ const Logo = (props) => {
         className='icon-logo'
         src={AuthLogo}
         preview={false}
-        height={200}
+        height={56}
       />
     </div>
   );
