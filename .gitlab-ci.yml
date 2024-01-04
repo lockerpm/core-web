@@ -6,6 +6,8 @@ stages:
   - deploy
 
 build_staging:
+  environment:
+    name: cystack
   stage: build
   script:
     - cystack-deployer
@@ -16,6 +18,8 @@ build_staging:
     - tags
 
 deploy_staging:
+  environment:
+    name: cystack
   stage: deploy
   script:
     - cystack-deployer
