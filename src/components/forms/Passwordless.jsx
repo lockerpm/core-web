@@ -150,21 +150,16 @@ const PasswordlessForm = (props) => {
   }
 
   const redirectByError = async (error) => {
-    console.log('Error', error);
-    if (error.code) {
-      global.pushError({ message: t(`passwordless.errors.${error.code}`) })
-    } else {
-      global.pushError(error)
-    }
     resetState()
     setPasswordless(null)
     setPin(null)
     if (['0000'].includes(error.code)) {
       await commonServices.reset_service();
-      setStep(0);
+      onRepair();
     } else if (['2007', '2003', '2009'].includes(error.code)) {
       if (selectedDevice) {
         setStep(1);
+        return;
       } else {
         setStep(0)
       }
@@ -181,10 +176,18 @@ const PasswordlessForm = (props) => {
       onRepair();
     } else {
       if (selectedDevice) {
-        setStep(1)
+        setStep(1);
+        return;
       } else {
         setStep(0);
       }
+    }
+    console.log('Error', error);
+    console.log(error.code);
+    if (error.code) {
+      global.pushError({ message: t(`passwordless.errors.${error.code}`) })
+    } else {
+      global.pushError(error)
     }
   }
 

@@ -61,10 +61,10 @@ const BoxData = (props) => {
                 src={record.created_by.avatar}
                 size={28}
               >
-                {record.created_by.full_name.slice(0, 1)?.toUpperCase()}
+                {record.created_by?.email?.slice(0, 1)?.toUpperCase()}
               </Avatar>
               <p className="ml-2">
-                {record.created_by.full_name}
+                {record.created_by?.email}
               </p>
             </div>
           </div>

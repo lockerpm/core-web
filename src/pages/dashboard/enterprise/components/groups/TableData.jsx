@@ -47,11 +47,11 @@ const TableData = (props) => {
         align: "center",
         width: 120,
         render: (_, record) => (
-          <Tooltip title={record.created_by.full_name}>
+          <Tooltip title={record.created_by?.email}>
             <Avatar
               src={record.created_by.avatar}
             >
-              {record.created_by.full_name.slice(0, 1)?.toUpperCase()}
+              {record.created_by?.email?.slice(0, 1)?.toUpperCase()}
             </Avatar>
           </Tooltip>
         ),
