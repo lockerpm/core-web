@@ -158,7 +158,7 @@ const getErrorMessage = (error) => {
     }
     return errorData.message
   }
-  return errorData?.message || error.toString();
+  return errorData?.message || error?.message || error.toString();
 }
 
 const getUserRole = (role) => {

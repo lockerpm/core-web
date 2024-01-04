@@ -318,10 +318,19 @@ const Lock = () => {
                           {
                             (userInfo?.login_method === 'password' || !isDesktop) && <div>
                               {
-                                userInfo?.login_method === 'password' && <p className="my-4 text-center">
-                                  {t('auth_pages.sign_in.or_login_with')}
-                                </p>
+                                !callingAPI && <Button
+                                  className="w-full"
+                                  size="large"
+                                  htmlType="submit"
+                                  loading={logging}
+                                  onClick={() => handleLogout()}
+                                >
+                                  {t('sidebar.logout')}
+                                </Button>
                               }
+                              <p className="my-4 text-center">
+                                {t('auth_pages.sign_in.or_login_with')}
+                              </p>
                               {
                                 !isDesktop && <Button
                                   className="w-full mb-4"
