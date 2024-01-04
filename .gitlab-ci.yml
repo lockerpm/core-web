@@ -5,23 +5,16 @@ stages:
   - build
   - deploy
 
-build_staging:
+build_vincss:
+  environment:
+    name: vincss
   stage: build
   script:
-    - cystack-deployer
+    - docker build --build-arg REACT_APP_API_URL=$REACT_APP_API_URL --build-arg REACT_APP_WS_URL=$REACT_APP_WS_URL -t cystack/locker-web-vincss -f staging.Dockerfile .
+    - docker push cystack/locker-web-vincss
   tags:
     - cs_newgen
   only:
-    - dev
-    - tags
-
-deploy_staging:
-  stage: deploy
-  script:
-    - cystack-deployer
-  tags:
-    - cs_newgen
-  only:
-    - dev
+    - vincss
     - tags
 
