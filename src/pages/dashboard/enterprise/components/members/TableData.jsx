@@ -62,7 +62,7 @@ const TableData = (props) => {
         render: (_, record) => <Role
           record={record}
           enterpriseId={enterpriseId}
-          onReload={onReload}
+          onReload={() => onReload()}
         />
       },
       {

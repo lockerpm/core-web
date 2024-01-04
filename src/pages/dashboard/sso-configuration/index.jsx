@@ -36,8 +36,8 @@ const SSOConfiguration = (props) => {
     await ssoConfigServices.get()
       .then((response) => {
         setSSOConfig(response);
+        form.setFieldsValue(response.sso_provider_options || {});
         setIsEditing(common.isEmpty(response))
-        form.setFieldsValue(response.sso_provider_options);
       })
       .catch((error) => {
         setIsEditing(false)

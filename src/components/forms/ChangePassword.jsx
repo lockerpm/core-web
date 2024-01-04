@@ -41,21 +41,6 @@ function ChangePasswordForm(props) {
         labelAlign={'left'}
         onFinish={onSave}
       >
-        {
-          isReset && <Form.Item
-            name={'full_name'}
-            label={t('common.full_name')}
-            rules={[
-              global.rules.REQUIRED(t("common.full_name")),
-            ]}
-          >
-            <Input
-              disabled={changing}
-              size='large'
-              placeholder={t('placeholder.enter')}
-            />
-          </Form.Item>
-        }
         <Form.Item
           name={'new_password'}
           label={t('change_password.new_password')}
