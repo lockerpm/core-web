@@ -46,6 +46,11 @@ const EnterpriseMembers = (props) => {
     role: '',
   })
 
+  useEffect(() => {
+    setSelectedTab(currentPage.query?.tab || 'active')
+  }, [currentPage.query?.tab])
+
+
   const payload = useMemo(() => {
     const p = {
       page: params.page,
@@ -89,11 +94,11 @@ const EnterpriseMembers = (props) => {
       }
     }
     return {}
-  }, [params, selectedTab])
+  }, [JSON.stringify(params), selectedTab])
 
   useEffect(() => {
     getMembers()
-  }, [JSON.stringify(params), selectedTab])
+  }, [JSON.stringify(payload)])
 
   useEffect(() => {
     setParams({
@@ -120,22 +125,23 @@ const EnterpriseMembers = (props) => {
     })
   }, [isMobile])
 
-  const getMembers = async (isCreated = false) => {
-    setLoading(true)
-    if (isCreated) {
-      setSelectedTab('pending')
+  const getMembers = async (tab) => {
+    if (tab && tab !== selectedTab) {
+      setSelectedTab(tab)
+    } else {
+      setLoading(true)
+      await enterpriseMemberServices
+        .list(enterpriseId, { ...payload })
+        .then((response) => {
+          setMembers(response.results)
+          setTotal(response.count)
+        })
+        .catch((error) => {
+          setMembers([])
+          global.pushError(error)
+        })
+      setLoading(false)
     }
-    await enterpriseMemberServices
-      .list(enterpriseId, { ...payload })
-      .then((response) => {
-        setMembers(response.results)
-        setTotal(response.count)
-      })
-      .catch((error) => {
-        setMembers([])
-        global.pushError(error)
-      })
-    setLoading(false)
   }
 
   const handleChangePage = (page, size) => {
@@ -198,7 +204,6 @@ const EnterpriseMembers = (props) => {
       <MenuTabs
         activeTab={selectedTab}
         onChange={(v) => {
-          setSelectedTab(v);
           global.navigate(currentPage.name, currentPage.params, { tab: v })
         }}
       />
@@ -208,25 +213,27 @@ const EnterpriseMembers = (props) => {
         activeTab={selectedTab}
         setParams={(v) => setParams({ ...v, page: 1 })}
       />
-      {
-        isMobile ? <BoxData
-          className='mt-4'
-          loading={loading}
-          enterpriseId={enterpriseId}
-          data={members}
-          params={params}
-          onDelete={deleteItem}
-          onReload={() => getMembers()}
-        /> : <TableData
-          className='mt-4'
-          loading={loading}
-          enterpriseId={enterpriseId}
-          data={members}
-          params={params}
-          onDelete={deleteItem}
-          onReload={() => getMembers()}
-        />
-      }
+      <div key={selectedTab}>
+        {
+          isMobile ? <BoxData
+            className='mt-4'
+            loading={loading}
+            enterpriseId={enterpriseId}
+            data={members}
+            params={params}
+            onDelete={deleteItem}
+            onReload={(activated) => getMembers(activated === undefined ? null : (activated ? 'active' : 'disabled'))}
+          /> : <TableData
+            className='mt-4'
+            loading={loading}
+            enterpriseId={enterpriseId}
+            data={members}
+            params={params}
+            onDelete={deleteItem}
+            onReload={(activated) => getMembers(activated === undefined ? null : (activated ? 'active' : 'disabled'))}
+          />
+        }
+      </div>
       {
         total > global.constants.PAGE_SIZE && !isMobile && <Pagination
           params={params}
@@ -238,7 +245,7 @@ const EnterpriseMembers = (props) => {
         visible={formVisible}
         item={selectedItem}
         enterpriseId={enterpriseId}
-        onReload={getMembers}
+        onReload={() => getMembers('pending')}
         onReview={handleOpenReview}
         onClose={() => setFormVisible(false)}
       />
@@ -247,7 +254,6 @@ const EnterpriseMembers = (props) => {
         members={newMembers}
         onClose={() => setReviewVisible(false)}
       />
-
     </div>
   )
 }

@@ -33,7 +33,7 @@ const Actions = (props) => {
     enterpriseMemberServices
       .activated(enterpriseId, item.id, payload).then(() => {
         global.pushSuccess(t("notification.success.enterprise_members.updated"))
-        onReload()
+        onReload(payload.activated)
       }).catch((error) => {
         global.pushError(error)
       })

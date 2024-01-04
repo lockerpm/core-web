@@ -17,6 +17,7 @@ import Logo from "./components/Logo";
 import EnterOtp from "./components/otp-code/EnterOtp";
 
 import commonServices from "../../services/common";
+import authServices from "../../services/auth";
 
 import global from "../../config/global";
 import common from "../../utils/common";
@@ -27,6 +28,7 @@ const OtpCode = () => {
   const location = useLocation();
 
   const factor2 = useSelector((state) => state.auth.factor2);
+  const isConnected = useSelector((state) => state.service.isConnected);
 
   const [callingAPI, setCallingAPI] = useState(false);
 
@@ -40,6 +42,15 @@ const OtpCode = () => {
     })
     setCallingAPI(false)
   }
+
+  const signOtherAccount = () => {
+    authServices.update_sso_account(null);
+    if (isConnected) {
+      service.setCacheData(null)
+    }
+    global.navigate(global.keys.BACK)
+  }
+
   return (
     <div
       className="auth-page"
@@ -66,7 +77,7 @@ const OtpCode = () => {
               factor2={factor2}
               isAuth={true}
               onVerify={onVerify}
-              onBack={() => global.navigate(global.keys.BACK)}
+              onBack={() => signOtherAccount()}
             />
           </Card>
         </div>
