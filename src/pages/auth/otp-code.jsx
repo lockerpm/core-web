@@ -46,7 +46,7 @@ const OtpCode = () => {
   const signOtherAccount = () => {
     authServices.update_sso_account(null);
     if (isConnected) {
-      service.setCacheData(null)
+      service.setCacheData({})
     }
     global.navigate(global.keys.BACK)
   }
