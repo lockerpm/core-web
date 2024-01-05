@@ -85,10 +85,10 @@ const Authenticate = () => {
     if (step === 1) {
       setOtherMethod('');
       form.setFieldValue('passkeyName', null)
-    } else if (step === 2 && isDesktop) {
-      selectOtherMethod()
+    } else if (step === 2 && isDesktop && preLogin?.require_passwordless) {
+      selectOtherMethod('security_key')
     }
-  }, [step, isDesktop, isConnected])
+  }, [step, isDesktop, isConnected, preLogin])
 
   const title = useMemo(() => {
     if (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) {

@@ -125,11 +125,10 @@ async function logout(query = {}) {
         url: global.endpoint.LOGOUT,
         method: 'post',
       })
+      await coreServices.logout();
     } catch (error) {
-
     }
   }
-  await coreServices.logout();
   const userInfo = global.store.getState().auth.userInfo
   if (userInfo?.sync_all_platforms) {
     await commonServices.service_logout();
