@@ -99,7 +99,7 @@ const Enterprise = (props) => {
       if (step === 0) {
         setChecking(true)
         const cacheData = await service.getCacheData();
-        if (cacheData) {
+        if (cacheData?.email) {
           authServices.update_sso_account({ email: cacheData.email })
           setStep(1);
         }
@@ -173,7 +173,7 @@ const Enterprise = (props) => {
   const signOtherAccount = () => {
     authServices.update_sso_account(null);
     if (isConnected) {
-      service.setCacheData(null)
+      service.setCacheData({})
     }
     if (isDesktop) {
       setStep(0)

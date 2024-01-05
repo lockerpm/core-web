@@ -489,7 +489,7 @@ async function service_logout() {
       if (service.pairingService?.hasKey || global.store.getState().system.isDesktop) {
         await service.logout();
       }
-      await service.setCacheData(null);
+      await service.setCacheData({});
     } catch (error) {
     }
   }
