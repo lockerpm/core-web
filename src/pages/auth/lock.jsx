@@ -318,7 +318,7 @@ const Lock = () => {
                           {
                             (userInfo?.login_method === 'password' || !isDesktop) && <div>
                               {
-                                !callingAPI && <Button
+                                !callingAPI && userInfo?.login_method !== 'password' && <Button
                                   className="w-full"
                                   size="large"
                                   htmlType="submit"
