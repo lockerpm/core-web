@@ -115,7 +115,13 @@ const Enterprise = (props) => {
     if (redirectClientId) {
       if (isConnected) {
         await service.setCacheData({ email: ssoUser.mail })
-        if (redirectClientId === 'desktop') {
+      }
+      if (redirectClientId === 'browser') {
+        window.postMessage({
+          command: 'sso-authResult',
+          email: ssoUser.mail
+        }, window.location.origin)
+      } else if (redirectClientId === 'desktop') {
           setTimeout(async () => {
             await service.sendCustomMessage({ signInReload: true });
             if (redirectClientId === 'desktop' && !isDesktopConnected) {
@@ -123,14 +129,8 @@ const Enterprise = (props) => {
             }
           }, 1000);
         }
-        authServices.update_redirect_client_id(null);
-      } else if (redirectClientId === 'browser') {
-        window.postMessage({
-          command: 'sso-authResult',
-          email: ssoUser.mail
-        }, window.location.origin)
-        authServices.update_redirect_client_id(null);
       }
+      authServices.update_redirect_client_id(null);
     }
   }
 
