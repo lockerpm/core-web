@@ -126,9 +126,9 @@ const Enterprise = (props) => {
         authServices.update_redirect_client_id(null);
       } else if (redirectClientId === 'browser') {
         window.postMessage({
-          command: 'cs-authResult',
+          command: 'sso-authResult',
           email: ssoUser.mail
-        })
+        }, window.location.origin)
         authServices.update_redirect_client_id(null);
       }
     }
