@@ -122,16 +122,15 @@ const Enterprise = (props) => {
           email: ssoUser.mail
         }, window.location.origin)
       } else if (redirectClientId === 'desktop') {
-          setTimeout(async () => {
-            await service.sendCustomMessage({ signInReload: true });
-            if (redirectClientId === 'desktop' && !isDesktopConnected) {
-              common.openDesktopApp();
-            }
-          }, 1000);
-        }
+        setTimeout(async () => {
+          await service.sendCustomMessage({ signInReload: true });
+          if (redirectClientId === 'desktop' && !isDesktopConnected) {
+            common.openDesktopApp();
+          }
+        }, 1000);
       }
-      authServices.update_redirect_client_id(null);
     }
+    authServices.update_redirect_client_id(null);
   }
 
   const isBack = useMemo(() => {
