@@ -194,8 +194,8 @@ const Actions = (props) => {
           onClick: () => onRestore([originCipher.id])
         },
         {
-          key: 'permanently_delete',
-          label: t('inventory.actions.permanently_delete'),
+          key: 'permanently_deleted',
+          label: t('inventory.actions.permanently_deleted'),
           danger: true,
           onClick: () => onPermanentlyDelete([originCipher.id])
         },

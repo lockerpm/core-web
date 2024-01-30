@@ -37,7 +37,7 @@ const Actions = (props) => {
       },
       {
         key: 'delete',
-        label: t('inventory.actions.permanently_delete'),
+        label: t('inventory.actions.permanently_deleted'),
         danger: true,
         onClick: () => onDelete(originCipher)
       },

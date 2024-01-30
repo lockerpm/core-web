@@ -225,7 +225,7 @@
         "created": "The new item has been added.",
         "updated": "The item information has been updated.",
         "deleted": "The Item has been moved to trash!.",
-        "permanently_delete": "The item has been permanently deleted.",
+        "permanently_deleted": "The item has been permanently deleted.",
         "restored": "The item has been restored!",
         "moved": "The item has been moved!"
       },
@@ -630,7 +630,7 @@
       "move_to_folder": "Move to a folder",
       "stop_sharing": "Stop sharing",
       "restore": "Restore",
-      "permanently_delete": "Permanently delete",
+      "permanently_deleted": "Permanently delete",
       "delete": "Delete",
       "share": "Share",
       "leave": "Leave",

@@ -27,8 +27,11 @@ const BoxData = (props) => {
     className = '',
     data = [],
     params = {},
+    selectedRowKeys = [],
     onUpdate = () => {},
-    onDelete = () => {}
+    onDelete = () => {},
+    selectionChange = () => {},
+    getCheckboxProps = () => {}
   } = props;
 
   const boxData = useMemo(() => {
@@ -51,7 +54,12 @@ const BoxData = (props) => {
             className="flex align-items justify-between"
           >
             <div className="flex align-items">
-              <Checkbox className="mr-2"/>
+              <Checkbox
+                className="mr-2"
+                checked={selectedRowKeys.includes(record.id)}
+                disabled={getCheckboxProps(record)?.disabled}
+                onChange={(e) => selectionChange(null, record.id, e.target.checked)}
+              />
               <Name cipher={record}/>
             </div>
             <Actions

@@ -225,7 +225,7 @@
         "created": "Mục mới đã được thêm thành công.",
         "updated": "Thông tin đã được cập nhật.",
         "deleted": "Mục đã được chuyển vào thùng rác!.",
-        "permanently_delete": "Mục đã được xóa vĩnh viễn.",
+        "permanently_deleted": "Mục đã được xóa vĩnh viễn.",
         "restored": "Mục đã được khôi phục!",
         "moved": "Mục đã được chuyển vào thư mục thành công!"
       },
@@ -630,7 +630,7 @@
       "move_to_folder": "Chuyển vào thư mục",
       "stop_sharing": "Dừng chia sẻ",
       "restore": "Khôi phục",
-      "permanently_delete": "Xóa vĩnh viễn",
+      "permanently_deleted": "Xóa vĩnh viễn",
       "delete": "Xóa",
       "share": "Chia sẻ",
       "leave": "Rời chia sẻ",

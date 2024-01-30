@@ -31,9 +31,11 @@ const Authenticator = (props) => {
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const [loading, setLoading] = useState(true);
+  const [callingAPI, setCallingAPI] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ciphers, setCiphers] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -110,7 +112,7 @@ const Authenticator = (props) => {
   const deleteItem = (cipher) => {
     global.confirm(() => {
       cipherServices.permanent_delete({ ids: [cipher.id] }).then(async () => {
-        global.pushSuccess(t('notification.success.cipher.permanently_delete'));
+        global.pushSuccess(t('notification.success.cipher.permanently_deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
@@ -122,6 +124,49 @@ const Authenticator = (props) => {
       });
     });
   };
+
+  const handleSelectionChange = (keys, key, value) => {
+    if (keys) {
+      const selectedCiphers = ciphers.filter((cipher) => keys.includes(cipher.id)
+        && cipher.type !== CipherType.MasterPassword
+        && common.isOwner(cipher)
+      )
+      setSelectedRowKeys(selectedCiphers.map((cipher) => cipher.id))
+    } else {
+      const selectedKeys = value ? [...selectedRowKeys, key] : selectedRowKeys.filter((k) => k !== key);
+      setSelectedRowKeys(selectedKeys)
+    }
+  }
+
+  const permanentlyDeleteItems = (cipherIds) => {
+    global.confirm(async () => {
+      setCallingAPI(true)
+      await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
+        global.pushSuccess(t('notification.success.cipher.permanently_deleted'));
+        if (filteredData.length === 1 && params.page > 1) {
+          setParams({
+            ...params,
+            page: params.page - 1
+          })
+        }
+        setSelectedRowKeys([]);
+      }).catch((error) => {
+        global.pushError(error)
+      });
+      setCallingAPI(false)
+    }, {
+      title: t('common.warning'),
+      content: t('cipher.permanently_delete_question'),
+      okText: t('button.ok'),
+    });
+  };
+
+  const getCheckboxProps = (record) => {
+    const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
+    return {
+      disabled: originCipher && (originCipher.type === CipherType.MasterPassword || !common.isOwner(originCipher))
+    }
+  }
 
   return (
     <div
@@ -144,12 +189,22 @@ const Authenticator = (props) => {
         ]}
       />
       {
-        !isEmpty && <Filter
-          className={'mt-2'}
-          params={params}
-          loading={syncing}
-          setParams={(v) => setParams({ ...v, page: 1 })}
-        />
+        !isEmpty && <>
+          {
+            selectedRowKeys.length > 0 ? <Multiple
+              selectedRowKeys={selectedRowKeys}
+              callingAPI={callingAPI}
+              isPermanentlyDelete={true}
+              onPermanentlyDelete={permanentlyDeleteItems}
+              onCancel={() => setSelectedRowKeys([])}
+            /> : <Filter
+              className={'mt-2'}
+              params={params}
+              loading={syncing}
+              setParams={(v) => setParams({ ...v, page: 1 })}
+            />
+          }
+        </>
       }
       {
         filteredData.total == 0 ? <NoCipher
@@ -165,6 +220,9 @@ const Authenticator = (props) => {
               loading={syncing || loading}
               data={filteredData.result}
               params={params}
+              selectedRowKeys={selectedRowKeys}
+              selectionChange={handleSelectionChange}
+              getCheckboxProps={getCheckboxProps}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
             /> : <TableData
@@ -172,6 +230,9 @@ const Authenticator = (props) => {
               loading={syncing || loading}
               data={filteredData.result}
               params={params}
+              selectedRowKeys={selectedRowKeys}
+              selectionChange={handleSelectionChange}
+              getCheckboxProps={getCheckboxProps}
               onUpdate={handleOpenForm}
               onDelete={deleteItem}
             />
