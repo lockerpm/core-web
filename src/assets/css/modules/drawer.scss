@@ -1,0 +1,20 @@
+.ant-drawer-content-wrapper {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .ant-drawer-content-wrapper {
+    width: 100% !important;
+    .ant-drawer-wrapper-body {
+      .ant-drawer-header {
+        padding: var(--page-content-spacing-collapsed) !important;
+      }
+      .ant-drawer-body {
+        padding: var(--page-content-spacing-collapsed) !important;
+      }
+      .ant-drawer-footer {
+        padding: var(--page-content-spacing-collapsed) !important;
+      }
+    }
+  }
+}

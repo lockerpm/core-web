@@ -58,7 +58,6 @@ function AdminLayout(props) {
 
   useEffect(() => {
     dispatch(storeActions.updateIsScrollToTop(false))
-    convertSize()
   }, [location])
 
   useEffect(() => {
@@ -138,12 +137,12 @@ function AdminLayout(props) {
               className={respCollapsed ? "" : "resp-collapsed"}
             >
               <SidebarTop collapsed={collapsed} />
-              <SidebarCenter collapsed={collapsed} routers={routers} />
-              {isMobile && (
+              <SidebarCenter collapsed={collapsed} routers={routers} onClose={() => isMobile ? setRespCollapsed(true) : () => {}}/>
+              {isMobile && <div className="resp-collapsed-bg" onClick={() => setRespCollapsed(true)}>
                 <div className='resp-menu-toggle-icon mr-3' onClick={() => setRespCollapsed(true)}>
                   <CloseOutlined />
                 </div>
-              )}
+              </div>}
             </Layout.Sider>
           )}
           <Layout

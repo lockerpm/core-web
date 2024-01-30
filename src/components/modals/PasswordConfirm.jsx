@@ -109,7 +109,7 @@ const PasswordConfirmModal = (props) => {
         {
           !isPair && <div>
             {
-              !unlockMethod && <div>
+              !['security_key', 'passkey'].includes(unlockMethod) && <div>
                 <div className="mb-2">
                   {description || t('password_confirm.confirm_note')}
                 </div>

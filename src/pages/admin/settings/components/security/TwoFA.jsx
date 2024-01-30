@@ -38,7 +38,8 @@ const TwoFA = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const userInfo = useSelector(state => state.auth.userInfo)
+  const userInfo = useSelector(state => state.auth.userInfo);
+  const isMobile = useSelector(state => state.system.isMobile);
 
   const [smartOtpVisible, setSmartOtpVisible] = useState(false);
   const [mailOtpVisible, setMailOtpVisible] = useState(false);
@@ -110,7 +111,7 @@ const TwoFA = (props) => {
               disabled={userInfo?.is_require_2fa}
               onClick={() => setConfirmVisible(true)}
             >
-              {t('security.two_fa.turn_off')}
+              {isMobile ? '' : t('security.two_fa.turn_off')}
             </Button>
           </Tooltip>
         }

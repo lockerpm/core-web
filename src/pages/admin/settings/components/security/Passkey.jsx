@@ -29,6 +29,7 @@ const Passkey = (props) => {
   const { t } = useTranslation();
   const userInfo = useSelector(state => state.auth.userInfo)
   const isConnected = useSelector(state => state.service.isConnected)
+  const isMobile = useSelector(state => state.system.isMobile);
 
   const [newKeyVisible, setNewKeyVisible] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -101,7 +102,7 @@ const Passkey = (props) => {
             icon={<PlusOutlined />}
             onClick={() => setNewKeyVisible(true)}
           >
-            {t('security.passkey.add_new_key')}
+            {isMobile ? '' : t('security.passkey.add_new_key')}
           </Button>
         }
       </div>

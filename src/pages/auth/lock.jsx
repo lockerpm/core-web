@@ -212,7 +212,7 @@ const Lock = () => {
   return (
     <Spin spinning={isLoading || loading}>
       <div
-        className="lock-page"
+        className="auth-page"
       >
         <div
           className="w-[600px]"

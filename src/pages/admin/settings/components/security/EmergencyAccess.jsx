@@ -4,7 +4,7 @@ import {
   Badge
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -34,7 +34,9 @@ const EmergencyAccess = (props) => {
   } = props;
   const { t } = useTranslation();
   const location = useLocation();
-  const currentPage = common.getRouterByLocation(location)
+  const currentPage = common.getRouterByLocation(location);
+  const isMobile = useSelector(state => state.system.isMobile);
+
   const [expand, setExpand] = useState(currentPage?.query?.emergency_access == 'true');
   const [formVisible, setFormVisible] = useState(false);
 
@@ -118,7 +120,7 @@ const EmergencyAccess = (props) => {
           icon={<PlusOutlined />}
           onClick={() => setFormVisible(true)}
         >
-          {t('security.emergency_access.add')}
+          {isMobile ? '' : t('security.emergency_access.add')}
         </Button>
       </div>
       <p className="mt-1">
