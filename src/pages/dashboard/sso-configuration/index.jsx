@@ -36,7 +36,9 @@ const SSOConfiguration = (props) => {
     await ssoConfigServices.get()
       .then((response) => {
         setSSOConfig(response);
-        form.setFieldsValue(response.sso_provider_options || {});
+        form.setFieldsValue(response.sso_provider_options || {
+
+        });
         setIsEditing(common.isEmpty(response))
       })
       .catch((error) => {
@@ -135,23 +137,25 @@ const SSOConfiguration = (props) => {
         >
           <Input placeholder={t("sso_configuration.placeholder.enter_secret")} />
         </Form.Item>
-        {/* <Form.Item
-          name='scope'
+        <Form.Item
           label={t("sso_configuration.oauth_scopes")}
         >
-          <Input placeholder={t("sso_configuration.placeholder.enter_scopes")} />
-        </Form.Item> */}
-        <Form.Item
-          name='email_claim_types'
-          label={t("sso_configuration.email_claim_types")}
-        >
-          <Input readOnly placeholder={t("sso_configuration.placeholder.email_claim_types")} />
+          <Input readOnly placeholder={t("sso_configuration.placeholder.enter_scopes")} value={'openid'}/>
         </Form.Item>
         <Form.Item
-          name='name_claim_types'
+          label={t("sso_configuration.redirect_behavior")}
+        >
+          <Input readOnly value={common.ssoRedirectUri()} />
+        </Form.Item>
+        <Form.Item
+          label={t("sso_configuration.email_claim_types")}
+        >
+          <Input readOnly placeholder={t("sso_configuration.placeholder.email_claim_types")} value={'mail'}/>
+        </Form.Item>
+        <Form.Item
           label={t("sso_configuration.name_claim_types")}
         >
-          <Input readOnly placeholder={t("sso_configuration.placeholder.name_claim_types")} />
+          <Input readOnly placeholder={t("sso_configuration.placeholder.name_claim_types")} value={'name'}/>
         </Form.Item>
       </Form>
       <div className='md:w-3/4 lg:w-3/5'>
