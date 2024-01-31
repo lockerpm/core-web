@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import {
   Space,
   Button,
@@ -27,7 +27,6 @@ import {
 function DropdownMenu() {
   const { t } = useTranslation();
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const isCloud = useSelector((state) => state.system.isCloud);
   const locale = useSelector((state) => state.system.locale);
   const teams = useSelector((state) => state.enterprise.teams);
 
@@ -44,7 +43,7 @@ function DropdownMenu() {
     }
     const role = common.getUserRole(teams[0]?.role)
     return <span>{teams[0]?.name} - {t(role?.label)}</span>
-  }, [teams, userInfo])
+  }, [teams, userInfo, locale])
 
   const AvatarIcon = useMemo((size = 32) => {
     if (userInfo?.avatar) {
@@ -68,11 +67,7 @@ function DropdownMenu() {
 
   const dropdownClick = async (item) => {
     if (item.key === 'account') {
-      if (isCloud) {
-        window.open(process.env.REACT_APP_LOCKER_ID_URL)
-      } else {
-        global.navigate(global.keys.SETTINGS_ACCOUNT)
-      }
+      global.navigate(global.keys.SETTINGS_ACCOUNT)
     } else if (item.key === 'logout') {
       authServices.logout();
     } else if (item.key === 'lock') {

@@ -27,7 +27,6 @@ const Setup2FA = () => {
   const location = useLocation();
   const currentPage = common.getRouterByLocation(location)
   const isConnected = useSelector((state) => state.service.isConnected)
-  const isDesktop = useSelector((state) => state.system.isDesktop)
 
   const [preLogin, setPreLogin] = useState(null)
   const [step, setStep] = useState(0)
@@ -69,12 +68,6 @@ const Setup2FA = () => {
       }
     }
   }, [preLogin])
-
-  useEffect(() => {
-    if (step === 0 && preLogin?.login_method === 'passwordless' && isDesktop) {
-      selectOtherMethod('security_key');
-    }
-  }, [preLogin, isDesktop, step]);
 
   const handlePrelogin = async () => {
     setLoading(true)
@@ -130,7 +123,7 @@ const Setup2FA = () => {
 
   const selectOtherMethod = (method) => {
     setOtherMethod(method);
-    if (method === 'security_key' && !isDesktop) {
+    if (method === 'security_key') {
       setIsPair(!isConnected || !service.pairingService?.hasKey);
     } else {
       setIsPair(false)
@@ -211,25 +204,21 @@ const Setup2FA = () => {
                     </Form>
                   }
                   {
-                    (preLogin?.login_method === 'password' || !isDesktop) && <div>
-                      {
-                        preLogin?.login_method === 'passwordless' && <p className="mb-2 font-semibold">
-                          {t('change_password.current_password')}
-                        </p>
-                      }
-                      {
-                        !isDesktop && <Button
-                          className="w-full mb-4"
-                          size="large"
-                          ghost
-                          type="primary"
-                          icon={<KeyOutlined />}
-                          disabled={loading || callingAPI}
-                          onClick={() => selectOtherMethod('passkey')}
-                        >
-                          {t('auth_pages.sign_in.your_passkey')}
-                        </Button>
-                      }
+                    preLogin?.login_method !== 'password' && <div>
+                      <p className="mb-2 font-semibold">
+                        {t('change_password.current_password')}
+                      </p>
+                      <Button
+                        className="w-full mb-4"
+                        size="large"
+                        ghost
+                        type="primary"
+                        icon={<KeyOutlined />}
+                        disabled={loading || callingAPI}
+                        onClick={() => selectOtherMethod('passkey')}
+                      >
+                        {t('auth_pages.sign_in.your_passkey')}
+                      </Button>
                       <Button
                         className="w-full"
                         size="large"

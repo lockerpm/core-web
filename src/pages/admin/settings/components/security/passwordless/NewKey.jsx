@@ -21,9 +21,8 @@ const NewKeyModal = (props) => {
   } = props;
 
   const userInfo = useSelector(state => state.auth.userInfo);
-  const isDesktop = useSelector(state => state.system.isDesktop);
 
-  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey && !isDesktop)
+  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey)
 
   return (
     <Modal

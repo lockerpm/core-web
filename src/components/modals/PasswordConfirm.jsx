@@ -31,7 +31,6 @@ const PasswordConfirmModal = (props) => {
   } = props;
 
   const userInfo = useSelector(state => state.auth.userInfo);
-  const isDesktop = useSelector(state => state.system.isDesktop);
   const isConnected = useSelector(state => state.service.isConnected);
 
   const [form] = Form.useForm();
@@ -50,11 +49,11 @@ const PasswordConfirmModal = (props) => {
 
   useEffect(() => {
     if (unlockMethod === 'security_key') {
-      setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey && !isDesktop)));
+      setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey)));
     } else {
       setIsPair(false);
     }
-  }, [isConnected, userInfo, isDesktop])
+  }, [isConnected, userInfo])
 
   const handleConfirm = async () => {
     form.validateFields().then(async () => {

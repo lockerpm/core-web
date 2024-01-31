@@ -465,7 +465,7 @@ async function reset_service() {
 }
 
 async function service_login(data) {
-  if (global.store.getState().service.isConnected && (service.pairingService?.hasKey || global.store.getState().system.isDesktop)) {
+  if (global.store.getState().service.isConnected && service.pairingService?.hasKey) {
     const cacheData = await service.getCacheData();
     await service.setCacheData({ ...cacheData, unlock_method: data.unlock_method })
     let hashedPassword = data?.hashedPassword
@@ -486,7 +486,7 @@ async function service_login(data) {
 async function service_logout() {
   if (global.store.getState().service.isConnected) {
     try {
-      if (service.pairingService?.hasKey || global.store.getState().system.isDesktop) {
+      if (service.pairingService?.hasKey) {
         await service.logout();
       }
       await service.setCacheData({});

@@ -31,9 +31,7 @@ const Authenticate = () => {
   const location = useLocation();
 
   const currentPage = common.getRouterByLocation(location)
-
   const isConnected = useSelector((state) => state.service.isConnected)
-  const isDesktop = useSelector((state) => state.system.isDesktop)
 
   const [preLogin, setPreLogin] = useState(null)
   const [step, setStep] = useState(0)
@@ -85,10 +83,8 @@ const Authenticate = () => {
     if (step === 1) {
       setOtherMethod('');
       form.setFieldValue('passkeyName', null)
-    } else if (step === 2 && isDesktop && preLogin?.require_passwordless) {
-      selectOtherMethod('security_key')
     }
-  }, [step, isDesktop, isConnected, preLogin])
+  }, [step, isConnected, preLogin])
 
   const title = useMemo(() => {
     if (preLogin?.login_method === 'password' && !preLogin?.require_passwordless) {
@@ -128,7 +124,7 @@ const Authenticate = () => {
   const selectOtherMethod = (method) => {
     setOtherMethod(method);
     setStep(3);
-    if (method === 'security_key' && !isDesktop) {
+    if (method === 'security_key') {
       setIsPair(!isConnected || !service.pairingService?.hasKey);
     } else {
       setIsPair(false)
@@ -314,13 +310,16 @@ const Authenticate = () => {
               {
                 step === 0 && <div>
                   {
-                    factor2 ? <EnterOtp
+                    !!factor2 && <EnterOtp
                       callingAPI={callingAPI}
                       factor2={factor2}
                       isAuth={true}
                       onVerify={onVerify}
                       onBack={() => setFactor2(null)}
-                    /> : <Form
+                    />
+                  }
+                  {
+                    !factor2 && <Form
                       form={form}
                       layout="vertical"
                       labelAlign={'left'}
@@ -395,7 +394,7 @@ const Authenticate = () => {
                     />
                   }
                   {
-                    preLogin?.require_passwordless && !isDesktop && <div>
+                    preLogin?.require_passwordless && <div>
                       <Button
                         className="w-full mb-4"
                         size="large"
@@ -423,55 +422,59 @@ const Authenticate = () => {
                 </div>
               }
               {
-                step === 3 && otherMethod === 'security_key' && <div>
+                step === 3 && <div>
                   {
-                    isPair && <PairingForm
-                      userInfo={preLogin}
-                      onConfirm={() => setIsPair(false)}
-                    />
+                    otherMethod === 'security_key' && <div>
+                      {
+                        isPair && <PairingForm
+                          userInfo={preLogin}
+                          onConfirm={() => setIsPair(false)}
+                        />
+                      }
+                      {
+                        !isPair && preLogin?.require_passwordless && <PasswordlessForm
+                          changing={callingAPI}
+                          userInfo={preLogin}
+                          accessToken={userSession?.access_token}
+                          onRepair={() => setIsPair(true)}
+                          onConfirm={(password) => handleSave({ new_password: password })}
+                        />
+                      }
+                    </div>
                   }
                   {
-                    !isPair && preLogin?.require_passwordless && <PasswordlessForm
-                      changing={callingAPI}
-                      userInfo={preLogin}
-                      accessToken={userSession?.access_token}
-                      onRepair={() => setIsPair(true)}
-                      onConfirm={(password) => handleSave({ new_password: password })}
-                    />
+                    otherMethod === 'passkey' && <div>
+                      <Form
+                        form={form}
+                        layout="vertical"
+                        disabled={callingAPI}
+                        onFinish={setPasswordLessByPasskey}
+                      >
+                        <Form.Item
+                          name={'passkeyName'}
+                          label={t('security.passkey.add_new_key_description')}
+                          rules={[
+                            global.rules.REQUIRED(t('common.name')),
+                          ]}
+                        >
+                          <Input
+                            size="large"
+                            autoFocus={true}
+                            placeholder={t('placeholder.enter')}
+                          />
+                        </Form.Item>
+                        <Button
+                          className="mt-4 w-full"
+                          type="primary"
+                          size="large"
+                          htmlType="submit"
+                          loading={callingAPI}
+                        >
+                          {t('button.continue')}
+                        </Button>
+                      </Form>
+                    </div>
                   }
-                </div>
-              }
-              {
-                step === 3 && otherMethod === 'passkey' && <div>
-                  <Form
-                    form={form}
-                    layout="vertical"
-                    disabled={callingAPI}
-                    onFinish={setPasswordLessByPasskey}
-                  >
-                    <Form.Item
-                      name={'passkeyName'}
-                      label={t('security.passkey.add_new_key_description')}
-                      rules={[
-                        global.rules.REQUIRED(t('common.name')),
-                      ]}
-                    >
-                      <Input
-                        size="large"
-                        autoFocus={true}
-                        placeholder={t('placeholder.enter')}
-                      />
-                    </Form.Item>
-                    <Button
-                      className="mt-4 w-full"
-                      type="primary"
-                      size="large"
-                      htmlType="submit"
-                      loading={callingAPI}
-                    >
-                      {t('button.continue')}
-                    </Button>
-                  </Form>
                 </div>
               }
               <div className="mt-4 text-center">

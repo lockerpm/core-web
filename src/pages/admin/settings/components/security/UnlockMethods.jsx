@@ -3,7 +3,7 @@ import {
   Divider
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -23,7 +23,6 @@ const UnlockMethods = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const isDesktop = useSelector((state) => state.system.isDesktop)
   const [expand, setExpand] = useState(false);
 
   return (
@@ -49,12 +48,8 @@ const UnlockMethods = (props) => {
           <ChangePassword />
           <Divider />
           <Passwordless />
-          {
-            !isDesktop && <div>
-              <Divider />
-              <Passkey />
-            </div>
-          }
+          <Divider />
+          <Passkey />
         </div>
       }
     </div>
