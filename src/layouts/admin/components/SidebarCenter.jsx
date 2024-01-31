@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import global from '../../../config/global';
 
 function SidebarCenter(props) {
-  const { collapsed } = props
+  const { collapsed, onClose = () => {} } = props
   const currentPage = useSelector((state) => state.system.currentPage);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const invitations = useSelector((state) => state.share.invitations);
@@ -94,6 +94,7 @@ function SidebarCenter(props) {
     } else {
       global.navigate(routerInfo.name);
     }
+    onClose();
   }
 
   return (

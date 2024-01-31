@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import {
-  Collapse,
+  List,
+  Popover,
   Checkbox,
 } from '@lockerpm/design';
 
@@ -17,6 +18,7 @@ import Actions from "./table/Actions";
 import common from "../../../../utils/common";
 
 import {
+  InfoCircleOutlined
 } from "@ant-design/icons";
 
 const BoxData = (props) => {
@@ -26,7 +28,6 @@ const BoxData = (props) => {
     loading = false,
     className = '',
     data = [],
-    params = {},
     selectedRowKeys = [],
     onMove = () => {},
     onUpdate = () => {},
@@ -39,27 +40,39 @@ const BoxData = (props) => {
     getCheckboxProps = () => {}
   } = props;
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
+  const GeneralInfo = (props) => {
+    const { record } = props;
+    return <div className="text-xs">
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('common.created_time')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.creationDate)}
+        />
+      </div>
+      <div className="flex items-center">
+        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.revisionDate)}
+        />
+      </div>
+    </div>
+  }
 
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data}
       className={className}
-      bordered={true}
-      expandIconPosition="end"
-      size="small"
-      collapsible='icon'
       loading={loading}
-    >
-      {
-        boxData.map((record) => <Collapse.Panel
-          key={record.id}
-          className={`${selectedRowKeys.includes(record.id) ? 'checked' : ''}`}
-          header={<div
-            className="flex align-items justify-between"
+      renderItem={(record) => (
+        <List.Item>
+          <div
+            key={record.id}
+            className="flex items-center justify-between w-full"
           >
-            <div className="flex align-items">
+            <div className="flex items-center">
               <Checkbox
                 className="mr-2"
                 checked={selectedRowKeys.includes(record.id)}
@@ -68,33 +81,31 @@ const BoxData = (props) => {
               />
               <Name cipher={record}/>
             </div>
-            <Actions
-              cipher={record}
-              onMove={onMove}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
-              onRestore={onRestore}
-              onShare={onShare}
-              onStopSharing={onStopSharing}
-              onPermanentlyDelete={onPermanentlyDelete}
-            />
-          </div>}
-        >
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.created_time')}:</p>
-            <TextCopy
-              value={common.timeFromNow(record.creationDate)}
-            />
+            <div className="ml-2 flex items-center">
+              <Popover
+                className="cursor-pointer mr-2"
+                placement="right"
+                trigger="click"
+                content={() => <GeneralInfo record={record}/>}
+              >
+                <InfoCircleOutlined />
+              </Popover>
+              <Actions
+                className="flex items-center"
+                cipher={record}
+                onMove={onMove}
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+                onRestore={onRestore}
+                onShare={onShare}
+                onStopSharing={onStopSharing}
+                onPermanentlyDelete={onPermanentlyDelete}
+              />
+            </div>
           </div>
-          <div className="flex items-center">
-            <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
-            <TextCopy
-              value={common.timeFromNow(record.revisionDate)}
-            />
-          </div>
-        </Collapse.Panel>)
-      }
-    </Collapse>
+        </List.Item>
+      )}
+    />
   );
 }
 

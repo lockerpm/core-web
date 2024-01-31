@@ -37,16 +37,16 @@ const SMTP = (props) => {
           <Badge status="default" />
           <p className="ml-2">{t('email_settings.smtp.description2')}</p>
         </div>
-        <p className="mt-2 flex items-center">
+        <p className="mt-2">
           {t('email_settings.smtp.note')}
-          <a
-            className="flex items-center ml-1"
-            href={'/'}
-          >
-            <span className="mr-2">{t('email_settings.smtp.note_link')}</span>
-            <ArrowRightOutlined />
-          </a>
         </p>
+        <a
+          className="flex items-center"
+          href={'/'}
+        >
+          <span className="mr-2">{t('email_settings.smtp.note_link')}</span>
+          <ArrowRightOutlined />
+        </a>
       </div>
       <Row gutter={[16, 0]}>
         <Col lg={16} md={24} xs={24}>

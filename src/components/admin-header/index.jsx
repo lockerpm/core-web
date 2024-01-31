@@ -4,6 +4,7 @@ import {
   Button,
   Row,
   Col,
+  Tooltip
 } from '@lockerpm/design';
 import {
   ArrowRightOutlined
@@ -91,7 +92,7 @@ const AdminHeader = (props) => {
                     onClick={() => a.click()}
                     icon={a.icon}
                   >
-                    {a.label}
+                    {isMobile ? '' : a.label}
                   </Button>
                 </Col>
               )}

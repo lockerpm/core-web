@@ -71,18 +71,25 @@
       .admin-layout-sidebar-center {
         width: var(--sidebar-width-mobile) !important;
       }
-      .resp-menu-toggle-icon {
+      .resp-collapsed-bg {
         position: absolute;
         top: 0;
         left: var(--sidebar-width-mobile);
-        margin: 4px 4px;
-        padding: 8px;
-        font-size: 18px;
-        cursor: pointer;
-        border: 1px solid var(--border-color);
-        color: var(--sidebar-menu-color);
-        background-color: var(--sidebar-background-color) !important;
-        border-radius: 4px;
+        height: 100%;
+        width: calc(100vw - var(--sidebar-width-mobile));
+        background-color: rgba(0, 0, 0, 0.45);
+        z-index: 9999;
+        .resp-menu-toggle-icon {
+          width: max-content;
+          margin: 4px 4px;
+          padding: 8px;
+          font-size: 18px;
+          cursor: pointer;
+          border: 1px solid var(--border-color);
+          color: var(--sidebar-menu-color);
+          background-color: var(--sidebar-background-color) !important;
+          border-radius: 4px;
+        }
       }
     }
   }

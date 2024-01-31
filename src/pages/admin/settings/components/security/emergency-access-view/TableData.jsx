@@ -49,7 +49,7 @@ const TableData = (props) => {
         key: 'actions',
         align: 'right',
         fixed: 'right',
-        width: 80,
+        width: 100,
         render: (_, record) => (
           <Actions
             allCiphers={allCiphers}

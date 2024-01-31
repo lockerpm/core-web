@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import { Collapse, Avatar, Space, Button } from "@lockerpm/design"
+import { List, Avatar, Space, Button, Popover } from "@lockerpm/design"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
@@ -11,7 +11,8 @@ import global from "../../../../config/global"
 
 import {
   EditOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  InfoCircleOutlined
 } from "@ant-design/icons"
 
 const BoxData = (props) => {
@@ -26,58 +27,69 @@ const BoxData = (props) => {
     onDelete = () => { },
   } = props
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
+  const GeneralInfo = (props) => {
+    const { record } = props;
+    return <div className="text-xs">
+      <div className='flex items-center mb-1'>
+        <p className='font-semibold mr-2'>{t("common.created_time")}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.creation_date)}
+        />
+      </div>
+      <div className='flex items-center'>
+        <p className='font-semibold mr-1'>{t("common.updated_time")}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.revision_date || record.creation_date)}
+        />
+      </div>
+      {
+        record.description && <div className='flex items-center'>
+          <p className='font-semibold mr-2'>{t("common.description")}:</p>
+          <TextCopy className="text-xs" value={record.description} />
+        </div>
+      }
+    </div>
+  }
 
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data.map((d) => ({ ...d, key: d.id }))}
       className={className}
-      bordered={true}
-      expandIconPosition='end'
-      size='small'
-      collapsible='icon'
       loading={loading}
-    >
-      {boxData.map((record) => (
-        <Collapse.Panel
-          key={record.id}
-          header={
-            <div className='flex align-items justify-between'>
-              <div className="flex items-center">
-                <Avatar shape="square" src={record.avatar} />
-                <div className="ml-2">
-                  <RouterLink
-                    className={'font-semibold'}
-                    label={record.name}
-                    routerName={global.keys.ENTERPRISE_DASHBOARD}
-                    routerParams={{ enterprise_id: record.id }}
-                  />
-                  <p className='font-semibold'>{record.enterprise_name}</p>
-                </div>
+      renderItem={(record) => (
+        <List.Item>
+          <div className='flex items-center justify-between w-full'>
+            <div className="flex items-center">
+              <Avatar shape="square" src={record.avatar} />
+              <div className="ml-2">
+                <RouterLink
+                  className={'font-semibold'}
+                  label={record.name}
+                  routerName={global.keys.ENTERPRISE_DASHBOARD}
+                  routerParams={{ enterprise_id: record.id }}
+                />
+                <p className='text-xs'>{record.enterprise_name}</p>
               </div>
-              <Space size={[8, 8]}>
-                <Button type='text' size='small' icon={<EditOutlined />} onClick={() => onUpdate(record)} />
-                {/* <Button type='text' size='small' danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} /> */}
-              </Space>
             </div>
-          }
-        >
-          <div className='flex items-center mb-2'>
-            <p className='font-semibold mr-2'>{t("common.description")}:</p>
-            <TextCopy value={common.timeFromNow(record.description)} />
+            <Space size={[8, 8]}>
+              <Popover
+                className="mr-2 cursor-pointer"
+                placement="right"
+                trigger="click"
+                content={() => <GeneralInfo record={record}/>}
+              >
+                <InfoCircleOutlined />
+              </Popover>
+              <Button type='text' size='small' icon={<EditOutlined />} onClick={() => onUpdate(record)} />
+              <Button type='text' size='small' disabled danger icon={<DeleteOutlined />} onClick={() => onDelete(record)} />
+            </Space>
           </div>
-          <div className='flex items-center mb-2'>
-            <p className='font-semibold mr-2'>{t("common.created_time")}:</p>
-            <TextCopy value={common.timeFromNow(record.creation_date)} />
-          </div>
-          <div className='flex items-center'>
-            <p className='font-semibold mr-2'>{t("common.updated_time")}:</p>
-            <TextCopy value={common.timeFromNow(record.revision_date || record.creation_date)} />
-          </div>
-        </Collapse.Panel>
-      ))}
-    </Collapse>
+        </List.Item>
+      )}
+    />
   )
 }
 

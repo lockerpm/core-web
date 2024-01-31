@@ -58,24 +58,10 @@ const updateServerType = data => {
 }
 
 
-const updateIsCloud = data => {
-  return {
-    type: actionTypes.SET_IS_CLOUD,
-    payload: data,
-  }
-}
-
 const updateCacheData = data => {
   systemService.update_cache(data)
   return {
     type: actionTypes.SET_CACHE_DATA,
-    payload: data,
-  }
-}
-
-const updateIsDesktop = data => {
-  return {
-    type: actionTypes.SET_IS_DESKTOP,
     payload: data,
   }
 }
@@ -89,7 +75,5 @@ export default {
   updateIsScrollToTop,
   updateCollapsed,
   updateServerType,
-  updateIsCloud,
-  updateCacheData,
-  updateIsDesktop
+  updateCacheData
 }

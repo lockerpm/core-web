@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import {
   Card,
   Button
@@ -15,7 +15,6 @@ import {
 } from "@ant-design/icons";
 
 import global from "../../config/global";
-import storeActions from "../../store/actions";
 
 const PairingForm = (props) => {
   const { t } = useTranslation()
@@ -24,21 +23,12 @@ const PairingForm = (props) => {
     onConfirm = () => {}
   } = props;
 
-  const isDesktop = useSelector((state) => state.system.isDesktop)
   const isConnected = useSelector((state) => state.service.isConnected)
   const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
   const approveCode = useSelector((state) => state.service.approveCode)
   const pairingConfirmed = useSelector((state) => state.service.pairingConfirmed)
   const clientId = useSelector((state) => state.service.clientId);
   const clientType = useSelector((state) => state.service.clientType);
-
-  const resetClient = async () => {
-    try {
-      await service.resetPairingCode(clientId)
-    } catch (error) {
-      global.pushError(error)
-    }
-  }
 
   const confirmClient = async () => {
     try {
@@ -49,22 +39,12 @@ const PairingForm = (props) => {
     }
   }
 
-  const confirmDesktopPairing = async () => {
-    try {
-      await service.confirmDesktopPairing();
-      global.store.dispatch(storeActions.updateApproveCode(null));
-      onConfirm();
-    } catch (error) {
-      global.pushError(error)
-    }
-  }
-
   return (
     <div className="pairing-form text-center">
       {
-        isConnected && (isDesktopConnected || isDesktop) && <div>
+        isConnected && isDesktopConnected && <div>
           <p className="mb-10 mt-6 text-left">
-            {t(isDesktop ? 'passwordless.confirm_code' : 'passwordless.pairing_required')}
+            {t('passwordless.pairing_required')}
           </p>
           {
             approveCode && <div className="flex justify-center">
@@ -77,10 +57,10 @@ const PairingForm = (props) => {
             approveCode ? <Button
               type="primary"
               className="w-full"
-              disabled={!isDesktop && !pairingConfirmed}
+              disabled={!pairingConfirmed}
               size="large"
               loading={callingAPI}
-              onClick={() => { !isDesktop ? confirmDesktopPairing() : confirmClient() }}
+              onClick={() => confirmClient()}
             >
               {t('button.confirm')}
             </Button> : <Button
@@ -94,32 +74,22 @@ const PairingForm = (props) => {
           }
           {
             approveCode && <div>
-              {
-                isDesktop ? <Button
-                  type="text"
-                  size="large"
-                  className="mt-2 w-full"
-                  icon={<ReloadOutlined />}
-                  onClick={() => resetClient()}
-                >
-                  {t('passwordless.reset_code')}
-                </Button> : <Button
-                  type="text"
-                  size="large"
-                  className="mt-2 w-full"
-                  icon={<ReloadOutlined />}
-                  onClick={() => service.sendPairingRequest()}
-                >
-                  {t('passwordless.repair')}
-                </Button>
-              }
+              <Button
+                type="text"
+                size="large"
+                className="mt-2 w-full"
+                icon={<ReloadOutlined />}
+                onClick={() => service.sendPairingRequest()}
+              >
+                {t('passwordless.repair')}
+              </Button>
             </div>
           }
           
         </div>
       }
       {
-        !isConnected && !isDesktop && <div>
+        !isConnected && <div>
           <p className="mb-10 mt-6">
             { t('passwordless.install_desktop')}
           </p>
@@ -134,7 +104,7 @@ const PairingForm = (props) => {
         </div>
       }
       {
-        isConnected && !isDesktopConnected && !isDesktop && <div>
+        isConnected && !isDesktopConnected && <div>
           <p className="mb-10 mt-6">
             { t('passwordless.open_desktop')}
           </p>

@@ -239,6 +239,7 @@ const Vault = (props) => {
             page: params.page - 1
           })
         }
+        setSelectedRowKeys([]);
       }).catch((error) => {
         global.pushError(error)
       });

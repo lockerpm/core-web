@@ -26,6 +26,7 @@ const ChangePassword = (props) => {
   const [currentPassword, setCurrentPassword] = useState(null);
 
   const userInfo = useSelector(state => state.auth.userInfo);
+  const isMobile = useSelector(state => state.system.isMobile);
 
   return (
     <div className={className}>
@@ -40,7 +41,7 @@ const ChangePassword = (props) => {
           icon={<KeyOutlined />}
           onClick={() => setConfirmVisible(true)}
         >
-          {t('change_password.title')}
+          {isMobile ? '' : t('change_password.title')}
         </Button>
       </div>
       <p className="mt-1">

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import {
-  Collapse,
+  List,
+  Popover
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
@@ -17,6 +18,7 @@ import SharedWith from "./table/SharedWith";
 import common from "../../../../../utils/common";
 
 import {
+  InfoCircleOutlined
 } from "@ant-design/icons";
 
 const BoxData = (props) => {
@@ -26,72 +28,83 @@ const BoxData = (props) => {
     loading = false,
     className = '',
     data = [],
-    params = {},
     onStopSharing = () => {},
   } = props;
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
+  const GeneralInfo = (props) => {
+    const { record } = props;
+    return <div className="text-xs">
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('shares.shared_with')}:</p>
+        <SharedWith send={record}/>
+      </div>
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('common.type')}:</p>
+        {
+          t(common.cipherTypeInfo('type', record.cipher.type).name)
+        }
+      </div>
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('shares.quick_shares.sharing_time')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.creationDate)}
+        />
+      </div>
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('shares.quick_shares.views')}:</p>
+        {
+          `${record.accessCount}${record.maxAccessCount ? `/${record.maxAccessCount}` : ''} ${t('shares.quick_shares.views')}`
+        }
+      </div>
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('shares.quick_shares.expiration')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : 'N/A'}
+          align={'center'}
+        />
+      </div>
+    </div>
+  }
 
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data.map((d) => ({ ...d, key: d.id }))}
       className={className}
-      bordered={true}
-      expandIconPosition="end"
-      size="small"
-      collapsible='icon'
       loading={loading}
-    >
-      {
-        boxData.map((record) => <Collapse.Panel
-          key={record.id}
-          header={<div
-            className="flex align-items justify-between"
-          >
-            <div className="flex align-items">
-              <CipherName
-                send={record}
-              />
+      renderItem={(record) => (
+        <List.Item>
+          <div key={record.id} className="w-full">
+            <div
+              className="flex items-center justify-between w-full"
+            >
+              <div className="flex items-center">
+                <CipherName
+                  send={record}
+                />
+              </div>
+              <div className="flex items-center">
+                <Popover
+                  className="mr-2 cursor-pointer"
+                  placement="right"
+                  trigger="click"
+                  content={() => <GeneralInfo record={record}/>}
+                >
+                  <InfoCircleOutlined />
+                </Popover>
+                <Actions
+                  className="flex items-center"
+                  item={record}
+                  onStopSharing={onStopSharing}
+                />
+              </div>
             </div>
-            <Actions
-              item={record}
-              onStopSharing={onStopSharing}
-            />
-          </div>}
-        >
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('shares.shared_with')}:</p>
-            <SharedWith send={record}/>
           </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.type')}:</p>
-            {
-              t(common.cipherTypeInfo('type', record.cipher.type).name)
-            }
-          </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('shares.quick_shares.sharing_time')}:</p>
-            <TextCopy
-              value={common.timeFromNow(record.creationDate)}
-            />
-          </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('shares.quick_shares.views')}:</p>
-            {
-              `${record.accessCount}${record.maxAccessCount ? `/${record.maxAccessCount}` : ''} ${t('shares.quick_shares.views')}`
-            }
-          </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('shares.quick_shares.expiration')}:</p>
-            <TextCopy
-              value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : 'N/A'}
-              align={'center'}
-            />
-          </div>
-        </Collapse.Panel>)
-      }
-    </Collapse>
+        </List.Item>
+      )}
+    />
   );
 }
 

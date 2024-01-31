@@ -29,11 +29,8 @@ const Enterprise = (props) => {
   } = props;
   const location = useLocation()
   const { t } = useTranslation();
-  const isDesktop = useSelector((state) => state.system.isDesktop);
   const isConnected = useSelector((state) => state.service.isConnected);
   const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
-  const signInReload = useSelector((state) => state.auth.signInReload)
-
   const currentPage = common.getRouterByLocation(location);
 
   const clientId = ['desktop', 'browser'].includes(currentPage?.query?.client_id) ? currentPage?.query?.client_id : null
@@ -41,7 +38,6 @@ const Enterprise = (props) => {
   const [step, setStep] = useState(0);
   const [ssoConfig, setSsoConfig] = useState(null);
   const [ssoUser, setSsoUser] = useState(null);
-  const [existed, setExisted] = useState(false);
   const [checking, setChecking] = useState(false);
 
   const ssoAccount = authServices.sso_account();
@@ -51,62 +47,35 @@ const Enterprise = (props) => {
   }, [])
 
   useEffect(() => {
-    if (ssoConfig && isDesktop) {
-      checkSsoConfig();
-    }
-  }, [isConnected, isDesktop, ssoConfig, signInReload])
-
-  useEffect(() => {
-    if (ssoUser && !isDesktop) {
+    if (ssoUser) {
       openOtherClient();
     }
-  }, [isConnected, ssoUser, isDesktop])
+  }, [isConnected, ssoUser])
 
   const checkExist = async () => {
     setChecking(true)
     const response = await ssoConfigServices.check_exists();
-    setExisted(response?.existed)
     if (response?.existed) {
       const ssoConfig = response.sso_configuration;
       setSsoConfig(ssoConfig)
-      if (!isDesktop) {
-        if (clientId) {
-          authServices.update_sso_account(null);
-          authServices.update_redirect_client_id(clientId);
-          redirectToAuthSSO(ssoConfig);
-        } else if (ssoAccount?.email) {
-          setStep(1)
-          setChecking(false)
-        } else if (currentPage.query?.code) {
-          getUserByCode(ssoConfig, currentPage.query?.code)
-        } else {
-          setChecking(false)
-          setStep(1)
-          redirectToAuthSSO(ssoConfig)
-        }
+      if (clientId) {
+        authServices.update_sso_account(null);
+        authServices.update_redirect_client_id(clientId);
+        redirectToAuthSSO(ssoConfig);
+      } else if (ssoAccount?.email) {
+        setStep(1)
+        setChecking(false)
+      } else if (currentPage.query?.code) {
+        getUserByCode(ssoConfig, currentPage.query?.code)
       } else {
         setChecking(false)
+        setStep(1)
+        redirectToAuthSSO(ssoConfig)
       }
     } else {
       setSsoConfig(null)
       setStep(1)
       setChecking(false)
-    }
-  }
-
-  const checkSsoConfig = async () => {
-    if (isConnected) {
-      if (step === 0) {
-        setChecking(true)
-        const cacheData = await service.getCacheData();
-        if (cacheData?.email) {
-          authServices.update_sso_account({ email: cacheData.email })
-          setStep(1);
-        }
-        setChecking(false)
-      }
-    } else {
-      setStep(0)
     }
   }
 
@@ -136,9 +105,6 @@ const Enterprise = (props) => {
   const isBack = useMemo(() => {
     if (ssoAccount) {
       return step > 2
-    }
-    if (existed && isDesktop) {
-      return step > 0
     }
     return step > 1
   })
@@ -174,11 +140,7 @@ const Enterprise = (props) => {
     if (isConnected) {
       service.setCacheData({})
     }
-    if (isDesktop) {
-      setStep(0)
-    } else {
-      redirectToAuthSSO(ssoConfig)
-    }
+    redirectToAuthSSO(ssoConfig)
   }
 
   return (
@@ -205,22 +167,9 @@ const Enterprise = (props) => {
           </div>
           {
             step === 0 && <div>
-              {
-                !isDesktop && <div className="flex items-center justify-center">
-                  <Spin spinning={checking} size="large"></Spin>
-                </div>
-              }
-              {
-                isDesktop && <Button
-                  className="w-full"
-                  size="large"
-                  type="primary"
-                  loading={loading || checking}
-                  onClick={() => redirectToAuthSSO(ssoConfig)}
-                >
-                  {t('auth_pages.sign_in.single_sign_on')}
-                </Button>
-              }
+              <div className="flex items-center justify-center">
+                <Spin spinning={checking} size="large"></Spin>
+              </div>
             </div>
           }
           {

@@ -3,7 +3,7 @@ import {
   Button,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -20,6 +20,8 @@ const MobilePasswordless = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
+  const isMobile = useSelector(state => state.system.isMobile);
+
   const [formVisible, setFormVisible] = useState(false);
 
   return (
@@ -34,7 +36,7 @@ const MobilePasswordless = (props) => {
           icon={<QrcodeOutlined />}
           onClick={() => setFormVisible(true)}
         >
-          {t('security.mobile_passwordless.action')}
+          {isMobile ? '' : t('security.mobile_passwordless.action')}
         </Button>
       </div>
       <p className="mt-1">

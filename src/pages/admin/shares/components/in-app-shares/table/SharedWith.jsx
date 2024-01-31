@@ -15,6 +15,7 @@ import common from "../../../../../../utils/common";
 const SharedWith = (props) => {
   const { t } = useTranslation()
   const myShares = useSelector((state) => state.share.myShares);
+  const isMobile = useSelector((state) => state.system.isMobile);
 
   const {
     className = '',
@@ -33,6 +34,7 @@ const SharedWith = (props) => {
         shareMembers.map((member, index) => <Tooltip key={index} title={member.email}>
           <Avatar
             src={member.avatar}
+            size={isMobile ? 20 : 28}
             style={{
               backgroundColor: common.getColorByIndex(index),
               color: 'black'

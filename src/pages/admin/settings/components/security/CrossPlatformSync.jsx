@@ -27,6 +27,7 @@ const CrossPlatformSync = (props) => {
   const { t } = useTranslation();
 
   const userInfo = useSelector(state => state.auth.userInfo);
+  const isMobile = useSelector(state => state.system.isMobile);
 
   const [callingAPI, setCallingAPI] = useState(false)
   const [confirmVisible, setConfirmVisible] = useState(false)
@@ -73,7 +74,7 @@ const CrossPlatformSync = (props) => {
           icon={<RedoOutlined />}
           onClick={() => setConfirmVisible(true)}
         >
-          {action}
+          {isMobile ? '' : action}
         </Button>
       </div>
       <p className="mt-1">

@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import {
-  Collapse,
-  Tag
+  List,
+  Tag,
+  Popover
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
@@ -28,7 +29,6 @@ const BoxData = (props) => {
     loading = false,
     className = '',
     data = [],
-    params = {},
     isFolder = false,
     onMove = () => {},
     onUpdate = () => {},
@@ -36,90 +36,102 @@ const BoxData = (props) => {
     onUpdateStatus = () => {}
   } = props;
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
+  const GeneralInfo = (props) => {
+    const { record } = props;
+    return <div className="text-xs">
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('roles.owner')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
+        />
+      </div>
+      {
+        !isFolder && <div className="flex items-center mb-1">
+          <p className="font-semibold mr-2">{t('common.type')}:</p>
+          <p>
+            {t(common.cipherTypeInfo('type', record.cipher_type || record.type).name)}
+          </p>
+        </div>
+      }
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={record.revisionDate ? common.timeFromNow(record.revisionDate) : common.timeFromNow(record.access_time)}
+          align={'center'}
+        />
+      </div>
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('common.status')}:</p>
+        {
+          (() => {
+            const status = common.getStatus(record.status)
+            return <Tag color={status.color}>
+              {t(status?.label)}
+            </Tag>
+          })()
+        }
+      </div>
+      <div className="flex items-center">
+        <p className="font-semibold mr-2">{t('shares.share_type')}:</p>
+        {
+          (() => {
+            const permission = common.getSharePermission(record.share_type)
+            return t(permission.label)
+          })()
+        }
+      </div>
+    </div>
+  }
+
 
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data.map((d) => ({ ...d, key: d.id }))}
       className={className}
-      bordered={true}
-      expandIconPosition="end"
-      size="small"
-      collapsible='icon'
       loading={loading}
-    >
-      {
-        boxData.map((record) => <Collapse.Panel
-          key={record.id}
-          header={<div
-            className="flex align-items justify-between"
+      renderItem={(record) => (
+        <List.Item>
+          <div
+            className="flex items-center justify-between w-full"
           >
-            <div className="flex align-items">
+            <div className="flex items-center">
               {
                 isFolder ? <FolderName folder={record}/> : <CipherName cipher={record}/>
               }
             </div>
-            {
-              isFolder ? <FolderActions
-                folder={record}
-                onUpdate={onUpdate}
-                onLeave={onLeave}
-                onUpdateStatus={onUpdateStatus}
-              /> : <CipherActions
-                cipher={record}
-                onMove={onMove}
-                onUpdate={onUpdate}
-                onLeave={onLeave}
-                onUpdateStatus={onUpdateStatus}
-              />
-            }
-          </div>}
-        >
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('roles.owner')}:</p>
-            <TextCopy
-              value={record.owner ? record.owner.full_name : common.getOrganization(record.organizationId).name}
-            />
-          </div>
-          {
-            !isFolder && <div className="flex items-center mb-2">
-              <p className="font-semibold mr-2">{t('common.type')}:</p>
-              <p>
-                {t(common.cipherTypeInfo('type', record.cipher_type || record.type).name)}
-              </p>
+            <div className="flex items-center">
+              <Popover
+                className="mr-2 cursor-pointer"
+                placement="right"
+                trigger="click"
+                content={() => <GeneralInfo record={record}/>}
+              >
+                <InfoCircleOutlined />
+              </Popover>
+              {
+                isFolder ? <FolderActions
+                  className="flex items-center"
+                  folder={record}
+                  onUpdate={onUpdate}
+                  onLeave={onLeave}
+                  onUpdateStatus={onUpdateStatus}
+                /> : <CipherActions
+                  className="flex items-center"
+                  cipher={record}
+                  onMove={onMove}
+                  onUpdate={onUpdate}
+                  onLeave={onLeave}
+                  onUpdateStatus={onUpdateStatus}
+                />
+              }
             </div>
-          }
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
-            <TextCopy
-              value={record.revisionDate ? common.timeFromNow(record.revisionDate) : common.timeFromNow(record.access_time)}
-              align={'center'}
-            />
           </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.status')}:</p>
-            {
-              (() => {
-                const status = common.getStatus(record.status)
-                return <Tag color={status.color}>
-                  {t(status?.label)}
-                </Tag>
-              })()
-            }
-          </div>
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('shares.share_type')}:</p>
-            {
-              (() => {
-                const permission = common.getSharePermission(record.share_type)
-                return t(permission.label)
-              })()
-            }
-          </div>
-        </Collapse.Panel>)
-      }
-    </Collapse>
+        </List.Item>
+      )}
+    />
   );
 }
 

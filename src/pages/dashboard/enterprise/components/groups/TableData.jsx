@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 
 import { TextCopy } from "../../../../../components"
 
-import { EditOutlined, DeleteOutlined, UsergroupAddOutlined } from "@ant-design/icons"
+import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, GroupOutlined } from "@ant-design/icons"
 
 import common from "../../../../../utils/common"
 
@@ -37,7 +37,10 @@ const TableData = (props) => {
         key: "name",
         align: "left",
         render: (_, record) => (
-          <TextCopy className="font-semibold" value={record.name} />
+          <div className="flex items-center">
+            <GroupOutlined style={{ fontSize: 20 }}/>
+            <TextCopy className="font-semibold ml-2" value={record.name} />
+          </div>
         ),
       },
       {

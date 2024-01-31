@@ -38,7 +38,6 @@ const SignInForm = (props) => {
   const currentPage = common.getRouterByLocation(location);
 
   const locale = useSelector((state) => state.system.locale);
-  const isDesktop = useSelector((state) => state.system.isDesktop);
   const isConnected = useSelector((state) => state.service.isConnected);
 
   const ssoAccount = authServices.sso_account();
@@ -66,12 +65,6 @@ const SignInForm = (props) => {
       handleCheckPwl();
     }
   }, [preLogin, isConnected]);
-
-  useEffect(() => {
-    if (step === 2 && preLogin?.login_method === 'passwordless' && isDesktop) {
-      selectOtherMethod('security_key');
-    }
-  }, [preLogin, isDesktop, step]);
 
   useEffect(() => {
     if (step === 1) {
@@ -115,8 +108,8 @@ const SignInForm = (props) => {
     } else if (!preLogin.is_password_changed || (preLogin.login_method === 'password' && preLogin.require_passwordless)) {
       global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email })
     } else if (preLogin.sync_all_platforms) {
-      setIsPair(isConnected && !isDesktop && !service.pairingService?.hasKey)
-      if (isConnected && (isDesktop || service.pairingService?.hasKey)) {
+      setIsPair(isConnected && !service.pairingService?.hasKey)
+      if (isConnected && service.pairingService?.hasKey) {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === preLogin.email) {
@@ -166,7 +159,7 @@ const SignInForm = (props) => {
   const selectOtherMethod = (method) => {
     setStep(3);
     setOtherMethod(method);
-    if (method === 'security_key' && !isDesktop) {
+    if (method === 'security_key') {
       setIsPair(!isConnected || !service.pairingService?.hasKey);
     } else {
       setIsPair(false)
@@ -217,40 +210,40 @@ const SignInForm = (props) => {
           />
         }
         {
-          step === 2 && !isPair && <div>
+          !isPair && <div>
             {
-              preLogin?.login_method === 'password' && <div>
-                <Form.Item
-                  name="password"
-                  rules={[
-                    global.rules.REQUIRED(t('auth_pages.password')),
-                  ]}
-                >
-                  <Input.Password
-                    placeholder={t('auth_pages.password')}
-                    size="large"
-                  />
-                </Form.Item>
-                <Button
-                  className="w-full"
-                  size="large"
-                  type="primary"
-                  htmlType="submit"
-                  loading={loading || callingAPI}
-                >
-                  {t('button.sign_in')}
-                </Button>
-              </div>
-            }
-            {
-              (preLogin?.login_method === 'password' || !isDesktop) && <div>
+              step === 2 && <div>
                 {
-                  preLogin?.login_method === 'password' && <p className="my-4 text-center">
-                    {t('auth_pages.sign_in.or_login_with')}
-                  </p>
+                  preLogin?.login_method === 'password' && <div>
+                    <Form.Item
+                      name="password"
+                      rules={[
+                        global.rules.REQUIRED(t('auth_pages.password')),
+                      ]}
+                    >
+                      <Input.Password
+                        placeholder={t('auth_pages.password')}
+                        size="large"
+                      />
+                    </Form.Item>
+                    <Button
+                      className="w-full"
+                      size="large"
+                      type="primary"
+                      htmlType="submit"
+                      loading={loading || callingAPI}
+                    >
+                      {t('button.sign_in')}
+                    </Button>
+                  </div>
                 }
-                {
-                  !isDesktop && <Button
+                <div>
+                  {
+                    preLogin?.login_method === 'password' && <p className="my-4 text-center">
+                      {t('auth_pages.sign_in.or_login_with')}
+                    </p>
+                  }
+                  <Button
                     className="w-full mb-4"
                     size="large"
                     ghost
@@ -261,46 +254,46 @@ const SignInForm = (props) => {
                   >
                     {t('auth_pages.sign_in.your_passkey')}
                   </Button>
-                }
-                <Button
-                  className="w-full"
-                  size="large"
-                  ghost
-                  type="primary"
-                  icon={<UsbOutlined />}
-                  disabled={loading || callingAPI}
-                  onClick={() =>selectOtherMethod('security_key')}
-                >
-                  {t('auth_pages.sign_in.your_security_key')}
-                </Button>
+                  <Button
+                    className="w-full"
+                    size="large"
+                    ghost
+                    type="primary"
+                    icon={<UsbOutlined />}
+                    disabled={loading || callingAPI}
+                    onClick={() =>selectOtherMethod('security_key')}
+                  >
+                    {t('auth_pages.sign_in.your_security_key')}
+                  </Button>
+                </div>
               </div>
             }
-          </div>
-        }
-        {
-          step === 3 && !isPair && <div>
             {
-              otherMethod === 'security_key' && <PasswordlessForm
-                changing={loading}
-                isLogin={true}
-                userInfo={preLogin}
-                onRepair={() => setIsPair(true)}
-                onConfirm={(password) => handleSubmit({
-                  username: preLogin.email,
-                  password
-                })}
-              />
-            }
-            {
-              otherMethod === 'passkey' && <PasskeyForm
-                changing={loading}
-                isLogin={true}
-                userInfo={preLogin}
-                onConfirm={(password) => handleSubmit({
-                  username: preLogin.email,
-                  password
-                })}
-              />
+              step === 3 && <div>
+                {
+                  otherMethod === 'security_key' && <PasswordlessForm
+                    changing={loading}
+                    isLogin={true}
+                    userInfo={preLogin}
+                    onRepair={() => setIsPair(true)}
+                    onConfirm={(password) => handleSubmit({
+                      username: preLogin.email,
+                      password
+                    })}
+                  />
+                }
+                {
+                  otherMethod === 'passkey' && <PasskeyForm
+                    changing={loading}
+                    isLogin={true}
+                    userInfo={preLogin}
+                    onConfirm={(password) => handleSubmit({
+                      username: preLogin.email,
+                      password
+                    })}
+                  />
+                }
+              </div>
             }
           </div>
         }

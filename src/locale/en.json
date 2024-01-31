@@ -225,7 +225,7 @@
         "created": "The new item has been added.",
         "updated": "The item information has been updated.",
         "deleted": "The Item has been moved to trash!.",
-        "permanently_delete": "The item has been permanently deleted.",
+        "permanently_deleted": "The item has been permanently deleted.",
         "restored": "The item has been restored!",
         "moved": "The item has been moved!"
       },
@@ -399,6 +399,7 @@
   "roles": {
     "supper_admin": "Supper Admin",
     "primary_admin": "Primary Admin",
+    "owner": "Owner",
     "admin": "Admin",
     "member": "Member"
   },
@@ -630,7 +631,7 @@
       "move_to_folder": "Move to a folder",
       "stop_sharing": "Stop sharing",
       "restore": "Restore",
-      "permanently_delete": "Permanently delete",
+      "permanently_deleted": "Permanently delete",
       "delete": "Delete",
       "share": "Share",
       "leave": "Leave",
@@ -1080,7 +1081,7 @@
       "description1": "It must support LOGIN authentication",
       "description2": "It must support TLS 1.0 or higher",
       "note": "Need help to integrate with SMTP?",
-      "note_link": "Follow our instructions.",
+      "note_link": "Follow our instructions",
       "host": "Host",
       "host_placeholder": "Your SMTP Host",
       "port": "Port",

@@ -29,6 +29,7 @@ const Passwordless = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
+  const isMobile = useSelector(state => state.system.isMobile);
 
   const [newKeyVisible, setNewKeyVisible] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -87,7 +88,7 @@ const Passwordless = (props) => {
             icon={<PlusOutlined />}
             onClick={() => setNewKeyVisible(true)}
           >
-            {t('security.passwordless.add_new_key')}
+            {isMobile ? '' : t('security.passwordless.add_new_key')}
           </Button>
         }
       </div>

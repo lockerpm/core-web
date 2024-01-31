@@ -25,8 +25,11 @@ const TableData = (props) => {
     className = '',
     data = [],
     params = {},
+    selectedRowKeys = [],
     onUpdate = () => {},
     onDelete = () => {},
+    selectionChange = () => {},
+    getCheckboxProps = () => {}
   } = props;
 
   const columns = useMemo(() => {
@@ -73,7 +76,7 @@ const TableData = (props) => {
         key: 'actions',
         align: 'right',
         fixed: 'right',
-        width: 80,
+        width: 100,
         render: (_, record) => (
           <Actions
             cipher={record}
@@ -94,7 +97,10 @@ const TableData = (props) => {
       rowKey={(record) => record?.id}
       size="small"
       rowSelection={{
-        columnWidth: 25
+        columnWidth: 25,
+        selectedRowKeys: selectedRowKeys,
+        onChange: selectionChange,
+        getCheckboxProps: getCheckboxProps,
       }}
       scroll={{ x: 1024 }}
     />

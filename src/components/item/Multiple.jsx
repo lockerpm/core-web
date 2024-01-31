@@ -74,7 +74,7 @@ const MultipleSelect = (props) => {
           danger
           onClick={() => onPermanentlyDelete(selectedRowKeys)}
         >
-          {t('inventory.actions.permanently_delete')}
+          {t('inventory.actions.permanently_deleted')}
         </Button>
       }
       <Button

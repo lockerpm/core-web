@@ -9,9 +9,7 @@ export default {
     isColumn: true,
     isScrollToTop: false,
     collapsed: false,
-    isCloud: false,
     serverType: null,
-    isDesktop: false,
     cacheData: systemService.get_cache(),
   },
   auth: {

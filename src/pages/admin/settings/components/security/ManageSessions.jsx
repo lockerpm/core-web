@@ -6,7 +6,7 @@ import {
   Tag
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -28,6 +28,8 @@ const ManageSessions = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
+  const isMobile = useSelector(state => state.system.isMobile);
+
   const [expand, setExpand] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
@@ -68,7 +70,7 @@ const ManageSessions = (props) => {
           icon={<LogoutOutlined />}
           onClick={() => openModal(null)}
         >
-          {t('security.manage_sessions.logout')}
+          {isMobile ? '' : t('security.manage_sessions.logout')}
         </Button>
       </div>
       {
