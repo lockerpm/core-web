@@ -4,6 +4,7 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 
 import { AdminHeader, ImageIcon } from "../../../components";
 import TableData from "./components/password-health/TableData";
+import BoxData from "./components/password-health/BoxData";
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -34,6 +35,7 @@ const PasswordHealth = (props) => {
   const currentPage = common.getRouterByLocation(location);
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const isMobile = useSelector((state) => state.system.isMobile)
 
   const [activeKey, setActiveKey] = useState(currentPage.query?.active_key || menus[0].key);
   const [exposedCiphers, setExposedCiphers] = useState([]);
@@ -191,11 +193,22 @@ const PasswordHealth = (props) => {
                 type={getCountByKey(m.key) > 0 ? 'warning' : 'success'}
               />
               {
-                getCountByKey(m.key) > 0 && <TableData
-                  className="mt-4"
-                  activeKey={activeKey}
-                  data={data}
-                />
+                getCountByKey(m.key) > 0 && <div>
+                  {
+                    !isMobile && <TableData
+                      className="mt-4"
+                      activeKey={activeKey}
+                      data={data}
+                    />
+                  }
+                   {
+                    isMobile && <BoxData
+                      className="mt-4"
+                      activeKey={activeKey}
+                      data={data}
+                    />
+                  }
+                </div>
               }
             </div>,
           };

@@ -9,9 +9,7 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 
-import {
-  TextCopy
-} from '../../components'
+import TextCopy from "./TextCopy";
 
 import { useTranslation } from "react-i18next";
 import global from "../../config/global";

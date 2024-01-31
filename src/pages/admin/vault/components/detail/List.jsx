@@ -545,7 +545,7 @@ const ListItemDetails = (props) => {
         key: 'shared_with',
         name: t('shares.shared_with'),
         hide: !cipher?.organizationId || isPublic,
-        value: <SharedWith cipher={cipher} />
+        value: <SharedWith cipher={cipher} className="flex items-center mt-1"/>
       },
     ].filter((c) => !c.hide).map((c) => { delete c.hide; return c })
   }, [

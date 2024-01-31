@@ -11,6 +11,7 @@ import {
 } from '../../../../../components';
 
 import TableData from "./emergency-access/TableData";
+import BoxData from "./emergency-access/BoxData";
 import ResetPasswordFormData from "./form-data/ResetPassword";
 import EmergencyContactFormData from "./form-data/EmergencyContact";
 
@@ -139,12 +140,22 @@ const EmergencyAccess = (props) => {
                 </small>
               }
             </div>
-            <TableData
-              data={listTrusted}
-              isTrusted={true}
-              fetchTrusted={fetchTrusted}
-              fetchGranted={fetchGranted}
-            />
+            {
+              !isMobile && <TableData
+                data={listTrusted}
+                isTrusted={true}
+                fetchTrusted={fetchTrusted}
+                fetchGranted={fetchGranted}
+              />
+            }
+            {
+              isMobile && <BoxData
+                data={listTrusted}
+                isTrusted={true}
+                fetchTrusted={fetchTrusted}
+                fetchGranted={fetchGranted}
+              />
+            }
           </div>
           <div className="mb-4">
             <div className="flex items-center justify-between mb-2">
@@ -157,12 +168,22 @@ const EmergencyAccess = (props) => {
                 </small>
               }
             </div>
-            <TableData
-              data={listGranted}
-              fetchTrusted={fetchTrusted}
-              fetchGranted={fetchGranted}
-              onResetPassword={handleResetPassword}
-            />
+            {
+              !isMobile && <TableData
+                data={listGranted}
+                fetchTrusted={fetchTrusted}
+                fetchGranted={fetchGranted}
+                onResetPassword={handleResetPassword}
+              />
+            }
+            {
+              isMobile && <BoxData
+                data={listGranted}
+                fetchTrusted={fetchTrusted}
+                fetchGranted={fetchGranted}
+                onResetPassword={handleResetPassword}
+              />
+            }
           </div>
         </div>
       }

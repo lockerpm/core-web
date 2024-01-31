@@ -39,7 +39,7 @@ const BoxData = (props) => {
     return <div className="text-xs">
       <div className="flex items-center mb-1">
         <p className="font-semibold mr-2">{t('shares.shared_with')}:</p>
-        <SharedWith cipher={record}/>
+        <SharedWith cipher={record} size={20}/>
       </div>
       {
         !isFolder && <div className="flex items-center mb-1">

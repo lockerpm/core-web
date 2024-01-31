@@ -36,7 +36,7 @@ const BoxData = (props) => {
     return <div className="text-xs">
       <div className="flex items-center mb-1">
         <p className="font-semibold mr-2">{t('shares.shared_with')}:</p>
-        <SharedWith send={record}/>
+        <SharedWith send={record} size={20}/>
       </div>
       <div className="flex items-center mb-1">
         <p className="font-semibold mr-2">{t('common.type')}:</p>
