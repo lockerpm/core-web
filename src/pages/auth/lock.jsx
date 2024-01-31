@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import React, { useEffect, useState, useMemo } from "react";
 import './css/auth.scss';
 

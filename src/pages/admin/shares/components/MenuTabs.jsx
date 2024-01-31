@@ -28,7 +28,7 @@ const MenuTabs = (props) => {
           return {
             label: (
               <span className="font-semibold">
-                {m.icon}
+                <span className="mr-2">{m.icon}</span>
                 {m.label}
               </span>
             ),

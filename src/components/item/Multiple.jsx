@@ -5,6 +5,11 @@ import {
 } from '@lockerpm/design';
 
 import {
+  FolderOutlined,
+  UndoOutlined,
+  DeleteOutlined,
+  ClearOutlined,
+  CloseOutlined
 } from "@ant-design/icons";
 
 import { useSelector } from 'react-redux';
@@ -26,10 +31,11 @@ const MultipleSelect = (props) => {
     onCancel = () => { },
   } = props;
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const isMobile = useSelector((state) => state.system.isMobile)
 
   return (
-    <Space size={[8, 8]}>
+    <Space size={[8, 8]} className="mt-2">
       <p className="text-s">{t('common.selected_items', { amount: selectedRowKeys.length, name: name })}</p>
       {
         isMove && <Button
@@ -37,9 +43,10 @@ const MultipleSelect = (props) => {
           ghost
           type={'primary'}
           loading={callingAPI}
+          icon={<FolderOutlined />}
           onClick={() => onMove()}
         >
-          {t('inventory.actions.move_to_folder')}
+          {isMobile ? '' : t('inventory.actions.move_to_folder')}
         </Button>
       }
       {
@@ -48,9 +55,10 @@ const MultipleSelect = (props) => {
           ghost
           type={'primary'}
           loading={callingAPI}
+          icon={<UndoOutlined />}
           onClick={() => onRestore(selectedRowKeys)}
         >
-          {t('inventory.actions.restore')}
+          {isMobile ? '' : t('inventory.actions.restore')}
         </Button>
       }
       {
@@ -60,9 +68,10 @@ const MultipleSelect = (props) => {
           type={'primary'}
           loading={callingAPI}
           danger
+          icon={<DeleteOutlined />}
           onClick={() => onDelete(selectedRowKeys)}
         >
-          {t('button.delete')}
+          {isMobile ? '' : t('button.delete')}
         </Button>
       }
       {
@@ -72,17 +81,19 @@ const MultipleSelect = (props) => {
           type={'primary'}
           loading={callingAPI}
           danger
+          icon={<ClearOutlined />}
           onClick={() => onPermanentlyDelete(selectedRowKeys)}
         >
-          {t('inventory.actions.permanently_deleted')}
+          {isMobile ? '' : t('inventory.actions.permanently_deleted')}
         </Button>
       }
       <Button
         size="medium"
         disabled={callingAPI}
+        icon={<CloseOutlined />}
         onClick={() => onCancel()}
       >
-        {t('button.cancel')}
+        {isMobile ? '' : t('button.cancel')}
       </Button>
     </Space>
   );

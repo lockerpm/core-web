@@ -15,7 +15,7 @@ import {
 
 import common from "../../utils/common";
 
-const TextCopyItem = (props) => {
+const TextCopy = (props) => {
   const {
     className = '',
     value = '',
@@ -110,4 +110,4 @@ const TextCopyItem = (props) => {
   );
 }
 
-export default TextCopyItem;
+export default TextCopy;

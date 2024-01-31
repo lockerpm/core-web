@@ -9,7 +9,7 @@
   z-index: 998;
   .admin-layout-header {
     height: 100%;
-    padding: 12px var(--page-content-spacing);
+    padding: var(--page-content-spacing-collapsed) var(--page-content-spacing);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,7 +29,7 @@
     }
     &__search-content {
       position: absolute;
-      top: 12px;
+      top: var(--page-content-spacing-collapsed);
       right: calc(var(--page-content-spacing) + 40px);
       width: 500px;
       .search-results {
@@ -60,7 +60,7 @@
   .ant-layout-header {
     left: 0 !important;
     .admin-layout-header {
-      padding: 12px var(--page-content-spacing-collapsed) !important;
+      padding: var(--page-content-spacing-collapsed) !important;
     }
   }
 }

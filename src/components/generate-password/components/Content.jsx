@@ -7,6 +7,7 @@ import {
 import {
   ReloadOutlined,
   DownOutlined,
+  RightOutlined
 } from "@ant-design/icons";
 import PasswordStrength from "./PasswordStrength";
 import { useTranslation } from "react-i18next";
@@ -109,7 +110,9 @@ const GeneratePasswordContent = (props) => {
         >
           <div>
             <small className="mr-1">{t('generate_password.show_options')}</small>
-            <DownOutlined style={{ fontSize: 12 }}/>
+            {
+              showOptions ? <DownOutlined style={{ fontSize: 12 }}/> : <RightOutlined style={{ fontSize: 12 }}/>
+            }
           </div>
         </Button>
       </div>
