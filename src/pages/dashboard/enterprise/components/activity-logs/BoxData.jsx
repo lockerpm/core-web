@@ -1,5 +1,5 @@
-import React, { useMemo } from "react"
-import { Collapse, Avatar } from "@lockerpm/design"
+import React, { } from "react"
+import { List, Popover, Avatar } from "@lockerpm/design"
 
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
@@ -9,68 +9,73 @@ import { TextCopy, RouterLink } from "../../../../../components"
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-import { } from "@ant-design/icons"
+import { InfoCircleOutlined } from "@ant-design/icons"
 
 const BoxData = (props) => {
   const {
     loading = false,
     className = "",
     data = [],
-    params = {},
     enterpriseId
   } = props
 
   const { t } = useTranslation()
   const locale = useSelector((state) => state.system.locale)
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
+  const GeneralInfo = (props) => {
+    const { record } = props;
+    return <div className="text-xs">
+      <div className='flex items-center mb-1'>
+        <p className='font-semibold mr-2'>{t("common.action")}:</p>
+        <div
+          className='flex items-center text-limited'
+          dangerouslySetInnerHTML={{ __html: record.description[locale]?.replace('<b', '<b style="margin: 0 4px"') }}
+        />
+      </div>
+      <div className='flex items-center mb-1'>
+        <p className='font-semibold mr-2'>{t("common.time")}:</p>
+        <TextCopy className="text-xs" value={common.convertDateTime(record.creation_date)} />
+      </div>
+      <div className='flex items-center'>
+        <p className='font-semibold mr-2'>{t("common.ip_address")}:</p>
+        <TextCopy className="text-xs" value={record.ip_address} />
+      </div>
+    </div>
+  }
 
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data.map((d) => ({ ...d, key: d.id }))}
       className={className}
-      bordered={true}
-      expandIconPosition='end'
-      size='small'
-      collapsible='icon'
       loading={loading}
-    >
-      {boxData.map((record) => (
-        <Collapse.Panel
-          key={record.id}
-          header={
-            <div className='flex align-items justify-between'>
-              <div className='flex items-center'>
-                <Avatar src={record.avatar} />
-                <div className='ml-2'>
-                  <RouterLink
-                    className={"font-semibold"}
-                    label={record.user?.name || record.user?.email}
-                    routerName={global.keys.ENTERPRISE_MEMBER}
-                    routerParams={{ enterprise_id: enterpriseId, member_id: record.id }}
-                  />
-                  <p className='text-xs'>{record.user?.email}</p>
-                </div>
+      renderItem={(record) => (
+        <List.Item>
+          <div className='flex items-center justify-between w-full'>
+            <div className='flex items-center'>
+              <Avatar src={record.avatar} />
+              <div className='ml-2'>
+                <RouterLink
+                  className={"font-semibold"}
+                  label={record.user?.name || record.user?.email}
+                  routerName={global.keys.ENTERPRISE_MEMBER}
+                  routerParams={{ enterprise_id: enterpriseId, member_id: record.id }}
+                />
+                <p className='text-xs'>{record.user?.email}</p>
               </div>
             </div>
-          }
-        >
-          <div className='flex items-center mb-2'>
-            <p className='font-semibold mr-2'>{t("common.action")}:</p>
-            <TextCopy value={record.description[locale]} />
+            <Popover
+              className="mr-2 cursor-pointer"
+              placement="right"
+              trigger="click"
+              content={() => <GeneralInfo record={record}/>}
+            >
+              <InfoCircleOutlined />
+            </Popover>
           </div>
-          <div className='flex items-center mb-2'>
-            <p className='font-semibold mr-2'>{t("common.time")}:</p>
-            <TextCopy value={common.convertDateTime(record.creation_date)} />
-          </div>
-          <div className='flex items-center mb-2'>
-            <p className='font-semibold mr-2'>{t("common.ip_address")}:</p>
-            <TextCopy value={record.ip_address} />
-          </div>
-        </Collapse.Panel>
-      ))}
-    </Collapse>
+        </List.Item>
+      )}
+    />
   )
 }
 

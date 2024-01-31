@@ -399,6 +399,7 @@
   "roles": {
     "supper_admin": "Quản trị viên cấp cao",
     "primary_admin": "Quản trị viên chính",
+    "owner": "Người sở hữu",
     "admin": "Quản trị viên",
     "member": "Thành viên"
   },
@@ -1080,7 +1081,7 @@
       "description1": "Phải hỗ trợ xác thực LOGIN",
       "description2": "Phải hỗ trợ TLS 1.0 trở lên",
       "note": "Cần giúp đỡ để tích hợp với SMTP?",
-      "note_link": "Làm theo hướng dẫn của chúng tôi tại đây.",
+      "note_link": "Làm theo hướng dẫn của chúng tôi tại đây",
       "host": "Host",
       "host_placeholder": "Máy chủ (Host) SMTP của bạn",
       "port": "Port",

@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React, { } from "react";
 import {
-  Collapse,
+  List,
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
@@ -24,26 +24,18 @@ const BoxData = (props) => {
     onReview = () => {}
   } = props;
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
-
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data}
       className={className}
-      bordered={true}
-      expandIconPosition="end"
-      size="small"
-      collapsible='icon'
       loading={loading}
-    >
-      {
-        boxData.map((record) => <Collapse.Panel
-          key={record.id}
-          header={<div
-            className="flex align-items justify-between"
+      renderItem={(record) => (
+        <List.Item>
+          <div
+            className="flex items-center justify-between w-full"
           >
-            <div className="flex align-items">
+            <div className="flex items-center">
               <Name
                 cipher={record}
                 allCiphers={allCiphers}
@@ -51,13 +43,14 @@ const BoxData = (props) => {
               />
             </div>
             <Actions
+              className="flex items-center"
               cipher={record}
               allCiphers={allCiphers}
             />
-          </div>}
-        />)
-      }
-    </Collapse>
+          </div>
+        </List.Item>
+      )}
+    />
   );
 }
 

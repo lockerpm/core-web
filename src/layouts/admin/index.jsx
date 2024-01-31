@@ -79,6 +79,7 @@ function AdminLayout(props) {
   }, [currentPage?.params?.enterprise_id, userInfo, teams])
 
   useEffect(() => {
+    convertSize();
     setInterval(() => {
       checkVaultTimeOut()
     }, [5 * 1000])

@@ -399,6 +399,7 @@
   "roles": {
     "supper_admin": "Supper Admin",
     "primary_admin": "Primary Admin",
+    "owner": "Owner",
     "admin": "Admin",
     "member": "Member"
   },
@@ -1080,7 +1081,7 @@
       "description1": "It must support LOGIN authentication",
       "description2": "It must support TLS 1.0 or higher",
       "note": "Need help to integrate with SMTP?",
-      "note_link": "Follow our instructions.",
+      "note_link": "Follow our instructions",
       "host": "Host",
       "host_placeholder": "Your SMTP Host",
       "port": "Port",

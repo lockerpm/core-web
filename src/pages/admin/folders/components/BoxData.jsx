@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { } from "react";
 import {
-  Collapse,
+  List,
+  Popover
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
@@ -16,6 +17,7 @@ import Actions from "./table/Actions";
 import common from "../../../../utils/common";
 
 import {
+  InfoCircleOutlined
 } from "@ant-design/icons";
 
 const BoxData = (props) => {
@@ -32,52 +34,62 @@ const BoxData = (props) => {
     onShare = () => {}
   } = props;
 
-  const boxData = useMemo(() => {
-    return data.map((d, index) => ({ ...d, stt: index + 1 + (params.page - 1) * params.size }))
-  }, [data])
+  const GeneralInfo = (props) => {
+    const {record} = props;
+    return <div className="text-xs">
+      <div className="flex items-center mb-1">
+        <p className="font-semibold mr-2">{t('common.created_time')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.creationDate)}
+        />
+      </div>
+      <div className="flex items-center">
+        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
+        <TextCopy
+          className="text-xs"
+          value={common.timeFromNow(record.revisionDate)}
+        />
+      </div>
+    </div>
+  }
 
   return (
-    <Collapse
+    <List
+      bordered={false}
+      dataSource={data}
       className={className}
-      bordered={true}
-      expandIconPosition="end"
-      size="small"
-      collapsible='icon'
       loading={loading}
-    >
-      {
-        boxData.map((record) => <Collapse.Panel
-          key={record.id}
-          header={<div
-            className="flex align-items justify-between"
+      renderItem={(record) => (
+        <List.Item>
+          <div
+            className="flex items-center justify-between w-full"
           >
-            <div className="flex align-items">
+            <div className="flex items-center">
               <Name item={record}/>
             </div>
-            <Actions
-              item={record}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
-              onStop={onStop}
-              onShare={onShare}
-            />
-          </div>}
-        >
-          <div className="flex items-center mb-2">
-            <p className="font-semibold mr-2">{t('common.created_time')}:</p>
-            <TextCopy
-              value={common.timeFromNow(record.creationDate)}
-            />
+            <div className="flex items-center">
+              <Popover
+                className="mr-2 cursor-pointer"
+                placement="left"
+                trigger="click"
+                content={() => <GeneralInfo record={record}/>}
+              >
+                <InfoCircleOutlined />
+              </Popover>
+              <Actions
+                item={record}
+                className="flex items-center"
+                onUpdate={onUpdate}
+                onDelete={onDelete}
+                onStop={onStop}
+                onShare={onShare}
+              />
+            </div>
           </div>
-          <div className="flex items-center">
-            <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
-            <TextCopy
-              value={common.timeFromNow(record.revisionDate)}
-            />
-          </div>
-        </Collapse.Panel>)
-      }
-    </Collapse>
+        </List.Item>
+      )}
+    />
   );
 }
 

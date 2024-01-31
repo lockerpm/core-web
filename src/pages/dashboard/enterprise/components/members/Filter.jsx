@@ -28,7 +28,7 @@ const Filter = (props) => {
     <Row className={`filter ${className}`} justify={"space-between"} gutter={[0, 8]}>
       <Col lg={16} span={16} xs={24} className='w-full'>
         <Row justify={"left"} gutter={[12, 12]}>
-          <Col lg={8} md={8} sm={24} xs={24}>
+          <Col lg={8} md={8} sm={12} xs={12}>
             <Input
               prefix={<SearchOutlined />}
               value={searchText}
@@ -44,7 +44,7 @@ const Filter = (props) => {
               onPressEnter={() => setParams({ ...params, searchText })}
             />
           </Col>
-          <Col lg={8} md={8} sm={12} xs={24}>
+          <Col lg={8} md={8} sm={12} xs={12}>
             <Select
               className='w-full'
               optionFilterProp='children'

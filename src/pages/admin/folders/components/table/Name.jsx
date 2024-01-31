@@ -53,7 +53,7 @@ const Name = (props) => {
         </div>
         {
           showItems && <TextCopy
-            className="text-sm font-semibold"
+            className="text-xs"
             value={`${[...folderCiphers, ...collectionCiphers].length} ${t('common.items')}`}
           />
         }
