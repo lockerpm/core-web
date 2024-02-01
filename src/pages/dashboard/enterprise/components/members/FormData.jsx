@@ -7,22 +7,23 @@ import {
   Select,
   Upload
 } from '@lockerpm/design';
-import {
-  ItemInput,
-} from '../../../../../components'
+import components from '../../../../../components'
 import {
   UploadOutlined,
-  LinkOutlined
 } from '@ant-design/icons';
 
 import { } from 'react-redux';
 import { useTranslation, Trans } from "react-i18next";
+
 import global from '../../../../../config/global';
 import coreServices from '../../../../../services/core';
 import commonServices from '../../../../../services/common';
 import enterpriseMemberServices from '../../../../../services/enterprise-member';
 
 function FormData(props) {
+  const {
+    ItemInput,
+  } = components;
   const {
     visible = false,
     enterpriseId,

@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
+import components from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
-import Enable from "./components/setup-2fa/Enable";
+import Enable2FA from "./components/Enable2FA";
 import {
   KeyOutlined,
   UsbOutlined
@@ -23,6 +23,7 @@ import global from "../../config/global";
 import common from "../../utils/common";
 
 const Setup2FA = () => {
+  const { Pairing, SecurityKey, Passkey } = components;
   const { t } = useTranslation();
   const location = useLocation();
   const currentPage = common.getRouterByLocation(location)
@@ -237,13 +238,13 @@ const Setup2FA = () => {
               {
                 step === 1 && <div>
                   {
-                    isPair && <PairingForm
+                    isPair && <Pairing
                       userInfo={preLogin}
                       onConfirm={() => setIsPair(false)}
                     />
                   }
                   {
-                    !isPair && otherMethod === 'security_key' && <PasswordlessForm
+                    !isPair && otherMethod === 'security_key' && <SecurityKey
                       changing={callingAPI}
                       userInfo={preLogin}
                       isLogin={true}
@@ -252,7 +253,7 @@ const Setup2FA = () => {
                     />
                   }
                   {
-                    !isPair && otherMethod === 'passkey' && <PasskeyForm
+                    !isPair && otherMethod === 'passkey' && <Passkey
                       changing={loading}
                       isLogin={true}
                       userInfo={preLogin}
@@ -262,7 +263,7 @@ const Setup2FA = () => {
                 </div>
               }
               {
-                step === 2 && <Enable
+                step === 2 && <Enable2FA
                   factor2={factor2}
                   callingAPI={callingAPI}
                   setCallingAPI={setCallingAPI}

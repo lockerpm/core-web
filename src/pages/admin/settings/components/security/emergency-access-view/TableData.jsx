@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 import {
 } from "@ant-design/icons";
 
-import Name from "./table/Name";
-import Actions from "./table/Actions";
+import Name from "./Name";
+import Actions from "./Actions";
 
 const TableData = (props) => {
   const { t } = useTranslation();

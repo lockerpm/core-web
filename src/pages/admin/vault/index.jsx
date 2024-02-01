@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
-import { AdminHeader, Pagination, Multiple } from "../../../components";
+import components from "../../../components";
 
 import NoCipher from "./components/NoCipher";
 import Filter from "./components/Filter";
 import TableData from "./components/TableData";
-import BoxData from "./components/BoxData";
+import ListData from "./components/ListData";
 import FormData from "./components/FormData";
 import MoveFolder from "./components/MoveFolder";
+
 import ShareFormData from "../shares/components/FormData";
 import QuickShareReview from "../shares/components/quick-shares/Review";
 
@@ -24,6 +25,7 @@ import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
 
 const Vault = (props) => {
+  const { PageHeader, Pagination, MultipleSelect } = components;
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -256,7 +258,7 @@ const Vault = (props) => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t(cipherType.title)}
         total={filteredData.total}
         actions={[
@@ -274,7 +276,7 @@ const Vault = (props) => {
       {
         !isEmpty && <>
           {
-            selectedRowKeys.length > 0 ? <Multiple
+            selectedRowKeys.length > 0 ? <MultipleSelect
               selectedRowKeys={selectedRowKeys}
               callingAPI={callingAPI}
               isMove={currentPage.name !== global.keys.TRASH}
@@ -305,7 +307,7 @@ const Vault = (props) => {
           onCreate={() => handleOpenForm()}
         /> : <>
           {
-            isMobile ? <BoxData
+            isMobile ? <ListData
               className="mt-4"
               loading={syncing || loading}
               data={filteredData.result}

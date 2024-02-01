@@ -10,7 +10,7 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { ItemInput } from '../../../../../components';
+import components from '../../../../../components';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,7 @@ import common from '../../../../../utils/common';
 import global from '../../../../../config/global';
 
 function QuickShare(props) {
+  const { ItemInput } = components;
   const {
     item,
     form,

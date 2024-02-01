@@ -14,7 +14,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 import Logo from "./components/Logo";
-import EnterOtp from "./components/otp-code/EnterOtp";
+import EnterOtp from "./components/EnterOtp";
 
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";

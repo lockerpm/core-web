@@ -4,7 +4,7 @@ import {
   LockOutlined,
   FolderOutlined
 } from "@ant-design/icons";
-import { AdminHeader } from "../../../components";
+import components from "../../../components";
 
 import MenuTabs from "./components/MenuTabs";
 import NoItem from "./components/NoItem";
@@ -23,6 +23,7 @@ import commonServices from "../../../services/common";
 import sharingServices from "../../../services/sharing";
 
 const SharedWithMe = (props) => {
+  const { PageHeader }  = components;
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -172,7 +173,7 @@ const SharedWithMe = (props) => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t('sidebar.shared_with_me')}
         total={filteredData.total}
         actions={[]}

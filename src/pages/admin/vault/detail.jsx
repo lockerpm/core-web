@@ -2,12 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
-import { AdminHeader } from "../../../components";
+import components from "../../../components";
 import ListItemDetails from "./components/detail/List";
 import FormData from "./components/FormData";
 import MoveFolder from "./components/MoveFolder";
-import CipherIcon from "./components/table/CipherIcon";
-import Actions from "./components/table/Actions";
+import CipherIcon from "./components/CipherIcon";
+import Actions from "./components/Actions";
 import ShareFormData from "../shares/components/FormData";
 import QuickShareReview from "../shares/components/quick-shares/Review";
 
@@ -20,7 +20,8 @@ import global from "../../../config/global";
 import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
 
-const VaultDetail = (props) => {
+const VaultDetail = () => {
+  const { PageHeader } = components;
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -140,7 +141,7 @@ const VaultDetail = (props) => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, {}, 0)}
     >
-      <AdminHeader
+      <PageHeader
         title={originCipher?.name}
         subtitle={common.cipherSubtitle(originCipher)}
         actions={[]}

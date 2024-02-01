@@ -5,19 +5,20 @@ import {
   Drawer,
   Divider
 } from '@lockerpm/design';
-import {
-  TextCopy
-} from '../../../../../components'
+import components from '../../../../../components'
 import {
   ArrowDownOutlined
 } from '@ant-design/icons';
 
 import { } from 'react-redux';
 import { useTranslation, Trans } from "react-i18next";
-import { blue } from '@ant-design/colors';
+import { } from '@ant-design/colors';
 
 import common from '../../../../../utils/common';
 function FormData(props) {
+  const {
+    TextCopy
+  } = components;
   const {
     visible = false,
     members = [],

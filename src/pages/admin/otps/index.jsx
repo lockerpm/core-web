@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
-import { AdminHeader, Pagination, Multiple } from "../../../components";
+import components from "../../../components";
 
 import NoCipher from "../vault/components/NoCipher";
 import Filter from "./components/Filter";
 import TableData from "./components/TableData";
-import BoxData from "./components/BoxData";
+import ListData from "./components/ListData";
 import FormData from "./components/FormData";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 import { CipherType } from "../../../core-js/src/enums"
@@ -20,10 +20,10 @@ import global from "../../../config/global";
 import cipherServices from "../../../services/cipher";
 import commonServices from "../../../services/common";
 
-const Authenticator = (props) => {
+const Authenticator = () => {
+  const { PageHeader, Pagination, MultipleSelect } = components;
   const { t } = useTranslation();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const currentPage = common.getRouterByLocation(location);
   const syncing = useSelector((state) => state.sync.syncing);
@@ -173,7 +173,7 @@ const Authenticator = (props) => {
       className="authenticator layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t('sidebar.authenticator')}
         total={filteredData.total}
         actions={[
@@ -191,7 +191,7 @@ const Authenticator = (props) => {
       {
         !isEmpty && <>
           {
-            selectedRowKeys.length > 0 ? <Multiple
+            selectedRowKeys.length > 0 ? <MultipleSelect
               selectedRowKeys={selectedRowKeys}
               callingAPI={callingAPI}
               isPermanentlyDelete={true}
@@ -215,7 +215,7 @@ const Authenticator = (props) => {
           onCreate={() => handleOpenForm()}
         /> : <>
           {
-            isMobile ? <BoxData
+            isMobile ? <ListData
               className="mt-4"
               loading={syncing || loading}
               data={filteredData.result}

@@ -5,13 +5,14 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import { RouterLink } from "../../components";
+import components from '../../components';
 import common from '../../utils/common';
 import global from '../../config/global';
 
-import './css/Breadcrumb.scss';
+import './css/layout-breadcrumb.scss';
 
 function LayoutBreadcrumb() {
+  const { RouterLink } = components;
   const { t } = useTranslation();
   const location = useLocation();
 

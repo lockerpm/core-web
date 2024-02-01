@@ -4,7 +4,7 @@ import { Table, Space, Button, Avatar } from "@lockerpm/design"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, RouterLink } from "../../../../components"
+import components from "../../../../components"
 
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 
@@ -12,8 +12,16 @@ import common from "../../../../utils/common"
 import global from "../../../../config/global"
 
 const TableData = (props) => {
+  const { TextCopy, RouterLink } = components;
   const { t } = useTranslation()
-  const { loading = false, className = "", data = [], params = {}, onUpdate = () => { }, onDelete = () => { } } = props
+  const {
+    loading = false,
+    className = "",
+    data = [],
+    params = {},
+    onUpdate = () => { },
+    onDelete = () => { }
+  } = props
 
   const columns = useMemo(() => {
     return [

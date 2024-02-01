@@ -6,7 +6,7 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { AdminHeader, FilterTime } from "../../../components";
+import components from "../../../components";
 import AdoptionRate from "./components/dashboard/AdoptionRate";
 import News from "./components/dashboard/News";
 import UserLoginByTime from "./components/dashboard/UserLoginsByTime";
@@ -23,6 +23,7 @@ import enterpriseServices from "../../../services/enterprise";
 import dayjs from 'dayjs'
 
 const EnterpriseDashboard = (props) => {
+  const { PageHeader, FilterTime }= components;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();
@@ -66,7 +67,7 @@ const EnterpriseDashboard = (props) => {
 
   return (
     <div className="enterprise_dashboard layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('enterprise_dashboard.title')}
         actions={[]}
         Right={() => <FilterTime

@@ -19,7 +19,7 @@ import {
   UsbOutlined
 } from "@ant-design/icons";
 
-import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
+import components from "../../components";
 
 import Logo from "./components/Logo";
 
@@ -38,6 +38,7 @@ import common from "../../utils/common";
 import global from "../../config/global";
 
 const Lock = () => {
+  const { Pairing, SecurityKey, Passkey } = components;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -263,7 +264,7 @@ const Lock = () => {
                 <div>
                   {
                     isPair && <div>
-                      <PairingForm
+                      <Pairing
                         userInfo={userInfo}
                         callingAPI={callingAPI}
                         onConfirm={() => handlePairConfirm()}
@@ -356,7 +357,7 @@ const Lock = () => {
                           {
                             step === 2 && <div>
                               {
-                                otherMethod === 'security_key' && <PasswordlessForm
+                                otherMethod === 'security_key' && <SecurityKey
                                   changing={callingAPI}
                                   isLogin={true}
                                   userInfo={userInfo}
@@ -367,7 +368,7 @@ const Lock = () => {
                                 />
                               }
                               {
-                                otherMethod === 'passkey' && <PasskeyForm
+                                otherMethod === 'passkey' && <Passkey
                                   changing={loading}
                                   isLogin={true}
                                   userInfo={userInfo}

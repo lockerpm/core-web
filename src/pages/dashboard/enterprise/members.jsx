@@ -2,12 +2,12 @@ import React, { useEffect, useState, useMemo } from "react"
 import { } from "@lockerpm/design"
 import { PlusOutlined } from "@ant-design/icons"
 
-import { AdminHeader, Pagination } from "../../../components"
+import components from "../../../components"
 
 import MenuTabs from "./components/members/MenuTabs";
 import Filter from "./components/members/Filter"
 import TableData from "./components/members/TableData"
-import BoxData from "./components/members/BoxData"
+import ListData from "./components/members/ListData"
 import FormData from "./components/members/FormData"
 import Review from "./components/members/Review";
 
@@ -21,6 +21,7 @@ import global from "../../../config/global"
 import enterpriseMemberServices from "../../../services/enterprise-member"
 
 const EnterpriseMembers = (props) => {
+  const { PageHeader, Pagination } = components;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
@@ -187,7 +188,7 @@ const EnterpriseMembers = (props) => {
       className='enterprise_members layout-content'
       onScroll={(e) => common.scrollEnd(e, params, total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t("enterprise_members.title")}
         total={total}
         actions={[
@@ -215,7 +216,7 @@ const EnterpriseMembers = (props) => {
       />
       <div key={selectedTab}>
         {
-          isMobile ? <BoxData
+          isMobile ? <ListData
             className='mt-4'
             loading={loading}
             enterpriseId={enterpriseId}

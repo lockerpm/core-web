@@ -6,9 +6,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  PasswordConfirmModal,
-} from '../../../../../components'
+import components from '../../../../../components'
 
 import FormDataModal from "./change-password/FormDataModal";
 
@@ -17,6 +15,7 @@ import {
 } from "@ant-design/icons";
 
 const ChangePassword = (props) => {
+  const { PasswordConfirmModal } = components;
   const {
     className = '',
   } = props;

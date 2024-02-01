@@ -10,14 +10,14 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  NoData,
-  ImageIcon
-} from '../../../../components';
-
+import components from "../../../../components";
 import { gray } from '@ant-design/colors';
 
 const NoFolder = (props) => {
+  const {
+    NoData,
+    ImageIcon
+  } = components;
   const { t } = useTranslation()
   const {
     className = '',

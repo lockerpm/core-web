@@ -4,7 +4,7 @@ import { } from "@ant-design/icons";
 import { } from "../../../../../components";
 
 import TableData from "./TableData";
-import BoxData from "./BoxData";
+import ListData from "./ListData";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ const QuickShares = (props) => {
       className="quick-shares"
     >
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className="mt-4"
           loading={loading}
           data={filteredData.result}

@@ -9,10 +9,11 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import LineChart from './charts/Line'
+import components from "../../../../../components";
 import { green } from '@ant-design/colors';
 
 const UserLoginByTime = (props) => {
+  const { Line } = components
   const {
     loading = false,
     data = {},
@@ -48,7 +49,7 @@ const UserLoginByTime = (props) => {
       <p className="font-semibold text-gray mb-2 text-xl">
         {t('enterprise_dashboard.user_login.title')}
       </p>
-      <LineChart
+      <Line
         colors={[green[6]]}
         categories={chartData.map((p) => p.key)}
         series={series}

@@ -10,16 +10,15 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import common from "../../../../utils/common";
+import components from '../../../../components';
 
-import {
-  NoData
-} from '../../../../components';
-
-import CipherIcon from "./table/CipherIcon";
+import CipherIcon from "./CipherIcon";
 import { gray } from '@ant-design/colors';
 
 const NoCipher = (props) => {
+  const {
+    NoData
+  } = components;
   const { t } = useTranslation()
   const {
     className = '',

@@ -14,7 +14,7 @@ import {
 
 import { } from 'react-redux';
 
-import { AdminHeader, PasswordStrength, TextCopy } from "../../../components";
+import components from "../../../components";
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -29,6 +29,7 @@ import enterpriseMemberServices from "../../../services/enterprise-member";
 import { red } from '@ant-design/colors';
 
 const Member = (props) => {
+  const { PageHeader, PasswordStrength, TextCopy } = components;
   const { t } = useTranslation();
   const location = useLocation();
 
@@ -131,7 +132,7 @@ const Member = (props) => {
 
   return (
     <div className="member-details layout-content">
-      <AdminHeader
+      <PageHeader
         title={member.full_name}
         subtitle={member.email}
         actions={[]}

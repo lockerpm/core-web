@@ -12,7 +12,7 @@ import {
 
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { AdminHeader, ImageIcon } from "../../../components";
+import components from "../../../components";
 
 import toolServices from "../../../services/tool";
 
@@ -23,6 +23,7 @@ import global from "../../../config/global";
 import common from "../../../utils/common";
 
 const BreachScanner = (props) => {
+  const { PageHeader, ImageIcon } = components;
   const {} = props;
   const { t } = useTranslation();
   const [callingAPI, setCallingAPI] = useState(false);
@@ -60,7 +61,7 @@ const BreachScanner = (props) => {
 
   return (
     <div className="breach-scanner layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('security_tools.data_breach_scanner.title')}
         subtitle={t('security_tools.data_breach_scanner.description')}
         actions={[]}

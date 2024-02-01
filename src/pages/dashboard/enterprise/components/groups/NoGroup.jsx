@@ -6,11 +6,12 @@ import { GroupOutlined } from "@ant-design/icons"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { NoData } from "../../../../../components"
+import components from "../../../../../components"
 
 import { gray } from "@ant-design/colors"
 
 const NoEnterprise = (props) => {
+  const { NoData } = components;
   const { t } = useTranslation()
   const {
     className = "",

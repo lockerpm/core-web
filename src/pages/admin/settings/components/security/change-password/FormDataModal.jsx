@@ -9,13 +9,14 @@ import { } from '@ant-design/colors';
 import { useTranslation } from "react-i18next";
 import { } from "@ant-design/icons";
 
-import { ChangePasswordForm } from "../../../../../../components";
+import components from "../../../../../../components";
 import global from "../../../../../../config/global";
 import userServices from '../../../../../../services/user';
 import authServices from '../../../../../../services/auth';
 
 
 const FormDataModal = (props) => {
+  const { ChangePassword } = components;
   const { t } = useTranslation()
   const {
     visible = false,
@@ -51,7 +52,7 @@ const FormDataModal = (props) => {
       width={360}
       footer={false}
     >
-      <ChangePasswordForm
+      <ChangePassword
         changing={callingAPI}
         isReset={false}
         onSave={(values) => handleSave(values)}

@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 
 import { } from 'react-redux';
-import { PasswordConfirmModal } from "../../../../../../components";
+import components from "../../../../../../components";
 
 import { useTranslation } from "react-i18next";
 
@@ -18,6 +18,7 @@ import { orange } from '@ant-design/colors';
 import userServices from "../../../../../../services/user";
 
 const DeauthorizeSessionsModal = (props) => {
+  const { PasswordConfirmModal } = components;
   const { t } = useTranslation()
   const {
     visible = false,

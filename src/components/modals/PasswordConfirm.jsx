@@ -4,8 +4,8 @@ import {
   Form,
   Input
 } from '@lockerpm/design';
-import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
 
+import components from "../../components";
 import { useSelector } from 'react-redux';
 import { orange } from '@ant-design/colors';
 
@@ -16,7 +16,9 @@ import global from "../../config/global";
 import authServices from "../../services/auth";
 
 const PasswordConfirmModal = (props) => {
-  const { t } = useTranslation()
+  const { Pairing, SecurityKey, Passkey } = components;
+  const { t } = useTranslation();
+
   const {
     visible = false,
     danger = false,
@@ -99,7 +101,7 @@ const PasswordConfirmModal = (props) => {
     >
       <div key={timeNow}>
         {
-          isPair && <PairingForm
+          isPair && <Pairing
             callingAPI={callingAPI}
             userInfo={userInfo}
             onConfirm={() => setIsPair(false)}
@@ -133,7 +135,7 @@ const PasswordConfirmModal = (props) => {
             }
             {
               unlockMethod === 'security_key' && <div>
-                <PasswordlessForm
+                <SecurityKey
                   changing={callingAPI}
                   userInfo={userInfo}
                   onConfirm={onConfirm}
@@ -143,7 +145,7 @@ const PasswordConfirmModal = (props) => {
             }
             {
               unlockMethod === 'passkey' && <div>
-                <PasskeyForm
+                <Passkey
                   changing={callingAPI}
                   userInfo={userInfo}
                   onConfirm={onConfirm}

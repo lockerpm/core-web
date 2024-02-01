@@ -6,9 +6,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  PasswordConfirmModal
-} from '../../../../../components';
+import components from '../../../../../components';
 
 import userServices from "../../../../../services/user";
 import commonServices from "../../../../../services/common";
@@ -21,6 +19,9 @@ import {
 import global from "../../../../../config/global";
 
 const CrossPlatformSync = (props) => {
+  const {
+    PasswordConfirmModal
+  } = components;
   const {
     className = '',
   } = props;

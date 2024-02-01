@@ -5,7 +5,7 @@ import {
   Avatar
 } from '@lockerpm/design';
 
-import { RouterLink } from "../../../../../components";
+import components from "../../../../../components";
 
 import {
 } from "@ant-design/icons";
@@ -14,6 +14,7 @@ import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 const UsersBlocked = (props) => {
+  const { RouterLink } = components;
   const {
     loading = false,
     data = {},

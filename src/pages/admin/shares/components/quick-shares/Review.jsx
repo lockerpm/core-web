@@ -10,8 +10,8 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import CipherName from '../../../vault/components/table/Name';
-import SharedWith from "./table/SharedWith";
+import CipherName from '../../../vault/components/Name';
+import SharedWith from "./SharedWith";
 
 import common from '../../../../../utils/common';
 

@@ -9,7 +9,7 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { AdminHeader } from "../../../components";
+import components from "../../../components";
 
 import PersonalInfo from './components/account/PersonalInfo'
 import Preferences from './components/account/Preferences'
@@ -24,6 +24,7 @@ import global from "../../../config/global";
 import commonServices from "../../../services/common";
 
 const AccountDetails = (props) => {
+  const { PageHeader } = components;
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -74,7 +75,7 @@ const AccountDetails = (props) => {
 
   return (
     <div className="account-details layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('account_details.title')}
         subtitle={t('account_details.description')}
         actions={[]}

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react"
 import { Row, Col } from "@lockerpm/design"
 import { } from "@ant-design/icons"
 
-import { AdminHeader } from "../../../components"
+import components from "../../../components"
 import PasswordRequirements from "./components/policies/PasswordRequirements"
 import PasswordlessLogin from "./components/policies/PasswordlessLogin"
 import BlockFailedLogins from "./components/policies/BlockFailedLogins"
@@ -17,6 +17,7 @@ import common from "../../../utils/common";
 import enterprisePolicyServices from "../../../services/enterprise-policy"
 
 const EnterprisePolicies = (props) => {
+  const { PageHeader } = components
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
@@ -48,7 +49,7 @@ const EnterprisePolicies = (props) => {
 
   return (
     <div className='enterprise_members layout-content'>
-      <AdminHeader
+      <PageHeader
         title={t("enterprise_policies.title")}
         actions={[]}
       />

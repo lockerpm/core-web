@@ -2,10 +2,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import { } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
-import { AdminHeader, Pagination } from "../../../components";
+import components from "../../../components";
 import Filter from "./components/security/emergency-access-view/Filter";
 import TableData from "./components/security/emergency-access-view/TableData";
-import BoxData from "./components/security/emergency-access-view/BoxData";
+import ListData from "./components/security/emergency-access-view/ListData";
 import ViewItem from "./components/security/emergency-access-view/ViewItem";
 
 import { useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ import common from "../../../utils/common";
 import emergencyAccessServices from "../../../services/emergency-access";
 
 const EmergencyAccessView = (props) => {
+  const { PageHeader, Pagination }= components;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();
@@ -170,7 +171,7 @@ const EmergencyAccessView = (props) => {
 
   return (
     <div className=" layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('emergency_access_view.title')}
         total={filteredData.total}
         description={t('emergency_access_view.description', { owner: grantedEmergencyAccess?.full_name })}
@@ -185,7 +186,7 @@ const EmergencyAccessView = (props) => {
         />
       }
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className="mt-4"
           loading={loading}
           data={filteredData.result}

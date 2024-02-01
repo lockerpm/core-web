@@ -10,15 +10,17 @@ import {
 } from '@ant-design/icons';
 
 import { gray } from '@ant-design/colors';
-
-import { NoData, SearchText, ImageIcon } from '../../../components'
-import CipherIcon from '../../../pages/admin/vault/components/table/CipherIcon';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+
+import components from '../../../components';
+import CipherIcon from '../../../pages/admin/vault/components/CipherIcon';
+
 import common from '../../../utils/common';
 import global from '../../../config/global';
 
 function SearchContent(props) {
+  const { NoData, SearchText, ImageIcon } = components;
   const {
     onClose = () => {}
   } = props

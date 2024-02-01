@@ -10,12 +10,13 @@ import { useTranslation } from "react-i18next";
 import {
 } from "@ant-design/icons";
 
-import { PasswordStrength } from '../../../../../components'
+import components from '../../../../../components'
 
-import Name from "../../../vault/components/table/Name";
+import Name from "../../../vault/components/Name";
 import common from "../../../../../utils/common";
 
 const TableData = (props) => {
+  const { PasswordStrength } = components;
   const { t } = useTranslation();
   const {
     loading = false,

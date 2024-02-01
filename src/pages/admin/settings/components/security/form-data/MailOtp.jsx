@@ -8,7 +8,7 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { MailOtpForm } from '../../../../../../components';
+import components from '../../../../../../components';
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -17,6 +17,7 @@ import authServices from '../../../../../../services/auth';
 import global from '../../../../../../config/global';
 
 function MailOtpFormData(props) {
+  const { MailOtp } = components;
   const {
     visible = false,
     factor2 = {},
@@ -132,7 +133,7 @@ function MailOtpFormData(props) {
         <p className='mb-4'>
           {t('security.two_fa.email_otp.description')}
         </p>
-        <MailOtpForm
+        <MailOtp
           userInfo={userInfo}
           step={step}
           isSentTo={isSentTo}

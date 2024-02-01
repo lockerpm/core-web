@@ -6,20 +6,19 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  TextCopy,
-} from '../../../../../components';
+import components from '../../../../../components';
 
 import {
 } from "@ant-design/icons";
 
-import CipherName from "../../../vault/components/table/Name";
-import SharedWith from "./table/SharedWith";
-import Actions from "./table/Actions";
+import CipherName from "../../../vault/components/Name";
+import SharedWith from "./SharedWith";
+import Actions from "./Actions";
 
 import common from "../../../../../utils/common";
 
 const TableData = (props) => {
+  const { TextCopy } = components;
   const { t } = useTranslation();
   const {
     loading = false,

@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 
-import { ImageIcon } from "../../../../components";
+import components from "../../../../components";
 
 import {
   RedoOutlined
@@ -18,6 +18,7 @@ import common from "../../../../utils/common";
 import quickShareServices from "../../../../services/quick-share";
 
 const VerifyEmail = (props) => {
+  const { ImageIcon } = components;
   const {
     sendId,
     decryptKey,

@@ -10,10 +10,7 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  PasswordConfirmModal
-} from '../../../../../components'
-
+import components from '../../../../../components'
 import global from "../../../../../config/global";
 
 import {
@@ -21,6 +18,7 @@ import {
 } from "@ant-design/icons";
 
 import { } from '@ant-design/colors';
+
 import { Utils } from "../../../../../core-js/src/misc/utils";
 import { FolderView } from "../../../../../core-js/src/models/view/folderView";
 import { FolderWithId as FolderExport } from '../../../../../core-js/src/models/export/folderWithId'
@@ -30,6 +28,7 @@ import * as papa from 'papaparse';
 import common from "../../../../../utils/common";
 
 const Export = (props) => {
+  const { PasswordConfirmModal } = components;
   const {
     className = '',
   } = props;

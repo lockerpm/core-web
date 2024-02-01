@@ -4,10 +4,9 @@ import {
   Button,
   Dropdown,
   Avatar,
-  Tag
 } from '@lockerpm/design';
 
-import '../css/components/SidebarTop.scss';
+import '../css/sidebar-top.scss';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 

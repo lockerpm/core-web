@@ -6,16 +6,17 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  ImageIcon,
-  GeneratePasswordContent
-} from '../../../../components'
+import components from '../../../../components'
 
 import {
   RightOutlined
 } from "@ant-design/icons";
 
 const PasswordGenerate = (props) => {
+  const {
+    ImageIcon,
+    GenerateOptions
+  } = components;
   const {
     className = '',
   } = props;
@@ -51,7 +52,7 @@ const PasswordGenerate = (props) => {
         onClose={() => setVisible(false)}
         open={visible}
       >
-        <GeneratePasswordContent
+        <GenerateOptions
           isFill={false}
           isShowOptions={true}
         />

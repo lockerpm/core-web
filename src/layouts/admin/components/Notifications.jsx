@@ -5,15 +5,16 @@ import {
   Badge,
 } from '@lockerpm/design';
 
-import { ImageIcon } from '../../../components';
-
+import components from '../../../components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import notificationServices from "../../../services/notification";
 import sharingServices from '../../../services/sharing';
+
 import global from '../../../config/global';
 import common from '../../../utils/common';
+
 import { gray } from '@ant-design/colors';
 
 import {
@@ -21,6 +22,7 @@ import {
 } from '@ant-design/icons'
 
 function Notifications() {
+  const { ImageIcon } = components;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const [callingAPI, setCallingAPI] = useState(false);

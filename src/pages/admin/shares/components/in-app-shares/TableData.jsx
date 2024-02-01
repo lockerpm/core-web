@@ -6,21 +6,22 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  TextCopy,
-} from '../../../../../components';
+import components from '../../../../../components';
 
 import {
 } from "@ant-design/icons";
 
-import CipherName from "../../../vault/components/table/Name";
-import FolderName from "../../../folders/components/table/Name";
-import Actions from "./table/Actions";
-import SharedWith from "./table/SharedWith";
+import CipherName from "../../../vault/components/Name";
+import FolderName from "../../../folders/components/Name";
+import Actions from "./Actions";
+import SharedWith from "./SharedWith";
 
 import common from "../../../../../utils/common";
 
 const TableData = (props) => {
+  const {
+    TextCopy
+  } = components;
   const { t } = useTranslation();
   const {
     loading = false,

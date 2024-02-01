@@ -1,0 +1,24 @@
+.admin-layout-sidebar-center {
+  height: calc(100% - var(--sidebar-bottom-height) - var(--sidebar-top-height));
+  overflow: auto;
+  &__group {
+    height: 40px;
+    padding: var(--page-content-spacing-collapsed);
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sidebar-menu-group-color) !important;
+    overflow-wrap: break-word;
+  }
+}
+.ant-layout-sider-collapsed {
+  .admin-layout-sidebar-center {
+    height: calc(100% - var(--sidebar-bottom-height) - var(--sidebar-top-height-collapsed)) !important;
+    .ant-menu-item-icon {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -7,11 +7,8 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-} from '../../../../../components';
-
 import TableData from "./emergency-access/TableData";
-import BoxData from "./emergency-access/BoxData";
+import ListData from "./emergency-access/ListData";
 import ResetPasswordFormData from "./form-data/ResetPassword";
 import EmergencyContactFormData from "./form-data/EmergencyContact";
 
@@ -149,7 +146,7 @@ const EmergencyAccess = (props) => {
               />
             }
             {
-              isMobile && <BoxData
+              isMobile && <ListData
                 data={listTrusted}
                 isTrusted={true}
                 fetchTrusted={fetchTrusted}
@@ -177,7 +174,7 @@ const EmergencyAccess = (props) => {
               />
             }
             {
-              isMobile && <BoxData
+              isMobile && <ListData
                 data={listGranted}
                 fetchTrusted={fetchTrusted}
                 fetchGranted={fetchGranted}

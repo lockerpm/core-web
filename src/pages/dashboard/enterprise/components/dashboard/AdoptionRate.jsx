@@ -3,7 +3,7 @@ import {
   Card,
 } from '@lockerpm/design';
 
-import { RouterLink } from "../../../../../components";
+import components from "../../../../../components";
 
 import {
 } from "@ant-design/icons";
@@ -11,10 +11,10 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import DonutChart from './charts/Donut';
 import { blue, green, orange } from '@ant-design/colors';
 
 const AdoptionRate = (props) => {
+  const { Donut } = components;
   const {
     loading = false,
     data = {}
@@ -39,7 +39,7 @@ const AdoptionRate = (props) => {
       <p className="font-semibold text-gray mb-2 text-xl">
         {t('enterprise_dashboard.adoption_rate.title')}
       </p>
-      <DonutChart
+      <Donut
         height={250}
         type="pie"
         colors={[

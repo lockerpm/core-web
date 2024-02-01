@@ -11,9 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  PasswordConfirmModal
-} from '../../../../../components'
+import components from '../../../../../components'
 
 import SmartOtpFormData from "./form-data/SmartOtp";
 import MailOtpFormData from "./form-data/MailOtp";
@@ -34,6 +32,9 @@ import {
 import { green } from '@ant-design/colors';
 
 const TwoFA = (props) => {
+  const {
+    PasswordConfirmModal
+  } = components;
   const {
     className = '',
   } = props;

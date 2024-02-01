@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react"
 import { Space, Button, Drawer, Select, List, Avatar } from "@lockerpm/design"
-import { RouterLink } from "../../../../../components"
+import components from "../../../../../components"
 
 import { DeleteOutlined } from "@ant-design/icons"
 
@@ -12,6 +12,7 @@ import enterpriseMemberServices from "../../../../../services/enterprise-member"
 import global from "../../../../../config/global"
 
 function FormUsers(props) {
+  const { RouterLink } = components;
   const {
     visible = false,
     item = null,

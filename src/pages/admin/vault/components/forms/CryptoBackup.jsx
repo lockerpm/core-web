@@ -9,15 +9,16 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { GeneratePassword } from '../../../../../components'
+import components from '../../../../../components'
 import SeedPhrase from '../form-items/crypto-backup/SeedPhrase';
 
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import global from '../../../../../config/global';
 
 function CryptoBackupForm(props) {
+  const { GeneratePassword } = components;
   const {
     form,
     disabled = false

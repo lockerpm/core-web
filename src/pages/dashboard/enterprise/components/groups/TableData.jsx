@@ -4,13 +4,14 @@ import { Table, Space, Button, Tooltip, Avatar } from "@lockerpm/design"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy } from "../../../../../components"
+import components from "../../../../../components"
 
 import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, GroupOutlined } from "@ant-design/icons"
 
 import common from "../../../../../utils/common"
 
 const TableData = (props) => {
+  const { TextCopy } = components;
   const { t } = useTranslation()
   const {
     loading = false,

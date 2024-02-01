@@ -2,9 +2,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import { Tabs, Avatar, Alert, Tooltip } from '@lockerpm/design';
 import { InfoCircleOutlined } from "@ant-design/icons";
 
-import { AdminHeader, ImageIcon } from "../../../components";
+import components from "../../../components";
+
 import TableData from "./components/password-health/TableData";
-import BoxData from "./components/password-health/BoxData";
+import ListData from "./components/password-health/ListData";
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -29,6 +30,7 @@ const menus = [
 ]
 
 const PasswordHealth = (props) => {
+  const { PageHeader, ImageIcon } = components;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();
@@ -131,7 +133,7 @@ const PasswordHealth = (props) => {
 
   return (
     <div className="password-health layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('security_tools.password_health.title')}
         subtitle={t('security_tools.password_health.description')}
         actions={[]}
@@ -202,7 +204,7 @@ const PasswordHealth = (props) => {
                     />
                   }
                    {
-                    isMobile && <BoxData
+                    isMobile && <ListData
                       className="mt-4"
                       activeKey={activeKey}
                       data={data}

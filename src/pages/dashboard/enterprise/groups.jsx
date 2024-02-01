@@ -2,12 +2,12 @@ import React, { useEffect, useState, useMemo } from "react"
 import { } from "@lockerpm/design"
 import { PlusOutlined } from "@ant-design/icons"
 
-import { AdminHeader, Pagination } from "../../../components"
+import components from "../../../components"
 
 import Filter from "./components/groups/Filter"
 import NoGroup from "./components/groups/NoGroup"
 import TableData from "./components/groups/TableData"
-import BoxData from "./components/groups/BoxData"
+import ListData from "./components/groups/ListData"
 import FormData from "./components/groups/FormData"
 import FormUsers from "./components/groups/FormUsers"
 
@@ -21,6 +21,7 @@ import common from "../../../utils/common"
 import global from "../../../config/global"
 
 const EnterpriseGroups = (props) => {
+  const { PageHeader, Pagination } = components;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
@@ -132,7 +133,7 @@ const EnterpriseGroups = (props) => {
       className='enterprise_members layout-content'
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t("enterprise_groups.title")}
         total={groups.length}
         actions={[
@@ -156,7 +157,7 @@ const EnterpriseGroups = (props) => {
       ) : (
         <>
           {isMobile ? (
-            <BoxData
+            <ListData
               className='mt-4'
               loading={loading}
               data={filteredData.result}

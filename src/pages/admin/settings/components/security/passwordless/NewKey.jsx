@@ -9,9 +9,10 @@ import { } from '@ant-design/colors';
 import { useTranslation } from "react-i18next";
 import { } from "@ant-design/icons";
 
-import { PairingForm, PasswordlessForm } from "../../../../../../components";
+import components from "../../../../../../components";
 
 const NewKeyModal = (props) => {
+  const { Pairing, SecurityKey } = components;
   const { t } = useTranslation()
   const {
     visible = false,
@@ -33,14 +34,14 @@ const NewKeyModal = (props) => {
       footer={false}
     >
       {
-        isPair && <PairingForm
+        isPair && <Pairing
           userInfo={userInfo}
           isLogin={true}
           onConfirm={() => setIsPair(false)}
         />
       }
       {
-        !isPair && <PasswordlessForm
+        !isPair && <SecurityKey
           changing={changing}
           userInfo={userInfo}
           isAddKey={true}

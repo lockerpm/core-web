@@ -7,12 +7,13 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { GeneratePassword } from '../../../../../components'
+import components from '../../../../../components'
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 function PasswordForm(props) {
+  const { GeneratePassword } = components;
   const {
     form,
     disabled = false

@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
-import { ChangePasswordForm, PairingForm, PasswordlessForm } from "../../components";
+import components from "../../components";
 
 import WelcomeImg from '../../assets/images/welcome.svg';
-import EnterOtp from "./components/otp-code/EnterOtp";
+import EnterOtp from "./components/EnterOtp";
 
 import {
   ArrowLeftOutlined,
@@ -27,6 +27,7 @@ import common from "../../utils/common";
 import jsCore from "../../core-js"   
 
 const Authenticate = () => {
+  const { ChangePassword, Pairing, SecurityKey } = components;
   const { t } = useTranslation();
   const location = useLocation();
 
@@ -388,7 +389,7 @@ const Authenticate = () => {
               {
                 step === 2 && <div>
                   {
-                    !preLogin?.require_passwordless && <ChangePasswordForm
+                    !preLogin?.require_passwordless && <ChangePassword
                       changing={callingAPI}
                       onSave={handleSave}
                     />
@@ -426,13 +427,13 @@ const Authenticate = () => {
                   {
                     otherMethod === 'security_key' && <div>
                       {
-                        isPair && <PairingForm
+                        isPair && <Pairing
                           userInfo={preLogin}
                           onConfirm={() => setIsPair(false)}
                         />
                       }
                       {
-                        !isPair && preLogin?.require_passwordless && <PasswordlessForm
+                        !isPair && preLogin?.require_passwordless && <SecurityKey
                           changing={callingAPI}
                           userInfo={preLogin}
                           accessToken={userSession?.access_token}

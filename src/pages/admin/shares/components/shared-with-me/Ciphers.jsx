@@ -4,7 +4,7 @@ import { } from "@ant-design/icons";
 import { } from "../../../../../components";
 
 import TableData from "./TableData";
-import BoxData from "./BoxData";
+import ListData from "./ListData";
 
 import FormData from "../../../vault/components/FormData";
 import MoveFolder from "../../../vault/components/MoveFolder";
@@ -53,7 +53,7 @@ const ShareCiphers = (props) => {
       className="share-ciphers"
     >
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className="mt-4"
           loading={loading}
           data={filteredData.result}

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { } from "react";
 import {
 } from '@lockerpm/design';
 
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {
-  ImageIcon
-} from '../../../../components'
+import components from '../../../../components'
 
 import {
   RightOutlined
@@ -15,11 +13,11 @@ import {
 import global from "../../../../config/global";
 
 const PasswordHealth = (props) => {
+  const { ImageIcon } = components;
   const {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const [formVisible, setFormVisible] = useState(false);
 
   return (
     <div className={className}>

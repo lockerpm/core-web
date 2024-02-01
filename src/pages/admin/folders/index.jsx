@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react"
 import {} from "@lockerpm/design"
 import { PlusOutlined } from "@ant-design/icons"
-import { AdminHeader, Pagination } from "../../../components"
-
+import components from "../../../components"
 import NoFolder from "./components/NoFolder"
 import Filter from "./components/Filter"
 import TableData from "./components/TableData"
-import BoxData from "./components/BoxData"
+import ListData from "./components/ListData"
 import FormData from "./components/FormData"
 import ShareFormData from "../shares/components/FormData"
 
@@ -20,6 +19,7 @@ import global from "../../../config/global"
 import commonServices from "../../../services/common"
 
 const Folders = (props) => {
+  const { PageHeader, Pagination } = components;
   const { t } = useTranslation()
   const location = useLocation()
   const dispatch = useDispatch()
@@ -124,7 +124,7 @@ const Folders = (props) => {
 
   return (
     <div className='vault layout-content' onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}>
-      <AdminHeader
+      <PageHeader
         title={t("inventory.all_folders")}
         total={filteredData.total}
         actions={[
@@ -146,7 +146,7 @@ const Folders = (props) => {
       ) : (
         <>
           {isMobile ? (
-            <BoxData
+            <ListData
               className='mt-4'
               loading={syncing}
               data={filteredData.result}

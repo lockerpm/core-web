@@ -15,7 +15,7 @@ import {
   ExclamationCircleOutlined
 } from "@ant-design/icons";
 
-import { AdminHeader } from "../../../components";
+import components from "../../../components";
 
 import EmailProvider from "./components/EmailProvider";
 import SMTP from "./components/SMTP";
@@ -32,6 +32,7 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 
 const EmailSetting = (props) => {
+  const { PageHeader } = components
   const { } = props;
   const { t } = useTranslation();
 
@@ -196,7 +197,7 @@ const EmailSetting = (props) => {
   return (
     <div className="email-setting layout-content">
       <Spin spinning={loading}>
-        <AdminHeader
+        <PageHeader
           title={t('email_settings.title')}
           subtitle={t('email_settings.description')}
           actions={[]}

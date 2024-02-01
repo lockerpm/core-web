@@ -19,9 +19,10 @@ import emergencyAccessServices from '../../../../../../services/emergency-access
 import commonServices from '../../../../../../services/common';
 
 import { SymmetricCryptoKey } from '../../../../../../core-js/src/models/domain';
-import { GeneratePassword } from '../../../../../../components';
+import components from '../../../../../../components';
 
 function ResetMasterPasswordFormData(props) {
+  const { GeneratePassword } = components;
   const {
     item = null,
     visible = false,

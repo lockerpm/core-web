@@ -4,7 +4,7 @@ import { Table, Space, Avatar, Tag } from "@lockerpm/design"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, PasswordStrength, RouterLink } from "../../../../../components"
+import components from "../../../../../components"
 import Actions from "./Actions"
 import Role from "./Role"
 
@@ -12,6 +12,7 @@ import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
 const TableData = (props) => {
+  const { TextCopy, PasswordStrength, RouterLink } = components;
   const { t } = useTranslation()
   const {
     className = "",

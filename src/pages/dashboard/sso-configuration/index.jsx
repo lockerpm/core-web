@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react"
 import { Form, Input, Button, Space } from "@lockerpm/design"
 
-import { AdminHeader } from "../../../components"
+import components from "../../../components"
 
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
@@ -19,6 +19,7 @@ import global from "../../../config/global"
 import common from "../../../utils/common"
 
 const SSOConfiguration = (props) => {
+  const { PageHeader } = components;
   const { } = props
   const { t } = useTranslation()
 
@@ -91,7 +92,7 @@ const SSOConfiguration = (props) => {
 
   return (
     <div className='sso-configuration layout-content'>
-      <AdminHeader title={t("sso_configuration.title")} subtitle={t("sso_configuration.description")} actions={[]} />
+      <PageHeader title={t("sso_configuration.title")} subtitle={t("sso_configuration.description")} actions={[]} />
       <Form
         form={form}
         layout='vertical'

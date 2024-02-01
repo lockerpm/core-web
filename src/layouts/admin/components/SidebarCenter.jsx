@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Menu, Badge } from '@lockerpm/design';
-import '../css/components/SidebarCenter.scss';
+import '../css/sidebar-center.scss';
 import { useSelector } from 'react-redux';
 import {
   LeftOutlined,

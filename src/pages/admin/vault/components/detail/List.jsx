@@ -7,21 +7,26 @@ import {
   Image,
   Space
 } from '@lockerpm/design';
+import { useTranslation } from "react-i18next";
 import { } from "@ant-design/icons";
 
-import { useTranslation } from "react-i18next";
-import { TextCopy, PasswordStrength } from "../../../../../components";
+import components from "../../../../../components";
+
 import { CipherType } from "../../../../../core-js/src/enums";
 
-import FolderName from "../../../folders/components/table/Name";
-import SharedWith from "../../../shares/components/in-app-shares/table/SharedWith";
-import DisplayOtp from "../../../otps/components/table/DisplayOtp";
+import FolderName from "../../../folders/components/Name";
+import SharedWith from "../../../shares/components/in-app-shares/SharedWith";
+import DisplayOtp from "../../../otps/components/DisplayOtp";
 import SeedPhrase from "../form-items/crypto-backup/SeedPhrase";
 
 import common from "../../../../../utils/common";
 import global from "../../../../../config/global";
 
 const ListItemDetails = (props) => {
+  const {
+    TextCopy,
+    PasswordStrength
+  } = components;
   const {
     className,
     cipher,

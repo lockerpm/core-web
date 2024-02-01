@@ -2,10 +2,10 @@ import React, { useEffect, useState, useMemo } from "react"
 import { } from "@lockerpm/design"
 import { } from "@ant-design/icons"
 
-import { AdminHeader, Pagination } from "../../../components"
+import components from "../../../components"
 import Filter from "./components/activity-logs/Filter"
 import TableData from "./components/activity-logs/TableData"
-import BoxData from "./components/activity-logs/BoxData"
+import ListData from "./components/activity-logs/ListData"
 
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
@@ -19,6 +19,7 @@ import global from "../../../config/global"
 import dayjs from 'dayjs'
 
 const EnterpriseActivityLogs = (props) => {
+  const { PageHeader, Pagination } = components;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
@@ -127,7 +128,7 @@ const EnterpriseActivityLogs = (props) => {
       className='enterprise_members layout-content'
       onScroll={(e) => common.scrollEnd(e, params, total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t("enterprise_activity_logs.title")}
         total={total}
       />
@@ -139,7 +140,7 @@ const EnterpriseActivityLogs = (props) => {
         setParams={(v) => setParams({ ...v, page: 1 })}
       />
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className='mt-4'
           loading={loading}
           data={activityLogs}

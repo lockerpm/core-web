@@ -6,12 +6,11 @@ import {
 import {
   SearchOutlined,
   MenuOutlined,
-  BellOutlined
 } from '@ant-design/icons';
-import './css/Header.scss';
 
-import { ImageIcon } from '../../components';
+import './css/layout-header.scss';
 
+import components from '../../components';
 import Breadcrumb from './Breadcrumb';
 import SearchContent from './components/SearchContent';
 import Notifications from './components/Notifications';
@@ -20,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 function Header(props) {
+  const { ImageIcon } = components;
   const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
   const [search, setSearch] = useState(false);

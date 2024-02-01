@@ -10,8 +10,8 @@ import Logo from "./components/Logo";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import Personal from "./components/sign-in/Personal";
-import Enterprise from "./components/sign-in/Enterprise";
+import Personal from "./components/Personal";
+import Enterprise from "./components/Enterprise";
 
 import AuthBgImage from "../../assets/images/auth-bg-image.svg";
 

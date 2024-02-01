@@ -6,7 +6,7 @@ import {
   ShareAltOutlined,
   PlusOutlined
 } from "@ant-design/icons";
-import { AdminHeader } from "../../../components";
+import components from "../../../components";
 
 import MenuTabs from "./components/MenuTabs";
 import NoItem from "./components/NoItem";
@@ -28,6 +28,7 @@ import { CipherType } from "../../../core-js/src/enums";
 
 
 const MySharedItems = (props) => {
+  const { PageHeader }  = components;
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -149,7 +150,7 @@ const MySharedItems = (props) => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t('sidebar.my_shared_items')}
         total={filteredData.total}
         actions={[

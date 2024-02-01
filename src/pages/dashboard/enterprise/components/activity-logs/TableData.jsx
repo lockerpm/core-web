@@ -4,7 +4,7 @@ import { Table, Avatar } from "@lockerpm/design"
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, RouterLink } from "../../../../../components"
+import components from "../../../../../components"
 
 import { } from "@ant-design/icons"
 
@@ -12,6 +12,7 @@ import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
 const TableData = (props) => {
+  const { TextCopy, RouterLink } = components;
   const { t } = useTranslation()
   const {
     loading = false,

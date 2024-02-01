@@ -1,17 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { } from 'react';
 import {
   Space,
   Image,
   Button,
 } from '@lockerpm/design';
 
-import '../css/components/SidebarTop.scss';
-import { useSelector } from 'react-redux';
+import '../css/sidebar-top.scss';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import IconLogo from '../../../assets/images/logos/icon-logo.svg'
 import DropdownMenu from './DropdownMenu';
 import global from '../../../config/global';
+
 import { gray } from '@ant-design/colors';
 
 import {

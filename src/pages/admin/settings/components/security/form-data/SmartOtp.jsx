@@ -5,7 +5,7 @@ import {
   Drawer,
 } from '@lockerpm/design';
 
-import { SmartOtpForm } from '../../../../../../components';
+import components from '../../../../../../components';
 
 import {
 } from '@ant-design/icons';
@@ -17,6 +17,7 @@ import authServices from '../../../../../../services/auth';
 import global from '../../../../../../config/global';
 
 function SmartOtpFormData(props) {
+  const { SmartOtp } = components;
   const {
     visible = false,
     factor2 = {},
@@ -96,7 +97,7 @@ function SmartOtpFormData(props) {
         <p className='mb-4'>
           {t('security.two_fa.smart_otp.description')}
         </p>
-        <SmartOtpForm
+        <SmartOtp
           callingAPI={callingAPI}
           smartOtp={smartOtp}
           otp={otp}

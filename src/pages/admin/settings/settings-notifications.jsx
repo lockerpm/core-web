@@ -6,7 +6,7 @@ import {
 } from '@lockerpm/design';
 import { } from "@ant-design/icons";
 
-import { AdminHeader } from "../../../components";
+import components from "../../../components";
 
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ import notificationServices from "../../../services/notification";
 import global from "../../../config/global";
 
 const Notifications = (props) => {
+  const { PageHeader } = components;
   const { } = props;
   const { t } = useTranslation();
   const language = useSelector((state) => state.system.language)
@@ -48,7 +49,7 @@ const Notifications = (props) => {
 
   return (
     <div className="email-notifications layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('email_notifications.title')}
         actions={[]}
       />
