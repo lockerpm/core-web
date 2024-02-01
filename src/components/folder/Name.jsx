@@ -1,15 +1,16 @@
 import React, { useMemo } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
 import {
 } from "@ant-design/icons";
 
-import components from "../../../../components";
+import components from "..";
 
-import global from "../../../../config/global";
+import global from "../../config/global";
 
 const Name = (props) => {
   const {

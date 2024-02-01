@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import {
   Input,
@@ -12,18 +15,14 @@ import {
   UsbOutlined
 } from '@ant-design/icons'
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import components from "../../../../components";
 
-import components from "../../../components";
+import userServices from "../../../../services/user";
+import commonServices from "../../../../services/common";
+import authServices from "../../../../services/auth";
 
-import userServices from "../../../services/user";
-import commonServices from "../../../services/common";
-import authServices from "../../../services/auth";
-
-import global from "../../../config/global";
-import common from "../../../utils/common";
+import global from "../../../../config/global";
+import common from "../../../../utils/common";
 
 const SignInForm = (props) => {
   const { Pairing, SecurityKey, Passkey } = components

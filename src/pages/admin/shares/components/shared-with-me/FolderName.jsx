@@ -10,7 +10,7 @@ import components from '../../../../../components';
 import {
 } from "@ant-design/icons";
 
-import Name from "../../../folders/components/Name";
+import Name from "../../../../../components/folder/Name";
 
 const FolderName = (props) => {
   const {

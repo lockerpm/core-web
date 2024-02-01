@@ -22,7 +22,7 @@ import global from "../../../config/global";
 
 import { green } from '@ant-design/colors';
 
-const Setup2FA = (props) => {
+const Enable2FA = (props) => {
   const { SmartOtp, MailOtp } = components;
   const { t } = useTranslation();
   const {
@@ -177,4 +177,4 @@ const Setup2FA = (props) => {
   );
 }
 
-export default Setup2FA;
+export default Enable2FA;

@@ -1,20 +1,21 @@
-import React, { useMemo } from "react";
-import {
-} from '@lockerpm/design';
-
+import React, { } from "react";
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import components from "../../../../components";
-
-import CipherIcon from "../../vault/components/CipherIcon";
-import DisplayOtp from "./DisplayOtp";
+import {
+} from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
 
+import components from "..";
+
 const Name = (props) => {
-  const { TextCopy } = components;
+  const {
+    TextCopy,
+    CipherIcon,
+    DisplayOtp
+  } = components;
   const { t } = useTranslation()
   const { cipher = {} } = props;
 

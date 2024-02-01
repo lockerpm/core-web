@@ -10,7 +10,7 @@ import components from '../../../../../components';
 import {
 } from "@ant-design/icons";
 
-import Name from "../../../vault/components/Name";
+import Name from "../../../../../components/vault/Name";
 
 const CipherName = (props) => {
   const {

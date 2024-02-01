@@ -1,4 +1,7 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Spin
@@ -7,17 +10,14 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from '../../../../components';
-
-import CipherIcon from "./CipherIcon";
 import { gray } from '@ant-design/colors';
+
+import components from '..';
 
 const NoCipher = (props) => {
   const {
-    NoData
+    NoData,
+    CipherIcon
   } = components;
   const { t } = useTranslation()
   const {

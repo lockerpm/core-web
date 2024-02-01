@@ -11,7 +11,7 @@ import components from '../../../../../components';
 import {
 } from "@ant-design/icons";
 
-import CipherName from "../../../vault/components/Name";
+import CipherName from "../../../../../components/vault/Name";
 import SharedWith from "./SharedWith";
 import Actions from "./Actions";
 

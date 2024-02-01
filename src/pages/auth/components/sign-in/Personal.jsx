@@ -1,22 +1,22 @@
 import React, { useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
   Card,
   Button,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import SignInForm from "./SignInForm";
-
 import {
   ArrowLeftOutlined
 } from "@ant-design/icons";
 
-import global from "../../../config/global";
+
+import authComponents from "..";
+import global from "../../../../config/global";
 
 const Personal = (props) => {
+  const { SignInForm } = authComponents.SignInComponents
   const {
     loading,
     onSubmit = () => {}

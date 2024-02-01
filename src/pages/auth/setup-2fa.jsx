@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import './css/auth.scss';
-
-import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import components from "../../components";
+import {
+  Image,
+  Row,
+  Col,
+  Button,
+  Input,
+  Avatar,
+  Form
+} from '@lockerpm/design';
 
-import WelcomeImg from '../../assets/images/welcome.svg';
-import Enable2FA from "./components/Enable2FA";
 import {
   KeyOutlined,
   UsbOutlined
 } from "@ant-design/icons";
+
+import components from "../../components";
+import authComponents from "./components";
+
+import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import authServices from "../../services/auth";
@@ -22,8 +30,12 @@ import commonServices from "../../services/common";
 import global from "../../config/global";
 import common from "../../utils/common";
 
+import './css/auth.scss';
+
 const Setup2FA = () => {
   const { Pairing, SecurityKey, Passkey } = components;
+  const { Enable2FA } = authComponents;
+  const { WelcomeImg } = images;
   const { t } = useTranslation();
   const location = useLocation();
   const currentPage = common.getRouterByLocation(location)

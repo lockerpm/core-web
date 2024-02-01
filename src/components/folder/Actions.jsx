@@ -1,4 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from 'react-redux';
+
 import {
   Space,
   Button,
@@ -9,9 +12,7 @@ import {
   EllipsisOutlined
 } from "@ant-design/icons";
 
-import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
-import common from "../../../../utils/common";
+import common from "../../utils/common";
 
 const Actions = (props) => {
   const { t } = useTranslation()

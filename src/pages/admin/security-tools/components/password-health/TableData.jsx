@@ -12,7 +12,7 @@ import {
 
 import components from '../../../../../components'
 
-import Name from "../../../vault/components/Name";
+import Name from "../../../../../components/vault/Name";
 import common from "../../../../../utils/common";
 
 const TableData = (props) => {

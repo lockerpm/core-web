@@ -14,9 +14,9 @@ import components from "../../../../../components";
 
 import { CipherType } from "../../../../../core-js/src/enums";
 
-import FolderName from "../../../folders/components/Name";
+import FolderName from "../../../../../components/folder/Name";
 import SharedWith from "../../../shares/components/in-app-shares/SharedWith";
-import DisplayOtp from "../../../otps/components/DisplayOtp";
+import DisplayOtp from "../../../../../components/DisplayOtp";
 import SeedPhrase from "../form-items/crypto-backup/SeedPhrase";
 
 import common from "../../../../../utils/common";

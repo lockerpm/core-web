@@ -11,8 +11,8 @@ import components from '../../../../components';
 import {
 } from "@ant-design/icons";
 
-import Name from "./Name";
-import Actions from "./Actions";
+import Name from "../../../../components/vault/Name";
+import Actions from "../../../../components/vault/Actions";
 
 import common from "../../../../utils/common";
 

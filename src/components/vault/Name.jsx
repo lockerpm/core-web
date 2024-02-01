@@ -1,27 +1,26 @@
 import React, { useMemo } from "react";
-import {
-  Tag
-} from '@lockerpm/design';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import components from '../../../../components';
+import {
+  Tag
+} from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
 
-import CipherIcon from "./CipherIcon";
+import components from '..';
 
-import common from "../../../../utils/common";
-import global from "../../../../config/global";
+import common from "../../utils/common";
+import global from "../../config/global";
 
 const Name = (props) => {
   const {
     TextCopy,
     RouterLink,
-    ImageIcon
+    ImageIcon,
+    CipherIcon
   } = components;
   const { t } = useTranslation()
   const location = useLocation();

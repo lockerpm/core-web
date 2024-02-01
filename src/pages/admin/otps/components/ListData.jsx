@@ -10,8 +10,8 @@ import { useTranslation } from "react-i18next";
 
 import components from "../../../../components";
 
-import Name from "./Name";
-import Actions from "./Actions";
+import Name from "../../../../components/otp/Name";
+import Actions from "../../../../components/otp/Actions";
 
 import common from "../../../../utils/common";
 

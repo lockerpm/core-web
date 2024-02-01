@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import components from '../../../components';
-import CipherIcon from '../../../pages/admin/vault/components/CipherIcon';
+import CipherIcon from '../../../components/CipherIcon';
 
 import common from '../../../utils/common';
 import global from '../../../config/global';

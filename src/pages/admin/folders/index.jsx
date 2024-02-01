@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useMemo } from "react"
-import {} from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-import components from "../../../components"
-import NoFolder from "./components/NoFolder"
-import Filter from "./components/Filter"
-import TableData from "./components/TableData"
-import ListData from "./components/ListData"
-import FormData from "./components/FormData"
-import ShareFormData from "../shares/components/FormData"
-
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import {} from "@lockerpm/design"
+
+import { PlusOutlined } from "@ant-design/icons"
+
+import components from "../../../components"
+import folderComponents from "./components"
+
+import ShareFormData from "../shares/components/FormData"
 
 import common from "../../../utils/common"
 
@@ -20,6 +19,14 @@ import commonServices from "../../../services/common"
 
 const Folders = (props) => {
   const { PageHeader, Pagination } = components;
+  const {
+    NoFolder,
+    Filter,
+    TableData,
+    ListData,
+    FormData
+  } = folderComponents;
+  
   const { t } = useTranslation()
   const location = useLocation()
   const dispatch = useDispatch()

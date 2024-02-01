@@ -1,16 +1,17 @@
 import React from "react";
-import './css/index.scss';
-
-import { Divider, Button } from '@lockerpm/design';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import global from "../../../config/global";
+
+import { Divider, Button } from '@lockerpm/design';
 
 import {
   ExclamationCircleOutlined,
   LeftOutlined
 } from "@ant-design/icons";
+
+import global from "../../../config/global";
+
+import './css/index.scss';
 
 const AdminErrorPage = () => {
   const { t } = useTranslation();

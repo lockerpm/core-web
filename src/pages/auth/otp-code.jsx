@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import './css/auth.scss';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
   Card,
@@ -8,13 +10,9 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from 'react-router-dom';
+import authComponents from "./components";
 
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
-import Logo from "./components/Logo";
-import EnterOtp from "./components/EnterOtp";
+import images from "../../assets/images";
 
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";
@@ -22,7 +20,11 @@ import authServices from "../../services/auth";
 import global from "../../config/global";
 import common from "../../utils/common";
 
+import './css/auth.scss';
+
 const OtpCode = () => {
+  const { Logo, EnterOtp } = authComponents;
+  const { AuthBgImage } = images;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

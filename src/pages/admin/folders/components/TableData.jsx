@@ -1,23 +1,21 @@
 import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Table,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from '../../../../components';
-
 import {
 } from "@ant-design/icons";
 
-import Name from "./Name";
-import Actions from "./Actions";
+import components from '../../../../components';
 
 import common from "../../../../utils/common";
 
 const TableData = (props) => {
   const { TextCopy } = components;
+  const { Name, Actions } = components.Folder
   const { t } = useTranslation();
   const {
     loading = false,

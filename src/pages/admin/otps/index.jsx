@@ -1,27 +1,28 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { } from '@lockerpm/design';
-import { PlusOutlined } from "@ant-design/icons";
-import components from "../../../components";
-
-import NoCipher from "../vault/components/NoCipher";
-import Filter from "./components/Filter";
-import TableData from "./components/TableData";
-import ListData from "./components/ListData";
-import FormData from "./components/FormData";
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
+
+import { } from '@lockerpm/design';
+
+import { PlusOutlined } from "@ant-design/icons";
+
+import components from "../../../components";
+import otpComponents from "./components";
+
 import { CipherType } from "../../../core-js/src/enums"
 
-import common from "../../../utils/common";
-
-import global from "../../../config/global";
 import cipherServices from "../../../services/cipher";
 import commonServices from "../../../services/common";
 
+import global from "../../../config/global";
+import common from "../../../utils/common";
+
 const Authenticator = () => {
   const { PageHeader, Pagination, MultipleSelect } = components;
+  const { NoCipher } = components.Vault;
+  const { Filter, TableData, ListData, FormData } = otpComponents;
+
   const { t } = useTranslation();
   const location = useLocation();
 

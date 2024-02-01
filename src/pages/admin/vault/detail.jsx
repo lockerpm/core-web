@@ -6,8 +6,8 @@ import components from "../../../components";
 import ListItemDetails from "./components/detail/List";
 import FormData from "./components/FormData";
 import MoveFolder from "./components/MoveFolder";
-import CipherIcon from "./components/CipherIcon";
-import Actions from "./components/Actions";
+import CipherIcon from "../../../components/CipherIcon";
+import Actions from "../../../components/vault/Actions";
 import ShareFormData from "../shares/components/FormData";
 import QuickShareReview from "../shares/components/quick-shares/Review";
 

@@ -9,7 +9,7 @@ import components from "../../../../components";
 import {
 } from "@ant-design/icons";
 
-import CipherIcon from "../../../admin/vault/components/CipherIcon";
+import CipherIcon from "../../../../components/CipherIcon";
 
 const Name = (props) => {
   const { TextCopy, ImageIcon } = components;

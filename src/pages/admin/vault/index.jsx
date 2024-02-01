@@ -3,7 +3,7 @@ import { } from '@lockerpm/design';
 import { PlusOutlined } from "@ant-design/icons";
 import components from "../../../components";
 
-import NoCipher from "./components/NoCipher";
+import NoCipher from "../../../components/vault/NoCipher";
 import Filter from "./components/Filter";
 import TableData from "./components/TableData";
 import ListData from "./components/ListData";

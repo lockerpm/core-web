@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 
 import components from '../../../../../components';
 
-import CipherName from "../../../vault/components/Name";
-import FolderName from "../../../folders/components/Name";
+import CipherName from "../../../../../components/vault/Name";
+import FolderName from "../../../../../components/folder/Name";
 import Actions from "./Actions";
 import SharedWith from "./SharedWith";
 

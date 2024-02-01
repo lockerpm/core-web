@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 import {
   Image
 } from '@lockerpm/design';
@@ -6,12 +9,10 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { CipherType } from "../core-js/src/enums";
 
-import common from "../../../../utils/common";
-import { CipherType } from "../../../../core-js/src/enums";
-import global from "../../../../config/global";
+import common from "../utils/common";
+import global from "../config/global";
 
 import extractDomain from 'extract-domain';
 

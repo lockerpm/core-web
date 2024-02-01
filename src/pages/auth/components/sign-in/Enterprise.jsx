@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import {
   Card,
@@ -6,23 +9,20 @@ import {
   Spin
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-
-import SignInForm from "./SignInForm";
-
 import {
   ArrowLeftOutlined
 } from "@ant-design/icons";
 
-import ssoConfigServices from "../../../services/sso-config";
-import authServices from "../../../services/auth";
+import authComponents from "..";
 
-import common from "../../../utils/common";
-import global from "../../../config/global";
+import ssoConfigServices from "../../../../services/sso-config";
+import authServices from "../../../../services/auth";
+
+import common from "../../../../utils/common";
+import global from "../../../../config/global";
 
 const Enterprise = (props) => {
+  const { SignInForm } = authComponents.SignInComponents;
   const {
     loading,
     onSubmit = () => { }

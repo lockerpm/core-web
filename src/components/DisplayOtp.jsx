@@ -1,20 +1,18 @@
 import React, { useMemo, useState, useEffect } from "react";
-import {
-  Progress
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-} from '../../../../components';
+  Progress
+} from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
+
 import { green } from '@ant-design/colors';
 
-import common from "../../../../utils/common";
-import global from "../../../../config/global";
+import common from "../utils/common";
+import global from "../config/global";
 
 const DisplayOtp = (props) => {
   const { t } = useTranslation()

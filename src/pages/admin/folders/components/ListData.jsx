@@ -1,25 +1,23 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   List,
   Popover
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from "../../../../components";
-
-import Name from "./Name";
-import Actions from "./Actions";
-
-import common from "../../../../utils/common";
-
 import {
   InfoCircleOutlined
 } from "@ant-design/icons";
 
+import components from "../../../../components";
+
+import common from "../../../../utils/common";
+
 const ListData = (props) => {
   const { TextCopy } = components;
+  const { Name, Actions } = components.Folder
   const { t } = useTranslation();
 
   const {

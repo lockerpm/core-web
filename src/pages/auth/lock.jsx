@@ -1,6 +1,8 @@
 /* eslint-disable no-import-assign */
 import React, { useEffect, useState, useMemo } from "react";
-import './css/auth.scss';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
   Card,
@@ -20,16 +22,9 @@ import {
 } from "@ant-design/icons";
 
 import components from "../../components";
+import authComponents from "./components";
 
-import Logo from "./components/Logo";
-
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
-
-import RULES from '../../config/rules'
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from 'react-router-dom';
+import images from "../../assets/images";
 
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";
@@ -37,8 +32,13 @@ import authServices from "../../services/auth";
 import common from "../../utils/common";
 import global from "../../config/global";
 
+import './css/auth.scss';
+
 const Lock = () => {
   const { Pairing, SecurityKey, Passkey } = components;
+  const { Logo } = authComponents;
+  const { AuthBgImage } = images;
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -297,7 +297,7 @@ const Lock = () => {
                                     name="password"
                                     noStyle
                                     rules={[
-                                      RULES.REQUIRED(t('lock.password')),
+                                      global.rules.REQUIRED(t('lock.password')),
                                     ]}
                                   >
                                     <Input.Password

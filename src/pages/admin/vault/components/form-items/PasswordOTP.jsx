@@ -16,7 +16,7 @@ import global from '../../../../../config/global';
 import { CipherType } from '../../../../../core-js/src/enums';
 import commonServices from '../../../../../services/common';
 
-import DisplayOtp from '../../../otps/components/DisplayOtp';
+import DisplayOtp from '../../../../../components/DisplayOtp';
 
 const options = {
   NO_OTP: 'no_otp',

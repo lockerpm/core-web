@@ -1,21 +1,28 @@
 import React, { useEffect, useState, useMemo } from "react";
-import './css/auth.scss';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
-import components from "../../components";
-
-import WelcomeImg from '../../assets/images/welcome.svg';
-import EnterOtp from "./components/EnterOtp";
+import {
+  Image,
+  Row,
+  Col,
+  Button,
+  Input,
+  Avatar,
+  Form
+} from '@lockerpm/design';
 
 import {
   ArrowLeftOutlined,
   KeyOutlined,
   UsbOutlined
 } from '@ant-design/icons'
+
+import components from "../../components";
+import authComponents from "./components";
+
+import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
@@ -24,10 +31,14 @@ import commonServices from "../../services/common";
 
 import global from "../../config/global";
 import common from "../../utils/common";
-import jsCore from "../../core-js"   
+import jsCore from "../../core-js";
+
+import './css/auth.scss';
 
 const Authenticate = () => {
   const { ChangePassword, Pairing, SecurityKey } = components;
+  const { EnterOtp } = authComponents;
+
   const { t } = useTranslation();
   const location = useLocation();
 
@@ -271,7 +282,7 @@ const Authenticate = () => {
               <div className="w-full text-center px-12">
                 <Image
                   className="mb-6"
-                  src={WelcomeImg}
+                  src={images.WelcomeImg}
                 />
                 <div className="flex items-center justify-center">
                   <Avatar
