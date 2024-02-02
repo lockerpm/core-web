@@ -1,28 +1,35 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { } from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-import components from "../../../components"
-
-import Filter from "./components/Filter"
-import NoEnterprise from "./components/NoEnterprise"
-import TableData from "./components/TableData"
-import ListData from "./components/ListData"
-import FormData from "./components/FormData"
-
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import {
+} from "@lockerpm/design"
+
+import {
+  PlusOutlined
+} from "@ant-design/icons"
+
+import commonComponents from "../../../components/common"
+import enterprisesComponents from "./components"
+
+import enterpriseServices from "../../../services/enterprise"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
-import enterpriseServices from "../../../services/enterprise"
+const { PageHeader } = commonComponents;
+const {
+  Filter,
+  NoEnterprise,
+  TableData,
+  ListData,
+  FormData
+} = enterprisesComponents;
 
-const Enterprises = (props) => {
-  const { PageHeader } = components;
+const Enterprises = () => {
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
   const isMobile = useSelector((state) => state.system.isMobile)

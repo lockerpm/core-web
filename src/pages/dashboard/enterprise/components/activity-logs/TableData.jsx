@@ -1,18 +1,23 @@
 import React, { useMemo } from "react"
-import { Table, Avatar } from "@lockerpm/design"
-
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import components from "../../../../../components"
+import {
+  Table,
+  Avatar
+} from "@lockerpm/design"
 
-import { } from "@ant-design/icons"
+import {
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
+const { TextCopy, RouterLink } = itemsComponents;
+
 const TableData = (props) => {
-  const { TextCopy, RouterLink } = components;
   const { t } = useTranslation()
   const {
     loading = false,

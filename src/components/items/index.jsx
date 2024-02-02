@@ -1,23 +1,23 @@
 import FilterTime from "./FilterTime";
 import ImageIcon from "./ImageIcon";
-import ItemInput from "./ItemInput";
 import MultipleSelect from "./MultipleSelect";
 import NoData from "./NoData";
 import Pagination from "./Pagination";
 import RouterLink from "./RouterLink";
 import SearchText from "./SearchText";
 import TextCopy from "./TextCopy";
+import PasswordStrength from "./PasswordStrength";
 
-const Items = {
+const itemsComponents = {
   FilterTime,
   ImageIcon,
-  ItemInput,
   MultipleSelect,
   NoData,
   Pagination,
   RouterLink,
   SearchText,
-  TextCopy
+  TextCopy,
+  PasswordStrength
 }
 
-export default Items
+export default itemsComponents

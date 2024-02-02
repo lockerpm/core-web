@@ -1,4 +1,7 @@
 import React from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
@@ -11,9 +14,6 @@ import {
   ClearOutlined,
   CloseOutlined
 } from "@ant-design/icons";
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 const MultipleSelect = (props) => {
   const {

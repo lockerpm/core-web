@@ -1,4 +1,7 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   Space,
@@ -12,13 +15,11 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import global from '../../../../../../config/global';
 import sharingServices from '../../../../../../services/sharing';
 import emergencyAccessServices from '../../../../../../services/emergency-access';
+
 import common from '../../../../../../utils/common';
+import global from '../../../../../../config/global';
 
 function EmergencyContactFormData(props) {
   const {

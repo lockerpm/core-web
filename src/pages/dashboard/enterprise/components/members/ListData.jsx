@@ -1,21 +1,27 @@
 import React, { } from "react"
-import { List, Popover, Space, Avatar, Tag } from "@lockerpm/design"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import components from "../../../../../components"
+import {
+  List,
+  Popover,
+  Space,
+  Avatar,
+  Tag
+} from "@lockerpm/design"
 
-import Actions from "./Actions"
-import Role from "./Role"
+import { InfoCircleOutlined } from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items";
+import memberComponents from "../../../../../components/member";
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-import { InfoCircleOutlined } from "@ant-design/icons"
+const { TextCopy, PasswordStrength, RouterLink } = itemsComponents;
+const { Actions, Role } = memberComponents;
 
 const ListData = (props) => {
-  const { TextCopy, PasswordStrength, RouterLink } = components;
   const { t } = useTranslation();
   const {
     className = "",

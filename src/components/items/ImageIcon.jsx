@@ -1,13 +1,12 @@
 import React, { } from "react";
+import { } from 'react-redux';
+
 import {
   Image,
 } from '@lockerpm/design';
 
-
 import {
 } from "@ant-design/icons";
-
-import { } from 'react-redux';
 
 const ImageIcon = (props) => {
   const {

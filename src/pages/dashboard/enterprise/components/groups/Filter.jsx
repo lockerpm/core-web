@@ -1,10 +1,18 @@
 import React, { useMemo, useState, useEffect } from "react"
-import { Row, Col, Input, Dropdown } from "@lockerpm/design"
-
-import { SearchOutlined, CaretDownOutlined } from "@ant-design/icons"
-
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
+
+import {
+  Row,
+  Col,
+  Input,
+  Dropdown
+} from "@lockerpm/design"
+
+import {
+  SearchOutlined,
+  CaretDownOutlined
+} from "@ant-design/icons"
 
 import global from "../../../../../config/global"
 

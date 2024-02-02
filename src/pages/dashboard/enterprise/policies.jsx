@@ -1,23 +1,33 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { Row, Col } from "@lockerpm/design"
-import { } from "@ant-design/icons"
-
-import components from "../../../components"
-import PasswordRequirements from "./components/policies/PasswordRequirements"
-import PasswordlessLogin from "./components/policies/PasswordlessLogin"
-import BlockFailedLogins from "./components/policies/BlockFailedLogins"
-import LoginWith2FA from "./components/policies/LoginWith2FA"
-
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 
-import common from "../../../utils/common";
+import {
+  Row,
+  Col
+} from "@lockerpm/design"
+
+import {
+} from "@ant-design/icons"
+
+import commonComponents from "../../../components/common";
+import policiesComponents from "./components/policies";
+
 
 import enterprisePolicyServices from "../../../services/enterprise-policy"
 
+import common from "../../../utils/common";
+
+const { PageHeader } = commonComponents;
+const {
+  PasswordRequirements,
+  PasswordlessLogin,
+  BlockFailedLogins,
+  LoginWith2FA
+} = policiesComponents;
+
 const EnterprisePolicies = (props) => {
-  const { PageHeader } = components
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()

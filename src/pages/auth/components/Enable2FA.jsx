@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
   Card,
@@ -11,19 +13,18 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 
-import components from "../../../components";
+import { green } from '@ant-design/colors';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import formsComponents from "../../../components/forms";
 
 import authServices from "../../../services/auth";
 
 import global from "../../../config/global";
 
-import { green } from '@ant-design/colors';
+
+const { SmartOtp, MailOtp } = formsComponents;
 
 const Enable2FA = (props) => {
-  const { SmartOtp, MailOtp } = components;
   const { t } = useTranslation();
   const {
     factor2,

@@ -1,17 +1,22 @@
 import React from "react"
-import { Button, Spin } from "@lockerpm/design"
-
-import { } from "@ant-design/icons"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import components from "../../../../components"
+import {
+  Button,
+  Spin
+} from "@lockerpm/design"
+
+import {
+} from "@ant-design/icons"
 
 import { gray } from "@ant-design/colors"
 
+import itemsComponents from "../../../../components/items"
+
+const { NoData, ImageIcon } = itemsComponents;
+
 const NoEnterprise = (props) => {
-  const { NoData, ImageIcon } = components;
   const { t } = useTranslation()
   const {
     className = "",

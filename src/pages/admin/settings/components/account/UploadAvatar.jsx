@@ -1,16 +1,17 @@
 import React, { useMemo, useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Upload,
   message,
   Button
 } from '@lockerpm/design';
+
 import {
   InboxOutlined,
   CloseOutlined
 } from "@ant-design/icons";
-
-import { useDispatch } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 const UploadAvatar = (props) => {
   const {
@@ -18,7 +19,6 @@ const UploadAvatar = (props) => {
     onChange = () => {},
     onChangeFile = () => {}
   } = props
-  const { callingAPI } = props
   const { t } = useTranslation();
   const dispatch = useDispatch();
 

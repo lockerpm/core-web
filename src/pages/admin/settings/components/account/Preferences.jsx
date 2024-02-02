@@ -1,14 +1,15 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   Form,
   Select,
 } from '@lockerpm/design';
+
 import {
 } from "@ant-design/icons";
-
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 import global from "../../../../../config/global";
 

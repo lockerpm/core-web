@@ -1,24 +1,27 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   Input,
   Button
 } from '@lockerpm/design';
 
-import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
-
-import components from "../../../../components";
-
 import {
   RedoOutlined
 } from "@ant-design/icons";
-import global from "../../../../config/global";
-import common from "../../../../utils/common";
+
+import itemsComponents from "../../../../components/items";
+
 import quickShareServices from "../../../../services/quick-share";
 
+import global from "../../../../config/global";
+import common from "../../../../utils/common";
+
+const { ImageIcon } = itemsComponents;
+
 const VerifyEmail = (props) => {
-  const { ImageIcon } = components;
   const {
     sendId,
     decryptKey,

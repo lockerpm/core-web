@@ -1,22 +1,25 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   List,
   Switch,
   Divider
 } from '@lockerpm/design';
-import { } from "@ant-design/icons";
 
-import components from "../../../components";
+import {
+} from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import commonComponents from "../../../components/common";
 
-import { } from '../../../utils/common';
 import notificationServices from "../../../services/notification";
+
 import global from "../../../config/global";
 
+const { PageHeader } = commonComponents;
+
 const Notifications = (props) => {
-  const { PageHeader } = components;
   const { } = props;
   const { t } = useTranslation();
   const language = useSelector((state) => state.system.language)

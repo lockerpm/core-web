@@ -1,20 +1,25 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
 } from '@lockerpm/design';
 
-import components from "../../../../../components";
-
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import {
+  blue,
+  green,
+  orange
+} from '@ant-design/colors';
 
-import { blue, green, orange } from '@ant-design/colors';
+import chartComponents from "../../../../../components/chart";
+
+const { Donut } = chartComponents;
 
 const AdoptionRate = (props) => {
-  const { Donut } = components;
   const {
     loading = false,
     data = {}

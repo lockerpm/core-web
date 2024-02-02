@@ -1,16 +1,16 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   List,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import {
+} from "@ant-design/icons";
 
 import Name from "./Name";
 import Actions from "./Actions";
-
-import {
-} from "@ant-design/icons";
 
 const BoxData = (props) => {
   const { t } = useTranslation();
@@ -19,7 +19,6 @@ const BoxData = (props) => {
     loading = false,
     className = '',
     data = [],
-    params = {},
     allCiphers = [],
     onReview = () => {}
   } = props;

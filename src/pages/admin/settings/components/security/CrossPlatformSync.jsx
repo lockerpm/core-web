@@ -1,27 +1,26 @@
 import React, { useMemo, useState } from "react";
-import {
-  Button,
-} from '@lockerpm/design';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import components from '../../../../../components';
-
-import userServices from "../../../../../services/user";
-import commonServices from "../../../../../services/common";
-import authServices from "../../../../../services/auth";
+import {
+  Button,
+} from '@lockerpm/design';
 
 import {
   RedoOutlined,
 } from "@ant-design/icons";
 
+import modalsComponents from "../../../../../components/modals";
+
+import userServices from "../../../../../services/user";
+import commonServices from "../../../../../services/common";
+import authServices from "../../../../../services/auth";
+
 import global from "../../../../../config/global";
 
+const { PasswordConfirmModal } = modalsComponents;
+
 const CrossPlatformSync = (props) => {
-  const {
-    PasswordConfirmModal
-  } = components;
   const {
     className = '',
   } = props;

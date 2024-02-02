@@ -12,13 +12,11 @@ import {
 
 import { gray } from '@ant-design/colors';
 
-import components from "../../../../components";
+import itemsComponents from "../../../../components/items";
+
+const { NoData, ImageIcon } = itemsComponents;
 
 const NoFolder = (props) => {
-  const {
-    NoData,
-    ImageIcon
-  } = components;
   const { t } = useTranslation()
   const {
     className = '',

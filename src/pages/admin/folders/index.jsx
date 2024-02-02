@@ -7,26 +7,28 @@ import {} from "@lockerpm/design"
 
 import { PlusOutlined } from "@ant-design/icons"
 
-import components from "../../../components"
-import folderComponents from "./components"
+import itemsComponents from "../../../components/items"
+import commonComponents from "../../../components/common"
+import foldersComponents from "./components"
 
-import ShareFormData from "../shares/components/FormData"
+import ShareFormData from "../../../components/share/FormData"
 
 import common from "../../../utils/common"
 
 import global from "../../../config/global"
-import commonServices from "../../../services/common"
+import commonServices from "../../../services/common";
+
+const { Pagination } = itemsComponents;
+const { PageHeader } = commonComponents;
+const {
+  NoFolder,
+  Filter,
+  TableData,
+  ListData,
+  FormData
+} = foldersComponents;
 
 const Folders = (props) => {
-  const { PageHeader, Pagination } = components;
-  const {
-    NoFolder,
-    Filter,
-    TableData,
-    ListData,
-    FormData
-  } = folderComponents;
-  
   const { t } = useTranslation()
   const location = useLocation()
   const dispatch = useDispatch()

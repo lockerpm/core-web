@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { } from 'react';
+import { } from 'react-redux';
+import { useTranslation, Trans } from "react-i18next";
+
 import {
   Space,
   Button,
   Drawer,
   Divider
 } from '@lockerpm/design';
-import components from '../../../../../components'
+
 import {
   ArrowDownOutlined
 } from '@ant-design/icons';
 
-import { } from 'react-redux';
-import { useTranslation, Trans } from "react-i18next";
 import { } from '@ant-design/colors';
 
+import itemsComponents from '../../../../../components/items';
+
 import common from '../../../../../utils/common';
-function FormData(props) {
-  const {
-    TextCopy
-  } = components;
+
+const { TextCopy } = itemsComponents;
+
+function Review(props) {
   const {
     visible = false,
     members = [],
@@ -86,4 +89,4 @@ function FormData(props) {
   );
 }
 
-export default FormData;
+export default Review;

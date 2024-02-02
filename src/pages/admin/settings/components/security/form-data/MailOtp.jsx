@@ -1,4 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
@@ -8,16 +11,15 @@ import {
 import {
 } from '@ant-design/icons';
 
-import components from '../../../../../../components';
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import formsComponents from '../../../../../../components/forms';
 
 import authServices from '../../../../../../services/auth';
+
 import global from '../../../../../../config/global';
 
+const { MailOtp } = formsComponents;
+
 function MailOtpFormData(props) {
-  const { MailOtp } = components;
   const {
     visible = false,
     factor2 = {},

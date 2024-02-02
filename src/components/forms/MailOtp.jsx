@@ -1,4 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Input
@@ -7,9 +10,6 @@ import {
 import {
   MailOutlined
 } from '@ant-design/icons';
-
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 function MailOtpForm(props) {
   const {

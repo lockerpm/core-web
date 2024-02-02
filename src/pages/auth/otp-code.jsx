@@ -22,9 +22,10 @@ import common from "../../utils/common";
 
 import './css/auth.scss';
 
+const { Logo, EnterOtp } = authComponents;
+const { AuthBgImage } = images;
+
 const OtpCode = () => {
-  const { Logo, EnterOtp } = authComponents;
-  const { AuthBgImage } = images;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

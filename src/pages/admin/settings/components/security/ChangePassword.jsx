@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import {
-  Button,
-} from '@lockerpm/design';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import components from '../../../../../components'
-
-import FormDataModal from "./change-password/FormDataModal";
+import {
+  Button,
+} from '@lockerpm/design';
 
 import {
   KeyOutlined,
 } from "@ant-design/icons";
 
+import modalsComponents from "../../../../../components/modals";
+
+import ChangePasswordModal from "./modals/ChangePassword";
+
+
+const { PasswordConfirmModal } = modalsComponents;
+
 const ChangePassword = (props) => {
-  const { PasswordConfirmModal } = components;
   const {
     className = '',
   } = props;
@@ -57,7 +59,7 @@ const ChangePassword = (props) => {
         }}
         onClose={() => setConfirmVisible(false)}
       />
-      <FormDataModal
+      <ChangePasswordModal
         visible={formVisible}
         currentPassword={currentPassword}
         onClose={() => setFormVisible(false)}

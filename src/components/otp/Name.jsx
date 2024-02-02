@@ -8,14 +8,13 @@ import {
 import {
 } from "@ant-design/icons";
 
-import components from "..";
+import commonComponents from "../common";
+import itemsComponents from "../items";
+
+const { CipherIcon, DisplayOtp } = commonComponents;
+const { TextCopy} = itemsComponents;
 
 const Name = (props) => {
-  const {
-    TextCopy,
-    CipherIcon,
-    DisplayOtp
-  } = components;
   const { t } = useTranslation()
   const { cipher = {} } = props;
 

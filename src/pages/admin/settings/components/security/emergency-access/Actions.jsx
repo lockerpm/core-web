@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
@@ -9,17 +11,15 @@ import {
   EllipsisOutlined
 } from "@ant-design/icons";
 
-import { useTranslation } from "react-i18next";
-import global from "../../../../../../config/global";
-
 import { orange, green } from '@ant-design/colors';
 
 import emergencyAccessServices from "../../../../../../services/emergency-access";
+
 import common from "../../../../../../utils/common";
+import global from "../../../../../../config/global";
 
 const Actions = (props) => {
   const { t } = useTranslation()
-  
   const {
     className = '',
     contact = null,

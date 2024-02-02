@@ -1,22 +1,22 @@
 import React, { useMemo } from "react";
-import {
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import components from '../../../../../../components';
+import {
+} from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
 
-import CipherIcon from "../../../../../../components/CipherIcon";
+import itemsComponents from "../../../../../../components/items";
+import commonComponents from "../../../../../../components/common";
+
 import common from "../../../../../../utils/common";
 
+const { TextCopy } = itemsComponents;
+const { CipherIcon } = commonComponents;
+
 const Name = (props) => {
-  const {
-    TextCopy,
-  } = components;
   const { t } = useTranslation();
   const {
     cipher = {},

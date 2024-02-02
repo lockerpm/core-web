@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
 } from '@lockerpm/design';
 
-import { useTranslation } from "react-i18next";
 import { green } from '@ant-design/colors';
 
 const SearchText = (props) => {

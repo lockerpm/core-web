@@ -1,17 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   Typography,
   Input
 } from '@lockerpm/design';
 
-import { useTranslation } from "react-i18next";
-import { gray } from '@ant-design/colors';
 import {
   CopyOutlined,
   CheckOutlined,
   EyeOutlined,
   EyeInvisibleOutlined
 } from '@ant-design/icons';
+
+import { gray } from '@ant-design/colors';
 
 import common from "../../utils/common";
 

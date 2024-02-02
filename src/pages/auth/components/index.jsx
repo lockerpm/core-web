@@ -1,13 +1,15 @@
-import SignInComponents from "./sign-in";
 import EnterOtp from "./EnterOtp";
 import Enable2FA from "./Enable2FA";
 import Logo from "./Logo";
+import Personal from "./Personal";
+import Enterprise from "./Enterprise";
 
 const authComponents = {
-  SignInComponents,
   EnterOtp,
   Enable2FA,
-  Logo
+  Logo,
+  Personal,
+  Enterprise
 }
 
 export default authComponents

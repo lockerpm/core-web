@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  List,
-  Tooltip
-} from '@lockerpm/design';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import NewPasskeyModal from "./passwordless/NewPasskey";
-import authServices from "../../../../../services/auth";
+import {
+  Button,
+  List,
+} from '@lockerpm/design';
 
 import {
   DownOutlined,
@@ -18,6 +14,10 @@ import {
   PlusOutlined,
   DeleteOutlined
 } from "@ant-design/icons";
+
+import NewPasskeyModal from "./modals/NewPasskey";
+
+import authServices from "../../../../../services/auth";
 
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";

@@ -8,7 +8,7 @@ import {
 import {
 } from "@ant-design/icons";
 
-import components from "..";
+import itemsComponents from "../items";
 
 import global from "../../config/global";
 
@@ -17,7 +17,7 @@ const Name = (props) => {
     TextCopy,
     RouterLink,
     ImageIcon
-  } = components;
+  } = itemsComponents;
 
   const { t } = useTranslation()
   const { item = {}, showItems = true } = props;

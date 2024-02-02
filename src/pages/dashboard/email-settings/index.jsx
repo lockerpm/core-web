@@ -1,4 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Row,
   Col,
@@ -8,6 +11,7 @@ import {
   Form,
   Modal
 } from '@lockerpm/design';
+
 import {
   EditOutlined,
   SendOutlined,
@@ -15,15 +19,8 @@ import {
   ExclamationCircleOutlined
 } from "@ant-design/icons";
 
-import components from "../../../components";
-
-import EmailProvider from "./components/EmailProvider";
-import SMTP from "./components/SMTP";
-import SendGrid from "./components/SendGrid";
-import SendEmailModal from "./components/SendEmail";
-
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import commonComponents from "../../../components/common";
+import emailSettingsComponents from "./components";
 
 import mailConfigServices from "../../../services/mail-config";
 import resourceServices from "../../../services/resource";
@@ -31,8 +28,15 @@ import resourceServices from "../../../services/resource";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
+const { PageHeader } = commonComponents;
+const {
+  EmailProvider,
+  SMTP,
+  SendGrid,
+  SendEmail
+} = emailSettingsComponents;
+
 const EmailSetting = (props) => {
-  const { PageHeader } = components
   const { } = props;
   const { t } = useTranslation();
 
@@ -293,7 +297,7 @@ const EmailSetting = (props) => {
           </div>
         }
       </Spin>
-      <SendEmailModal
+      <SendEmail
         visible={sendVisible}
         onClose={() => setSendVisible(false)}
       />

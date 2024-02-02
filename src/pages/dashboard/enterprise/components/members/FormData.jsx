@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { } from 'react-redux';
+import { useTranslation, Trans } from "react-i18next";
+
 import {
   Form,
   Space,
@@ -7,23 +10,22 @@ import {
   Select,
   Upload
 } from '@lockerpm/design';
-import components from '../../../../../components'
+
+import commonComponents from '../../../../../components/common';
+
 import {
   UploadOutlined,
 } from '@ant-design/icons';
 
-import { } from 'react-redux';
-import { useTranslation, Trans } from "react-i18next";
-
-import global from '../../../../../config/global';
 import coreServices from '../../../../../services/core';
 import commonServices from '../../../../../services/common';
 import enterpriseMemberServices from '../../../../../services/enterprise-member';
 
+import global from '../../../../../config/global';
+
+const { ItemInput } = commonComponents;
+
 function FormData(props) {
-  const {
-    ItemInput,
-  } = components;
   const {
     visible = false,
     enterpriseId,

@@ -1,19 +1,21 @@
 import React, { } from "react";
-import {
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import components from '../../../../components'
+import {
+} from '@lockerpm/design';
 
 import {
   RightOutlined
 } from "@ant-design/icons";
+
+import itemsComponents from "../../../../components/items";
+
 import global from "../../../../config/global";
 
+const { ImageIcon } = itemsComponents;
+
 const PasswordHealth = (props) => {
-  const { ImageIcon } = components;
   const {
     className = '',
   } = props;

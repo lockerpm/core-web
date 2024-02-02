@@ -4,7 +4,7 @@ import ListData from "./ListData";
 import NoFolder from "./NoFolder";
 import TableData from "./TableData";
 
-const folderComponents = {
+const foldersComponents = {
   Filter,
   FormData,
   ListData,
@@ -12,4 +12,4 @@ const folderComponents = {
   TableData
 }
 
-export default folderComponents
+export default foldersComponents

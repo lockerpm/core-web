@@ -1,7 +1,7 @@
 import PasswordConfirmModal from "./PasswordConfirm";
 
-const Modals = {
+const modalsComponents = {
   PasswordConfirmModal
 }
 
-export default Modals
+export default modalsComponents

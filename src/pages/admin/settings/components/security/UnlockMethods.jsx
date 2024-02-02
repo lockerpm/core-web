@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import {
-  Divider
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-} from '../../../../../components';
+  Divider
+} from '@lockerpm/design';
 
 import ChangePassword from "./ChangePassword";
-import Passwordless from "./Passwordless";
+import SecurityKey from "./SecurityKey";
 import Passkey from "./Passkey";
 
 import {
@@ -47,7 +44,7 @@ const UnlockMethods = (props) => {
         expand && <div className="mt-8">
           <ChangePassword />
           <Divider />
-          <Passwordless />
+          <SecurityKey />
           <Divider />
           <Passkey />
         </div>

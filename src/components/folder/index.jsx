@@ -1,9 +1,9 @@
 import Actions from "./Actions";
 import Name from "./Name";
 
-const Folder = {
+const folderComponents = {
   Actions,
   Name
 }
 
-export default Folder
+export default folderComponents

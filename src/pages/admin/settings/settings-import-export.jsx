@@ -1,19 +1,17 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { Divider } from '@lockerpm/design';
-import { } from "@ant-design/icons";
-
-import components from "../../../components";
-import Import from "./components/import-export/Import";
-import Export from "./components/import-export/Export";
-
+import React, { } from "react";
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import { } from '../../../utils/common';
+import { Divider } from '@lockerpm/design';
+import { } from "@ant-design/icons";
 
+import commonComponents from "../../../components/common";
+import importExportComponents from "./components/import-export";
+
+const { PageHeader } = commonComponents;
+const { Import, Export } = importExportComponents;
 
 const ImportExport = (props) => {
-  const { PageHeader } = components
   const { } = props;
   const { t } = useTranslation();
   return (

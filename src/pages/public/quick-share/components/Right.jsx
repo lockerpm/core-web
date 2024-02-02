@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
   Image,
   Button
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import Intro from '../../../../assets/images/pages/quick-share-detail/intro.png';
+import images from "../../../../assets/images";
 
 import global from "../../../../config/global";
+
+const { IntroImg } = images;
 
 const Right = () => {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ const Right = () => {
       }}
     >
       <Image
-        src={Intro}
+        src={IntroImg}
         preview={false}
       />
       <div style={{ marginTop: -80 }}>

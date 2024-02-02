@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Modal,
   Form,
   Input
 } from '@lockerpm/design';
 
-import components from "../../components";
-import { useSelector } from 'react-redux';
-import { orange } from '@ant-design/colors';
-
-import { useTranslation } from "react-i18next";
 import { InfoCircleFilled } from "@ant-design/icons";
 
-import global from "../../config/global";
+import { orange } from '@ant-design/colors';
+
+import formsComponents from "../forms";
+
 import authServices from "../../services/auth";
 
+import global from "../../config/global";
+
+const { Pairing, SecurityKey, Passkey } = formsComponents;
+
 const PasswordConfirmModal = (props) => {
-  const { Pairing, SecurityKey, Passkey } = components;
   const { t } = useTranslation();
 
   const {

@@ -1,20 +1,21 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   List,
   Avatar
 } from '@lockerpm/design';
 
-import components from "../../../../../components";
-
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import itemsComponents from "../../../../../components/items";
+
+const { RouterLink } = itemsComponents;
 
 const UsersBlocked = (props) => {
-  const { RouterLink } = components;
   const {
     loading = false,
     data = {},

@@ -1,25 +1,23 @@
 import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Table,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from '../../../../components';
-
 import {
 } from "@ant-design/icons";
 
-import Name from "../../../../components/vault/Name";
-import Actions from "../../../../components/vault/Actions";
+import itemsComponents from "../../../../components/items";
+import cipherComponents from "../../../../components/cipher";
 
 import common from "../../../../utils/common";
 
+const { TextCopy } = itemsComponents;
+const { Name, Actions } = cipherComponents;
+
 const TableData = (props) => {
-  const {
-    TextCopy,
-  } = components;
   const { t } = useTranslation();
   const {
     loading = false,

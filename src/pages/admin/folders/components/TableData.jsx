@@ -9,13 +9,15 @@ import {
 import {
 } from "@ant-design/icons";
 
-import components from '../../../../components';
+import itemsComponents from "../../../../components/items";
+import folderComponents from "../../../../components/folder";
 
 import common from "../../../../utils/common";
 
+const { TextCopy } = itemsComponents;
+const { Name, Actions } = folderComponents
+
 const TableData = (props) => {
-  const { TextCopy } = components;
-  const { Name, Actions } = components.Folder
   const { t } = useTranslation();
   const {
     loading = false,

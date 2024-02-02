@@ -1,31 +1,39 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { } from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-
-import components from "../../../components"
-
-import Filter from "./components/groups/Filter"
-import NoGroup from "./components/groups/NoGroup"
-import TableData from "./components/groups/TableData"
-import ListData from "./components/groups/ListData"
-import FormData from "./components/groups/FormData"
-import FormUsers from "./components/groups/FormUsers"
-
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import {
+} from "@lockerpm/design"
+
+import {
+  PlusOutlined
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../components/items"
+import commonComponents from "../../../components/common"
+import groupsComponents from "./components/groups"
 
 import enterpriseGroupServices from "../../../services/enterprise-group"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
+const { PageHeader } = commonComponents;
+const { Pagination } = itemsComponents;
+const {
+  Filter,
+  NoGroup,
+  FormData,
+  FormUsers,
+  ListData,
+  TableData
+} = groupsComponents;
+
 const EnterpriseGroups = (props) => {
-  const { PageHeader, Pagination } = components;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const isMobile = useSelector((state) => state.system.isMobile)
 

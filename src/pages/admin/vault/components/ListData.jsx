@@ -1,28 +1,27 @@
-import React, { useMemo } from "react";
+import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   List,
   Popover,
   Checkbox,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from '../../../../components';
-
-import Name from "../../../../components/vault/Name";
-import Actions from "../../../../components/vault/Actions";
-
-import common from "../../../../utils/common";
-
 import {
   InfoCircleOutlined
 } from "@ant-design/icons";
 
+
+import itemsComponents from "../../../../components/items";
+import cipherComponents from "../../../../components/cipher";
+
+import common from "../../../../utils/common";
+
+const { TextCopy } = itemsComponents;
+const { Name, Actions } = cipherComponents;
+
 const ListData = (props) => {
-  const {
-    TextCopy,
-  } = components;
   const { t } = useTranslation();
 
   const {

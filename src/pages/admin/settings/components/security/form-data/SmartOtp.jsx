@@ -1,23 +1,25 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
   Drawer,
 } from '@lockerpm/design';
 
-import components from '../../../../../../components';
-
 import {
 } from '@ant-design/icons';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import formsComponents from '../../../../../../components/forms';
 
 import authServices from '../../../../../../services/auth';
+
 import global from '../../../../../../config/global';
 
+const { SmartOtp } = formsComponents;
+
 function SmartOtpFormData(props) {
-  const { SmartOtp } = components;
   const {
     visible = false,
     factor2 = {},

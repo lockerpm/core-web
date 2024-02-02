@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from "react"
-import { Form, Space, Button, Drawer, Input } from "@lockerpm/design"
-
-import { } from "@ant-design/icons"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 
-import global from "../../../../../config/global"
-import common from "../../../../../utils/common"
+import {
+  Form,
+  Space,
+  Button,
+  Drawer,
+  Input
+} from "@lockerpm/design"
+
+import { } from "@ant-design/icons"
+
 import enterpriseGroupServices from "../../../../../services/enterprise-group"
 
+import global from "../../../../../config/global"
+import common from "../../../../../utils/common"
+
 function FormData(props) {
-  const { visible = false, item = null, onClose = () => { }, onReload = () => { } } = props
+  const {
+    visible = false,
+    item = null,
+    onClose = () => { },
+    onReload = () => { }
+  } = props
   const { t } = useTranslation()
   const location = useLocation()
   const [form] = Form.useForm()

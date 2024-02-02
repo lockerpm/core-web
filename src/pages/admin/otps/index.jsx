@@ -7,8 +7,10 @@ import { } from '@lockerpm/design';
 
 import { PlusOutlined } from "@ant-design/icons";
 
-import components from "../../../components";
-import otpComponents from "./components";
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import cipherComponents from "../../../components/cipher";
+import otpsComponents from "./components";
 
 import { CipherType } from "../../../core-js/src/enums"
 
@@ -18,10 +20,12 @@ import commonServices from "../../../services/common";
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
+const { Pagination, MultipleSelect } = itemsComponents;
+const { PageHeader } = commonComponents;
+const { NoCipher } = cipherComponents;
+const { Filter, TableData, ListData, FormData } = otpsComponents;
+
 const Authenticator = () => {
-  const { PageHeader, Pagination, MultipleSelect } = components;
-  const { NoCipher } = components.Vault;
-  const { Filter, TableData, ListData, FormData } = otpComponents;
 
   const { t } = useTranslation();
   const location = useLocation();

@@ -1,28 +1,27 @@
-import React, { useMemo } from "react";
+import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   List,
   Popover
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from '../../../../../components';
-
-import CipherName from "../../../../../components/vault/Name";
-import Actions from "./Actions";
-import SharedWith from "./SharedWith";
-
-import common from "../../../../../utils/common";
-
 import {
   InfoCircleOutlined
 } from "@ant-design/icons";
 
+import itemsComponents from "../../../../../components/items";
+import cipherComponents from "../../../../../components/cipher";
+import quickShareComponents from "../../../../../components/quick-share";
+
+import common from "../../../../../utils/common";
+
+const { TextCopy } = itemsComponents;
+const { Actions, SharedWith } = quickShareComponents;
+const CipherName = cipherComponents.Name;
+
 const ListData = (props) => {
-  const {
-    TextCopy,
-  } = components;
   const { t } = useTranslation();
 
   const {

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   Space,
@@ -10,19 +13,19 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import formsComponents from '../../../../../../components/forms';
 
-import global from '../../../../../../config/global';
-import common from '../../../../../../utils/common';
 import emergencyAccessServices from '../../../../../../services/emergency-access';
 import commonServices from '../../../../../../services/common';
 
 import { SymmetricCryptoKey } from '../../../../../../core-js/src/models/domain';
-import components from '../../../../../../components';
+
+import global from '../../../../../../config/global';
+import common from '../../../../../../utils/common';
+
+const { GeneratePassword } = formsComponents;
 
 function ResetMasterPasswordFormData(props) {
-  const { GeneratePassword } = components;
   const {
     item = null,
     visible = false,

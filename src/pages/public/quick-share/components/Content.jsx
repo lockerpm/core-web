@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
   Button
@@ -9,11 +11,11 @@ import {
   EyeInvisibleOutlined
 } from '@ant-design/icons';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import cipherComponents from "../../../../components/cipher";
+import quickShareComponents from "../../../../components/quick-share";
 
-import Name from "./Name";
-import ListItemDetails from "../../../admin/vault/components/detail/List";
+const { DetailList } = cipherComponents
+const { Name } = quickShareComponents
 
 const Content = (props) => {
   const {
@@ -41,7 +43,7 @@ const Content = (props) => {
           {showText ? t('quick_share_detail.hide_information') : t('quick_share_detail.reveal_information')}
         </Button>
       </div>
-      <ListItemDetails
+      <DetailList
         cipher={cipher}
         showText={showText}
         isPublic

@@ -16,11 +16,10 @@ import global from "../../config/global";
 
 import './css/auth.scss';
 
-const SingIn = () => {
-  const { Logo } = authComponents;
-  const { Personal, Enterprise } = authComponents.SignInComponents;
-  const { AuthBgImage } = images;
+const { Logo, Personal, Enterprise } = authComponents;
+const { AuthBgImage } = images;
 
+const SingIn = () => {
   const { t } = useTranslation();
   const isLoading = useSelector((state) => state.system.isLoading);
   const serverType = useSelector((state) => state.system.serverType);

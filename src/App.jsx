@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
-import { Layout, Modal, notification } from '@lockerpm/design'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import components from './components'
+
+import { Layout, Modal, notification } from '@lockerpm/design'
+
+import commonComponents from './components/common'
 
 import {
   ExclamationCircleOutlined
@@ -39,7 +41,8 @@ const App = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const location = useLocation()
-  const { ClientService } = components
+  
+  const { ClientService } = commonComponents
 
   global.location = location;
   notification.config({ placement: 'bottomLeft', duration: 3 })

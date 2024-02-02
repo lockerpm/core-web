@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Modal,
   Form,
@@ -9,15 +12,13 @@ import {
   InfoCircleFilled
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-
-import { useTranslation } from "react-i18next";
-
 import { green } from '@ant-design/colors';
-import global from "../../../../config/global";
+
 import mailConfigServices from "../../../../services/mail-config";
 
-const SendModal = (props) => {
+import global from "../../../../config/global";
+
+const SendEmail = (props) => {
   const { t } = useTranslation()
   const {
     visible = false,
@@ -94,4 +95,4 @@ const SendModal = (props) => {
   );
 }
 
-export default SendModal;
+export default SendEmail;

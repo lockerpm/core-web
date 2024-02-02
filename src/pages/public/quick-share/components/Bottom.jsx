@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
 } from '@lockerpm/design';
-import { useSelector } from 'react-redux';
 
-import { useTranslation } from "react-i18next";
+import images from "../../../../assets/images";
+
 import global from "../../../../config/global";
-import CyStack from '../../../../assets/images/logos/CyStack.png'
+
+const { CyStackImg } = images;
 
 const Bottom = () => {
   const { t } = useTranslation();
@@ -29,7 +32,7 @@ const Bottom = () => {
           <img
             className="ml-2 mr-3"
             style={{ height: 16 }}
-            src={CyStack}
+            src={CyStackImg}
             alt="CyStack"
           />
         </a>

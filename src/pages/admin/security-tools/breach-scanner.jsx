@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Form,
@@ -10,20 +13,21 @@ import {
   Image
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import components from "../../../components";
-
-import toolServices from "../../../services/tool";
-
 import {
 } from "@ant-design/icons";
+
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+
+import toolServices from "../../../services/tool";
 
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
+const { ImageIcon } = itemsComponents;
+const { PageHeader } = commonComponents;
+
 const BreachScanner = (props) => {
-  const { PageHeader, ImageIcon } = components;
   const {} = props;
   const { t } = useTranslation();
   const [callingAPI, setCallingAPI] = useState(false);

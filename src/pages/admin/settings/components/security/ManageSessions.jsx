@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   List,
@@ -6,21 +9,16 @@ import {
   Tag
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import {
-} from '../../../../../components'
-
 import {
   LogoutOutlined,
   RightOutlined,
   DownOutlined
 } from "@ant-design/icons";
 
-import DeauthorizeSessionsModal from "./manage-sessions/DeauthorizeSessions";
+import DeauthorizeSessionsModal from "./modals/DeauthorizeSessions";
 
 import userServices from "../../../../../services/user";
+
 import common from "../../../../../utils/common";
 
 const ManageSessions = (props) => {

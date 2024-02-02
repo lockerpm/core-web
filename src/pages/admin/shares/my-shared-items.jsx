@@ -1,34 +1,44 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
+
 import { } from '@lockerpm/design';
+
 import {
   LockOutlined,
   FolderOutlined,
   ShareAltOutlined,
   PlusOutlined
 } from "@ant-design/icons";
-import components from "../../../components";
 
-import MenuTabs from "./components/MenuTabs";
-import NoItem from "./components/NoItem";
-import FormData from "./components/FormData";
-import Filter from "../vault/components/Filter";
-import InAppShares from "./components/in-app-shares/index";
-import QuickShares from "./components/quick-shares";
-import QuickShareReview from "./components/quick-shares/Review";
-
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useLocation } from 'react-router-dom';
-
-import common from "../../../utils/common";
-import global from "../../../config/global";
-import commonServices from "../../../services/common";
+import commonComponents from "../../../components/common";
+import shareComponents from "../../../components/share";
+import vaultComponents from "../vault/components";
+import inAppSharesComponents from "./components/in-app-shares";
+import quickSharesComponents from "./components/quick-shares";
 
 import { CipherType } from "../../../core-js/src/enums";
 
+import commonServices from "../../../services/common";
+
+import common from "../../../utils/common";
+import global from "../../../config/global";
+
+const { PageHeader }  = commonComponents;
+const { Filter }  = vaultComponents;
+const {
+  MenuTabs,
+  NoItem,
+  FormData,
+  QuickShareReview
+}  = shareComponents;
+const InAppListData = inAppSharesComponents.ListData;
+const InAppTableData = inAppSharesComponents.TableData;
+const QuickListData = quickSharesComponents.ListData;
+const QuickTableData = quickSharesComponents.TableData;
 
 const MySharedItems = (props) => {
-  const { PageHeader }  = components;
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -213,22 +223,52 @@ const MySharedItems = (props) => {
       {
         filteredData.total > 0 && <>
           {
-            menuType !== menuTypes.QUICK_SHARES && <InAppShares
-              loading={syncing}
-              params={params}
-              isFolder={menuType === menuTypes.FOLDERS}
-              filteredData={filteredData}
-              onUpdate={handleOpenForm}
-              onStopSharing={stopSharingItem}
-            />
+            menuType !== menuTypes.QUICK_SHARES && <div
+              className="in-app-shares"
+            >
+              {
+                isMobile ? <InAppListData
+                  className="mt-4"
+                  loading={syncing}
+                  data={filteredData.result}
+                  params={params}
+                  isFolder={menuType === menuTypes.FOLDERS}
+                  onUpdate={handleOpenForm}
+                  onStopSharing={stopSharingItem}
+                /> : <InAppTableData
+                  className="mt-4"
+                  loading={syncing}
+                  data={filteredData.result}
+                  params={params}
+                  isFolder={menuType === menuTypes.FOLDERS}
+                  onUpdate={handleOpenForm}
+                  onStopSharing={stopSharingItem}
+                />
+              }
+            </div>
           }
           {
-            menuType === menuTypes.QUICK_SHARES && <QuickShares
-              loading={syncing}
-              params={params}
-              filteredData={filteredData}
-              onStopSharing={stopSharingItem}
-            />
+            menuType === menuTypes.QUICK_SHARES && <div
+              className="quick-shares"
+            >
+              {
+                isMobile ? <QuickListData
+                  className="mt-4"
+                  loading={syncing}
+                  data={filteredData.result}
+                  params={params}
+                  isFolder={false}
+                  onStopSharing={stopSharingItem}
+                /> : <QuickTableData
+                  className="mt-4"
+                  loading={loading}
+                  data={filteredData.result}
+                  params={params}
+                  isFolder={false}
+                  onStopSharing={stopSharingItem}
+                />
+              }
+            </div>
           }
         </>
       }

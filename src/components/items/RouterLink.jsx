@@ -1,12 +1,12 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { Link } from "react-router-dom";
+
 import {
 } from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
-
-import { } from 'react-redux';
-import { Link } from "react-router-dom";
 
 import common from "../../utils/common";
 

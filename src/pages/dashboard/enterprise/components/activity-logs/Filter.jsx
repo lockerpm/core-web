@@ -1,15 +1,23 @@
 import React, { } from "react"
-import { Row, Col, Select, Avatar } from "@lockerpm/design"
-import components from "../../../../../components"
-import { } from "@ant-design/icons"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
+import {
+  Row,
+  Col,
+  Select,
+  Avatar
+} from "@lockerpm/design"
+
+import { } from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items"
+
 import global from "../../../../../config/global"
 
+const { FilterTime } = itemsComponents;
+
 const Filter = (props) => {
-  const { FilterTime } = components;
   const { t } = useTranslation()
   const {
     className = "",

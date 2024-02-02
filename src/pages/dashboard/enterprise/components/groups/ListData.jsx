@@ -1,17 +1,31 @@
 import React, { } from "react"
-import { List, Popover, Space, Button, Avatar, Tooltip } from "@lockerpm/design"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import components from "../../../../../components"
+import {
+  List,
+  Popover,
+  Space,
+  Button,
+  Avatar,
+  Tooltip
+} from "@lockerpm/design"
+
+import {
+  EditOutlined,
+  DeleteOutlined,
+  UsergroupAddOutlined,
+  GroupOutlined,
+  InfoCircleOutlined
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
 
-import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, GroupOutlined, InfoCircleOutlined } from "@ant-design/icons"
+const { TextCopy } = itemsComponents;
 
 const ListData = (props) => {
-  const { TextCopy } = components;
   const { t } = useTranslation()
 
   const {

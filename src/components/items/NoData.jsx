@@ -1,4 +1,6 @@
 import React, { } from "react";
+import { } from 'react-redux';
+
 import {
   Image,
   Spin
@@ -6,8 +8,6 @@ import {
 
 import {
 } from "@ant-design/icons";
-
-import { } from 'react-redux';
 
 const NoData = (props) => {
   const {

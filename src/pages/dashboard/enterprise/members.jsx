@@ -1,31 +1,38 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { } from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-
-import components from "../../../components"
-
-import MenuTabs from "./components/members/MenuTabs";
-import Filter from "./components/members/Filter"
-import TableData from "./components/members/TableData"
-import ListData from "./components/members/ListData"
-import FormData from "./components/members/FormData"
-import Review from "./components/members/Review";
-
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import {
+} from "@lockerpm/design"
+import {
+  PlusOutlined
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../components/items"
+import commonComponents from "../../../components/common"
+import membersComponents from "./components/members"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
 import enterpriseMemberServices from "../../../services/enterprise-member"
 
+const { Pagination } = itemsComponents;
+const { PageHeader } = commonComponents;
+const {
+  Filter,
+  FormData,
+  MenuTabs,
+  ListData,
+  TableData,
+  Review,
+} = membersComponents;
+
 const EnterpriseMembers = (props) => {
-  const { PageHeader, Pagination } = components;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const isMobile = useSelector((state) => state.system.isMobile)
 

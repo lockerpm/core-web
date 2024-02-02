@@ -1,21 +1,35 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Tabs, Avatar, Alert, Tooltip } from '@lockerpm/design';
-import { InfoCircleOutlined } from "@ant-design/icons";
-
-import components from "../../../components";
-
-import TableData from "./components/password-health/TableData";
-import ListData from "./components/password-health/ListData";
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
+import {
+  Tabs,
+  Avatar,
+  Alert,
+  Tooltip
+} from '@lockerpm/design';
+
+import {
+  InfoCircleOutlined
+} from "@ant-design/icons";
+
+import { red, green } from '@ant-design/colors';
+
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import passwordHealthComponents from "../../../components/password-health";
+
+import { CipherType } from "../../../core-js/src/enums";
+
+import commonServices from "../../../services/common";
+
 import common from "../../../utils/common";
 import global from "../../../config/global";
-import commonServices from "../../../services/common";
-import { red, green } from '@ant-design/colors';
-import { CipherType } from "../../../core-js/src/enums";
+
+const { ImageIcon } = itemsComponents;
+const { PageHeader } = commonComponents;
+const { ListData, TableData } = passwordHealthComponents
 
 const menus = [
   {
@@ -30,7 +44,6 @@ const menus = [
 ]
 
 const PasswordHealth = (props) => {
-  const { PageHeader, ImageIcon } = components;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();

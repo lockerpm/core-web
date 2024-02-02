@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   Button,
@@ -7,20 +10,18 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { red } from '@ant-design/colors';
 
-import components from "../../../../../components";
+import modalsComponents from "../../../../../components/modals";
 
 import userServices from "../../../../../services/user";
 import commonServices from "../../../../../services/common";
 
 import global from "../../../../../config/global";
 
-import { red } from '@ant-design/colors';
+const { PasswordConfirmModal } = modalsComponents;
 
 const DangerZone = (props) => {
-  const { PasswordConfirmModal } = components;
   const { } = props
   const { t } = useTranslation();
   const [confirmVisible, setConfirmVisible] = useState(false);

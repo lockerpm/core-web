@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import {
   Spin,
@@ -6,27 +9,27 @@ import {
   Col,
 } from '@lockerpm/design';
 
-import { useDispatch } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+
+import authComponents from "../../auth/components";
+import quickShareDetailComponents from "./components";
+
+import quickShareServices from "../../../services/quick-share";
+
+import common from "../../../utils/common";
+import global from "../../../config/global";
 
 import '../css/index.scss';
 
-import common from "../../../utils/common";
-import quickShareServices from "../../../services/quick-share";
-
-import Logo from "../../auth/components/Logo";
-
-import Right from "./components/Right";
-import Bottom from "./components/Bottom";
-import NotFound from "./components/NotFound";
-import Content from "./components/Content";
-import VerifyEmail from "./components/VerifyEmail";
-
-import global from "../../../config/global";
+const { Logo } = authComponents;
+const {
+  Right,
+  Bottom,
+  NotFound,
+  Content,
+  VerifyEmail
+} = quickShareDetailComponents;
 
 const QuickShareDetail = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const { t } = useTranslation();
 

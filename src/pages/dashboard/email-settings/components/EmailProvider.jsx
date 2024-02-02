@@ -1,4 +1,7 @@
-import React, { useState, useMemo } from "react";
+import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Row,
   Col,
@@ -7,21 +10,12 @@ import {
   Badge
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import {
-} from '../../../../components'
-
-import {
-} from '../../../../utils/common'
-
 import {
 } from "@ant-design/icons";
 
 import { green } from '@ant-design/colors';
 
-const General = (props) => {
+const EmailProvider = (props) => {
   const { t } = useTranslation()
   const {
     className = '',
@@ -89,4 +83,4 @@ const General = (props) => {
   );
 }
 
-export default General;
+export default EmailProvider;

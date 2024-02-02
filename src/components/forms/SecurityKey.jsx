@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   Button,
@@ -12,18 +15,17 @@ import {
   RedoOutlined
 } from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
 import { green } from '@ant-design/colors';
 
-import ImageIcon from "../items/ImageIcon";
-
-import { useTranslation } from "react-i18next";
+import itemsComponents from "../items";
 
 import authServices from "../../services/auth";
 import commonServices from "../../services/common";
 
-import global from "../../config/global";
 import storeActions from "../../store/actions";
+import global from "../../config/global";
+
+const { ImageIcon } = itemsComponents
 
 const PasswordlessForm = (props) => {
   const { t } = useTranslation()

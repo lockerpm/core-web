@@ -1,11 +1,10 @@
 import React, { } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   Pagination,
   ConfigProvider
 } from '@lockerpm/design';
-
-import { useTranslation } from "react-i18next";
-
 
 const PaginationItem = (props) => {
   const {

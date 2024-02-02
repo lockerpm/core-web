@@ -1,27 +1,29 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { } from '@lockerpm/design';
-import { } from "@ant-design/icons";
-
-import components from "../../../components";
-import ListItemDetails from "./components/detail/List";
-import FormData from "./components/FormData";
-import MoveFolder from "./components/MoveFolder";
-import CipherIcon from "../../../components/CipherIcon";
-import Actions from "../../../components/vault/Actions";
-import ShareFormData from "../shares/components/FormData";
-import QuickShareReview from "../shares/components/quick-shares/Review";
-
+import React, { useState, useMemo } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import common from "../../../utils/common";
-import global from "../../../config/global";
+import { } from '@lockerpm/design';
+import { } from "@ant-design/icons";
+
+import commonComponents from "../../../components/common";
+import cipherComponents from "../../../components/cipher";
+import shareComponents from "../../../components/share";
+import vaultComponents from "./components";
+
 import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
 
+import common from "../../../utils/common";
+import global from "../../../config/global";
+
+const { PageHeader, CipherIcon } = commonComponents;
+const { DetailList, Actions } = cipherComponents;
+const { FormData, MoveFolder } = vaultComponents;
+const { QuickShareReview } = shareComponents;
+const ShareFormData = shareComponents.FormData;
+
 const VaultDetail = () => {
-  const { PageHeader } = components;
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -164,7 +166,7 @@ const VaultDetail = () => {
           onPermanentlyDelete={permanentlyDeleteItems}
         />}
       />
-      <ListItemDetails
+      <DetailList
         className="mt-4"
         cipher={originCipher}
       />

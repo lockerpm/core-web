@@ -1,4 +1,7 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   List,
   Popover,
@@ -6,9 +9,6 @@ import {
   Tag,
   Tooltip
 } from '@lockerpm/design';
-
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 import {
   InfoCircleOutlined

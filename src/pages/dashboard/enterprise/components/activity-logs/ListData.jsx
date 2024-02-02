@@ -1,18 +1,25 @@
 import React, { } from "react"
-import { List, Popover, Avatar } from "@lockerpm/design"
-
 import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import components from "../../../../../components"
+import {
+  List,
+  Popover,
+  Avatar
+} from "@lockerpm/design"
+
+import {
+  InfoCircleOutlined
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-import { InfoCircleOutlined } from "@ant-design/icons"
+const { TextCopy, RouterLink } = itemsComponents;
 
 const ListData = (props) => {
-  const { TextCopy, RouterLink } = components;
   const {
     loading = false,
     className = "",

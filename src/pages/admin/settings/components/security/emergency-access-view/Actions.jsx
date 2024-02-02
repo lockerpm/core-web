@@ -1,4 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
@@ -10,9 +13,6 @@ import {
   ExportOutlined,
   CopyOutlined,
 } from "@ant-design/icons";
-
-import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
 
 import { CipherType } from "../../../../../../core-js/src/enums";
 

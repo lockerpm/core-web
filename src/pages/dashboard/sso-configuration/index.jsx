@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useMemo } from "react"
-import { Form, Input, Button, Space } from "@lockerpm/design"
-
-import components from "../../../components"
-
+import React, { useEffect, useState } from "react"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
+
+import {
+  Form,
+  Input,
+  Button,
+  Space
+} from "@lockerpm/design"
 
 import {
   EditOutlined,
@@ -13,13 +16,16 @@ import {
   RedoOutlined,
 } from "@ant-design/icons";
 
+import commonComponents from "../../../components/common"
+
 import ssoConfigServices from "../../../services/sso-config"
 
 import global from "../../../config/global"
 import common from "../../../utils/common"
 
+const { PageHeader } = commonComponents;
+
 const SSOConfiguration = (props) => {
-  const { PageHeader } = components;
   const { } = props
   const { t } = useTranslation()
 

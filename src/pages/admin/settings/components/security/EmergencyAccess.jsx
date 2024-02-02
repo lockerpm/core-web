@@ -1,17 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
 import {
   Button,
   Badge
 } from '@lockerpm/design';
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import TableData from "./emergency-access/TableData";
-import ListData from "./emergency-access/ListData";
-import ResetPasswordFormData from "./form-data/ResetPassword";
-import EmergencyContactFormData from "./form-data/EmergencyContact";
-
 
 import {
   PlusOutlined,
@@ -20,9 +15,15 @@ import {
 } from "@ant-design/icons";
 
 import { orange } from '@ant-design/colors';
-import { useLocation } from "react-router-dom";
+
+import TableData from "./emergency-access/TableData";
+import ListData from "./emergency-access/ListData";
+import ResetPasswordFormData from "./form-data/ResetPassword";
+import EmergencyContactFormData from "./form-data/EmergencyContact";
+
 
 import emergencyAccessServices from "../../../../../services/emergency-access";
+
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 

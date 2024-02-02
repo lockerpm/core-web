@@ -18,7 +18,7 @@ import {
   UsbOutlined
 } from "@ant-design/icons";
 
-import components from "../../components";
+import formsComponents from "../../components/forms";
 import authComponents from "./components";
 
 import images from "../../assets/images";
@@ -32,10 +32,12 @@ import common from "../../utils/common";
 
 import './css/auth.scss';
 
+const { Pairing, SecurityKey, Passkey } = formsComponents;
+const { Enable2FA } = authComponents;
+
+const { WelcomeImg } = images;
+
 const Setup2FA = () => {
-  const { Pairing, SecurityKey, Passkey } = components;
-  const { Enable2FA } = authComponents;
-  const { WelcomeImg } = images;
   const { t } = useTranslation();
   const location = useLocation();
   const currentPage = common.getRouterByLocation(location)

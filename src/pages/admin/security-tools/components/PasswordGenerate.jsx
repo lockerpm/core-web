@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import {
-  Drawer
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import components from '../../../../components'
+import {
+  Drawer
+} from '@lockerpm/design';
 
 import {
   RightOutlined
 } from "@ant-design/icons";
 
+import itemsComponents from "../../../../components/items";
+import commonComponents from "../../../../components/common";
+
+const { ImageIcon } = itemsComponents;
+const { GenerateOptions } = commonComponents;
+
 const PasswordGenerate = (props) => {
-  const {
-    ImageIcon,
-    GenerateOptions
-  } = components;
   const {
     className = '',
   } = props;

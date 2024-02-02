@@ -1,13 +1,14 @@
-import React, { useMemo } from "react"
-import { List, Avatar, Space, Button, Popover } from "@lockerpm/design"
-
+import React, { } from "react"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import components from "../../../../components"
-
-import common from "../../../../utils/common"
-import global from "../../../../config/global"
+import {
+  List,
+  Avatar,
+  Space,
+  Button,
+  Popover
+} from "@lockerpm/design"
 
 import {
   EditOutlined,
@@ -15,8 +16,14 @@ import {
   InfoCircleOutlined
 } from "@ant-design/icons"
 
+import itemsComponents from "../../../../components/items"
+
+import common from "../../../../utils/common"
+import global from "../../../../config/global"
+
+const { TextCopy, RouterLink } = itemsComponents;
+
 const ListData = (props) => {
-  const { TextCopy, RouterLink } = components;
   const { t } = useTranslation()
 
   const {

@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Table,
   Avatar,
   Tag,
   Tooltip
 } from '@lockerpm/design';
-
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 import {
   InfoCircleOutlined

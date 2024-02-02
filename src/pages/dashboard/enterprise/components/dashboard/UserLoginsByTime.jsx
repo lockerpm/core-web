@@ -1,4 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
 } from '@lockerpm/design';
@@ -6,14 +9,13 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import components from "../../../../../components";
 import { green } from '@ant-design/colors';
 
+import chartComponents from "../../../../../components/chart";
+
+const { Line } = chartComponents;
+
 const UserLoginByTime = (props) => {
-  const { Line } = components
   const {
     loading = false,
     data = {},

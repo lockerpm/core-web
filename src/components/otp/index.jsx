@@ -1,9 +1,9 @@
 import Actions from "./Actions";
 import Name from "./Name";
 
-const Otp = {
+const otpComponents = {
   Actions,
   Name
 }
 
-export default Otp
+export default otpComponents

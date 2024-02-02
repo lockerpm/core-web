@@ -1,27 +1,33 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
 import { } from '@lockerpm/design';
+
 import { } from "@ant-design/icons";
 
-import components from "../../../components";
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+
 import Filter from "./components/security/emergency-access-view/Filter";
 import TableData from "./components/security/emergency-access-view/TableData";
 import ListData from "./components/security/emergency-access-view/ListData";
 import ViewItem from "./components/security/emergency-access-view/ViewItem";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-
+import { CipherData } from "../../../core-js/src/models/data";
 import { CipherMapper } from "../../../core-js/src/constants";
 import { SymmetricCryptoKey, EncString, Cipher } from "../../../core-js/src/models/domain";
-import { CipherData } from "../../../core-js/src/models/data";
+
+import emergencyAccessServices from "../../../services/emergency-access";
 
 import global from "../../../config/global";
 import common from "../../../utils/common";
-import emergencyAccessServices from "../../../services/emergency-access";
+
+const { Pagination }= itemsComponents;
+const { PageHeader }= commonComponents;
 
 const EmergencyAccessView = (props) => {
-  const { PageHeader, Pagination }= components;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();

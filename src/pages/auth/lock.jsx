@@ -21,7 +21,7 @@ import {
   UsbOutlined
 } from "@ant-design/icons";
 
-import components from "../../components";
+import formsComponents from "../../components/forms";
 import authComponents from "./components";
 
 import images from "../../assets/images";
@@ -34,11 +34,12 @@ import global from "../../config/global";
 
 import './css/auth.scss';
 
-const Lock = () => {
-  const { Pairing, SecurityKey, Passkey } = components;
-  const { Logo } = authComponents;
-  const { AuthBgImage } = images;
+const { Pairing, SecurityKey, Passkey } = formsComponents;
+const { Logo } = authComponents;
 
+const { AuthBgImage } = images;
+
+const Lock = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
