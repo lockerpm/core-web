@@ -14,10 +14,12 @@ import {
   InfoCircleOutlined
 } from "@ant-design/icons";
 
-import Actions from "./Actions";
+import emergencyAccessComponents from "../../../../../../components/emergency-access";
 
 import common from "../../../../../../utils/common";
 import global from "../../../../../../config/global";
+
+const { Actions } = emergencyAccessComponents;
 
 const ListData = (props) => {
   const { t } = useTranslation();

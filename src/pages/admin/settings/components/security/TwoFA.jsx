@@ -23,14 +23,14 @@ import {
 import { green } from '@ant-design/colors';
 
 import modalsComponents from "../../../../../components/modals";
-
-import SmartOtpFormData from "./form-data/SmartOtp";
-import MailOtpFormData from "./form-data/MailOtp";
+import securityFormDataComponents from "./form-data";
 
 import authServices from "../../../../../services/auth";
 
 import common from "../../../../../utils/common";
 import global from "../../../../../config/global";
+
+const { SmartOtpFormData, MailOtpFormData } = securityFormDataComponents;
 
 const { PasswordConfirmModal} = modalsComponents;
 

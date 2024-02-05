@@ -9,8 +9,9 @@ import {
 import {
 } from "@ant-design/icons";
 
-import Name from "./Name";
-import Actions from "./Actions";
+import emergencyAccessComponents from "../../../../../../components/emergency-access";
+
+const { Name, ViewActions } = emergencyAccessComponents;
 
 const BoxData = (props) => {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ const BoxData = (props) => {
                 onReview={onReview}
               />
             </div>
-            <Actions
+            <ViewActions
               className="flex items-center"
               cipher={record}
               allCiphers={allCiphers}

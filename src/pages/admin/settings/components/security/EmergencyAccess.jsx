@@ -16,16 +16,16 @@ import {
 
 import { orange } from '@ant-design/colors';
 
-import TableData from "./emergency-access/TableData";
-import ListData from "./emergency-access/ListData";
-import ResetPasswordFormData from "./form-data/ResetPassword";
-import EmergencyContactFormData from "./form-data/EmergencyContact";
-
+import securityEAComponents from "./emergency-access";
+import securityFormDataComponents from "./form-data";
 
 import emergencyAccessServices from "../../../../../services/emergency-access";
 
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
+
+const { TableData, ListData } = securityEAComponents;
+const { ResetPasswordFormData, EmergencyContactFormData } = securityFormDataComponents;
 
 const EmergencyAccess = (props) => {
   const {

@@ -14,7 +14,7 @@ import { } from "@ant-design/icons";
 
 import global from "../../../../../../config/global";
 
-const NewPassKeyModal = (props) => {
+const NewPasskeyModal = (props) => {
   const { t } = useTranslation()
   const {
     visible = false,
@@ -70,4 +70,4 @@ const NewPassKeyModal = (props) => {
   );
 }
 
-export default NewPassKeyModal;
+export default NewPasskeyModal;

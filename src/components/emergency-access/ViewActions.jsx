@@ -14,11 +14,11 @@ import {
   CopyOutlined,
 } from "@ant-design/icons";
 
-import { CipherType } from "../../../../../../core-js/src/enums";
+import { CipherType } from "../../core-js/src/enums";
 
-import common from "../../../../../../utils/common";
+import common from "../../utils/common";
 
-const Actions = (props) => {
+const ViewActions = (props) => {
   const { t } = useTranslation()
   
   const {
@@ -144,4 +144,4 @@ const Actions = (props) => {
   );
 }
 
-export default Actions;
+export default ViewActions;

@@ -8,10 +8,10 @@ import {
 import {
 } from "@ant-design/icons";
 
-import itemsComponents from "../../../../../../components/items";
-import commonComponents from "../../../../../../components/common";
+import itemsComponents from "../items";
+import commonComponents from "../common";
 
-import common from "../../../../../../utils/common";
+import common from "../../utils/common";
 
 const { TextCopy } = itemsComponents;
 const { CipherIcon } = commonComponents;

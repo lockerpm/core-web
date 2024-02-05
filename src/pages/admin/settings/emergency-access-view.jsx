@@ -9,11 +9,7 @@ import { } from "@ant-design/icons";
 
 import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";
-
-import Filter from "./components/security/emergency-access-view/Filter";
-import TableData from "./components/security/emergency-access-view/TableData";
-import ListData from "./components/security/emergency-access-view/ListData";
-import ViewItem from "./components/security/emergency-access-view/ViewItem";
+import securityEAViewComponents from "./components/security/emergency-access-view";
 
 import { CipherData } from "../../../core-js/src/models/data";
 import { CipherMapper } from "../../../core-js/src/constants";
@@ -26,6 +22,7 @@ import common from "../../../utils/common";
 
 const { Pagination }= itemsComponents;
 const { PageHeader }= commonComponents;
+const { Filter, TableData, ListData, ViewItem }= securityEAViewComponents;
 
 const EmergencyAccessView = (props) => {
   const { } = props;

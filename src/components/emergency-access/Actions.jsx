@@ -13,10 +13,10 @@ import {
 
 import { orange, green } from '@ant-design/colors';
 
-import emergencyAccessServices from "../../../../../../services/emergency-access";
+import emergencyAccessServices from "../../services/emergency-access";
 
-import common from "../../../../../../utils/common";
-import global from "../../../../../../config/global";
+import common from "../../utils/common";
+import global from "../../config/global";
 
 const Actions = (props) => {
   const { t } = useTranslation()

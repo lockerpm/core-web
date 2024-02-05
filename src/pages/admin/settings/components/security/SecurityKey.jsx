@@ -15,12 +15,14 @@ import {
   DeleteOutlined
 } from "@ant-design/icons";
 
-import NewSecurityKeyModal from "./modals/NewSecurityKey";
+import securityModalsComponents from "./modals";
 
 import authServices from "../../../../../services/auth";
 
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
+
+const { NewSecurityKeyModal } = securityModalsComponents;
 
 const SecurityKey = (props) => {
   const {

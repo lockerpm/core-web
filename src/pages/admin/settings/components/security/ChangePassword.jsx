@@ -11,11 +11,10 @@ import {
 } from "@ant-design/icons";
 
 import modalsComponents from "../../../../../components/modals";
-
-import ChangePasswordModal from "./modals/ChangePassword";
-
+import securityModalsComponents from "./modals";
 
 const { PasswordConfirmModal } = modalsComponents;
+const { ChangePasswordModal } = securityModalsComponents;
 
 const ChangePassword = (props) => {
   const {

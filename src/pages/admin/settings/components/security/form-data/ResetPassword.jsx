@@ -25,7 +25,7 @@ import common from '../../../../../../utils/common';
 
 const { GeneratePassword } = formsComponents;
 
-function ResetMasterPasswordFormData(props) {
+function ResetPasswordFormData(props) {
   const {
     item = null,
     visible = false,
@@ -163,4 +163,4 @@ function ResetMasterPasswordFormData(props) {
   );
 }
 
-export default ResetMasterPasswordFormData;
+export default ResetPasswordFormData;

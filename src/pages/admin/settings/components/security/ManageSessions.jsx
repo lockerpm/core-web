@@ -15,11 +15,13 @@ import {
   DownOutlined
 } from "@ant-design/icons";
 
-import DeauthorizeSessionsModal from "./modals/DeauthorizeSessions";
+import securityModalsComponents from "./modals";
 
 import userServices from "../../../../../services/user";
 
 import common from "../../../../../utils/common";
+
+const { DeauthorizeSessionsModal } = securityModalsComponents;
 
 const ManageSessions = (props) => {
   const {

@@ -10,7 +10,9 @@ import {
   QrcodeOutlined,
 } from "@ant-design/icons";
 
-import QrCodeModal from "./modals/QrCode";
+import securityModalsComponents from "./modals";
+
+const { QrCodeModal } = securityModalsComponents;
 
 const MobilePasswordless = (props) => {
   const {
