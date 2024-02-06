@@ -1,14 +1,14 @@
 import AdoptionRate from "./AdoptionRate";
 import News from "./News";
 import PasswordSecurity from "./PasswordSecurity";
-import UserLoginsByTime from "./UserLoginsByTime";
+import UserLoginByTime from "./UserLoginByTime";
 import UsersBlocked from "./UsersBlocked";
 
 const dashboardComponents = {
   AdoptionRate,
   News,
   PasswordSecurity,
-  UserLoginsByTime,
+  UserLoginByTime,
   UsersBlocked
 }
 

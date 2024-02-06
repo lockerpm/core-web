@@ -29,7 +29,7 @@ const {
   UserLoginByTime,
   PasswordSecurity,
   UsersBlocked
-}= dashboardComponents;
+} = dashboardComponents;
 
 const EnterpriseDashboard = (props) => {
   const { } = props;
