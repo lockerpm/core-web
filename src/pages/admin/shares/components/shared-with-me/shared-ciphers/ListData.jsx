@@ -9,6 +9,7 @@ import {
 } from '@lockerpm/design';
 
 import {
+  InfoCircleOutlined
 } from "@ant-design/icons";
 
 import itemsComponents from "../../../../../../components/items";

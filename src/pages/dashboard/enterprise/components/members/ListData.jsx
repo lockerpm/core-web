@@ -10,7 +10,9 @@ import {
   Tag
 } from "@lockerpm/design"
 
-import { InfoCircleOutlined } from "@ant-design/icons"
+import {
+  InfoCircleOutlined
+} from "@ant-design/icons"
 
 import itemsComponents from "../../../../../components/items";
 import memberComponents from "../../../../../components/member";

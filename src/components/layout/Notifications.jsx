@@ -238,8 +238,8 @@ function Notifications() {
         selectedKeys: notifications.filter((n) => !n.read).map((n) => n.id),
         onClick: dropdownClick,
         style: {
-          maxWidth: 400,
-          maxHeight: 600,
+          maxWidth: 360,
+          maxHeight: 480,
           padding: '8px 0',
           overflow: 'auto'
         }

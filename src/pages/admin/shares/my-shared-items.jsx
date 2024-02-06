@@ -261,7 +261,7 @@ const MySharedItems = (props) => {
                   onStopSharing={stopSharingItem}
                 /> : <QuickTableData
                   className="mt-4"
-                  loading={loading}
+                  loading={syncing}
                   data={filteredData.result}
                   params={params}
                   isFolder={false}

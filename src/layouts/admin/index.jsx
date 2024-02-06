@@ -41,7 +41,7 @@ function AdminLayout(props) {
   const userInfo = useSelector((state) => state.auth.userInfo)
   const teams = useSelector((state) => state.enterprise.teams)
 
-  const [respCollapsed, setRespCollapsed] = useState(false)
+  const [respCollapsed, setRespCollapsed] = useState(true)
 
   const accessToken = authServices.access_token()
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`)
@@ -104,6 +104,7 @@ function AdminLayout(props) {
     if (window.innerWidth <= 768) {
       dispatch(storeActions.updateIsMobile(true))
       dispatch(storeActions.updateCollapsed(false))
+      setRespCollapsed(true)
     } else if (window.innerWidth <= 1024) {
       dispatch(storeActions.updateIsMobile(false))
       setRespCollapsed(false)

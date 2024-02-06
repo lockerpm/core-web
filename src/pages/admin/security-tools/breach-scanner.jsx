@@ -99,7 +99,7 @@ const BreachScanner = (props) => {
             ]}
           >
             <Input
-              style={{ width: 400 }}
+              style={{ width: 400, maxWidth: '100%' }}
               disabled={callingAPI}
               placeholder={t('placeholder.enter')}
               onChange={() => setIsChecked(false)}
