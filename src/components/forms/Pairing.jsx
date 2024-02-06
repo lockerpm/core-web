@@ -27,8 +27,6 @@ const PairingForm = (props) => {
   const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
   const approveCode = useSelector((state) => state.service.approveCode)
   const pairingConfirmed = useSelector((state) => state.service.pairingConfirmed)
-  const clientId = useSelector((state) => state.service.clientId);
-  const clientType = useSelector((state) => state.service.clientType);
 
   const confirmDesktopPairing = async () => {
     try {
