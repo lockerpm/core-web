@@ -30,14 +30,16 @@ const PairingForm = (props) => {
   const clientId = useSelector((state) => state.service.clientId);
   const clientType = useSelector((state) => state.service.clientType);
 
-  const confirmClient = async () => {
+  const confirmDesktopPairing = async () => {
     try {
-      await service.confirmPairingClient(clientId, clientType);
+      await service.confirmDesktopPairing();
+      global.store.dispatch(storeActions.updateApproveCode(null));
       onConfirm();
     } catch (error) {
       global.pushError(error)
     }
   }
+
 
   return (
     <div className="pairing-form text-center">
@@ -60,7 +62,7 @@ const PairingForm = (props) => {
               disabled={!pairingConfirmed}
               size="large"
               loading={callingAPI}
-              onClick={() => confirmClient()}
+              onClick={() => confirmDesktopPairing()}
             >
               {t('button.confirm')}
             </Button> : <Button
