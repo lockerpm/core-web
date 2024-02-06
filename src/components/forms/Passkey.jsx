@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   Button,
@@ -10,10 +13,7 @@ import {
   RedoOutlined
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
 import { green } from '@ant-design/colors';
-
-import { useTranslation } from "react-i18next";
 
 import global from "../../config/global";
 

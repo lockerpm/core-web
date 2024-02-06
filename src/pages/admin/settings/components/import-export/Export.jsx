@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Row,
   Col,
@@ -7,27 +10,25 @@ import {
   Button,
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import {
-  PasswordConfirmModal
-} from '../../../../../components'
-
-import global from "../../../../../config/global";
-
 import {
   ExportOutlined,
 } from "@ant-design/icons";
 
 import { } from '@ant-design/colors';
+
+import modalsComponents from "../../../../../components/modals";
+
 import { Utils } from "../../../../../core-js/src/misc/utils";
 import { FolderView } from "../../../../../core-js/src/models/view/folderView";
 import { FolderWithId as FolderExport } from '../../../../../core-js/src/models/export/folderWithId'
 import { CipherWithIds as CipherExport } from '../../../../../core-js/src/models/export/cipherWithIds'
 
-import * as papa from 'papaparse';
+import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
+
+import * as papa from 'papaparse';
+
+const { PasswordConfirmModal } = modalsComponents;
 
 const Export = (props) => {
   const {

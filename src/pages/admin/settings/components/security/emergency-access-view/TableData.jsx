@@ -1,16 +1,16 @@
 import React, { useMemo } from "react";
-import {
-  Table,
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
+  Table,
+} from '@lockerpm/design';
+
+import {
 } from "@ant-design/icons";
 
-import Name from "./table/Name";
-import Actions from "./table/Actions";
+import Name from "../../../../../../components/emergency-access/Name";
+import Actions from "../../../../../../components/emergency-access/ViewActions";
 
 const TableData = (props) => {
   const { t } = useTranslation();

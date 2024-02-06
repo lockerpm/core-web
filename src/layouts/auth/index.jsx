@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Layout } from '@lockerpm/design';
-import PageContent from '../../routes';
+
+import layoutComponents from "../../components/layout"
+
+const { PageContent } = layoutComponents;
 
 function AuthLayout(props) {
   const { routers, pages } = props

@@ -1,15 +1,26 @@
-import React, { useMemo } from "react"
-import { Table, Space, Avatar, Tag } from "@lockerpm/design"
-
+import React, { } from "react"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, PasswordStrength, RouterLink } from "../../../../../components"
-import Actions from "./Actions"
-import Role from "./Role"
+import {
+  Table,
+  Space,
+  Avatar,
+  Tag
+} from "@lockerpm/design"
+
+import {
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items";
+import memberComponents from "../../../../../components/member";
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
+
+const { TextCopy, PasswordStrength, RouterLink } = itemsComponents;
+const { Actions, Role } = memberComponents;
+
 
 const TableData = (props) => {
   const { t } = useTranslation()

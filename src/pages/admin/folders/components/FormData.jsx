@@ -1,4 +1,7 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   Space,
@@ -10,14 +13,11 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import folderServices from '../../../../services/folder';
+import sharingServices from '../../../../services/sharing';
 
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
-
-import folderServices from '../../../../services/folder';
-import sharingServices from '../../../../services/sharing';
 
 function FormData(props) {
   const {

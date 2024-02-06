@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   Switch,
@@ -13,14 +16,11 @@ import {
   EditOutlined
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import commonServices from "../../../../../services/common";
+import enterprisePolicyServices from "../../../../../services/enterprise-policy";
 
 import common from "../../../../../utils/common";
 import global from "../../../../../config/global";
-
-import enterprisePolicyServices from "../../../../../services/enterprise-policy";
-import commonServices from "../../../../../services/common";
 
 const PasswordlessLogin = (props) => {
   const {

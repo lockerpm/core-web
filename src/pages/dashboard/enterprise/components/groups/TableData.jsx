@@ -1,14 +1,27 @@
-import React, { useMemo } from "react"
-import { Table, Space, Button, Tooltip, Avatar } from "@lockerpm/design"
-
+import React, { } from "react"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy } from "../../../../../components"
+import {
+  Table,
+  Space,
+  Button,
+  Avatar,
+  Tooltip
+} from "@lockerpm/design"
 
-import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, GroupOutlined } from "@ant-design/icons"
+import {
+  EditOutlined,
+  DeleteOutlined,
+  UsergroupAddOutlined,
+  GroupOutlined,
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
+
+const { TextCopy } = itemsComponents;
 
 const TableData = (props) => {
   const { t } = useTranslation()

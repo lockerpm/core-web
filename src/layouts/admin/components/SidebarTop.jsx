@@ -1,21 +1,28 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Image,
   Button,
 } from '@lockerpm/design';
 
-import '../css/components/SidebarTop.scss';
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import IconLogo from '../../../assets/images/logos/icon-logo.svg'
-import DropdownMenu from './DropdownMenu';
-import global from '../../../config/global';
-import { gray } from '@ant-design/colors';
-
 import {
 } from '@ant-design/icons'
+
+import { gray } from '@ant-design/colors';
+
+import layoutComponents from '../../../components/layout';
+
+import images from '../../../assets/images';
+
+import global from '../../../config/global';
+
+import '../css/sidebar-top.scss';
+
+const { DropdownMenu } = layoutComponents;
+const { IconLogo } = images;
 
 function SidebarTop(props) {
   const { collapsed } = props

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Badge,
@@ -7,20 +10,6 @@ import {
   Card,
   Tooltip
 } from '@lockerpm/design';
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import {
-  PasswordConfirmModal
-} from '../../../../../components'
-
-import SmartOtpFormData from "./form-data/SmartOtp";
-import MailOtpFormData from "./form-data/MailOtp";
-
-import authServices from "../../../../../services/auth";
-import common from "../../../../../utils/common";
-import global from "../../../../../config/global";
 
 import {
   MobileOutlined,
@@ -32,6 +21,18 @@ import {
 } from "@ant-design/icons";
 
 import { green } from '@ant-design/colors';
+
+import modalsComponents from "../../../../../components/modals";
+import securityFormDataComponents from "./form-data";
+
+import authServices from "../../../../../services/auth";
+
+import common from "../../../../../utils/common";
+import global from "../../../../../config/global";
+
+const { SmartOtpFormData, MailOtpFormData } = securityFormDataComponents;
+
+const { PasswordConfirmModal} = modalsComponents;
 
 const TwoFA = (props) => {
   const {

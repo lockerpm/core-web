@@ -1,19 +1,33 @@
 import React, { useMemo } from "react"
-import { Table, Space, Button, Avatar } from "@lockerpm/design"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import { TextCopy, RouterLink } from "../../../../components"
+import {
+  Table,
+  Space,
+  Button,
+  Avatar
+} from "@lockerpm/design"
 
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
+
+import itemsComponents from "../../../../components/items"
 
 import common from "../../../../utils/common"
 import global from "../../../../config/global"
 
+const { TextCopy, RouterLink } = itemsComponents;
+
 const TableData = (props) => {
   const { t } = useTranslation()
-  const { loading = false, className = "", data = [], params = {}, onUpdate = () => { }, onDelete = () => { } } = props
+  const {
+    loading = false,
+    className = "",
+    data = [],
+    params = {},
+    onUpdate = () => { },
+    onDelete = () => { }
+  } = props
 
   const columns = useMemo(() => {
     return [

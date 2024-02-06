@@ -1,4 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
+
 import {
   List,
   Divider,
@@ -8,25 +12,25 @@ import {
   Tag,
   Space
 } from '@lockerpm/design';
+
 import {
   SafetyCertificateOutlined
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
+import { red } from '@ant-design/colors';
 
-import { AdminHeader, PasswordStrength, TextCopy } from "../../../components";
-import { useTranslation } from "react-i18next";
-import { useLocation } from 'react-router-dom';
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import memberComponents from "../../../components/member";
 
-import Actions from "./components/members/Actions";
-import Role from "./components/members/Role";
+import enterpriseMemberServices from "../../../services/enterprise-member";
 
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-import enterpriseMemberServices from "../../../services/enterprise-member";
-
-import { red } from '@ant-design/colors';
+const { PasswordStrength, TextCopy } = itemsComponents;
+const { PageHeader } = commonComponents;
+const { Actions, Role } = memberComponents;
 
 const Member = (props) => {
   const { t } = useTranslation();
@@ -131,7 +135,7 @@ const Member = (props) => {
 
   return (
     <div className="member-details layout-content">
-      <AdminHeader
+      <PageHeader
         title={member.full_name}
         subtitle={member.email}
         actions={[]}

@@ -1,6 +1,8 @@
 /* eslint-disable no-import-assign */
 import React, { useEffect, useState, useMemo } from "react";
-import './css/auth.scss';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
   Card,
@@ -19,23 +21,23 @@ import {
   UsbOutlined
 } from "@ant-design/icons";
 
-import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
+import formsComponents from "../../components/forms";
+import authComponents from "./components";
 
-import Logo from "./components/Logo";
-
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
-
-import RULES from '../../config/rules'
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from 'react-router-dom';
+import images from "../../assets/images";
 
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";
 
 import common from "../../utils/common";
 import global from "../../config/global";
+
+import './css/auth.scss';
+
+const { Pairing, SecurityKey, Passkey } = formsComponents;
+const { Logo } = authComponents;
+
+const { AuthBgImage } = images;
 
 const Lock = () => {
   const { t } = useTranslation();
@@ -263,7 +265,7 @@ const Lock = () => {
                 <div>
                   {
                     isPair && <div>
-                      <PairingForm
+                      <Pairing
                         userInfo={userInfo}
                         callingAPI={callingAPI}
                         onConfirm={() => handlePairConfirm()}
@@ -296,7 +298,7 @@ const Lock = () => {
                                     name="password"
                                     noStyle
                                     rules={[
-                                      RULES.REQUIRED(t('lock.password')),
+                                      global.rules.REQUIRED(t('lock.password')),
                                     ]}
                                   >
                                     <Input.Password
@@ -356,7 +358,7 @@ const Lock = () => {
                           {
                             step === 2 && <div>
                               {
-                                otherMethod === 'security_key' && <PasswordlessForm
+                                otherMethod === 'security_key' && <SecurityKey
                                   changing={callingAPI}
                                   isLogin={true}
                                   userInfo={userInfo}
@@ -367,7 +369,7 @@ const Lock = () => {
                                 />
                               }
                               {
-                                otherMethod === 'passkey' && <PasskeyForm
+                                otherMethod === 'passkey' && <Passkey
                                   changing={loading}
                                   isLogin={true}
                                   userInfo={userInfo}

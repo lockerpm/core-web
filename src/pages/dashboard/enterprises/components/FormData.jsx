@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react"
-import { Form, Space, Button, Drawer, Input } from "@lockerpm/design"
-
-import { } from "@ant-design/icons"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
-import global from "../../../../config/global"
+import {
+  Form,
+  Space,
+  Button,
+  Drawer,
+  Input
+} from "@lockerpm/design"
+
+import {
+} from "@ant-design/icons"
+
 import enterpriseServices from "../../../../services/enterprise"
+
+import global from "../../../../config/global"
 
 function FormData(props) {
   const {

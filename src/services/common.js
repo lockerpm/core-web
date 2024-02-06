@@ -354,7 +354,7 @@ async function delete_collection(collection) {
       ciphers
     }
   }
-  await sharingServices.delete_sharing_folder(folder.organizationId, folder.id, payload);
+  await sharingServices.delete_sharing_folder(collection.organizationId, collection.id, payload);
   await global.jsCore.cipherService.softDelete(cipherInsideCollection.map((c) => c.id));
   await get_all_collections();
 }

@@ -1,23 +1,32 @@
 import React, { useEffect, useState, useMemo } from "react"
-import {} from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-import { AdminHeader, Pagination } from "../../../components"
-
-import NoFolder from "./components/NoFolder"
-import Filter from "./components/Filter"
-import TableData from "./components/TableData"
-import BoxData from "./components/BoxData"
-import FormData from "./components/FormData"
-import ShareFormData from "../shares/components/FormData"
-
 import { useSelector, useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 
+import {} from "@lockerpm/design"
+
+import { PlusOutlined } from "@ant-design/icons"
+
+import itemsComponents from "../../../components/items"
+import commonComponents from "../../../components/common"
+import foldersComponents from "./components"
+
+import ShareFormData from "../../../components/share/FormData"
+
 import common from "../../../utils/common"
 
 import global from "../../../config/global"
-import commonServices from "../../../services/common"
+import commonServices from "../../../services/common";
+
+const { Pagination } = itemsComponents;
+const { PageHeader } = commonComponents;
+const {
+  NoFolder,
+  Filter,
+  TableData,
+  ListData,
+  FormData
+} = foldersComponents;
 
 const Folders = (props) => {
   const { t } = useTranslation()
@@ -124,7 +133,7 @@ const Folders = (props) => {
 
   return (
     <div className='vault layout-content' onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}>
-      <AdminHeader
+      <PageHeader
         title={t("inventory.all_folders")}
         total={filteredData.total}
         actions={[
@@ -146,7 +155,7 @@ const Folders = (props) => {
       ) : (
         <>
           {isMobile ? (
-            <BoxData
+            <ListData
               className='mt-4'
               loading={syncing}
               data={filteredData.result}

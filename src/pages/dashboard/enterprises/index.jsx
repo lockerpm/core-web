@@ -1,27 +1,35 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { } from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-import { AdminHeader } from "../../../components"
-
-import Filter from "./components/Filter"
-import NoEnterprise from "./components/NoEnterprise"
-import TableData from "./components/TableData"
-import BoxData from "./components/BoxData"
-import FormData from "./components/FormData"
-
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import {
+} from "@lockerpm/design"
+
+import {
+  PlusOutlined
+} from "@ant-design/icons"
+
+import commonComponents from "../../../components/common"
+import enterprisesComponents from "./components"
+
+import enterpriseServices from "../../../services/enterprise"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
-import enterpriseServices from "../../../services/enterprise"
+const { PageHeader } = commonComponents;
+const {
+  Filter,
+  NoEnterprise,
+  TableData,
+  ListData,
+  FormData
+} = enterprisesComponents;
 
-const Enterprises = (props) => {
+const Enterprises = () => {
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
   const isMobile = useSelector((state) => state.system.isMobile)
@@ -119,7 +127,7 @@ const Enterprises = (props) => {
       className='vault layout-content'
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t("enterprises.title")}
         total={filteredData.total}
         actions={[
@@ -141,7 +149,7 @@ const Enterprises = (props) => {
       ) : (
         <>
           {isMobile ? (
-            <BoxData
+            <ListData
               className='mt-4'
               loading={loading}
               data={filteredData.result}

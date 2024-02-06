@@ -1,24 +1,23 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { Divider } from '@lockerpm/design';
-import { } from "@ant-design/icons";
-
-import { AdminHeader } from "../../../components";
-import PasswordGenerate from "./components/PasswordGenerate";
-import PasswordHealth from "./components/PasswordHealth";
-import DataBreachScanner from "./components/DataBreachScanner";
-
-import { useSelector } from 'react-redux';
+import React, { } from "react";
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import { } from '../../../utils/common';
+import { Divider } from '@lockerpm/design';
 
+import { } from "@ant-design/icons";
+
+import commonComponents from "../../../components/common";
+import securityToolsComponents from "./components";
+
+const { PageHeader } = commonComponents;
+const { PasswordGenerate, PasswordHealth, DataBreachScanner } = securityToolsComponents;
 
 const SecurityTools = (props) => {
   const { } = props;
   const { t } = useTranslation();
   return (
     <div className="security-tools layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('security_tools.title')}
         subtitle={t('security_tools.description')}
         actions={[]}

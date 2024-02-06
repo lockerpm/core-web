@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Row,
   Col,
@@ -10,9 +13,6 @@ import {
   SearchOutlined,
   CaretDownOutlined
 } from "@ant-design/icons";
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 import global from "../../../../config/global";
 

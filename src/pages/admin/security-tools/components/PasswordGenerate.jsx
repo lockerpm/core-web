@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import {
-  Drawer
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  ImageIcon,
-  GeneratePasswordContent
-} from '../../../../components'
+  Drawer
+} from '@lockerpm/design';
 
 import {
   RightOutlined
 } from "@ant-design/icons";
+
+import itemsComponents from "../../../../components/items";
+import commonComponents from "../../../../components/common";
+
+const { ImageIcon } = itemsComponents;
+const { GenerateOptions } = commonComponents;
 
 const PasswordGenerate = (props) => {
   const {
@@ -51,7 +52,7 @@ const PasswordGenerate = (props) => {
         onClose={() => setVisible(false)}
         open={visible}
       >
-        <GeneratePasswordContent
+        <GenerateOptions
           isFill={false}
           isShowOptions={true}
         />

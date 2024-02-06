@@ -1,19 +1,19 @@
 import React, { } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
   Button
 } from '@lockerpm/design';
 
-import { useSelector } from 'react-redux';
-import { } from '@ant-design/colors';
-
-import { useTranslation } from "react-i18next";
-import common from "../../utils/common";
-
 import {
   ReloadOutlined
 } from "@ant-design/icons";
 
+import { } from '@ant-design/colors';
+
+import common from "../../utils/common";
 import global from "../../config/global";
 
 const PairingForm = (props) => {

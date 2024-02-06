@@ -1,24 +1,22 @@
 import React, { useMemo } from "react";
-import {
-  Table,
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  TextCopy,
-} from '../../../../../components';
+  Table,
+} from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
-import CipherName from "../../../vault/components/table/Name";
-import FolderName from "../../../folders/components/table/Name";
-import Actions from "./table/Actions";
-import SharedWith from "./table/SharedWith";
+import itemsComponents from "../../../../../components/items";
+import cipherComponents from "../../../../../components/cipher";
+import folderComponents from "../../../../../components/folder";
+import inAppShareComponents from "../../../../../components/in-app-share";
 
 import common from "../../../../../utils/common";
+
+const { TextCopy } = itemsComponents;
+const { Actions, SharedWith } = inAppShareComponents;
+const CipherName = cipherComponents.Name;
+const FolderName = folderComponents.Name;
 
 const TableData = (props) => {
   const { t } = useTranslation();

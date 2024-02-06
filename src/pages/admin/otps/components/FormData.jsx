@@ -13,12 +13,12 @@ import {
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import global from '../../../../config/global';
-import common from '../../../../utils/common';
+import { CipherType } from '../../../../core-js/src/enums';
 
 import cipherServices from '../../../../services/cipher';
 
-import { CipherType } from '../../../../core-js/src/enums';
+import global from '../../../../config/global';
+import common from '../../../../utils/common';
 
 function FormData(props) {
   const {

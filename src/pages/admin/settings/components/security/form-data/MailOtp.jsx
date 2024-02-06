@@ -1,4 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
@@ -8,13 +11,13 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { MailOtpForm } from '../../../../../../components';
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import formsComponents from '../../../../../../components/forms';
 
 import authServices from '../../../../../../services/auth';
+
 import global from '../../../../../../config/global';
+
+const { MailOtp } = formsComponents;
 
 function MailOtpFormData(props) {
   const {
@@ -132,7 +135,7 @@ function MailOtpFormData(props) {
         <p className='mb-4'>
           {t('security.two_fa.email_otp.description')}
         </p>
-        <MailOtpForm
+        <MailOtp
           userInfo={userInfo}
           step={step}
           isSentTo={isSentTo}

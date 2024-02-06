@@ -1,18 +1,19 @@
-import React, { useEffect, useMemo } from 'react'
-import { Layout, Modal, notification } from '@lockerpm/design'
+import React, { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { ClientService } from './components'
+
+import { Layout, Modal, notification } from '@lockerpm/design'
+
+import commonComponents from './components/common'
 
 import {
   ExclamationCircleOutlined
 } from '@ant-design/icons'
 
-import './assets/css/index.scss'
-
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import './assets/css/index.scss'
 
 import { navigatePage } from './utils/navigate'
 import common from './utils/common'
@@ -40,6 +41,8 @@ const App = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const location = useLocation()
+  
+  const { ClientService } = commonComponents
 
   global.location = location;
   notification.config({ placement: 'bottomLeft', duration: 3 })

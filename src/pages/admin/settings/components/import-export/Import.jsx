@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import {
-  Button,
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-} from '../../../../../components'
+  Button,
+} from '@lockerpm/design';
 
 import {
   ImportOutlined
 } from "@ant-design/icons";
 
-import ImportForm from "./ImportForm";
+import formsComponents from "../../../../../components/forms"; 
+
+const { ImportForm } = formsComponents;
 
 const Import = (props) => {
   const {

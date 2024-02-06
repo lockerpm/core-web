@@ -1,31 +1,67 @@
-import React, { useEffect } from "react";
-import { Divider } from '@lockerpm/design';
-import { } from "@ant-design/icons";
-
-import { AdminHeader } from "../../../components";
-import UnlockMethods from "./components/security/UnlockMethods";
-import MobilePasswordless from "./components/security/MobilePasswordless";
-import CrossPlatformSync from "./components/security/CrossPlatformSync";
-import TwoFA from "./components/security/TwoFA";
-import EmergencyAccess from "./components/security/EmergencyAccess";
-import ManageSessions from "./components/security/ManageSessions";
-
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { } from '../../../utils/common';
+import { Divider } from '@lockerpm/design';
+
+import {
+  DownOutlined,
+  RightOutlined
+} from "@ant-design/icons";
+
+import commonComponents from "../../../components/common";
+import securityComponents from "./components/security";
+
+const { PageHeader } = commonComponents;
+const {
+  ChangePassword,
+  Passkey,
+  SecurityKey,
+  TwoFA,
+  MobilePasswordless,
+  CrossPlatformSync,
+  EmergencyAccess,
+  ManageSessions
+} = securityComponents;
 
 const Security = (props) => {
   const { } = props;
   const { t } = useTranslation();
+  const [expand, setExpand] = useState(false);
   
   return (
     <div className="email-notifications layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('security_control.title')}
         subtitle={t('security_control.description')}
         actions={[]}
       />
-      <UnlockMethods className="mt-4" />
+      <div className="mt-4">
+        <div className="flex justify-between">
+          <div
+            className="flex text-primary cursor-pointer"
+            onClick={() => setExpand(!expand)}
+          >
+            <p className="font-semibold text-xl mr-2">
+              {t('security.unlock_methods.title')}
+            </p>
+            {
+              expand ? <DownOutlined /> : <RightOutlined />
+            }
+          </div>
+        </div>
+        <p className="mt-1">
+          {t('security.unlock_methods.description')}
+        </p>
+        {
+          expand && <div className="mt-8">
+            <ChangePassword />
+            <Divider />
+            <SecurityKey />
+            <Divider />
+            <Passkey />
+          </div>
+        }
+      </div>
       <Divider />
       <MobilePasswordless />
       <Divider />

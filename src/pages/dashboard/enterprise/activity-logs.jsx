@@ -1,28 +1,32 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { } from "@lockerpm/design"
-import { } from "@ant-design/icons"
-
-import { AdminHeader, Pagination } from "../../../components"
-import Filter from "./components/activity-logs/Filter"
-import TableData from "./components/activity-logs/TableData"
-import BoxData from "./components/activity-logs/BoxData"
-
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import { } from "@lockerpm/design"
+
+import { } from "@ant-design/icons"
+
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import activityLogsComponents from "./components/activity-logs";
 
 import enterpriseActivityServices from "../../../services/enterprise-activity"
 import enterpriseMemberServices from "../../../services/enterprise-member"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
+
 import dayjs from 'dayjs'
+
+const { Pagination } = itemsComponents;
+const { PageHeader } = commonComponents;
+const { Filter, ListData, TableData } = activityLogsComponents;
 
 const EnterpriseActivityLogs = (props) => {
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
   const enterpriseId = currentPage?.params.enterprise_id
@@ -127,7 +131,7 @@ const EnterpriseActivityLogs = (props) => {
       className='enterprise_members layout-content'
       onScroll={(e) => common.scrollEnd(e, params, total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t("enterprise_activity_logs.title")}
         total={total}
       />
@@ -139,7 +143,7 @@ const EnterpriseActivityLogs = (props) => {
         setParams={(v) => setParams({ ...v, page: 1 })}
       />
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className='mt-4'
           loading={loading}
           data={activityLogs}

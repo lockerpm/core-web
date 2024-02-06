@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useMemo } from "react"
-import { Form, Input, Button, Space } from "@lockerpm/design"
-
-import { AdminHeader } from "../../../components"
-
+import React, { useEffect, useState } from "react"
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
+
+import {
+  Form,
+  Input,
+  Button,
+  Space
+} from "@lockerpm/design"
 
 import {
   EditOutlined,
@@ -13,10 +16,14 @@ import {
   RedoOutlined,
 } from "@ant-design/icons";
 
+import commonComponents from "../../../components/common"
+
 import ssoConfigServices from "../../../services/sso-config"
 
 import global from "../../../config/global"
 import common from "../../../utils/common"
+
+const { PageHeader } = commonComponents;
 
 const SSOConfiguration = (props) => {
   const { } = props
@@ -91,7 +98,7 @@ const SSOConfiguration = (props) => {
 
   return (
     <div className='sso-configuration layout-content'>
-      <AdminHeader title={t("sso_configuration.title")} subtitle={t("sso_configuration.description")} actions={[]} />
+      <PageHeader title={t("sso_configuration.title")} subtitle={t("sso_configuration.description")} actions={[]} />
       <Form
         form={form}
         layout='vertical'

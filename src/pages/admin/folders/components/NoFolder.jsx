@@ -1,4 +1,7 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Spin
@@ -7,15 +10,11 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import {
-  NoData,
-  ImageIcon
-} from '../../../../components';
-
 import { gray } from '@ant-design/colors';
+
+import itemsComponents from "../../../../components/items";
+
+const { NoData, ImageIcon } = itemsComponents;
 
 const NoFolder = (props) => {
   const { t } = useTranslation()

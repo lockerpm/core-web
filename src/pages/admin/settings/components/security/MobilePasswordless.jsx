@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import {
-  Button,
-} from '@lockerpm/design';
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-} from '../../../../../components';
-
-import QrCodeModal from "./mobile-passwordless/QrCode";
+  Button,
+} from '@lockerpm/design';
 
 import {
   QrcodeOutlined,
 } from "@ant-design/icons";
+
+import securityModalsComponents from "./modals";
+
+const { QrCodeModal } = securityModalsComponents;
 
 const MobilePasswordless = (props) => {
   const {

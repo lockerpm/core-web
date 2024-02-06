@@ -1,20 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
 import {
   Button,
   Badge
 } from '@lockerpm/design';
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import {
-} from '../../../../../components';
-
-import TableData from "./emergency-access/TableData";
-import BoxData from "./emergency-access/BoxData";
-import ResetPasswordFormData from "./form-data/ResetPassword";
-import EmergencyContactFormData from "./form-data/EmergencyContact";
-
 
 import {
   PlusOutlined,
@@ -23,11 +15,17 @@ import {
 } from "@ant-design/icons";
 
 import { orange } from '@ant-design/colors';
-import { useLocation } from "react-router-dom";
+
+import securityEAComponents from "./emergency-access";
+import securityFormDataComponents from "./form-data";
 
 import emergencyAccessServices from "../../../../../services/emergency-access";
+
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
+
+const { TableData, ListData } = securityEAComponents;
+const { ResetPasswordFormData, EmergencyContactFormData } = securityFormDataComponents;
 
 const EmergencyAccess = (props) => {
   const {
@@ -149,7 +147,7 @@ const EmergencyAccess = (props) => {
               />
             }
             {
-              isMobile && <BoxData
+              isMobile && <ListData
                 data={listTrusted}
                 isTrusted={true}
                 fetchTrusted={fetchTrusted}
@@ -177,7 +175,7 @@ const EmergencyAccess = (props) => {
               />
             }
             {
-              isMobile && <BoxData
+              isMobile && <ListData
                 data={listGranted}
                 fetchTrusted={fetchTrusted}
                 fetchGranted={fetchGranted}

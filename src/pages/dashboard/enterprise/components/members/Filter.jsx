@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react"
-import { Row, Col, Input, Select } from "@lockerpm/design"
-
-import { SearchOutlined } from "@ant-design/icons"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
+
+import {
+  Row,
+  Col,
+  Input,
+  Select
+} from "@lockerpm/design"
+
+import { SearchOutlined } from "@ant-design/icons"
 
 import global from "../../../../../config/global"
 

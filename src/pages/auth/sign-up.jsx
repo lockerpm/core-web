@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import './css/auth.scss';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
-  Image,
   Card,
   Input,
   Form,
   Button
 } from '@lockerpm/design';
 
-import Logo from "./components/Logo";
+import authComponents from "./components";
 
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
-
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import authServices from "../../services/auth";
@@ -22,6 +19,11 @@ import coreServices from "../../services/core";
 import commonServices from "../../services/common";
 
 import global from "../../config/global";
+
+import './css/auth.scss';
+
+const { Logo } = authComponents;
+const { AuthBgImage } = images;
 
 const SingUp = () => {
   const { t } = useTranslation();

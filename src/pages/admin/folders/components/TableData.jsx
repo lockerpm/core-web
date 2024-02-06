@@ -1,22 +1,21 @@
 import React, { useMemo } from "react";
-import {
-  Table,
-} from '@lockerpm/design';
-
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  TextCopy,
-} from '../../../../components';
+  Table,
+} from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
 
-import Name from "./table/Name";
-import Actions from "./table/Actions";
+import itemsComponents from "../../../../components/items";
+import folderComponents from "../../../../components/folder";
 
 import common from "../../../../utils/common";
+
+const { TextCopy } = itemsComponents;
+const { Name, Actions } = folderComponents
 
 const TableData = (props) => {
   const { t } = useTranslation();

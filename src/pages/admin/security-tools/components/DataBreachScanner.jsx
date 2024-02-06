@@ -1,26 +1,25 @@
-import React, { useState } from "react";
-import {
-} from '@lockerpm/design';
-
+import React, { } from "react";
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  ImageIcon
-} from '../../../../components';
+} from '@lockerpm/design';
 
 import {
   RightOutlined
 } from "@ant-design/icons";
+
+import itemsComponents from "../../../../components/items";
+
 import global from "../../../../config/global";
+
+const { ImageIcon } = itemsComponents;
 
 const DataBreachScanner = (props) => {
   const {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const [formVisible, setFormVisible] = useState(false);
-
   return (
     <div className={className}>
       <div className="flex items-center">

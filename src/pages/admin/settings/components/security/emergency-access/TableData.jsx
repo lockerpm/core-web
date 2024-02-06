@@ -1,4 +1,7 @@
 import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Table,
   Avatar,
@@ -6,17 +9,16 @@ import {
   Tooltip
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
 import {
   InfoCircleOutlined
 } from "@ant-design/icons";
 
-import Actions from "./Actions";
+import emergencyAccessComponents from "../../../../../../components/emergency-access";
 
 import common from "../../../../../../utils/common";
 import global from "../../../../../../config/global";
+
+const { Actions } = emergencyAccessComponents;
 
 const TableData = (props) => {
   const { t } = useTranslation();

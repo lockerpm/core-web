@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import './css/auth.scss';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
   Spin
 } from '@lockerpm/design';
 
-import Logo from "./components/Logo";
+import authComponents from "./components";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import Personal from "./components/sign-in/Personal";
-import Enterprise from "./components/sign-in/Enterprise";
-
-import AuthBgImage from "../../assets/images/auth-bg-image.svg";
+import images from "../../assets/images";
 
 import commonServices from "../../services/common";
 
 import global from "../../config/global";
+
+import './css/auth.scss';
+
+const { Logo, Personal, Enterprise } = authComponents;
+const { AuthBgImage } = images;
 
 const SingIn = () => {
   const { t } = useTranslation();

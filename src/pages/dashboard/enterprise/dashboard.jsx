@@ -1,26 +1,35 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
 import {
   Row,
   Col,
 } from '@lockerpm/design';
+
 import {
 } from "@ant-design/icons";
 
-import { AdminHeader, FilterTime } from "../../../components";
-import AdoptionRate from "./components/dashboard/AdoptionRate";
-import News from "./components/dashboard/News";
-import UserLoginByTime from "./components/dashboard/UserLoginsByTime";
-import PasswordSecurity from "./components/dashboard/PasswordSecurity";
-import UsersBlocked from "./components/dashboard/UsersBlocked";
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import dashboardComponents from "./components/dashboard";
 
-import { } from 'react-redux';
-import { useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
-import common from "../../../utils/common";
 import enterpriseServices from "../../../services/enterprise";
 
+import common from "../../../utils/common";
+
 import dayjs from 'dayjs'
+
+const { FilterTime }= itemsComponents;
+const { PageHeader }= commonComponents;
+const {
+  AdoptionRate,
+  News,
+  UserLoginByTime,
+  PasswordSecurity,
+  UsersBlocked
+}= dashboardComponents;
 
 const EnterpriseDashboard = (props) => {
   const { } = props;
@@ -66,7 +75,7 @@ const EnterpriseDashboard = (props) => {
 
   return (
     <div className="enterprise_dashboard layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('enterprise_dashboard.title')}
         actions={[]}
         Right={() => <FilterTime

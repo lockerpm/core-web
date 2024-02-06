@@ -1,18 +1,23 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
 } from '@lockerpm/design';
 
-import { RouterLink } from "../../../../../components";
-
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import {
+  blue,
+  green,
+  orange
+} from '@ant-design/colors';
 
-import DonutChart from './charts/Donut';
-import { blue, green, orange } from '@ant-design/colors';
+import chartComponents from "../../../../../components/chart";
+
+const { Donut } = chartComponents;
 
 const AdoptionRate = (props) => {
   const {
@@ -39,7 +44,7 @@ const AdoptionRate = (props) => {
       <p className="font-semibold text-gray mb-2 text-xl">
         {t('enterprise_dashboard.adoption_rate.title')}
       </p>
-      <DonutChart
+      <Donut
         height={250}
         type="pie"
         colors={[

@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Modal,
   Form,
   Input
 } from '@lockerpm/design';
-import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
 
-import { useSelector } from 'react-redux';
-import { orange } from '@ant-design/colors';
-
-import { useTranslation } from "react-i18next";
 import { InfoCircleFilled } from "@ant-design/icons";
 
-import global from "../../config/global";
+import { orange } from '@ant-design/colors';
+
+import formsComponents from "../forms";
+
 import authServices from "../../services/auth";
 
+import global from "../../config/global";
+
+const { Pairing, SecurityKey, Passkey } = formsComponents;
+
 const PasswordConfirmModal = (props) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+
   const {
     visible = false,
     danger = false,
@@ -99,7 +105,7 @@ const PasswordConfirmModal = (props) => {
     >
       <div key={timeNow}>
         {
-          isPair && <PairingForm
+          isPair && <Pairing
             callingAPI={callingAPI}
             userInfo={userInfo}
             onConfirm={() => setIsPair(false)}
@@ -133,7 +139,7 @@ const PasswordConfirmModal = (props) => {
             }
             {
               unlockMethod === 'security_key' && <div>
-                <PasswordlessForm
+                <SecurityKey
                   changing={callingAPI}
                   userInfo={userInfo}
                   onConfirm={onConfirm}
@@ -143,7 +149,7 @@ const PasswordConfirmModal = (props) => {
             }
             {
               unlockMethod === 'passkey' && <div>
-                <PasskeyForm
+                <Passkey
                   changing={callingAPI}
                   userInfo={userInfo}
                   onConfirm={onConfirm}

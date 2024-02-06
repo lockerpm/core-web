@@ -1,4 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Card,
 } from '@lockerpm/design';
@@ -6,11 +9,11 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import LineChart from './charts/Line'
 import { green } from '@ant-design/colors';
+
+import chartComponents from "../../../../../components/chart";
+
+const { Line } = chartComponents;
 
 const UserLoginByTime = (props) => {
   const {
@@ -48,7 +51,7 @@ const UserLoginByTime = (props) => {
       <p className="font-semibold text-gray mb-2 text-xl">
         {t('enterprise_dashboard.user_login.title')}
       </p>
-      <LineChart
+      <Line
         colors={[green[6]]}
         categories={chartData.map((p) => p.key)}
         series={series}

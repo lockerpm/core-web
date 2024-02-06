@@ -1,4 +1,7 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Drawer,
 } from '@lockerpm/design';
@@ -6,11 +9,9 @@ import {
 import {
 } from '@ant-design/icons';
 
-import ListItemDetails from '../../../../vault/components/detail/List';
+import cipherComponents from '../../../../../../components/cipher';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
+const { DetailList } = cipherComponents;
 
 function ViewItem(props) {
   const {
@@ -33,7 +34,7 @@ function ViewItem(props) {
         onClose={onClose}
         open={visible}
       >
-        <ListItemDetails
+        <DetailList
           cipher={item}
           isPublic={true}
         />

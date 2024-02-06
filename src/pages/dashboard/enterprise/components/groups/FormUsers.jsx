@@ -1,15 +1,26 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { Space, Button, Drawer, Select, List, Avatar } from "@lockerpm/design"
-import { RouterLink } from "../../../../../components"
-
-import { DeleteOutlined } from "@ant-design/icons"
-
 import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
+import {
+  Space,
+  Button,
+  Drawer,
+  Select,
+  List,
+  Avatar
+} from "@lockerpm/design"
+
+import { DeleteOutlined } from "@ant-design/icons"
+
+import itemsComponents from "../../../../../components/items"
+
 import enterpriseGroupServices from "../../../../../services/enterprise-group"
 import enterpriseMemberServices from "../../../../../services/enterprise-member"
+
 import global from "../../../../../config/global"
+
+const { RouterLink } = itemsComponents;
 
 function FormUsers(props) {
   const {

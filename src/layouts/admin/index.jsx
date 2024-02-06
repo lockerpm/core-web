@@ -1,29 +1,33 @@
 import React, { useEffect, useMemo, useState } from "react"
-import { Layout, Button } from "@lockerpm/design"
-
-import { CloseOutlined, VerticalAlignTopOutlined } from "@ant-design/icons"
-
-import "./css/index.scss"
-
 import { useDispatch, useSelector } from "react-redux"
 import useWebSocket from "react-use-websocket"
 import { useLocation } from "react-router-dom"
+import {
+  Layout,
+  Button
+} from "@lockerpm/design"
 
-import Header from "./Header"
-import SidebarTop from "./components/SidebarTop"
-import SidebarCenter from "./components/SidebarCenter"
+import {
+  CloseOutlined,
+  VerticalAlignTopOutlined
+} from "@ant-design/icons"
 
-import PageContent from "../../routes"
-
-import storeActions from "../../store/actions"
+import layoutComponents from "../../components/layout"
+import adminLayoutComponents from "./components"
 
 import authServices from "../../services/auth"
 import commonServices from "../../services/common"
 import enterpriseServices from "../../services/enterprise"
 
-import global from "../../config/global"
+import storeActions from "../../store/actions"
 
+import global from "../../config/global"
 import common from "../../utils/common"
+
+import "./css/index.scss"
+
+const { PageContent } = layoutComponents;
+const { Header, SidebarTop, SidebarCenter } = adminLayoutComponents;
 
 function AdminLayout(props) {
   const { routers, pages } = props
@@ -37,7 +41,7 @@ function AdminLayout(props) {
   const userInfo = useSelector((state) => state.auth.userInfo)
   const teams = useSelector((state) => state.enterprise.teams)
 
-  const [respCollapsed, setRespCollapsed] = useState(false)
+  const [respCollapsed, setRespCollapsed] = useState(true)
 
   const accessToken = authServices.access_token()
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`)
@@ -100,6 +104,7 @@ function AdminLayout(props) {
     if (window.innerWidth <= 768) {
       dispatch(storeActions.updateIsMobile(true))
       dispatch(storeActions.updateCollapsed(false))
+      setRespCollapsed(true)
     } else if (window.innerWidth <= 1024) {
       dispatch(storeActions.updateIsMobile(false))
       setRespCollapsed(false)

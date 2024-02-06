@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { } from '@lockerpm/design';
-import { } from "@ant-design/icons";
-import { } from "../../../../../components";
-
-import TableData from "./TableData";
-import BoxData from "./BoxData";
-
-import FormData from "../../../vault/components/FormData";
-import MoveFolder from "../../../vault/components/MoveFolder";
-
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
+import { } from '@lockerpm/design';
+
+import { } from "@ant-design/icons";
+
+import vaultComponents from "../../../vault/components";
+import sharedCiphersComponents from "./shared-ciphers";
+
 import common from "../../../../../utils/common";
+
+const { FormData, MoveFolder } = vaultComponents;
+const { ListData, TableData } = sharedCiphersComponents;
 
 const ShareCiphers = (props) => {
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ const ShareCiphers = (props) => {
       className="share-ciphers"
     >
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className="mt-4"
           loading={loading}
           data={filteredData.result}

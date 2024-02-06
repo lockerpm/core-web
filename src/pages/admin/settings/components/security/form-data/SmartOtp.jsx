@@ -1,20 +1,23 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Space,
   Button,
   Drawer,
 } from '@lockerpm/design';
 
-import { SmartOtpForm } from '../../../../../../components';
-
 import {
 } from '@ant-design/icons';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import formsComponents from '../../../../../../components/forms';
 
 import authServices from '../../../../../../services/auth';
+
 import global from '../../../../../../config/global';
+
+const { SmartOtp } = formsComponents;
 
 function SmartOtpFormData(props) {
   const {
@@ -96,7 +99,7 @@ function SmartOtpFormData(props) {
         <p className='mb-4'>
           {t('security.two_fa.smart_otp.description')}
         </p>
-        <SmartOtpForm
+        <SmartOtp
           callingAPI={callingAPI}
           smartOtp={smartOtp}
           otp={otp}

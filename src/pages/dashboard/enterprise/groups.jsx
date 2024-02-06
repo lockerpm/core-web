@@ -1,30 +1,39 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { } from "@lockerpm/design"
-import { PlusOutlined } from "@ant-design/icons"
-
-import { AdminHeader, Pagination } from "../../../components"
-
-import Filter from "./components/groups/Filter"
-import NoGroup from "./components/groups/NoGroup"
-import TableData from "./components/groups/TableData"
-import BoxData from "./components/groups/BoxData"
-import FormData from "./components/groups/FormData"
-import FormUsers from "./components/groups/FormUsers"
-
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
+
+import {
+} from "@lockerpm/design"
+
+import {
+  PlusOutlined
+} from "@ant-design/icons"
+
+import itemsComponents from "../../../components/items"
+import commonComponents from "../../../components/common"
+import groupsComponents from "./components/groups"
 
 import enterpriseGroupServices from "../../../services/enterprise-group"
 
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
+const { PageHeader } = commonComponents;
+const { Pagination } = itemsComponents;
+const {
+  Filter,
+  NoGroup,
+  FormData,
+  FormUsers,
+  ListData,
+  TableData
+} = groupsComponents;
+
 const EnterpriseGroups = (props) => {
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const isMobile = useSelector((state) => state.system.isMobile)
 
@@ -132,7 +141,7 @@ const EnterpriseGroups = (props) => {
       className='enterprise_members layout-content'
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t("enterprise_groups.title")}
         total={groups.length}
         actions={[
@@ -156,7 +165,7 @@ const EnterpriseGroups = (props) => {
       ) : (
         <>
           {isMobile ? (
-            <BoxData
+            <ListData
               className='mt-4'
               loading={loading}
               data={filteredData.result}

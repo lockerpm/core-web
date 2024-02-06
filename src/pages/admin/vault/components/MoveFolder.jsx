@@ -1,4 +1,7 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   Space,
@@ -9,16 +12,17 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import cipherFormItemComponents from '../../../../components/cipher/form-item';
+import foldersComponents from '../../folders/components';
 
-import SelectFolder from './form-items/SelectFolder';
-import FolderFormData from "../../folders/components/FormData";
+import sharingServices from '../../../../services/sharing';
+import cipherServices from '../../../../services/cipher';
 
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
-import sharingServices from '../../../../services/sharing';
-import cipherServices from '../../../../services/cipher';
+
+const { SelectFolder } = cipherFormItemComponents;
+const { FormData } = foldersComponents;
 
 function MoveFolder(props) {
   const {
@@ -146,7 +150,7 @@ function MoveFolder(props) {
           />
         </Form>
       </Drawer>
-      <FolderFormData
+      <FormData
         visible={folderVisible}
         onClose={() => setFolderVisible(false)}
         callback={(res) => {

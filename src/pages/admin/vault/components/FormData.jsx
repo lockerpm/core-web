@@ -1,4 +1,7 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   Space,
@@ -9,28 +12,32 @@ import {
 import {
 } from '@ant-design/icons';
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import ItemName from './form-items/ItemName';
-import Notes from './form-items/Notes';
-import SelectFolder from './form-items/SelectFolder';
-import CustomFields from './form-items/CustomFields';
-import PasswordOTP from './form-items/PasswordOTP';
-
-import PasswordForm from './forms/Password';
-import CardForm from './forms/Card';
-import CryptoBackupForm from './forms/CryptoBackup';
-import IdentityForm from './forms/Identity';
-import FolderFormData from "../../folders/components/FormData";
+import cipherFormItemComponents from '../../../../components/cipher/form-item';
+import cipherFormComponents from '../../../../components/cipher/form';
+import foldersComponents from '../../folders/components';
 
 import { CipherType } from '../../../../core-js/src/enums';
+
+import commonServices from '../../../../services/common';
+import cipherServices from '../../../../services/cipher';
 
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
 
-import commonServices from '../../../../services/common';
-import cipherServices from '../../../../services/cipher';
+const {
+  ItemName,
+  Notes,
+  SelectFolder,
+  CustomFields,
+  PasswordOTP
+} = cipherFormItemComponents;
+const {
+  PasswordForm,
+  CardForm,
+  CryptoBackupForm,
+  IdentityForm,
+} = cipherFormComponents;
+const FolderFormData = foldersComponents.FormData
 
 function FormData(props) {
   const {

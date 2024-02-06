@@ -1,14 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Menu, Badge } from '@lockerpm/design';
-import '../css/components/SidebarCenter.scss';
 import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
+import {
+  Menu,
+  Badge
+} from '@lockerpm/design';
+
 import {
   LeftOutlined,
 } from '@ant-design/icons'
-import common from '../../../utils/common';
 
-import { useTranslation } from "react-i18next";
+import common from '../../../utils/common';
 import global from '../../../config/global';
+
+import '../css/sidebar-center.scss';
 
 function SidebarCenter(props) {
   const { collapsed, onClose = () => {} } = props

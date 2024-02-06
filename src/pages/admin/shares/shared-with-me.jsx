@@ -1,26 +1,34 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Badge } from '@lockerpm/design';
-import {
-  LockOutlined,
-  FolderOutlined
-} from "@ant-design/icons";
-import { AdminHeader } from "../../../components";
-
-import MenuTabs from "./components/MenuTabs";
-import NoItem from "./components/NoItem";
-import Filter from "../vault/components/Filter";
-import ShareCiphers from "./components/shared-with-me/Ciphers";
-import ShareFolders from "./components/shared-with-me/Folders";
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import common from "../../../utils/common";
-import global from "../../../config/global";
+import { Badge } from '@lockerpm/design';
+
+import {
+  LockOutlined,
+  FolderOutlined
+} from "@ant-design/icons";
+
+import commonComponents from "../../../components/common";
+import shareComponents from "../../../components/share";
+import vaultComponents from "../vault/components";
+
+import ShareCiphers from "./components/shared-with-me/Ciphers";
+import ShareFolders from "./components/shared-with-me/Folders";
 
 import commonServices from "../../../services/common";
 import sharingServices from "../../../services/sharing";
+
+import common from "../../../utils/common";
+import global from "../../../config/global";
+
+const { PageHeader }  = commonComponents;
+const { Filter }  = vaultComponents;
+const {
+  MenuTabs,
+  NoItem,
+}  = shareComponents;
 
 const SharedWithMe = (props) => {
   const { t } = useTranslation();
@@ -172,7 +180,7 @@ const SharedWithMe = (props) => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t('sidebar.shared_with_me')}
         total={filteredData.total}
         actions={[]}

@@ -1,6 +1,9 @@
 import React, { } from 'react';
 import { Layout } from '@lockerpm/design';
-import PageContent from '../../routes';
+
+import layoutComponents from "../../components/layout"
+
+const { PageContent } = layoutComponents;
 
 function PublicLayout(props) {
   const { routers, pages } = props

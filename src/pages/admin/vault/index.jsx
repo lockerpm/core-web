@@ -1,27 +1,34 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { } from '@lockerpm/design';
-import { PlusOutlined } from "@ant-design/icons";
-import { AdminHeader, Pagination, Multiple } from "../../../components";
-
-import NoCipher from "./components/NoCipher";
-import Filter from "./components/Filter";
-import TableData from "./components/TableData";
-import BoxData from "./components/BoxData";
-import FormData from "./components/FormData";
-import MoveFolder from "./components/MoveFolder";
-import ShareFormData from "../shares/components/FormData";
-import QuickShareReview from "../shares/components/quick-shares/Review";
-
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
+
+import { } from '@lockerpm/design';
+
+import {
+  PlusOutlined
+} from "@ant-design/icons";
+
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import cipherComponents from "../../../components/cipher";
+import shareComponents from "../../../components/share";
+import vaultComponents from "./components";
+
 import { CipherType } from "../../../core-js/src/enums"
 
-import common from "../../../utils/common";
-
-import global from "../../../config/global";
 import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
+
+import common from "../../../utils/common";
+import global from "../../../config/global";
+
+const { Pagination, MultipleSelect } = itemsComponents;
+const { NoCipher } = cipherComponents;
+const { PageHeader } = commonComponents;
+const { Filter, TableData, ListData, FormData, MoveFolder } = vaultComponents;
+const { QuickShareReview } = shareComponents;
+const ShareFormData = shareComponents.FormData;
 
 const Vault = (props) => {
   const { t } = useTranslation();
@@ -256,7 +263,7 @@ const Vault = (props) => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <AdminHeader
+      <PageHeader
         title={t(cipherType.title)}
         total={filteredData.total}
         actions={[
@@ -274,7 +281,7 @@ const Vault = (props) => {
       {
         !isEmpty && <>
           {
-            selectedRowKeys.length > 0 ? <Multiple
+            selectedRowKeys.length > 0 ? <MultipleSelect
               selectedRowKeys={selectedRowKeys}
               callingAPI={callingAPI}
               isMove={currentPage.name !== global.keys.TRASH}
@@ -305,7 +312,7 @@ const Vault = (props) => {
           onCreate={() => handleOpenForm()}
         /> : <>
           {
-            isMobile ? <BoxData
+            isMobile ? <ListData
               className="mt-4"
               loading={syncing || loading}
               data={filteredData.result}

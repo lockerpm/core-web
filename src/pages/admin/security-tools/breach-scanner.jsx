@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Form,
@@ -10,17 +13,19 @@ import {
   Image
 } from '@lockerpm/design';
 
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
-import { AdminHeader, ImageIcon } from "../../../components";
-
-import toolServices from "../../../services/tool";
-
 import {
 } from "@ant-design/icons";
 
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+
+import toolServices from "../../../services/tool";
+
 import global from "../../../config/global";
 import common from "../../../utils/common";
+
+const { ImageIcon } = itemsComponents;
+const { PageHeader } = commonComponents;
 
 const BreachScanner = (props) => {
   const {} = props;
@@ -60,7 +65,7 @@ const BreachScanner = (props) => {
 
   return (
     <div className="breach-scanner layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('security_tools.data_breach_scanner.title')}
         subtitle={t('security_tools.data_breach_scanner.description')}
         actions={[]}
@@ -94,7 +99,7 @@ const BreachScanner = (props) => {
             ]}
           >
             <Input
-              style={{ width: 400 }}
+              style={{ width: 400, maxWidth: '100%' }}
               disabled={callingAPI}
               placeholder={t('placeholder.enter')}
               onChange={() => setIsChecked(false)}

@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import './css/auth.scss';
-
-import { Image, Row, Col, Button, Input, Avatar, Form } from '@lockerpm/design';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { PairingForm, PasswordlessForm, PasskeyForm } from "../../components";
+import {
+  Image,
+  Row,
+  Col,
+  Button,
+  Input,
+  Avatar,
+  Form
+} from '@lockerpm/design';
 
-import WelcomeImg from '../../assets/images/welcome.svg';
-import Enable from "./components/setup-2fa/Enable";
 import {
   KeyOutlined,
   UsbOutlined
 } from "@ant-design/icons";
+
+import formsComponents from "../../components/forms";
+import authComponents from "./components";
+
+import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import authServices from "../../services/auth";
@@ -21,6 +29,13 @@ import commonServices from "../../services/common";
 
 import global from "../../config/global";
 import common from "../../utils/common";
+
+import './css/auth.scss';
+
+const { Pairing, SecurityKey, Passkey } = formsComponents;
+const { Enable2FA } = authComponents;
+
+const { WelcomeImg } = images;
 
 const Setup2FA = () => {
   const { t } = useTranslation();
@@ -237,13 +252,13 @@ const Setup2FA = () => {
               {
                 step === 1 && <div>
                   {
-                    isPair && <PairingForm
+                    isPair && <Pairing
                       userInfo={preLogin}
                       onConfirm={() => setIsPair(false)}
                     />
                   }
                   {
-                    !isPair && otherMethod === 'security_key' && <PasswordlessForm
+                    !isPair && otherMethod === 'security_key' && <SecurityKey
                       changing={callingAPI}
                       userInfo={preLogin}
                       isLogin={true}
@@ -252,7 +267,7 @@ const Setup2FA = () => {
                     />
                   }
                   {
-                    !isPair && otherMethod === 'passkey' && <PasskeyForm
+                    !isPair && otherMethod === 'passkey' && <Passkey
                       changing={loading}
                       isLogin={true}
                       userInfo={preLogin}
@@ -262,7 +277,7 @@ const Setup2FA = () => {
                 </div>
               }
               {
-                step === 2 && <Enable
+                step === 2 && <Enable2FA
                   factor2={factor2}
                   callingAPI={callingAPI}
                   setCallingAPI={setCallingAPI}

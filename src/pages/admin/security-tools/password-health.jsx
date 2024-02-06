@@ -1,20 +1,35 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Tabs, Avatar, Alert, Tooltip } from '@lockerpm/design';
-import { InfoCircleOutlined } from "@ant-design/icons";
-
-import { AdminHeader, ImageIcon } from "../../../components";
-import TableData from "./components/password-health/TableData";
-import BoxData from "./components/password-health/BoxData";
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
+import {
+  Tabs,
+  Avatar,
+  Alert,
+  Tooltip
+} from '@lockerpm/design';
+
+import {
+  InfoCircleOutlined
+} from "@ant-design/icons";
+
+import { red, green } from '@ant-design/colors';
+
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import passwordHealthComponents from "../../../components/password-health";
+
+import { CipherType } from "../../../core-js/src/enums";
+
+import commonServices from "../../../services/common";
+
 import common from "../../../utils/common";
 import global from "../../../config/global";
-import commonServices from "../../../services/common";
-import { red, green } from '@ant-design/colors';
-import { CipherType } from "../../../core-js/src/enums";
+
+const { ImageIcon } = itemsComponents;
+const { PageHeader } = commonComponents;
+const { ListData, TableData } = passwordHealthComponents
 
 const menus = [
   {
@@ -131,7 +146,7 @@ const PasswordHealth = (props) => {
 
   return (
     <div className="password-health layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('security_tools.password_health.title')}
         subtitle={t('security_tools.password_health.description')}
         actions={[]}
@@ -202,7 +217,7 @@ const PasswordHealth = (props) => {
                     />
                   }
                    {
-                    isMobile && <BoxData
+                    isMobile && <ListData
                       className="mt-4"
                       activeKey={activeKey}
                       data={data}

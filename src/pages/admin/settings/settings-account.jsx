@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Form,
   List,
@@ -6,22 +9,20 @@ import {
   Col,
   Button
 } from '@lockerpm/design';
+
 import {
 } from "@ant-design/icons";
 
-import { AdminHeader } from "../../../components";
+import commonComponents from "../../../components/common";
+import accountComponents from "./components/account";
 
-import PersonalInfo from './components/account/PersonalInfo'
-import Preferences from './components/account/Preferences'
-import DangerZone from './components/account/DangerZone'
-
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
+import commonServices from "../../../services/common";
 import userServices from "../../../services/user";
 
 import global from "../../../config/global";
-import commonServices from "../../../services/common";
+
+  const { PageHeader } = commonComponents;
+  const { PersonalInfo, Preferences, DangerZone } = accountComponents;
 
 const AccountDetails = (props) => {
   const { t } = useTranslation();
@@ -74,7 +75,7 @@ const AccountDetails = (props) => {
 
   return (
     <div className="account-details layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('account_details.title')}
         subtitle={t('account_details.description')}
         actions={[]}

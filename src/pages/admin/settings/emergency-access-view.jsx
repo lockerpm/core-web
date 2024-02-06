@@ -1,24 +1,28 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { } from '@lockerpm/design';
-import { } from "@ant-design/icons";
-
-import { AdminHeader, Pagination } from "../../../components";
-import Filter from "./components/security/emergency-access-view/Filter";
-import TableData from "./components/security/emergency-access-view/TableData";
-import BoxData from "./components/security/emergency-access-view/BoxData";
-import ViewItem from "./components/security/emergency-access-view/ViewItem";
-
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
+import { } from '@lockerpm/design';
+
+import { } from "@ant-design/icons";
+
+import itemsComponents from "../../../components/items";
+import commonComponents from "../../../components/common";
+import securityEAViewComponents from "./components/security/emergency-access-view";
+
+import { CipherData } from "../../../core-js/src/models/data";
 import { CipherMapper } from "../../../core-js/src/constants";
 import { SymmetricCryptoKey, EncString, Cipher } from "../../../core-js/src/models/domain";
-import { CipherData } from "../../../core-js/src/models/data";
+
+import emergencyAccessServices from "../../../services/emergency-access";
 
 import global from "../../../config/global";
 import common from "../../../utils/common";
-import emergencyAccessServices from "../../../services/emergency-access";
+
+const { Pagination }= itemsComponents;
+const { PageHeader }= commonComponents;
+const { Filter, TableData, ListData, ViewItem }= securityEAViewComponents;
 
 const EmergencyAccessView = (props) => {
   const { } = props;
@@ -170,7 +174,7 @@ const EmergencyAccessView = (props) => {
 
   return (
     <div className=" layout-content">
-      <AdminHeader
+      <PageHeader
         title={t('emergency_access_view.title')}
         total={filteredData.total}
         description={t('emergency_access_view.description', { owner: grantedEmergencyAccess?.full_name })}
@@ -185,7 +189,7 @@ const EmergencyAccessView = (props) => {
         />
       }
       {
-        isMobile ? <BoxData
+        isMobile ? <ListData
           className="mt-4"
           loading={loading}
           data={filteredData.result}
