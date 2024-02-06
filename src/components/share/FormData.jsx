@@ -134,8 +134,10 @@ function FormData(props) {
   }, [visible, item, menuType])
 
   useEffect(() => {
-    initData(); 
-  }, [item, myShares, originCollection, menuType])
+    if (visible) {
+      initData();
+    }
+  }, [visible, item, myShares, originCollection, menuType])
 
   const initData = async () => {
     if (menuType !== menuTypes.QUICK_SHARES) {
