@@ -13,6 +13,8 @@ import {
 
 import { } from '@ant-design/colors';
 
+import storeActions from "../../store/actions"
+
 import common from "../../utils/common";
 import global from "../../config/global";
 
