@@ -10,7 +10,9 @@ import { } from "react-i18next";
 import {
 } from "@ant-design/icons";
 
-import AuthLogo from '../../../assets/images/logos/auth-logo.svg'
+import images from "../../../assets/images";
+
+const { AuthLogo } = images;
 
 const Logo = (props) => {
   const {

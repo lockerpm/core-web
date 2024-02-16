@@ -9,6 +9,9 @@ import {
 import {
 } from "@ant-design/icons";
 
+import images from "../../assets/images";
+const { NoDataImg } = images;
+
 const NoData = (props) => {
   const {
     loading = false,
@@ -20,7 +23,7 @@ const NoData = (props) => {
         className={`text-center ${className}`}
       >
         <Image
-          src={require('../../assets/images/data/no-data.svg').default}
+          src={NoDataImg}
           preview={false}
         />
       </div>
