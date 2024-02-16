@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -23,17 +23,19 @@ const PageHeader = (props) => {
     subtitle = '',
     description = '',
     actions = [],
-    isEdit = false,
     isMarginTop = true,
     docLink = '',
     docLabel = '',
     Logo = () => <></>,
-    EditForm = () => <></>,
-    Right = () => <></>
+    Right = () => null
   } = props
 
   const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
+
+  const isRight = useMemo(() => {
+    return !!Right()
+  }, [Right])
 
   return (
     <>
@@ -50,18 +52,17 @@ const PageHeader = (props) => {
           height: (isMobile || description) ? 'auto' : `${60}px`,
         }}
       >
-        <Col lg={actions.length > 0 ? 16 : 12} className="page-header__left flex items-center">
-          <div>
-            <Logo />
-          </div>
-          <div className="w-full">
-            {
-              isEdit ? <EditForm /> : <h1
-                className={`page-header__left--title font-semibold ${isMarginTop ? 'text-2xl' : 'text-xl'}`}
-              >
-                {title}
-              </h1>
-            }
+        <Col span={(isRight || actions.length > 0) ? 16 : 12} className="page-header__left flex items-center">
+          <Logo />
+          <div
+            className="text-limited"
+          >
+            <h1
+              className={`page-header__left--title font-semibold w-full text-limited text-limited__block ${isMarginTop ? 'text-2xl' : 'text-xl'}`}
+              title={title}
+            >
+              {title}
+            </h1>
             {
               ![null, undefined].includes(total) && <p
                 className="page-header__left--subtitle mt-1"
@@ -71,13 +72,16 @@ const PageHeader = (props) => {
               </p>
             }
             {
-              subtitle && <p className="page-header__left--subtitle">
+              subtitle && <p
+                className="page-header__left--subtitle text-limited text-limited__block"
+                title={subtitle}
+              >
                 {subtitle}
               </p>
             }
           </div>
         </Col>
-        <Col lg={actions.length > 0 ? 8 : 12} className="page-header__right" align="right">
+        <Col span={(isRight || actions.length > 0) ? 8 : 12} className="page-header__right" align="right">
           <Row gutter={[8, 8]} justify="end">
             {
               actions.filter((a) => !a.hide).map((a) =>
@@ -95,10 +99,9 @@ const PageHeader = (props) => {
                     {isMobile ? '' : a.label}
                   </Button>
                 </Col>
-              )}
-            {
-              <Right />
+              )
             }
+            <Right />
           </Row>
         </Col>
       </Row>

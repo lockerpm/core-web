@@ -5,6 +5,10 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 
+  &__block {
+    display: block;
+  }
+
   &__2 {
     -webkit-line-clamp: 2;
   }
