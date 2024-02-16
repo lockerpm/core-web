@@ -140,6 +140,9 @@ function Notifications() {
 
   const dropdownClick = async (item) => {
     const notification = notifications.find((n) => n.id === item.key);
+    if (!notification) {
+      return;
+    }
     if (!notification.read) {
       await markAsRead(notification.id)
     }
