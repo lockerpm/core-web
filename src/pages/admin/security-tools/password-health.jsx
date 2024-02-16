@@ -11,7 +11,8 @@ import {
 } from '@lockerpm/design';
 
 import {
-  InfoCircleOutlined
+  InfoCircleOutlined,
+  ArrowLeftOutlined
 } from "@ant-design/icons";
 
 import { red, green } from '@ant-design/colors';
@@ -27,7 +28,7 @@ import commonServices from "../../../services/common";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { ImageIcon } = itemsComponents;
+const { ImageIcon, RouterLink } = itemsComponents;
 const { PageHeader } = commonComponents;
 const { ListData, TableData } = passwordHealthComponents
 
@@ -150,12 +151,21 @@ const PasswordHealth = (props) => {
         title={t('security_tools.password_health.title')}
         subtitle={t('security_tools.password_health.description')}
         actions={[]}
-        Logo={() => <ImageIcon
-          name="security-tools/pw-health"
-          className="mr-4"
-          width={48}
-          height={48}
-        />}
+        Logo={() => <div className="flex items-center">
+          <RouterLink
+            className={'font-semibold'}
+            label={''}
+            routerName={global.keys.SECURITY_TOOLS}
+            routerParams={{ }}
+            icon={<ArrowLeftOutlined />}
+          />
+          <ImageIcon
+            name="security-tools/pw-health"
+            className="mx-4"
+            width={48}
+            height={48}
+          />
+        </div>}
       />
       <Tabs
         activeKey={activeKey}

@@ -3,10 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import { } from '@lockerpm/design';
-import { } from "@ant-design/icons";
+import {
+} from '@lockerpm/design';
+import {
+  ArrowLeftOutlined
+} from "@ant-design/icons";
 
 import commonComponents from "../../../components/common";
+import itemsComponents from "../../../components/items";
 import cipherComponents from "../../../components/cipher";
 import shareComponents from "../../../components/share";
 import vaultComponents from "./components";
@@ -18,6 +22,7 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 
 const { PageHeader, CipherIcon } = commonComponents;
+const { RouterLink } = itemsComponents;
 const { DetailList, Actions } = cipherComponents;
 const { FormData, MoveFolder } = vaultComponents;
 const { QuickShareReview } = shareComponents;
@@ -42,6 +47,10 @@ const VaultDetail = () => {
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === currentPage.params?.cipher_id)
   }, [currentPage, allCiphers])
+
+  const pageCipherType = useMemo(() => {
+    return common.cipherTypeInfo('detailRouter', currentPage.name)
+  }, [currentPage])
 
   const cipherType = useMemo(() => {
     return common.cipherTypeInfo('type', originCipher.type)
@@ -147,13 +156,22 @@ const VaultDetail = () => {
         title={originCipher?.name}
         subtitle={common.cipherSubtitle(originCipher)}
         actions={[]}
-        Logo={() => <CipherIcon
-          className="mr-4"
-          size={48}
-          item={originCipher}
-          type={cipherType.type}
-          isDeleted={originCipher?.isDeleted}
-        />}
+        Logo={() => <div className="flex items-center">
+          <RouterLink
+            className={'font-semibold'}
+            label={''}
+            routerName={pageCipherType?.listRouter || global.keys.VAULT}
+            routerParams={{ }}
+            icon={<ArrowLeftOutlined />}
+          />
+          <CipherIcon
+            className="mx-4"
+            size={48}
+            item={originCipher}
+            type={originCipher.type}
+            isDeleted={originCipher?.isDeleted}
+          />
+        </div>}
         Right={() => <Actions
           size="medium"
           cipher={originCipher}

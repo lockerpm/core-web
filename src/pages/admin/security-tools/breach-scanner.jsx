@@ -14,6 +14,7 @@ import {
 } from '@lockerpm/design';
 
 import {
+  ArrowLeftOutlined
 } from "@ant-design/icons";
 
 import itemsComponents from "../../../components/items";
@@ -24,7 +25,7 @@ import toolServices from "../../../services/tool";
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
-const { ImageIcon } = itemsComponents;
+const { ImageIcon, RouterLink } = itemsComponents;
 const { PageHeader } = commonComponents;
 
 const BreachScanner = (props) => {
@@ -69,12 +70,21 @@ const BreachScanner = (props) => {
         title={t('security_tools.data_breach_scanner.title')}
         subtitle={t('security_tools.data_breach_scanner.description')}
         actions={[]}
-        Logo={() => <ImageIcon
-          name="security-tools/pw-breach"
-          className="mr-4"
-          width={48}
-          height={48}
-        />}
+        Logo={() => <div className="flex items-center">
+          <RouterLink
+            className={'font-semibold'}
+            label={''}
+            routerName={global.keys.SECURITY_TOOLS}
+            routerParams={{ }}
+            icon={<ArrowLeftOutlined />}
+          />
+          <ImageIcon
+            name="security-tools/pw-breach"
+            className="mx-4"
+            width={48}
+            height={48}
+          />
+        </div>}
       />
       <Card
         className="mt-4"
