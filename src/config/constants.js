@@ -109,6 +109,11 @@ const USER_ROLE = {
   MEMBER: 'member',
 }
 
+const TIMEOUT_ACTION = {
+  LOCK: 'lock',
+  LOGOUT: 'logOut'
+}
+
 export default {
   FILE_TYPE,
   ACCOUNT_ROLE,
@@ -128,6 +133,7 @@ export default {
   MAX_KEY_BACKUP: 3,
   ACTIVITY_LOG_ACTION,
   USER_ROLE,
+  TIMEOUT_ACTION,
   CORE_JS_INFO: {
     KDF: 0,
     KDF_ITERATIONS: 100000
@@ -596,11 +602,11 @@ export default {
   ],
   VAULT_TIMEOUT_ACTIONS: [
     {
-      value: 'lock',
+      value: TIMEOUT_ACTION.LOCK,
       label: 'button.lock',
     },
     {
-      value: 'logOut',
+      value: TIMEOUT_ACTION.LOGOUT,
       label: 'button.logout',
     },
   ],
