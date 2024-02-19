@@ -19,11 +19,10 @@ import global from "../../../config/global"
 
 import dayjs from 'dayjs'
 
-const { Pagination } = itemsComponents;
-const { PageHeader } = commonComponents;
-const { Filter, ListData, TableData } = activityLogsComponents;
-
 const EnterpriseActivityLogs = (props) => {
+  const { Pagination } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const { Filter, ListData, TableData } = activityLogsComponents;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()

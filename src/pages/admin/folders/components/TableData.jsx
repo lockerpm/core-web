@@ -14,10 +14,9 @@ import folderComponents from "../../../../components/folder";
 
 import common from "../../../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const { Name, Actions } = folderComponents
-
 const TableData = (props) => {
+  const { TextCopy } = itemsComponents;
+  const { Name, Actions } = folderComponents;
   const { t } = useTranslation();
   const {
     loading = false,

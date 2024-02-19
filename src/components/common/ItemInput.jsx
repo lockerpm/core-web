@@ -11,15 +11,16 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 
-import { red } from '@ant-design/colors';
+import {
+  red
+} from '@ant-design/colors';
 
 import itemsComponents from "../items";
 
 import global from "../../config/global";
 
-const { TextCopy } = itemsComponents
-
 const ItemInput = (props) => {
+  const { TextCopy } = itemsComponents;
   const {
     type = 'username',
     note = null,

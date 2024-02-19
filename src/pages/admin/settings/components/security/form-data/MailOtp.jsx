@@ -17,9 +17,8 @@ import authServices from '../../../../../../services/auth';
 
 import global from '../../../../../../config/global';
 
-const { MailOtp } = formsComponents;
-
 function MailOtpFormData(props) {
+  const { MailOtp } = formsComponents;
   const {
     visible = false,
     factor2 = {},

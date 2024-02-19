@@ -23,9 +23,8 @@ import { SymmetricCryptoKey } from '../../../../../../core-js/src/models/domain'
 import global from '../../../../../../config/global';
 import common from '../../../../../../utils/common';
 
-const { GeneratePassword } = formsComponents;
-
 function ResetPasswordFormData(props) {
+  const { GeneratePassword } = formsComponents;
   const {
     item = null,
     visible = false,

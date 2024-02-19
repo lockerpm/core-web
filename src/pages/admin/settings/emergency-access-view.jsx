@@ -20,11 +20,10 @@ import emergencyAccessServices from "../../../services/emergency-access";
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
-const { Pagination }= itemsComponents;
-const { PageHeader }= commonComponents;
-const { Filter, TableData, ListData, ViewItem }= securityEAViewComponents;
-
 const EmergencyAccessView = (props) => {
+  const { Pagination } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const { Filter, TableData, ListData, ViewItem } = securityEAViewComponents;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();

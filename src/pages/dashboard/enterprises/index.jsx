@@ -18,16 +18,15 @@ import enterpriseServices from "../../../services/enterprise"
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
-const { PageHeader } = commonComponents;
-const {
-  Filter,
-  NoEnterprise,
-  TableData,
-  ListData,
-  FormData
-} = enterprisesComponents;
-
 const Enterprises = () => {
+  const { PageHeader } = commonComponents;
+  const {
+    Filter,
+    NoEnterprise,
+    TableData,
+    ListData,
+    FormData
+  } = enterprisesComponents;
   const { t } = useTranslation()
   const location = useLocation()
 

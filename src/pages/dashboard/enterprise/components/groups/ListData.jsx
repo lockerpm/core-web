@@ -23,9 +23,8 @@ import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
 
-const { TextCopy } = itemsComponents;
-
 const ListData = (props) => {
+  const { TextCopy } = itemsComponents;
   const { t } = useTranslation()
 
   const {

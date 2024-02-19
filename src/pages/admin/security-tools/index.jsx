@@ -9,10 +9,9 @@ import { } from "@ant-design/icons";
 import commonComponents from "../../../components/common";
 import securityToolsComponents from "./components";
 
-const { PageHeader } = commonComponents;
-const { PasswordGenerate, PasswordHealth, DataBreachScanner } = securityToolsComponents;
-
 const SecurityTools = (props) => {
+  const { PageHeader } = commonComponents;
+  const { PasswordGenerate, PasswordHealth, DataBreachScanner } = securityToolsComponents;
   const { } = props;
   const { t } = useTranslation();
   return (

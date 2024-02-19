@@ -13,9 +13,8 @@ import itemsComponents from "../../../../components/items";
 
 import global from "../../../../config/global";
 
-const { ImageIcon } = itemsComponents;
-
 const DataBreachScanner = (props) => {
+  const { ImageIcon } = itemsComponents;
   const {
     className = '',
   } = props;

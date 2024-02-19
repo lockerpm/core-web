@@ -11,9 +11,8 @@ import {
 
 import cipherComponents from '../../../../../../components/cipher';
 
-const { DetailList } = cipherComponents;
-
 function ViewItem(props) {
+  const { DetailList } = cipherComponents;
   const {
     visible = false,
     item = null,

@@ -1,7 +1,9 @@
 import React from "react";
-import './css/403.scss';
-import authServices from '../../services/auth'
 import { useTranslation } from "react-i18next";
+
+import authServices from '../../services/auth';
+
+import './css/403.scss';
 
 const Permission = () => {
   const { t } = useTranslation();

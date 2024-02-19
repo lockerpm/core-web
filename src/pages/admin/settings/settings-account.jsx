@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -21,12 +21,10 @@ import userServices from "../../../services/user";
 
 import global from "../../../config/global";
 
+const AccountDetails = (props) => {
   const { PageHeader } = commonComponents;
   const { PersonalInfo, Preferences, DangerZone } = accountComponents;
-
-const AccountDetails = (props) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const userInfo = useSelector((state) => state.auth.userInfo)
 

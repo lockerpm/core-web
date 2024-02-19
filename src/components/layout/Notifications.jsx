@@ -22,9 +22,8 @@ import sharingServices from '../../services/sharing';
 import global from '../../config/global';
 import common from '../../utils/common';
 
-const { ImageIcon } = itemsComponents;
-
 function Notifications() {
+  const { ImageIcon } = itemsComponents;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const [callingAPI, setCallingAPI] = useState(false);

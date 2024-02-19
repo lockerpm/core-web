@@ -15,9 +15,8 @@ import itemsComponents from "../../../../../components/items"
 
 import global from "../../../../../config/global"
 
-const { FilterTime } = itemsComponents;
-
 const Filter = (props) => {
+  const { FilterTime } = itemsComponents;
   const { t } = useTranslation()
   const {
     className = "",

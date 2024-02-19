@@ -25,10 +25,9 @@ import toolServices from "../../../services/tool";
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
-const { ImageIcon, RouterLink } = itemsComponents;
-const { PageHeader } = commonComponents;
-
 const BreachScanner = (props) => {
+  const { ImageIcon, RouterLink } = itemsComponents;
+  const { PageHeader } = commonComponents;
   const {} = props;
   const { t } = useTranslation();
   const [callingAPI, setCallingAPI] = useState(false);

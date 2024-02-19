@@ -15,10 +15,9 @@ import { gray } from '@ant-design/colors';
 import itemsComponents from "../items";
 import commonComponents from "../common";
 
-const { NoData } = itemsComponents
-const { CipherIcon } = commonComponents
-
 const NoCipher = (props) => {
+  const { NoData } = itemsComponents;
+  const { CipherIcon } = commonComponents;
   const { t } = useTranslation()
   const {
     className = '',

@@ -17,9 +17,8 @@ import emergencyAccessServices from '../../../services/emergency-access';
 
 import global from '../../../config/global';
 
-const { ImageIcon } = itemsComponents;
-
 function EmergencyAccessInvitations() {
+  const { ImageIcon } = itemsComponents;
   const { t } = useTranslation();
   const [listGranted, setListGranted] = useState([]);
   const [accepting, setAccepting] = useState(false);

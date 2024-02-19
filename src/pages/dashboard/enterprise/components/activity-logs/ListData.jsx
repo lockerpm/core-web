@@ -17,9 +17,8 @@ import itemsComponents from "../../../../../components/items"
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-const { TextCopy, RouterLink } = itemsComponents;
-
 const ListData = (props) => {
+  const { TextCopy, RouterLink } = itemsComponents;
   const {
     loading = false,
     className = "",

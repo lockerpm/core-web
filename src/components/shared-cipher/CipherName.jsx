@@ -11,10 +11,9 @@ import {
 import itemsComponents from "../items";
 import cipherComponents from "../cipher";
 
-const { TextCopy, ImageIcon } = itemsComponents;
-const { Name } = cipherComponents;
-
 const CipherName = (props) => {
+  const { TextCopy, ImageIcon } = itemsComponents;
+  const { Name } = cipherComponents;
   const { t } = useTranslation()
   const { cipher = {} } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)

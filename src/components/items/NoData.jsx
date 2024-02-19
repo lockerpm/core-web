@@ -10,9 +10,9 @@ import {
 } from "@ant-design/icons";
 
 import images from "../../assets/images";
-const { NoDataImg } = images;
 
 const NoData = (props) => {
+  const { NoDataImg } = images;
   const {
     loading = false,
     className = ''

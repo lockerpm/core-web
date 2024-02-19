@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -12,13 +12,11 @@ import sharedCiphersComponents from "./shared-ciphers";
 
 import common from "../../../../../utils/common";
 
-const { FormData, MoveFolder } = vaultComponents;
-const { ListData, TableData } = sharedCiphersComponents;
-
 const ShareCiphers = (props) => {
+  const { FormData, MoveFolder } = vaultComponents;
+  const { ListData, TableData } = sharedCiphersComponents;
   const { t } = useTranslation();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const {
     loading = false,

@@ -13,10 +13,9 @@ import {
 import modalsComponents from "../../../../../components/modals";
 import securityModalsComponents from "./modals";
 
-const { PasswordConfirmModal } = modalsComponents;
-const { ChangePasswordModal } = securityModalsComponents;
-
 const ChangePassword = (props) => {
+  const { PasswordConfirmModal } = modalsComponents;
+  const { ChangePasswordModal } = securityModalsComponents;
   const {
     className = '',
   } = props;

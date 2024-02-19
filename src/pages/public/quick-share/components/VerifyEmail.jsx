@@ -19,9 +19,8 @@ import quickShareServices from "../../../../services/quick-share";
 import global from "../../../../config/global";
 import common from "../../../../utils/common";
 
-const { ImageIcon } = itemsComponents;
-
 const VerifyEmail = (props) => {
+  const { ImageIcon } = itemsComponents;
   const {
     sendId,
     decryptKey,

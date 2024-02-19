@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { useLocation } from 'react-router-dom';
+import { } from 'react-router-dom';
 
 import { } from '@lockerpm/design';
 import { } from "@ant-design/icons";
@@ -9,13 +9,10 @@ import { } from "@ant-design/icons";
 import foldersComponents from "../../../folders/components";
 import sharedCiphersComponents from "./shared-ciphers";
 
-const { FormData } = foldersComponents;
-const { ListData, TableData } = sharedCiphersComponents;
-
 const ShareFolders = (props) => {
+  const { FormData } = foldersComponents;
+  const { ListData, TableData } = sharedCiphersComponents;
   const { t } = useTranslation();
-  const location = useLocation();
-  const dispatch = useDispatch();
 
   const {
     loading = false,

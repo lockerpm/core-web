@@ -17,11 +17,10 @@ import quickShareComponents from "../../../../../components/quick-share";
 
 import common from "../../../../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const { Actions, SharedWith } = quickShareComponents;
-const CipherName = cipherComponents.Name;
-
 const ListData = (props) => {
+  const { TextCopy } = itemsComponents;
+  const { Actions, SharedWith } = quickShareComponents;
+  const CipherName = cipherComponents.Name;
   const { t } = useTranslation();
 
   const {

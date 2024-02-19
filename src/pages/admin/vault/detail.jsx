@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -21,17 +21,15 @@ import cipherServices from "../../../services/cipher";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { PageHeader, CipherIcon } = commonComponents;
-const { RouterLink } = itemsComponents;
-const { DetailList, Actions } = cipherComponents;
-const { FormData, MoveFolder } = vaultComponents;
-const { QuickShareReview } = shareComponents;
-const ShareFormData = shareComponents.FormData;
-
 const VaultDetail = () => {
+  const { PageHeader, CipherIcon } = commonComponents;
+  const { RouterLink } = itemsComponents;
+  const { DetailList, Actions } = cipherComponents;
+  const { FormData, MoveFolder } = vaultComponents;
+  const { QuickShareReview } = shareComponents;
+  const ShareFormData = shareComponents.FormData;
   const { t } = useTranslation();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);

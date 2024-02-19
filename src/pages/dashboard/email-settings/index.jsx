@@ -28,15 +28,15 @@ import resourceServices from "../../../services/resource";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { PageHeader } = commonComponents;
-const {
-  EmailProvider,
-  SMTP,
-  SendGrid,
-  SendEmail
-} = emailSettingsComponents;
-
 const EmailSetting = (props) => {
+  const { PageHeader } = commonComponents;
+  const {
+    EmailProvider,
+    SMTP,
+    SendGrid,
+    SendEmail
+  } = emailSettingsComponents;
+
   const { } = props;
   const { t } = useTranslation();
 

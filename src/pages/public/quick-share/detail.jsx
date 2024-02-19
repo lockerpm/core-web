@@ -20,16 +20,15 @@ import global from "../../../config/global";
 
 import '../css/index.scss';
 
-const { Logo } = authComponents;
-const {
-  Right,
-  Bottom,
-  NotFound,
-  Content,
-  VerifyEmail
-} = quickShareDetailComponents;
-
 const QuickShareDetail = () => {
+  const { Logo } = authComponents;
+  const {
+    Right,
+    Bottom,
+    NotFound,
+    Content,
+    VerifyEmail
+  } = quickShareDetailComponents;
   const location = useLocation();
   const { t } = useTranslation();
 

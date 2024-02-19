@@ -14,10 +14,9 @@ import otpComponents from "../../../../components/otp";
 
 import common from "../../../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const { Name, Actions } = otpComponents;
-
 const TableData = (props) => {
+  const { TextCopy } = itemsComponents;
+  const { Name, Actions } = otpComponents;
   const { t } = useTranslation();
   const {
     loading = false,

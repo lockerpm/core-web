@@ -28,11 +28,10 @@ import enterpriseMemberServices from "../../../services/enterprise-member";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { PasswordStrength, TextCopy } = itemsComponents;
-const { PageHeader } = commonComponents;
-const { Actions, Role } = memberComponents;
-
 const Member = (props) => {
+  const { PasswordStrength, TextCopy } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const { Actions, Role } = memberComponents;
   const { t } = useTranslation();
   const location = useLocation();
 

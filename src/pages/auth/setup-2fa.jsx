@@ -32,12 +32,11 @@ import common from "../../utils/common";
 
 import './css/auth.scss';
 
-const { Pairing, SecurityKey, Passkey } = formsComponents;
-const { Enable2FA } = authComponents;
-
-const { WelcomeImg } = images;
-
 const Setup2FA = () => {
+  const { Pairing, SecurityKey, Passkey } = formsComponents;
+  const { Enable2FA } = authComponents;
+  
+  const { WelcomeImg } = images;
   const { t } = useTranslation();
   const location = useLocation();
   const currentPage = common.getRouterByLocation(location)

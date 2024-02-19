@@ -10,7 +10,9 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { red } from '@ant-design/colors';
+import {
+  red
+} from '@ant-design/colors';
 
 import modalsComponents from "../../../../../components/modals";
 
@@ -19,9 +21,8 @@ import commonServices from "../../../../../services/common";
 
 import global from "../../../../../config/global";
 
-const { PasswordConfirmModal } = modalsComponents;
-
 const DangerZone = (props) => {
+  const { PasswordConfirmModal } = modalsComponents;
   const { } = props
   const { t } = useTranslation();
   const [confirmVisible, setConfirmVisible] = useState(false);

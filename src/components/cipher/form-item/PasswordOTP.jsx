@@ -21,8 +21,6 @@ import { CipherType } from '../../../core-js/src/enums';
 
 import global from '../../../config/global';
 
-const { DisplayOtp } = commonComponents;
-
 const options = {
   NO_OTP: 'no_otp',
   NEW_OTP: 'new_otp',
@@ -30,6 +28,7 @@ const options = {
 }
 
 function PasswordOTP(props) {
+  const { DisplayOtp } = commonComponents;
   const {
     form,
     item,

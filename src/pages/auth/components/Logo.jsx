@@ -12,9 +12,8 @@ import {
 
 import images from "../../../assets/images";
 
-const { AuthLogo } = images;
-
 const Logo = (props) => {
+  const { AuthLogo } = images;
   const {
   } = props;
   return (

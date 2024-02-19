@@ -4,16 +4,15 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import itemsComponents from "../items";
-import commonComponents from "../common";
-
 import {
 } from "@ant-design/icons";
 
-const { TextCopy, ImageIcon } = itemsComponents;
-const { CipherIcon } = commonComponents;
+import itemsComponents from "../items";
+import commonComponents from "../common";
 
 const Name = (props) => {
+  const { TextCopy, ImageIcon } = itemsComponents;
+  const { CipherIcon } = commonComponents;
   const { t } = useTranslation()
 
   const { cipher = {}, showText } = props;

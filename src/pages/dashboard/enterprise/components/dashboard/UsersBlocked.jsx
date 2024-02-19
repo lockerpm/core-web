@@ -13,9 +13,8 @@ import {
 
 import itemsComponents from "../../../../../components/items";
 
-const { RouterLink } = itemsComponents;
-
 const UsersBlocked = (props) => {
+  const { RouterLink } = itemsComponents;
   const {
     loading = false,
     data = {},

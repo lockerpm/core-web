@@ -23,14 +23,14 @@ import sharingServices from "../../../services/sharing";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { PageHeader }  = commonComponents;
-const { Filter }  = vaultComponents;
-const {
-  MenuTabs,
-  NoItem,
-}  = shareComponents;
-
 const SharedWithMe = (props) => {
+  const { PageHeader }  = commonComponents;
+  const { Filter }  = vaultComponents;
+  const {
+    MenuTabs,
+    NoItem,
+  }  = shareComponents;
+
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();

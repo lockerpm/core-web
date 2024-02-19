@@ -34,12 +34,12 @@ import global from "../../config/global";
 
 import './css/auth.scss';
 
-const { Pairing, SecurityKey, Passkey } = formsComponents;
-const { Logo } = authComponents;
-
-const { AuthBgImage } = images;
-
 const Lock = () => {
+  const { Pairing, SecurityKey, Passkey } = formsComponents;
+  const { Logo } = authComponents;
+  
+  const { AuthBgImage } = images;
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

@@ -11,11 +11,11 @@ import {
   Upload
 } from '@lockerpm/design';
 
-import commonComponents from '../../../../../components/common';
-
 import {
   UploadOutlined,
 } from '@ant-design/icons';
+
+import commonComponents from '../../../../../components/common';
 
 import coreServices from '../../../../../services/core';
 import commonServices from '../../../../../services/common';
@@ -23,9 +23,8 @@ import enterpriseMemberServices from '../../../../../services/enterprise-member'
 
 import global from '../../../../../config/global';
 
-const { ItemInput } = commonComponents;
-
 function FormData(props) {
+  const { ItemInput } = commonComponents;
   const {
     visible = false,
     enterpriseId,

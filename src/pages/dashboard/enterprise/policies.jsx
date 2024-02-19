@@ -14,20 +14,19 @@ import {
 import commonComponents from "../../../components/common";
 import policiesComponents from "./components/policies";
 
-
 import enterprisePolicyServices from "../../../services/enterprise-policy"
 
 import common from "../../../utils/common";
 
-const { PageHeader } = commonComponents;
-const {
-  PasswordRequirements,
-  PasswordlessLogin,
-  BlockFailedLogins,
-  LoginWith2FA
-} = policiesComponents;
-
 const EnterprisePolicies = (props) => {
+  const { PageHeader } = commonComponents;
+  const {
+    PasswordRequirements,
+    PasswordlessLogin,
+    BlockFailedLogins,
+    LoginWith2FA
+  } = policiesComponents;
+
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()

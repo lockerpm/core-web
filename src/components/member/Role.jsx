@@ -1,4 +1,6 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from 'react-redux';
 import {
   Select,
   Tag
@@ -7,11 +9,10 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
+import enterpriseMemberServices from "../../services/enterprise-member";
+
 import global from "../../config/global";
 import common from "../../utils/common";
-import enterpriseMemberServices from "../../services/enterprise-member";
 
 const Role = (props) => {
   const {

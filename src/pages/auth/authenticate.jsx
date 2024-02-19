@@ -35,10 +35,9 @@ import jsCore from "../../core-js";
 
 import './css/auth.scss';
 
-const { ChangePassword, Pairing, SecurityKey } = formsComponents;
-const { EnterOtp } = authComponents;
-
 const Authenticate = () => {
+  const { ChangePassword, Pairing, SecurityKey } = formsComponents;
+  const { EnterOtp } = authComponents;
 
   const { t } = useTranslation();
   const location = useLocation();

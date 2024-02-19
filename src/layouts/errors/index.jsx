@@ -3,9 +3,8 @@ import { Layout } from '@lockerpm/design';
 
 import layoutComponents from "../../components/layout"
 
-const { PageContent } = layoutComponents;
-
 function ErrorsLayout(props) {
+  const { PageContent } = layoutComponents;
   const { routers, pages } = props
   return (
     <Layout className="errors-layout">

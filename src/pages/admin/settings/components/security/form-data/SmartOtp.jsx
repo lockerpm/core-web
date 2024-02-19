@@ -17,9 +17,8 @@ import authServices from '../../../../../../services/auth';
 
 import global from '../../../../../../config/global';
 
-const { SmartOtp } = formsComponents;
-
 function SmartOtpFormData(props) {
+  const { SmartOtp } = formsComponents;
   const {
     visible = false,
     factor2 = {},

@@ -13,9 +13,8 @@ import { green } from '@ant-design/colors';
 
 import chartComponents from "../../../../../components/chart";
 
-const { Line } = chartComponents;
-
 const UserLoginByTime = (props) => {
+  const { Line } = chartComponents;
   const {
     loading = false,
     data = {},

@@ -25,9 +25,8 @@ import commonServices from "../../services/common";
 import storeActions from "../../store/actions";
 import global from "../../config/global";
 
-const { ImageIcon } = itemsComponents
-
 const PasswordlessForm = (props) => {
+  const { ImageIcon } = itemsComponents;
   const { t } = useTranslation()
   const {
     changing = false,

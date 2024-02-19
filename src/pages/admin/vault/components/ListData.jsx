@@ -18,10 +18,9 @@ import cipherComponents from "../../../../components/cipher";
 
 import common from "../../../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const { Name, Actions } = cipherComponents;
-
 const ListData = (props) => {
+  const { TextCopy } = itemsComponents;
+  const { Name, Actions } = cipherComponents;
   const { t } = useTranslation();
 
   const {

@@ -18,9 +18,8 @@ import itemsComponents from "../items";
 import global from "../../config/global";
 import common from "../../utils/common";
 
-const { PasswordStrength } = itemsComponents;
-
 const GenerateOptions = (props) => {
+  const { PasswordStrength } = itemsComponents;
   const { t } = useTranslation();
   const {
     className = '',

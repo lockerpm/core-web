@@ -15,10 +15,9 @@ import cipherComponents from "../cipher";
 
 import common from "../../utils/common";
 
-const { PasswordStrength } = itemsComponents;
-const { Name } = cipherComponents;
-
 const TableData = (props) => {
+  const { PasswordStrength } = itemsComponents;
+  const { Name } = cipherComponents;
   const { t } = useTranslation();
   const {
     loading = false,

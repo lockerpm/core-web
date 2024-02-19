@@ -28,10 +28,6 @@ import commonServices from "../../../services/common";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { ImageIcon, RouterLink } = itemsComponents;
-const { PageHeader } = commonComponents;
-const { ListData, TableData } = passwordHealthComponents
-
 const menus = [
   {
     key: 'weak_passwords',
@@ -45,6 +41,9 @@ const menus = [
 ]
 
 const PasswordHealth = (props) => {
+  const { ImageIcon, RouterLink } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const { ListData, TableData } = passwordHealthComponents;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();

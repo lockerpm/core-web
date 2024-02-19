@@ -11,9 +11,8 @@ import {
 
 import emergencyAccessComponents from "../../../../../../components/emergency-access";
 
-const { Name, ViewActions } = emergencyAccessComponents;
-
 const BoxData = (props) => {
+  const { Name, ViewActions } = emergencyAccessComponents;
   const { t } = useTranslation();
 
   const {

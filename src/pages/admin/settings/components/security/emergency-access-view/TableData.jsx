@@ -9,10 +9,10 @@ import {
 import {
 } from "@ant-design/icons";
 
-import Name from "../../../../../../components/emergency-access/Name";
-import Actions from "../../../../../../components/emergency-access/ViewActions";
+import emergencyAccessComponents from "../../../../../../components/emergency-access";
 
 const TableData = (props) => {
+  const { Name, Actions } = emergencyAccessComponents;
   const { t } = useTranslation();
   const {
     loading = false,

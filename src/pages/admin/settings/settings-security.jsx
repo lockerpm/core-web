@@ -11,19 +11,18 @@ import {
 import commonComponents from "../../../components/common";
 import securityComponents from "./components/security";
 
-const { PageHeader } = commonComponents;
-const {
-  ChangePassword,
-  Passkey,
-  SecurityKey,
-  TwoFA,
-  MobilePasswordless,
-  CrossPlatformSync,
-  EmergencyAccess,
-  ManageSessions
-} = securityComponents;
-
 const Security = (props) => {
+  const { PageHeader } = commonComponents;
+  const {
+    ChangePassword,
+    Passkey,
+    SecurityKey,
+    TwoFA,
+    MobilePasswordless,
+    CrossPlatformSync,
+    EmergencyAccess,
+    ManageSessions
+  } = securityComponents;
   const { } = props;
   const { t } = useTranslation();
   const [expand, setExpand] = useState(false);

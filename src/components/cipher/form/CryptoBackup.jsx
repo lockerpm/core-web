@@ -17,10 +17,10 @@ import cipherFormItemComponents from '../form-item';
 
 import global from '../../../config/global';
 
-const { GeneratePassword } = formsComponents;
-const { SeedPhrase } = cipherFormItemComponents;
-
 function CryptoBackupForm(props) {
+  const { GeneratePassword } = formsComponents;
+  const { SeedPhrase } = cipherFormItemComponents;
+
   const {
     form,
     disabled = false

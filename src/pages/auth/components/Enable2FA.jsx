@@ -21,10 +21,8 @@ import authServices from "../../../services/auth";
 
 import global from "../../../config/global";
 
-
-const { SmartOtp, MailOtp } = formsComponents;
-
 const Enable2FA = (props) => {
+  const { SmartOtp, MailOtp } = formsComponents;
   const { t } = useTranslation();
   const {
     factor2,

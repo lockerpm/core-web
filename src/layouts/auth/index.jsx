@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { } from 'react';
 import { Layout } from '@lockerpm/design';
 
 import layoutComponents from "../../components/layout"
 
-const { PageContent } = layoutComponents;
-
 function AuthLayout(props) {
+  const { PageContent } = layoutComponents;
   const { routers, pages } = props
   return (
     <Layout className="auth-layout">

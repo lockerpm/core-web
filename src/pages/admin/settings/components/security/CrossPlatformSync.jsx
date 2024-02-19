@@ -18,9 +18,8 @@ import authServices from "../../../../../services/auth";
 
 import global from "../../../../../config/global";
 
-const { PasswordConfirmModal } = modalsComponents;
-
 const CrossPlatformSync = (props) => {
+  const { PasswordConfirmModal } = modalsComponents;
   const {
     className = '',
   } = props;

@@ -12,9 +12,8 @@ import {
 
 import formsComponents from "../../../../../components/forms"; 
 
-const { ImportForm } = formsComponents;
-
 const Import = (props) => {
+  const { ImportForm } = formsComponents;
   const {
     className = '',
   } = props;

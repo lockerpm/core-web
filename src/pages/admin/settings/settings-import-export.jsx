@@ -8,10 +8,9 @@ import { } from "@ant-design/icons";
 import commonComponents from "../../../components/common";
 import importExportComponents from "./components/import-export";
 
-const { PageHeader } = commonComponents;
-const { Import, Export } = importExportComponents;
-
 const ImportExport = (props) => {
+  const { PageHeader } = commonComponents;
+  const { Import, Export } = importExportComponents;
   const { } = props;
   const { t } = useTranslation();
   return (

@@ -21,17 +21,16 @@ import common from "../../../utils/common";
 
 import dayjs from 'dayjs'
 
-const { FilterTime }= itemsComponents;
-const { PageHeader }= commonComponents;
-const {
-  AdoptionRate,
-  News,
-  UserLoginByTime,
-  PasswordSecurity,
-  UsersBlocked
-} = dashboardComponents;
-
 const EnterpriseDashboard = (props) => {
+  const { FilterTime }= itemsComponents;
+  const { PageHeader }= commonComponents;
+  const {
+    AdoptionRate,
+    News,
+    UserLoginByTime,
+    PasswordSecurity,
+    UsersBlocked
+  } = dashboardComponents;
   const { } = props;
   const { t } = useTranslation();
   const location = useLocation();

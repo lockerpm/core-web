@@ -11,10 +11,9 @@ import {
 import itemsComponents from "../items";
 import folderComponents from "../folder";
 
-const { TextCopy, ImageIcon } = itemsComponents;
-const { Name } = folderComponents;
-
 const FolderName = (props) => {
+  const { TextCopy, ImageIcon } = itemsComponents;
+  const { Name } = folderComponents;
   const { t } = useTranslation()
   const { folder = {} } = props;
   const allCollections = useSelector((state) => state.collection.allCollections)

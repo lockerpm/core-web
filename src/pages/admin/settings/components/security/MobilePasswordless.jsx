@@ -12,9 +12,8 @@ import {
 
 import securityModalsComponents from "./modals";
 
-const { QrCodeModal } = securityModalsComponents;
-
 const MobilePasswordless = (props) => {
+  const { QrCodeModal } = securityModalsComponents;
   const {
     className = '',
   } = props;

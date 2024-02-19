@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Row,
   Col,
   Form,
   Input
 } from '@lockerpm/design';
+
 import {
 } from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
-
-import { } from '../../../../utils/common';
 import global from "../../../../config/global";
 
 const SendGrid = (props) => {

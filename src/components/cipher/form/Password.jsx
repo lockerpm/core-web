@@ -12,9 +12,8 @@ import {
 
 import formsComponents from '../../forms';
 
-const { GeneratePassword } = formsComponents;
-
 function PasswordForm(props) {
+  const { GeneratePassword } = formsComponents;
   const {
     form,
     disabled = false

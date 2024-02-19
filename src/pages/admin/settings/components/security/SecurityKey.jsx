@@ -22,9 +22,8 @@ import authServices from "../../../../../services/auth";
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
-const { NewSecurityKeyModal } = securityModalsComponents;
-
 const SecurityKey = (props) => {
+  const { NewSecurityKeyModal } = securityModalsComponents;
   const {
     className = '',
   } = props;

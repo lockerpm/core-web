@@ -11,7 +11,9 @@ import {
   Avatar
 } from "@lockerpm/design"
 
-import { DeleteOutlined } from "@ant-design/icons"
+import {
+  DeleteOutlined
+} from "@ant-design/icons"
 
 import itemsComponents from "../../../../../components/items"
 
@@ -20,9 +22,8 @@ import enterpriseMemberServices from "../../../../../services/enterprise-member"
 
 import global from "../../../../../config/global"
 
-const { RouterLink } = itemsComponents;
-
 function FormUsers(props) {
+  const { RouterLink } = itemsComponents;
   const {
     visible = false,
     item = null,

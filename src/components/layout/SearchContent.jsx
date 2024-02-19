@@ -21,10 +21,9 @@ import commonComponents from '../common';
 import common from '../../utils/common';
 import global from '../../config/global';
 
-const { NoData, SearchText, ImageIcon } = itemsComponents;
-const { CipherIcon } = commonComponents;
-
 function SearchContent(props) {
+  const { NoData, SearchText, ImageIcon } = itemsComponents;
+  const { CipherIcon } = commonComponents;
   const {
     onClose = () => {}
   } = props

@@ -13,10 +13,9 @@ import commonComponents from "../common";
 
 import common from "../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const { CipherIcon } = commonComponents;
-
 const Name = (props) => {
+  const { TextCopy } = itemsComponents;
+  const { CipherIcon } = commonComponents;
   const { t } = useTranslation();
   const {
     cipher = {},

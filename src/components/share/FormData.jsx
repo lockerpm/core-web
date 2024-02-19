@@ -19,15 +19,6 @@ import { FolderRequest } from '../../core-js/src/models/request';
 import global from '../../config/global';
 import common from '../../utils/common';
 
-const {
-  ShareOption,
-  ItemsShare,
-  FolderShare,
-  QuickShare,
-  ShareMembers,
-  Footer
-} = shareFormDataComponents;
-
 const shareWithOptions = {
   ANYONE: 0,
   ONLY_SOME: 1
@@ -48,6 +39,14 @@ const countAccessOptions = {
 }
 
 function FormData(props) {
+  const {
+    ShareOption,
+    ItemsShare,
+    FolderShare,
+    QuickShare,
+    ShareMembers,
+    Footer
+  } = shareFormDataComponents;
   const {
     visible = false,
     menuTypes = {},

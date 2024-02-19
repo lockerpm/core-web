@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 
@@ -10,28 +10,26 @@ import { PlusOutlined } from "@ant-design/icons"
 import itemsComponents from "../../../components/items"
 import commonComponents from "../../../components/common"
 import foldersComponents from "./components"
-
-import ShareFormData from "../../../components/share/FormData"
+import shareComponents from "../../../components/share"
 
 import common from "../../../utils/common"
 
 import global from "../../../config/global"
 import commonServices from "../../../services/common";
 
-const { Pagination } = itemsComponents;
-const { PageHeader } = commonComponents;
-const {
-  NoFolder,
-  Filter,
-  TableData,
-  ListData,
-  FormData
-} = foldersComponents;
-
-const Folders = (props) => {
+const Folders = () => {
+  const { Pagination } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const {
+    NoFolder,
+    Filter,
+    TableData,
+    ListData,
+    FormData
+  } = foldersComponents;
+  const ShareFormData = shareComponents.FormData;
   const { t } = useTranslation()
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const currentPage = common.getRouterByLocation(location)
   const syncing = useSelector((state) => state.sync.syncing)

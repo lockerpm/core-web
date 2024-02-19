@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import { Breadcrumb } from '@lockerpm/design';
+import {
+  Breadcrumb
+} from '@lockerpm/design';
 
 import itemsComponents from '../items';
 
@@ -12,9 +14,8 @@ import global from '../../config/global';
 
 import '../css/breadcrumb.scss';
 
-const { RouterLink } = itemsComponents;
-
 function LayoutBreadcrumb() {
+  const { RouterLink } = itemsComponents;
   const { t } = useTranslation();
   const location = useLocation();
 

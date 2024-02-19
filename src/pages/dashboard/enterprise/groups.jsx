@@ -19,18 +19,17 @@ import enterpriseGroupServices from "../../../services/enterprise-group"
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
-const { PageHeader } = commonComponents;
-const { Pagination } = itemsComponents;
-const {
-  Filter,
-  NoGroup,
-  FormData,
-  FormUsers,
-  ListData,
-  TableData
-} = groupsComponents;
-
 const EnterpriseGroups = (props) => {
+  const { PageHeader } = commonComponents;
+  const { Pagination } = itemsComponents;
+  const {
+    Filter,
+    NoGroup,
+    FormData,
+    FormUsers,
+    ListData,
+    TableData
+  } = groupsComponents;
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()

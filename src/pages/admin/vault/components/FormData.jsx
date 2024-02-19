@@ -24,22 +24,23 @@ import cipherServices from '../../../../services/cipher';
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
 
-const {
-  ItemName,
-  Notes,
-  SelectFolder,
-  CustomFields,
-  PasswordOTP
-} = cipherFormItemComponents;
-const {
-  PasswordForm,
-  CardForm,
-  CryptoBackupForm,
-  IdentityForm,
-} = cipherFormComponents;
-const FolderFormData = foldersComponents.FormData
 
 function FormData(props) {
+  const {
+    ItemName,
+    Notes,
+    SelectFolder,
+    CustomFields,
+    PasswordOTP
+  } = cipherFormItemComponents;
+  const {
+    PasswordForm,
+    CardForm,
+    CryptoBackupForm,
+    IdentityForm,
+  } = cipherFormComponents;
+  const FolderFormData = foldersComponents.FormData
+
   const {
     visible = false,
     item = null,

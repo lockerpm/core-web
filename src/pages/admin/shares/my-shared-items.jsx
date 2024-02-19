@@ -25,20 +25,20 @@ import commonServices from "../../../services/common";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const { PageHeader }  = commonComponents;
-const { Filter }  = vaultComponents;
-const {
-  MenuTabs,
-  NoItem,
-  FormData,
-  QuickShareReview
-}  = shareComponents;
-const InAppListData = inAppSharesComponents.ListData;
-const InAppTableData = inAppSharesComponents.TableData;
-const QuickListData = quickSharesComponents.ListData;
-const QuickTableData = quickSharesComponents.TableData;
-
 const MySharedItems = (props) => {
+  const { PageHeader }  = commonComponents;
+  const { Filter }  = vaultComponents;
+  const {
+    MenuTabs,
+    NoItem,
+    FormData,
+    QuickShareReview
+  }  = shareComponents;
+  const InAppListData = inAppSharesComponents.ListData;
+  const InAppTableData = inAppSharesComponents.TableData;
+  const QuickListData = quickSharesComponents.ListData;
+  const QuickTableData = quickSharesComponents.TableData;
+
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();

@@ -10,9 +10,9 @@ import {
 
 import cipherFormItemComponents from '../form-item';
 
-const { PersonalForm, ContactForm } = cipherFormItemComponents;
-
 function IdentityForm(props) {
+  const { PersonalForm, ContactForm } = cipherFormItemComponents;
+
   const {
     disabled = false
   } = props

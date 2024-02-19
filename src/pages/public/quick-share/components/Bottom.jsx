@@ -9,9 +9,8 @@ import images from "../../../../assets/images";
 
 import global from "../../../../config/global";
 
-const { CyStackImg } = images;
-
 const Bottom = () => {
+  const { CyStackImg } = images;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale)
   useEffect(() => {

@@ -14,9 +14,8 @@ import { gray } from '@ant-design/colors';
 
 import itemsComponents from "../items";
 
-const { NoData, ImageIcon } = itemsComponents;
-
 const NoItem = (props) => {
+  const { NoData, ImageIcon } = itemsComponents;
   const { t } = useTranslation()
   const {
     className = '',

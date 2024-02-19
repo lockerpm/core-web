@@ -18,9 +18,8 @@ import commonComponents from '../../common';;
 import common from '../../../utils/common';
 import global from '../../../config/global';
 
-const { ItemInput } = commonComponents;
-
 function QuickShare(props) {
+  const { ItemInput } = commonComponents;
   const {
     item,
     form,

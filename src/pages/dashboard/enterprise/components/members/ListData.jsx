@@ -20,10 +20,9 @@ import memberComponents from "../../../../../components/member";
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
 
-const { TextCopy, PasswordStrength, RouterLink } = itemsComponents;
-const { Actions, Role } = memberComponents;
-
 const ListData = (props) => {
+  const { TextCopy, PasswordStrength, RouterLink } = itemsComponents;
+  const { Actions, Role } = memberComponents;
   const { t } = useTranslation();
   const {
     className = "",

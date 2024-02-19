@@ -23,13 +23,13 @@ import { CipherType } from "../../core-js/src/enums";
 import common from "../../utils/common";
 import global from "../../config/global";
 
-const { TextCopy, PasswordStrength } = itemsComponents;
-const { DisplayOtp } = commonComponents;
-const { SeedPhrase } = cipherFormItemComponents;
-const { SharedWith } = inAppShareComponents;
-const FolderName = folderComponents.Name;
-
 const DetailList = (props) => {
+  const { TextCopy, PasswordStrength } = itemsComponents;
+  const { DisplayOtp } = commonComponents;
+  const { SeedPhrase } = cipherFormItemComponents;
+  const { SharedWith } = inAppShareComponents;
+  const FolderName = folderComponents.Name;
+
   const {
     className,
     cipher,
@@ -37,6 +37,7 @@ const DetailList = (props) => {
     showText = true,
     isPublic = false
   } = props;
+
   const { t } = useTranslation();
 
   const cipherTypeData = useMemo(() => {

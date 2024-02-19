@@ -21,10 +21,9 @@ import global from '../../../config/global';
 
 import '../css/sidebar-top.scss';
 
-const { DropdownMenu } = layoutComponents;
-const { IconLogo } = images;
-
 function SidebarTop(props) {
+  const { DropdownMenu } = layoutComponents;
+  const { IconLogo } = images;
   const { collapsed } = props
   const { t } = useTranslation();
 

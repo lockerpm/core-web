@@ -18,10 +18,8 @@ import userServices from "../../../../../../services/user";
 import global from "../../../../../../config/global";
 import common from "../../../../../../utils/common";
 
-
-const { PasswordConfirmModal } = modalsComponents;
-
 const DeauthorizeSessionsModal = (props) => {
+  const { PasswordConfirmModal } = modalsComponents;
   const { t } = useTranslation()
   const {
     visible = false,

@@ -18,9 +18,8 @@ import emergencyAccessComponents from "../../../../../../components/emergency-ac
 import common from "../../../../../../utils/common";
 import global from "../../../../../../config/global";
 
-const { Actions } = emergencyAccessComponents;
-
 const TableData = (props) => {
+  const { Actions } = emergencyAccessComponents;
   const { t } = useTranslation();
   const {
     loading = false,

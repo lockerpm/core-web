@@ -15,9 +15,8 @@ import { gray } from "@ant-design/colors"
 
 import itemsComponents from "../../../../../components/items"
 
-const { NoData } = itemsComponents;
-
 const NoEnterprise = (props) => {
+  const { NoData } = itemsComponents;
   const { t } = useTranslation()
   const {
     className = "",

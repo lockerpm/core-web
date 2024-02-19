@@ -12,10 +12,9 @@ import {
 import itemsComponents from "../items";
 import commonComponents from "../common";
 
-const { PasswordStrength } = itemsComponents;
-const { GenerateOptions } = commonComponents;
-
 const GeneratePassword = (props) => {
+  const { PasswordStrength } = itemsComponents;
+  const { GenerateOptions } = commonComponents;
   const { t } = useTranslation();
   const {
     className = '',

@@ -28,9 +28,8 @@ import common from "../../../../../utils/common";
 
 import * as papa from 'papaparse';
 
-const { PasswordConfirmModal } = modalsComponents;
-
 const Export = (props) => {
+  const { PasswordConfirmModal } = modalsComponents;
   const {
     className = '',
   } = props;

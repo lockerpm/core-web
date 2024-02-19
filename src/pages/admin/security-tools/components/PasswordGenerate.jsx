@@ -13,10 +13,9 @@ import {
 import itemsComponents from "../../../../components/items";
 import commonComponents from "../../../../components/common";
 
-const { ImageIcon } = itemsComponents;
-const { GenerateOptions } = commonComponents;
-
 const PasswordGenerate = (props) => {
+  const { ImageIcon } = itemsComponents;
+  const { GenerateOptions } = commonComponents;
   const {
     className = '',
   } = props;

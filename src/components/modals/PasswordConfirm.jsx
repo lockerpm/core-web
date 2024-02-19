@@ -8,7 +8,9 @@ import {
   Input
 } from '@lockerpm/design';
 
-import { InfoCircleFilled } from "@ant-design/icons";
+import {
+  InfoCircleFilled
+} from "@ant-design/icons";
 
 import { orange } from '@ant-design/colors';
 
@@ -18,9 +20,8 @@ import authServices from "../../services/auth";
 
 import global from "../../config/global";
 
-const { Pairing, SecurityKey, Passkey } = formsComponents;
-
 const PasswordConfirmModal = (props) => {
+  const { Pairing, SecurityKey, Passkey } = formsComponents;
   const { t } = useTranslation();
 
   const {

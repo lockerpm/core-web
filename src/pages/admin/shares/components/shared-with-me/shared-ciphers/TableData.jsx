@@ -15,15 +15,14 @@ import sharedCipherComponents from "../../../../../../components/shared-cipher";
 
 import common from "../../../../../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const {
-  CipherName,
-  CipherActions,
-  FolderName,
-  FolderActions
-} = sharedCipherComponents;
-
 const TableData = (props) => {
+  const { TextCopy } = itemsComponents;
+  const {
+    CipherName,
+    CipherActions,
+    FolderName,
+    FolderActions
+  } = sharedCipherComponents;
   const { t } = useTranslation();
   const {
     loading = false,

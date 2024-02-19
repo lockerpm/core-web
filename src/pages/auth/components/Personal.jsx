@@ -15,9 +15,8 @@ import authFormsComponents from "./forms";
 
 import global from "../../../config/global";
 
-const { SignInForm } = authFormsComponents;
-
 const Personal = (props) => {
+  const { SignInForm } = authFormsComponents;
   const {
     loading,
     onSubmit = () => {}

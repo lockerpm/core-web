@@ -14,10 +14,9 @@ import {
 import cipherComponents from "../../../../components/cipher";
 import quickShareComponents from "../../../../components/quick-share";
 
-const { DetailList } = cipherComponents
-const { Name } = quickShareComponents
-
 const Content = (props) => {
+  const { DetailList } = cipherComponents;
+  const { Name } = quickShareComponents;
   const {
     cipher,
     className

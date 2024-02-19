@@ -1,8 +1,9 @@
 import React from "react";
-import './css/404.scss';
-
 import { useTranslation } from "react-i18next";
+
 import global from "../../config/global";
+
+import './css/404.scss';
 
 const PageNotFound = () => {
   const { t } = useTranslation();

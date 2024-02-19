@@ -24,9 +24,8 @@ import authServices from "../../../../services/auth";
 import global from "../../../../config/global";
 import common from "../../../../utils/common";
 
-const { Pairing, SecurityKey, Passkey } = formsComponents;
-
 const SignInForm = (props) => {
+  const { Pairing, SecurityKey, Passkey } = formsComponents;
   const {
     loading,
     step = 1,

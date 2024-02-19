@@ -17,9 +17,8 @@ import notificationServices from "../../../services/notification";
 
 import global from "../../../config/global";
 
-const { PageHeader } = commonComponents;
-
 const Notifications = (props) => {
+  const { PageHeader } = commonComponents;
   const { } = props;
   const { t } = useTranslation();
   const language = useSelector((state) => state.system.language)

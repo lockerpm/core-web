@@ -17,10 +17,9 @@ import layoutComponents from '../../../components/layout';
 
 import '../css/header.scss';
 
-const { ImageIcon } = itemsComponents;
-const { Breadcrumb, SearchContent, Notifications } = layoutComponents;
-
 function Header(props) {
+  const { ImageIcon } = itemsComponents;
+  const { Breadcrumb, SearchContent, Notifications } = layoutComponents;
   const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
   const [search, setSearch] = useState(false);

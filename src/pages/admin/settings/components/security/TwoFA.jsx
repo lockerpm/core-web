@@ -30,11 +30,9 @@ import authServices from "../../../../../services/auth";
 import common from "../../../../../utils/common";
 import global from "../../../../../config/global";
 
-const { SmartOtpFormData, MailOtpFormData } = securityFormDataComponents;
-
-const { PasswordConfirmModal} = modalsComponents;
-
 const TwoFA = (props) => {
+  const { SmartOtpFormData, MailOtpFormData } = securityFormDataComponents;
+  const { PasswordConfirmModal} = modalsComponents;
   const {
     className = '',
   } = props;

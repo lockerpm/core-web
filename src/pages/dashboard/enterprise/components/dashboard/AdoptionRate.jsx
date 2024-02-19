@@ -17,9 +17,8 @@ import {
 
 import chartComponents from "../../../../../components/chart";
 
-const { Donut } = chartComponents;
-
 const AdoptionRate = (props) => {
+  const { Donut } = chartComponents;
   const {
     loading = false,
     data = {}

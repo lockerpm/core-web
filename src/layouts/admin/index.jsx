@@ -26,10 +26,9 @@ import common from "../../utils/common"
 
 import "./css/index.scss"
 
-const { PageContent } = layoutComponents;
-const { Header, SidebarTop, SidebarCenter } = adminLayoutComponents;
-
 function AdminLayout(props) {
+  const { PageContent } = layoutComponents;
+  const { Header, SidebarTop, SidebarCenter } = adminLayoutComponents;
   const { routers, pages } = props
   const dispatch = useDispatch()
   const location = useLocation()

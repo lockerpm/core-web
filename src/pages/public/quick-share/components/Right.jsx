@@ -11,9 +11,8 @@ import images from "../../../../assets/images";
 
 import global from "../../../../config/global";
 
-const { IntroImg } = images;
-
 const Right = () => {
+  const { IntroImg } = images;
   const { t } = useTranslation();
 
   useEffect(() => {

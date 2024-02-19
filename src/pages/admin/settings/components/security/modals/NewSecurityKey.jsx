@@ -12,9 +12,8 @@ import { } from "@ant-design/icons";
 
 import formsComponents from "../../../../../../components/forms";
 
-const { Pairing, SecurityKey } = formsComponents;
-
 const NewSecurityKeyModal = (props) => {
+  const { Pairing, SecurityKey } = formsComponents;
   const { t } = useTranslation()
   const {
     visible = false,

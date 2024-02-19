@@ -24,10 +24,9 @@ import emergencyAccessServices from "../../../../../services/emergency-access";
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
-const { TableData, ListData } = securityEAComponents;
-const { ResetPasswordFormData, EmergencyContactFormData } = securityFormDataComponents;
-
 const EmergencyAccess = (props) => {
+  const { TableData, ListData } = securityEAComponents;
+  const { ResetPasswordFormData, EmergencyContactFormData } = securityFormDataComponents;
   const {
     className = '',
   } = props;

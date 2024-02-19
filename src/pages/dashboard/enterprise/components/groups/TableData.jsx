@@ -21,9 +21,8 @@ import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
 
-const { TextCopy } = itemsComponents;
-
 const TableData = (props) => {
+  const { TextCopy } = itemsComponents;
   const { t } = useTranslation()
   const {
     loading = false,

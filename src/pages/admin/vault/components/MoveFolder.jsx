@@ -21,10 +21,9 @@ import cipherServices from '../../../../services/cipher';
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
 
-const { SelectFolder } = cipherFormItemComponents;
-const { FormData } = foldersComponents;
-
 function MoveFolder(props) {
+  const { SelectFolder } = cipherFormItemComponents;
+  const { FormData } = foldersComponents;
   const {
     visible = false,
     cipherIds = [],

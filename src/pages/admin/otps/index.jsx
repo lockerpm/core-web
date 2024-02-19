@@ -20,12 +20,11 @@ import commonServices from "../../../services/common";
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
-const { Pagination, MultipleSelect } = itemsComponents;
-const { PageHeader } = commonComponents;
-const { NoCipher } = cipherComponents;
-const { Filter, TableData, ListData, FormData } = otpsComponents;
-
 const Authenticator = () => {
+  const { Pagination, MultipleSelect } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const { NoCipher } = cipherComponents;
+  const { Filter, TableData, ListData, FormData } = otpsComponents;
 
   const { t } = useTranslation();
   const location = useLocation();

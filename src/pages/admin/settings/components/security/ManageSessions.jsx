@@ -21,9 +21,8 @@ import userServices from "../../../../../services/user";
 
 import common from "../../../../../utils/common";
 
-const { DeauthorizeSessionsModal } = securityModalsComponents;
-
 const ManageSessions = (props) => {
+  const { DeauthorizeSessionsModal } = securityModalsComponents;
   const {
     className = '',
   } = props;

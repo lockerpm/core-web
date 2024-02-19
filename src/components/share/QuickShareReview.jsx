@@ -15,10 +15,9 @@ import quickShareComponents from '../quick-share';
 
 import common from '../../utils/common';
 
-const { SharedWith } = quickShareComponents;
-const CipherName = cipherComponents.Name;
-
 function QuickShareReview(props) {
+  const { SharedWith } = quickShareComponents;
+  const CipherName = cipherComponents.Name;
   const {
     visible = false,
     sendId = null,

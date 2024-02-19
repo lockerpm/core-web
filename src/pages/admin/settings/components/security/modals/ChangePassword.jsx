@@ -6,9 +6,11 @@ import {
   Modal,
 } from '@lockerpm/design';
 
-import { } from '@ant-design/colors';
+import {
+} from '@ant-design/colors';
 
-import { } from "@ant-design/icons";
+import {
+} from "@ant-design/icons";
 
 import formsComponents from "../../../../../../components/forms";
 
@@ -17,9 +19,8 @@ import authServices from '../../../../../../services/auth';
 
 import global from "../../../../../../config/global";
 
-const { ChangePassword } = formsComponents;
-
 const ChangePasswordModal = (props) => {
+  const { ChangePassword } = formsComponents;
   const { t } = useTranslation()
   const {
     visible = false,

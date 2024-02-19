@@ -23,9 +23,8 @@ import ssoConfigServices from "../../../services/sso-config"
 import global from "../../../config/global"
 import common from "../../../utils/common"
 
-const { PageHeader } = commonComponents;
-
 const SSOConfiguration = (props) => {
+  const { PageHeader } = commonComponents;
   const { } = props
   const { t } = useTranslation()
 

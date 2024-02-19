@@ -13,15 +13,15 @@ import {
   ArrowDownOutlined
 } from '@ant-design/icons';
 
-import { } from '@ant-design/colors';
+import {
+} from '@ant-design/colors';
 
 import itemsComponents from '../../../../../components/items';
 
 import common from '../../../../../utils/common';
 
-const { TextCopy } = itemsComponents;
-
 function Review(props) {
+  const { TextCopy } = itemsComponents;
   const {
     visible = false,
     members = [],

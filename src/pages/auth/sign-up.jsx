@@ -22,10 +22,9 @@ import global from "../../config/global";
 
 import './css/auth.scss';
 
-const { Logo } = authComponents;
-const { AuthBgImage } = images;
-
 const SingUp = () => {
+  const { Logo } = authComponents;
+  const { AuthBgImage } = images;
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const serverType = useSelector((state) => state.system.serverType);

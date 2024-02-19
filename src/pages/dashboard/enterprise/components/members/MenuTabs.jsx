@@ -1,13 +1,13 @@
 import React, { } from "react";
+import { } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Tabs
 } from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
-
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 const MenuTabs = (props) => {
   const { t } = useTranslation()

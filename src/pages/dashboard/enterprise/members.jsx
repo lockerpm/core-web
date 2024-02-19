@@ -13,23 +13,23 @@ import itemsComponents from "../../../components/items"
 import commonComponents from "../../../components/common"
 import membersComponents from "./components/members"
 
+import enterpriseMemberServices from "../../../services/enterprise-member"
+
 import common from "../../../utils/common"
 import global from "../../../config/global"
 
-import enterpriseMemberServices from "../../../services/enterprise-member"
-
-const { Pagination } = itemsComponents;
-const { PageHeader } = commonComponents;
-const {
-  Filter,
-  FormData,
-  MenuTabs,
-  ListData,
-  TableData,
-  Review,
-} = membersComponents;
-
 const EnterpriseMembers = (props) => {
+  const { Pagination } = itemsComponents;
+  const { PageHeader } = commonComponents;
+  const {
+    Filter,
+    FormData,
+    MenuTabs,
+    ListData,
+    TableData,
+    Review,
+  } = membersComponents;
+
   const { } = props
   const { t } = useTranslation()
   const location = useLocation()

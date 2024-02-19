@@ -18,12 +18,12 @@ import inAppShareComponents from "../../../../../components/in-app-share";
 
 import common from "../../../../../utils/common";
 
-const { TextCopy } = itemsComponents;
-const { Actions, SharedWith } = inAppShareComponents;
-const CipherName = cipherComponents.Name;
-const FolderName = folderComponents.Name;
-
 const ListData = (props) => {
+  const { TextCopy } = itemsComponents;
+  const { Actions, SharedWith } = inAppShareComponents;
+  const CipherName = cipherComponents.Name;
+  const FolderName = folderComponents.Name;
+
   const { t } = useTranslation();
   const {
     loading = false,
