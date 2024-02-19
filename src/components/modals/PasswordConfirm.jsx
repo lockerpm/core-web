@@ -104,6 +104,9 @@ const PasswordConfirmModal = (props) => {
         disabled: checking || callingAPI
       }}
     >
+      <div className="mb-2">
+        {description || t('password_confirm.confirm_note')}
+      </div>
       <div key={timeNow}>
         {
           isPair && <Pairing
@@ -116,9 +119,6 @@ const PasswordConfirmModal = (props) => {
           !isPair && <div>
             {
               !['security_key', 'passkey'].includes(unlockMethod) && <div>
-                <div className="mb-2">
-                  {description || t('password_confirm.confirm_note')}
-                </div>
                 <Form
                   form={form}
                   onFinish={handleConfirm}
