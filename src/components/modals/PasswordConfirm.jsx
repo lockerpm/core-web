@@ -94,7 +94,7 @@ const PasswordConfirmModal = (props) => {
       okText={okText}
       onOk={() => handleConfirm()}
       onCancel={() => onClose()}
-      footer={userInfo?.login_method === 'password' && !isPair ? undefined : false}
+      footer={(userInfo?.login_method === 'password' || !isPair) ? undefined : false}
       okButtonProps={{
         loading: checking || callingAPI,
         disabled: !password,
