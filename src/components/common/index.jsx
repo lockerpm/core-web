@@ -5,6 +5,7 @@ import PageHeader from "./PageHeader";
 import UploadFile from "./UploadFile";
 import GenerateOptions from "./GenerateOptions";
 import ItemInput from "./ItemInput";
+import UserAvatar from "./UserAvatar";
 
 const commonComponents = {
   CipherIcon,
@@ -13,7 +14,8 @@ const commonComponents = {
   PageHeader,
   UploadFile,
   GenerateOptions,
-  ItemInput
+  ItemInput,
+  UserAvatar
 }
 
 export default commonComponents

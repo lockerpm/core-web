@@ -6,7 +6,6 @@ import {
   Space,
   Button,
   Dropdown,
-  Avatar,
 } from '@lockerpm/design';
 
 import {
@@ -15,53 +14,23 @@ import {
   GroupOutlined
 } from '@ant-design/icons';
 
+import commonComponents from '../common';
+
 import authServices from "../../services/auth";
 import userServices from '../../services/user';
 import commonServices from '../../services/common';
 
 import global from '../../config/global';
-import common from '../../utils/common';
 
 function DropdownMenu() {
+  const { UserAvatar } = commonComponents;
   const { t } = useTranslation();
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const locale = useSelector((state) => state.system.locale);
   const teams = useSelector((state) => state.enterprise.teams);
 
   const isEntepriseAdmin = useMemo(() => {
     return teams[0]?.role?.includes('admin')
   }, [teams])
-
-  const roleDisplay = useMemo(() => {
-    if (userInfo?.is_super_admin) {
-      return <span>{t('roles.supper_admin')}</span>
-    }
-    if (teams.length === 0) {
-      return <span>{userInfo?.email}</span>
-    }
-    const role = common.getUserRole(teams[0]?.role)
-    return <span>{teams[0]?.name} - {t(role?.label)}</span>
-  }, [teams, userInfo, locale])
-
-  const AvatarIcon = useMemo((size = 32) => {
-    if (userInfo?.avatar) {
-      return <Avatar
-        size={size}
-        src={userInfo.avatar}
-      >
-        {userInfo.email.slice(0, 1)?.toUpperCase()}
-      </Avatar>
-    }
-    return <Avatar
-      size={size}
-      style={{
-        backgroundColor: 'var(--sidebar-menu-group-color)',
-        color: 'var(--sidebar-menu-active-background-color)'
-      }}
-    >
-      {userInfo?.name?.slice(0, 1)?.toUpperCase() || 'S'}
-    </Avatar>
-  }, [userInfo])
 
   const dropdownClick = async (item) => {
     if (item.key === 'account') {
@@ -98,11 +67,8 @@ function DropdownMenu() {
         items: [
           {
             key: 'account',
-            icon: AvatarIcon,
-            label: <div className='account-info'>
-              <div className='font-semibold'>{userInfo?.name}</div>
-              <p className='text-gray'>{roleDisplay}</p>
-            </div>,
+            icon: <UserAvatar />,
+            label: <></>,
           },
           {
             key: 'language',
@@ -149,7 +115,7 @@ function DropdownMenu() {
           type='text'
           className='avatar-button'
           shape='circle'
-          icon={AvatarIcon}
+          icon={<UserAvatar showInfo={false}/>}
         />
       </Space>
     </Dropdown>
