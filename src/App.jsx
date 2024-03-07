@@ -18,10 +18,8 @@ import './assets/css/index.scss'
 import { navigatePage } from './utils/navigate'
 import common from './utils/common'
 
-import AdminLayout from './layouts/admin'
-import AuthLayout from './layouts/auth'
-import ErrorsLayout from './layouts/errors'
-import PublicLayout from './layouts/public'
+import AdminLayout from './layouts'
+import OtherLayout from './layouts/other'
 
 import systemServices from './services/system'
 import storeActions from './store/actions'
@@ -129,19 +127,19 @@ const App = () => {
         />
       }
       {
-        currentPage?.type === 'auth' && <AuthLayout
+        currentPage?.type === 'auth' && <OtherLayout
           routers={global.routers.AUTH_ROUTERS}
           pages={pages}
         />
       }
       {
-        currentPage?.type === 'error' && <ErrorsLayout
+        currentPage?.type === 'error' && <OtherLayout
           routers={global.routers.ERROR_ROUTERS}
           pages={pages}
         />
       }
       {
-        currentPage?.type === 'public' && <PublicLayout
+        currentPage?.type === 'public' && <OtherLayout
           routers={global.routers.PUBLIC_ROUTERS}
           pages={pages}
         />

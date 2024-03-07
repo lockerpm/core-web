@@ -13,11 +13,11 @@ import {
 
 import { gray } from '@ant-design/colors';
 
-import layoutComponents from '../../../components/layout';
+import layoutComponents from '../../components/layout';
 
-import images from '../../../assets/images';
+import images from '../../assets/images';
 
-import global from '../../../config/global';
+import global from '../../config/global';
 
 import '../css/sidebar-top.scss';
 

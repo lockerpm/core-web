@@ -12,23 +12,28 @@ import {
   VerticalAlignTopOutlined
 } from "@ant-design/icons"
 
-import layoutComponents from "../../components/layout"
+import layoutComponents from "../components/layout"
 import adminLayoutComponents from "./components"
 
-import authServices from "../../services/auth"
-import commonServices from "../../services/common"
-import enterpriseServices from "../../services/enterprise"
+import authServices from "../services/auth"
+import commonServices from "../services/common"
+import enterpriseServices from "../services/enterprise"
 
-import storeActions from "../../store/actions"
+import storeActions from "../store/actions"
 
-import global from "../../config/global"
-import common from "../../utils/common"
+import global from "../config/global"
+import common from "../utils/common"
 
 import "./css/index.scss"
 
 function AdminLayout(props) {
   const { PageContent } = layoutComponents;
-  const { Header, SidebarTop, SidebarCenter } = adminLayoutComponents;
+  const {
+    Header,
+    SidebarTop,
+    SidebarCenter,
+    SidebarBottom
+  } = adminLayoutComponents;
   const { routers, pages } = props
   const dispatch = useDispatch()
   const location = useLocation()
@@ -148,6 +153,7 @@ function AdminLayout(props) {
             >
               <SidebarTop collapsed={collapsed} />
               <SidebarCenter collapsed={collapsed} routers={routers} onClose={() => isMobile ? setRespCollapsed(true) : () => {}}/>
+              <SidebarBottom collapsed={collapsed} />
               {isMobile && <div className="resp-collapsed-bg" onClick={() => setRespCollapsed(true)}>
                 <div className='resp-menu-toggle-icon mr-3' onClick={() => setRespCollapsed(true)}>
                   <CloseOutlined />

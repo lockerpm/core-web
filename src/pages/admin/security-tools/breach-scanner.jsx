@@ -142,8 +142,9 @@ const BreachScanner = (props) => {
       {
         isChecked && <div className="mt-4">
           {
-            breachResult.map((b) => <Card
+            breachResult.map((b, index) => <Card
               className="mb-2"
+              key={index}
               bodyStyle={{ padding: 12 }}
             >
               <Row gutter={[24, 24]}>

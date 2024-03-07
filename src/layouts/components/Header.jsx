@@ -12,8 +12,8 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 
-import itemsComponents from '../../../components/items';
-import layoutComponents from '../../../components/layout';
+import itemsComponents from '../../components/items';
+import layoutComponents from '../../components/layout';
 
 import '../css/header.scss';
 

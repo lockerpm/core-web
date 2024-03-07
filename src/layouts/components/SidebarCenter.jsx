@@ -11,8 +11,8 @@ import {
   LeftOutlined,
 } from '@ant-design/icons'
 
-import common from '../../../utils/common';
-import global from '../../../config/global';
+import common from '../../utils/common';
+import global from '../../config/global';
 
 import '../css/sidebar-center.scss';
 
