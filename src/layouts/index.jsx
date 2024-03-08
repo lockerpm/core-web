@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons"
 
 import layoutComponents from "../components/layout"
-import adminLayoutComponents from "./components"
+import layoutsComponents from "./components"
 
 import authServices from "../services/auth"
 import commonServices from "../services/common"
@@ -33,7 +33,7 @@ function AdminLayout(props) {
     SidebarTop,
     SidebarCenter,
     SidebarBottom
-  } = adminLayoutComponents;
+  } = layoutsComponents;
   const { routers, pages } = props
   const dispatch = useDispatch()
   const location = useLocation()
