@@ -161,6 +161,7 @@ function AdminLayout(props) {
               />
               <SidebarBottom
                 collapsed={collapsed}
+                showBottom={showBottom}
                 setShowBottom={setShowBottom}
               />
               {isMobile && <div className="resp-collapsed-bg" onClick={() => setRespCollapsed(true)}>
