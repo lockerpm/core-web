@@ -46,6 +46,7 @@ function AdminLayout(props) {
   const teams = useSelector((state) => state.enterprise.teams)
 
   const [respCollapsed, setRespCollapsed] = useState(true)
+  const [showBottom, setShowBottom] = useState(false)
 
   const accessToken = authServices.access_token()
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`)
@@ -155,9 +156,13 @@ function AdminLayout(props) {
               <SidebarCenter
                 collapsed={collapsed}
                 routers={routers}
+                showBottom={showBottom}
                 onClose={() => isMobile ? setRespCollapsed(true) : () => {}}
               />
-              <SidebarBottom collapsed={collapsed} />
+              <SidebarBottom
+                collapsed={collapsed}
+                setShowBottom={setShowBottom}
+              />
               {isMobile && <div className="resp-collapsed-bg" onClick={() => setRespCollapsed(true)}>
                 <div className='resp-menu-toggle-icon mr-3' onClick={() => setRespCollapsed(true)}>
                   <CloseOutlined />

@@ -17,7 +17,7 @@ import global from '../../config/global';
 import '../css/sidebar-center.scss';
 
 function SidebarCenter(props) {
-  const { collapsed, onClose = () => {} } = props
+  const { collapsed, showBottom, onClose = () => {} } = props
   const currentPage = useSelector((state) => state.system.currentPage);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const invitations = useSelector((state) => state.share.invitations);
@@ -104,7 +104,7 @@ function SidebarCenter(props) {
   }
 
   return (
-    <div className={'admin-layout-sidebar-center'}>
+    <div className={`admin-layout-sidebar-center ${showBottom ? 'show-bottom' : ''}`}>
       {
         backMenu && <Menu
           defaultOpenKeys={[]}
