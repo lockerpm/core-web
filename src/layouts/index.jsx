@@ -152,7 +152,11 @@ function AdminLayout(props) {
               className={respCollapsed ? "" : "resp-collapsed"}
             >
               <SidebarTop collapsed={collapsed} />
-              <SidebarCenter collapsed={collapsed} routers={routers} onClose={() => isMobile ? setRespCollapsed(true) : () => {}}/>
+              <SidebarCenter
+                collapsed={collapsed}
+                routers={routers}
+                onClose={() => isMobile ? setRespCollapsed(true) : () => {}}
+              />
               <SidebarBottom collapsed={collapsed} />
               {isMobile && <div className="resp-collapsed-bg" onClick={() => setRespCollapsed(true)}>
                 <div className='resp-menu-toggle-icon mr-3' onClick={() => setRespCollapsed(true)}>
@@ -162,8 +166,7 @@ function AdminLayout(props) {
             </Layout.Sider>
           )}
           <Layout
-            className={`admin-layout-center ${collapsed ? "admin-layout-center-collapsed" : ""} ${isMobile ? "mobile" : ""
-              }`}
+            className={`admin-layout-center ${collapsed ? "admin-layout-center-collapsed" : ""} ${isMobile ? "mobile" : ""}`}
           >
             <Layout.Header style={{ padding: 0 }}>
               <Header
