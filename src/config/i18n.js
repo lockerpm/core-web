@@ -5,7 +5,7 @@ import { initReactI18next } from 'react-i18next'
 import en from '../locale/en.json'
 import vi from '../locale/vi.json'
 
-import common from '../utils/common'
+import storage from '../utils/common/storage'
 
 const resources = {
   en: {
@@ -19,7 +19,7 @@ const resources = {
 i18n.use(initReactI18next)
   .init({
     resources,
-    lng: common.getLanguage(),
+    lng: storage.getLanguage(),
     interpolation: {
       escapeValue: false,
     },
