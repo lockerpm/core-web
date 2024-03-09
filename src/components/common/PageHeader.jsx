@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  Button,
   Row,
   Col,
 } from '@lockerpm/design';
@@ -14,9 +13,13 @@ import {
 
 import { gray } from '@ant-design/colors';
 
-import Notice from "./page-header/Notice";
+import pageHeaderComponents from "../page-header";
 
 const PageHeader = (props) => {
+  const {
+    EmergencyAccessInvitations,
+    Actions,
+  } = pageHeaderComponents;
   const {
     title = '',
     total = null,
@@ -39,7 +42,7 @@ const PageHeader = (props) => {
 
   return (
     <>
-      <Notice />
+      <EmergencyAccessInvitations />
       <Row
         gutter={[24, 8]}
         className={`
@@ -83,24 +86,7 @@ const PageHeader = (props) => {
         </Col>
         <Col span={(isRight || actions.length > 0) ? 8 : 12} className="page-header__right" align="right">
           <Row gutter={[8, 8]} justify="end">
-            {
-              actions.filter((a) => !a.hide).map((a) =>
-                <Col key={a.key}>
-                  <Button
-                    size={a.size}
-                    key={a.key}
-                    type={a.type}
-                    loading={a.loading}
-                    danger={a.danger}
-                    disabled={a.disabled}
-                    onClick={() => a.click()}
-                    icon={a.icon}
-                  >
-                    {isMobile ? '' : a.label}
-                  </Button>
-                </Col>
-              )
-            }
+            <Actions actions={actions}/>
             <Right />
           </Row>
         </Col>

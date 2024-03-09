@@ -83,7 +83,7 @@ const syncItems = async (cipherIds) => {
     await global.jsCore.cipherService.upsert(response)
   }).catch(() => {
   })
-  await common.getAllCiphers();
+  await store.getAllCiphers();
   global.store.dispatch(storeActions.updateSyncing(false))
 };
 

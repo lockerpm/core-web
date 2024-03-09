@@ -11,11 +11,11 @@ import {
 import {
 } from '@ant-design/icons';
 
-import itemsComponents from '../../items';
+import itemsComponents from '../items';
 
-import emergencyAccessServices from '../../../services/emergency-access';
+import emergencyAccessServices from '../../services/emergency-access';
 
-import global from '../../../config/global';
+import global from '../../config/global';
 
 function EmergencyAccessInvitations() {
   const { ImageIcon } = itemsComponents;

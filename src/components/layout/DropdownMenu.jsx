@@ -68,7 +68,6 @@ function DropdownMenu() {
           {
             key: 'account',
             icon: <UserAvatar />,
-            label: <></>,
           },
           {
             key: 'language',
