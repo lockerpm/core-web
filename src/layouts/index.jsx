@@ -16,7 +16,6 @@ import layoutComponents from "../components/layout"
 import layoutsComponents from "./components"
 
 import authServices from "../services/auth"
-import commonServices from "../services/common"
 import enterpriseServices from "../services/enterprise"
 
 import storeActions from "../store/actions"
