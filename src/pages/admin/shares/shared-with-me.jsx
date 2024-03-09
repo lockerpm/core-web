@@ -140,7 +140,7 @@ const SharedWithMe = (props) => {
       } else {
         global.pushSuccess(t('notification.success.sharing.rejected'))
       }
-      await commonServices.get_invitations();
+      await common.getInvitations();
     });
   }
 
@@ -153,11 +153,11 @@ const SharedWithMe = (props) => {
           const collectionCiphers = allCiphers.filter((c) => c.folderId === item.id)
           await global.jsCore.cipherService.delete(collectionCiphers.map(c => c.id))
           await global.jsCore.collectionService.delete(item.id)
-          await commonServices.get_all_collections();
+          await common.getAllCollections();
         } else {
           await global.jsCore.cipherService.delete([item.id])
         }
-        await commonServices.get_all_ciphers();
+        await common.getAllCollections();
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,

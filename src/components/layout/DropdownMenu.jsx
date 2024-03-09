@@ -18,9 +18,9 @@ import commonComponents from '../common';
 
 import authServices from "../../services/auth";
 import userServices from '../../services/user';
-import commonServices from '../../services/common';
 
 import global from '../../config/global';
+import common from '../../utils/common';
 
 function DropdownMenu() {
   const { UserAvatar } = commonComponents;
@@ -55,7 +55,7 @@ function DropdownMenu() {
       email: userInfo.email,
       language: language,
     }).then(() => {
-      commonServices.fetch_user_info();
+      common.fetchUserInfo();
     }).catch((error) => {
       global.pushError(error)
     })

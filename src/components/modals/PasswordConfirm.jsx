@@ -19,6 +19,7 @@ import formsComponents from "../forms";
 import authServices from "../../services/auth";
 
 import global from "../../config/global";
+import common from "../../utils/common";
 
 const PasswordConfirmModal = (props) => {
   const { Pairing, SecurityKey, Passkey } = formsComponents;
@@ -46,7 +47,7 @@ const PasswordConfirmModal = (props) => {
   const [timeNow, setTimeNow] = useState(new Date().getTime());
 
   const password = Form.useWatch('password', form);
-  const unlockMethod = authServices.unlock_method();
+  const unlockMethod = common.getUnlockMethod();
 
   useEffect(() => {
     form.resetFields();

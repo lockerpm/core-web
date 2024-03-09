@@ -16,7 +16,6 @@ import {
 import authFormsComponents from "./forms";
 
 import ssoConfigServices from "../../../services/sso-config";
-import authServices from "../../../services/auth";
 
 import common from "../../../utils/common";
 import global from "../../../config/global";
@@ -40,7 +39,7 @@ const Enterprise = (props) => {
   const [ssoUser, setSsoUser] = useState(null);
   const [checking, setChecking] = useState(false);
 
-  const ssoAccount = authServices.sso_account();
+  const ssoAccount = common.getSsoAccount();
 
   useEffect(() => {
     checkExist();
@@ -59,8 +58,8 @@ const Enterprise = (props) => {
       const ssoConfig = response.sso_configuration;
       setSsoConfig(ssoConfig)
       if (clientId) {
-        authServices.update_sso_account(null);
-        authServices.update_redirect_client_id(clientId);
+        common.updateSsoAccount(null);
+        common.updateRedirectClientId(clientId);
         redirectToAuthSSO(ssoConfig);
       } else if (ssoAccount?.email) {
         setStep(1)
@@ -80,7 +79,7 @@ const Enterprise = (props) => {
   }
 
   const openOtherClient = async () => {
-    const redirectClientId = authServices.redirect_client_id();
+    const redirectClientId = common.getRedirectClientId();
     if (redirectClientId) {
       if (isConnected) {
         await service.setCacheData({ email: ssoUser.mail })
@@ -99,7 +98,7 @@ const Enterprise = (props) => {
         }, 1000);
       }
     }
-    authServices.update_redirect_client_id(null);
+    common.updateRedirectClientId(null);
   }
 
   const isBack = useMemo(() => {
@@ -124,11 +123,11 @@ const Enterprise = (props) => {
       redirect_uri: common.ssoRedirectUri()
     }).then((response) => {
       setSsoUser(response)
-      authServices.update_sso_account({ email: response.mail })
+      common.updateSsoAccount({ email: response.mail })
       setStep(1);
     }).catch((error) => {
       setSsoUser(null);
-      authServices.update_sso_account(null);
+      common.updateSsoAccount(null);
       global.pushError(error)
       redirectToAuthSSO(ssoConfiguration)
     });
@@ -136,7 +135,7 @@ const Enterprise = (props) => {
   }
 
   const signOtherAccount = () => {
-    authServices.update_sso_account(null);
+    common.updateSsoAccount(null);
     if (isConnected) {
       service.setCacheData({})
     }

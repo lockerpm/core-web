@@ -1,8 +1,7 @@
 import request from '../utils/request'
 
 import coreServices from './core'
-import authServices from './auth'
-import commonServices from './common'
+
 import global from '../config/global'
 import common from '../utils/common'
 
@@ -53,7 +52,6 @@ async function on_premise_prelogin(data) {
   })
 }
 
-
 async function check_exist_email(data) {
   return request({
     url: global.endpoint.USERS_EXIST,
@@ -94,7 +92,7 @@ async function users_access_token(token) {
       client_id: global.constants.CLIENT_ID,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: authServices.device_id()
+      device_identifier: common.deviceId()
     }
   })
 }
@@ -115,7 +113,7 @@ async function users_session(data) {
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: authServices.device_id()
+      device_identifier: common.deviceId()
     }
   });
 }
@@ -136,7 +134,7 @@ async function users_session_otp(data) {
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: authServices.device_id(),
+      device_identifier: common.deviceId(),
       method: data.method,
       save_device: data.save_device || false,
       otp: data.otp
@@ -161,7 +159,7 @@ async function change_password(data = {}) {
   }
 
   const masterPasswordCipher = await common.createEncryptedMasterPw(newPassword)
-  const { score } = commonServices.password_strength(data.new_password)
+  const { score } = common.getPasswordStrength(data.new_password)
 
   const payload = {
     key: encKey[1].encryptedString,
@@ -185,7 +183,7 @@ async function register(data) {
   const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
   const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
   const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
-  const { score } = commonServices.password_strength(data.password)
+  const { score } = common.getPasswordStrength(data.password)
   let payload = {
     email: data.username,
     kdf: global.constants.CORE_JS_INFO.KDF,

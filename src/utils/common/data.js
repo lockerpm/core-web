@@ -49,14 +49,14 @@ const paginationAndSortData = (
   }
 }
 
-function scrollEnd(
+const scrollEnd = (
   event,
   params,
   total,
   setParams,
   isMobile = false,
   pageSize = global.constants.PAGE_SIZE
-) {
+) => {
   if (event.target.scrollTop > 100) {
     global.store.dispatch(storeActions.updateIsScrollToTop(true))
   } else {
@@ -84,8 +84,15 @@ const downloadCSV = (rows = []) => {
   window.open(encodedUri)
 }
 
+const getPasswordStrength = (password) => {
+  return global.jsCore.passwordGenerationService.passwordStrength(password, [
+    'cystack'
+  ]) || { score: 0 }
+}
+
 export default {
   paginationAndSortData,
   scrollEnd,
-  downloadCSV
+  downloadCSV,
+  getPasswordStrength
 }

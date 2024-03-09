@@ -25,7 +25,6 @@ import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import authServices from "../../services/auth";
-import commonServices from "../../services/common";
 
 import global from "../../config/global";
 import common from "../../utils/common";
@@ -121,7 +120,7 @@ const Setup2FA = () => {
       if (preLogin?.require_passwordless && preLogin?.login_method === 'password') {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
       } else {
-        await commonServices.unlock_to_vault({
+        await common.unlockToVault({
           password: currentPassword,
           username: preLogin.email,
           email: preLogin.email,
@@ -146,7 +145,7 @@ const Setup2FA = () => {
   }
 
   const signOtherAccount = () => {
-    authServices.update_sso_account(null);
+    common.updateSsoAccount(null);
     if (isConnected) {
       service.setCacheData({})
     }

@@ -17,8 +17,6 @@ import {
 
 import securityModalsComponents from "./modals";
 
-import authServices from "../../../../../services/auth";
-
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
@@ -41,7 +39,7 @@ const SecurityKey = (props) => {
   }, [])
 
   const getBackupKeys = async () => {
-    await service.setApiToken(authServices.access_token());
+    await service.setApiToken(common.getAccessToken);
     const response = await service.listBackupPasswordless();
     setBackupKeys(response?.filter((k) => k.type === 'hmac') || [])
   }
@@ -57,7 +55,7 @@ const SecurityKey = (props) => {
   const handleRemoveKey = async (keyId) => {
     global.confirm(async () => {
       try {
-        await service.setApiToken(authServices.access_token())
+        await service.setApiToken(common.getAccessToken)
         await service.deleteBackupPasswordless(keyId)
         await getBackupKeys();
       } catch (error) {

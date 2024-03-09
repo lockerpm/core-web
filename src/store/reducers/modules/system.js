@@ -17,8 +17,6 @@ const system = (state = initial.system, action) => {
     return { ...state, isScrollToTop: action.payload }
   case actionTypes.SET_COLLAPSED:
     return { ...state, collapsed: action.payload }
-  case actionTypes.SET_CACHE_DATA:
-    return { ...state, cacheData: action.payload }
   case actionTypes.SET_SERVER_TYPE:
     return { ...state, serverType: action.payload }
   default:

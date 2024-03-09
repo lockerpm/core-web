@@ -21,7 +21,6 @@ import { red } from '@ant-design/colors';
 
 import enterpriseServices from '../../../services/enterprise';
 import sharingServices from '../../../services/sharing';
-import commonServices from '../../../services/common';
 
 import global from '../../../config/global';
 import common from '../../../utils/common';
@@ -192,7 +191,7 @@ function ShareMembers(props) {
       } else {
         await sharingServices.update_sharing_member(cipherOrFolder.organizationId, item.id, { role: value })
       }
-      await commonServices.get_my_shares();
+      await common.getMyShares();
     }
     if (item.type === 'group') {
       if (item.isNew) {

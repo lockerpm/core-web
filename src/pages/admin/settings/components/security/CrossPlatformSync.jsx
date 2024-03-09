@@ -14,9 +14,9 @@ import modalsComponents from "../../../../../components/modals";
 
 import userServices from "../../../../../services/user";
 import commonServices from "../../../../../services/common";
-import authServices from "../../../../../services/auth";
 
 import global from "../../../../../config/global";
+import common from "../../../../../utils/common";
 
 const CrossPlatformSync = (props) => {
   const { PasswordConfirmModal } = modalsComponents;
@@ -42,7 +42,7 @@ const CrossPlatformSync = (props) => {
       await commonServices.service_login({
         email: userInfo.email,
         password: password,
-        unlock_method: authServices.unlock_method()
+        unlock_method: common.getUnlockMethod()
       })
     }
     setCallingAPI(false);
@@ -54,7 +54,7 @@ const CrossPlatformSync = (props) => {
       email: userInfo.email,
       sync_all_platforms: !userInfo.sync_all_platforms
     }).then(async () => {
-      await commonServices.fetch_user_info();
+      await common.fetchUserInfo();
       global.pushSuccess(t('notification.success.account_details.updated'));
     }).catch((error) => {
       global.pushError(error)

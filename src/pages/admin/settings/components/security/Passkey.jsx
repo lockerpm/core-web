@@ -17,8 +17,6 @@ import {
 
 import securityModalsComponents from "./modals";
 
-import authServices from "../../../../../services/auth";
-
 import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
@@ -44,7 +42,7 @@ const Passkey = (props) => {
 
   const getBackupKeys = async () => {
     if (isConnected) {
-      await service.setApiToken(authServices.access_token());
+      await service.setApiToken(common.getAccessToken());
       const response = await service.listBackupPasswordless();
       setBackupKeys(response?.filter((k) => k.type !== 'hmac') || [])
     }
@@ -52,7 +50,7 @@ const Passkey = (props) => {
 
   const handleAddNewKey = async (name) => {
     setCallingAPI(true);
-    await service.setApiToken(authServices.access_token());
+    await service.setApiToken(common.getAccessToken());
     const encKey = await global.jsCore.cryptoService.getEncKey();
     await service.setBackupPasswordlessUsingPasskey({
       email: userInfo.email,
@@ -73,7 +71,7 @@ const Passkey = (props) => {
   const handleRemoveKey = async (keyId) => {
     global.confirm(async () => {
       try {
-        await service.setApiToken(authServices.access_token())
+        await service.setApiToken(common.getAccessToken())
         await service.deleteBackupPasswordless(keyId)
         await getBackupKeys();
       } catch (error) {

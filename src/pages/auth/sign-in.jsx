@@ -10,9 +10,8 @@ import authComponents from "./components";
 
 import images from "../../assets/images";
 
-import commonServices from "../../services/common";
-
 import global from "../../config/global";
+import common from "../../utils/common";
 
 import './css/auth.scss';
 
@@ -31,7 +30,7 @@ const SingIn = () => {
       ...values,
       email: values.username
     }
-    await commonServices.unlock_to_vault(payload);
+    await common.unlockToVault(payload);
     setCallingAPI(false)
   }
 

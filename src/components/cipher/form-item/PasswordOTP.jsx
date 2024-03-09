@@ -15,11 +15,10 @@ import {
 
 import commonComponents from '../../common';
 
-import commonServices from '../../../services/common';
-
 import { CipherType } from '../../../core-js/src/enums';
 
 import global from '../../../config/global';
+import common from '../../../utils/common';
 
 const options = {
   NO_OTP: 'no_otp',
@@ -61,7 +60,7 @@ function PasswordOTP(props) {
   }, [searchText])
 
   const fetchCiphers = async () => {
-    const result = await commonServices.list_ciphers({
+    const result = await common.listCiphers({
       deleted: false,
       searchText: searchText,
       filters: [(c) => c.type === CipherType.TOTP]

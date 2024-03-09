@@ -14,9 +14,6 @@ import authComponents from "./components";
 
 import images from "../../assets/images";
 
-import commonServices from "../../services/common";
-import authServices from "../../services/auth";
-
 import global from "../../config/global";
 import common from "../../utils/common";
 
@@ -39,7 +36,7 @@ const OtpCode = () => {
 
   const onVerify = async (payload) => {
     setCallingAPI(true)
-    await commonServices.unlock_to_vault({ ...payload, is_otp: true }, query, () => {
+    await common.unlockToVault({ ...payload, is_otp: true }, query, () => {
       const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
       navigate(returnUrl);
     })
@@ -47,7 +44,7 @@ const OtpCode = () => {
   }
 
   const signOtherAccount = () => {
-    authServices.update_sso_account(null);
+    common.updateSsoAccount(null);
     if (isConnected) {
       service.setCacheData({})
     }

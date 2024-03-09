@@ -57,15 +57,6 @@ const updateServerType = data => {
   }
 }
 
-
-const updateCacheData = data => {
-  systemService.update_cache(data)
-  return {
-    type: actionTypes.SET_CACHE_DATA,
-    payload: data,
-  }
-}
-
 export default {
   changeLanguage,
   toggleLoading,
@@ -75,5 +66,4 @@ export default {
   updateIsScrollToTop,
   updateCollapsed,
   updateServerType,
-  updateCacheData
 }

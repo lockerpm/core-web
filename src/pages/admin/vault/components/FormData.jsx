@@ -18,7 +18,6 @@ import foldersComponents from '../../folders/components';
 
 import { CipherType } from '../../../../core-js/src/enums';
 
-import commonServices from '../../../../services/common';
 import cipherServices from '../../../../services/cipher';
 
 import global from '../../../../config/global';
@@ -93,7 +92,7 @@ function FormData(props) {
 
   const createCipher = async (values) => {
     const cipher = common.convertFormToCipher({ ...values, type: type });
-    const passwordStrength = values.password ? commonServices.password_strength(values.password) : {};
+    const passwordStrength = values.password ? common.getPasswordStrength(values.password) : {};
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,
       {
@@ -119,7 +118,7 @@ function FormData(props) {
       ...common.convertFormToCipher({ ...values, type: type }),
       organizationId: item.organizationId
     };
-    const passwordStrength = values.password ? commonServices.password_strength(values.password) : {};
+    const passwordStrength = values.password ? common.getPasswordStrength(values.password) : {};
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,
       {

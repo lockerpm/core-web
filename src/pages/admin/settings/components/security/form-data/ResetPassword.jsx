@@ -16,7 +16,6 @@ import {
 import formsComponents from '../../../../../../components/forms';
 
 import emergencyAccessServices from '../../../../../../services/emergency-access';
-import commonServices from '../../../../../../services/common';
 
 import { SymmetricCryptoKey } from '../../../../../../core-js/src/models/domain';
 
@@ -67,7 +66,7 @@ function ResetPasswordFormData(props) {
         values.new_password,
         encKey[0]
       )
-      const passwordStrength = await commonServices.password_strength(values.new_password);
+      const passwordStrength = await common.getPasswordStrength(values.new_password);
       const payload = {
         key: encKey[1].encryptedString,
         new_master_password_hash: masterPasswordHash,

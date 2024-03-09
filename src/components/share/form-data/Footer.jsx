@@ -12,7 +12,6 @@ import {
 
 import sharingServices from '../../../services/sharing';
 import quickShareServices from '../../../services/quick-share';
-import commonServices from '../../../services/common';
 
 import global from '../../../config/global';
 import common from '../../../utils/common';
@@ -106,7 +105,7 @@ function Footer(props) {
       members: newMembers,
       groups: newGroups
     }).then(() => {
-      commonServices.get_my_shares();
+      common.getMyShares();
       global.pushSuccess(t('notification.success.sharing.update_share_success'))
       onClose();
     }).catch((error) => {
@@ -143,7 +142,7 @@ function Footer(props) {
     }
     if (originCollection?.organizationId) {
       await sharingServices.add_sharing_members(originCollection.organizationId, payload).then(() => {
-        commonServices.get_my_shares();
+        common.getMyShares();
         global.pushSuccess(t('notification.success.sharing.share_folder_success'))
         onClose();        
       }).catch((error) => {
@@ -163,7 +162,7 @@ function Footer(props) {
     const quickRequest = await common.quickShareForRequest(values);
     await quickShareServices.create(quickRequest).then(async (response) => {
       global.pushSuccess(t('notification.success.sharing.share_folder_success'))
-      await commonServices.get_quick_shares();
+      await common.getQuickShares();
       onReview(response.id);
       onClose();
     }).catch((error) => {

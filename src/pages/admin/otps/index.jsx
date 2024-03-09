@@ -15,7 +15,6 @@ import otpsComponents from "./components";
 import { CipherType } from "../../../core-js/src/enums"
 
 import cipherServices from "../../../services/cipher";
-import commonServices from "../../../services/common";
 
 import global from "../../../config/global";
 import common from "../../../utils/common";
@@ -99,7 +98,7 @@ const Authenticator = () => {
 
   const fetchCiphers = async () => {
     setLoading(true);
-    const result = await commonServices.list_ciphers({
+    const result = await common.listCiphers({
       deleted: false,
       searchText: params.searchText,
       filters: [(c) => c.type === CipherType.TOTP]

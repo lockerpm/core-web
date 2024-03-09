@@ -19,11 +19,11 @@ import { green } from '@ant-design/colors';
 
 import itemsComponents from "../items";
 
-import authServices from "../../services/auth";
 import commonServices from "../../services/common";
 
 import storeActions from "../../store/actions";
 import global from "../../config/global";
+import common from "../../utils/common";
 
 const PasswordlessForm = (props) => {
   const { ImageIcon } = itemsComponents;
@@ -33,7 +33,7 @@ const PasswordlessForm = (props) => {
     isLogin = false,
     userInfo = {},
     isAddKey = false,
-    accessToken = authServices.access_token(),
+    accessToken = common.getAccessToken(),
     onRepair = () => { },
     onConfirm = () => { }
   } = props;

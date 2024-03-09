@@ -128,7 +128,7 @@ const Vault = (props) => {
 
   const fetchCiphers = async () => {
     setLoading(true);
-    const result = await commonServices.list_ciphers({
+    const result = await common.listCiphers({
       deleted: cipherType.isDeleted,
       searchText: params.searchText,
       filters: filters

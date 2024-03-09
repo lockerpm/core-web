@@ -18,10 +18,10 @@ import {
 import commonComponents from '../../../../../components/common';
 
 import coreServices from '../../../../../services/core';
-import commonServices from '../../../../../services/common';
 import enterpriseMemberServices from '../../../../../services/enterprise-member';
 
 import global from '../../../../../config/global';
+import common from '../../../../../utils/common';
 
 function FormData(props) {
   const { ItemInput } = commonComponents;
@@ -76,7 +76,7 @@ function FormData(props) {
       const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
       const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
       const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
-      const passwordStrength = commonServices.password_strength(password);
+      const passwordStrength = common.getPasswordStrength(password);
 
       return {
         email: u,

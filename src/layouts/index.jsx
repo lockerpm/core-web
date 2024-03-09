@@ -48,7 +48,7 @@ function AdminLayout(props) {
   const [respCollapsed, setRespCollapsed] = useState(true)
   const [showBottom, setShowBottom] = useState(false)
 
-  const accessToken = authServices.access_token()
+  const accessToken = common.getAccessToken()
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`)
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function AdminLayout(props) {
       const strData = lastMessage?.data.split("'").join('"')
       const messageData = JSON.parse(strData)
       if (messageData.event === "sync") {
-        commonServices.sync_data_by_ws(messageData)
+        common.syncDataByWs(messageData)
       }
     }
   }, [lastMessage])

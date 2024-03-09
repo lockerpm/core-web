@@ -3,10 +3,6 @@ import { ConstantsService } from '../core-js/src/services/constants.service';
 import { SymmetricCryptoKey } from '../core-js/src/models/domain';
 import { Utils } from '../core-js/src/misc/utils';
 
-async function clear_keys() {
-  await global.jsCore.cryptoService.clearKeys()
-}
-
 async function make_key(username, password) {
   if (global.jsCore) {
     return await global.jsCore.cryptoService.makeKey(
@@ -21,7 +17,7 @@ async function make_key(username, password) {
 
 async function unlock(data) {
   if (global.jsCore) {
-    await clear_keys()
+    await global.jsCore.cryptoService.clearKeys()
     let hashedPassword = data?.hashedPassword;
     let makeKey = data?.keyB64 ? new SymmetricCryptoKey(Utils.fromB64ToArray(data?.keyB64).buffer) : null
     if (data.password) {
@@ -59,13 +55,12 @@ async function lock () {
 
 async function logout () {
   if (global.jsCore) {
-    await clear_keys()
+    await global.jsCore.cryptoService.clearKeys()
     await global.jsCore.userService.clear()
   }
 }
 
 export default {
-  clear_keys,
   make_key,
   unlock,
   lock,

@@ -23,8 +23,6 @@ import passwordHealthComponents from "../../../components/password-health";
 
 import { CipherType } from "../../../core-js/src/enums";
 
-import commonServices from "../../../services/common";
-
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
@@ -63,7 +61,7 @@ const PasswordHealth = (props) => {
   const weakPasswordsData = useMemo(() => {
     return ciphersWithPasswords
       .map((c) => {
-        const { score } = commonServices.password_strength(c.login.password)
+        const { score } = common.getPasswordStrength(c.login.password)
         return {
           ...c,
           score: score

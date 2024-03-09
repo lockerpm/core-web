@@ -23,7 +23,6 @@ import OtherLayout from './layouts/other'
 
 import systemServices from './services/system'
 import storeActions from './store/actions'
-import authServices from './services/auth'
 import commonServices from './services/common'
 
 import i18n from './config/i18n'
@@ -76,7 +75,7 @@ const App = () => {
 
   useEffect(() => {
     commonServices.init_server();
-    const locale = systemServices.get_language()
+    const locale = common.getLanguage()
     dispatch(storeActions.changeLanguage(locale))
     i18n.changeLanguage(locale)
     initJsCore()
@@ -100,7 +99,7 @@ const App = () => {
 
   const beforeRedirect = async () => {
     const currentPage = common.getRouterByLocation(location)
-    const accessToken = authServices.access_token()
+    const accessToken = common.getAccessToken()
     if (accessToken) {
       if (!currentPage) {
         global.navigate(global.keys.ADMIN_ERROR)

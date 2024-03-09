@@ -26,8 +26,6 @@ import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
-import authServices from "../../services/auth";
-import commonServices from "../../services/common";
 
 import global from "../../config/global";
 import common from "../../utils/common";
@@ -210,8 +208,8 @@ const Authenticate = () => {
           login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
         })
       } else {
-        authServices.update_access_token_type(userSession.token_type)
-        authServices.update_access_token(userSession.access_token);
+        common.updateAccessTokenType(userSession.token_type)
+        common.updateAccessToken(userSession.access_token);
         if (newFullName || data.full_name) {
           await userServices.update_users_me({
             email: preLogin?.email,
@@ -243,7 +241,7 @@ const Authenticate = () => {
       sync_all_platforms: preLogin.sync_all_platforms,
       unlock_method: otherMethod
     }
-    await commonServices.unlock_to_vault(payload)
+    await common.unlockToVault(payload)
   }
 
   const setPasswordLessByPasskey = async (values) => {
@@ -265,7 +263,7 @@ const Authenticate = () => {
   }
 
   const signOtherAccount = () => {
-    authServices.update_sso_account(null);
+    common.updateSsoAccount(null);
     if (isConnected) {
       service.setCacheData({})
     }

@@ -10,7 +10,7 @@ import {
   SafetyCertificateOutlined,
 } from "@ant-design/icons";
 
-import commonServices from "../../services/common";
+import common from "../../utils/common";
 
 const passwordStatuses = [
   {
@@ -60,7 +60,7 @@ const PasswordStrength = (props) => {
   } = props
   const passwordStrength = useMemo(() => {
     if (password) {
-      return commonServices.password_strength(password)
+      return common.getPasswordStrength(password)
     }
     return { score: score }
   }, [password])

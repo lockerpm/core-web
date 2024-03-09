@@ -61,7 +61,7 @@ const Lock = () => {
   const query = common.convertStringToQuery(location.search);
 
   useEffect(() => {
-    commonServices.fetch_user_info();
+    common.fetchUserInfo();
   }, [])
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const Lock = () => {
       sync_all_platforms: userInfo.sync_all_platforms,
       unlock_method: values.unlock_method || otherMethod
     }
-    await commonServices.unlock_to_vault(payload, query, () => {
+    await common.unlockToVault(payload, query, () => {
       const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';
       navigate(returnUrl);
     })

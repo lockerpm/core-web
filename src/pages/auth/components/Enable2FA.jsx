@@ -20,6 +20,7 @@ import formsComponents from "../../../components/forms";
 import authServices from "../../../services/auth";
 
 import global from "../../../config/global";
+import common from "../../../utils/common";
 
 const Enable2FA = (props) => {
   const { SmartOtp, MailOtp } = formsComponents;
@@ -40,7 +41,7 @@ const Enable2FA = (props) => {
 
   useEffect(() => {
     setIdentity(factor2?.mail_otp ? global.constants.FACTOR2_IDENTITY.MAIL : global.constants.FACTOR2_IDENTITY.SMART_OTP)
-    authServices.update_access_token(factor2?.token)
+    common.updateAccessToken(factor2?.token)
   }, [factor2])
 
   const handleNext = async () => {

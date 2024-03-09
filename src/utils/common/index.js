@@ -1,3 +1,4 @@
+import storage from './storage'
 import other from './other'
 import data from './data'
 import format from './format'
@@ -8,8 +9,13 @@ import otp from './otp'
 import folder from './folder'
 import permission from'./permission'
 import share from './share'
+import store from './store'
+import sync from './sync'
+import socket from './socket'
+import auth from './auth'
 
 export default {
+  ...storage,
   ...other,
   ...data,
   ...format,
@@ -19,5 +25,9 @@ export default {
   ...otp,
   ...folder,
   ...permission,
-  ...share
+  ...share,
+  ...store,
+  ...sync,
+  ...socket,
+  ...auth
 }

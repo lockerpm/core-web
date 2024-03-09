@@ -5,7 +5,7 @@ import { initReactI18next } from 'react-i18next'
 import en from '../locale/en.json'
 import vi from '../locale/vi.json'
 
-import systemServices from '../services/system'
+import common from '../utils/common'
 
 const resources = {
   en: {
@@ -19,7 +19,7 @@ const resources = {
 i18n.use(initReactI18next)
   .init({
     resources,
-    lng: systemServices.get_language(),
+    lng: common.getLanguage(),
     interpolation: {
       escapeValue: false,
     },

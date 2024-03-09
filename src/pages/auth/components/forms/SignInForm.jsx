@@ -19,7 +19,6 @@ import formsComponents from "../../../../components/forms";
 
 import userServices from "../../../../services/user";
 import commonServices from "../../../../services/common";
-import authServices from "../../../../services/auth";
 
 import global from "../../../../config/global";
 import common from "../../../../utils/common";
@@ -40,7 +39,7 @@ const SignInForm = (props) => {
   const locale = useSelector((state) => state.system.locale);
   const isConnected = useSelector((state) => state.service.isConnected);
 
-  const ssoAccount = authServices.sso_account();
+  const ssoAccount = common.getSsoAccount();
   const email = ssoAccount?.email;
 
   const [preLogin, setPreLogin] = useState(null)

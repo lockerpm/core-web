@@ -16,10 +16,10 @@ import {
 import commonComponents from "../../../components/common";
 import accountComponents from "./components/account";
 
-import commonServices from "../../../services/common";
 import userServices from "../../../services/user";
 
 import global from "../../../config/global";
+import common from "../../../utils/common";
 
 const AccountDetails = (props) => {
   const { PageHeader } = commonComponents;
@@ -56,7 +56,7 @@ const AccountDetails = (props) => {
       language: values.language,
       timeout: values.timeout
     }).then(() => {
-      commonServices.fetch_user_info();
+      common.fetchUserInfo();
       global.pushSuccess(t('notification.success.account_details.updated'));
     }).catch((error) => {
       global.pushError(error)

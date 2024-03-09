@@ -14,11 +14,11 @@ import authComponents from "./components";
 import images from "../../assets/images";
 
 import userServices from "../../services/user";
-import authServices from "../../services/auth";
 import coreServices from "../../services/core";
 import commonServices from "../../services/common";
 
 import global from "../../config/global";
+import common from "../../utils/common";
 
 import './css/auth.scss';
 
@@ -40,9 +40,9 @@ const SingUp = () => {
         password: values.password,
         email: values.username
       }).then(async (response) => {
-        authServices.update_access_token_type(response.token_type)
-        authServices.update_access_token(response.access_token);
-        await commonServices.fetch_user_info();
+        common.updateAccessTokenType(response.token_type)
+        common.updateAccessToken(response.access_token);
+        await common.fetchUserInfo();
         await coreServices.unlock({ ...response, ...values })
         await commonServices.sync_data()
         global.navigate(global.keys.VAULT)
@@ -56,7 +56,7 @@ const SingUp = () => {
   }
 
   const signOtherAccount = () => {
-    authServices.update_sso_account(null);
+    common.updateSsoAccount(null);
     if (isConnected) {
       service.setCacheData({})
     }

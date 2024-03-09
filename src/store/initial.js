@@ -1,5 +1,3 @@
-import systemService from "../services/system"
-
 export default {
   system: {
     locale: "en",
@@ -10,7 +8,6 @@ export default {
     isScrollToTop: false,
     collapsed: false,
     serverType: null,
-    cacheData: systemService.get_cache(),
   },
   auth: {
     userInfo: null,

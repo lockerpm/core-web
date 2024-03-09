@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { handleResponseErrorMessage } from './response'
-import authServices from '../services/auth'
+import common from './common'
+
 // create an axios instance
 const service = axios.create({
   withCredentials: false, // send cookies when cross-domain requests
@@ -10,8 +11,8 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    const accessToken = authServices.access_token() || ''
-    const accessTokenType = authServices.access_token_type() || 'Bearer'
+    const accessToken = common.getAccessToken() || ''
+    const accessTokenType = common.getAccessTokenType() || 'Bearer'
     config.headers['Content-Type'] = 'multipart/form-data'
     config.headers['Authorization'] = `${accessTokenType} ${accessToken}`
     return config

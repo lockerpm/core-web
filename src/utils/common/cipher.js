@@ -30,6 +30,21 @@ const newCipherTypes = [
   CipherType.CryptoWallet,
 ]
 
+const listCiphers = async (params, ciphers = null) => {
+  let result = await global.jsCore.searchService.searchCiphers(
+    params.searchText,
+    [
+      ...params.filters,
+      c => c.isDeleted === params.deleted,
+    ],
+    ciphers
+  ) || []
+  result = result.map(item => {
+    return parseNotesOfNewTypes(item)
+  })
+  return result
+}
+
 const cipherSubtitle = (item) => {
   if (!item) {
     return null
@@ -398,6 +413,7 @@ const decryptCipher = async (cipher, key) => {
 
 export default {
   newCipherTypes,
+  listCiphers,
   cipherSubtitle,
   cipherTypeInfo,
   parseNotesOfNewTypes,

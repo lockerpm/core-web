@@ -16,7 +16,6 @@ import {
   EditOutlined
 } from "@ant-design/icons";
 
-import commonServices from "../../../../../services/common";
 import enterprisePolicyServices from "../../../../../services/enterprise-policy";
 
 import common from "../../../../../utils/common";
@@ -54,7 +53,7 @@ const PasswordlessLogin = (props) => {
         policy_type: policy.policy_type,
         config: config
       })
-      await commonServices.fetch_user_info();
+      await common.fetchUserInfo();
       setVisible(false);
     }).catch((error) => {
       global.pushError(error)
