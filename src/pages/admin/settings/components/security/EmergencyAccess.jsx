@@ -4,14 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import {
-  Button,
-  Badge
 } from '@lockerpm/design';
 
 import {
-  PlusOutlined,
-  RightOutlined,
-  DownOutlined
 } from "@ant-design/icons";
 
 import { orange } from '@ant-design/colors';
@@ -25,7 +20,7 @@ import global from "../../../../../config/global";
 import common from "../../../../../utils/common";
 
 const EmergencyAccess = (props) => {
-  const { TableData, ListData } = securityEAComponents;
+  const { EAHeader, TableData, ListData } = securityEAComponents;
   const { ResetPasswordFormData, EmergencyContactFormData } = securityFormDataComponents;
   const {
     className = '',
@@ -94,36 +89,12 @@ const EmergencyAccess = (props) => {
 
   return (
     <div className={className}>
-      <div className="flex justify-between">
-        <div
-          className="flex text-primary cursor-pointer"
-          onClick={() => setExpand(!expand)}
-        >
-          <p className="font-semibold text-xl mr-2">
-            {t('security.emergency_access.title')}
-          </p>
-          {
-            !!pendingRequests && <Badge
-              className="flex items-center mr-2"
-              count={pendingRequests}
-            />
-          }
-          {
-            expand ? <DownOutlined /> : <RightOutlined />
-          }
-        </div>
-        <Button
-          type='primary'
-          ghost
-          icon={<PlusOutlined />}
-          onClick={() => setFormVisible(true)}
-        >
-          {isMobile ? '' : t('security.emergency_access.add')}
-        </Button>
-      </div>
-      <p className="mt-1">
-        {t('security.emergency_access.description')}
-      </p>
+      <EAHeader
+        expand={expand}
+        setExpand={setExpand}
+        pendingRequests={pendingRequests}
+        onCreate={() => setFormVisible(true)}
+      />
       {
         expand && <div className="mt-4">
           <div className="mb-4">
