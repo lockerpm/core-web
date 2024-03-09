@@ -1,5 +1,4 @@
 import actionTypes from '../actionTypes'
-import systemService from '../../services/system'
 
 const changeLanguage = lang => {
   return {

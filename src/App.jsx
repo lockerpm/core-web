@@ -21,7 +21,6 @@ import common from './utils/common'
 import AdminLayout from './layouts'
 import OtherLayout from './layouts/other'
 
-import systemServices from './services/system'
 import storeActions from './store/actions'
 import commonServices from './services/common'
 
