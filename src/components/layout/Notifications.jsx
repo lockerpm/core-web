@@ -22,20 +22,39 @@ import sharingServices from '../../services/sharing';
 import global from '../../config/global';
 import common from '../../utils/common';
 
+let interval = null;
+
 function Notifications() {
   const { ImageIcon } = itemsComponents;
   const { t } = useTranslation();
+
   const locale = useSelector((state) => state.system.locale);
+
   const [callingAPI, setCallingAPI] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     featData()
-    setInterval(() => {
-      featData();
-    }, 1000 * 30)
   }, [])
+
+  useEffect(() => {
+    clearInterval(interval)
+    scrollToTop();
+    setPage(1);
+    if (!isOpen) {
+      interval = setInterval(() => {
+        featData();
+      }, 1000 * 30)
+    }
+  }, [isOpen])
+
+  const totalPage = useMemo(() => {
+    return Math.ceil(total / 20)
+  }, [total])
 
   const getNotificationIcon = (type) => {
     switch (type) {
@@ -53,12 +72,17 @@ function Notifications() {
     }
   }
 
-  const featData = async () => {
+  const featData = async (page = 1) => {
     const isLocked = await global.jsCore?.vaultTimeoutService.isLocked()
     if (!isLocked) {
-      await notificationServices.list({ paging: 0, scope: 'pwdmanager' }).then((response) => {
-        setNotifications(response);
-        setUnreadCount(response.filter((r) => !r.read).length);
+      await notificationServices.list({ scope: 'pwdmanager', page: page }).then((response) => {
+        if (page === 1) {
+          setNotifications(response.results);
+        } else {
+          setNotifications([...notifications, ...response.results]);
+        }
+        setUnreadCount(response.unread_count);
+        setTotal(response.count)
       }).catch(() => {
         setNotifications([])
         setUnreadCount(0)
@@ -66,6 +90,7 @@ function Notifications() {
     } else {
       setNotifications([])
       setUnreadCount(0)
+      setTotal(0)
     }
   }
 
@@ -205,7 +230,6 @@ function Notifications() {
     })
   }
 
-
   const shareKeyToNewMember = async (notificationId, sharingId, groupId, emails) => {
     try {
       const orgKey = await global.jsCore.cryptoService.getOrgKey(sharingId)
@@ -233,12 +257,35 @@ function Notifications() {
     }
   }
 
+  const scrollEnd =  (event) => {
+    if (event.target?.scrollTop == event.target?.scrollTopMax) {
+      if (total > notifications.length && (page + 1 <= totalPage)) {
+        const newPage = page + 1;
+        setPage(newPage);
+        featData(newPage);
+      }
+    }
+  }
+
+  const scrollToTop = () => {
+    const layoutContent = document.querySelector('.notification-menu')
+    if (layoutContent) {
+      layoutContent.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    }
+  }
+
   return (
     <Dropdown
       menu={{
         items,
         selectedKeys: notifications.filter((n) => !n.read).map((n) => n.id),
         onClick: dropdownClick,
+        onScroll: scrollEnd,
+        className: 'notification-menu',
         style: {
           maxWidth: 360,
           maxHeight: 480,
@@ -248,6 +295,7 @@ function Notifications() {
       }}
       placement="bottomRight"
       trigger={'click'}
+      onOpenChange={(open) => setIsOpen(open)}
     >
       <Badge count={unreadCount}>
         <Button
