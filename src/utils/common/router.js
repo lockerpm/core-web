@@ -1,18 +1,6 @@
 import global from '../../config/global'
 import other from './other'
 
-const allRouters = () => {
-  return [
-    ...global.routers.AUTH_ROUTERS.map(r => ({ ...r, type: 'auth' })),
-    ...global.routers.ERROR_ROUTERS.map(r => ({ ...r, type: 'error' })),
-    ...global.routers.PUBLIC_ROUTERS.map(r => ({ ...r, type: 'public' })),
-    ...global.routers.ADMIN_ROUTERS.map(r => ({ ...r, type: 'admin' })),
-  ].map(r => ({
-    ...r,
-    keys: r.path.split('/'),
-  }))
-}
-
 const convertQueryToString = (routerPath, query) => {
   if (typeof query === 'object' && !other.isEmpty(query)) {
     const querys = []
@@ -51,7 +39,7 @@ const getRouterParams = (routerPath, params) => {
 }
 
 const getRouterByName = name => {
-  const route = allRouters().find(r => r.name === name)
+  const route = other.allRouters().find(r => r.name === name)
   return route ? {
     ...route,
     key: route.name
@@ -85,7 +73,7 @@ const compareLocation = (routerKeys, location) => {
 }
 
 const getRouterByLocation = location => {
-  const route = allRouters().find(r => compareLocation(r.keys, location).valid)
+  const route = other.allRouters().find(r => compareLocation(r.keys, location).valid)
   return route ? {
     ...route,
     key: route.name,
@@ -97,7 +85,7 @@ const getRouterByLocation = location => {
 
 const getRoutersByLocation = location => {
   const route = getRouterByLocation(location)
-  let menu = global.menus.ADMIN_MENUS.find(m => {
+  let menu = other.allMenus().find(m => {
     if (m.children) {
       return !!m.children.find(c => c.key === route?.name)
     }
@@ -108,7 +96,7 @@ const getRoutersByLocation = location => {
   })
   let parent = null
   if (menu?.parent) {
-    parent = global.menus.ADMIN_MENUS.find(m => m.key === menu.parent)
+    parent = other.allMenus().find(m => m.key === menu.parent)
   }
   const menus = []
   if (parent) {
@@ -128,12 +116,10 @@ const getRoutersByLocation = location => {
 }
 
 export default {
-  allRouters,
   convertQueryToString,
   convertStringToQuery,
   getRouterParams,
   getRouterByName,
-  compareLocation,
   getRouterByLocation,
   getRoutersByLocation
 }

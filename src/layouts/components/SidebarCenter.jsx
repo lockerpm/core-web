@@ -27,7 +27,7 @@ function SidebarCenter(props) {
   const { t } = useTranslation();
 
   const menus = useMemo(() => {
-    return global.menus.ADMIN_MENUS
+    return common.allMenus();
   }, [])
 
   const invitedCount = useMemo(() => {

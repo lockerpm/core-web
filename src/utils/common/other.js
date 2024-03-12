@@ -1,6 +1,6 @@
 import global from '../../config/global';
 import { Trans } from 'react-i18next';
-import creditCardType from 'credit-card-type'
+import creditCardType from 'credit-card-type';
 
 const has = Object.prototype.hasOwnProperty
 
@@ -180,6 +180,22 @@ const openDesktopApp = () => {
   window.location.replace(`locker-app://`)
 }
 
+const allRouters = () => {
+  return [
+    ...global.routers.AUTH_ROUTERS.map(r => ({ ...r, type: 'auth' })),
+    ...global.routers.ERROR_ROUTERS.map(r => ({ ...r, type: 'error' })),
+    ...global.routers.PUBLIC_ROUTERS.map(r => ({ ...r, type: 'public' })),
+    ...global.routers.ADMIN_ROUTERS.map(r => ({ ...r, type: 'admin' })),
+  ].map(r => ({
+    ...r,
+    keys: r.path.split('/'),
+  }))
+}
+
+const allMenus = () => {
+  return global.menus.ADMIN_MENUS;
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -204,5 +220,7 @@ export default {
   getUserRole,
   ssoRedirectUri,
   redirectToAuthSSO,
-  openDesktopApp
+  openDesktopApp,
+  allRouters,
+  allMenus
 }
