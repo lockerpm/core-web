@@ -203,7 +203,8 @@ function Notifications() {
         }
         break;
       case global.constants.NOTIFICATION_TYPE.PASSWORD_TIP_TRICK:
-        window.open(item.metadata.link[locale], '_blank')
+        const link = item.metadata?.link ? item.metadata?.link[locale] : ''
+        common.openNewTab(link)
         break;
       default:
         global.navigate(global.keys.VAULT)

@@ -1,6 +1,7 @@
 import global from "../../config/global";
 import commonServices from "../../services/common";
 import storeActions from '../../store/actions';
+import syncServices from "../../services/sync";
 
 import store from "./store";
 import sync from "./sync";
