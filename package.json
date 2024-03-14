@@ -76,7 +76,7 @@
     "eject": "react-scripts eject",
     "sub:init": "git submodule update --force --recursive --init --remote",
     "sub:pull": "git submodule foreach git pull --recurse-submodules origin password",
-    "sub:update": "git submodule update --init --recursive",
+    "sub:update": "git submodule update --remote",
     "superclean": "yarn prettier && yarn lint:fix",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix"
