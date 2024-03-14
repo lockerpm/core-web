@@ -44,7 +44,7 @@ function AdminLayout(props) {
   const userInfo = useSelector((state) => state.auth.userInfo)
   const teams = useSelector((state) => state.enterprise.teams)
 
-  const [respCollapsed, setRespCollapsed] = useState(true)
+  const [respCollapsed, setRespCollapsed] = useState(false)
   const [showBottom, setShowBottom] = useState(false)
 
   const accessToken = common.getAccessToken()
