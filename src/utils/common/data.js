@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
-import storeActions from '../../store/actions/index'
 import global from '../../config/global'
+import storeActions from '../../store/actions/index'
 
 const paginationAndSortData = (
   allData,

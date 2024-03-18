@@ -3,8 +3,7 @@ import commonServices from "../../services/common";
 import storeActions from '../../store/actions';
 import syncServices from "../../services/sync";
 
-import store from "./store";
-import sync from "./sync";
+import common from ".";
 
 const syncDataByWs = async (message) => {
   const eventType = message.type;
@@ -14,17 +13,17 @@ const syncDataByWs = async (message) => {
   } else if (eventType.includes('cipher')) {
     if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(eventType)) {
       if (eventType === 'cipher_update') {
-        await sync.syncProfile();
+        await common.syncProfile();
       }
       if (message.data.id) {
-        await sync.syncItems([message.data.id])
+        await common.syncItems([message.data.id])
       }
       if (message.data.ids) {
-        await sync.syncItems(message.data.ids)
+        await common.syncItems(message.data.ids)
       }
     } else if (eventType.includes('cipher_delete_permanent')) {
       await global.jsCore.cipherService.delete(message.data.ids);
-      await store.getAllCiphers();
+      await common.getAllCiphers();
     } else {
       await commonServices.sync_data();
     }
@@ -32,10 +31,10 @@ const syncDataByWs = async (message) => {
     if (eventType.includes('update')) {
       const res = await syncServices.sync_folder(message.data.id);
       await global.jsCore.folderService.upsert([res])
-      await store.getAllFolders();
+      await common.getAllFolders();
     } else if (eventType.includes('delete')) {
       await global.jsCore.folderService.delete(message.data.ids);
-      await store.getAllFolders();
+      await common.getAllFolders();
     } else {
       await commonServices.sync_data();
     }
@@ -44,11 +43,11 @@ const syncDataByWs = async (message) => {
       if (message.data.id) {
         const res = await syncServices.sync_collection(message.data.id);
         await global.jsCore.collectionService.upsert([res])
-        await store.getAllCollections();
+        await common.getAllCollections();
       }
     } else if (eventType.includes('delete')) {
       await global.jsCore.collectionService.delete(message.data.ids);
-      await store.getAllCollections();
+      await common.getAllCollections();
     } else {
       await commonServices.sync_data();
     }

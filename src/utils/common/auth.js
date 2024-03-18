@@ -3,8 +3,8 @@ import commonServices from "../../services/common";
 import coreServices from "../../services/core";
 
 import global from "../../config/global";
-import storage from "./storage";
-import store from "./store";
+
+import common from ".";
 
 const unlockToVault = async (
   payload,
@@ -21,10 +21,10 @@ const unlockToVault = async (
       global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
       global.navigate(global.keys.SETUP_2FA, {}, query || {})
     } else {
-      storage.updateAccessTokenType(response.token_type)
-      storage.updateAccessToken(response.access_token);
-      storage.updateUnlockMethod(payload.unlock_method);
-      await store.fetchUserInfo();
+      common.updateAccessTokenType(response.token_type)
+      common.updateAccessToken(response.access_token);
+      common.updateUnlockMethod(payload.unlock_method);
+      await common.fetchUserInfo();
       await coreServices.unlock({ ...response, ...payload });
       await commonServices.sync_data();
       if (payload.sync_all_platforms) {

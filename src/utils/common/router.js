@@ -1,8 +1,7 @@
-import global from '../../config/global'
-import other from './other'
+import common from '.'
 
 const convertQueryToString = (routerPath, query) => {
-  if (typeof query === 'object' && !other.isEmpty(query)) {
+  if (typeof query === 'object' && !common.isEmpty(query)) {
     const querys = []
     Object.keys(query).forEach(key => {
       querys.push(`${key}=${query[key]}`)
@@ -39,7 +38,7 @@ const getRouterParams = (routerPath, params) => {
 }
 
 const getRouterByName = name => {
-  const route = other.allRouters().find(r => r.name === name)
+  const route = common.allRouters().find(r => r.name === name)
   return route ? {
     ...route,
     key: route.name
@@ -73,7 +72,7 @@ const compareLocation = (routerKeys, location) => {
 }
 
 const getRouterByLocation = location => {
-  const route = other.allRouters().find(r => compareLocation(r.keys, location).valid)
+  const route = common.allRouters().find(r => compareLocation(r.keys, location).valid)
   return route ? {
     ...route,
     key: route.name,
@@ -85,7 +84,7 @@ const getRouterByLocation = location => {
 
 const getRoutersByLocation = location => {
   const route = getRouterByLocation(location)
-  let menu = other.allMenus().find(m => {
+  let menu = common.allMenus().find(m => {
     if (m.children) {
       return !!m.children.find(c => c.key === route?.name)
     }
@@ -96,7 +95,7 @@ const getRoutersByLocation = location => {
   })
   let parent = null
   if (menu?.parent) {
-    parent = other.allMenus().find(m => m.key === menu.parent)
+    parent = common.allMenus().find(m => m.key === menu.parent)
   }
   const menus = []
   if (parent) {

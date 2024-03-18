@@ -23,7 +23,7 @@ import { Utils } from '../../core-js/src/misc/utils';
 import { CryptoWalletData } from '../new-types/crypto-wallet';
 import { CipherMapper } from '../../core-js/src/constants';
 
-import other from './other';
+import common from '.';
 
 const newCipherTypes = [
   CipherType.TOTP,
@@ -138,12 +138,12 @@ const convertFormToCipher = (form = {}, isNewCipher = true) => {
     result.cryptoWallet = new CryptoWalletData({
       ...form,
       notes: form.notes,
-      walletApp: other.selectedWalletApp(form.walletApp),
-      networks: other.selectedNetworks(form.networks),
+      walletApp: common.selectedWalletApp(form.walletApp),
+      networks: common.selectedNetworks(form.networks),
     })
   } else if (form.type === CipherType.Card) {
     result.card = {
-      brand: other.cardBrandByNumber(form.number),
+      brand: common.cardBrandByNumber(form.number),
       cardholderName: form.cardholderName,
       code: form.code,
       expMonth: form.expMonth,

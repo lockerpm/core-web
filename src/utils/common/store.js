@@ -1,6 +1,3 @@
-import cipher from './cipher'
-import storage from './storage'
-
 import global from '../../config/global'
 import storeActions from '../../store/actions'
 
@@ -10,13 +7,14 @@ import sharingServices from '../../services/sharing'
 import enterpriseServices from '../../services/enterprise'
 
 import i18n from '../../config/i18n'
+import common from '.'
 
 const fetchUserInfo = async () => {
   await userServices.users_me().then(async (response) => {
     await global.jsCore.vaultTimeoutService.setVaultTimeoutOptions(response.timeout, response.timeout_action);
     global.store.dispatch(storeActions.updateUserInfo(response));
     global.store.dispatch(storeActions.changeLanguage(response.language || global.constants.LANGUAGE.EN));
-    storage.updateLanguage(response.language || global.constants.LANGUAGE.EN);
+    common.updateLanguage(response.language || global.constants.LANGUAGE.EN);
     i18n.changeLanguage(response.language || global.constants.LANGUAGE.EN);
   }).catch(async () => {
     await authServices.logout();
@@ -48,7 +46,7 @@ const getAllCollections = async () => {
 const getAllCiphers = async () => {
   const result = await global.jsCore.cipherService.getAllDecrypted() || []
   const allCiphers = result.map(item => {
-    const i = cipher.parseNotesOfNewTypes(item)
+    const i = common.parseNotesOfNewTypes(item)
     i.checked = false
     return i
   })

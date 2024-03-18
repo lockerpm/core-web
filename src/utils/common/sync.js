@@ -1,10 +1,10 @@
-import store from './store'
-
 import global from '../../config/global'
 import storeActions from '../../store/actions'
 
 import syncServices from '../../services/sync'
 import quickShareServices from '../../services/quick-share'
+
+import common from '.'
 
 const syncProfile = async (data) => {
   let profile = data
@@ -19,7 +19,7 @@ const syncProfile = async (data) => {
     securityStamp: profile?.securityStamp || null,
     emailVerified: profile?.emailVerified || false
   })
-  await store.getAllCollections();
+  await common.getAllCollections();
 }
 
 const syncFolders = async (data) => {
@@ -29,7 +29,7 @@ const syncFolders = async (data) => {
   }
   const userId = await global.jsCore.userService.getUserId()
   await global.jsCore.syncService.syncFolders(userId, folders)
-  await store.getAllFolders();
+  await common.getAllFolders();
 }
 
 const syncCollections = async (data) => {
@@ -38,7 +38,7 @@ const syncCollections = async (data) => {
     collections = await syncServices.sync_collections();
   }
   await global.jsCore.syncService.syncCollections(collections);
-  await store.getAllCiphers();
+  await common.getAllCiphers();
 }
 
 const syncPolicies = async (data) => {
@@ -66,14 +66,14 @@ const syncCiphers = async(ciphers) => {
   })
   await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
   await global.jsCore.syncService.syncSomeCiphers(userId, ciphers)
-  await store.getAllCiphers();
+  await common.getAllCiphers();
 }
 
 const getQuickShares = async () => {
   const userId = await global.jsCore.userService.getUserId();
   const quickShares = await quickShareServices.list();
   await global.jsCore.syncService.syncSends(userId, quickShares);
-  await store.getSends()
+  await common.getSends()
 }
 
 const syncItems = async (cipherIds) => {
@@ -83,7 +83,7 @@ const syncItems = async (cipherIds) => {
     await global.jsCore.cipherService.upsert(response)
   }).catch(() => {
   })
-  await store.getAllCiphers();
+  await common.getAllCiphers();
   global.store.dispatch(storeActions.updateSyncing(false))
 };
 
