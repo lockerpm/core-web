@@ -30,7 +30,7 @@ const CipherIcon = (props) => {
   const [cipher, setCipher] = useState(null);
 
   useEffect(() => {
-    setCipher(null)
+    setCipher(item)
   }, [item])
 
   const cipherIcon = useMemo(() => {
@@ -43,7 +43,7 @@ const CipherIcon = (props) => {
           alt: selectedApp.name,
           shape: 'square'
         }
-      } else if ([CipherType.Login, CipherType.MasterPassword].includes(cipher.type)) {
+      } else if ([CipherType.Login, CipherType.MasterPassword].includes(cipher.type) && process.env.REACT_APP_LOGO_URL) {
         const domain = cipher?.login?.uris && cipher?.login?.uris[0]?._uri ? extractDomain(cipher.login.uris[0]._uri) : null
         if (domain) {
           logo = {
