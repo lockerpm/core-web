@@ -172,6 +172,7 @@ function FormData(props) {
         >
           <ItemName
             className={'mb-4'}
+            item={item}
             cipherTypes={cipherTypes}
             cipherType={cipherType}
             disabled={callingAPI}

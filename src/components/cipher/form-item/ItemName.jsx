@@ -15,6 +15,7 @@ import global from '../../../config/global';
 
 function ItemName(props) {
   const {
+    item = null,
     cipherType,
     cipherTypes,
     disabled = false,
@@ -37,7 +38,7 @@ function ItemName(props) {
         >
           <Select
             className='w-full'
-            disabled={disabled}
+            disabled={disabled || !!item?.id}
             options={cipherTypes.map((type) => ({ value: type.type, label: t(type.name) }))}
             onChange={onChange}
           />
