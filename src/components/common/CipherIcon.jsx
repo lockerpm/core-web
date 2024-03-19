@@ -36,10 +36,11 @@ const CipherIcon = (props) => {
   const cipherIcon = useMemo(() => {
     let logo = null
     if (cipher) {
-      if (cipher.type === CipherType.CryptoWallet) {
-        const selectedApp = global.constants.WALLET_APPS.find(a => a.alias === cipher?.cryptoWallet?.walletApp?.alias)
+      const selectedApp = global.constants.WALLET_APPS.find(a => a.alias === cipher?.cryptoWallet?.walletApp?.alias)
+      console.log(selectedApp);
+      if (cipher.type === CipherType.CryptoWallet && selectedApp) {
         logo = {
-          src: selectedApp.logo,
+          src: selectedApp.icon,
           alt: selectedApp.name,
           shape: 'square'
         }
