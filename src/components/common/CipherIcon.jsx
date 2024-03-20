@@ -37,7 +37,6 @@ const CipherIcon = (props) => {
     let logo = null
     if (cipher) {
       const selectedApp = global.constants.WALLET_APPS.find(a => a.alias === cipher?.cryptoWallet?.walletApp?.alias)
-      console.log(selectedApp);
       if (cipher.type === CipherType.CryptoWallet && selectedApp) {
         logo = {
           src: selectedApp.icon,

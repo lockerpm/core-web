@@ -19,7 +19,7 @@ const syncProfile = async (data) => {
     securityStamp: profile?.securityStamp || null,
     emailVerified: profile?.emailVerified || false
   })
-  await common.getAllCollections();
+  await common.getAllOrganizations();
 }
 
 const syncFolders = async (data) => {
