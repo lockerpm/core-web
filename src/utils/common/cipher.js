@@ -194,7 +194,8 @@ const getEncCipherForRequest = async (originalCipher, extraData = {}) => {
 
   // Change type to Note for new cipher types to encrypt first
   if (cipher.type === CipherType.CryptoWallet) {
-    if (cipher.cryptoWallet) {
+    const notesJson = JSON.parse(cipher.notes)
+    if (cipher.cryptoWallet && !notesJson?.walletApp) {
       cipher.notes = JSON.stringify({
         ...cipher.cryptoWallet,
         notes: cipher.notes

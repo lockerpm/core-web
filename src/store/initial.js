@@ -19,6 +19,7 @@ export default {
     isSync: false,
     syncing: false,
     syncProfile: null,
+    syncPolicies: []
   },
   share: {
     myShares: [],

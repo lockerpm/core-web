@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
@@ -43,7 +43,7 @@ const VaultDetail = () => {
   const [sendId, setSendId] = useState(null);
 
   const originCipher = useMemo(() => {
-    return allCiphers.find((c) => c.id === currentPage.params?.cipher_id)
+    return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
   }, [currentPage, allCiphers])
 
   const pageCipherType = useMemo(() => {
@@ -52,6 +52,12 @@ const VaultDetail = () => {
 
   const cipherType = useMemo(() => {
     return common.cipherTypeInfo('type', originCipher.type)
+  }, [originCipher])
+
+  useEffect(() => {
+    if (originCipher && !originCipher.id) {
+      global.navigate(global.keys.VAULT)
+    }
   }, [originCipher])
 
   const handleOpenForm = (item = null, cloneMode = false) => {

@@ -51,6 +51,8 @@ const syncDataByWs = async (message) => {
     } else {
       await commonServices.sync_data();
     }
+  } else {
+    await commonServices.sync_data();
   }
   global.store.dispatch(storeActions.updateSyncing(false))
 }

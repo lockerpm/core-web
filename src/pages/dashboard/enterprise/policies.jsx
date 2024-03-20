@@ -54,6 +54,7 @@ const EnterprisePolicies = (props) => {
 
   const handleOnUpdated = (policy) => {
     setPolicies(policies.map((p) => p.policy_type === policy.policy_type ? policy : p))
+    common.syncPolicies();
   }
 
   return (

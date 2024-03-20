@@ -11,6 +11,8 @@ const sync = (state = initial.sync, action) => {
     return { ...state, syncing: action.payload }
   case actionTypes.SET_SYNC_PROFILE:
     return { ...state, syncProfile: action.payload }
+  case actionTypes.SET_SYNC_POLICIES:
+    return { ...state, syncPolicies: action.payload }
   default:
     return state
   }
