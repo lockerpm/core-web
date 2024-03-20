@@ -38,7 +38,7 @@ const syncCollections = async (data) => {
     collections = await syncServices.sync_collections();
   }
   await global.jsCore.syncService.syncCollections(collections);
-  await common.getAllCiphers();
+  await common.getAllCollections();
 }
 
 const syncPolicies = async (data) => {
