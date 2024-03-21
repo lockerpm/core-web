@@ -46,6 +46,7 @@ function AdminLayout(props) {
 
   const [respCollapsed, setRespCollapsed] = useState(false)
   const [showBottom, setShowBottom] = useState(false)
+  const [isLocked, setIsLocked] = useState(false)
 
   const accessToken = common.getAccessToken()
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`)
@@ -88,17 +89,21 @@ function AdminLayout(props) {
 
   useEffect(() => {
     convertSize();
-    setInterval(() => {
-      checkVaultTimeOut()
+    setInterval(async () => {
+      const isLocked = await global.jsCore?.vaultTimeoutService.isLocked();
+      setIsLocked(isLocked)
     }, [5 * 1000])
   }, [])
+
+  useEffect(() => {
+    checkVaultTimeOut();
+  }, [isLocked, currentPage, userInfo])
 
   window.addEventListener("resize", (event) => {
     convertSize()
   })
 
   const checkVaultTimeOut = async () => {
-    const isLocked = await global.jsCore?.vaultTimeoutService.isLocked();
     const timeoutAction = userInfo.timeout_action;
     if (isLocked && currentPage.type === 'admin') {
       if (timeoutAction === global.constants.TIMEOUT_ACTION.LOCK) {
