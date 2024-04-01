@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 
 import {
   Avatar,
-  Tooltip
+  Tooltip,
+  Divider
 } from '@lockerpm/design';
 
 import {
+  GroupOutlined
 } from "@ant-design/icons";
 
 import common from "../../utils/common";
@@ -19,13 +21,19 @@ const SharedWith = (props) => {
   const {
     className = '',
     cipher = {},
-    size = ''
+    size = 30
   } = props;
 
   const shareMembers = useMemo(() => {
     const share =
       myShares.find(s => s.id === cipher?.organizationId) || {}
     return share.members || []
+  }, [cipher, myShares])
+
+  const shareGroups = useMemo(() => {
+    const share =
+      myShares.find(s => s.id === cipher?.organizationId) || {}
+    return share.groups || []
   }, [cipher, myShares])
 
   const sharedWithMembers = useMemo(() => {
@@ -47,9 +55,28 @@ const SharedWith = (props) => {
     </Avatar.Group>
   }, [shareMembers])
 
+  const sharedWithGroups = useMemo(() => {
+    return <Avatar.Group maxCount={3}>
+      {
+        shareGroups.map((group, index) => <Tooltip key={index} title={group.name}>
+          <GroupOutlined style={{ fontSize: size }}/>
+        </Tooltip>)
+      }
+    </Avatar.Group>
+  }, [shareGroups])
+
   return (
-    <div className={className}>
+    <div className={`${className} flex items-center justify-center`}>
       {sharedWithMembers}
+      {
+        shareGroups.length > 0 && <Divider
+          type={"vertical"}
+          style={{
+            height: size
+          }}
+        />
+      }
+      {sharedWithGroups}
     </div>
   );
 }

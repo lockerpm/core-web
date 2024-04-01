@@ -12,7 +12,7 @@ import {
 import emergencyAccessComponents from "../../../../../../components/emergency-access";
 
 const TableData = (props) => {
-  const { Name, Actions } = emergencyAccessComponents;
+  const { Name, ViewActions } = emergencyAccessComponents;
   const { t } = useTranslation();
   const {
     loading = false,
@@ -51,7 +51,7 @@ const TableData = (props) => {
         fixed: 'right',
         width: 100,
         render: (_, record) => (
-          <Actions
+          <ViewActions
             allCiphers={allCiphers}
             cipher={record}
           />

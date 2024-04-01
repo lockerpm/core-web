@@ -276,6 +276,8 @@ function ImportForm(props) {
             <Select
               placeholder={t('placeholder.select')}
               className="w-full"
+              showSearch={true}
+              filterOption
               options={[
                 {
                   label: t('import_export.popular'),

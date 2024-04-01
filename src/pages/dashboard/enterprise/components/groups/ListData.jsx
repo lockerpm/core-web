@@ -43,7 +43,7 @@ const ListData = (props) => {
         <p className='font-semibold mr-2'>{t("common.created_by")}:</p>
         <Tooltip title={record.created_by?.email}>
           <Avatar
-            src={record.created_by.avatar}
+            src={record.created_by?.avatar}
             size={20}
           >
             {record.created_by?.email?.slice(0, 1)?.toUpperCase()}
