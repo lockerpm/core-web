@@ -245,7 +245,7 @@ const EnterpriseMembers = (props) => {
       {
         total > global.constants.PAGE_SIZE && !isMobile && <Pagination
           params={params}
-          total={filteredData.total}
+          total={total}
           onChange={handleChangePage}
         />
       }

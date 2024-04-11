@@ -21,7 +21,7 @@ const ShareCiphers = (props) => {
   const {
     loading = false,
     params = {},
-    filteredData = [],
+    filteredData = {},
     onLeave = () => {},
     onUpdateStatus = () => {}
   } = props

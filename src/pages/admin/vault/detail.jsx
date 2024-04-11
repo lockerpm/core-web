@@ -54,6 +54,10 @@ const VaultDetail = () => {
     return common.cipherTypeInfo('type', originCipher.type)
   }, [originCipher])
 
+  const listRouterName = useMemo(() => {
+    return pageCipherType?.listRouter || global.keys.VAULT
+  }, [pageCipherType])
+
   useEffect(() => {
     if (originCipher && !originCipher.id) {
       global.navigate(global.keys.VAULT)
@@ -83,12 +87,7 @@ const VaultDetail = () => {
     global.confirm(async () => {
       await cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
-        if (filteredData.length === 1 && params.page > 1) {
-          setParams({
-            ...params,
-            page: params.page - 1
-          })
-        }
+        global.navigate(listRouterName)
       }).catch((error) => {
         global.pushError(error)
       });
@@ -104,12 +103,7 @@ const VaultDetail = () => {
     global.confirm(async () => {
       await cipherServices.restore({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.restored'));
-        if (filteredData.length === 1 && params.page > 1) {
-          setParams({
-            ...params,
-            page: params.page - 1
-          })
-        }
+        global.navigate(listRouterName)
       }).catch((error) => {
         global.pushError(error)
       });
@@ -124,7 +118,7 @@ const VaultDetail = () => {
   const stopSharingItem = async (cipher) => {
     try {
       await commonServices.stop_sharing_cipher(cipher);
-      global.pushSuccess(t('notification.success.cipher.updated'))
+      global.pushSuccess(t('notification.success.cipher.updated'));
     } catch (error) {
       global.pushError(error)
     }
@@ -134,13 +128,7 @@ const VaultDetail = () => {
     global.confirm(async () => {
       await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
-        if (filteredData.length === 1 && params.page > 1) {
-          setParams({
-            ...params,
-            page: params.page - 1
-          })
-        }
-        setSelectedRowKeys([]);
+        global.navigate(listRouterName)
       }).catch((error) => {
         global.pushError(error)
       });
@@ -164,7 +152,7 @@ const VaultDetail = () => {
           <RouterLink
             className={'font-semibold'}
             label={''}
-            routerName={pageCipherType?.listRouter || global.keys.VAULT}
+            routerName={listRouterName}
             routerParams={{ }}
             icon={<ArrowLeftOutlined />}
           />
