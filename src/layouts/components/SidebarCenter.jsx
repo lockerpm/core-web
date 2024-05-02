@@ -84,8 +84,11 @@ function SidebarCenter(props) {
   }, [backMenu, menus])
 
   useEffect(() => {
-    setOpenKeys(sidebarMenus.filter((m) => m.children).map((m) => m.key))
-  }, [sidebarMenus])
+    const cMenu = menus.find((m) => m.key === (currentPage?.parent || currentPage?.key));
+    if (cMenu && cMenu.isChildren) {
+      setOpenKeys([cMenu.parent]);
+    }
+  }, [menus, currentPage])
 
   const handleMenuClick = (menu) => {
     const menuInfo = menus.find((m) => m.key === menu.key)
