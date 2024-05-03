@@ -19,6 +19,7 @@ const RouterLink = (props) => {
     label = '',
     blank = false,
     maxWidth = '100%',
+    flex = 1,
     icon = <></>
   } = props;
 
@@ -30,7 +31,7 @@ const RouterLink = (props) => {
   return (
     <Link
       className={`cs-link ${className} text-primary text-limited`}
-      style={{ maxWidth: maxWidth, flex: 1 }}
+      style={{ maxWidth: maxWidth, flex: flex }}
       target={blank ? '_blank' : ''}
       to={newPath}
     >
