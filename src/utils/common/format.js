@@ -3,6 +3,9 @@ const formatCurrency = (value = 0, fixed = 0, currency = '') => {
   if (fixed && `${value || 0}`.split('.')[1]?.length > fixed) {
     newValue = Number(value || 0).toFixed(fixed)
   }
+  if (currency === '$') {
+    return `${currency} ${newValue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  }
   return `${newValue} ${currency}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
