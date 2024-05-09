@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: space-between;
     &__left {
-      min-width: 60%;
+      flex: 1;
       .menu-toggle-icon{
         font-size: 24px;
         cursor: pointer;
