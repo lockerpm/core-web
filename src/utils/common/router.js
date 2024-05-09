@@ -84,34 +84,37 @@ const getRouterByLocation = location => {
 
 const getRoutersByLocation = location => {
   const route = getRouterByLocation(location)
-  let menu = common.allMenus().find(m => {
-    if (m.children) {
-      return !!m.children.find(c => c.key === route?.name)
+  if (route) {
+    let menu = common.allMenus().find(m => {
+      if (m.children) {
+        return !!m.children.find(c => c.key === route?.name)
+      }
+      if (route.parent) {
+        return m.key === route.parent
+      }
+      return m.key === route.name
+    })
+    let parent = null
+    if (menu?.parent) {
+      parent = common.allMenus().find(m => m.key === menu.parent)
+    }
+    const routers = []
+    if (parent) {
+      routers.push(parent)
+    }
+    if (menu) {
+      if (menu.key === route.name) {
+        routers.push({ ...menu, ...route })
+      } else {
+        routers.push(menu)
+      }
     }
     if (route.parent) {
-      return m.key === route?.parent
+      routers.push(route)
     }
-    return m.key === route?.name
-  })
-  let parent = null
-  if (menu?.parent) {
-    parent = common.allMenus().find(m => m.key === menu.parent)
+    return routers
   }
-  const menus = []
-  if (parent) {
-    menus.push(parent)
-  }
-  if (menu) {
-    if (menu.key === route.name) {
-      menus.push({ ...menu, ...route })
-    } else {
-      menus.push(menu)
-    }
-  }
-  if (route.parent) {
-    menus.push(route)
-  }
-  return menus
+  return []
 }
 
 export default {
