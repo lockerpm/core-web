@@ -19,7 +19,7 @@ import '../css/header.scss';
 
 function Header(props) {
   const { ImageIcon } = itemsComponents;
-  const { Breadcrumb, SearchContent, Notifications } = layoutComponents;
+  const { Breadcrumb, SearchContent, Notifications, DropdownMenu } = layoutComponents;
   const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
   const [search, setSearch] = useState(false);
@@ -62,6 +62,9 @@ function Header(props) {
             onClick={() => setSearch(true)}
           />
           <Notifications />
+          {
+            isMobile && <DropdownMenu />
+          }
         </Space>
       </div>
       {

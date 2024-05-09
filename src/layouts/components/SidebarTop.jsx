@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -26,6 +26,8 @@ function SidebarTop(props) {
   const { IconLogo } = images;
   const { collapsed } = props
   const { t } = useTranslation();
+
+  const isMobile = useSelector((state) => state.system.isMobile)
 
   const handleClickLogo = () => {
     global.navigate(global.keys.VAULT)
@@ -57,7 +59,9 @@ function SidebarTop(props) {
           </p>
         }
       </div>
-      <DropdownMenu />
+      {
+        !isMobile && <DropdownMenu />
+      }
     </div>
   );
 }

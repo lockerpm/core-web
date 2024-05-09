@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
-  Space,
   Button,
   Dropdown,
 } from '@lockerpm/design';
@@ -109,14 +108,12 @@ function DropdownMenu() {
       placement="bottomLeft"
       trigger={'click'}
     >
-      <Space wrap>
-        <Button
-          type='text'
-          className='avatar-button'
-          shape='circle'
-          icon={<UserAvatar showInfo={false}/>}
-        />
-      </Space>
+      <Button
+        type='text'
+        className='avatar-button'
+        shape='circle'
+        icon={<UserAvatar showInfo={false}/>}
+      />
     </Dropdown>
   );
 }
