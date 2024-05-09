@@ -108,15 +108,16 @@ const getRoutersByLocation = location => {
       } else {
         routers.push(menu)
       }
-    }
-    if (route.parent) {
+      if (route.parent) {
+        routers.push(route)
+      }
+    } else {
       routers.push(route)
     }
     return routers
   }
   return []
 }
-
 export default {
   convertQueryToString,
   convertStringToQuery,
