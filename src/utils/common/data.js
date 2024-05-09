@@ -55,21 +55,23 @@ const scrollEnd = (
   total,
   setParams,
   isMobile = false,
-  pageSize = global.constants.PAGE_SIZE
+  pageSize = global.constants.PAGE_SIZE,
 ) => {
   if (event.target.scrollTop > 100) {
     global.store.dispatch(storeActions.updateIsScrollToTop(true))
   } else {
     global.store.dispatch(storeActions.updateIsScrollToTop(false))
   }
-  if (global.store.getState().system.isMobile || isMobile) {
-    const isBottom = event.target.scrollTop > 0 && (Math.round(event.target.scrollHeight) === Math.round(event.target.offsetHeight + event.target.scrollTop))
-    if (isBottom && params.size < total) {
-      setParams({
-        ...params,
-        page: 1,
-        size: params.size + pageSize
-      })
+  if (params) {
+    if (global.store.getState().system.isMobile || isMobile) {
+      const isBottom = event.target.scrollTop > 0 && (Math.round(event.target.scrollHeight) === Math.round(event.target.offsetHeight + event.target.scrollTop))
+      if (isBottom && params.size < total) {
+        setParams({
+          ...params,
+          page: 1,
+          size: params.size + pageSize
+        })
+      }
     }
   }
 }
