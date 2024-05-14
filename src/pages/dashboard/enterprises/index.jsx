@@ -10,6 +10,7 @@ import {
   PlusOutlined
 } from "@ant-design/icons"
 
+import itemsComponents from "../../../components/items"
 import commonComponents from "../../../components/common"
 import enterprisesComponents from "./components"
 
@@ -20,6 +21,7 @@ import global from "../../../config/global"
 
 const Enterprises = () => {
   const { PageHeader } = commonComponents;
+  const { Pagination } = itemsComponents;
   const {
     Filter,
     NoEnterprise,

@@ -10,6 +10,7 @@ import {
   FolderOutlined
 } from "@ant-design/icons";
 
+import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";
 import shareComponents from "../../../components/share";
 import vaultComponents from "../vault/components";
@@ -26,6 +27,8 @@ import global from "../../../config/global";
 const SharedWithMe = (props) => {
   const { PageHeader }  = commonComponents;
   const { Filter }  = vaultComponents;
+  const { Pagination } = itemsComponents;
+
   const {
     MenuTabs,
     NoItem,
