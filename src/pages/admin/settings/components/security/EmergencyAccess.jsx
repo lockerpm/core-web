@@ -39,6 +39,9 @@ const EmergencyAccess = (props) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
+    if (expand) {
+      setFormVisible(true)
+    }
     fetchData()
   }, [])
 

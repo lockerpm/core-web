@@ -21,7 +21,7 @@ const Notifications = (props) => {
   const { PageHeader } = commonComponents;
   const { } = props;
   const { t } = useTranslation();
-  const language = useSelector((state) => state.system.language)
+  const locale = useSelector((state) => state.system.locale)
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ const Notifications = (props) => {
             ]}
           >
             <p className="font-semibold">
-              {item.category[`name_${language}`] || item.category.name}
+              {item.category[`name_${locale}`] || item.category.name}
             </p>
           </List.Item>
         )}
