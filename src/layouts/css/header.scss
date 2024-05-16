@@ -30,7 +30,7 @@
     &__search-content {
       position: absolute;
       top: var(--page-content-spacing-collapsed);
-      right: calc(var(--page-content-spacing) + 40px);
+      right: calc(var(--page-content-spacing) + 80px);
       width: 500px;
       .search-results {
         &__item {
