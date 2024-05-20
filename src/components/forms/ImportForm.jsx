@@ -264,6 +264,7 @@ function ImportForm(props) {
           form={form}
           layout="vertical"
           labelAlign={'left'}
+          className='import-form'
         >
           <Form.Item
             name={'format'}
@@ -275,17 +276,17 @@ function ImportForm(props) {
           >
             <Select
               placeholder={t('placeholder.select')}
-              className="w-full"
+              className="w-full import-format-select"
               showSearch={true}
               filterOption
               options={[
                 {
                   label: t('import_export.popular'),
-                  options: featuredImportOptions.map((o) => ({ value: o.id, label: o.name })),
+                  options: featuredImportOptions.map((o) => ({ value: o.id, label: o.name, className: `import-format-option-${o.id}` })),
                 },
                 {
                   label: t('import_export.others'),
-                  options: regularImportOptions.map((o) => ({ value: o.id, label: o.name })),
+                  options: regularImportOptions.map((o) => ({ value: o.id, label: o.name, className: `import-format-option-${o.id}` })),
                 },
               ]}
             />
@@ -298,7 +299,10 @@ function ImportForm(props) {
           >
             <div className='flex items-center'>
               <Upload {...uploadProps}>
-                <Button icon={<UploadOutlined />}>
+                <Button
+                  icon={<UploadOutlined />}
+                  className="import-choose-file"
+                >
                   {t('button.choose_file')}
                 </Button>
               </Upload>

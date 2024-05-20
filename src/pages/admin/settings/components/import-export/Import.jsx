@@ -28,6 +28,7 @@ const Import = (props) => {
         </p>
         <Button
           type='primary'
+          className="import-items"
           ghost
           icon={<ImportOutlined />}
           onClick={() => setFormVisible(true)}

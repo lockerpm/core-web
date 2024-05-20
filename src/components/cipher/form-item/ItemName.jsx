@@ -37,9 +37,9 @@ function ItemName(props) {
           }
         >
           <Select
-            className='w-full'
+            className='w-full item-type-select'
             disabled={disabled || !!item?.id}
-            options={cipherTypes.map((type) => ({ value: type.type, label: t(type.name) }))}
+            options={cipherTypes.map((type) => ({ value: type.type, label: t(type.name), className: `item-type-option-${type.type}` }))}
             onChange={onChange}
           />
         </Form.Item>

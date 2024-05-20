@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Form,
   Space,
@@ -110,6 +110,7 @@ function FormData(props) {
           layout="vertical"
           labelAlign={'left'}
           disabled={callingAPI}
+          className='vault-form'
         >
           <Form.Item
             name={'name'}
