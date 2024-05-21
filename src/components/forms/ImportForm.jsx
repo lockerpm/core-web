@@ -242,15 +242,18 @@ function ImportForm(props) {
         onClose={handleClose}
         open={visible}
         width={600}
+        className='import-form-drawer'
         footer={
           <Space className='flex items-center justify-end'>
             <Button
+              className="import-form-close-btn"
               onClick={handleClose}
             >
               {t('button.cancel')}
             </Button>
             <Button
               type="primary"
+              className="import-form-import-btn"
               loading={callingAPI}
               disabled={!selectedFile && !fileContent}
               onClick={handleImport}

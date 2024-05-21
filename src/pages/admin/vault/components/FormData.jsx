@@ -142,6 +142,7 @@ function FormData(props) {
   return (
     <div className={props.className}>
       <Drawer
+        className="vault-form"
         title={t( `inventory.${cipherType.key}.${item && !cloneMode ? 'edit' : 'add'}`)}
         placement="right"
         onClose={onClose}
@@ -150,12 +151,14 @@ function FormData(props) {
         footer={
           <Space className='flex items-center justify-end'>
             <Button
+              className="vault-form-close-btn"
               disabled={callingAPI}
               onClick={onClose}
             >
               {t('button.cancel')}
             </Button>
             <Button
+              className="vault-form-save-btn"
               type="primary"
               loading={callingAPI}
               onClick={handleSave}
