@@ -142,7 +142,7 @@ function FormData(props) {
   return (
     <div className={props.className}>
       <Drawer
-        className="vault-form"
+        className="vault-form-drawer"
         title={t( `inventory.${cipherType.key}.${item && !cloneMode ? 'edit' : 'add'}`)}
         placement="right"
         onClose={onClose}
@@ -172,6 +172,7 @@ function FormData(props) {
           form={form}
           layout="vertical"
           labelAlign={'left'}
+          className='vault-form'
         >
           <ItemName
             className={'mb-4'}
