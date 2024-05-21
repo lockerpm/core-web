@@ -279,7 +279,8 @@ function ImportForm(props) {
           >
             <Select
               placeholder={t('placeholder.select')}
-              className="w-full import-format-select"
+              className="w-full"
+              popupClassName='import-format-options'
               showSearch={true}
               filterOption
               options={[
