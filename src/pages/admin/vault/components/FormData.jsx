@@ -46,6 +46,7 @@ function FormData(props) {
     cipherType = {},
     cloneMode = false,
     folderId = null,
+    isTutorial = false,
     setCloneMode = () => {},
     onClose = () => {},
   } = props
@@ -180,6 +181,7 @@ function FormData(props) {
             cipherTypes={cipherTypes}
             cipherType={cipherType}
             disabled={callingAPI}
+            isTutorial={isTutorial}
             onChange={(v) => {
               const formData = common.convertCipherToForm({
                 type: v,
