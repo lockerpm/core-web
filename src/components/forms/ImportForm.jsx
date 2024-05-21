@@ -31,6 +31,7 @@ import common from '../../utils/common';
 function ImportForm(props) {
   const {
     visible = false,
+    isTutorial = false,
     onClose = () => {},
   } = props
   const { t } = useTranslation();
@@ -242,6 +243,7 @@ function ImportForm(props) {
         onClose={handleClose}
         open={visible}
         width={600}
+        closable={!isTutorial}
         className='import-form-drawer'
         footer={
           <Space className='flex items-center justify-end'>
@@ -283,6 +285,7 @@ function ImportForm(props) {
               popupClassName='import-format-options'
               showSearch={true}
               filterOption
+              defaultOpen={isTutorial}
               options={[
                 {
                   label: t('import_export.popular'),

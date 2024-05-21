@@ -148,6 +148,7 @@ function FormData(props) {
         placement="right"
         onClose={onClose}
         open={visible}
+        closable={!isTutorial}
         width={600}
         footer={
           <Space className='flex items-center justify-end'>
