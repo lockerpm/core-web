@@ -19,6 +19,7 @@ function ItemName(props) {
     cipherType,
     cipherTypes,
     disabled = false,
+    isTutorial = false,
     onChange = () => {}
   } = props
   const { t } = useTranslation()
@@ -39,6 +40,7 @@ function ItemName(props) {
           <Select
             className='w-full'
             popupClassName='item-type-options'
+            defaultOpen={isTutorial}
             disabled={disabled || !!item?.id}
             options={cipherTypes.map((type) => ({ value: type.type, label: t(type.name), className: `item-type-option-${type.type}` }))}
             onChange={onChange}

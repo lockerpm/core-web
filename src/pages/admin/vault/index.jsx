@@ -42,6 +42,7 @@ const Vault = (props) => {
   const [loading, setLoading] = useState(true);
   const [callingAPI, setCallingAPI] = useState(false);
   const [cloneMode, setCloneMode] = useState(false);
+  const [isTutorial, setIsTutorial] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [moveVisible, setMoveVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -273,7 +274,10 @@ const Vault = (props) => {
             icon: <PlusOutlined />,
             hide: currentPage.name === global.keys.TRASH || isEmpty,
             disabled: syncing || loading,
-            click: () => handleOpenForm()
+            click: (isTutorial = false) => {
+              setIsTutorial(isTutorial)
+              handleOpenForm();
+            }
           }
         ]}
       />
@@ -358,6 +362,7 @@ const Vault = (props) => {
         cipherType={cipherType}
         cloneMode={cloneMode}
         folderId={currentPage.params.folder_id}
+        isTutorial={isTutorial}
         setCloneMode={setCloneMode}
         onClose={() => {
           setFormVisible(false);
