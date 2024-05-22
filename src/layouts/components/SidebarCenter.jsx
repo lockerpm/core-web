@@ -126,6 +126,7 @@ function SidebarCenter(props) {
         items={sidebarMenus.map((m) => ({
           key: m.key,
           icon: m.icon,
+          className: m.className,
           label: m.key === global.keys.SHARES && !openKeys.includes(global.keys.SHARES) ? <div className='w-full'>
             <span className='mr-2'>{t(m.label)}</span>
             <Badge count={invitedCount} />
