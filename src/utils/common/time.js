@@ -1,6 +1,7 @@
 
 import moment from 'moment'
 import dayjs from 'dayjs'
+import common from '.'
 
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -13,6 +14,7 @@ const convertTime = time => {
 }
 
 const timeFromNow = time => {
+  dayjs.locale(common.getLanguage())
   if (!time) {
     return ''
   }
@@ -23,6 +25,7 @@ const timeFromNow = time => {
 }
 
 const convertDateTime = (date, format = 'HH:mm DD-MM-YYYY') => {
+  dayjs.locale(common.getLanguage())
   if (date && typeof date === 'number') {
     return dayjs(date * 1000).format(format)
   }
@@ -81,6 +84,7 @@ const getTimeByOption = (key, value = []) => {
 }
 
 const convertCipherFieldDate = (date) => {
+  dayjs.locale(common.getLanguage())
   const newDate = date.split('-').reverse();
   return dayjs(newDate.join('-'))
 }
