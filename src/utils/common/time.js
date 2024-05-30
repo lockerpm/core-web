@@ -3,6 +3,9 @@ import moment from 'moment'
 import dayjs from 'dayjs'
 import common from '.'
 
+require('dayjs/locale/en')
+require('dayjs/locale/vi')
+
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
