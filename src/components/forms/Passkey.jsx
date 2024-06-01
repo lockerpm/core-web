@@ -104,7 +104,7 @@ const PasskeyForm = (props) => {
             type="text"
             size="large"
             icon={<RedoOutlined />}
-            onClick={() => getDeviceKeys()}
+            onClick={() => getPasskeys()}
           >
             {t('passwordless.reload_keys')}
           </Button>
