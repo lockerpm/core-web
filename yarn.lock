@@ -1833,6 +1833,16 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@lockerpm/client-service@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@lockerpm/client-service/-/client-service-1.1.0.tgz#042c4aa7b4c5ab3364e457f4907ef98b8b82b68d"
+  integrity sha512-LwhZDRVAbuURX456PTkY/p7LkpaGa5eZqrVAj1/MtEpgnVAg+4sfEEEhGtE+cRypxLbRw1UUOlK+onrKkdPuJQ==
+  dependencies:
+    axios "^1.6.2"
+    eventemitter3 "^5.0.1"
+    uuid "^9.0.1"
+    ws "^8.14.2"
+
 "@lockerpm/design@^1.0.17":
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/@lockerpm/design/-/design-1.0.17.tgz#7cc5beb175d8f0606b5eca0ce98063954c44580a"
@@ -8274,16 +8284,6 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
-
-locker-client-service@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/locker-client-service/-/locker-client-service-0.2.6.tgz#471fea553e2ac2210aa2db7dadb50bbffeb5a737"
-  integrity sha512-l2tKpx7PHK/wZ5HbazxjXe671mKcfWVRBI+0fgDOYECVPb2QSXDllWS2MWGDckjNKcwgO+A2O/CyOp5PeeK4gA==
-  dependencies:
-    axios "^1.6.2"
-    eventemitter3 "^5.0.1"
-    uuid "^9.0.1"
-    ws "^8.14.2"
 
 lodash.debounce@^4.0.8:
   version "4.0.8"

@@ -1,4 +1,4 @@
-import { WebService, StorageService } from 'locker-client-service'
+import { WebService, StorageService } from '@lockerpm/client-service'
 
 class WebStorageService implements StorageService {
   secureStorage: {
@@ -50,7 +50,6 @@ const service = new WebService({
   baseApiUrl: `${process.env.REACT_APP_API_URL}/v3`,
   clientType: 'web',
   domain: window.location.hostname,
-  servicePorts: [14411, 14110, 15611, 14412, 16311, 14514, 14515, 14413, 16310],
 })
 
 export { service }
