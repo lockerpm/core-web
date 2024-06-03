@@ -70,7 +70,8 @@ const getLanguage = () => {
     const lang = JSON.parse(localStorage.getItem('secrets-language'))
     return [
       global.constants.LANGUAGE.EN,
-      global.constants.LANGUAGE.VI
+      global.constants.LANGUAGE.VI,
+      global.constants.LANGUAGE.ZH
     ].includes(lang) ? lang : global.constants.LANGUAGE.EN
   } catch (_) {
     return global.constants.LANGUAGE.EN
