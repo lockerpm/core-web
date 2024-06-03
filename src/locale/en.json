@@ -1,7 +1,7 @@
 {
   "common": {
     "app_name": "Locker Password Manager",
-    "app_title": "Locker",
+    "app_title": "Password Manager",
     "total": "Total",
     "status": "Status",
     "created_time": "Created Time",
@@ -31,6 +31,7 @@
     "language": "Language",
     "english": "English (US)",
     "vietnamese": "Vietnamese (VN)",
+    "chinese": "Chinese (CN)",
     "count": "Count",
     "search_all": "Search all system data",
     "back": "Back",
@@ -340,7 +341,9 @@
     "enterprise_members": "Users",
     "enterprise_groups": "Groups",
     "enterprise_policies": "Policies",
-    "enterprise_activity_logs": "Activity Logs"
+    "enterprise_activity_logs": "Activity Logs",
+    "secrets_manager": "Secrets Manager",
+    "password_manager": "Password Manager"
   },
   "auth_pages": {
     "username": "Email",

@@ -1,0 +1,1276 @@
+{
+  "common": {
+    "app_name": "Locker Password Manager",
+    "app_title": "Password Manager",
+    "total": "總額",
+    "status": "狀態",
+    "created_time": "建立時間",
+    "updated_time": "更新時間",
+    "created_by": "誰創造了",
+    "title": "標題",
+    "action": "動作",
+    "actions": "動作",
+    "type": "類型",
+    "here": "這",
+    "assignee": "受讓人",
+    "products": "產品",
+    "no_data": "沒有資料",
+    "confirm": "確認",
+    "confirmed": "已確認",
+    "warning": "警告",
+    "delete_question": "您確定要刪除?",
+    "information": "資訊",
+    "value": "欄位值",
+    "error": "錯誤",
+    "all_time": "每時每刻",
+    "last_week": "上個星期",
+    "last_month": "上個月",
+    "custom_time": "自訂時間",
+    "public": "公眾",
+    "private": "私人的",
+    "language": "語言",
+    "english": "English (US)",
+    "vietnamese": "Tiếng Việt",
+    "chinese": "中國人",
+    "count": "數數",
+    "search_all": "搜尋全部",
+    "back": "返回",
+    "all": "全部",
+    "all_default": "全部 (*)",
+    "copy": "複製",
+    "copied": "已複製到剪貼簿",
+    "users": "使用者",
+    "access_type": "存取類型",
+    "client": "Client",
+    "location": "地點",
+    "time": "時間",
+    "ip_address": "IP 位址",
+    "last_used": "最後使用",
+    "last_ip_address": "最後的 IP 位址",
+    "read": "讀",
+    "write": "讀和寫",
+    "items": "項目",
+    "folders": "資料夾",
+    "description": "Description",
+    "active": "啟用",
+    "inactive": "不活躍的",
+    "role": "Role",
+    "full_name": "全名",
+    "access_date": "Access date",
+    "email": "Email",
+    "username": "使用者名稱",
+    "on": "On",
+    "off": "Off",
+    "no": "No.",
+    "coming_soon": "Coming Soon",
+    "results": "Results",
+    "no_file_chosen": "No file chosen",
+    "name": "名稱",
+    "other": "其他",
+    "length": "長度",
+    "mr": "先生",
+    "mrs": "女士",
+    "ms": "Ms",
+    "dr": "Dr",
+    "detail": "Detail",
+    "selected_items": "{{amount}} 已選取的項目",
+    "member": "成員",
+    "folder": "資料夾",
+    "or": "或",
+    "item": "項目",
+    "email_addresses": "電子信箱",
+    "receiver": "收件人",
+    "days_number": "{{number}} ",
+    "one_day": "1 天",
+    "username_or_email": "電子信箱或使用者名稱",
+    "password": "密碼",
+    "me": "我",
+    "otp_code": "次性密碼",
+    "successfully": "成功地",
+    "group": "群組",
+    "password_strength": "密碼強度",
+    "number_members": "會員人數",
+    "user": "使用者",
+    "members": "成員",
+    "configuration": "設定",
+    "characters": "字元",
+    "second": "秒",
+    "minute": "分鐘",
+    "hour": "小時",
+    "seconds": "秒",
+    "minutes": "分鐘",
+    "hours": "小時",
+    "joined_at": "加入於",
+    "option": "選項"
+  },
+  "button": {
+    "add": "新增",
+    "edit": "編輯",
+    "create": "創造",
+    "update": "更新",
+    "detail": "細節",
+    "delete": "刪除",
+    "next": "下一步",
+    "back": "返回",
+    "review": "審查",
+    "submit": "送出",
+    "reset": "重置",
+    "see_more": "看更多",
+    "cancel": "取消",
+    "save": "儲存",
+    "go_back": "回去",
+    "sign_in": "登入",
+    "sign_up": "註冊",
+    "activate": "啟用",
+    "deactivate": "停用",
+    "regenerate": "Regenerate",
+    "import": "匯入",
+    "export": "匯出",
+    "download": "下載",
+    "new_member": "新成員",
+    "lock": "鎖定",
+    "logout": "登出",
+    "save_changes": "儲存變更",
+    "enable": "啟用",
+    "disable": "停用",
+    "verify": "驗證",
+    "send_test": "發送測試電子郵件",
+    "send": "發送",
+    "choose_file": "請選擇正確的檔案",
+    "reinvite": "重新邀請",
+    "select": "選擇",
+    "continue": "繼續",
+    "new_item": "新物品",
+    "new_folder": "新建資料夾",
+    "new_share": "新股",
+    "new_enterprise": "新公司",
+    "share": "分享",
+    "view": "檢視",
+    "copy_link": "複製連結",
+    "ok": "確定",
+    "remove": "移除",
+    "close": "關閉",
+    "confirm": "確認",
+    "download_desktop_app": "下載桌面程式",
+    "open_desktop_app": "開啟桌面應用程式",
+    "new_user": "新用戶",
+    "new_group": "新組",
+    "resend_invitation": "重新邀請"
+  },
+  "placeholder": {
+    "name": "輸入名字",
+    "search": "搜尋所有內容……",
+    "description": "輸入描述",
+    "type": "請選擇",
+    "value": "輸入值",
+    "select": "請選擇",
+    "enter": "請輸入",
+    "ip": "請輸入新的IP",
+    "username": "請輸入您的電子信箱",
+    "password": "請輸入您的密碼",
+    "code": "請輸入一次性密碼",
+    "otp": "請輸入一次性密碼",
+    "text": "文字",
+    "email": "example@gmail.com",
+    "phone": "0123456789",
+    "month_year": "MM/YY",
+    "date": "DD/MM/YYYY",
+    "url": "https://",
+    "field_name": "欄位名稱",
+    "wallet_app": "錢包 App",
+    "networks": "可用網路",
+    "select_users": "輸入電子郵件以選擇用戶"
+  },
+  "validation": {
+    "required": "{{name}} 為必填項.",
+    "invalid": "{{name}} 無效.",
+    "existed": "{{name}} 已經存在.",
+    "least_length": "{{name}} 的最短密碼長度為 {{ min }}.",
+    "passwords_not_match": "密碼驗證不符!",
+    "key_existed": "此密鑰已存在於所選環境中"
+  },
+  "notification": {
+    "error": {
+      "title": "錯誤",
+      "message": {
+        "default": "發生錯誤, 請再試一次!",
+        "error_occurred": "發生錯誤"
+      }
+    },
+    "success": {
+      "title": "成功",
+      "copied": "已複製到剪貼簿",
+      "member": {
+        "created": "已成功加入成員.",
+        "updated": "會員資料已更新.",
+        "deleted": "已成功刪除成員.",
+        "reinvited": "已重新邀請!"
+      },
+      "change_password": {
+        "changed": "您的密碼已更新."
+      },
+      "account_details": {
+        "updated": "您的設定已更新.",
+        "purged": "您的保險庫已清除!"
+      },
+      "factor2": {
+        "enabled": "已啟用雙重認證",
+        "disabled": "雙重認證已停用"
+      },
+      "email_settings": {
+        "updated": "Mail plugin has been set up success.",
+        "reset": "Mail setting reset successfully.",
+        "send_test": "Send test email successfully."
+      },
+      "cipher": {
+        "created": "已新增項目.",
+        "updated": "已更新項目.",
+        "deleted": "已將項目移至垃圾桶!.",
+        "permanently_deleted": "已永久刪除項目.",
+        "restored": "已還原項目!",
+        "moved": "項目已移動!"
+      },
+      "folder": {
+        "created": "資料夾已新增.",
+        "updated": "資料夾資訊已更新.",
+        "deleted": "資料夾已刪除."
+      },
+      "sharing": {
+        "accepted": "已接受邀請",
+        "rejected": "已拒絕邀請",
+        "leave_group_success": "已成功退出分享群組",
+        "confirm_member_success": "此成員已確認!",
+        "update_share_success": "已成功更新分享成員",
+        "share_items_success": "已分享這些項目!",
+        "share_item_success": "已分享此項目!",
+        "share_folder_success": "資料夾已共享!",
+        "stop_share_success": "已成功停止分享",
+        "shared_to_new_member": "已成功將項目共享給新成員"
+      },
+      "notification": {
+        "updated": "您的設定已更新!"
+      },
+      "emergency_access": {
+        "accepted": "已接受邀請",
+        "removed": "已移除使用者 {{user}}",
+        "rejected": "已拒絕緊急存取權限",
+        "invited": "已邀請使用者",
+        "reinvited": "{{user}} 已重新邀請",
+        "confirmed": "已確認 {{user}} 的身份",
+        "approved": "已核准緊急存取權限",
+        "takeover_password": "已重設 {{user}} 的密碼。您現在可使用新的主密碼登入保險庫。"
+      },
+      "manage_sessions": {
+        "logout_device": "該設備已註銷!",
+        "logout_all_devices": "所有會話均已取消授權"
+      },
+      "import_export": {
+        "exported": "數據已匯出!"
+      },
+      "quick_share_detail": {
+        "check_mail": "請檢查您的信箱."
+      },
+      "enterprise": {
+        "created": "已新增新公司!",
+        "updated": "公司資訊已更新!",
+        "deleted": "該公司已被刪除!"
+      },
+      "enterprise_members": {
+        "created": "新用戶已新增!",
+        "updated": "使用者資訊已更新!",
+        "deleted": "該用戶已被刪除!",
+        "reinvited": "邀請郵件發送成功"
+      },
+      "enterprise_groups": {
+        "created": "群組已新增!",
+        "updated": "群組資訊已更新!",
+        "deleted": "群組已刪除!",
+        "users_updated": "群組成員已更新!"
+      },
+      "policy": {
+        "updated": "您的設定已更新!"
+      },
+      "passkey": {
+        "added": "The new passkey has been added"
+      },
+      "security_key": {
+        "added": "The new security key has been added"
+      },
+      "sso_configuration": {
+        "updated": "The SSO Configuration has been updated.",
+        "reset": "The SSO Configuration has been reset."
+      }
+    },
+    "warning": {
+      "title": "警告"
+    }
+  },
+  "sidebar": {
+    "account_setting": "設定",
+    "lock_your_account": "鎖定帳戶",
+    "logout": "登出",
+    "your_account": "我的帳戶",
+    "locker_help_center": "客服中心",
+    "locker_community_forum": "Locker社群論壇",
+    "status_page": "Status Page",
+    "terms_policy": "條款內容與條件",
+    "inventory": "清單",
+    "all": "所有項目",
+    "passwords": "密碼",
+    "notes": "安全筆記",
+    "cards": "付款卡",
+    "crypto_backups": "加密資產備份",
+    "identities": "身份資料",
+    "folders": "資料夾",
+    "authenticator": "驗證器",
+    "security_tools": "安全工具",
+    "shares": "共享項目",
+    "trash": "垃圾桶",
+    "settings": "設定",
+    "account": "帳戶",
+    "import_export": "匯入/匯出",
+    "security": "安全性",
+    "notifications": "通知",
+    "shared_with_me": "跟我分享",
+    "my_shared_items": "已分享的項目",
+    "enterprise": "企業儀表板",
+    "enterprises": "Companies",
+    "email_settings": "Email Settings",
+    "sso_configuration": "SSO Configuration",
+    "enterprise_dashboard": "儀表板",
+    "enterprise_members": "使用者",
+    "enterprise_groups": "群組",
+    "enterprise_policies": "策略",
+    "enterprise_activity_logs": "活動日誌",
+    "secrets_manager": "Secrets Manager",
+    "password_manager": "Password Manager"
+  },
+  "auth_pages": {
+    "username": "電子信箱",
+    "password": "密碼",
+    "otp": "OTP",
+    "confirm_password": "確認密碼",
+    "password_hint": "取得密碼提示",
+    "sign_in": {
+      "title": "歡迎回來!",
+      "label": "登入",
+      "note": "還沒有帳戶?",
+      "single_sign_on": "Single Sign-On",
+      "or_login_with": "或用 解鎖",
+      "your_passkey": "Your passkey",
+      "your_security_key": "Your security key"
+    },
+    "sign_up": {
+      "title": "Create admin account",
+      "label": "註冊",
+      "note": "已有帳戶?"
+    },
+    "otp_code": {
+      "title": "輸入 2FA 代碼",
+      "description": "請輸入驗證碼",
+      "remember_device": "記住這個設備",
+      "sign_in_account": "登入您的帳戶",
+      "verify_identity": "驗證身分"
+    },
+    "authenticate": {
+      "title": "更新帳號資訊",
+      "description": "請輸入您帳戶的全名，然後建立一個新密碼來取代給定的臨時密碼.",
+      "setup_pwl": "設定無密碼登入",
+      "setup_pwl_description": "您的帳戶需要無密碼登入。設定無密碼登入以繼續.",
+      "note": "已有帳戶？?",
+      "link_invalid": "Reset password link is invalid. Please enter password to update account information."
+    },
+    "setup_2fa": {
+      "title": "啟用兩步驟驗證",
+      "description": "您的團隊要求登入時使用兩步驟驗證（2FA）。請啟用 2FA 後繼續。"
+    }
+  },
+  "error_pages": {
+    "admin_error": {
+      "title": "發生了一些錯誤",
+      "description": "我們遇到了問題，無法繼續。您可以詢問您的管理員或稍後再試."
+    },
+    "permission": {
+      "title": "您無權存取此功能",
+      "login_other_account": "登入另一個帳戶"
+    },
+    "page_not_found": {
+      "title": "找不到網頁",
+      "go_back_dashboard": "前往控制台"
+    }
+  },
+  "roles": {
+    "supper_admin": "Supper Admin",
+    "primary_admin": "Primary Admin",
+    "owner": "Owner",
+    "admin": "Admin",
+    "member": "Member"
+  },
+  "statuses": {
+    "confirmed": "已確認",
+    "invited": "已邀請",
+    "accepted": "已接受",
+    "created": "建立於",
+    "expired": "已過期",
+    "accessed": "已訪問",
+    "shared": "已共享",
+    "rejected": "被拒絕",
+    "pending": "處理中",
+    "requested": "被請求",
+    "recovery_initiated": "已提交申請",
+    "recovery_approved": "已核准申請"
+  },
+  "permissions": {
+    "editable": "可編輯",
+    "viewable": "可檢視",
+    "only_use": "僅使用"
+  },
+  "sort_options": {
+    "sort_by": "排序依據",
+    "name_ascending": "名稱升序",
+    "name_descending": "名字降序",
+    "time_ascending": "時間升序",
+    "time_descending": "時間降序"
+  },
+  "notice": {
+    "emergency_access_invitations": {
+      "title": "成為緊急聯絡人邀請",
+      "description": "您受邀成為以下聯絡人的緊急聯絡人 {{owner}}.",
+      "access_type": "存取權限類型: {{type}}"
+    }
+  },
+  "password_confirm": {
+    "confirm_note": "輸入您的密碼"
+  },
+  "passwordless": {
+    "confirm_pairing": "確認配對",
+    "pairing_required": "需要桌面應用程式配對。在桌面應用程式上，確認以下程式碼.",
+    "confirm_code": "確認瀏覽器中的程式碼是否與下列內容相符",
+    "reset_code": "重置程式碼",
+    "repair": "再次配對",
+    "open_desktop": "Desktop app connection is required. Please open Locker Desktop App",
+    "install_desktop": "Desktop app installation is required. Please download and install Locker Desktop App",
+    "connect_key": "Connect the key you want to add",
+    "no_key_found": "No key found",
+    "scan_fingerprint": "Scan your fingerprint",
+    "enter_key_pin": "Enter your security key PIN",
+    "touch_key": "Touch your security key",
+    "reload_devices": "Reload list devices",
+    "reload_keys": "Reload keys",
+    "choose_a_key": "Choose a key to verify yourself",
+    "new_password": "Enter new Password",
+    "connect_security_key_to_login": "Connect to a security key.",
+    "connect_passkey_to_login": "Connect to a passkey.",
+    "errors": {
+      "0000": "Unspecified error",
+      "1000": "API error",
+      "1001": "API token not found",
+      "1002": "Passwordless is not enabled",
+      "2001": "Cannot connect to fido key",
+      "2002": "Cannot create credential, key return empty secret",
+      "2003": "Invalid PIN",
+      "2004": "Cannot find relying party",
+      "2005": "Cannot find any valid credential in this key",
+      "2006": "Cannot find the required credential in this key",
+      "2007": "Cannot use fingerprint, please use PIN instead",
+      "2008": "PIN validation failed to many times, key is blocked",
+      "2009": "Failed to verify fingerprint",
+      "2011": "FIDO action timed out",
+      "3001": "Client is not confirmed",
+      "3002": "No key",
+      "3003": "Cannot encrypt payload",
+      "3004": "Cannot decrypt response",
+      "3005": "Desktop is not paired",
+      "3006": "Desktop is not confirmed",
+      "4001": "Client not found",
+      "4002": "Cannot broadcast secure message",
+      "5001": "Background service is not connected",
+      "5002": "Background service failed to decrypt request"
+    }
+  },
+  "change_password": {
+    "title": "變更密碼",
+    "subtitle": "輸入目前密碼.",
+    "your_password": "你的密碼",
+    "current_password": "目前密碼",
+    "new_password": "輸入新的密碼",
+    "confirm_new_password": "再次輸入新的密碼"
+  },
+  "account_details": {
+    "title": "帳號詳細資料",
+    "description": "管理您的個人資料詳細資料、帳戶首選項、帳戶安全性和隱私.",
+    "personal_info": "個人資料",
+    "profile_photo": "您的個人資料照片",
+    "preferences": {
+      "title": "偏好設定",
+      "language": "語言",
+      "timeout": "閒置多久後自動上鎖",
+      "timeout_desc": "指定一段裝置閒置時間後，自動為保險庫上鎖.",
+      "timeout_action": "上鎖後動作",
+      "timeout_action_lock_desc": "上鎖後需要重新輸入主密碼解鎖.",
+      "timeout_action_logout_desc": "上鎖後須重新登入."
+    },
+    "danger_zone": {
+      "title": "危險區域",
+      "delete_data": "刪除所有保險庫資料",
+      "delete_data_desc": "刪除 Locker 帳戶中的所有資料。但您的 Locker 帳戶會保留。",
+      "delete_account": "刪除帳戶",
+      "delete_account_desc": "永久刪除您的 Locker 帳戶",
+      "delete_all_account_items": "刪除帳戶內的所有項目"
+    }
+  },
+  "security_control": {
+    "title": "安全設定",
+    "description": "管理您的安全和隱私設定。"
+  },
+  "email_notifications": {
+    "title": "電子郵件通知"
+  },
+  "generate_password": {
+    "title": "隨機產生密碼",
+    "fill_password": "自動填入密碼",
+    "copy_password": "複製密碼",
+    "show_options": "顯示選項",
+    "options": {
+      "uppercase": "包含大寫（A-Z）",
+      "lowercase": "包含小寫（a-z）",
+      "digits": "包含數字（0-9）",
+      "symbols": "包含特殊符號（@!$%*）",
+      "ambiguous": "避免容易混淆的字元"
+    },
+    "status": {
+      "very_weak": "非常弱",
+      "weak": "弱",
+      "medium": "中",
+      "good": "強",
+      "strong": "非常強"
+    }
+  },
+  "drag_upload": {
+    "action": "單擊或拖曳",
+    "description": "檔案上傳到該區域",
+    "note": "SVG, PNG, JPG 或者 GIF (最大限度。800x400px)",
+    "invalid": "無效的！文件類型是 {{type}}",
+    "large": "文件大小太大！請選擇800x400px以內的文件",
+    "content_invalid": "文件內容無效"
+  },
+  "lock": {
+    "title": "登入",
+    "description": "輸入您的密碼以解鎖",
+    "password": "密碼",
+    "master_password_hint": "取得密碼提示",
+    "unlock": "解鎖",
+    "connect_key": "連接到您的安全金鑰",
+    "cross_platform_sync_enable": "您的帳戶已啟用跨平台同步"
+  },
+  "inventory": {
+    "all_items": "所有項目",
+    "all_folders": "所有資料夾",
+    "shared": "已在 Locker 分享",
+    "vault": {
+      "title": "開始吧！",
+      "description": "新增您的第一個項目。您隨時都能輕鬆找到它",
+      "add": "新增項目",
+      "edit": "編輯"
+    },
+    "identity": {
+      "title": "快速填寫線上表格",
+      "description": "新增身份資料，Locker 能幫您自動填寫各類線上表單",
+      "add": "新增身份資料",
+      "edit": "編輯"
+    },
+    "crypto_backup": {
+      "title": "新增第一個加密資產備份",
+      "description": "將您的加密帳戶/錢包安全存放",
+      "add": "新增資產",
+      "edit": "編輯"
+    },
+    "card": {
+      "title": "簡化線上購物",
+      "description": "新增付款卡，線上購物時自動填入付款資料",
+      "add": "新增付款卡",
+      "edit": "編輯"
+    },
+    "note": {
+      "title": "解放被塞滿的大腦",
+      "description": "儲存 Wi-Fi 密碼、辦公室保全密碼，或是朋友的生日",
+      "add": "新增註記",
+      "edit": "編輯"
+    },
+    "password": {
+      "title": "讓我們開始吧!",
+      "description": "紀錄密碼，從任何裝置都能隨時存取",
+      "add": "新增密碼",
+      "edit": "編輯"
+    },
+    "authenticator": {
+      "title": "使您的帳戶更加安全",
+      "description": "開啟 Locker 的雙因素認證功能，為您的線上帳戶再增一層安全防護",
+      "add": "設定雙因素認證（2FA）",
+      "edit": "編輯"
+    },
+    "folders": {
+      "title": "新增資料夾",
+      "description": "新增一個資料夾來管理密碼",
+      "add": "新增資料夾",
+      "edit": "重新命名"
+    },
+    "trash": {
+      "title": "這裡什麼都沒有",
+      "description": "移到垃圾桶的項目都可在永久刪除前還原"
+    },
+    "actions": {
+      "go_to_web": "前往網站",
+      "copy_username": "複製使用者名稱",
+      "copy_password": "複製密碼",
+      "copy_totp": "複製TOTP",
+      "copy_note": "複製註記",
+      "copy_seed_phrase": "複製種子片語",
+      "copy_wallet_address": "複製錢包地址",
+      "copy_private_key": "複製私鑰",
+      "copy_password_pin": "複製密碼/PIN",
+      "edit": "編輯",
+      "clone": "複製",
+      "move_to_folder": "移到資料夾",
+      "stop_sharing": "停止分享",
+      "restore": "恢復",
+      "permanently_deleted": "永久刪除",
+      "delete": "刪除",
+      "share": "分享",
+      "leave": "離開",
+      "accept": "接受",
+      "decline": "拒絕",
+      "copy_link": "複製連結"
+    },
+    "move_to": {
+      "title": "移動至",
+      "description": "為這 {{amount}} 項選取的項目選取新的資料夾。"
+    }
+  },
+  "cipher": {
+    "type": "類型",
+    "item_name": "項目名稱",
+    "others": "其他",
+    "notes": "備註",
+    "select_folder": "選取資料夾",
+    "folder_name": "資料夾名稱",
+    "no_folder": "沒有資料夾",
+    "add_folder": "新增資料夾",
+    "delete_question": "您確定要把這些項目丟到垃圾桶嗎？垃圾桶內的項目會在 30 天後被永久刪除。",
+    "restore_question": "您確定要復原這個項目嗎？",
+    "permanently_delete_question": "您確定要永久刪除此項目嗎？",
+    "types": {
+      "password": "密碼",
+      "note": "安全筆記",
+      "card": "卡片",
+      "crypto_backup": "加密資產備份",
+      "identity": "身份資料",
+      "master_password": "密碼",
+      "otp": "OTP"
+    },
+    "custom_fields": {
+      "title": "自訂欄位",
+      "new": "新增自訂欄位",
+      "text": "文字",
+      "hidden_field": "隱藏欄位",
+      "url": "網址",
+      "email": "電子信箱",
+      "date": "電子信箱",
+      "month_year": "月/年",
+      "phone": "電話號碼"
+    },
+    "password": {
+      "title": "登入資訊",
+      "username": "電子郵件/使用者名稱",
+      "password": "密碼",
+      "website": "網址",
+      "setup_otp": "雙因素認證設定",
+      "totp": "TOTP",
+      "no_otp": "暫不啟用雙因素認證",
+      "new_otp": "新增雙因素認證設定",
+      "existing_otp": "套用現有雙因素認證設定",
+      "secret_key": "密鑰或路徑",
+      "select_otp": "選擇雙因素認證設定"
+    },
+    "card": {
+      "title": "卡片資訊",
+      "cardholder_name": "持卡人姓名",
+      "brand": "發卡機構",
+      "card_number": "卡號",
+      "expiration_month": "有效月",
+      "expiration_year": "有效年",
+      "security_code": "安全驗證碼（CVV）"
+    },
+    "crypto_backup": {
+      "title": "加密資產備份",
+      "wallet_app": "錢包 App",
+      "username": "使用者名稱",
+      "password": "密碼",
+      "pin": "PIN",
+      "wallet_address": "錢包地址",
+      "private_key": "私鑰",
+      "seed_phrase": "助記詞",
+      "networks": "可用網路"
+    },
+    "identity": {
+      "personal_title": "個人資料",
+      "title": "標題",
+      "first_name": "名",
+      "last_name": "姓",
+      "username": "使用者名稱",
+      "company": "公司",
+      "email": "電子信箱",
+      "phone": "電話號碼",
+      "social_security_number": "身分證字號/居留證號碼",
+      "passport_number": "護照號碼",
+      "license_number": "駕照號碼",
+      "contact_title": "聯絡資訊",
+      "address1": "地址1",
+      "address2": "地址2",
+      "city_town": "城市",
+      "state_province": "州/省",
+      "zip_postal": "郵遞區號",
+      "country": "國家"
+    },
+    "otp": {
+      "name": "OTP",
+      "secret_key": "密鑰或路徑"
+    }
+  },
+  "shares": {
+    "encrypted_content": "加密內容",
+    "share_type": "分享型態",
+    "share_items": "已分享的項目",
+    "share_item": "已分享的項目",
+    "share_folder": "共享資料夾",
+    "leave_question": "您確定要退出這個分享群組嗎？",
+    "shared_with": "分享對象",
+    "in_app_shares": {
+      "items": "在應用程式內已分享的項目",
+      "folders": "在應用程式內共享資料夾",
+      "quick_shares": "快速分享"
+    },
+    "no_data": {
+      "title": "這裡什麼都沒有",
+      "description": "您與他人分享的項目都會出現在這裡",
+      "quick_share_description": "傳送一個項目連結給任何人，對方不需要 Locker 帳戶即可檢視內容。",
+      "add": "新共享"
+    },
+    "quick_shares": {
+      "sharing_time": "共享時間",
+      "views": "檢視次數",
+      "expiration": "到期日",
+      "anyone": "任何人",
+      "nobody": "無人",
+      "choose_an_item": "選擇一個項目",
+      "share_with": "與某人分享",
+      "anyone_with_the_link": "任何擁有連結的人",
+      "only_invited_people": "僅限受邀的對象",
+      "link_expires_after": "連結有效期限",
+      "unlimited_access": "不限次數",
+      "times_access": "允許存取次數",
+      "get_link_to_share": "取得共享連結",
+      "email_addresses_share": "請輸入共享名單的電子信箱",
+      "email_addresses_share_note": "對方需要驗證電子郵件地址才能存取項目",
+      "expiration_description": "此共享項目連結有效期限 {{time}}",
+      "expire_options": {
+        "an_hour": "1 小時",
+        "a_day": "1 天",
+        "a_week": "1 週",
+        "14_days": "14 days",
+        "a_month": "1 個月",
+        "no_expiration": "不會過期"
+      }
+    },
+    "new_share": {
+      "choose_option": "選擇您的共享設定",
+      "in_app_share_items": "在應用程式內已分享的項目",
+      "in_app_share_items_note": "與 Locker 使用者或使用者群組共享（僅 Locker 企業版支援）。對方將能查看或編輯您的項目內容。",
+      "in_app_share_folder": "在應用程式內共享資料夾",
+      "in_app_share_folder_note": "與 Locker 使用者或使用者群組共享（僅 Locker 企業版支援）。對方將能夠查看或編輯您的資料夾",
+      "quick_shares": "快速分享",
+      "get_shareable_link": "取得分享連結",
+      "get_shareable_link_note": "傳送一個項目連結給任何人，對方不需要 Locker 帳戶即可檢視內容。",
+      "choose_items": "選擇項目",
+      "choose_items_note": "您可以選擇任意數量的項目。",
+      "personal_email_or_group": "個人電子信箱或團隊名稱",
+      "search_inventory": "搜尋清單",
+      "personal_email_or_group_placeholder": "個人電子信箱或團隊名稱",
+      "choose_folder": "選擇資料夾",
+      "search_folder": "搜尋資料夾",
+      "personal_email": "個人電子信箱",
+      "personal_email_placeholder": "輸入電子信箱"
+    }
+  },
+  "import_export": {
+    "title": "匯入/匯出",
+    "description": "管理個人資料與帳戶設定。",
+    "import": "匯入項目",
+    "file_content": "檔案內容",
+    "import_description": "從瀏覽器或檔案匯入密碼與其他項目。",
+    "export": "匯出項目",
+    "export_description": "請輸入您的密碼以匯出保險庫內的資料。",
+    "choose_format": "選擇文件格式:",
+    "upload_file": "上傳檔案",
+    "confirm": "{{type}}",
+    "popular": "受歡迎的",
+    "others": "其他",
+    "copy_paste_file_contents": "或複製/貼上匯入檔案內容",
+    "instructions": "{{name}} 匯入說明",
+    "select_appropriate_file": "請選擇正確的檔案",
+    "incorrect_format": "資料格式不正確",
+    "import_failed": "資料匯入失敗",
+    "no_data": "沒有資料",
+    "import_success": "已匯入 {{foldersCount}} 個資料夾，{{ciphersCount}}/{{total}} 個項目"
+  },
+  "instructions": {
+    "see_details": "請至我們的說明網頁查看詳細操作說明："
+  },
+  "timeouts": {
+    "one_minute": "1 分鐘",
+    "five_minutes": "5 分鐘",
+    "fifteen_minutes": "15 分鐘",
+    "thirty_minutes": "30 分鐘",
+    "one_hour": "1 小時",
+    "four_hours": "4 小時",
+    "two_weeks": "2 週",
+    "on_refresh": "當瀏覽器重啟時"
+  },
+  "security": {
+    "unlock_methods": {
+      "title": "解鎖方法",
+      "description": "使用主密碼解鎖您的保管庫，passkeys 或安全金鑰。您可以使用所有可用的方法"
+    },
+    "change_password": {
+      "title": "帳戶密碼",
+      "description": "不論是哪種方案，所有 Locker 帳戶皆受到 AES-256 加密及零知識（Zero Knowledge）技術保護，提供最完善的隱私保護。"
+    },
+    "passkey": {
+      "title": "Passkeys",
+      "add_new_key": "新增 passkey",
+      "add_new_key_description": "passkey 名稱",
+      "description": "使用臉部辨識、指紋辨識或電腦 PIN 碼來解鎖您的保管庫。可在網頁瀏覽器上使用"
+    }, 
+    "passwordless": {
+      "title": "安全金鑰",
+      "description": "驗證使用實體安全金鑰解鎖您的保管庫（您最多可以新增 4 個新金鑰）。需要安裝桌面應用程式",
+      "security_keys_added": "新增了安全金鑰",
+      "add_new_key": "新增",
+      "require_passwordless": "您的企業需要無密碼登入且無法關閉"
+    },
+    "mobile_passwordless": {
+      "title": "Mobile passwordless login",
+      "description": "Scan a QR code to log in to the mobile app.",
+      "action": "Scan QR code",
+      "enter_code": "Enter verification code here",
+      "code": "OTP Code",
+      "point_phone": "Point your phone camera to the QR Code below to confirm Login",
+      "expire_in": "QR Code Expire in: {{expireCountdown}}s",
+      "expired": "QR Code Expired"
+    },
+    "cross_platform_sync": {
+      "title": "Cross-platform sync",
+      "description": "Enable login sync for your account across the web app, extension, and desktop app on the same device. Desktop app installation is required.",
+      "turn_on": "Turn on sync",
+      "turn_off": "Turn off sync",
+      "question": "Are you sure you want to {{action}}?"
+    },
+    "two_fa": {
+      "title": "雙因素認證（2FA）",
+      "description": "為您的 Locker 帳戶設雙因素認證，打造更安全的防護。",
+      "turn_on": "開啟雙因素認證",
+      "turn_off": "關閉兩步驟驗證",
+      "setup_on": "兩步驟驗證是",
+      "your_second_step": "你的第二步",
+      "your_second_step_description": "輸入密碼後，系統會要求您進行第二次驗證步驟",
+      "require_2fa": "您的企業需要雙重認證 (2FA)，無法關閉",
+      "email_otp": {
+        "name": "驗證信箱",
+        "description": "當我們偵測到從異常裝置的登入嘗試時，將要求您輸入安全代碼。",
+        "send_code": "透過電子郵件發送代碼",
+        "have_code": "我有一個代碼",
+        "enter_code": "請輸入驗證碼",
+        "sent_to": "電子郵件已發送至 {{email}}"
+      },
+      "smart_otp": {
+        "description": "透過第二道登入步驟，為您的帳戶增添額外的安全防護。",
+        "name": "驗證應用程式",
+        "name_description": "透過第二道登入步驟，為您的帳戶增添額外的安全防護。",
+        "enter_code": "請輸入驗證碼",
+        "step1": {
+          "title": "下載 Locker",
+          "description": "下載適用於手機、桌上型電腦的 Locker 應用程序，或安裝在瀏覽器擴充功能中"
+        },
+        "step2": {
+          "title": "記下以下鍵",
+          "description": "將此組金鑰 <strong>{key}</strong> 手寫到紙上並保管好。若您遺失或換新了裝置，將會需要這組金鑰。"
+        },
+        "step3": {
+          "title": "前往 Locker 密碼管理器應用程式中的 OTP 選項卡",
+          "description": "在手機或電腦上開啟 <strong>Locker Password Manager</strong> 應用程式，前往「一次性密碼」（OTP）頁面，並使用手機掃描下方的 QRCode。"
+        },
+        "step4": {
+          "title": "請輸入驗證碼",
+          "description": "在下方輸入應用程式產生的一次性驗證碼。"
+        }
+      }
+    },
+    "emergency_access": {
+      "title": "緊急存取權限",
+      "description": "此功能可授予另一個 Locker 帳戶的擁有者在特定緊急情況下，存取您的保險庫之能力。",
+      "add": "新增可信任聯絡人",
+      "your_trusted_contacts": "您的可信任聯絡人",
+      "contacts_that_trusted_you": "委託您為緊急聯絡人",
+      "pending_requests": "{{number}} 待回覆的申請",
+      "grantor_recovery_initiated_info": "{{day}} 天後，或是您手動核准申請後，對方將能存取您的帳戶。",
+      "grantee_recovery_initiated_info": "{{day}} 天後，或是對方手動核准後，將授予您存取權限。",
+      "approve_question": "您確定要核准對方的緊急存取權限嗎？這將使 {{user}} 能夠 {{type}} 您的帳戶。",
+      "delete_question": "您確定要移除此緊急聯絡人嗎？",
+      "initiate_question": "您確定要請求緊急存取權限嗎？您會於 {{day}} 天後獲得存取權，或是在使用者手動核准時的任何時間點獲得。",
+      "actions": {
+        "accept": "接受",
+        "request_access": "請求權限",
+        "view": "View",
+        "reset_their_lp": "重設對方 Locker 密碼",
+        "reinvite": "重新邀請",
+        "reject": "拒絕",
+        "approve": "同意"
+      },
+      "emergency_contact": {
+        "invite": "邀請可信任聯絡人",
+        "user_access": "使用者存取權限",
+        "view": "檢視",
+        "view_description": "對方將能檢視您所有保險庫項目。",
+        "takeover": "接管",
+        "takeover_description": "對方將能重設您的主密碼。",
+        "wait_time": "等待時間",
+        "wait_time_description": "自動授予權限前須等待的時間"
+      },
+      "takeover": {
+        "title": "接管",
+        "new_id_password": "新的 Locker ID 密碼",
+        "re_new_id_password": "再次輸入 Locker ID 密碼",
+        "new_master_password": "輸入新的密碼",
+        "re_new_master_password": "再次輸入新的密碼"
+      }
+    },
+    "manage_sessions": {
+      "title": "管理登入裝置",
+      "description": "",
+      "logout": "從所有裝置登出",
+      "log_out_of": "登出此 {{device_name}}",
+      "log_out_of_description": "這個動作會移除此裝置存取您的 Locker 帳戶之權限。請輸入密碼確認。.",
+      "log_out_all": "解除所有裝置的登入授權",
+      "log_out_all_description": "擔心帳戶在其他裝置上登入著嗎？執行以下動作將會解除您曾使用過的電腦或裝置的登入授權。若您曾使用公用電腦，或是曾不小心在非您所有的裝置上儲存密碼，建議進行此步驟。",
+      "log_out_all_note": "這個動作也會登出目前正在使用的帳戶，您將需要重新登入。"
+    }
+  },
+  "emergency_access_view": {
+    "title": "緊急通道視圖",
+    "description": "創作者：{{owner}}",
+    "view_item": "檢視項目"
+  },
+  "notifications": {
+    "title": "通知",
+    "mark_all_as_read": "全部標為已讀",
+    "no_notifications": "沒有新的通知",
+    "item_no_longer_shared": "此項目已停止共享"
+  },
+  "security_tools": {
+    "title": "安全工具",
+    "description": "Locker 密碼管理器安全性工具",
+    "password_generate": {
+      "title": "安全強力密碼產生器",
+      "description": "為您的帳戶建立安全密碼"
+    },
+    "password_health": {
+      "title": "密碼健康檢測",
+      "description": "辨識會使您遭受風險的密碼",
+      "exposed_time": "曾外洩次",
+      "exposed_time_count": "曾外洩 {{count}} 次",
+      "good_news": "好消息",
+      "good_news_details": "您保險庫中所有项目的密碼強度都足夠。",
+      "used_time_count": "使用於 {{count}} 次",
+      "very_weak": "非常弱",
+      "weak_passwords": {
+        "title": "強度不足的密碼",
+        "description": "容易被猜測",
+        "alert_title": "發現了強度不足的密碼",
+        "alert_description": "我們在您的保險庫中發現有 {{count}} 個項目密碼強度不足。您應該將它們修改成更強的密碼。"
+      },
+      "reused_passwords": {
+        "title": "重複使用的密碼",
+        "description": "使用於多個帳戶",
+        "alert_title": "發現了重複使用的密碼",
+        "alert_description": "我們發現保險庫中有 {{count}} 組密碼被重複使用。您應該將它們都修改成獨特的密碼。"
+      },
+      "exposed_passwords": {
+        "title": "遭外洩的密碼",
+        "description": "遭外洩的密碼是指駭客透過已知的資料洩漏事件揭露，並在網路上公開或於暗網上販售的密碼。",
+        "alert_title": "發現了遭外洩的密碼",
+        "alert_description": "我們發現在您的保險庫中有 {{count}} 個項目的密碼曾在已知的資料洩漏事件中被揭露。您應該將這些密碼修改成新的。"
+      }
+    },
+    "data_breach_scanner": {
+      "title": "資料洩漏掃描",
+      "description": "在您的保險庫中掃描是否有被外洩過的帳戶。",
+      "content_title": "所謂的 &quot;breach&quot; 指的是網站資料遭駭客非法存取並隨後公諸於世的事件。請檢閱被駭時遭外洩的資料類別（如電子郵件地址、密碼、信用卡號等），並採取適當的行動，例如修改密碼。",
+      "input_label": "檢查您使用的任一使用者名稱或子郵件地址。",
+      "action": "檢查外洩情況",
+      "breach_not_found_details": "沒有在任何已知資料洩漏事件中找到 {{username}}。",
+      "alert_title": "已發現外洩的帳戶",
+      "alert_description": "{{different_count}} 筆不同的資料洩漏事件中發現 {{username}}。",
+      "compromised_data": "遭外洩的資料",
+      "website": "網址",
+      "affected_users": "波及的使用者數",
+      "breach_occurred": "洩漏事件日期",
+      "added_occurred": "洩漏事件通報日期"
+    }
+  },
+  "quick_share_detail": {
+    "title": "快速又簡單",
+    "description": "使用 Locker 快速共享能讓您以加密方式共享敏感資訊（如密碼、加密資產等）。分享的連結也會自動過期，讓您可以保有隱私，也能確保資料不會永遠留在網路上。",
+    "action": "立即嘗試置物櫃！",
+    "product_of": "A product of",
+    "copyright": "Copyright © {{year}} Locker.io · All rights reserved.",
+    "terms": "條款",
+    "privacy_policy": "隱私政策",
+    "reveal_information": "顯示內容",
+    "hide_information": "隱藏內容",
+    "not_fond": {
+      "title": "抱歉，沒有可檢視的項目",
+      "description": {
+        "title": "可能是以下其中一個狀況：",
+        "note1": "檢視項目的連結已過期或使用次數已達上限。",
+        "note2": "擁有者已停止共享此項目。",
+        "note3": "您輸入的連結不正確。"
+      }
+    },
+    "verify_email": {
+      "title": "您已收到機敏資料",
+      "description": " 檢視內容前，您需要先驗證信箱。請輸入您的信箱以接收一次性密碼",
+      "enter_otp": "請輸入一次性密碼",
+      "action": "發送驗證碼",
+      "resend": "重新發送驗證碼"
+    }
+  },
+  "enterprises": {
+    "title": "公司",
+    "add": "新公司",
+    "edit": "編輯公司資訊",
+    "name": "公司名稱",
+    "subtitle": "副標題"
+  },
+  "email_settings": {
+    "title": "Email Settings",
+    "description": "Integrate with an Email service Provider to enable email notifications for your group members.",
+    "email_provider": {
+      "title": "Email Provider",
+      "description": "Choose an Email Provider that you want to use for email sending."
+    },
+    "set_up_integration": {
+      "title": "Set up Integration"
+    },
+    "general": {
+      "from_email": "From email",
+      "from_email_placeholder": "Default address that emails will be sent from",
+      "from_name": "From name",
+      "from_name_placeholder": "Default name that emails will be sent from"
+    },
+    "smtp": {
+      "title": "SMTP",
+      "provider": "SMTP Provider",
+      "description": "The SMTP Credentials will be stored in your database. A few important expectations about your server:",
+      "description1": "It must support LOGIN authentication",
+      "description2": "It must support TLS 1.0 or higher",
+      "note": "Need help to integrate with SMTP?",
+      "note_link": "Follow our instructions",
+      "host": "Host",
+      "host_placeholder": "Your SMTP Host",
+      "port": "Port",
+      "port_placeholder": "SMTP Port",
+      "port_description": "Common ports for SMTP transmission are 25, 465, 587.",
+      "username": "Username",
+      "username_placeholder": "Your SMTP Username",
+      "password": "Password",
+      "password_placeholder": "Your SMTP Password "
+    },
+    "amazon_ses": {
+      "title": "Amazon SES"
+    },
+    "send_grid": {
+      "title": "SendGrid",
+      "api_key": "API Key",
+      "api_key_placeholder": "SendGrid’s API Key",
+      "domain": "Domain/Subdomain",
+      "domain_placeholder": "Domain/Subdomain configured in SendGrid"
+    },
+    "sendinblue": {
+      "title": "Sendinblue"
+    },
+    "google": {
+      "title": "Google"
+    },
+    "outlook": {
+      "title": "Outlook"
+    },
+    "send_test": {
+      "title": "Send test email",
+      "description": "Enter an email address to send a test email to"
+    },
+    "reset": {
+      "title": "Reset Email Plugin?",
+      "description": "Are you sure to reset? All changes you have made will be reset and your users will no longer receive emails."
+    }
+  },
+  "sso_configuration": {
+    "title": "OAuth Configuration",
+    "description": "Configuration OAuth to require users log in using SSO",
+    "sso_provider": "Provider",
+    "identifier": "Identifier",
+    "oauth_authorization_url": "OAuth authorization URL",
+    "oauth_token_url": "OAuth token URL",
+    "redirect_behavior": "Redirect behavior",
+    "api_url": "API URL providing user details when authenticated",
+    "oauth_client_id": "OAuth Client ID",
+    "oauth_client_secret": "OAuth Client secret",
+    "oauth_scopes": "OAuth scopes to request",
+    "email_claim_types": "Email claim types",
+    "name_claim_types": "Name claim types",
+    "reset_question": "Are you sure you want to reset config?",
+    "placeholder": {
+      "sso_provider": "oauth2",
+      "identifier": "vincss-sso",
+      "https": "https://",
+      "enter_id": "Enter ID",
+      "enter_secret": "Enter secret",
+      "enter_scopes": "Read or ...",
+      "email_claim_types": "EX: email",
+      "name_claim_types": "EX: name"
+    }
+  },
+  "enterprise_dashboard": {
+    "title": "儀表板",
+    "adoption_rate": {
+      "title": "Adoption Rate",
+      "accessed": "Accessed",
+      "requested": "Requested",
+      "created": "Created",
+      "total": "Total users"
+    },
+    "news": {
+      "title": "News",
+      "users_blocked": "Users being blocked by failed logins"
+    },
+    "user_login": {
+      "title": "User logins by time",
+      "user": "User"
+    },
+    "password_security": {
+      "title": "Password Security",
+      "weak_password": "Users with weak Password",
+      "more_than_weak_passwords": "Users with more than 10 weak passwords",
+      "leaked_account": "Users with at least 1 leaked account"
+    },
+    "users_blocked": {
+      "title": "Users blocked by failed logins"
+    }
+  },
+  "enterprise_members": {
+    "title": "Users",
+    "user_email": "User email",
+    "role": "Role",
+    "upload_file": "Upload file",
+    "upload_file_guide": "or Upload file of users (CSV format)",
+    "add": "Invite user",
+    "edit": "Edit user info",
+    "all_roles": "All roles",
+    "all_statuses": "All statuses",
+    "tabs": {
+      "active": "Active licenses",
+      "pending": "Pending members",
+      "disabled": "Disabled members",
+      "blocked": "Blocked members"
+    },
+    "form": {
+      "title": "Invite people to company",
+      "username_description": "Add user(s) email and press the Enter key",
+      "role_description": "Role of new member(s)",
+      "full_name_description": "Full name of new member",
+      "new_member_info": "New member information",
+      "new_member_description": "The password(s) will be displayed once. Copy or download to share with the right people. You may skip this step if you've set up {{mail}} to send email invitations",
+      "new_member_invite": "If you have set up {{mail}}, the new member(s) will receive an invitation via their email address"
+    }
+  },
+  "enterprise_groups": {
+    "title": "Groups",
+    "group_name": "Group name",
+    "add": "New group",
+    "edit": "Edit group info",
+    "users": "Group users",
+    "users_of_group": "List users of groups",
+    "no_data": {
+      "title": "Add your first company group",
+      "description": "Add an group to manage users."
+    }
+  },
+  "enterprise_policies": {
+    "title": "Policies",
+    "password_requirements": {
+      "title": "Password requirements",
+      "description": "Force users to use strong password.",
+      "modal": {
+        "description": "Set password requirements for your members. These rules apply to all passwords in their vault.",
+        "minimum_password_length": "Minimum password length",
+        "password_complexity": "Password complexity",
+        "requires_lowercase": "Requires lowercase",
+        "requires_uppercase": "Requires UPPERCASE",
+        "requires_digit": "Requires digit",
+        "requires_special_character": "Requires special character"
+      }
+    },
+    "block_failed_logins": {
+      "title": "Block failed logins",
+      "description": "Block user when there are multiple failed login attempts.",
+      "modal": {
+        "description": "Block users from logging in Locker when there are too many failed logins.",
+        "block_when": "Block a user when there are:",
+        "how_long": "How long do you want to block user from logging in?",
+        "receive_an_email": "Receive an email when a member gets blocked",
+        "do_not_notify_me": "Do not notify me",
+        "failed_login_attempts": "failed login attempts"
+      }
+    },
+    "passwordless_login": {
+      "title": "Passwordless login",
+      "description": "Users are forced to use passwordless to login to Locker.",
+      "modal": {
+        "description": "Require users to login using passwordless method (currently FIDO2 standard).",
+        "choose_password_or_passwordless": "User can choose Passwordless or Password",
+        "only_allow_passwordless": "Only allow passwordless (Password is disabled)"
+      }
+    },
+    "log_in_with_2fa": {
+      "title": "Log in with 2FA",
+      "description": "Users are forced to use 2FA to login to Locker for the first time on new devices.",
+      "modal": {
+        "description": "Require users to use Two-Factor Authentication (2FA) to log in to their locker accounts for the first time on new devices.",
+        "description1": "When turned on, users are forced to use an authenticator of their choices (ex: Google Authenticator, Authy, Locker,...)",
+        "only_admin_and_primary_admin": "Only Admin and Primary Admin",
+        "apply_to_all_users": "Apply to all users"
+      }
+    }
+  },
+  "enterprise_activity_logs": {
+    "title": "Activity Logs",
+    "all_actions": "All actions",
+    "all_users": "All users",
+    "actions": {
+      "member_status": "Member status",
+      "role_changes": "Role changes",
+      "policy_violations": "Policy violations",
+      "user_login": "User login",
+      "sharing": "Sharing"
+    }
+  }
+}

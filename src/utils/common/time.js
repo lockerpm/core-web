@@ -5,6 +5,7 @@ import common from '.'
 
 require('dayjs/locale/en')
 require('dayjs/locale/vi')
+require('dayjs/locale/zh')
 
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
@@ -36,7 +37,7 @@ const convertDateTime = (date, format = 'HH:mm DD-MM-YYYY') => {
 }
 
 const disabledDate = current => {
-  return current && moment(current).format('YYYY-MM-DD') < moment().format('YYYY-MM-DD')
+  return current && dayjs(current).unix() < dayjs().unix()
 }
 
 const disabledTime = (now, condition = true, type = 'hour') => {

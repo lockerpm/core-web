@@ -69,6 +69,7 @@ const ACCESS_TYPE = {
 const LANGUAGE = {
   VI: 'vi',
   EN: 'en',
+  ZH: 'zh'
 }
 
 const NOTIFICATION_TYPE = {
@@ -146,6 +147,10 @@ export default {
     {
       value: LANGUAGE.VI,
       label: 'common.vietnamese',
+    },
+    {
+      value: LANGUAGE.ZH,
+      label: 'common.chinese',
     },
   ],
   IMPORT_FILE_TYPES: [],

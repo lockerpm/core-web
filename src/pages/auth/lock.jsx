@@ -227,7 +227,7 @@ const Lock = () => {
                 padding: '32px'
               }}
             >
-              <div className="w-full flex items-center">
+              <div className="w-full flex items-center justify-center">
                 {
                   step > 1 && <Button
                     className="mr-2"
@@ -240,7 +240,7 @@ const Lock = () => {
                   {t('lock.title')}
                 </p>
               </div>
-              <p className="mb-6 mt-2">
+              <p className="mb-6 mt-2 text-center">
                 {description}
               </p>
               <Form

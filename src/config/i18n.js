@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next'
 
 import en from '../locale/en.json'
 import vi from '../locale/vi.json'
+import zh from '../locale/zh.json'
 
 const resources = {
   en: {
@@ -12,6 +13,9 @@ const resources = {
   vi: {
     translation: vi,
   },
+  zh: {
+    translation: zh,
+  }
 }
 
 i18n.use(initReactI18next)

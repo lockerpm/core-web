@@ -1,9 +1,9 @@
 {
   "common": {
     "app_name": "Locker Password Manager",
-    "app_title": "Locker",
+    "app_title": "Password Manager",
     "total": "Tất cả",
-    "status": "Status",
+    "status": "Trạng thái",
     "created_time": "Thời gian tạo",
     "updated_time": "Cập nhật lần cuối",
     "created_by": "Tạo bởi",
@@ -31,6 +31,7 @@
     "language": "Ngôn ngữ",
     "english": "Tiếng Anh (US)",
     "vietnamese": "Tiếng Việt (VN)",
+    "chinese": "Tiếng Trung (CN)",
     "count": "Đếm",
     "search_all": "Tìm kiếm tất cả dữ liệu",
     "back": "Quay lại",
@@ -38,7 +39,7 @@
     "all_default": "Tất cả (*)",
     "copy": "Sao chép",
     "copied": "Đã sao chép",
-    "users": "Users",
+    "users": "Người dùng",
     "access_type": "Quyền truy cập",
     "client": "Client",
     "location": "Địa điểm",
@@ -340,7 +341,9 @@
     "enterprise_members": "Thành viên",
     "enterprise_groups": "Nhóm",
     "enterprise_policies": "Chính sách",
-    "enterprise_activity_logs": "Nhật ký hoạt động"
+    "enterprise_activity_logs": "Nhật ký hoạt động",
+    "secrets_manager": "Secrets Manager",
+    "password_manager": "Password Manager"
   },
   "auth_pages": {
     "username": "Email",

@@ -19,6 +19,7 @@ import '../css/sidebar-center.scss';
 function SidebarCenter(props) {
   const { collapsed, showBottom, onClose = () => {} } = props
   const currentPage = useSelector((state) => state.system.currentPage);
+  const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const invitations = useSelector((state) => state.share.invitations);
 
@@ -61,7 +62,7 @@ function SidebarCenter(props) {
       return null
     }
     return null
-  }, [currentPage, menus])
+  }, [currentPage, menus, locale])
 
   const sidebarMenus = useMemo(() => {
     if (backMenu) {
