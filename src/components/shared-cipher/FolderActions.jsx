@@ -27,6 +27,7 @@ const FolderActions = (props) => {
   } = props;
 
   const allFolders = useSelector((state) => state.folder.allFolders)
+  const locale = useSelector((state) => state.system.locale);
 
   const isInvited = useMemo(() => {
     return folder.status === global.constants.STATUS.INVITED
@@ -69,7 +70,7 @@ const FolderActions = (props) => {
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
     return []
-  }, [originFolder])
+  }, [originFolder, locale])
 
   const role = useMemo(() => {
     return {

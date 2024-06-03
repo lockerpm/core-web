@@ -27,13 +27,14 @@ const CrossPlatformSync = (props) => {
 
   const userInfo = useSelector(state => state.auth.userInfo);
   const isMobile = useSelector(state => state.system.isMobile);
+  const locale = useSelector((state) => state.system.locale);
 
   const [callingAPI, setCallingAPI] = useState(false)
   const [confirmVisible, setConfirmVisible] = useState(false)
 
   const action = useMemo(() => {
     return userInfo.sync_all_platforms ? t('security.cross_platform_sync.turn_off') : t('security.cross_platform_sync.turn_on')
-  }, [userInfo])
+  }, [userInfo, locale])
 
   const onConfirm = async (password) => {
     setCallingAPI(true);

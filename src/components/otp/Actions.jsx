@@ -22,6 +22,7 @@ const Actions = (props) => {
   } = props;
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const locale = useSelector((state) => state.system.locale);
 
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === cipher?.id) || cipher
@@ -41,7 +42,7 @@ const Actions = (props) => {
         onClick: () => onDelete(originCipher)
       },
     ]
-  }, [originCipher])
+  }, [originCipher, locale])
 
   return (
     <div className={className}>

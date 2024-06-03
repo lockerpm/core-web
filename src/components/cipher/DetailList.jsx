@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -39,6 +40,7 @@ const DetailList = (props) => {
   } = props;
 
   const { t } = useTranslation();
+  const locale = useSelector((state) => state.system.locale);
 
   const cipherTypeData = useMemo(() => {
     if (!cipher) {
@@ -483,7 +485,7 @@ const DetailList = (props) => {
         />
       },
     ]
-  }, [cipher, showText])
+  }, [cipher, showText, locale])
 
   const data = useMemo(() => {
     if (!cipher) {
@@ -561,7 +563,8 @@ const DetailList = (props) => {
     cipher,
     cipherTypeData,
     isPublic,
-    showText
+    showText,
+    locale
   ])
 
   return (

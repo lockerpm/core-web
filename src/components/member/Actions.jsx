@@ -18,7 +18,6 @@ import global from "../../config/global";
 
 const Actions = (props) => {
   const { t } = useTranslation()
-  const userInfo = useSelector((state) => state.auth.userInfo)
   const {
     className = '',
     item = null,
@@ -26,6 +25,9 @@ const Actions = (props) => {
     onDelete = () => { },
     onReload = () => { },
   } = props;
+  
+  const userInfo = useSelector((state) => state.auth.userInfo)
+  const locale = useSelector((state) => state.system.locale);
 
   const showAction = useMemo(() => {
     return item.role !== global.constants.USER_ROLE.PRIMARY_ADMIN && item.email !== userInfo?.email
@@ -80,7 +82,7 @@ const Actions = (props) => {
       ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
     }
     return []
-  }, [item])
+  }, [item, locale])
 
   return (
     <div className={className}>

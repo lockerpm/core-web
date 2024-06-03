@@ -28,6 +28,7 @@ const Actions = (props) => {
 
   const allFolders = useSelector((state) => state.folder.allFolders)
   const allCollections = useSelector((state) => state.collection.allCollections)
+  const locale = useSelector((state) => state.system.locale);
 
   const originCollection = useMemo(() => {
     return allCollections.find((d) => d.id === item?.id)
@@ -92,7 +93,7 @@ const Actions = (props) => {
         onClick: () => onDelete(originFolder)
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [originFolder, originCollection])
+  }, [originFolder, originCollection, locale])
 
   return (
     <div className={className}>

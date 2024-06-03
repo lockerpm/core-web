@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -23,45 +23,48 @@ const FilterTime = (props) => {
     onChange = () => { },
   } = props;
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const locale = useSelector((state) => state.system.locale);
 
-  const items = [
-    {
-      key: 'all_time',
-      label: <span>
-        {t('common.all_time')}
-      </span>,
-      form: <></>
-    },
-    {
-      key: 'last_week',
-      label: <span>
-        {t('common.last_week')}
-      </span>,
-      form: <></>
-    },
-    {
-      key: 'last_month',
-      label: <span>
-        {t('common.last_month')}
-      </span>,
-      form: <></>
-    },
-    {
-      key: 'custom_time',
-      label: <span>
-        {t('common.custom_time')}
-      </span>,
-      form: <DatePicker.RangePicker
-        value={params.dates.map((d) => dayjs(d))}
-        onChange={(v) => changeCustomTime(v)}
-        size="medium"
-        allowClear={false}
-        className="mr-2 filter-filed__m"
-        placement="bottomRight"
-      />,
-    },
-  ]
+  const items = useMemo(() => {
+    return [
+      {
+        key: 'all_time',
+        label: <span>
+          {t('common.all_time')}
+        </span>,
+        form: <></>
+      },
+      {
+        key: 'last_week',
+        label: <span>
+          {t('common.last_week')}
+        </span>,
+        form: <></>
+      },
+      {
+        key: 'last_month',
+        label: <span>
+          {t('common.last_month')}
+        </span>,
+        form: <></>
+      },
+      {
+        key: 'custom_time',
+        label: <span>
+          {t('common.custom_time')}
+        </span>,
+        form: <DatePicker.RangePicker
+          value={params.dates.map((d) => dayjs(d))}
+          onChange={(v) => changeCustomTime(v)}
+          size="medium"
+          allowClear={false}
+          className="mr-2 filter-filed__m"
+          placement="bottomRight"
+        />,
+      },
+    ]
+  }, [locale])
 
   useEffect(() => {
     setSelectedItem(params.time_option)

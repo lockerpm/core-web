@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -27,6 +27,8 @@ const ViewActions = (props) => {
     cipher = null,
     allCiphers = []
   } = props;
+
+  const locale = useSelector((state) => state.system.locale);
 
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === cipher.id) || cipher
@@ -103,7 +105,7 @@ const ViewActions = (props) => {
       default:
         return [];
     }
-  }, [originCipher])
+  }, [originCipher, locale])
 
   const role = useMemo(() => {
     return {

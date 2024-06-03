@@ -62,6 +62,7 @@ function FormData(props) {
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allFolders = useSelector((state) => state.folder.allFolders)
   const allCollections = useSelector((state) => state.collection.allCollections);
+  const locale = useSelector((state) => state.system.locale);
 
   const [step, setStep] = useState(1);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -187,7 +188,7 @@ function FormData(props) {
       return `${title} ${menuType ===  menuTypes.CIPHERS ? t('common.items') : t('common.folder')}`
     }
     return title
-  }, [step, menuType, item])
+  }, [step, menuType, item, locale])
 
   const stopSharingCipher = async (row) => {
     try {

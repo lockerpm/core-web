@@ -33,6 +33,7 @@ const CipherActions = (props) => {
   } = props;
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const locale = useSelector((state) => state.system.locale);
 
   const isInvited = useMemo(() => {
     return cipher.status === global.constants.STATUS.INVITED
@@ -112,7 +113,7 @@ const CipherActions = (props) => {
       default:
         return [];
     }
-  }, [originCipher])
+  }, [originCipher, locale])
 
   const generalMenus = useMemo(() => {
     if (isAccepted) {
@@ -163,7 +164,7 @@ const CipherActions = (props) => {
       isCopy: !isInvited && !originCipher?.isDeleted && copyMenus.length > 0,
       isGeneral: !isInvited && generalMenus.length > 0
     }
-  }, [originCipher, copyMenus])
+  }, [originCipher, copyMenus, locale])
 
   return (
     <div className={className}>

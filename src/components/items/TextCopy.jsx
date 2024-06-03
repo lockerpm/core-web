@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -29,6 +30,8 @@ const TextCopy = (props) => {
     display = null,
     show = null
   } = props;
+
+  const locale = useSelector((state) => state.system.locale);
 
   const { t } = useTranslation()
   const [isHover, setIsHover] = useState(false)
@@ -91,7 +94,14 @@ const TextCopy = (props) => {
       </div>
     }
     return <></>
-  }, [value, isPassword, align, show, showText])
+  }, [
+    value,
+    isPassword,
+    align,
+    show,
+    showText,
+    locale
+  ])
 
   return (
     <Typography.Text

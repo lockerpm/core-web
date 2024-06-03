@@ -84,7 +84,14 @@ function LayoutBreadcrumb() {
         setMenus(brRouters);
       }
     }
-  }, [location, currentPage, allFolders, allCiphers, locale, currentEnterprise])
+  }, [
+    location,
+    currentPage,
+    allFolders,
+    allCiphers,
+    locale,
+    currentEnterprise
+  ])
 
   const items = useMemo(() => {
     const breadcrumbRouters = menus.map((m, index) => ({
@@ -111,7 +118,11 @@ function LayoutBreadcrumb() {
       ]
     }
     return breadcrumbRouters
-  }, [menus, currentPage, userInfo])
+  }, [
+    menus,
+    currentPage,
+    userInfo
+  ])
 
   return (
     <Breadcrumb className='flex items-center' items={items} />

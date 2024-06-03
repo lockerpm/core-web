@@ -1,5 +1,5 @@
 import React, { } from "react";
-import { useDispatch } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -15,7 +15,6 @@ import {
 const PersonalInfo = (props) => {
   const { } = props
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   return (
     <div>

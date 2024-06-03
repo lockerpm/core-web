@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -22,6 +22,8 @@ const Actions = (props) => {
     onStopSharing = () => {},
   } = props;
 
+  const locale = useSelector((state) => state.system.locale);
+
   const generalMenus = useMemo(() => {
     return [
       {
@@ -35,7 +37,7 @@ const Actions = (props) => {
         onClick: () => onStopSharing(item)
       },
     ]
-  }, [item])
+  }, [item, locale])
 
   return (
     <div className={className}>

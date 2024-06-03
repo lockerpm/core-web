@@ -38,6 +38,7 @@ const Actions = (props) => {
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const locale = useSelector((state) => state.system.locale);
 
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === cipher.id) || cipher
@@ -114,7 +115,7 @@ const Actions = (props) => {
       default:
         return [];
     }
-  }, [originCipher])
+  }, [originCipher, locale])
 
   const shareMenus = useMemo(() => {
     if (originCipher.type === CipherType.MasterPassword) {
@@ -142,7 +143,7 @@ const Actions = (props) => {
         onClick: () => onShare(originCipher, true)
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [originCipher, allOrganizations])
+  }, [originCipher, allOrganizations, locale])
 
   const generalMenus = useMemo(() => {
     if (originCipher.type === CipherType.MasterPassword ) {
@@ -201,7 +202,7 @@ const Actions = (props) => {
       ]
     }
     return []
-  }, [originCipher])
+  }, [originCipher, locale])
 
   const role = useMemo(() => {
     return {

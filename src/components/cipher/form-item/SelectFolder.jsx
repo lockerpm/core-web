@@ -26,6 +26,7 @@ function SelectFolder(props) {
 
   const allFolders = useSelector((state) => state.folder.allFolders);
   const allCollections = useSelector((state) => state.collection.allCollections);
+  const locale = useSelector((state) => state.system.locale);
 
   const canChangeFolder = useMemo(() => {
     const memberCollections = allCollections.filter((c) => !common.isOwner(c))
@@ -48,7 +49,13 @@ function SelectFolder(props) {
       },
       ...result
     ]
-  }, [allFolders, allCollections, canChangeFolder, isMove])
+  }, [
+    allFolders,
+    allCollections,
+    canChangeFolder,
+    isMove,
+    locale
+  ])
 
   return (
     <div className={props.className}>

@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -18,6 +19,8 @@ const SharedWith = (props) => {
     className = '',
     send = null,
   } = props;
+
+  const locale = useSelector((state) => state.system.locale);
 
   const sharedWithText = useMemo(() => {
     if (!send?.requireOtp) {
@@ -40,7 +43,7 @@ const SharedWith = (props) => {
         </Tooltip>)
       }
     </Avatar.Group>
-  }, [send])
+  }, [send, locale])
 
   return (
     <div className={className}>

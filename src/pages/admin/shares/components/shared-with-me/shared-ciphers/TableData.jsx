@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -35,6 +35,8 @@ const TableData = (props) => {
     onLeave = () => {},
     onUpdateStatus = () => {}
   } = props;
+
+  const locale = useSelector((state) => state.system.locale);
 
   const columns = useMemo(() => {
     return [
@@ -129,7 +131,8 @@ const TableData = (props) => {
         ),
       },
     ].filter((c) => !c.hide)
-  }, [])
+  }, [locale])
+
   return (
     <Table
       className={className}

@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -28,6 +29,8 @@ const Actions = (props) => {
     fetchGranted = () => {},
     onResetPassword = () => {},
   } = props;
+
+  const locale = useSelector((state) => state.system.locale);
 
   const reinvite = async () => {
     await emergencyAccessServices.reinvite(contact.id).then(() => {
@@ -191,7 +194,7 @@ const Actions = (props) => {
         onClick: () => remove()
       },
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
-  }, [contact, isTrusted])
+  }, [contact, isTrusted, locale])
 
   return (
     <div className={className}>
