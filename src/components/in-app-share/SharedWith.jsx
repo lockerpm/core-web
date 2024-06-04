@@ -48,7 +48,7 @@ const SharedWith = (props) => {
               color: 'black'
             }}
           >
-            {member.email.slice(0, 1)?.toUpperCase()}
+            {member.email?.slice(0, 1)?.toUpperCase()}
           </Avatar>
         </Tooltip>)
       }

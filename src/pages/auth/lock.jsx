@@ -254,7 +254,7 @@ const Lock = () => {
                       <Avatar
                         src={userInfo?.avatar}
                       >
-                        {userInfo?.email.slice(0, 1)?.toUpperCase()}
+                        {userInfo?.email?.slice(0, 1)?.toUpperCase()}
                       </Avatar>
                     }
                     value={userInfo?.name || userInfo?.email}

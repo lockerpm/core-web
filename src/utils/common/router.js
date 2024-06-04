@@ -18,7 +18,7 @@ const convertStringToQuery = (queryString = {}) => {
   if (typeof queryString === 'object') {
     return queryString
   }
-  const querys = queryString.slice(1, queryString.length)?.split('&').filter(Boolean)
+  const querys = queryString?.slice(1, queryString.length)?.split('&').filter(Boolean)
   const query = {}
   querys.forEach(q => {
     const key = q?.split('=')[0]

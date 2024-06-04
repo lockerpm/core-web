@@ -46,8 +46,8 @@ function SeedPhrase(props) {
   const handleChangeWord = (newV, index) => {
     const newVArray = newV?.trim().split(' ');
     const maxLength = newValue.length > (index + newVArray.length) ? newValue.length : (index + newVArray.length)
-    const leftArray = newValue.slice(0, index);
-    const rightArray = newValue.slice(index + newVArray.length, maxLength);
+    const leftArray = newValue?.slice(0, index) || [];
+    const rightArray = newValue?.slice(index + newVArray.length, maxLength) || [];
 
     if (newVArray.length) {
       const words = [...leftArray, ...newVArray, ...rightArray]

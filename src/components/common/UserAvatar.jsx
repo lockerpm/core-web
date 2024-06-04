@@ -40,7 +40,7 @@ function UserAvatar(props) {
           size={size}
           src={userInfo.avatar}
         >
-          {userInfo.email.slice(0, 1)?.toUpperCase()}
+          {userInfo?.email?.slice(0, 1)?.toUpperCase()}
         </Avatar>
       }
       {
