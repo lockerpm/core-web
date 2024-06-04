@@ -41,7 +41,8 @@
   .admin-layout-center {
     .admin-layout-content {
       flex: none;
-      height: calc(100vh - var(--header-height));
+      min-height: calc(100vh - var(--header-height));
+      height: max-content !important;
       position: relative;
       left: var(--sidebar-width);
       top: var(--header-height);

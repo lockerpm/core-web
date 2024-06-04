@@ -29,6 +29,7 @@
 .layout-content {
   min-height: auto;
   max-height: 100%;
+  height: max-content;
   overflow: auto;
   padding: var(--default-spacing) var(--page-content-spacing);
   padding-bottom: 48px;
