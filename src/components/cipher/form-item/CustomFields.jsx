@@ -153,7 +153,7 @@ function CustomFields(props) {
                     ...customFields,
                     {
                       type: fieldTypes[0].value,
-                      name: '',
+                      name: t(`cipher.custom_fields.${fieldTypes[0].key}`).toString(),
                       value: fieldTypes[0].defaultValue || '',
                     }
                   ])

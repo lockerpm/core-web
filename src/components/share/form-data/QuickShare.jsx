@@ -92,9 +92,14 @@ function QuickShare(props) {
           className='mb-2'
           name={'emails'}
           label={
-            <p className='font-semibold'>
-              {t('shares.quick_shares.email_addresses_share')}
-            </p>
+            <div>
+              <p className='font-semibold'>
+                {t('shares.quick_shares.email_addresses_share')}
+              </p>
+              <span className='text-xs'>
+                {t('shares.new_share.personal_email_note')}
+              </span>
+            </div>
           }
           rules={[
             {

@@ -13,6 +13,8 @@ import {
 import {
 } from '@ant-design/icons';
 
+import global from '../../../config/global';
+
 function PersonalForm(props) {
   const {
     disabled = false
@@ -97,6 +99,9 @@ function PersonalForm(props) {
           <Form.Item
             name={'username'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.password.username'), 'USERNAME')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.identity.username')}
@@ -129,6 +134,9 @@ function PersonalForm(props) {
           <Form.Item
             name={'email'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.identity.email'), 'EMAIL')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.identity.email')}
@@ -145,6 +153,9 @@ function PersonalForm(props) {
           <Form.Item
             name={'phone'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.identity.phone'), 'PHONE')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.identity.phone')}
@@ -161,6 +172,9 @@ function PersonalForm(props) {
           <Form.Item
             name={'ssn'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.identity.social_security_number'), 'NUMBER')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.identity.social_security_number')}
@@ -177,6 +191,9 @@ function PersonalForm(props) {
           <Form.Item
             name={'passportNumber'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.identity.passport_number'), 'PASSPORT_NUMBER')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.identity.passport_number')}
@@ -193,6 +210,9 @@ function PersonalForm(props) {
           <Form.Item
             name={'licenseNumber'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.identity.license_number'), 'LICENSE_NUMBER')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.identity.license_number')}

@@ -140,9 +140,15 @@ export default {
     },
     {
       name: keys.FOLDER_DETAIL,
-      path: '/folders/:folder_id',
+      path: '/folders/:folder_id/items',
       element: 'Vault',
       parent: keys.FOLDERS,
+    },
+    {
+      name: keys.FOLDER_ITEM_DETAIL,
+      path: '/folders/:folder_id/items/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.FOLDER_DETAIL,
     },
     {
       name: keys.AUTHENTICATOR,

@@ -23,12 +23,15 @@ const DisplayOtp = (props) => {
   } = props;
 
   const [otp, setOtp] = useState('')
-  const [period, setPeriod] = useState(30)
+  const [period, setPeriod] = useState(0)
   const [now, setNow] = useState(new Date().getTime() / 1000)
 
   const start = useMemo(() => {
-    return period - Math.floor(now) % period
-  }, [period, now, period])
+    if (period > 0) {
+      return period - Math.floor(now) % period
+    }
+    return period
+  }, [period, now])
 
   const otpFormat = useMemo(() => {
     return common.formatOTP(otp)
@@ -48,7 +51,6 @@ const DisplayOtp = (props) => {
   }, [start, period])
 
   useEffect(() => { 
-    setPeriod(30);
     setNow(new Date().getTime() / 1000);
     getOTP();
   }, [notes])

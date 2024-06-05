@@ -67,6 +67,9 @@ function CryptoBackupForm(props) {
       <Form.Item
         name={'username'}
         className='mb-2'
+        rules={[
+          global.rules.INVALID(t('cipher.password.username'), 'USERNAME')
+        ]}
         label={
           <p className='text-gray'>
             {t('cipher.password.username')}

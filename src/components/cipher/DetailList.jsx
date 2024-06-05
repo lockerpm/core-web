@@ -20,6 +20,7 @@ import cipherFormItemComponents from "./form-item";
 import inAppShareComponents from "../in-app-share";
 
 import { CipherType } from "../../core-js/src/enums";
+import { FieldType } from "../../core-js/src/enums";
 
 import common from "../../utils/common";
 import global from "../../config/global";
@@ -514,6 +515,7 @@ const DetailList = (props) => {
           value={f.value}
           showIcon={true}
           show={showText}
+          defaultShow={f.type !== FieldType.Hidden}
           align="between"
         />
       })),

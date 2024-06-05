@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 
 import formsComponents from '../../forms';
+import global from '../../../config/global';
 
 function PasswordForm(props) {
   const { GeneratePassword } = formsComponents;
@@ -33,6 +34,9 @@ function PasswordForm(props) {
       <Form.Item
         name={'username'}
         className='mb-2'
+        rules={[
+          global.rules.INVALID(t('cipher.password.username'), 'USERNAME')
+        ]}
         label={
           <p className='text-gray'>
             {t('cipher.password.username')}
@@ -66,6 +70,9 @@ function PasswordForm(props) {
       <Form.Item
         name={'uri'}
         className='mb-2'
+        rules={[
+          global.rules.INVALID(t('cipher.password.website'), 'LINK')
+        ]}
         label={
           <p className='text-gray'>
             {t('cipher.password.website')}

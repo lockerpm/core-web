@@ -29,6 +29,7 @@ const Name = (props) => {
   } = props;
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
+  const locale = useSelector((state) => state.system.locale)
 
   const originCipher = useMemo(() => {
     if (send) {
@@ -51,6 +52,29 @@ const Name = (props) => {
     return common.cipherTypeInfo('listRouter', currentPage.name, cipher.type)
   }, [originCipher, currentPage])
 
+  const cipherLabel = useMemo(() => {
+    return cipher.name || originCipher.name || t('shares.encrypted_content')
+  }, [cipher, originCipher, locale])
+
+  const routerParams = useMemo(() => {
+    if (currentPage?.name === global.keys.FOLDER_DETAIL) {
+      return { 
+        cipher_id: cipher.id || originCipher.id,
+        folder_id: currentPage.params?.folder_id
+      }
+    }
+    return { 
+      cipher_id: cipher.id || originCipher.id,
+    }
+  }, [cipher, originCipher, currentPage])
+
+  const routerName = useMemo(() => {
+    if (currentPage?.name === global.keys.FOLDER_DETAIL) {
+      return global.keys.FOLDER_ITEM_DETAIL
+    }
+    return cipherType?.detailRouter || global.keys.VAULT_DETAIL
+  }, [currentPage, cipherType])
+
   return (
     <div className="flex items-center w-full">
       <CipherIcon
@@ -62,9 +86,9 @@ const Name = (props) => {
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}
-            label={cipher.name || originCipher.name || t('shares.encrypted_content')}
-            routerName={cipherType?.detailRouter || global.keys.VAULT_DETAIL}
-            routerParams={{ cipher_id: cipher.id || originCipher.id }}
+            label={cipherLabel}
+            routerName={routerName}
+            routerParams={routerParams}
             icon={
               isCipherShare ? <ImageIcon
                 className="ml-1"
