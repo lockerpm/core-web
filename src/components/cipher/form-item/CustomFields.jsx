@@ -118,7 +118,13 @@ function CustomFields(props) {
                         />
                       }
                       {
-                        field?.key !== 'date' && <Input
+                        field?.key === 'hidden_field' && <Input.Password
+                          disabled={disabled}
+                          placeholder={t(`placeholder.${field?.placeholder || field?.key}`)}
+                        />
+                      }
+                      {
+                        !['date', 'hidden_field'].includes(field?.key) && <Input
                           disabled={disabled}
                           placeholder={t(`placeholder.${field?.placeholder || field?.key}`)}
                         />

@@ -28,18 +28,23 @@ const TextCopy = (props) => {
     limited = true,
     showIcon = false,
     display = null,
-    show = null
+    show = null,
+    defaultShow = null
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
 
   const { t } = useTranslation()
   const [isHover, setIsHover] = useState(false)
-  const [showText, setShowText] = useState(show)
+  const [showText, setShowText] = useState(false)
 
   useEffect(() => {
     setShowText(show)
   }, [show])
+
+  useEffect(() => {
+    setShowText(defaultShow === null ? show : defaultShow)
+  }, [])
 
   const icons = useMemo(() => {
     if ((isHover || showIcon) && !!value) {

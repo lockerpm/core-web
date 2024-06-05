@@ -659,6 +659,7 @@
     "delete_question": "Bạn thực sự muốn chuyển mục vào thùng rác? Mục này sẽ bị xóa vĩnh viễn sau 30 ngày.",
     "restore_question": "Bạn có chắc sẽ khôi phục mục này?",
     "permanently_delete_question": "Bạn có chắc sẽ xóa mục này vĩnh viễn?",
+    "master_password_note": "Đây là Master Password Locker của bạn. Mật khẩu này sẽ tự động thay đổi khi bạn thay đổi Master Password trong phần Cài Đặt. Chúng tôi tạo ra mục này để bạn xem lại khi quên Master Password. Đừng lo, việc tái tạo Master Password diễn ra ngay tại thiết bị của bạn, đội ngũ Locker vẫn không thể xem, sửa, can thiệp tới Master Password của bạn.",
     "types": {
       "password": "Mật khẩu",
       "note": "Ghi chú",
@@ -794,12 +795,14 @@
       "choose_items": "Chọn mục",
       "choose_items_note": "Bạn có thể chọn nhiều mục.",
       "personal_email_or_group": "Email cá nhân hoặc tên nhóm",
+      "search_email_or_group_note": "Thêm địa chỉ email hoặc nhóm, sau đó nhấn phím Enter.",
       "search_inventory": "Tìm trong kho lưu trữ",
       "personal_email_or_group_placeholder": "Nhập email hoặc tên nhóm để tìm",
       "choose_folder": "Chọn thư mục",
       "search_folder": "Tìm thư mục",
       "personal_email": "Email cá nhân",
-      "personal_email_placeholder": "Nhập email để tìm kiếm"
+      "personal_email_placeholder": "Nhập email để tìm kiếm",
+      "personal_email_note": "Thêm địa chỉ email, sau đó nhấn phím Enter."
     }
   },
   "import_export": {

@@ -52,8 +52,8 @@ function SidebarTop(props) {
         </Space>
         {
           !collapsed && <p
-            className='ml-1'
-            style={{ color: gray[0] }}
+            className='ml-1 font-semibold text-primary cursor-pointer'
+            onClick={() => handleClickLogo()}
           >
             {t('common.app_title')}
           </p>

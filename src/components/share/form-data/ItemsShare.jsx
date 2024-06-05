@@ -39,9 +39,11 @@ function ItemsShare(props) {
             <p className='font-semibold'>
               {t('shares.new_share.choose_items')}
             </p>
-            <span>
-              {t('shares.new_share.choose_items_note')}
-            </span>
+            {
+              !item && <span className='text-xs'>
+                {t('shares.new_share.choose_items_note')}
+              </span>
+            }
           </div>
         }
         rules={[]}

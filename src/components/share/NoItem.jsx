@@ -48,7 +48,6 @@ const NoItem = (props) => {
                 !isSharedWithMe && <Button
                   className="mt-6"
                   type="primary"
-                  ghost
                   onClick={onCreate}
                 >
                   {t('shares.no_data.add')}

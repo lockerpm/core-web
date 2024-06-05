@@ -64,8 +64,9 @@ const DetailList = (props) => {
           value: <TextCopy
             value={cipher.login.password}
             showIcon={true}
+            defaultShow={false}
             show={showText}
-            isPassword={true}
+            align="between"
           />
         },
         {
@@ -106,7 +107,8 @@ const DetailList = (props) => {
           key: 'notes',
           name: t('cipher.notes'),
           value: <TextCopy
-            value={cipher?.notes}
+            value={CipherType.MasterPassword === cipher.type ? t('cipher.master_password_note') : cipher?.notes}
+            limited={false}
             showIcon={true}
             show={showText}
             align="between"
@@ -220,7 +222,8 @@ const DetailList = (props) => {
             value={cipher.cryptoWallet?.password}
             showIcon={true}
             show={showText}
-            isPassword={true}
+            defaultShow={false}
+            align="between"
           />
         },
         {
@@ -248,7 +251,8 @@ const DetailList = (props) => {
             value={cipher.cryptoWallet?.privateKey}
             showIcon={true}
             show={showText}
-            isPassword={true}
+            defaultShow={false}
+            align="between"
           />
         },
         {
@@ -516,7 +520,7 @@ const DetailList = (props) => {
       {
         key: 'owner',
         name: t('roles.owner'),
-        hide: isPublic,
+        hide: isPublic || common.isProtectedCipher(cipher),
         value: <div>
           {
             common.isOwner(cipher) ? t('common.me') : common.getOrganization(cipher.organizationId)?.name || null
@@ -526,7 +530,7 @@ const DetailList = (props) => {
       {
         key: 'folder',
         name: t('common.folder'),
-        hide: isPublic,
+        hide: isPublic || common.isProtectedCipher(cipher),
         value: cipher.folderId ? <FolderName
           item={{ id: cipher.folderId }}
           showItems={false}
@@ -535,7 +539,7 @@ const DetailList = (props) => {
       {
         key: 'created_time',
         name: t('common.created_time'),
-        hide: isPublic,
+        hide: isPublic || common.isProtectedCipher(cipher),
         value: <TextCopy
           value={common.timeFromNow(cipher.creationDate)}
           showIcon={true}
@@ -545,7 +549,7 @@ const DetailList = (props) => {
       {
         key: 'updated_time',
         name: t('common.updated_time'),
-        hide: isPublic,
+        hide: isPublic || common.isProtectedCipher(cipher),
         value: <TextCopy
           value={common.timeFromNow(cipher.revisionDate)}
           showIcon={true}
@@ -555,8 +559,12 @@ const DetailList = (props) => {
       {
         key: 'shared_with',
         name: t('shares.shared_with'),
-        hide: !cipher?.organizationId || isPublic,
-        value: <SharedWith cipher={cipher} className="flex items-center mt-1"/>
+        hide: !cipher?.organizationId || isPublic || common.isProtectedCipher(cipher),
+        value: <SharedWith
+          cipher={cipher}
+          className="flex items-center"
+          justify="start"
+        />
       },
     ].filter((c) => !c.hide).map((c) => { delete c.hide; return c })
   }, [

@@ -52,13 +52,13 @@ const Name = (props) => {
   }, [originCipher, currentPage])
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full">
       <CipherIcon
         item={originCipher}
         isDeleted={originCipher?.isDeleted}
         type={originCipher.type}
       />
-      <div className="ml-2 flex-1">
+      <div className="ml-2 flex-1" style={{ width: 'calc(100% - 36px)' }}>
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}

@@ -50,6 +50,9 @@ function CardForm(props) {
           <Form.Item
             name={'number'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.card.card_number'), 'CARD_NUMBER')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.card.card_number')}
@@ -76,6 +79,7 @@ function CardForm(props) {
           >
             <Select
               className='w-full'
+              placeholder={t('placeholder.select')}
               options={global.constants.EXP_MONTH_OPTIONS}
               disabled={disabled}
             />
@@ -85,6 +89,9 @@ function CardForm(props) {
           <Form.Item
             name={'expYear'}
             className='mb-2'
+            rules={[
+              global.rules.INVALID(t('cipher.card.expiration_year'), 'EXPIRATION_YEAR')
+            ]}
             label={
               <p className='text-gray'>
                 {t('cipher.card.expiration_year')}
@@ -101,6 +108,9 @@ function CardForm(props) {
       <Form.Item
         name={'code'}
         className='mb-2'
+        rules={[
+          global.rules.INVALID(t('cipher.card.security_code'), 'CVV')
+        ]}
         label={
           <p className='text-gray'>
             {t('cipher.card.security_code')}

@@ -243,7 +243,7 @@ export default {
     {
       key: 'master_password',
       type: CipherType.MasterPassword,
-      icon: require('../assets/images/icons/ciphers/login.svg'),
+      icon: require('../assets/images/logos/icon-logo.svg'),
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
       title: '',
@@ -488,7 +488,6 @@ export default {
     { label: 'Other', value: 'Other' }
   ],
   EXP_MONTH_OPTIONS: [
-    { label: '----', value: '' },
     { label: '01', value: '1' },
     { label: '02', value: '2' },
     { label: '03', value: '3' },

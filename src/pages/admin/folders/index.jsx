@@ -139,6 +139,7 @@ const Folders = () => {
             key: "add",
             label: t("button.new_folder"),
             type: "primary",
+            hide: isEmpty,
             icon: <PlusOutlined />,
             disabled: syncing,
             click: () => handleOpenForm(),

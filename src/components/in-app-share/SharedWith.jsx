@@ -20,6 +20,7 @@ const SharedWith = (props) => {
 
   const {
     className = '',
+    justify = 'center',
     cipher = {},
     size = 30
   } = props;
@@ -66,7 +67,7 @@ const SharedWith = (props) => {
   }, [shareGroups])
 
   return (
-    <div className={`${className} flex items-center justify-center`}>
+    <div className={`${className} flex items-center justify-${justify}`}>
       {sharedWithMembers}
       {
         shareGroups.length > 0 && <Divider

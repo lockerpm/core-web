@@ -259,9 +259,14 @@ function ShareMembers(props) {
       <Form.Item
         className='mb-2'
         label={
-          <p className='font-semibold'>
-            { menuType === menuTypes.CIPHERS ? t('shares.new_share.personal_email_or_group') : t('shares.new_share.personal_email')}
-          </p>
+          <div>
+            <p className='font-semibold'>
+              { menuType === menuTypes.CIPHERS ? t('shares.new_share.personal_email_or_group') : t('shares.new_share.personal_email')}
+            </p>
+            <span className='text-xs'>
+              { menuType === menuTypes.CIPHERS ? t('shares.new_share.search_email_or_group_note') : t('shares.new_share.personal_email_note')}
+            </span>
+          </div>
         }
       >
         <Select

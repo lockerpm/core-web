@@ -8,6 +8,7 @@ import {
 } from '@lockerpm/design';
 
 import {
+  PlusOutlined
 } from "@ant-design/icons";
 
 import { gray } from '@ant-design/colors';
@@ -44,7 +45,7 @@ const NoFolder = (props) => {
             <Button
               className="mt-6"
               type="primary"
-              ghost
+              icon={<PlusOutlined />}
               onClick={onCreate}
             >
               {t('inventory.folders.add')}

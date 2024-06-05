@@ -23,9 +23,9 @@ const CipherName = (props) => {
   }, [allCiphers, cipher])
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full">
       {
-        originCipher ? <Name cipher={cipher}/> : <div className="flex items-center">
+        originCipher ? <Name cipher={cipher}/> : <div className="flex items-center w-full">
           <ImageIcon
             name={'any-icon'}
             width={32}

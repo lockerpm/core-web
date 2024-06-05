@@ -101,7 +101,7 @@ const convertCipherToForm = (cipher = {}) => {
     result = {
       ...result,
       ...(cipher.card || new CardView()),
-      expMonth: cipher?.card?.expMonth || ''
+      expMonth: cipher?.card?.expMonth || null
     }
   } else if (cipher.type === CipherType.Identity) {
     result = {
@@ -295,10 +295,10 @@ const createEncryptedMasterPw = async (masterPw, encKey = null) => {
   const cipher = new CipherView()
   cipher.type = CipherType.Login
   const loginData = new LoginView()
-  loginData.username = Utils.getDomain(window.location.origin);
+  loginData.username = 'web-core.locker.io';
   loginData.password = masterPw
   const uriView = new LoginUriView()
-  uriView.uri = window.location.origin,
+  uriView.uri = 'https://web-core.locker.io',
   loginData.uris = [uriView]
   cipher.login = loginData
   cipher.name = 'Locker Password'
