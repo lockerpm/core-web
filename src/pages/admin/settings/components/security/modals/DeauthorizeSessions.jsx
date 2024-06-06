@@ -38,14 +38,14 @@ const DeauthorizeSessionsModal = (props) => {
       if (device) {
         await deauthorizeDevice();
         if (device.device_identifier === common.deviceId()) {
-          await authServices.redirect_login();
+          await authServices.logout();
         } else {
           onConfirm();
           onClose();
         }
       } else {
         await deauthorizeSessions(keyHash);
-        await authServices.redirect_login();
+        await authServices.logout();
       }
     } else {
       authServices.logout();
