@@ -55,8 +55,25 @@ const VaultDetail = () => {
   }, [originCipher])
 
   const listRouterName = useMemo(() => {
+    if (currentPage?.name === global.keys.FOLDER_DETAIL_ITEM) {
+      return global.keys.FOLDER_DETAIL
+    }
     return pageCipherType?.listRouter || global.keys.VAULT
   }, [pageCipherType])
+
+  const listRouterParams = useMemo(() => {
+    if (currentPage?.name === global.keys.FOLDER_DETAIL_ITEM) {
+      return {
+        folder_id: currentPage?.params.folder_id
+      }
+    }
+    return {}
+  }, [pageCipherType])
+
+  const listRouterQuery = useMemo(() => {
+    return {}
+  }, [pageCipherType])
+  
 
   useEffect(() => {
     if (originCipher && !originCipher.id) {
@@ -82,12 +99,16 @@ const VaultDetail = () => {
     setSendId(sendId);
     setReviewVisible(true);
   }
+  
+  const navigateListPage = () => {
+    global.navigate(listRouterName, listRouterParams, listRouterQuery)
+  }
 
   const deleteItems = (cipherIds) => {
     global.confirm(async () => {
       await cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
-        global.navigate(listRouterName)
+        navigateListPage()
       }).catch((error) => {
         global.pushError(error)
       });
@@ -103,7 +124,7 @@ const VaultDetail = () => {
     global.confirm(async () => {
       await cipherServices.restore({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.restored'));
-        global.navigate(listRouterName)
+        navigateListPage()
       }).catch((error) => {
         global.pushError(error)
       });
@@ -128,7 +149,7 @@ const VaultDetail = () => {
     global.confirm(async () => {
       await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
-        global.navigate(listRouterName)
+        navigateListPage()
       }).catch((error) => {
         global.pushError(error)
       });
@@ -153,7 +174,8 @@ const VaultDetail = () => {
             className={'font-semibold'}
             label={''}
             routerName={listRouterName}
-            routerParams={{ }}
+            routerParams={listRouterParams}
+            routerQuery={listRouterQuery}
             icon={<ArrowLeftOutlined />}
           />
           <CipherIcon

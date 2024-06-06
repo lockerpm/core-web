@@ -53,10 +53,14 @@ async function lock () {
 }
 
 async function logout () {
+  await lock();
   if (global.jsCore) {
+    const userId = await global.jsCore.userService.getUserId()
     await global.jsCore.cryptoService.clearKeys()
     await global.jsCore.userService.clear()
-    await global.jsCore.cipherService.clear()
+    if (userId) {
+      await global.jsCore.cipherService.clear(userId)
+    }
   }
 }
 
