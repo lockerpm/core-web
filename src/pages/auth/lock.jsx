@@ -298,11 +298,11 @@ const Lock = () => {
                                     name="password"
                                     noStyle
                                     rules={[
-                                      global.rules.REQUIRED(t('lock.password')),
+                                      global.rules.REQUIRED(t('lock.master_password')),
                                     ]}
                                   >
                                     <Input.Password
-                                      placeholder={t('lock.password')}
+                                      placeholder={t('lock.master_password')}
                                       size="large"
                                       disabled={callingAPI || logging}
                                       onPressEnter={handleUnlock}

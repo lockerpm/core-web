@@ -5,6 +5,7 @@ import Folders from './folders'
 import Authenticator from './otps'
 import SharedWithMe from './shares/shared-with-me'
 import MySharedItems from './shares/my-shared-items'
+import QuickShareDetail from './shares/quick-share-detail'
 import SecurityTools from './security-tools'
 import PasswordHealth from './security-tools/password-health'
 import BreachScanner from './security-tools/breach-scanner'
@@ -23,6 +24,7 @@ export default {
   Authenticator,
   SharedWithMe,
   MySharedItems,
+  QuickShareDetail,
   SecurityTools,
   PasswordHealth,
   BreachScanner,

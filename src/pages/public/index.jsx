@@ -1,6 +1,6 @@
 // Public pages
-import QuickShareDetail from './quick-share/detail'
+import ShareDetail from './shares/detail'
 
 export default {
-  QuickShareDetail
+  ShareDetail
 }

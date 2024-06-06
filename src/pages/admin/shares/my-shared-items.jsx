@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -43,7 +43,6 @@ const MySharedItems = (props) => {
 
   const { t } = useTranslation();
   const location = useLocation();
-  const dispatch = useDispatch();
   const menuTypes = global.constants.MENU_TYPES
 
   const currentPage = common.getRouterByLocation(location);
@@ -81,9 +80,7 @@ const MySharedItems = (props) => {
         .filter((c) => c.id)
         .filter((c) => common.isOwner(c))
     }
-    return sends.map((s) => ({
-      ...s,
-    }))
+    return sends
   }, [allCiphers, allCollections, invitations, sends, menuType, syncing])
 
   const isEmpty = useMemo(() => {

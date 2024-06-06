@@ -55,7 +55,7 @@ const PageHeader = (props) => {
           height: (isMobile || description) ? 'auto' : `${60}px`,
         }}
       >
-        <Col span={(isRight || actions.length > 0) ? 16 : 12} className="page-header__left flex items-center">
+        <Col span={(isRight || actions.length > 0) ? 16 : 24} className="page-header__left flex items-center">
           <Logo />
           <div
             className="text-limited"
@@ -84,7 +84,7 @@ const PageHeader = (props) => {
             }
           </div>
         </Col>
-        <Col span={(isRight || actions.length > 0) ? 8 : 12} className="page-header__right" align="right">
+        <Col span={(isRight || actions.length > 0) ? 8 : 0} className="page-header__right" align="right">
           <Row gutter={[8, 8]} justify="end">
             <Actions actions={actions}/>
             <Right />

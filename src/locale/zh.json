@@ -557,7 +557,7 @@
   "lock": {
     "title": "登入",
     "description": "輸入您的密碼以解鎖",
-    "password": "密碼",
+    "master_password": "密碼",
     "master_password_hint": "取得密碼提示",
     "unlock": "解鎖",
     "connect_key": "連接到您的安全金鑰",

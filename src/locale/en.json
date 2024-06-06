@@ -557,7 +557,7 @@
   "lock": {
     "title": "Sign in to your account",
     "description": "Enter your Password to unlock",
-    "password": "Password",
+    "master_password": "Password",
     "master_password_hint": "Get Password hint",
     "unlock": "Unlock",
     "connect_key": "Connect to your security key",

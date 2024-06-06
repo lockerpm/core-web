@@ -48,7 +48,7 @@ const DeauthorizeSessionsModal = (props) => {
         await authServices.logout();
       }
     } else {
-      authServices.logout();
+      global.pushError({ message: t('validation.invalid', { name: t('lock.master_password') }) })
     }
     setCallingAPI(false);
   }

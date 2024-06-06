@@ -33,7 +33,7 @@ const Name = (props) => {
 
   const originCipher = useMemo(() => {
     if (send) {
-      return allCiphers.find((d) => d.id === send?.cipherId) || send.cipher
+      return send.cipher
     }
     return allCiphers.find((d) => d.id === cipher.id) || cipher
   }, [allCiphers, cipher])
@@ -56,6 +56,19 @@ const Name = (props) => {
     return cipher.name || originCipher.name || t('shares.encrypted_content')
   }, [cipher, originCipher, locale])
 
+  const routerName = useMemo(() => {
+    if (currentPage?.name === global.keys.FOLDER_DETAIL) {
+      return global.keys.FOLDER_DETAIL_ITEM
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS) {
+      if (currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+        return global.keys.QUICK_SHARE_DETAIL
+      }
+      return global.keys.VAULT_DETAIL
+    }
+    return cipherType?.detailRouter || global.keys.VAULT_DETAIL
+  }, [currentPage, cipherType])
+
   const routerParams = useMemo(() => {
     if (currentPage?.name === global.keys.FOLDER_DETAIL) {
       return { 
@@ -63,17 +76,20 @@ const Name = (props) => {
         folder_id: currentPage.params?.folder_id
       }
     }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS) {
+      if (currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+        return {
+          id: send.id
+        }
+      }
+      return { 
+        cipher_id: cipher.id || originCipher.id,
+      }
+    }
     return { 
       cipher_id: cipher.id || originCipher.id,
     }
-  }, [cipher, originCipher, currentPage])
-
-  const routerName = useMemo(() => {
-    if (currentPage?.name === global.keys.FOLDER_DETAIL) {
-      return global.keys.FOLDER_ITEM_DETAIL
-    }
-    return cipherType?.detailRouter || global.keys.VAULT_DETAIL
-  }, [currentPage, cipherType])
+  }, [cipher, originCipher, currentPage, send])
 
   return (
     <div className="flex items-center w-full">

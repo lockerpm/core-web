@@ -557,7 +557,7 @@
   "lock": {
     "title": "Đăng nhập vào tài khoản của bạn",
     "description": "Nhập mật khẩu",
-    "password": "Mật khẩu",
+    "master_password": "Mật khẩu",
     "master_password_hint": "Nhận gợi ý mật khẩu",
     "unlock": "Mở khóa",
     "connect_key": "Kết nối với khóa bảo mật của bạn",

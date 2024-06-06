@@ -101,11 +101,6 @@ export default {
       isChildren: true
     },
     {
-      key: keys.TRASH,
-      icon: <DeleteOutlined />,
-      label: 'sidebar.trash',
-    },
-    {
       key: keys.SECURITY_TOOLS,
       icon: <SecurityScanOutlined />,
       label: 'sidebar.security_tools',
@@ -139,6 +134,11 @@ export default {
       parent: keys.SETTINGS,
       icon: <BellOutlined />,
       label: 'sidebar.notifications',
+    },
+    {
+      key: keys.TRASH,
+      icon: <DeleteOutlined />,
+      label: 'sidebar.trash',
     },
 
     // Enterprise

@@ -67,11 +67,7 @@ const getAllFolders = async () => {
 
 const getSends = async () => {
   const sends = await global.jsCore.sendService.getAllDecrypted() || []
-  const allCiphers = global.store.getState().cipher.allCiphers
-  global.store.dispatch(storeActions.updateSends(sends.map((s) => {
-    const cipher = allCiphers.find(c => c.id === s.cipherId)
-    return { ...s, name: cipher?.name, cipher: cipher }
-  })))
+  global.store.dispatch(storeActions.updateSends(sends))
 }
 
 const getMyShares = async () => {

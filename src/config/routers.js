@@ -54,9 +54,9 @@ export default {
 
   PUBLIC_ROUTERS: [
     {
-      name: keys.QUICK_SHARE_DETAIL,
+      name: keys.SHARE_DETAIL,
       path: '/quick-shares/:id',
-      element: 'QuickShareDetail',
+      element: 'ShareDetail',
       not_auth: true
     }
   ],
@@ -140,13 +140,13 @@ export default {
     },
     {
       name: keys.FOLDER_DETAIL,
-      path: '/folders/:folder_id/items',
+      path: '/folders/:folder_id',
       element: 'Vault',
       parent: keys.FOLDERS,
     },
     {
-      name: keys.FOLDER_ITEM_DETAIL,
-      path: '/folders/:folder_id/items/:cipher_id',
+      name: keys.FOLDER_DETAIL_ITEM,
+      path: '/folders/:folder_id/:cipher_id',
       element: 'VaultDetail',
       parent: keys.FOLDER_DETAIL,
     },
@@ -164,6 +164,11 @@ export default {
       name: keys.MY_SHARED_ITEMS,
       path: '/shares/my-shared-items',
       element: 'MySharedItems',
+    },
+    {
+      name: keys.QUICK_SHARE_DETAIL,
+      path: '/shares/quick-shares/:id',
+      element: 'QuickShareDetail',
     },
     {
       name: keys.TRASH,
@@ -212,7 +217,7 @@ export default {
     },
     {
       name: keys.EMERGENCY_ACCESS_VIEW,
-      path: '/settings/emergency-access/:contact_id',
+      path: '/settings/security/emergency-access/:contact_id',
       element: 'EmergencyAccessView',
       label: 'emergency_access_view.title',
       parent: keys.SETTINGS_SECURITY,

@@ -16,8 +16,6 @@ import { orange } from '@ant-design/colors';
 
 import formsComponents from "../forms";
 
-import authServices from "../../services/auth";
-
 import global from "../../config/global";
 import common from "../../utils/common";
 
@@ -71,7 +69,7 @@ const PasswordConfirmModal = (props) => {
       if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
         onConfirm(password);
       } else {
-        authServices.logout();
+        global.pushError({ message: t('validation.invalid', { name: t('lock.master_password') }) })
       }
       setChecking(false);
     })

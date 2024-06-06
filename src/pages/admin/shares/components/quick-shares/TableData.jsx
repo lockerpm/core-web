@@ -18,7 +18,7 @@ import common from "../../../../../utils/common";
 const TableData = (props) => {
   const { TextCopy } = itemsComponents;
   const { Actions, SharedWith } = quickShareComponents;
-  const CipherName = cipherComponents.Name;
+  const { Name } = cipherComponents;
   const { t } = useTranslation();
   const {
     loading = false,
@@ -44,7 +44,7 @@ const TableData = (props) => {
         dataIndex: 'title',
         key: 'name',
         align: 'left',
-        render: (_, record) => <CipherName
+        render: (_, record) => <Name
           send={record}
         />
       },

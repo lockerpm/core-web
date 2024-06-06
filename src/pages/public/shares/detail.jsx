@@ -20,7 +20,7 @@ import global from "../../../config/global";
 
 import '../css/index.scss';
 
-const QuickShareDetail = () => {
+const ShareDetail = () => {
   const { Logo } = authComponents;
   const {
     Right,
@@ -140,4 +140,4 @@ const QuickShareDetail = () => {
   );
 }
 
-export default QuickShareDetail;
+export default ShareDetail;

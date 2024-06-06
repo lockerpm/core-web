@@ -47,9 +47,12 @@ function AdminLayout(props) {
   const [respCollapsed, setRespCollapsed] = useState(false)
   const [showBottom, setShowBottom] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
-
-  const accessToken = common.getAccessToken()
-  const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`)
+  
+  const accessToken = common.getAccessToken();
+  const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`, {
+    shouldReconnect: () => true,
+    reconnectInterval: 5000
+  })
 
   useEffect(() => {
     if (lastMessage) {
