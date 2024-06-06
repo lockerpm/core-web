@@ -40,7 +40,7 @@ function CustomFields(props) {
     form.setFieldValue('fields', customFields.map((f, i) => ({
       ...f,
       type: i === index ? type : f.type,
-      name: i === index ? '' : f.name,
+      name: i === index ? t(`cipher.custom_fields.${field.key}`).toString() : f.name,
       value: i === index ? field?.defaultValue || '' : f.value,
     })))
   }

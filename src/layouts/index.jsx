@@ -104,9 +104,9 @@ function AdminLayout(props) {
   })
 
   const checkVaultTimeOut = async () => {
-    const timeoutAction = userInfo.timeout_action;
-    if (isLocked && currentPage.type === 'admin') {
-      if (timeoutAction === global.constants.TIMEOUT_ACTION.LOCK) {
+    const timeoutAction = userInfo?.timeout_action;
+    if (isLocked) {
+      if (timeoutAction == global.constants.TIMEOUT_ACTION.LOCK) {
         await authServices.redirect_login()
       } else {
         await authServices.logout()

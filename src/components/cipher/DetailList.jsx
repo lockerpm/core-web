@@ -236,6 +236,17 @@ const DetailList = (props) => {
           />
         },
         {
+          key: 'pin',
+          name: t('cipher.crypto_backup.pin'),
+          value: <TextCopy
+            value={cipher.cryptoWallet?.pin}
+            showIcon={true}
+            show={showText}
+            defaultShow={false}
+            align="between"
+          />
+        },
+        {
           key: 'wallet_address',
           name: t('cipher.crypto_backup.wallet_address'),
           value: <TextCopy
