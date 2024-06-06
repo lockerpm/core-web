@@ -47,9 +47,8 @@ async function lock () {
       global.jsCore.cryptoService.clearKeyPair(true),
       global.jsCore.cryptoService.clearEncKey(true)
     ])
-  
-    global.jsCore.cipherService.clearCache()
-    global.jsCore.searchService.clearIndex()
+    await global.jsCore.cipherService.clear()
+    await global.jsCore.searchService.clearIndex()
   }
 }
 
@@ -57,6 +56,7 @@ async function logout () {
   if (global.jsCore) {
     await global.jsCore.cryptoService.clearKeys()
     await global.jsCore.userService.clear()
+    await global.jsCore.cipherService.clear()
   }
 }
 

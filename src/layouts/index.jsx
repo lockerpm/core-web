@@ -89,11 +89,14 @@ function AdminLayout(props) {
 
   useEffect(() => {
     convertSize();
-    setInterval(async () => {
-      const isLocked = await global.jsCore?.vaultTimeoutService.isLocked();
-      setIsLocked(isLocked)
-    }, [5 * 1000])
-  }, [])
+    if (global.jsCore?.vaultTimeoutService) {
+      global.jsCore.vaultTimeoutService.startCheck();
+      setInterval(async () => {
+        const isLocked = await global.jsCore?.vaultTimeoutService.isLocked();
+        setIsLocked(isLocked)
+      }, [5 * 1000])
+    }
+  }, [global.jsCore])
 
   useEffect(() => {
     checkVaultTimeOut();
