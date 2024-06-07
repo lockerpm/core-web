@@ -151,11 +151,12 @@ const getToken = (email) => {
 
 const getErrorMessage = (error) => {
   const errorData = error?.response?.data || error?.response || error;
-  if (errorData?.details && !isEmpty(errorData?.details) && !['7009'].includes(toString(errorData?.code))) {
+  const message = errorData?.message || error?.message || error.toString();
+  if (errorData?.details && !isEmpty(errorData?.details)) {
     const errorKeys = Object.keys(errorData.details)
-    return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]]
+    return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]] || message;
   }
-  return errorData?.message || error?.message || error.toString();
+  return message
 }
 
 const getUserRole = (role) => {
