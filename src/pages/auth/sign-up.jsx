@@ -152,6 +152,16 @@ const SingUp = () => {
               </Form.Item>
               <Form.Item
                 name="password_hint"
+                rules={[
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (value && getFieldValue('password') === value) {
+                        return Promise.reject(new Error(t('validation.invalid', { name: t('auth_pages.password_hint') })));
+                      }
+                      return Promise.resolve()
+                    },
+                  }),
+                ]}
               >
                 <Input.Password
                   placeholder={t('auth_pages.password_hint')}
