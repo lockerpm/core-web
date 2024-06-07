@@ -150,13 +150,10 @@ const getToken = (email) => {
 }
 
 const getErrorMessage = (error) => {
-  const errorData = error?.response?.data || null;
-  if (errorData?.details) {
+  const errorData = error?.response?.data || error?.response || error;
+  if (errorData?.details && !isEmpty(errorData?.details) && !['7009'].includes(toString(errorData?.code))) {
     const errorKeys = Object.keys(errorData.details)
-    if (errorKeys.length > 0) {
-      return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]]
-    }
-    return errorData.message
+    return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]]
   }
   return errorData?.message || error?.message || error.toString();
 }
