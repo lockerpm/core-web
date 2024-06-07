@@ -84,7 +84,7 @@ function ChangePasswordForm(props) {
             rules={[
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (value && getFieldValue('password') === value) {
+                  if (value && getFieldValue('new_password') === value) {
                     return Promise.reject(new Error(t('validation.invalid', { name: t('auth_pages.password_hint') })));
                   }
                   return Promise.resolve()
