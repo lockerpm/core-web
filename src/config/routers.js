@@ -203,7 +203,7 @@ export default {
     },
     {
       name: keys.QUICK_SHARE_DETAIL,
-      path: '/shares/quick-shares/:id',
+      path: '/shares/quick-shares/:send_id',
       element: 'QuickShareDetail',
       parent: keys.MY_SHARED_ITEMS,
     },

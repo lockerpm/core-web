@@ -66,14 +66,14 @@ const Name = (props) => {
     if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER) {
       return global.keys.SHARED_WITH_ME_FOLDER_ITEM
     }
-    if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type !== global.constants.MENU_TYPES.QUICK_SHARES) {
-      return global.keys.MY_SHARED_ITEMS_ITEM
-    }
     if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER) {
       return global.keys.MY_SHARED_ITEMS_FOLDER_ITEM
     }
-    if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
-      return global.keys.QUICK_SHARE_DETAIL
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS) {
+      if (currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+        return global.keys.QUICK_SHARE_DETAIL
+      }
+      return global.keys.MY_SHARED_ITEMS_ITEM
     }
     if (currentPage?.name === global.keys.PASSWORD_HEALTH) {
       if (currentPage?.query?.active_key === 'reused_passwords') {
@@ -100,7 +100,7 @@ const Name = (props) => {
     }
     if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
       return {
-        id: send.id
+        send_id: send.id
       }
     }
     return { 

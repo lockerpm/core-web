@@ -83,41 +83,32 @@ const getRouterByLocation = location => {
 }
 
 const getRoutersByLocation = location => {
-  const route = getRouterByLocation(location)
-  if (route) {
-    let menu = common.allMenus().find(m => {
-      if (m.children) {
-        return !!m.children.find(c => c.key === route?.name)
-      }
-      if (route.parent) {
-        return m.key === route.parent
-      }
-      return m.key === route.name
-    })
-    let parent = null
-    if (menu?.parent) {
-      parent = common.allMenus().find(m => m.key === menu.parent)
+  const allRouters = common.allRouters();
+  const allMenus = common.allMenus();
+
+  const getParents = (router) => {
+    const pRouter = allRouters.find((r) => r.name === router.parent)
+    if (pRouter) {
+      return [...getParents(pRouter), router]
     }
-    const routers = []
-    if (parent) {
-      routers.push(parent)
-    }
+    return [router]
+  }
+  const router = getRouterByLocation(location)
+  if (router) {
+    const routers = getParents(router)
+    const menu = allMenus.find((m) => m.key === routers[0].name);
     if (menu) {
-      if (menu.key === route.name) {
-        routers.push({ ...menu, ...route })
-      } else {
-        routers.push(menu)
+      const menuParent = allMenus.find((m) => m.key === menu.parent)
+      if (menuParent) {
+        return [menuParent, menu, ...routers.slice(1, routers.length)]
       }
-      if (route.parent) {
-        routers.push(route)
-      }
-    } else {
-      routers.push(route)
+      return [menu, ...routers.slice(1, routers.length)]
     }
     return routers
   }
   return []
 }
+
 export default {
   convertQueryToString,
   convertStringToQuery,

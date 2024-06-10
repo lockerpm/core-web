@@ -31,7 +31,7 @@ const QuickShareDetail = () => {
   const sends = useSelector((state) => state.share.sends);
 
   const send = useMemo(() => {
-    return sends.find((c) => c.id === currentPage.params?.id) || {}
+    return sends.find((c) => c.id === currentPage.params?.send_id) || {}
   }, [currentPage, sends])
 
   const sendCipher = useMemo(() => {

@@ -28,7 +28,7 @@ import enterpriseMemberServices from "../../../services/enterprise-member";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const Member = (props) => {
+const Member = () => {
   const { PasswordStrength, TextCopy } = itemsComponents;
   const { PageHeader } = commonComponents;
   const { Actions, Role } = memberComponents;
@@ -133,47 +133,51 @@ const Member = (props) => {
   }
 
   return (
-    <div className="member-details layout-content">
-      <PageHeader
-        title={member.full_name}
-        subtitle={member.email}
-        actions={[]}
-        Logo={() => <div className="mr-4">
-          <Avatar
-            size={48}
-            src={member.avatar}
+    <>
+      {
+        data.length > 0 && <div className="member-details layout-content">
+          <PageHeader
+            title={member.full_name}
+            subtitle={member.email}
+            actions={[]}
+            Logo={() => <div className="mr-4">
+              <Avatar
+                size={48}
+                src={member.avatar}
+              />
+            </div>}
+            Right={() => <div className="flex items-center">
+              {Status}
+              <Actions
+                size="medium"
+                item={member}
+                enterpriseId={enterpriseId}
+                onDelete={() => deleteItem()}
+                onReload={() => fetchData()}
+              />
+            </div>}
           />
-        </div>}
-        Right={() => <div className="flex items-center">
-          {Status}
-          <Actions
-            size="medium"
-            item={member}
-            enterpriseId={enterpriseId}
-            onDelete={() => deleteItem()}
-            onReload={() => fetchData()}
+          <List
+            itemLayout="horizontal"
+            dataSource={data}
+            loading={loading}
+            renderItem={(item, index) => (
+              <List.Item>
+                <Row className="w-full" align={'middle'}>
+                  <Col lg={8} md={8} sm={24} xs={24}>
+                    <p className="font-semibold">{item.name}</p>
+                  </Col>
+                  <Col lg={16} md={16} sm={24} xs={24}>
+                    {item.value}
+                  </Col>
+                </Row>
+              </List.Item>
+            )}
           />
-        </div>}
-      />
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        loading={loading}
-        renderItem={(item, index) => (
-          <List.Item>
-            <Row className="w-full" align={'middle'}>
-              <Col lg={8} md={8} sm={24} xs={24}>
-                <p className="font-semibold">{item.name}</p>
-              </Col>
-              <Col lg={16} md={16} sm={24} xs={24}>
-                {item.value}
-              </Col>
-            </Row>
-          </List.Item>
-        )}
-      />
-      <Divider className="my-1" />
-    </div>
+          <Divider className="my-1" />
+        </div>
+      }
+    </>
   );
 }
 

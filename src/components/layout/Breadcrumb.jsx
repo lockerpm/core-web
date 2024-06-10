@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
@@ -19,88 +19,79 @@ function LayoutBreadcrumb() {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const [menus, setMenus] = useState([]);
   const locale = useSelector((state) => state.system.locale);
   const currentPage = useSelector((state) => state.system.currentPage);
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const allFolders = useSelector((state) => state.folder.allFolders);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const allFolders = useSelector((state) => state.folder.allFolders);
+  const allCollections = useSelector((state) => state.collection.allCollections);
+  const sends = useSelector((state) => state.share.sends);
   const currentEnterprise = useSelector((state) => state.enterprise.currentEnterprise);
 
-  useEffect(() => {
-    if (location) {
-      const brRouters = common.getRoutersByLocation(location).map((r) => ({ ...r, label: t(r.label) }));
-      const lastRouter = brRouters.slice(-1)[0];
-      if (lastRouter) {
-        let lastRouters = [lastRouter]
-        if (lastRouter.children) {
-          const children = lastRouter.children.find((m) => m.key === currentPage.name)
-          lastRouters = [
-            {
-              ...lastRouter.children[0],
-              label: t(lastRouter.label)
-            },
-            {
-              ...children,
-              label: t(children.label)
-            }
-          ]
-        }
-        if (lastRouter.parent && !common.isEmpty(lastRouter.params)) {
-          let label = t(lastRouter.label) || t('common.detail')
-          if (currentEnterprise) {
-            setMenus([
-              {
-                router: global.keys.ENTERPRISE_DASHBOARD,
-                label: currentEnterprise.name,
-              },
-              ...brRouters.filter((m) => m.key !== lastRouter.key),
-              {
-                ...lastRouter,
-                label
-              }
-            ]);
-          } else {
-            if (lastRouter.parent == global.keys.FOLDERS) {
-              label = allFolders.find((f) => f.id == lastRouter.params.folder_id)?.name || t('common.detail')
-            } else if (lastRouter.params.cipher_id) {
-              label = allCiphers.find((f) => f.id == lastRouter.params.cipher_id)?.name || t('common.detail')
-            }
-            setMenus([
-              ...brRouters.filter((m) => m.key !== lastRouter.key),
-              {
-                ...lastRouter,
-                label
-              }
-            ]);
-          }
-        } else {
-          setMenus([
-            ...brRouters.filter((m) => m.key !== lastRouter.key),
-            ...lastRouters
-          ]);
-        }
-      } else {
-        setMenus(brRouters);
+  const originCipher = useMemo(() => {
+    return allCiphers.find((d) => d.id === currentPage?.params?.cipher_id)
+  }, [allCiphers, currentPage])
+
+  const originFolder = useMemo(() => {
+    return [...allFolders, ...allCollections].find((c) => c.id === currentPage?.params?.folder_id)
+  }, [allFolders, allCollections, currentPage])
+
+  const originSend = useMemo(() => {
+    return sends.find((d) => d.id === currentPage?.params?.send_id)
+  }, [sends, currentPage])
+
+  const getMenuLabel = (menu) => {
+    if (!menu.label) {
+      const lastParam = menu.path?.split('/:').slice(-1)[0]
+      if (lastParam?.includes('cipher_id')) {
+        return originCipher?.name || t('common.detail')
+      }
+      if (lastParam?.includes('folder_id')) {
+        return originFolder?.name || t('common.detail')
+      }
+      if (lastParam?.includes('send_id')) {
+        return originSend?.cipher?.name || t('common.detail')
+      }
+      if (lastParam?.includes('member_id')) {
+        return t('common.detail')
       }
     }
+    return t(menu.label)
+  }
+
+  const brMenus = useMemo(() => {
+    const menus = common.getRoutersByLocation(location).map((menu) => ({
+      ...menu,
+      label: getMenuLabel(menu)
+    }))
+    if (currentEnterprise) {
+      return [
+        {
+          name: global.keys.ENTERPRISE_DASHBOARD,
+          label: currentEnterprise.name
+        },
+        ...menus
+      ]
+    }
+    return menus
   }, [
-    location,
-    currentPage,
-    allFolders,
-    allCiphers,
     locale,
-    currentEnterprise
+    currentPage,
+    currentEnterprise,
+    sends,
+    allCiphers,
+    allFolders,
+    allCollections,
   ])
 
   const items = useMemo(() => {
-    const breadcrumbRouters = menus.map((m, index) => ({
+    const breadcrumbRouters = brMenus.map((m, index) => ({
       key: index,
-      title: index === menus.length - 1 ? <span>
+      title: index === brMenus.length - 1 ? <span>
         {m.label}
       </span> : <RouterLink
         label={m.label}
-        routerName={m.router || m.key}
+        routerName={m.name || m.key}
         routerParams={currentPage.params}
         routerQuery={currentPage.query}
         maxWidth={120}
@@ -119,7 +110,7 @@ function LayoutBreadcrumb() {
     }
     return breadcrumbRouters
   }, [
-    menus,
+    brMenus,
     currentPage,
     userInfo
   ])
