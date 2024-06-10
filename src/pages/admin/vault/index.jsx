@@ -6,7 +6,8 @@ import { useLocation } from 'react-router-dom';
 import { } from '@lockerpm/design';
 
 import {
-  PlusOutlined
+  PlusOutlined,
+  ArrowLeftOutlined
 } from "@ant-design/icons";
 
 import itemsComponents from "../../../components/items";
@@ -23,8 +24,8 @@ import cipherServices from "../../../services/cipher";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const Vault = (props) => {
-  const { Pagination, MultipleSelect } = itemsComponents;
+const Vault = () => {
+  const { Pagination, MultipleSelect, RouterLink, ImageIcon } = itemsComponents;
   const { NoCipher } = cipherComponents;
   const { PageHeader } = commonComponents;
   const { Filter, TableData, ListData, FormData, MoveFolder } = vaultComponents;
@@ -38,6 +39,8 @@ const Vault = (props) => {
   const syncing = useSelector((state) => state.sync.syncing);
   const isMobile = useSelector((state) => state.system.isMobile);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const allFolders = useSelector((state) => state.folder.allFolders);
+  const allCollections = useSelector((state) => state.collection.allCollections);
 
   const [loading, setLoading] = useState(true);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -60,6 +63,14 @@ const Vault = (props) => {
     searchText: currentPage?.query?.searchText,
   });
 
+  const folderId = useMemo(() => {
+    return currentPage?.params?.folder_id || null
+  }, [currentPage])
+
+  const originFolder = useMemo(() => {
+    return [...allFolders, ...allCollections].find((c) => c.id === folderId)
+  }, [allFolders, allCollections, folderId])
+
   const cipherType = useMemo(() => {
     const type = common.cipherTypeInfo('listRouter', currentPage.name)
     return {
@@ -74,19 +85,42 @@ const Vault = (props) => {
       f.push((c) => c.type === cipherType.type)
     } else {
       f.push((c) => c.type !== CipherType.TOTP)
-      if (currentPage.name === global.keys.FOLDER_DETAIL) {
-        const folderId = currentPage.params.folder_id
+      if (folderId) {
         f.push((c) => (c.folderId === folderId) || (c.collectionIds && c.collectionIds[0] === folderId))
       }
     }
     return f
-  }, [cipherType, currentPage])
+  }, [cipherType, folderId])
 
   const isEmpty = useMemo(() => {
     return !allCiphers.find(
       (c) => c.isDeleted === cipherType.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
     )
   }, [allCiphers, JSON.stringify(cipherType)])
+
+  const listRouterName = useMemo(() => {
+    if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER) {
+      return global.keys.SHARED_WITH_ME
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER) {
+      return global.keys.MY_SHARED_ITEMS
+    }
+    return global.keys.FOLDERS
+  }, [currentPage])
+
+  const listRouterParams = useMemo(() => {
+    return {}
+  }, [])
+
+  const listRouterQuery = useMemo(() => {
+    if ([
+      global.keys.SHARED_WITH_ME_FOLDER,
+      global.keys.MY_SHARED_ITEMS_FOLDER
+    ].includes(currentPage?.name)) {
+      return { menu_type: global.constants.MENU_TYPES.FOLDERS }
+    }
+    return {}
+  }, [currentPage])
 
   useEffect(() => {
     setSelectedRowKeys([]);
@@ -264,7 +298,7 @@ const Vault = (props) => {
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
       <PageHeader
-        title={t(cipherType.title)}
+        title={folderId ? originFolder?.name : t(cipherType.title)}
         total={filteredData.total}
         actions={[
           {
@@ -280,6 +314,22 @@ const Vault = (props) => {
             }
           }
         ]}
+        Logo={() => folderId ? <div className="flex items-center">
+          <RouterLink
+            className={'font-semibold'}
+            label={''}
+            routerName={listRouterName}
+            routerParams={listRouterParams}
+            routerQuery={listRouterQuery}
+            icon={<ArrowLeftOutlined />}
+          />
+          <ImageIcon
+            className="mx-4"
+            name={originFolder?.isCollection ? 'folder-share' : 'folder'}
+            width={48}
+            height={48}
+          />
+        </div> : <></>}
       />
       {
         !isEmpty && <>
@@ -361,7 +411,7 @@ const Vault = (props) => {
         item={selectedItem}
         cipherType={cipherType}
         cloneMode={cloneMode}
-        folderId={currentPage.params.folder_id}
+        folderId={folderId}
         isTutorial={isTutorial}
         setCloneMode={setCloneMode}
         onClose={() => {

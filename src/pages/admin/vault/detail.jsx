@@ -58,21 +58,54 @@ const VaultDetail = () => {
     if (currentPage?.name === global.keys.FOLDER_DETAIL_ITEM) {
       return global.keys.FOLDER_DETAIL
     }
+    if (currentPage?.name === global.keys.SHARED_WITH_ME_ITEM) {
+      return global.keys.SHARED_WITH_ME
+    }
+    if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER_ITEM) {
+      return global.keys.SHARED_WITH_ME_FOLDER
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS_ITEM) {
+      return global.keys.MY_SHARED_ITEMS
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER_ITEM) {
+      return global.keys.MY_SHARED_ITEMS_FOLDER
+    }
+    if ([
+      global.keys.PASSWORD_HEALTH_WEAK_ITEM,
+      global.keys.PASSWORD_HEALTH_REUSED_ITEM,
+      global.keys.PASSWORD_HEALTH_EXPOSED_ITEM
+    ].includes(currentPage?.name)) {
+      return global.keys.PASSWORD_HEALTH
+    }
     return pageCipherType?.listRouter || global.keys.VAULT
   }, [pageCipherType])
 
   const listRouterParams = useMemo(() => {
-    if (currentPage?.name === global.keys.FOLDER_DETAIL_ITEM) {
+    if ([
+      global.keys.FOLDER_DETAIL_ITEM,
+      global.keys.SHARED_WITH_ME_FOLDER_ITEM,
+      global.keys.MY_SHARED_ITEMS_FOLDER_ITEM,
+    ].includes(currentPage?.name)) {
       return {
         folder_id: currentPage?.params.folder_id
       }
     }
     return {}
-  }, [pageCipherType])
+  }, [currentPage])
 
   const listRouterQuery = useMemo(() => {
+    if (currentPage?.name === global.keys.PASSWORD_HEALTH_REUSED_ITEM) {
+      return {
+        active_key: 'reused_passwords'
+      }
+    }
+    if (currentPage?.name === global.keys.PASSWORD_HEALTH_EXPOSED_ITEM) {
+      return {
+        active_key: 'exposed_passwords'
+      }
+    }
     return {}
-  }, [pageCipherType])
+  }, [currentPage])
   
 
   useEffect(() => {

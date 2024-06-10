@@ -161,14 +161,51 @@ export default {
       element: 'SharedWithMe',
     },
     {
+      name: keys.SHARED_WITH_ME_ITEM,
+      path: '/shares/shared-with-me/items/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.SHARED_WITH_ME,
+    },
+    {
+      name: keys.SHARED_WITH_ME_FOLDER,
+      path: '/shares/shared-with-me/folders/:folder_id',
+      element: 'Vault',
+      parent: keys.SHARED_WITH_ME,
+    },
+    {
+      name: keys.SHARED_WITH_ME_FOLDER_ITEM,
+      path: '/shares/shared-with-me/folders/:folder_id/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.SHARED_WITH_ME_FOLDER,
+    },
+    {
       name: keys.MY_SHARED_ITEMS,
       path: '/shares/my-shared-items',
       element: 'MySharedItems',
     },
     {
+      name: keys.MY_SHARED_ITEMS_ITEM,
+      path: '/shares/my-shared-items/items/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.MY_SHARED_ITEMS,
+    },
+    {
+      name: keys.MY_SHARED_ITEMS_FOLDER,
+      path: '/shares/my-shared-items/folders/:folder_id',
+      element: 'Vault',
+      parent: keys.MY_SHARED_ITEMS,
+    },
+    {
+      name: keys.MY_SHARED_ITEMS_FOLDER_ITEM,
+      path: '/shares/my-shared-items/folders/:folder_id/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.MY_SHARED_ITEMS_FOLDER,
+    },
+    {
       name: keys.QUICK_SHARE_DETAIL,
       path: '/shares/quick-shares/:id',
       element: 'QuickShareDetail',
+      parent: keys.MY_SHARED_ITEMS,
     },
     {
       name: keys.TRASH,
@@ -177,9 +214,9 @@ export default {
     },
     {
       name: keys.TRASH_DETAIL,
-      parent: keys.TRASH,
       path: '/trash/:cipher_id',
       element: 'VaultDetail',
+      parent: keys.TRASH,
     },
     {
       name: keys.SECURITY_TOOLS,
@@ -194,11 +231,29 @@ export default {
       label: 'security_tools.password_health.title',
     },
     {
+      name: keys.PASSWORD_HEALTH_WEAK_ITEM,
+      path: '/security-tools/password-health/weak/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.PASSWORD_HEALTH,
+    },
+    {
+      name: keys.PASSWORD_HEALTH_REUSED_ITEM,
+      path: '/security-tools/password-health/reused/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.PASSWORD_HEALTH,
+    },
+    {
+      name: keys.PASSWORD_HEALTH_EXPOSED_ITEM,
+      path: '/security-tools/password-health/exposed/:cipher_id',
+      element: 'VaultDetail',
+      parent: keys.PASSWORD_HEALTH,
+    },
+    {
       name: keys.BREACH_SCANNER,
-      parent: keys.SECURITY_TOOLS,
       path: '/security-tools/breach-scanner',
       element: 'BreachScanner',
       label: 'security_tools.data_breach_scanner.title',
+      parent: keys.SECURITY_TOOLS,
     },
     {
       name: keys.SETTINGS_ACCOUNT,

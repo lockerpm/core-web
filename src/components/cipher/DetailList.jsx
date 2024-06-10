@@ -19,8 +19,7 @@ import commonComponents from "../common";
 import cipherFormItemComponents from "./form-item";
 import inAppShareComponents from "../in-app-share";
 
-import { CipherType } from "../../core-js/src/enums";
-import { FieldType } from "../../core-js/src/enums";
+import { CipherType, FieldType } from "../../core-js/src/enums";
 
 import common from "../../utils/common";
 import global from "../../config/global";

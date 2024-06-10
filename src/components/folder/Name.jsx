@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
 import {
 } from '@lockerpm/design';
@@ -11,6 +12,7 @@ import {
 import itemsComponents from "../items";
 
 import global from "../../config/global";
+import common from "../../utils/common";
 
 const Name = (props) => {
   const {
@@ -20,7 +22,11 @@ const Name = (props) => {
   } = itemsComponents;
 
   const { t } = useTranslation()
+  const location = useLocation();
+
   const { item = {}, showItems = true } = props;
+  const currentPage = common.getRouterByLocation(location);
+
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
   const allFolders = useSelector((state) => state.folder.allFolders)
   const allCollections = useSelector((state) => state.collection.allCollections)
@@ -37,6 +43,21 @@ const Name = (props) => {
     return allCiphers.filter((c) => c.collectionIds && c.collectionIds[0] === item?.id)
   }, [item, allCiphers])
 
+  const routerName = useMemo(() => {
+    if (currentPage?.name == global.keys.SHARED_WITH_ME) {
+      return global.keys.SHARED_WITH_ME_FOLDER
+    }
+    if (currentPage?.name == global.keys.MY_SHARED_ITEMS) {
+      return global.keys.MY_SHARED_ITEMS_FOLDER
+    }
+    return global.keys.FOLDER_DETAIL
+  }, [currentPage])
+
+  const routerParams = useMemo(() => {
+    return { folder_id: originFolder.id }
+  }, [originFolder])
+
+
   return (
     <div className="flex items-center">
       <ImageIcon
@@ -49,8 +70,8 @@ const Name = (props) => {
           <RouterLink
             className={'font-semibold'}
             label={originFolder.name}
-            routerName={global.keys.FOLDER_DETAIL}
-            routerParams={{ folder_id: originFolder.id }}
+            routerName={routerName}
+            routerParams={routerParams}
           />
         </div>
         {

@@ -60,36 +60,58 @@ const Name = (props) => {
     if (currentPage?.name === global.keys.FOLDER_DETAIL) {
       return global.keys.FOLDER_DETAIL_ITEM
     }
-    if (currentPage?.name === global.keys.MY_SHARED_ITEMS) {
-      if (currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
-        return global.keys.QUICK_SHARE_DETAIL
+    if (currentPage?.name === global.keys.SHARED_WITH_ME) {
+      return global.keys.SHARED_WITH_ME_ITEM
+    }
+    if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER) {
+      return global.keys.SHARED_WITH_ME_FOLDER_ITEM
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type !== global.constants.MENU_TYPES.QUICK_SHARES) {
+      return global.keys.MY_SHARED_ITEMS_ITEM
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER) {
+      return global.keys.MY_SHARED_ITEMS_FOLDER_ITEM
+    }
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+      return global.keys.QUICK_SHARE_DETAIL
+    }
+    if (currentPage?.name === global.keys.PASSWORD_HEALTH) {
+      if (currentPage?.query?.active_key === 'reused_passwords') {
+        return global.keys.PASSWORD_HEALTH_REUSED_ITEM
       }
-      return global.keys.VAULT_DETAIL
+      if (currentPage?.query?.active_key === 'exposed_passwords') {
+        return global.keys.PASSWORD_HEALTH_EXPOSED_ITEM
+      }
+      return global.keys.PASSWORD_HEALTH_WEAK_ITEM
     }
     return cipherType?.detailRouter || global.keys.VAULT_DETAIL
   }, [currentPage, cipherType])
 
   const routerParams = useMemo(() => {
-    if (currentPage?.name === global.keys.FOLDER_DETAIL) {
+    if ([
+      global.keys.FOLDER_DETAIL,
+      global.keys.SHARED_WITH_ME_FOLDER,
+      global.keys.MY_SHARED_ITEMS_FOLDER
+    ].includes(currentPage?.name)) {
       return { 
         cipher_id: cipher.id || originCipher.id,
         folder_id: currentPage.params?.folder_id
       }
     }
-    if (currentPage?.name === global.keys.MY_SHARED_ITEMS) {
-      if (currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
-        return {
-          id: send.id
-        }
-      }
-      return { 
-        cipher_id: cipher.id || originCipher.id,
+    if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+      return {
+        id: send.id
       }
     }
     return { 
       cipher_id: cipher.id || originCipher.id,
     }
-  }, [cipher, originCipher, currentPage, send])
+  }, [
+    cipher,
+    originCipher,
+    currentPage,
+    send
+  ])
 
   return (
     <div className="flex items-center w-full">
