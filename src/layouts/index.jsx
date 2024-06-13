@@ -29,6 +29,7 @@ function AdminLayout(props) {
   const { PageContent } = layoutComponents;
   const {
     Header,
+    Footer,
     SidebarTop,
     SidebarCenter,
     SidebarBottom
@@ -72,7 +73,7 @@ function AdminLayout(props) {
     dispatch(storeActions.updateIsScrollToTop(false))
     setTimeout(() => {
       common.scrollToTop();
-    }, 2000);
+    }, 1000);
   }, [location])
 
   useEffect(() => {
@@ -197,6 +198,11 @@ function AdminLayout(props) {
             <Layout.Content className='admin-layout-content'>
               <PageContent routers={routers} pages={pages} />
             </Layout.Content>
+            <Layout.Footer style={{ padding: 0 }}>
+              <Footer
+                className='admin-layout-footer'
+              />
+            </Layout.Footer>
           </Layout>
           {isScrollToTop && (
             <div className='admin-layout__button'>
