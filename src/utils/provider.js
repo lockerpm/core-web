@@ -5,6 +5,7 @@ import { ConfigProvider } from '@lockerpm/design'
 
 import vi_VN from '@lockerpm/design/es/locale/vi_VN'
 import en_US from '@lockerpm/design/es/locale/en_US'
+import zh_CN from '@lockerpm/design/es/locale/zh_CN'
 
 import moment from 'moment'
 import 'moment/locale/vi'
@@ -12,20 +13,42 @@ import 'moment/locale/zh-cn'
 
 import vi from '../locale/vi.json'
 import en from '../locale/en.json'
+import zh from '../locale/zh.json'
 
 import global from '../config/global'
+
+const getLocale = (locale) => {
+  if (locale === global.constants.LANGUAGE.EN) {
+    return {
+      value: en,
+      default: en_US
+    }
+  }
+  if (locale === global.constants.LANGUAGE.VI) {
+    return {
+      value: vi,
+      default: vi_VN
+    }
+  }
+  if (locale === global.constants.LANGUAGE.ZH) {
+    return {
+      value: zh,
+      default: zh_CN
+    }
+  }
+}
 
 const Locales = props => {
   const localeIntl = {
     locale: props.locale,
-    messages: props.locale === global.constants.LANGUAGE.EN ? en : vi,
+    messages: getLocale(props.locale).value,
   }
   moment.locale(props.locale)
   
   return (
     <IntlProvider {...localeIntl}>
       <ConfigProvider
-        locale={props.locale === global.constants.LANGUAGE.EN ? en_US : vi_VN}
+        locale={getLocale(props.locale).default}
       >
         {props.children}
       </ConfigProvider>
