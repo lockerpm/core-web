@@ -55,12 +55,7 @@ const getColorByIndex = index => {
 }
 
 const openNewTab = (link) => {
-  const regex = global.patterns.LINK
-  if (regex.test(link)) {
-    window.open(link, '_blank')
-  } else {
-    global.pushError(t('validation', { name: 'URL' }))
-  }
+  window.open(link, '_blank')
 }
 
 const copyToClipboard = (str) => {
