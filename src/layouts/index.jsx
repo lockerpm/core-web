@@ -47,6 +47,7 @@ function AdminLayout(props) {
 
   const [respCollapsed, setRespCollapsed] = useState(false)
   const [showBottom, setShowBottom] = useState(false)
+  const [showFooter, setShowFooter] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
   
   const accessToken = common.getAccessToken();
@@ -195,12 +196,16 @@ function AdminLayout(props) {
                 setRespCollapsed={setRespCollapsed}
               />
             </Layout.Header>
-            <Layout.Content className='admin-layout-content'>
+            <Layout.Content
+              className={`admin-layout-content  ${showFooter ? 'is-footer' : ''}`}
+            >
               <PageContent routers={routers} pages={pages} />
             </Layout.Content>
             <Layout.Footer style={{ padding: 0 }}>
               <Footer
                 className='admin-layout-footer'
+                showFooter={showFooter}
+                setShowFooter={setShowFooter}
               />
             </Layout.Footer>
           </Layout>

@@ -46,9 +46,11 @@
       position: relative;
       left: var(--sidebar-width);
       padding-top: var(--header-height);
-      padding-bottom: var(--footer-height);
       width: calc(100% - var(--sidebar-width));
       z-index: 1;
+      &.is-footer {
+        padding-bottom: var(--footer-height);
+      }
     }
     &.admin-layout-center-collapsed {
       .admin-layout-content {
