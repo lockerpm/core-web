@@ -1,6 +1,4 @@
 .ant-layout-footer {
-  height: var(--footer-height) !important;
-  line-height: var(--footer-height) !important;
   background: none !important;
   position: fixed;
   bottom: 0;
@@ -8,14 +6,10 @@
   right: 0px;
   z-index: 998;
   .admin-layout-footer {
-    height: 100%;
+    height: var(--footer-height) !important;
+    line-height: var(--footer-height) !important;
     padding: var(--page-content-spacing-collapsed) var(--page-content-spacing);
     background-color: white !important;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
-    box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08);
     border-top: 1px solid var(--border-color);
   }
 }
