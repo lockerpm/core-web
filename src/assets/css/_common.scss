@@ -28,7 +28,7 @@
 
 .layout-content {
   min-height: auto;
-  height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: auto !important;
   padding: var(--default-spacing) var(--page-content-spacing);
   padding-bottom: 48px;
