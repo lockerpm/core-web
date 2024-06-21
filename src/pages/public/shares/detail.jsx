@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import {
@@ -16,7 +16,6 @@ import quickShareDetailComponents from "./components";
 import quickShareServices from "../../../services/quick-share";
 
 import common from "../../../utils/common";
-import global from "../../../config/global";
 
 import '../css/index.scss';
 
@@ -30,7 +29,6 @@ const ShareDetail = () => {
     VerifyEmail
   } = quickShareDetailComponents;
   const location = useLocation();
-  const { t } = useTranslation();
 
   const currentPage = common.getRouterByLocation(location);
   const key = currentPage?.hash?.replace('#', '') || null;
@@ -56,8 +54,7 @@ const ShareDetail = () => {
           const cipher = await common.decryptCipher(res.cipher, key)
           setCipher(cipher)
         }
-      }).catch((error) => {
-        global.pushError(error)
+      }).catch(() => {
         setInvalid(true)
       })
     } else {
@@ -91,8 +88,7 @@ const ShareDetail = () => {
       setCipher(cipher)
       setRequireOtp(false)
       return true
-    }).catch((error) => {
-      global.pushError(error)
+    }).catch(() => {
       if (!keepToken) {
         removeToken(email)
       }
