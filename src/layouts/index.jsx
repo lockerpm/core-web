@@ -72,9 +72,7 @@ function AdminLayout(props) {
 
   useEffect(() => {
     dispatch(storeActions.updateIsScrollToTop(false))
-    setTimeout(() => {
-      common.scrollToTop();
-    }, 1000);
+    common.scrollToTop();
   }, [location])
 
   useEffect(() => {
