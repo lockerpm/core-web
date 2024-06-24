@@ -86,10 +86,10 @@ const Lock = () => {
     if (userInfo?.sync_all_platforms) {
       return t('lock.cross_platform_sync_enable')
     }
-    if (userInfo?.login_method === 'passwordless') {
-      if (otherMethod === 'security_key') {
-        return t('lock.security_key_desc');
-      }
+    if (otherMethod === 'security_key') {
+      return t('lock.security_key_desc');
+    }
+    if (otherMethod === 'passkey') {
       return t('lock.passkey_key_desc');
     }
     return t('lock.description');
