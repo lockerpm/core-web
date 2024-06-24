@@ -852,7 +852,7 @@
       "title": "Passkeys",
       "add_new_key": "新增 passkey",
       "add_new_key_description": "passkey 名稱",
-      "description": "使用臉部辨識、指紋辨識或電腦 PIN 碼來解鎖您的保管庫。可在網頁瀏覽器上使用"
+      "description": "使用 Android 手機上的人臉辨識、指紋或 PIN 碼或安全金鑰來解鎖您的保管庫。可在網頁瀏覽器上使用。"
     }, 
     "passwordless": {
       "title": "安全金鑰",
@@ -865,7 +865,7 @@
       "title": "Mobile passwordless login",
       "description": "Scan a QR code to log in to the mobile app.",
       "action": "Scan QR code",
-      "enter_code": "Enter verification code here",
+      "enter_code": "Enter OTP Code from the mobile app here",
       "code": "OTP Code",
       "point_phone": "Point your phone camera to the QR Code below to confirm Login",
       "expire_in": "QR Code Expire in: {{expireCountdown}}s",

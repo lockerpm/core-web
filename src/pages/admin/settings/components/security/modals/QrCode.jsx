@@ -85,7 +85,7 @@ const QrCodeModal = (props) => {
                   global.rules.LATEST_LENGTH(t('security.mobile_passwordless.code'), 6)
                 ]}
               >
-                <Input.Password
+                <Input
                   autoFocus={true}
                   placeholder={t('placeholder.enter')}
                   disabled={callingAPI}

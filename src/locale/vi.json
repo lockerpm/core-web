@@ -852,7 +852,7 @@
       "title": "Passkeys",
       "add_new_key": "Thêm passkey mới",
       "add_new_key_description": "Tên passkey",
-      "description": "Sử dụng nhận dạng khuôn mặt, nhận dạng dấu vân tay hoặc PIN máy tính để mở khóa vault của bạn. Có sẵn trên trình duyệt web."
+      "description": "Sử dụng Khuôn mặt, Dấu vân tay hoặc mã PIN trên điện thoại Android hoặc khóa bảo mật để mở khóa kho tiền của bạn. Có sẵn trên trình duyệt web."
     },
     "passwordless": {
       "title": "Khóa Bảo mật",
@@ -865,7 +865,7 @@
       "title": "Đăng nhập không mật khẩu vào điện thoại",
       "description": "Quét mã QR để đăng nhập vào ứng dụng di động.",
       "action": "Quét mã QR",
-      "enter_code": "Nhập mã xác thực",
+      "enter_code": "Nhập mã OTP từ ứng dụng di động tại đây",
       "code": "Mã OTP",
       "point_phone": "Hãy quét mã QR bằng ứng dụng Locker trên điện thoại của bạn.",
       "expire_in": "Mã QR hết hạn trong: {{expireCountdown}}s",
