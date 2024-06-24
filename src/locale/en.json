@@ -456,7 +456,7 @@
     "enter_key_pin": "Enter your security key PIN",
     "touch_key": "Touch your security key",
     "reload_devices": "Reload list devices",
-    "reload_keys": "Reload keys",
+    "reload_keys": "Reload list keys",
     "choose_a_key": "Choose a key to verify yourself",
     "new_password": "Enter new Password",
     "connect_security_key_to_login": "Connect to a security key.",
@@ -557,10 +557,11 @@
   "lock": {
     "title": "Sign in to your account",
     "description": "Enter your Password to unlock",
+    "security_key_desc": "Sign in with a security key",
+    "passkey_key_desc": "Sign in with a passkey",
     "master_password": "Password",
     "master_password_hint": "Get Password hint",
     "unlock": "Unlock",
-    "connect_key": "Connect to your security key",
     "cross_platform_sync_enable": "Your account enabled Cross-platform sync"
   },
   "inventory": {

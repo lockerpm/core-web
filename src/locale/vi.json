@@ -456,7 +456,7 @@
     "enter_key_pin": "Nhập PIN của khóa bảo mật",
     "touch_key": "Chạm vào khóa bảo mật của bạn",
     "reload_devices": "Tải lại danh sách thiết bị",
-    "reload_keys": "Tải lại khoá",
+    "reload_keys": "Tải lại danh sách khoá",
     "choose_a_key": "Chọn một khóa để xác thực bạn",
     "new_password": "Nhập mật khẩu mới",
     "connect_security_key_to_login": "Kết nối với một khóa bảo mật.",
@@ -557,11 +557,12 @@
   "lock": {
     "title": "Đăng nhập vào tài khoản của bạn",
     "description": "Nhập mật khẩu",
+    "security_key_desc": "Đăng nhập bằng khóa bảo mật",
+    "passkey_key_desc": "Đăng nhập bằng mật mã",
     "master_password": "Mật khẩu",
     "master_password_hint": "Nhận gợi ý mật khẩu",
     "unlock": "Mở khóa",
-    "connect_key": "Kết nối với khóa bảo mật của bạn",
-    "cross_platform_sync_enable": "Your account enabled Cross-platform sync"
+    "cross_platform_sync_enable": "Tài khoản của bạn đã bật Đồng bộ đăng nhập đa nền tảng"
   },
   "inventory": {
     "all_items": "Tất cả mục",

@@ -456,7 +456,7 @@
     "enter_key_pin": "Enter your security key PIN",
     "touch_key": "Touch your security key",
     "reload_devices": "Reload list devices",
-    "reload_keys": "Reload keys",
+    "reload_keys": "Reload list keys",
     "choose_a_key": "Choose a key to verify yourself",
     "new_password": "Enter new Password",
     "connect_security_key_to_login": "Connect to a security key.",
@@ -557,10 +557,11 @@
   "lock": {
     "title": "登入",
     "description": "輸入您的密碼以解鎖",
+    "security_key_desc": "使用安全金鑰登入",
+    "passkey_key_desc": "使用密碼登入",
     "master_password": "密碼",
     "master_password_hint": "取得密碼提示",
     "unlock": "解鎖",
-    "connect_key": "連接到您的安全金鑰",
     "cross_platform_sync_enable": "您的帳戶已啟用跨平台同步"
   },
   "inventory": {

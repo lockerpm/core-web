@@ -86,8 +86,14 @@ const Lock = () => {
     if (userInfo?.sync_all_platforms) {
       return t('lock.cross_platform_sync_enable')
     }
-    return userInfo?.login_method === 'passwordless' ? t('lock.connect_key') : t('lock.description')
-  }, [userInfo])
+    if (userInfo?.login_method === 'passwordless') {
+      if (otherMethod === 'security_key') {
+        return t('lock.security_key_desc');
+      }
+      return t('lock.passkey_key_desc');
+    }
+    return t('lock.description');
+  }, [userInfo, otherMethod])
 
   const handleUnlock = async () => {
     if (serviceUser) {
