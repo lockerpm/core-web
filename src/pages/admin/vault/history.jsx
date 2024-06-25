@@ -12,6 +12,7 @@ import {
 
 import commonComponents from "../../../components/common";
 import itemsComponents from "../../../components/items";
+import vaultHistoryComponents from "./components/history";
 
 import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
@@ -22,11 +23,19 @@ import global from "../../../config/global";
 const VaultHistory = () => {
   const { PageHeader, CipherIcon } = commonComponents;
   const { RouterLink } = itemsComponents;
+  const { Filter, ListData, TableData } = vaultHistoryComponents;
+
   const { t } = useTranslation();
   const location = useLocation();
 
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const isMobile = useSelector((state) => state.system.isMobile);
+
+  const [params, setParams] = useState({
+    orderField: 'revisionDate',
+    orderDirection: 'desc',
+  });
 
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
@@ -90,12 +99,15 @@ const VaultHistory = () => {
     return {}
   }, [currentPage])
   
-
   useEffect(() => {
     if (originCipher && !originCipher.id) {
       global.navigate(global.keys.VAULT)
     }
   }, [originCipher])
+
+  const filteredData = useMemo(() => {
+    return []
+  }, [params, originCipher])
 
   return (
     <div
@@ -125,6 +137,22 @@ const VaultHistory = () => {
         </div>}
         Right={() => <></>}
       />
+      <Filter
+        className={'mt-2'}
+        params={params}
+        setParams={(v) => setParams(v)}
+      />
+      {
+        isMobile ? <ListData
+          className="mt-4"
+          data={filteredData}
+          onRestore={() => {}}
+        /> : <TableData
+          className="mt-4"
+          data={filteredData}
+          onRestore={() => {}}
+        />
+      }
     </div>
   );
 }
