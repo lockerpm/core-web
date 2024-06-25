@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
 import {
   Menu,
@@ -17,19 +18,28 @@ import global from '../../config/global';
 import '../css/sidebar-center.scss';
 
 function SidebarCenter(props) {
+  const { t } = useTranslation();
+  const location = useLocation();
+  
   const { collapsed, showBottom, onClose = () => {} } = props
   const currentPage = useSelector((state) => state.system.currentPage);
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const invitations = useSelector((state) => state.share.invitations);
+  const currentEnterprise = useSelector((state) => state.enterprise.currentEnterprise);
 
   const [openKeys, setOpenKeys] = useState([])
-
-  const { t } = useTranslation();
 
   const menus = useMemo(() => {
     return common.allMenus();
   }, [])
+
+  useEffect(() => {
+    const cMenu = menus.find((m) => m.key === (currentPage?.parent || currentPage?.key));
+    if (cMenu && cMenu.isChildren) {
+      setOpenKeys([cMenu.parent]);
+    }
+  }, [menus, currentPage])
 
   const invitedCount = useMemo(() => {
     return invitations.filter((i) => i.status === global.constants.STATUS.INVITED).length
@@ -84,12 +94,35 @@ function SidebarCenter(props) {
       })
   }, [backMenu, menus])
 
-  useEffect(() => {
-    const cMenu = menus.find((m) => m.key === (currentPage?.parent || currentPage?.key));
-    if (cMenu && cMenu.isChildren) {
-      setOpenKeys([cMenu.parent]);
+  const brMenus = useMemo(() => {
+    const rMenus = common.getRoutersByLocation(location)
+    if (currentEnterprise) {
+      return [
+        {
+          name: global.keys.ENTERPRISE_DASHBOARD,
+          label: currentEnterprise.name
+        },
+        ...rMenus
+      ]
     }
-  }, [menus, currentPage])
+    return rMenus
+  }, [
+    location,
+    currentPage,
+    currentEnterprise,
+  ])
+
+  const selectedKey = useMemo(() => {
+    const selectedMenu = menus.find((m) => m.key === currentPage?.parent || m.key === currentPage?.key);
+    if (selectedMenu) {
+      return selectedMenu?.key
+    }
+    const sidebarMenu = sidebarMenus.find((m) => m.key === brMenus[0]?.key);
+    if (sidebarMenu?.children?.length > 0) {
+      return sidebarMenu.children.find((c) => brMenus.map((brm) => brm.key).includes(c.key))?.key
+    }
+    return sidebarMenu.key;
+  }, [brMenus, currentPage, sidebarMenus])
 
   const handleMenuClick = (menu) => {
     const menuInfo = menus.find((m) => m.key === menu.key)
@@ -121,7 +154,7 @@ function SidebarCenter(props) {
       }
       <Menu
         openKeys={openKeys}
-        selectedKeys={[currentPage?.parent || currentPage?.key]}
+        selectedKeys={[selectedKey]}
         mode="inline"
         collapsed={collapsed.toString()}
         items={sidebarMenus.map((m) => ({

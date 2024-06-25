@@ -79,6 +79,13 @@ export default {
       element: 'VaultDetail',
     },
     {
+      name: keys.VAULT_HISTORY,
+      parent: keys.VAULT_DETAIL,
+      path: '/vault/:cipher_id/history',
+      element: 'VaultHistory',
+      label: 'password_history.title'
+    },
+    {
       name: keys.PASSWORDS,
       path: '/passwords',
       element: 'Vault',
@@ -88,6 +95,13 @@ export default {
       parent: keys.PASSWORDS,
       path: '/passwords/:cipher_id',
       element: 'VaultDetail',
+    },
+    {
+      name: keys.PASSWORD_HISTORY,
+      parent: keys.PASSWORD_DETAIL,
+      path: '/passwords/:cipher_id/history',
+      element: 'VaultHistory',
+      label: 'password_history.title'
     },
     {
       name: keys.NOTES,
@@ -151,6 +165,13 @@ export default {
       parent: keys.FOLDER_DETAIL,
     },
     {
+      name: keys.FOLDER_DETAIL_ITEM_HISTORY,
+      parent: keys.FOLDER_DETAIL_ITEM,
+      path: '/folders/:folder_id/:cipher_id/history',
+      element: 'VaultHistory',
+      label: 'password_history.title'
+    },
+    {
       name: keys.AUTHENTICATOR,
       path: '/authenticator',
       element: 'Authenticator',
@@ -167,6 +188,13 @@ export default {
       parent: keys.SHARED_WITH_ME,
     },
     {
+      name: keys.SHARED_WITH_ME_ITEM_HISTORY,
+      path: '/shares/shared-with-me/items/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.SHARED_WITH_ME_ITEM,
+      label: 'password_history.title'
+    },
+    {
       name: keys.SHARED_WITH_ME_FOLDER,
       path: '/shares/shared-with-me/folders/:folder_id',
       element: 'Vault',
@@ -177,6 +205,13 @@ export default {
       path: '/shares/shared-with-me/folders/:folder_id/:cipher_id',
       element: 'VaultDetail',
       parent: keys.SHARED_WITH_ME_FOLDER,
+    },
+    {
+      name: keys.SHARED_WITH_ME_FOLDER_ITEM_HISTORY,
+      path: '/shares/shared-with-me/folders/:folder_id/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.SHARED_WITH_ME_FOLDER_ITEM,
+      label: 'password_history.title'
     },
     {
       name: keys.MY_SHARED_ITEMS,
@@ -190,6 +225,13 @@ export default {
       parent: keys.MY_SHARED_ITEMS,
     },
     {
+      name: keys.MY_SHARED_ITEMS_ITEM_HISTORY,
+      path: '/shares/my-shared-items/items/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.MY_SHARED_ITEMS_ITEM,
+      label: 'password_history.title'
+    },
+    {
       name: keys.MY_SHARED_ITEMS_FOLDER,
       path: '/shares/my-shared-items/folders/:folder_id',
       element: 'Vault',
@@ -200,6 +242,13 @@ export default {
       path: '/shares/my-shared-items/folders/:folder_id/:cipher_id',
       element: 'VaultDetail',
       parent: keys.MY_SHARED_ITEMS_FOLDER,
+    },
+    {
+      name: keys.MY_SHARED_ITEMS_FOLDER_ITEM_HISTORY,
+      path: '/shares/my-shared-items/:folder_id/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.MY_SHARED_ITEMS_FOLDER_ITEM,
+      label: 'password_history.title'
     },
     {
       name: keys.QUICK_SHARE_DETAIL,
@@ -237,16 +286,37 @@ export default {
       parent: keys.PASSWORD_HEALTH,
     },
     {
+      name: keys.PASSWORD_HEALTH_WEAK_ITEM_HISTORY,
+      path: '/security-tools/password-health/weak/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.PASSWORD_HEALTH_WEAK_ITEM,
+      label: 'password_history.title'
+    },
+    {
       name: keys.PASSWORD_HEALTH_REUSED_ITEM,
       path: '/security-tools/password-health/reused/:cipher_id',
       element: 'VaultDetail',
       parent: keys.PASSWORD_HEALTH,
     },
     {
+      name: keys.PASSWORD_HEALTH_REUSED_ITEM_HISTORY,
+      path: '/security-tools/password-health/reused/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.PASSWORD_HEALTH_REUSED_ITEM,
+      label: 'password_history.title'
+    },
+    {
       name: keys.PASSWORD_HEALTH_EXPOSED_ITEM,
       path: '/security-tools/password-health/exposed/:cipher_id',
       element: 'VaultDetail',
       parent: keys.PASSWORD_HEALTH,
+    },
+    {
+      name: keys.PASSWORD_HEALTH_EXPOSED_ITEM_HISTORY,
+      path: '/security-tools/password-health/exposed/:cipher_id/history',
+      element: 'VaultHistory',
+      parent: keys.PASSWORD_HEALTH_EXPOSED_ITEM,
+      label: 'password_history.title'
     },
     {
       name: keys.BREACH_SCANNER,

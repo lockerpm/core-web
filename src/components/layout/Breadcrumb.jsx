@@ -76,6 +76,7 @@ function LayoutBreadcrumb() {
     return menus
   }, [
     locale,
+    location,
     currentPage,
     currentEnterprise,
     sends,

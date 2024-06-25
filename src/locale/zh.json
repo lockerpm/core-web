@@ -641,7 +641,8 @@
       "leave": "離開",
       "accept": "接受",
       "decline": "拒絕",
-      "copy_link": "複製連結"
+      "copy_link": "複製連結",
+      "view_password_history": "查看密碼歷史記錄"
     },
     "move_to": {
       "title": "移動至",
@@ -1276,5 +1277,8 @@
       "user_login": "User login",
       "sharing": "Sharing"
     }
+  },
+  "password_history": {
+    "title": "密碼歷史記錄"
   }
 }

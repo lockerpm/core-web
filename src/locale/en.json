@@ -641,7 +641,8 @@
       "leave": "Leave",
       "accept": "Accept",
       "decline": "Decline",
-      "copy_link": "Copy link"
+      "copy_link": "Copy link",
+      "view_password_history": "View password history"
     },
     "move_to": {
       "title": "Move to",
@@ -1276,5 +1277,8 @@
       "user_login": "User login",
       "sharing": "Sharing"
     }
+  },
+  "password_history": {
+    "title": "Password History"
   }
 }

@@ -641,7 +641,8 @@
       "leave": "Rời chia sẻ",
       "accept": "Chấp nhận",
       "decline": "Từ chối",
-      "copy_link": "Sao chép liên kết"
+      "copy_link": "Sao chép liên kết",
+      "view_password_history": "Xem lịch sử mật khẩu"
     },
     "move_to": {
       "title": "Chuyển tới",
@@ -1276,5 +1277,8 @@
       "user_login": "Người dùng đăng nhập",
       "sharing": "Chia sẻ"
     }
+  },
+  "password_history": {
+    "title": "Lịch sử mật khẩu"
   }
 }

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import {
   Space,
@@ -19,10 +20,12 @@ import {
 import { CipherType } from "../../core-js/src/enums";
 
 import common from "../../utils/common";
+import global from "../../config/global";
 
 const Actions = (props) => {
   const { t } = useTranslation()
-  
+  const location = useLocation();
+
   const {
     className = '',
     size = "small",
@@ -35,6 +38,8 @@ const Actions = (props) => {
     onStopSharing = () => {},
     onPermanentlyDelete = () => {}
   } = props;
+
+  const currentPage = common.getRouterByLocation(location);
 
   const allOrganizations = useSelector((state) => state.organization.allOrganizations)
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -145,6 +150,16 @@ const Actions = (props) => {
     ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
   }, [originCipher, allOrganizations, locale])
 
+  const cipherType = useMemo(() => {
+    return common.cipherTypeInfo('listRouter', currentPage.name, cipher.type)
+  }, [originCipher, currentPage])
+
+  const viewHistory = () => {
+    const cipherHistoryRouterName = common.getCipherHistoryRouterName(currentPage, cipherType);
+    const cipherHistoryRouterParams = common.getCipherHistoryRouterParams(currentPage, cipher.id || originCipher.id);
+    global.navigate(cipherHistoryRouterName, cipherHistoryRouterParams)
+  }
+
   const generalMenus = useMemo(() => {
     if (originCipher.type === CipherType.MasterPassword ) {
       return []
@@ -166,6 +181,12 @@ const Actions = (props) => {
           key: 'move_to_folder',
           label: t('inventory.actions.move_to_folder'),
           onClick: () => onMove(originCipher)
+        },
+        {
+          key: 'view_password_history',
+          hide: originCipher.type !== CipherType.Login,
+          label: t('inventory.actions.view_password_history'),
+          onClick: () => viewHistory()
         },
         {
           key: 'stop_sharing',

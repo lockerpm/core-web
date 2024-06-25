@@ -1,4 +1,5 @@
 import common from '.'
+import global from '../../config/global'
 
 const convertQueryToString = (routerPath, query) => {
   if (typeof query === 'object' && !common.isEmpty(query)) {
@@ -109,11 +110,123 @@ const getRoutersByLocation = location => {
   return []
 }
 
+const getCipherRouterName = (currentPage, cipherType) => {
+  if (currentPage?.name === global.keys.FOLDER_DETAIL) {
+    return global.keys.FOLDER_DETAIL_ITEM
+  }
+  if (currentPage?.name === global.keys.SHARED_WITH_ME) {
+    return global.keys.SHARED_WITH_ME_ITEM
+  }
+  if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER) {
+    return global.keys.SHARED_WITH_ME_FOLDER_ITEM
+  }
+  if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER) {
+    return global.keys.MY_SHARED_ITEMS_FOLDER_ITEM
+  }
+  if (currentPage?.name === global.keys.MY_SHARED_ITEMS) {
+    if (currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+      return global.keys.QUICK_SHARE_DETAIL
+    }
+    return global.keys.MY_SHARED_ITEMS_ITEM
+  }
+  if (currentPage?.name === global.keys.PASSWORD_HEALTH) {
+    if (currentPage?.query?.active_key === 'reused_passwords') {
+      return global.keys.PASSWORD_HEALTH_REUSED_ITEM
+    }
+    if (currentPage?.query?.active_key === 'exposed_passwords') {
+      return global.keys.PASSWORD_HEALTH_EXPOSED_ITEM
+    }
+    return global.keys.PASSWORD_HEALTH_WEAK_ITEM
+  }
+  return cipherType?.detailRouter || global.keys.VAULT_DETAIL
+}
+
+const getCipherRouterParams = (currentPage, cipherId, sendId) => {
+  if ([
+    global.keys.FOLDER_DETAIL,
+    global.keys.SHARED_WITH_ME_FOLDER,
+    global.keys.MY_SHARED_ITEMS_FOLDER
+  ].includes(currentPage?.name)) {
+    return { 
+      cipher_id: cipherId,
+      folder_id: currentPage.params?.folder_id
+    }
+  }
+  if (currentPage?.name === global.keys.MY_SHARED_ITEMS && currentPage?.query?.menu_type === global.constants.MENU_TYPES.QUICK_SHARES) {
+    return {
+      send_id: sendId
+    }
+  }
+  return { 
+    cipher_id: cipherId,
+  }
+}
+
+const getCipherHistoryRouterName = (currentPage, cipherType) => {
+  if (currentPage?.name === global.keys.FOLDER_DETAIL) {
+    return global.keys.FOLDER_DETAIL_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.FOLDER_DETAIL_ITEM) {
+    return global.keys.FOLDER_DETAIL_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.SHARED_WITH_ME_ITEM) {
+    return global.keys.SHARED_WITH_ME_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER) {
+    return global.keys.SHARED_WITH_ME_FOLDER_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.SHARED_WITH_ME_FOLDER_ITEM) {
+    return global.keys.SHARED_WITH_ME_FOLDER_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.MY_SHARED_ITEMS_ITEM) {
+    return global.keys.MY_SHARED_ITEMS_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER) {
+    return global.keys.MY_SHARED_ITEMS_FOLDER_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.MY_SHARED_ITEMS_FOLDER_ITEM) {
+    return global.keys.MY_SHARED_ITEMS_FOLDER_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.PASSWORD_HEALTH_WEAK_ITEM) {
+    return global.keys.PASSWORD_HEALTH_WEAK_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.PASSWORD_HEALTH_REUSED_ITEM) {
+    return global.keys.PASSWORD_HEALTH_REUSED_ITEM_HISTORY
+  }
+  if (currentPage?.name === global.keys.PASSWORD_HEALTH_EXPOSED_ITEM) {
+    return global.keys.PASSWORD_HEALTH_EXPOSED_ITEM_HISTORY
+  }
+  return cipherType?.historyRouter || global.keys.VAULT_HISTORY
+}
+
+const getCipherHistoryRouterParams = (currentPage, cipherId) => {
+  if ([
+    global.keys.FOLDER_DETAIL,
+    global.keys.FOLDER_DETAIL_ITEM,
+    global.keys.SHARED_WITH_ME_FOLDER,
+    global.keys.SHARED_WITH_ME_FOLDER_ITEM,
+    global.keys.MY_SHARED_ITEMS_FOLDER,
+    global.keys.MY_SHARED_ITEMS_FOLDER_ITEM
+  ].includes(currentPage?.name)) {
+    return { 
+      cipher_id: cipherId,
+      folder_id: currentPage.params?.folder_id
+    }
+  }
+  return { 
+    cipher_id: cipherId,
+  }
+}
+
 export default {
   convertQueryToString,
   convertStringToQuery,
   getRouterParams,
   getRouterByName,
   getRouterByLocation,
-  getRoutersByLocation
+  getRoutersByLocation,
+  getCipherRouterName,
+  getCipherRouterParams,
+  getCipherHistoryRouterName,
+  getCipherHistoryRouterParams
 }
