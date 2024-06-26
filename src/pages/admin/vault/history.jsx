@@ -14,7 +14,6 @@ import commonComponents from "../../../components/common";
 import itemsComponents from "../../../components/items";
 import vaultHistoryComponents from "./components/history";
 
-import commonServices from "../../../services/common";
 import cipherServices from "../../../services/cipher";
 
 import common from "../../../utils/common";
@@ -23,15 +22,19 @@ import global from "../../../config/global";
 const VaultHistory = () => {
   const { PageHeader, CipherIcon } = commonComponents;
   const { RouterLink } = itemsComponents;
-  const { Filter, ListData, TableData } = vaultHistoryComponents;
+  const { Filter, ListData, TableData, ConfirmRestoreModal } = vaultHistoryComponents;
 
-  const { t } = useTranslation();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const isMobile = useSelector((state) => state.system.isMobile);
+  const allCollections = useSelector((state) => state.collection.allCollections);
 
+  const [restoreVisible, setRestoreVisible] = useState(false);
+  const [selectedHistory, setSelectedHistory] = useState(null);
+  const [callingAPI, setCallingAPI] = useState(false);
   const [params, setParams] = useState({
     orderField: 'revisionDate',
     orderDirection: 'desc',
@@ -40,6 +43,10 @@ const VaultHistory = () => {
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
   }, [currentPage, allCiphers])
+
+  const isRestore = useMemo(() => {
+    return common.isChangeCipher(originCipher);
+  }, [originCipher])
 
   const pageCipherType = useMemo(() => {
     return common.cipherTypeInfo('detailRouter', currentPage.name)
@@ -106,8 +113,45 @@ const VaultHistory = () => {
   }, [originCipher])
 
   const filteredData = useMemo(() => {
-    return []
+    const pwHistory = originCipher.passwordHistory;
+    return pwHistory
   }, [params, originCipher])
+
+  const handleRestore = (item) => {
+    setSelectedHistory(item);
+    setRestoreVisible(true);
+  }
+
+  const onUpdateCipher = async () => {
+    setCallingAPI(true);
+    const formData = common.convertCipherToForm(originCipher);
+    formData.password = selectedHistory?.password;
+    const cipher = {
+      ...common.convertFormToCipher(formData),
+      organizationId: originCipher.organizationId
+    }
+    const passwordStrength = formData.password ? common.getPasswordStrength(formData.password) : {};
+    const { data, collectionIds } = await common.getEncCipherForRequest(
+      cipher,
+      {
+        writeableCollections: allCollections.filter((c) => common.isOwner(c)),
+        nonWriteableCollections: allCollections.filter((c) => !common.isOwner(c)),
+      }
+    )
+    const payload = {
+      ...data,
+      collectionIds,
+      score: passwordStrength.score,
+    }
+    await cipherServices.update(originCipher.id, payload).then(() => {
+      global.pushSuccess(t('notification.success.cipher.updated'));
+      setRestoreVisible(false);
+      global.navigate(listRouterName, listRouterParams, listRouterQuery);
+    }).catch((error) => {
+      global.pushError(error)
+    })
+    setCallingAPI(false);
+  }
 
   return (
     <div
@@ -145,14 +189,23 @@ const VaultHistory = () => {
       {
         isMobile ? <ListData
           className="mt-4"
+          isRestore={isRestore}
           data={filteredData}
-          onRestore={() => {}}
+          onRestore={(v) => handleRestore(v)}
         /> : <TableData
           className="mt-4"
+          isRestore={isRestore}
           data={filteredData}
-          onRestore={() => {}}
+          onRestore={(v) => handleRestore(v)}
         />
       }
+      <ConfirmRestoreModal
+        visible={restoreVisible}
+        item={selectedHistory}
+        callingAPI={callingAPI}
+        onConfirm={() => onUpdateCipher()}
+        onClose={() => setRestoreVisible(false)}
+      />
     </div>
   );
 }

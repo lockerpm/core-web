@@ -5,26 +5,25 @@ import { useTranslation } from "react-i18next";
 import {
   List,
   Popover,
-  Dropdown,
-  Button
 } from '@lockerpm/design';
 
 import {
   InfoCircleOutlined,
-  EllipsisOutlined
 } from "@ant-design/icons";
 
-
 import itemsComponents from "../../../../../components/items";
+import cipherComponents from "../../../../../components/cipher";
 
 import common from "../../../../../utils/common";
 
 const ListData = (props) => {
   const { TextCopy } = itemsComponents;
+  const { HistoryActions } = cipherComponents;
   const { t } = useTranslation();
 
   const {
     className = '',
+    isRestore = false,
     data = [],
     onRestore = () => {},
   } = props;
@@ -33,10 +32,10 @@ const ListData = (props) => {
     const { record } = props;
     return <div className="text-xs">
       <div className="flex items-center">
-        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
+        <p className="font-semibold mr-2">{t('common.last_used')}:</p>
         <TextCopy
           className="text-xs"
-          value={common.timeFromNow(record.revisionDate)}
+          value={common.convertDateTime(record.revisionDate, 'LLL')}
         />
       </div>
     </div>
@@ -47,7 +46,6 @@ const ListData = (props) => {
       bordered={false}
       dataSource={data}
       className={className}
-      loading={loading}
       renderItem={(record) => (
         <List.Item>
           <div
@@ -57,7 +55,8 @@ const ListData = (props) => {
             <div className="flex items-center">
               <TextCopy
                 value={record.password}
-                defaultShow={false}
+                show={false}
+                align="between"
               />
             </div>
             <div className="ml-2 flex items-center">
@@ -69,27 +68,11 @@ const ListData = (props) => {
               >
                 <InfoCircleOutlined />
               </Popover>
-              <Dropdown
-                menu={{ items: [
-                  {
-                    key: 'copy',
-                    label: t('common.copy'),
-                    onClick: () => common.copyToClipboard(record.password)
-                  },
-                  {
-                    key: 'restore',
-                    label: t('inventory.actions.restore'),
-                    onClick: () => onRestore(record.password)
-                  },
-                ] }}
-                trigger={['click']}
-              >
-                <Button
-                  type="text"
-                  size={'small'}
-                  icon={<EllipsisOutlined style={{ fontSize: 16 }}/>}
-                />
-              </Dropdown>
+              <HistoryActions
+                item={record}
+                isRestore={isRestore}
+                onRestore={onRestore}
+              />
             </div>
           </div>
         </List.Item>

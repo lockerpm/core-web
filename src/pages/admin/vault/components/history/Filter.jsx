@@ -33,7 +33,7 @@ const Filter = (props) => {
   }, [params])
 
   const sortMenus = useMemo(() => {
-    return global.constants.SORT_OPTIONS.map((o) => ({
+    return global.constants.SORT_OPTIONS.filter((o) => o.orderField !== 'name').map((o) => ({
       key: o.key,
       label: <p className={o.key === selectedSortOption?.key ? 'text-primary' : ''}>
         {t(o.label)}

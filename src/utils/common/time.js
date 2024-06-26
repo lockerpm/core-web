@@ -8,8 +8,9 @@ require('dayjs/locale/vi')
 require('dayjs/locale/zh')
 
 var relativeTime = require('dayjs/plugin/relativeTime')
+const localizedFormat = require('dayjs/plugin/localizedFormat')
+dayjs.extend(localizedFormat)
 dayjs.extend(relativeTime)
-
 
 const convertTime = time => {
   const hours = Math.floor(Number(time) / 60)

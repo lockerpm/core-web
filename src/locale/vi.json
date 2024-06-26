@@ -155,7 +155,8 @@
     "open_desktop_app": "Mở ứng dụng máy tính",
     "new_user": "Người dùng mới",
     "new_group": "Nhóm mới",
-    "resend_invitation": "Gửi lại lời mời"
+    "resend_invitation": "Gửi lại lời mời",
+    "restore": "Khôi phục"
   },
   "placeholder": {
     "name": "Nhập tên",
@@ -1279,6 +1280,8 @@
     }
   },
   "password_history": {
-    "title": "Lịch sử mật khẩu"
+    "title": "Lịch sử mật khẩu",
+    "restore_password": "Khôi phục mật khẩu",
+    "question": "Bạn có chắc chắn khôi phục lại mật khẩu này không? Mật khẩu này sẽ thay thế mật khẩu hiện tại?"
   }
 }

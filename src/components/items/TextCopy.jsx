@@ -22,7 +22,6 @@ const TextCopy = (props) => {
   const {
     className = '',
     value = '',
-    isPassword = false,
     align = 'start',
     color = '',
     limited = true,
@@ -47,7 +46,7 @@ const TextCopy = (props) => {
   }, [])
 
   const icons = useMemo(() => {
-    if ((isHover || showIcon) && !!value) {
+    if (isHover || showIcon) {
       return [
         <CopyOutlined/>,
         <CheckOutlined/>
@@ -60,48 +59,37 @@ const TextCopy = (props) => {
   }, [isHover])
 
   const DisplayValue = useMemo(() => {
-    if (value) {
-      if (isPassword && showText) {
-        return <Input.Password
-          className={`p-0 text-${align} mr-2`}
-          value={value}
-          bordered={false}
-        />
-      }
-      if (show != null) {
-        return <div
-          style={{ color: color || gray[6] }}
-          className={`flex items-center justify-${isPassword ? 'between' : align} w-full`}
-        >
-          <p
-            className={`${limited ? 'text-limited' : ''}`}
-            title={common.formatText(value, showText)}
-            style={{ marginBottom: 0 }}
-          >
-            {common.formatText(value, showText)}
-          </p>
-          <span
-            className="ml-2 cursor-pointer"
-            onClick={() => setShowText(!showText)}
-          >
-            {
-              !showText ? <EyeOutlined /> : <EyeInvisibleOutlined />
-            }
-          </span>
-        </div>
-      }
+    if (show != null) {
       return <div
-        className={`${limited ? 'text-limited' : ''}`}
         style={{ color: color || gray[6] }}
-        title={value}
+        className={`flex items-center justify-${align} w-full`}
       >
-        {value}
+        <p
+          className={`${limited ? 'text-limited' : ''}`}
+          title={common.formatText(value, showText)}
+          style={{ marginBottom: 0 }}
+        >
+          {common.formatText(value, showText)}
+        </p>
+        <span
+          className="ml-2 cursor-pointer"
+          onClick={() => setShowText(!showText)}
+        >
+          {
+            !showText ? <EyeOutlined /> : <EyeInvisibleOutlined />
+          }
+        </span>
       </div>
     }
-    return <></>
+    return <div
+      className={`${limited ? 'text-limited' : ''}`}
+      style={{ color: color || gray[6] }}
+      title={value}
+    >
+      {value}
+    </div>
   }, [
     value,
-    isPassword,
     align,
     show,
     showText,

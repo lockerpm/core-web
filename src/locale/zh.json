@@ -155,7 +155,8 @@
     "open_desktop_app": "開啟桌面應用程式",
     "new_user": "新用戶",
     "new_group": "新組",
-    "resend_invitation": "重新邀請"
+    "resend_invitation": "重新邀請",
+    "restore": "恢復"
   },
   "placeholder": {
     "name": "輸入名字",
@@ -1279,6 +1280,8 @@
     }
   },
   "password_history": {
-    "title": "密碼歷史記錄"
+    "title": "密碼歷史記錄",
+    "restore_password": "恢復密碼",
+    "question": "您確定要恢復此密碼嗎？這會取代目前密碼？"
   }
 }

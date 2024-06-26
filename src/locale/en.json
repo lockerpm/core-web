@@ -155,7 +155,8 @@
     "open_desktop_app": "Open desktop app",
     "new_user": "New user",
     "new_group": "New group",
-    "resend_invitation": "Resend invitation"
+    "resend_invitation": "Resend invitation",
+    "restore": "Restore"
   },
   "placeholder": {
     "name": "Enter name",
@@ -1279,6 +1280,8 @@
     }
   },
   "password_history": {
-    "title": "Password History"
+    "title": "Password History",
+    "restore_password": "Restore password",
+    "question": "Are you sure to restore this password? This will replace the current password?"
   }
 }
