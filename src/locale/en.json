@@ -155,7 +155,8 @@
     "open_desktop_app": "Open desktop app",
     "new_user": "New user",
     "new_group": "New group",
-    "resend_invitation": "Resend invitation"
+    "resend_invitation": "Resend invitation",
+    "restore": "Restore"
   },
   "placeholder": {
     "name": "Enter name",
@@ -641,7 +642,8 @@
       "leave": "Leave",
       "accept": "Accept",
       "decline": "Decline",
-      "copy_link": "Copy link"
+      "copy_link": "Copy link",
+      "view_password_history": "View password history"
     },
     "move_to": {
       "title": "Move to",
@@ -1276,5 +1278,10 @@
       "user_login": "User login",
       "sharing": "Sharing"
     }
+  },
+  "password_history": {
+    "title": "Password History",
+    "restore_password": "Restore password",
+    "question": "Are you sure to restore this password? This will replace the current password?"
   }
 }

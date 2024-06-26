@@ -1,6 +1,7 @@
 // Admin Pages
 import Vault from './vault'
 import VaultDetail from './vault/detail'
+import VaultHistory from './vault/history'
 import Folders from './folders'
 import Authenticator from './otps'
 import SharedWithMe from './shares/shared-with-me'
@@ -20,6 +21,7 @@ import AdminErrorPage from './errors'
 export default {
   Vault,
   VaultDetail,
+  VaultHistory,
   Folders,
   Authenticator,
   SharedWithMe,

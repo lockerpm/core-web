@@ -77,8 +77,8 @@ function Review(props) {
                 value={m.email}
               />
               <TextCopy
-                isPassword={true}
                 value={m.password}
+                show={false}
               />
               <Divider className='my-2' />
             </div>)

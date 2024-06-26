@@ -178,6 +178,7 @@ export default {
       icon: require('../assets/images/icons/ciphers/vault.svg'),
       listRouter: keys.VAULT,
       detailRouter: keys.VAULT_DETAIL,
+      historyRouter: keys.VAULT_HISTORY,
       title: 'inventory.all_items',
       name: '',
       isCreate: false
@@ -188,6 +189,7 @@ export default {
       icon: require('../assets/images/icons/ciphers/login.svg'),
       listRouter: keys.PASSWORDS,
       detailRouter: keys.PASSWORD_DETAIL,
+      historyRouter: keys.PASSWORD_HISTORY,
       title: 'sidebar.passwords',
       name: 'cipher.types.password',
       isCreate: true,

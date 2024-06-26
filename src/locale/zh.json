@@ -155,7 +155,8 @@
     "open_desktop_app": "開啟桌面應用程式",
     "new_user": "新用戶",
     "new_group": "新組",
-    "resend_invitation": "重新邀請"
+    "resend_invitation": "重新邀請",
+    "restore": "恢復"
   },
   "placeholder": {
     "name": "輸入名字",
@@ -641,7 +642,8 @@
       "leave": "離開",
       "accept": "接受",
       "decline": "拒絕",
-      "copy_link": "複製連結"
+      "copy_link": "複製連結",
+      "view_password_history": "查看密碼歷史記錄"
     },
     "move_to": {
       "title": "移動至",
@@ -1276,5 +1278,10 @@
       "user_login": "User login",
       "sharing": "Sharing"
     }
+  },
+  "password_history": {
+    "title": "密碼歷史記錄",
+    "restore_password": "恢復密碼",
+    "question": "您確定要恢復此密碼嗎？這會取代目前密碼？"
   }
 }

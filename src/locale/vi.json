@@ -155,7 +155,8 @@
     "open_desktop_app": "Mở ứng dụng máy tính",
     "new_user": "Người dùng mới",
     "new_group": "Nhóm mới",
-    "resend_invitation": "Gửi lại lời mời"
+    "resend_invitation": "Gửi lại lời mời",
+    "restore": "Khôi phục"
   },
   "placeholder": {
     "name": "Nhập tên",
@@ -641,7 +642,8 @@
       "leave": "Rời chia sẻ",
       "accept": "Chấp nhận",
       "decline": "Từ chối",
-      "copy_link": "Sao chép liên kết"
+      "copy_link": "Sao chép liên kết",
+      "view_password_history": "Xem lịch sử mật khẩu"
     },
     "move_to": {
       "title": "Chuyển tới",
@@ -1276,5 +1278,10 @@
       "user_login": "Người dùng đăng nhập",
       "sharing": "Chia sẻ"
     }
+  },
+  "password_history": {
+    "title": "Lịch sử mật khẩu",
+    "restore_password": "Khôi phục mật khẩu",
+    "question": "Bạn có chắc chắn khôi phục lại mật khẩu này không? Mật khẩu này sẽ thay thế mật khẩu hiện tại?"
   }
 }
