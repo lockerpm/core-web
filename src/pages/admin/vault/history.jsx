@@ -142,6 +142,8 @@ const VaultHistory = () => {
     formData.password = selectedHistory?.password;
     const cipher = {
       ...common.convertFormToCipher(formData),
+      id: originCipher.id,
+      passwordHistory: originCipher.passwordHistory,
       organizationId: originCipher.organizationId
     }
     const passwordStrength = formData.password ? common.getPasswordStrength(formData.password) : {};

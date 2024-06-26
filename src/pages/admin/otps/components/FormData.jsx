@@ -71,7 +71,10 @@ function FormData(props) {
   }
 
   const editCipher = async (values) => {
-    const cipher = common.convertFormToCipher({ ...values, notes: item.notes, type: CipherType.TOTP });
+    const cipher = {
+      ...common.convertFormToCipher({ ...values, notes: item.notes, type: CipherType.TOTP }),
+      id: item.id
+    }
     const { data } = await common.getEncCipherForRequest(cipher)
     await cipherServices.update(item.id, data).then(() => {
       global.pushSuccess(t('notification.success.cipher.updated'))
