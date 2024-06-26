@@ -21,7 +21,7 @@ import global from "../../../config/global";
 
 const VaultHistory = () => {
   const { PageHeader, CipherIcon } = commonComponents;
-  const { RouterLink } = itemsComponents;
+  const { RouterLink, Pagination } = itemsComponents;
   const { Filter, ListData, TableData, ConfirmRestoreModal } = vaultHistoryComponents;
 
   const location = useLocation();
@@ -36,13 +36,21 @@ const VaultHistory = () => {
   const [selectedHistory, setSelectedHistory] = useState(null);
   const [callingAPI, setCallingAPI] = useState(false);
   const [params, setParams] = useState({
-    orderField: 'revisionDate',
+    page: 1,
+    size: global.constants.PAGE_SIZE,
+    orderField: 'lastUsedDate',
     orderDirection: 'desc',
   });
 
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
   }, [currentPage, allCiphers])
+
+  useEffect(() => {
+    if (originCipher && !originCipher.id) {
+      global.navigate(global.keys.VAULT)
+    }
+  }, [originCipher])
 
   const isRestore = useMemo(() => {
     return common.isChangeCipher(originCipher);
@@ -105,17 +113,23 @@ const VaultHistory = () => {
   const listRouterQuery = useMemo(() => {
     return {}
   }, [currentPage])
-  
-  useEffect(() => {
-    if (originCipher && !originCipher.id) {
-      global.navigate(global.keys.VAULT)
-    }
-  }, [originCipher])
 
   const filteredData = useMemo(() => {
-    const pwHistory = originCipher.passwordHistory;
-    return pwHistory
-  }, [params, originCipher])
+    return common.paginationAndSortData(
+      originCipher.passwordHistory,
+      params,
+      params.orderField,
+      params.orderDirection
+    )
+  }, [originCipher, JSON.stringify(params)])
+
+  const handleChangePage = (page, size) => {
+    setParams({
+      ...params,
+      page,
+      size
+    })
+  };
 
   const handleRestore = (item) => {
     setSelectedHistory(item);
@@ -156,7 +170,7 @@ const VaultHistory = () => {
   return (
     <div
       className="vault layout-content"
-      onScroll={(e) => common.scrollEnd(e, {}, 0)}
+      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
       <PageHeader
         title={originCipher?.name}
@@ -190,13 +204,20 @@ const VaultHistory = () => {
         isMobile ? <ListData
           className="mt-4"
           isRestore={isRestore}
-          data={filteredData}
+          data={filteredData.result}
           onRestore={(v) => handleRestore(v)}
         /> : <TableData
           className="mt-4"
           isRestore={isRestore}
-          data={filteredData}
+          data={filteredData.result}
           onRestore={(v) => handleRestore(v)}
+        />
+      }
+      {
+        filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
+          params={params}
+          total={filteredData.total}
+          onChange={handleChangePage}
         />
       }
       <ConfirmRestoreModal

@@ -25,22 +25,22 @@ const Filter = (props) => {
 
   const locale = useSelector((state) => state.system.locale);
 
+  const sortOptions = global.constants.SORT_OPTIONS.filter((o) => o.orderField !== 'name')
+
   const selectedSortOption = useMemo(() => {
-    return global.constants.SORT_OPTIONS.find((o) =>
-      o.orderField === params.orderField &&
+    return sortOptions.find((o) =>
       o.orderDirection === params.orderDirection
     )
   }, [params])
 
   const sortMenus = useMemo(() => {
-    return global.constants.SORT_OPTIONS.filter((o) => o.orderField !== 'name').map((o) => ({
+    return sortOptions.map((o) => ({
       key: o.key,
       label: <p className={o.key === selectedSortOption?.key ? 'text-primary' : ''}>
         {t(o.label)}
       </p>,
       onClick: () => setParams({
         ...params,
-        orderField: o.orderField,
         orderDirection: o.orderDirection
       })
     }))
