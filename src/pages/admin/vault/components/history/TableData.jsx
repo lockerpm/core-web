@@ -49,7 +49,7 @@ const TableData = (props) => {
         />
       },
       {
-        title: t('common.last_used'),
+        title: t('common.last_updated'),
         dataIndex: 'lastUsedDate',
         key: 'lastUsedDate',
         align: 'center',

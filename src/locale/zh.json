@@ -59,12 +59,12 @@
     "access_date": "訪問日期",
     "email": "Email",
     "username": "使用者名稱",
-    "on": "On",
-    "off": "Off",
+    "on": "在",
+    "off": "離開",
     "no": "No.",
-    "coming_soon": "Coming Soon",
-    "results": "Results",
-    "no_file_chosen": "No file chosen",
+    "coming_soon": "即將推出",
+    "results": "結果",
+    "no_file_chosen": "沒有選中任何文件",
     "name": "名稱",
     "other": "其他",
     "length": "長度",
@@ -101,7 +101,8 @@
     "minutes": "分鐘",
     "hours": "小時",
     "joined_at": "加入於",
-    "option": "選項"
+    "option": "選項",
+    "last_updated": "最後更新"
   },
   "button": {
     "add": "新增",

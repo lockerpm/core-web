@@ -101,7 +101,8 @@
     "minutes": "phút",
     "hours": "giờ",
     "joined_at": "Tham gia vào",
-    "option": "Chọn"
+    "option": "Chọn",
+    "last_updated": "Cập nhật lần cuối"
   },
   "button": {
     "add": "Thêm",

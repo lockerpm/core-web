@@ -32,10 +32,10 @@ const ListData = (props) => {
     const { record } = props;
     return <div className="text-xs">
       <div className="flex items-center">
-        <p className="font-semibold mr-2">{t('common.last_used')}:</p>
+        <p className="font-semibold mr-2">{t('common.last_updated')}:</p>
         <TextCopy
           className="text-xs"
-          value={common.convertDateTime(record.revisionDate, 'LLL')}
+          value={common.convertDateTime(record.lastUsedDate, 'LLL')}
         />
       </div>
     </div>

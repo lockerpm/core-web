@@ -101,7 +101,8 @@
     "minutes": "minutes",
     "hours": "hours",
     "joined_at": "Joined at",
-    "option": "Option"
+    "option": "Option",
+    "last_updated": "Last Updated"
   },
   "button": {
     "add": "Add",
