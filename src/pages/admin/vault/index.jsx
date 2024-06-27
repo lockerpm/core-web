@@ -67,6 +67,14 @@ const Vault = () => {
     return currentPage?.params?.folder_id || null
   }, [currentPage])
 
+  const canChangeFolder = useMemo(() => {
+    const memberCollections = allCollections.filter((c) => !common.isOwner(c))
+    if (folderId) {
+      return !memberCollections.some(f => f.id === folderId)
+    }
+    return true
+  }, [folderId, allCollections])
+
   const originFolder = useMemo(() => {
     return [...allFolders, ...allCollections].find((c) => c.id === folderId)
   }, [allFolders, allCollections, folderId])
@@ -306,7 +314,7 @@ const Vault = () => {
             label: t('button.new_item'),
             type: 'primary',
             icon: <PlusOutlined />,
-            hide: currentPage.name === global.keys.TRASH || isEmpty,
+            hide: currentPage.name === global.keys.TRASH || isEmpty || !canChangeFolder,
             disabled: syncing || loading,
             click: (isTutorial = false) => {
               setIsTutorial(isTutorial)
