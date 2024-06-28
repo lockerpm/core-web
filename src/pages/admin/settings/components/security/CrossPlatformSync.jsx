@@ -38,7 +38,6 @@ const CrossPlatformSync = (props) => {
 
   const onConfirm = async (password) => {
     setCallingAPI(true);
-    await toggleSyncPlatforms();
     if (!userInfo.sync_all_platforms) {
       await commonServices.service_login({
         email: userInfo.email,
@@ -46,6 +45,7 @@ const CrossPlatformSync = (props) => {
         unlock_method: common.getUnlockMethod()
       })
     }
+    await toggleSyncPlatforms();
     setCallingAPI(false);
     setConfirmVisible(false);
   }
