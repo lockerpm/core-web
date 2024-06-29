@@ -97,10 +97,12 @@ const PasswordConfirmModal = (props) => {
       okButtonProps={{
         loading: checking || callingAPI,
         disabled: !password,
-        danger: danger
+        danger: danger,
+        size: "large"
       }}
       cancelButtonProps={{
-        disabled: checking || callingAPI
+        disabled: checking || callingAPI,
+        size: "large"
       }}
     >
       <div className="mb-2">
@@ -130,6 +132,7 @@ const PasswordConfirmModal = (props) => {
                   >
                     <Input.Password
                       autoFocus={true}
+                      size="large"
                       placeholder={t('placeholder.enter')}
                       disabled={checking || callingAPI}
                     />

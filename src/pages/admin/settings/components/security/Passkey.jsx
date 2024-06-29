@@ -26,7 +26,6 @@ const Passkey = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const userInfo = useSelector(state => state.auth.userInfo)
   const isConnected = useSelector(state => state.service.isConnected)
   const isMobile = useSelector(state => state.system.isMobile);
 
@@ -48,24 +47,12 @@ const Passkey = (props) => {
     }
   }
 
-  const handleAddNewKey = async (name) => {
+  const handleAddedKey = async () => {
+    global.pushSuccess(t('notification.success.passkey.added'))
     setCallingAPI(true);
-    await service.setApiToken(common.getAccessToken());
-    const encKey = await global.jsCore.cryptoService.getEncKey();
-    await service.setBackupPasswordlessUsingPasskey({
-      email: userInfo.email,
-      name: userInfo.name,
-      currentEncKey: encKey.key,
-      passkeyName: name
-    }).then(() => {
-      global.pushSuccess(t('notification.success.passkey.added'))
-      getBackupKeys();
-      setNewKeyVisible(false);
-      setCallingAPI(false);
-    }).catch((error) => {
-      global.pushError(error);
-      setCallingAPI(false);
-    });
+    await getBackupKeys();
+    setNewKeyVisible(false);
+    setCallingAPI(false);
   }
 
   const handleRemoveKey = async (keyId) => {
@@ -139,10 +126,10 @@ const Passkey = (props) => {
       }
       {
         newKeyVisible && <NewPasskeyModal
-          callingAPI={callingAPI}
+          changing={callingAPI}
           visible={newKeyVisible}
-          onConfirm={(name) => handleAddNewKey(name)}
           onClose={() => setNewKeyVisible(false)}
+          onConfirm={() => handleAddedKey()}
         />
       }
     </div>

@@ -87,6 +87,7 @@ const QrCodeModal = (props) => {
               >
                 <Input
                   autoFocus={true}
+                  size="large"
                   placeholder={t('placeholder.enter')}
                   disabled={callingAPI}
                 />
@@ -95,6 +96,7 @@ const QrCodeModal = (props) => {
                 className="w-full"
                 type="primary"
                 htmlType="submit"
+                size="large"
                 loading={callingAPI}
               >
                 {t('button.continue')}

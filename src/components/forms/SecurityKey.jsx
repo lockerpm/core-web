@@ -79,36 +79,13 @@ const PasswordlessForm = (props) => {
   }
 
   const handleContinue = async (pin = null) => {
-    if ((isLogin || userInfo?.login_method === 'passwordless') && !isAddKey) {
+    if (isLogin && !isAddKey) {
       await getPwl();
     } else {
       setPin(pin);
       await service.setApiToken(accessToken);
-      if (isAddKey) {
-        await setBackupPwl();
-      } else {
-        await setPwl();
-      }
+      await setBackupPwl();
     }
-  }
-
-  const setPwl = async () => {
-    setCallingAPI(true)
-    try {
-      const response = await service.setNewPasswordless({
-        email: userInfo.email,
-        name: selectedDevice.name,
-        deviceName: selectedDevice.name,
-        devicePath: selectedDevice.path,
-        pin: pin
-      })
-      setStep(2);
-      setPasswordless(response)
-      await onConfirm(response)
-    } catch (error) {
-      redirectByError(error)
-    }
-    setCallingAPI(false)
   }
 
   const setBackupPwl = async () => {
@@ -149,6 +126,25 @@ const PasswordlessForm = (props) => {
     }
     setCallingAPI(false)
   }
+
+  // const setPwl = async () => {
+  //   setCallingAPI(true)
+  //   try {
+  //     const response = await service.setNewPasswordless({
+  //       email: userInfo.email,
+  //       name: selectedDevice.name,
+  //       deviceName: selectedDevice.name,
+  //       devicePath: selectedDevice.path,
+  //       pin: pin
+  //     })
+  //     setStep(2);
+  //     setPasswordless(response)
+  //     await onConfirm(response)
+  //   } catch (error) {
+  //     redirectByError(error)
+  //   }
+  //   setCallingAPI(false)
+  // }
 
   const redirectByError = async (error) => {
     resetState()
