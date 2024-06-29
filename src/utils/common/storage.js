@@ -62,12 +62,12 @@ const getUnlockMethod = () => {
 }
 
 const updateLanguage = (data) => {
-  localStorage.setItem('secrets-language', JSON.stringify(data))
+  localStorage.setItem('passwords-language', JSON.stringify(data))
 }
 
 const getLanguage = () => {
   try {
-    const lang = JSON.parse(localStorage.getItem('secrets-language'))
+    const lang = JSON.parse(localStorage.getItem('passwords-language'))
     return [
       global.constants.LANGUAGE.EN,
       global.constants.LANGUAGE.VI,
