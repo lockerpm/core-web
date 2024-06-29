@@ -30,6 +30,7 @@ function AdminLayout(props) {
   const {
     Header,
     Footer,
+    Other,
     SidebarTop,
     SidebarCenter,
     SidebarBottom
@@ -218,6 +219,7 @@ function AdminLayout(props) {
               />
             </div>
           )}
+          <Other />
         </Layout>
       )}
     </>
