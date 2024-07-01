@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import {
   Card,
@@ -94,7 +94,12 @@ const PasskeyForm = (props) => {
         {
           isAddKey && <div>
             <div className="mb-2">
-              {t('security.passkey.add_new_key_description')}
+              <Trans
+                i18nKey={'security.passkey.add_new_key_note'}
+                components={{
+                  b: <b className="font-semibold"></b>
+                }}
+              />
             </div>
             <Form
               form={form}
@@ -104,6 +109,7 @@ const PasskeyForm = (props) => {
               <Form.Item
                 name={'passkeyName'}
                 disabled={callingAPI}
+                label={t('security.passkey.add_new_key_description')}
                 rules={[
                   global.rules.REQUIRED(t('common.name')),
                 ]}

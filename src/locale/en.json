@@ -456,9 +456,10 @@
     "no_key_found": "No key found",
     "scan_fingerprint": "Scan your fingerprint",
     "enter_key_pin": "Enter your security key PIN",
-    "touch_key": "Touch your security key",
-    "reload_devices": "Reload list devices",
-    "reload_keys": "Reload list keys",
+    "touch_key": "Touch your security key to complete",
+    "touch_key_when_add": "Touch your security key to complete. You must touch it twice.",
+    "reload_devices": "Reload list",
+    "reload_keys": "Reload list",
     "choose_a_key": "Choose a key to verify yourself",
     "new_password": "Enter new Password",
     "connect_security_key_to_login": "Connect to a security key.",
@@ -855,7 +856,8 @@
     "passkey": {
       "title": "Passkeys",
       "add_new_key": "Add new passkey",
-      "add_new_key_description": "Passkey name",
+      "add_new_key_note": "Use a security key or an Android phone to create a passkey. You are required to authenticate <b>twice</b> with your device.",
+      "add_new_key_description": "First, enter the passkey name.",
       "description": "Use Face, Fingerprint or PIN on a Android phone or security key to unlock your vault. Available on web browser."
     }, 
     "passwordless": {

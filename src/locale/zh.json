@@ -220,9 +220,9 @@
         "disabled": "雙重認證已停用"
       },
       "email_settings": {
-        "updated": "Mail plugin has been set up success.",
-        "reset": "Mail setting reset successfully.",
-        "send_test": "Send test email successfully."
+        "updated": "郵件外掛程式已設定成功。",
+        "reset": "郵件設定重設成功。",
+        "send_test": "發送測試郵件成功。"
       },
       "cipher": {
         "created": "已新增項目.",
@@ -293,14 +293,14 @@
         "updated": "您的設定已更新!"
       },
       "passkey": {
-        "added": "The new passkey has been added"
+        "added": "新的密鑰已新增"
       },
       "security_key": {
-        "added": "The new security key has been added"
+        "added": "新增了新的安全金鑰"
       },
       "sso_configuration": {
-        "updated": "The SSO Configuration has been updated.",
-        "reset": "The SSO Configuration has been reset."
+        "updated": "SSO 設定已更新。",
+        "reset": "SSO 設定已重設。"
       }
     },
     "warning": {
@@ -357,13 +357,13 @@
       "title": "歡迎回來!",
       "label": "登入",
       "note": "還沒有帳戶?",
-      "single_sign_on": "Single Sign-On",
+      "single_sign_on": "單一登入",
       "or_login_with": "或用 解鎖",
-      "your_passkey": "Your passkey",
-      "your_security_key": "Your security key"
+      "your_passkey": "你的萬能鑰匙",
+      "your_security_key": "您的安全金鑰"
     },
     "sign_up": {
-      "title": "Create admin account",
+      "title": "建立管理員帳戶",
       "label": "註冊",
       "note": "已有帳戶?"
     },
@@ -380,7 +380,7 @@
       "setup_pwl": "設定無密碼登入",
       "setup_pwl_description": "您的帳戶需要無密碼登入。設定無密碼登入以繼續.",
       "note": "已有帳戶？?",
-      "link_invalid": "Reset password link is invalid. Please enter password to update account information."
+      "link_invalid": "重設密碼連結無效。請輸入密碼以更新帳戶資訊。"
     },
     "setup_2fa": {
       "title": "啟用兩步驟驗證",
@@ -450,44 +450,45 @@
     "confirm_code": "確認瀏覽器中的程式碼是否與下列內容相符",
     "reset_code": "重置程式碼",
     "repair": "再次配對",
-    "open_desktop": "Desktop app connection is required. Please open Locker Desktop App",
-    "install_desktop": "Desktop app installation is required. Please download and install Locker Desktop App",
-    "connect_key": "Connect the key you want to add",
-    "no_key_found": "No key found",
-    "scan_fingerprint": "Scan your fingerprint",
-    "enter_key_pin": "Enter your security key PIN",
-    "touch_key": "Touch your security key",
-    "reload_devices": "Reload list devices",
-    "reload_keys": "Reload list keys",
-    "choose_a_key": "Choose a key to verify yourself",
-    "new_password": "Enter new Password",
-    "connect_security_key_to_login": "Connect to a security key.",
-    "connect_passkey_to_login": "Connect to a passkey.",
+    "open_desktop": "需要連接桌面應用，請開啟Locker桌面應用程式",
+    "install_desktop": "需要安裝桌面應用程序，請下載並安裝Locker桌面應用程式",
+    "connect_key": "連線要新增的金鑰",
+    "no_key_found": "未找到金鑰",
+    "scan_fingerprint": "掃描您的指紋",
+    "enter_key_pin": "輸入您的安全金鑰 PIN",
+    "touch_key": "觸摸您的安全金鑰即可完成",
+    "touch_key_when_add": "觸摸您的安全金鑰即可完成。您必須觸摸它兩次。",
+    "reload_devices": "重新載入列表",
+    "reload_keys": "重新載入列表",
+    "choose_a_key": "選擇一個金鑰來驗證自己",
+    "new_password": "輸入新密碼",
+    "connect_security_key_to_login": "連線到安全金鑰。",
+    "connect_passkey_to_login": "連線到密碼。",
     "errors": {
-      "0000": "Unspecified error",
-      "1000": "API error",
-      "1001": "API token not found",
-      "1002": "Passwordless is not enabled",
-      "2001": "Cannot connect to fido key",
-      "2002": "Cannot create credential, key return empty secret",
-      "2003": "Invalid PIN",
-      "2004": "Cannot find relying party",
-      "2005": "Cannot find any valid credential in this key",
-      "2006": "Cannot find the required credential in this key",
-      "2007": "Cannot use fingerprint, please use PIN instead",
-      "2008": "PIN validation failed to many times, key is blocked",
-      "2009": "Failed to verify fingerprint",
-      "2011": "FIDO action timed out",
-      "3001": "Client is not confirmed",
-      "3002": "No key",
-      "3003": "Cannot encrypt payload",
-      "3004": "Cannot decrypt response",
-      "3005": "Desktop is not paired",
-      "3006": "Desktop is not confirmed",
-      "4001": "Client not found",
-      "4002": "Cannot broadcast secure message",
-      "5001": "Background service is not connected",
-      "5002": "Background service failed to decrypt request"
+      "0000": "未指定的錯誤",
+      "1000": "API錯誤",
+      "1001": "未找到 API 令牌",
+      "1002": "未啟用無密碼",
+      "2001": "無法連線到 fido 金鑰",
+      "2002": "無法建立憑證，金鑰傳回空秘密",
+      "2003": "PIN 碼無效",
+      "2004": "找不到依賴方",
+      "2005": "在此金鑰中找不到任何有效憑證",
+      "2006": "無法在此金鑰中找到所需的憑證",
+      "2007": "無法使用指紋，請使用 PIN 碼",
+      "2008": "PIN 驗證多次失敗，金鑰被阻止",
+      "2009": "指紋驗證失敗",
+      "2011": "FIDO 操作逾時",
+      "3001": "客戶端未確認",
+      "3002": "沒有鑰匙",
+      "3003": "無法加密有效負載",
+      "3004": "無法解密回應",
+      "3005": "桌面未配對",
+      "3006": "桌面未確認",
+      "4001": "找不到客戶端",
+      "4002": "無法廣播安全訊息",
+      "5001": "後台服務未連線",
+      "5002": "後台服務無法解密請求"
     }
   },
   "change_password": {
@@ -855,7 +856,8 @@
     "passkey": {
       "title": "Passkeys",
       "add_new_key": "新增 passkey",
-      "add_new_key_description": "passkey 名稱",
+      "add_new_key_note": "使用安全金鑰或 Android 手機建立金鑰。您需要使用裝置進行<b>兩次</b>身份驗證。",
+      "add_new_key_description": "首先，輸入金鑰名稱。",
       "description": "使用 Android 手機上的人臉辨識、指紋或 PIN 碼或安全金鑰來解鎖您的保管庫。可在網頁瀏覽器上使用。"
     }, 
     "passwordless": {
@@ -866,21 +868,21 @@
       "require_passwordless": "您的企業需要無密碼登入且無法關閉"
     },
     "mobile_passwordless": {
-      "title": "Mobile passwordless login",
-      "description": "Scan a QR code to log in to the mobile app.",
-      "action": "Scan QR code",
-      "enter_code": "Enter OTP Code from the mobile app here",
-      "code": "OTP Code",
-      "point_phone": "Point your phone camera to the QR Code below to confirm Login",
-      "expire_in": "QR Code Expire in: {{expireCountdown}}s",
-      "expired": "QR Code Expired"
+      "title": "手機無密碼登入",
+      "description": "掃描二維碼登入手機應用程式。",
+      "action": "掃描二維碼",
+      "enter_code": "在此輸入行動應用程式中的 OTP 碼",
+      "code": "OTP 代碼",
+      "point_phone": "將手機相機對準下面的二維碼以確認登入",
+      "expire_in": "二維碼過期時間：{{expireCountdown}}s",
+      "expired": "二維碼已過期"
     },
     "cross_platform_sync": {
-      "title": "Cross-platform sync",
-      "description": "Enable login sync for your account across the web app, extension, and desktop app on the same device. Desktop app installation is required.",
-      "turn_on": "Turn on sync",
-      "turn_off": "Turn off sync",
-      "question": "Are you sure you want to {{action}}?"
+      "title": "跨平台同步",
+      "description": "在同一裝置上的網頁應用程式、擴充功能和桌面應用程式中為您的帳戶啟用登入同步。需要安裝桌面應用程式。",
+      "turn_on": "開啟同步",
+      "turn_off": "關閉同步",
+      "question": "您確定要執行 {{action}} 嗎？"
     },
     "two_fa": {
       "title": "雙因素認證（2FA）",
@@ -1069,48 +1071,48 @@
     "subtitle": "副標題"
   },
   "email_settings": {
-    "title": "Email Settings",
-    "description": "Integrate with an Email service Provider to enable email notifications for your group members.",
+    "title": "電子郵件設定",
+    "description": "與電子郵件服務提供者集成，為您的群組成員啟用電子郵件通知。",
     "email_provider": {
-      "title": "Email Provider",
-      "description": "Choose an Email Provider that you want to use for email sending."
+      "title": "電子郵件提供者",
+      "description": "選擇您要用於傳送電子郵件的電子郵件提供者。"
     },
     "set_up_integration": {
-      "title": "Set up Integration"
+      "title": "設定集成"
     },
     "general": {
-      "from_email": "From email",
-      "from_email_placeholder": "Default address that emails will be sent from",
-      "from_name": "From name",
-      "from_name_placeholder": "Default name that emails will be sent from"
+      "from_email": "來自電子郵件",
+      "from_email_placeholder": "發送電子郵件的預設位址",
+      "from_name": "寄件者姓名",
+      "from_name_placeholder": "傳送電子郵件的預設名稱"
     },
     "smtp": {
       "title": "SMTP",
-      "provider": "SMTP Provider",
-      "description": "The SMTP Credentials will be stored in your database. A few important expectations about your server:",
-      "description1": "It must support LOGIN authentication",
-      "description2": "It must support TLS 1.0 or higher",
-      "note": "Need help to integrate with SMTP?",
-      "note_link": "Follow our instructions",
-      "host": "Host",
-      "host_placeholder": "Your SMTP Host",
-      "port": "Port",
-      "port_placeholder": "SMTP Port",
-      "port_description": "Common ports for SMTP transmission are 25, 465, 587.",
-      "username": "Username",
-      "username_placeholder": "Your SMTP Username",
-      "password": "Password",
-      "password_placeholder": "Your SMTP Password "
+      "provider": "SMTP 提供者",
+      "description": "SMTP 憑證將儲存在您的資料庫中。關於您的伺服器的一些重要期望：",
+      "description1": "必須支援LOGIN認證",
+      "description2": "必須支援 TLS 1.0 或更高版本",
+      "note": "需要協助來與 SMTP 整合嗎？",
+      "note_link": "按照我們的指示操作",
+      "host": "主機",
+      "host_placeholder": "您的 SMTP 主機",
+      "port": "連接埠",
+      "port_placeholder": "SMTP 連接埠",
+      "port_description": "SMTP傳輸常用埠為25、465、587。",
+      "使用者名稱": "使用者名稱",
+      "username_placeholder": "您的 SMTP 使用者名稱",
+      "密碼": "密碼",
+      "password_placeholder": "您的 SMTP 密碼 "
     },
     "amazon_ses": {
       "title": "Amazon SES"
     },
     "send_grid": {
-      "title": "SendGrid",
-      "api_key": "API Key",
-      "api_key_placeholder": "SendGrid’s API Key",
-      "domain": "Domain/Subdomain",
-      "domain_placeholder": "Domain/Subdomain configured in SendGrid"
+      "title": "發送網格",
+      "api_key": "API 金鑰",
+      "api_key_placeholder": "SendGrid 的 API 金鑰",
+      "domain": "網域/子網域",
+      "domain_placeholder": "在 SendGrid 中配置的域/子域"
     },
     "sendinblue": {
       "title": "Sendinblue"
@@ -1122,36 +1124,36 @@
       "title": "Outlook"
     },
     "send_test": {
-      "title": "Send test email",
-      "description": "Enter an email address to send a test email to"
+      "title": "發送測試郵件",
+      "description": "輸入用於傳送測試電子郵件的電子郵件地址"
     },
     "reset": {
-      "title": "Reset Email Plugin?",
-      "description": "Are you sure to reset? All changes you have made will be reset and your users will no longer receive emails."
+      "title": "重置電子郵件外掛？",
+      "description": "您確定要重置嗎？您所做的所有更改都將被重置，您的用戶將不再收到電子郵件。"
     }
   },
   "sso_configuration": {
-    "title": "OAuth Configuration",
-    "description": "Configuration OAuth to require users log in using SSO",
-    "sso_provider": "Provider",
-    "identifier": "Identifier",
-    "oauth_authorization_url": "OAuth authorization URL",
-    "oauth_token_url": "OAuth token URL",
-    "redirect_behavior": "Redirect behavior",
-    "api_url": "API URL providing user details when authenticated",
-    "oauth_client_id": "OAuth Client ID",
-    "oauth_client_secret": "OAuth Client secret",
-    "oauth_scopes": "OAuth scopes to request",
-    "email_claim_types": "Email claim types",
-    "name_claim_types": "Name claim types",
-    "reset_question": "Are you sure you want to reset config?",
+    "title": "OAuth 配置",
+    "description": "設定 OAuth 以要求使用者使用 SSO 登入",
+    "sso_provider": "提供者",
+    "identifier": "標識符",
+    "oauth_authorization_url": "OAuth 授權 URL",
+    "oauth_token_url": "OAuth 令牌 URL",
+    "redirect_behavior": "重定向行為",
+    "api_url": "經過驗證時提供使用者詳細資料的 API URL",
+    "oauth_client_id": "OAuth 用戶端 ID",
+    "oauth_client_secret": "OAuth 用戶端秘密",
+    "oauth_scopes": "要要求的 OAuth 範圍",
+    "email_claim_types": "電子郵件宣告類型",
+    "name_claim_types": "命名宣告類型",
+    "reset_question": "您確定要重設配置嗎？",
     "placeholder": {
       "sso_provider": "oauth2",
       "identifier": "vincss-sso",
       "https": "https://",
-      "enter_id": "Enter ID",
-      "enter_secret": "Enter secret",
-      "enter_scopes": "Read or ...",
+      "enter_id": "輸入身分證號",
+      "enter_secret": "輸入秘密",
+      "enter_scopes": "閱讀或 ...",
       "email_claim_types": "EX: email",
       "name_claim_types": "EX: name"
     }
@@ -1159,125 +1161,125 @@
   "enterprise_dashboard": {
     "title": "儀表板",
     "adoption_rate": {
-      "title": "Adoption Rate",
-      "accessed": "Accessed",
-      "requested": "Requested",
-      "created": "Created",
-      "total": "Total users"
+      "title": "採用率",
+      "accessed": "已存取",
+      "requested": "請求",
+      "created": "已建立",
+      "total": "總用戶數"
     },
     "news": {
-      "title": "News",
-      "users_blocked": "Users being blocked by failed logins"
+      "title": "訊息",
+      "users_blocked": "使用者因登入失敗而被阻止"
     },
     "user_login": {
-      "title": "User logins by time",
-      "user": "User"
+      "title": "使用者按時間登入",
+      "user": "使用者"
     },
     "password_security": {
-      "title": "Password Security",
-      "weak_password": "Users with weak Password",
-      "more_than_weak_passwords": "Users with more than 10 weak passwords",
-      "leaked_account": "Users with at least 1 leaked account"
+      "title": "密碼安全",
+      "weak_password": "密碼較弱的使用者",
+      "more_than_weak_passwords": "擁有超過 10 個弱密碼的使用者",
+      "leaked_account": "至少有 1 個洩漏帳戶的使用者"
     },
     "users_blocked": {
-      "title": "Users blocked by failed logins"
+      "title": "使用者因登入失敗而被阻止"
     }
   },
   "enterprise_members": {
-    "title": "Users",
-    "user_email": "User email",
-    "role": "Role",
-    "upload_file": "Upload file",
-    "upload_file_guide": "or Upload file of users (CSV format)",
-    "add": "Invite user",
-    "edit": "Edit user info",
-    "all_roles": "All roles",
-    "all_statuses": "All statuses",
+    "title": "使用者",
+    "user_email": "使用者電子郵件",
+    "role": "角色",
+    "upload_file": "上傳檔案",
+    "upload_file_guide": "或上傳使用者檔案（CSV 格式）",
+    "add": "邀請使用者",
+    "edit": "編輯使用者資訊",
+    "all_roles": "所有角色",
+    "all_statuses": "所有狀態",
     "tabs": {
-      "active": "Active licenses",
-      "pending": "Pending members",
-      "disabled": "Disabled members",
-      "blocked": "Blocked members"
+      "active": "有效許可證",
+      "pending": "待定成員",
+      "disabled": "殘障會員",
+      "blocked": "已封鎖成員"
     },
     "form": {
-      "title": "Invite people to company",
-      "username_description": "Add user(s) email and press the Enter key",
-      "role_description": "Role of new member(s)",
-      "full_name_description": "Full name of new member",
-      "new_member_info": "New member information",
-      "new_member_description": "The password(s) will be displayed once. Copy or download to share with the right people. You may skip this step if you've set up {{mail}} to send email invitations",
-      "new_member_invite": "If you have set up {{mail}}, the new member(s) will receive an invitation via their email address"
+      "title": "邀請人來公司",
+      "username_description": "新增使用者電子郵件並按 Enter 鍵",
+      "role_description": "新成員的角色",
+      "full_name_description": "新成員的全名",
+      "new_member_info": "新會員資料",
+      "new_member_description": "密碼將顯示一次。複製或下載以與合適的人分享。如果您已設定 {{mail}} 發送電子郵件邀請，則可以跳過此步驟",
+      "new_member_invite": "如果您設定了 {{mail}}，新成員將透過他們的電子郵件地址收到邀請"
     }
   },
   "enterprise_groups": {
-    "title": "Groups",
-    "group_name": "Group name",
-    "add": "New group",
-    "edit": "Edit group info",
-    "users": "Group users",
-    "users_of_group": "List users of groups",
+    "title": "組",
+    "group_name": "群組名稱",
+    "add": "新群組",
+    "edit": "編輯群組資訊",
+    "users": "群組使用者",
+    "users_of_group": "列出群組的使用者",
     "no_data": {
-      "title": "Add your first company group",
-      "description": "Add an group to manage users."
+      "title": "新增您的第一個公司群組",
+      "description": "新增一個群組來管理使用者。"
     }
   },
   "enterprise_policies": {
-    "title": "Policies",
+    "title": "政策",
     "password_requirements": {
-      "title": "Password requirements",
-      "description": "Force users to use strong password.",
+      "title": "密碼要求",
+      "description": "強制使用者使用強密碼。",
       "modal": {
-        "description": "Set password requirements for your members. These rules apply to all passwords in their vault.",
-        "minimum_password_length": "Minimum password length",
-        "password_complexity": "Password complexity",
-        "requires_lowercase": "Requires lowercase",
-        "requires_uppercase": "Requires UPPERCASE",
-        "requires_digit": "Requires digit",
-        "requires_special_character": "Requires special character"
+        "description": "為您的成員設定密碼要求。這些規則適用於其保管庫中的所有密碼。",
+        "minimum_password_length": "最小密碼長度",
+        "password_complexity": "密碼複雜度",
+        "requires_lowercase": "需要小寫",
+        "requires_uppercase": "需要大寫",
+        "requires_digit": "需要數字",
+        "requires_special_character": "需要特殊字元"
       }
     },
     "block_failed_logins": {
-      "title": "Block failed logins",
-      "description": "Block user when there are multiple failed login attempts.",
+      "title": "阻止失敗的登入",
+      "description": "當多次登入嘗試失敗時阻止使用者。",
       "modal": {
-        "description": "Block users from logging in Locker when there are too many failed logins.",
-        "block_when": "Block a user when there are:",
-        "how_long": "How long do you want to block user from logging in?",
-        "receive_an_email": "Receive an email when a member gets blocked",
-        "do_not_notify_me": "Do not notify me",
-        "failed_login_attempts": "failed login attempts"
+        "description": "登入失敗次數過多時，阻止使用者登入Locker。",
+        "block_when": "當出現下列情況時封鎖使用者：",
+        "how_long": "您希望阻止使用者登入多久？",
+        "receive_an_email": "當會員被封鎖時收到電子郵件",
+        "do_not_notify_me": "不要通知我",
+        "failed_login_attempts": "登入嘗試失敗"
       }
     },
     "passwordless_login": {
-      "title": "Passwordless login",
-      "description": "Users are forced to use passwordless to login to Locker.",
+      "title": "無密碼登入",
+      "description": "使用者強制使用無密碼登入Locker。",
       "modal": {
-        "description": "Require users to login using passwordless method (currently FIDO2 standard).",
-        "choose_password_or_passwordless": "User can choose Passwordless or Password",
-        "only_allow_passwordless": "Only allow passwordless (Password is disabled)"
+        "description": "要求使用者使用無密碼方式登入（目前為 FIDO2 標準）。",
+        "choose_password_or_passwordless": "使用者可以選擇無密碼或有密碼",
+        "only_allow_passwordless": "僅允許無密碼（密碼被停用）"
       }
     },
     "log_in_with_2fa": {
-      "title": "Log in with 2FA",
-      "description": "Users are forced to use 2FA to login to Locker for the first time on new devices.",
+      "title": "使用 2FA 登入",
+      "description": "使用者在新裝置上首次登入Locker時被迫使用2FA。",
       "modal": {
-        "description": "Require users to use Two-Factor Authentication (2FA) to log in to their locker accounts for the first time on new devices.",
-        "description1": "When turned on, users are forced to use an authenticator of their choices (ex: Google Authenticator, Authy, Locker,...)",
-        "only_admin_and_primary_admin": "Only Admin and Primary Admin",
-        "apply_to_all_users": "Apply to all users"
+        "description": "要求使用者在新裝置上首次登入其儲物櫃帳戶時使用雙重認證 (2FA)。",
+        "description1": "開啟後，使用者被迫使用自己選擇的身份驗證器（例如：Google Authenticator、Authy、Locker...）",
+        "only_admin_and_primary_admin": "僅限管理員和主管理員",
+        "apply_to_all_users": "適用於所有使用者"
       }
     }
   },
   "enterprise_activity_logs": {
-    "title": "Activity Logs",
-    "all_actions": "All actions",
-    "all_users": "All users",
+    "title": "活動日誌",
+    "all_actions": "所有動作",
+    "all_users": "所有使用者",
     "actions": {
-      "member_status": "Member status",
-      "role_changes": "Role changes",
-      "policy_violations": "Policy violations",
-      "user_login": "User login",
-      "sharing": "Sharing"
+      "member_status": "會員狀態",
+      "role_changes": "角色變更",
+      "policy_violations": "違反政策",
+      "user_login": "使用者登入",
+      "sharing": "分享"
     }
   },
   "password_history": {

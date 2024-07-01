@@ -284,9 +284,16 @@ const PasswordlessForm = (props) => {
         }
         {
           (isTouch || isFingerprint) && !passwordless && <div className="mt-10">
-            <p className="mt-6 text-left">
-              {isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
-            </p>
+            {
+              isAddKey && <p className="mt-6 text-left">
+                {t('passwordless.touch_key_when_add')}
+              </p>
+            }
+            {
+              !isAddKey && <p className="mt-6 text-left">
+                {isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
+              </p>
+            }
             <Card className="mt-2">
               <ImageIcon
                 name={'fingerprint'}

@@ -456,9 +456,10 @@
     "no_key_found": "Không tìm thấy khóa nào",
     "scan_fingerprint": "Quét vân tay của bạn",
     "enter_key_pin": "Nhập PIN của khóa bảo mật",
-    "touch_key": "Chạm vào khóa bảo mật của bạn",
-    "reload_devices": "Tải lại danh sách thiết bị",
-    "reload_keys": "Tải lại danh sách khoá",
+    "touch_key": "Chạm vào khóa bảo mật của bạn để hoàn thành",
+    "touch_key_when_add": "Chạm vào khóa bảo mật của bạn để hoàn thành. Bạn phải chạm vào nó hai lần.",
+    "reload_devices": "Tải lại danh sách",
+    "reload_keys": "Tải lại danh sách",
     "choose_a_key": "Chọn một khóa để xác thực bạn",
     "new_password": "Nhập mật khẩu mới",
     "connect_security_key_to_login": "Kết nối với một khóa bảo mật.",
@@ -855,7 +856,8 @@
     "passkey": {
       "title": "Passkeys",
       "add_new_key": "Thêm passkey mới",
-      "add_new_key_description": "Tên passkey",
+      "add_new_key_note": "Sử dụng khóa bảo mật hoặc điện thoại Android để tạo mật mã. Bạn được yêu cầu xác thực <b>hai lần</b> bằng thiết bị của mình.",
+      "add_new_key_description": "Đầu tiên, nhập tên mật mã.",
       "description": "Sử dụng Khuôn mặt, Dấu vân tay hoặc mã PIN trên điện thoại Android hoặc khóa bảo mật để mở khóa kho tiền của bạn. Có sẵn trên trình duyệt web."
     },
     "passwordless": {
