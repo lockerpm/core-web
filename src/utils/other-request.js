@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { handleResponseErrorMessage } from './response'
+import response from './response'
 import common from './common'
 
 // create an axios instance
@@ -29,7 +29,7 @@ service.interceptors.response.use(
     return res
   },
   async error => {
-    return Promise.reject(await handleResponseErrorMessage(error))
+    return Promise.reject(await response.handleResponseErrorMessage(error))
   }
 )
 

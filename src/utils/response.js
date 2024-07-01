@@ -2,7 +2,7 @@ import authServices from '../services/auth'
 import global from '../config/global'
 import common from '../utils/common'
 
-export async function handleResponseErrorMessage(err) {
+const handleResponseErrorMessage = async (err) => {
   if (err.response === undefined) {
     return err
   }
@@ -16,4 +16,8 @@ export async function handleResponseErrorMessage(err) {
     }
   }
   return err
+}
+
+export default {
+  handleResponseErrorMessage
 }
