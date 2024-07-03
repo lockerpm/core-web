@@ -68,7 +68,8 @@ const PasswordlessForm = (props) => {
     if (isConnected) {
       setLoading(true)
       try {
-        const devices = await service.getFidoDeviceList() || [];
+        const deviceList = await service.getFidoDeviceList() || [];
+        const devices = deviceList.filter((d) => !d.name?.toLowerCase()?.includes('windows hello'))
         setDevices(devices);
         setSelectedDevice(devices[0] || null)
       } catch (error) {
@@ -79,10 +80,10 @@ const PasswordlessForm = (props) => {
   }
 
   const handleContinue = async (pin = null) => {
+    setPin(pin);
     if (isLogin && !isAddKey) {
       await getPwl();
     } else {
-      setPin(pin);
       await service.setApiToken(accessToken);
       await setBackupPwl();
     }
