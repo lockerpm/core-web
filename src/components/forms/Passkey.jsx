@@ -103,6 +103,7 @@ const PasskeyForm = (props) => {
             </div>
             <Form
               form={form}
+              layout="vertical"
               disabled={callingAPI}
               onFinish={setBackupPwl}
             >

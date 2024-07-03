@@ -76,6 +76,7 @@ const QrCodeModal = (props) => {
             </div>
             <Form
               form={form}
+              layout="vertical"
               onFinish={handleContinue}
             >
               <Form.Item

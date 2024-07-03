@@ -121,6 +121,7 @@ const PasswordConfirmModal = (props) => {
             {
               !['security_key', 'passkey'].includes(unlockMethod) && <div>
                 <Form
+                  layout="vertical"
                   form={form}
                   onFinish={handleConfirm}
                 >
