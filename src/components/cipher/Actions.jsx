@@ -184,7 +184,7 @@ const Actions = (props) => {
         },
         {
           key: 'view_password_history',
-          hide: originCipher.type !== CipherType.Login,
+          hide: originCipher.type !== CipherType.Login || !common.isOwnerCipher(originCipher),
           disabled: !originCipher?.passwordHistory?.length,
           label: t('inventory.actions.view_password_history'),
           onClick: () => viewHistory()
