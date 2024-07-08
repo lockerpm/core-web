@@ -1833,10 +1833,10 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@lockerpm/client-service@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@lockerpm/client-service/-/client-service-1.1.0.tgz#042c4aa7b4c5ab3364e457f4907ef98b8b82b68d"
-  integrity sha512-LwhZDRVAbuURX456PTkY/p7LkpaGa5eZqrVAj1/MtEpgnVAg+4sfEEEhGtE+cRypxLbRw1UUOlK+onrKkdPuJQ==
+"@lockerpm/client-service@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@lockerpm/client-service/-/client-service-1.2.2.tgz#9c92e2ca8d05fb85437a58c9748a247f1bc715d6"
+  integrity sha512-Z3wWKMbDUzqRfQCP1MbyvOwhDfkD0V4TXMou4OFjrCRn24LtB2WKEHeDIUFYcsoVmOF6qbxacmXkLYnyxOgD+w==
   dependencies:
     axios "^1.6.2"
     eventemitter3 "^5.0.1"

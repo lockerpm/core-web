@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@lockerpm/client-service": "^1.1.0",
+    "@lockerpm/client-service": "^1.2.2",
     "@lockerpm/design": "^1.0.17",
     "apexcharts": "^3.44.2",
     "axios": "^0.27.2",

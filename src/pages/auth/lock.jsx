@@ -377,7 +377,6 @@ const Lock = () => {
                               {
                                 otherMethod === 'passkey' && <Passkey
                                   changing={loading}
-                                  isLogin={true}
                                   userInfo={userInfo}
                                   onConfirm={(password) => handleSubmit({
                                     password

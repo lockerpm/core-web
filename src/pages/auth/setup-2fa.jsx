@@ -267,7 +267,6 @@ const Setup2FA = () => {
                   {
                     !isPair && otherMethod === 'passkey' && <Passkey
                       changing={loading}
-                      isLogin={true}
                       userInfo={preLogin}
                       onConfirm={(password) => handleSignIn({ current_password: password })}
                     />

@@ -284,7 +284,6 @@ const SignInForm = (props) => {
                 {
                   otherMethod === 'passkey' && <Passkey
                     changing={loading}
-                    isLogin={true}
                     userInfo={preLogin}
                     onConfirm={(password) => handleSubmit({
                       username: preLogin.email,
