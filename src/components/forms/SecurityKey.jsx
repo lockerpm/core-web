@@ -33,7 +33,6 @@ const PasswordlessForm = (props) => {
     isLogin = false,
     userInfo = {},
     isAddKey = false,
-    securityKeys = [],
     accessToken = common.getAccessToken(),
     onRepair = () => { },
     onConfirm = () => { }
@@ -273,12 +272,12 @@ const PasswordlessForm = (props) => {
               </p>
             }
             {
-              !isAddKey && securityKeys?.length <= 1 && <p className="mt-6 text-left">
+              !isAddKey && (userInfo?.security_keys || []).length <= 1 && <p className="mt-6 text-left">
                 {isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
               </p>
             }
             {
-              !isAddKey && securityKeys?.length > 1 && <p className="mt-6 text-left">
+              !isAddKey && (userInfo?.security_keys || []).length > 1 && <p className="mt-6 text-left">
                 {isTouch ? t('passwordless.touch_key_when_add') : t('passwordless.scan_fingerprint_twice')}
               </p>
             }
