@@ -33,6 +33,7 @@ const PasswordlessForm = (props) => {
     isLogin = false,
     userInfo = {},
     isAddKey = false,
+    securityKeys = [],
     accessToken = common.getAccessToken(),
     onRepair = () => { },
     onConfirm = () => { }
@@ -127,25 +128,6 @@ const PasswordlessForm = (props) => {
     }
     setCallingAPI(false)
   }
-
-  // const setPwl = async () => {
-  //   setCallingAPI(true)
-  //   try {
-  //     const response = await service.setNewPasswordless({
-  //       email: userInfo.email,
-  //       name: selectedDevice.name,
-  //       deviceName: selectedDevice.name,
-  //       devicePath: selectedDevice.path,
-  //       pin: pin
-  //     })
-  //     setStep(2);
-  //     setPasswordless(response)
-  //     await onConfirm(response)
-  //   } catch (error) {
-  //     redirectByError(error)
-  //   }
-  //   setCallingAPI(false)
-  // }
 
   const redirectByError = async (error) => {
     resetState()
@@ -291,8 +273,13 @@ const PasswordlessForm = (props) => {
               </p>
             }
             {
-              !isAddKey && <p className="mt-6 text-left">
+              !isAddKey && securityKeys?.length <= 1 && <p className="mt-6 text-left">
                 {isTouch ? t('passwordless.touch_key') : t('passwordless.scan_fingerprint')}
+              </p>
+            }
+            {
+              !isAddKey && securityKeys?.length > 1 && <p className="mt-6 text-left">
+                {isTouch ? t('passwordless.touch_key_when_add') : t('passwordless.scan_fingerprint_twice')}
               </p>
             }
             <Card className="mt-2">

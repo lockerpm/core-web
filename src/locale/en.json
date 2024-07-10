@@ -455,6 +455,7 @@
     "connect_key": "Connect the key you want to add",
     "no_key_found": "No key found",
     "scan_fingerprint": "Scan your fingerprint",
+    "scan_fingerprint_twice": "Scan your fingerprint. You must do it twice.",
     "enter_key_pin": "Enter your security key PIN",
     "touch_key": "Touch your security key to complete",
     "touch_key_when_add": "Touch your security key to complete. You must touch it twice.",

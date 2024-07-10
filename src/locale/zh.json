@@ -455,6 +455,7 @@
     "connect_key": "連線要新增的金鑰",
     "no_key_found": "未找到金鑰",
     "scan_fingerprint": "掃描您的指紋",
+    "scan_fingerprint_twice": "掃描您的指紋。你必須做兩次。",
     "enter_key_pin": "輸入您的安全金鑰 PIN",
     "touch_key": "觸摸您的安全金鑰即可完成",
     "touch_key_when_add": "觸摸您的安全金鑰即可完成。您必須觸摸它兩次。",

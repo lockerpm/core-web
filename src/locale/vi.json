@@ -455,6 +455,7 @@
     "connect_key": "Kết nối khóa bảo mật bạn muốn thêm với máy tính.",
     "no_key_found": "Không tìm thấy khóa nào",
     "scan_fingerprint": "Quét vân tay của bạn",
+    "scan_fingerprint_twice": "Quét dấu vân tay của bạn. Bạn phải thực hiện hai lần.",
     "enter_key_pin": "Nhập PIN của khóa bảo mật",
     "touch_key": "Chạm vào khóa bảo mật của bạn để hoàn thành",
     "touch_key_when_add": "Chạm vào khóa bảo mật của bạn để hoàn thành. Bạn phải chạm vào nó hai lần.",
