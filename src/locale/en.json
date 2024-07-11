@@ -863,7 +863,7 @@
     }, 
     "passwordless": {
       "title": "Security Keys",
-      "description": "Authenticate with a physical security key to unlock your vault (you can add up to 4 keys). Desktop app installation is required.",
+      "description": "Authenticate with a physical security key to unlock your vault (you can add up to 3 keys). Desktop app installation is required.",
       "security_keys_added": "Security keys added",
       "add_new_key": "Add new key",
       "require_passwordless": "Passwordless login is required within your business and cannot be turn off."
