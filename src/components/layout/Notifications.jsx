@@ -240,9 +240,9 @@ function Notifications() {
       }
       const members = await Promise.all(
         emails.map(async email => {
-          const publicKey = await sharingServices.get_public_key({ email })
-          const key = publicKey
-            ? await global.jsCore.cryptoService.generateMemberKey(publicKey, { id: sharingId })
+          const response = await sharingServices.get_public_key({ email })
+          const key = response?.public_key
+            ? await global.jsCore.cryptoService.generateMemberKey(response.public_key, { id: sharingId })
             : null
           return {
             username: email,
