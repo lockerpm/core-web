@@ -137,7 +137,13 @@ function FormData(props) {
     if (visible) {
       initData();
     }
-  }, [visible, item, myShares, originCollection, menuType])
+  }, [
+    visible,
+    item,
+    myShares,
+    originCollection,
+    menuType
+  ])
 
   const initData = async () => {
     if (menuType !== menuTypes.QUICK_SHARES) {
@@ -322,7 +328,6 @@ function FormData(props) {
               }
               {
                 menuType !== menuTypes.QUICK_SHARES && <ShareMembers
-                  orgKey={orgKey}
                   menuType={menuType}
                   menuTypes={menuTypes}
                   cipherOrFolder={originCipher || originCollection}

@@ -242,7 +242,7 @@ function Notifications() {
         emails.map(async email => {
           const publicKey = await sharingServices.get_public_key({ email })
           const key = publicKey
-            ? await common.generateMemberKey(publicKey, orgKey)
+            ? await global.jsCore.cryptoService.generateMemberKey(publicKey, { id: sharingId })
             : null
           return {
             username: email,
