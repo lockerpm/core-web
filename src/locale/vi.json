@@ -863,7 +863,7 @@
     },
     "passwordless": {
       "title": "Khóa Bảo mật",
-      "description": "Xác thực với khóa bảo mật vật lý để mở khóa vault của bạn (bạn có thể thêm tối đa 4 khóa). Yêu cầu cài đặt ứng dụng cho máy tính.",
+      "description": "Xác thực với khóa bảo mật vật lý để mở khóa vault của bạn (bạn có thể thêm tối đa 3 khóa). Yêu cầu cài đặt ứng dụng cho máy tính.",
       "security_keys_added": "Đã thêm khóa bảo mật",
       "add_new_key": "Thêm khóa mới",
       "require_passwordless": "Đăng nhập không mật khẩu được yêu cầu trong doanh nghiệp của bạn và không thể tắt."

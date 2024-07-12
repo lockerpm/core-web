@@ -863,7 +863,7 @@
     }, 
     "passwordless": {
       "title": "安全金鑰",
-      "description": "驗證使用實體安全金鑰解鎖您的保管庫（您最多可以新增 4 個新金鑰）。需要安裝桌面應用程式",
+      "description": "驗證使用實體安全金鑰解鎖您的保管庫（您最多可以新增 3 個新金鑰）。需要安裝桌面應用程式",
       "security_keys_added": "新增了安全金鑰",
       "add_new_key": "新增",
       "require_passwordless": "您的企業需要無密碼登入且無法關閉"
