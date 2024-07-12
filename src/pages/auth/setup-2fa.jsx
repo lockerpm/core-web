@@ -259,7 +259,6 @@ const Setup2FA = () => {
                     !isPair && otherMethod === 'security_key' && <SecurityKey
                       changing={callingAPI}
                       userInfo={preLogin}
-                      isLogin={true}
                       onRepair={() => setIsPair(true)}
                       onConfirm={(password) => handleSignIn({ current_password: password })}
                     />

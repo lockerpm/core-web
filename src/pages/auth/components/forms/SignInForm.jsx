@@ -204,7 +204,6 @@ const SignInForm = (props) => {
         {
           isPair && <Pairing
             userInfo={preLogin}
-            isLogin={true}
             onConfirm={() => handlePairConfirm()}
           />
         }
@@ -272,7 +271,6 @@ const SignInForm = (props) => {
                 {
                   otherMethod === 'security_key' && <SecurityKey
                     changing={loading}
-                    isLogin={true}
                     userInfo={preLogin}
                     onRepair={() => setIsPair(true)}
                     onConfirm={(password) => handleSubmit({

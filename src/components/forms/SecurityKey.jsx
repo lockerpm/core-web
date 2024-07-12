@@ -25,12 +25,11 @@ import storeActions from "../../store/actions";
 import global from "../../config/global";
 import common from "../../utils/common";
 
-const PasswordlessForm = (props) => {
+const SecurityKeyForm = (props) => {
   const { ImageIcon } = itemsComponents;
   const { t } = useTranslation()
   const {
     changing = false,
-    isLogin = false,
     userInfo = {},
     isAddKey = false,
     accessToken = common.getAccessToken(),
@@ -81,7 +80,7 @@ const PasswordlessForm = (props) => {
 
   const handleContinue = async (pin = null) => {
     setPin(pin);
-    if (isLogin && !isAddKey) {
+    if (!isAddKey) {
       await getPwl();
     } else {
       await service.setApiToken(accessToken);
@@ -174,16 +173,9 @@ const PasswordlessForm = (props) => {
       <div className="passwordless-form text-center">
         {
           step === 0 && !callingAPI && !changing && <div>
-            {
-              isLogin && <p className={`my-6 text-left`}>
-                {t('passwordless.connect_security_key_to_login')}
-              </p>
-            }
-            {
-              !isLogin && <p className={`my-6 text-left`}>
-                {userInfo?.login_method === 'passwordless' ? t('passwordless.choose_a_key') : t('passwordless.connect_key')}
-              </p>
-            }
+            <p className={`my-6 text-left`}>
+              { isAddKey ? t('passwordless.connect_key') : t('passwordless.connect_security_key_to_login')}
+            </p>
             {
               devices.length === 0 && <Card
                 bodyStyle={{ padding: '9px 24px' }}
@@ -308,4 +300,4 @@ const PasswordlessForm = (props) => {
   );
 }
 
-export default PasswordlessForm;
+export default SecurityKeyForm;

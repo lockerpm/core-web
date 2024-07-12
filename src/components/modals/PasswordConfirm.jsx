@@ -31,7 +31,6 @@ const PasswordConfirmModal = (props) => {
     okText = '',
     callingAPI = false,
     width = 360,
-    requireDesktop = false,
     onConfirm = () => { },
     onClose = () => { },
   } = props;
@@ -44,8 +43,8 @@ const PasswordConfirmModal = (props) => {
   const [checking, setChecking] = useState(false);
   const [timeNow, setTimeNow] = useState(new Date().getTime());
 
-  const password = Form.useWatch('password', form);
   const unlockMethod = common.getUnlockMethod();
+  const inputPassword = Form.useWatch('password', form);
 
   useEffect(() => {
     form.resetFields();
@@ -55,24 +54,32 @@ const PasswordConfirmModal = (props) => {
 
   useEffect(() => {
     if (unlockMethod === 'security_key') {
-      setIsPair((requireDesktop || userInfo?.login_method === 'passwordless') && (!isConnected || (requireDesktop && !service.pairingService?.hasKey)));
+      setIsPair((!isConnected || !service.pairingService?.hasKey));
     } else {
       setIsPair(false);
     }
-  }, [isConnected, userInfo])
+  }, [isConnected, unlockMethod])
 
-  const handleConfirm = async () => {
-    form.validateFields().then(async () => {
-      setChecking(true)
-      const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
-      const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
-      if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
-        onConfirm(password);
-      } else {
-        global.pushError({ message: t('validation.invalid', { name: t('lock.master_password') }) })
-      }
-      setChecking(false);
-    })
+  const handleConfirm = async (password) => {
+    if (password) {
+      await validatePassword(password)
+    } else {
+      form.validateFields().then(async (values) => {
+        await validatePassword(values.password)
+      })
+    }
+  }
+
+  const validatePassword = async (password) => {
+    setChecking(true)
+    const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
+    const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
+    if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
+      onConfirm(password);
+    } else {
+      global.pushError({ message: t('validation.invalid', { name: t('lock.master_password') }) })
+    }
+    setChecking(false);
   }
 
   return (
@@ -93,10 +100,10 @@ const PasswordConfirmModal = (props) => {
       okText={okText}
       onOk={() => handleConfirm()}
       onCancel={() => onClose()}
-      footer={(userInfo?.login_method === 'password' || !isPair) ? undefined : false}
+      footer={(!['security_key', 'passkey'].includes(unlockMethod) && !isPair) ? undefined : false}
       okButtonProps={{
         loading: checking || callingAPI,
-        disabled: !password,
+        disabled: !inputPassword,
         danger: danger,
         size: "large"
       }}
@@ -123,7 +130,7 @@ const PasswordConfirmModal = (props) => {
                 <Form
                   layout="vertical"
                   form={form}
-                  onFinish={handleConfirm}
+                  onFinish={() => handleConfirm()}
                 >
                   <Form.Item
                     name={'password'}
@@ -146,7 +153,7 @@ const PasswordConfirmModal = (props) => {
                 <SecurityKey
                   changing={callingAPI}
                   userInfo={userInfo}
-                  onConfirm={onConfirm}
+                  onConfirm={(p) => handleConfirm(p)}
                   onRepair={() => setIsPair(true)}
                 />
               </div>
@@ -156,7 +163,7 @@ const PasswordConfirmModal = (props) => {
                 <Passkey
                   changing={callingAPI}
                   userInfo={userInfo}
-                  onConfirm={onConfirm}
+                  onConfirm={(p) => handleConfirm(p)}
                 />
               </div>
             }

@@ -84,7 +84,6 @@ const CrossPlatformSync = (props) => {
         title={action}
         callingAPI={callingAPI}
         visible={confirmVisible}
-        requireDesktop={!userInfo.sync_all_platforms}
         onClose={() => setConfirmVisible(false)}
         onConfirm={onConfirm}
       />

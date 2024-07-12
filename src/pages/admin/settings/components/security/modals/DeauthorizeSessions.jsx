@@ -32,23 +32,18 @@ const DeauthorizeSessionsModal = (props) => {
 
   const handleConfirm = async (password) => {
     setCallingAPI(true)
-    const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
-    const storedKeyHash = await global.jsCore.cryptoService.getKeyHash()
-    if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
-      if (device) {
-        await deauthorizeDevice();
-        if (device.device_identifier === common.deviceId()) {
-          await authServices.logout();
-        } else {
-          onConfirm();
-          onClose();
-        }
-      } else {
-        await deauthorizeSessions(keyHash);
+    if (device) {
+      await deauthorizeDevice();
+      if (device.device_identifier === common.deviceId()) {
         await authServices.logout();
+      } else {
+        onConfirm();
+        onClose();
       }
     } else {
-      global.pushError({ message: t('validation.invalid', { name: t('lock.master_password') }) })
+      const keyHash = await global.jsCore.cryptoService.hashPassword(password, null)
+      await deauthorizeSessions(keyHash);
+      await authServices.logout();
     }
     setCallingAPI(false);
   }

@@ -366,7 +366,6 @@ const Lock = () => {
                               {
                                 otherMethod === 'security_key' && <SecurityKey
                                   changing={callingAPI}
-                                  isLogin={true}
                                   userInfo={userInfo}
                                   onRepair={() => setIsPair(true)}
                                   onConfirm={(password) => handleSubmit({
