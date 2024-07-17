@@ -328,6 +328,7 @@ function FormData(props) {
               }
               {
                 menuType !== menuTypes.QUICK_SHARES && <ShareMembers
+                  orgKey={orgKey}
                   menuType={menuType}
                   menuTypes={menuTypes}
                   cipherOrFolder={originCipher || originCollection}

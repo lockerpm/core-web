@@ -27,6 +27,7 @@ import common from '../../../utils/common';
 
 function ShareMembers(props) {
   const {
+    orgKey = null,
     menuType = null,
     menuTypes = {},
     cipherOrFolder = null,
@@ -140,7 +141,7 @@ function ShareMembers(props) {
         .map(async m => {
           const publicKey = m.public_key
           const key = publicKey
-            ? await global.jsCore.cryptoService.generateMemberKey(publicKey, { id: cipherOrFolder.organizationId })
+            ? await common.clientGenerateMemberKey(publicKey, orgKey)
             : null
           return {
             username: m.email,
@@ -166,7 +167,7 @@ function ShareMembers(props) {
         .map(async m => {
           const response = await sharingServices.get_public_key({ email: m.email })
           const key = response.public_key
-            ? await global.jsCore.cryptoService.generateMemberKey(response.public_key, { id: cipherOrFolder.organizationId })
+            ? await common.clientGenerateMemberKey(response.public_key, orgKey)
             : null
           return {
             id: null,
@@ -240,7 +241,7 @@ function ShareMembers(props) {
   const handleConfirmMember = async (item) => {
     setCallingAPI(true)
     const response = await sharingServices.get_public_key({ email: item.email })
-    const key = response?.public_key ? await global.jsCore.cryptoService.generateMemberKey(response?.public_key, { id: cipherOrFolder.organizationId }) : null
+    const key = response?.public_key ? await common.clientGenerateMemberKey(response?.public_key, orgKey) : null
     sharingServices.add_sharing_member(cipherOrFolder.organizationId, item.id, { key }).then(() => {
       global.pushSuccess(t('notification.success.sharing.confirm_member_success'))
       setNewMembers(newMembers.map((m) => ({
