@@ -49,7 +49,7 @@ async function sync_data(syncing = true) {
       common.syncCiphers(ciphers),
       common.syncSettings(domains)
     ])
-    await Promise.all([
+    Promise.all([
       common.getMyShares(),
       common.getInvitations(),
       common.getTeams(),
