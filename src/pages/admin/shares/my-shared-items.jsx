@@ -53,6 +53,7 @@ const MySharedItems = (props) => {
   const allCollections = useSelector((state) => state.collection.allCollections)
   const invitations = useSelector((state) => state.share.invitations)
   const sends = useSelector((state) => state.share.sends)
+  const myShares = useSelector((state) => state.share.myShares);
 
   const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
   const [formVisible, setFormVisible] = useState(false);
@@ -81,7 +82,15 @@ const MySharedItems = (props) => {
         .filter((c) => common.isOwner(c))
     }
     return sends
-  }, [allCiphers, allCollections, invitations, sends, menuType, syncing])
+  }, [
+    allCiphers,
+    allCollections,
+    invitations,
+    sends,
+    menuType,
+    syncing,
+    myShares
+  ])
 
   const isEmpty = useMemo(() => {
     return items.length === 0
