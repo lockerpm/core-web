@@ -58,6 +58,8 @@ function FormData(props) {
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
+
+  const syncing = useSelector((state) => state.sync.syncing)
   const myShares = useSelector((state) => state.share.myShares);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allFolders = useSelector((state) => state.folder.allFolders)
@@ -94,6 +96,7 @@ function FormData(props) {
     setNewMembers([])
     setNewGroups([])
     if (visible) {
+      common.getMyShares();
       if (item) {
         setStep(2)
         if (menuType === menuTypes.CIPHERS) {
@@ -139,9 +142,10 @@ function FormData(props) {
     }
   }, [
     visible,
+    syncing,
     item,
     myShares,
-    originCollection,
+    allCollections,
     menuType
   ])
 
