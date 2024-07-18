@@ -54,14 +54,11 @@ async function sync_data(syncing = true) {
       common.getInvitations(),
       common.getTeams(),
       common.getQuickShares()
-    ]).then(() => {
-      global.store.dispatch(storeActions.updateSyncing(false))
-    }).catch(() => {
-      global.store.dispatch(storeActions.updateSyncing(false))
-    })
-  }).catch(() => {
-    global.store.dispatch(storeActions.updateSyncing(false))
+    ])
+  }).catch((error) => {
+    console.log(error);
   });
+  global.store.dispatch(storeActions.updateSyncing(false))
 }
 
 async function stop_sharing_cipher(cipher) {
