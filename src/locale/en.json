@@ -741,7 +741,8 @@
     },
     "otp": {
       "name": "OTP",
-      "secret_key": "Secret key"
+      "secret_key": "Secret key",
+      "limited": "You reached the OTP limit of Free Plan. Delete existing OTP(s) to add new."
     }
   },
   "shares": {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -7,6 +7,7 @@ import {
   Select,
   Input,
   Button,
+  Tooltip,
 } from '@lockerpm/design';
 
 import {
@@ -32,25 +33,28 @@ function PasswordOTP(props) {
     form,
     item,
     visible,
-    disabled = false
+    disabled = false,
+    otpLimited = false,
+    setIsCreateOtp = () => {},
   } = props
   const { t } = useTranslation();
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const [isEdit, setIsEdit] = useState(false)
-  const [option, setOption] = useState(options.NO_OTP)
+  const [option, setOption] = useState('')
   const [otps, setOtps] = useState([])
   const [searchText, setSearchText] = useState('')
-
-  const totp = Form.useWatch('totp', form);
+  const [totp, setTotp] = useState('')
 
   useEffect(() => {
     setSearchText('')
     if (item?.login?.totp) {
       setIsEdit(true)
-      setOption(options.NEW_OTP)
+      setTotp(item?.login?.totp)
+      setOption('')
     } else {
       setIsEdit(false)
+      setTotp('')
       setOption(options.NO_OTP)
     }
   }, [visible, item])
@@ -69,7 +73,13 @@ function PasswordOTP(props) {
   }
 
   const handleChangeOption = (v) => {
+    if (v === options.NEW_OTP) {
+      setIsCreateOtp(true)
+    } else {
+      setIsCreateOtp(false)
+    }
     setOption(v)
+    setTotp('')
     form.setFieldValue('totp', null)
   }
 
@@ -91,7 +101,13 @@ function PasswordOTP(props) {
             },
             {
               value: options.NEW_OTP,
-              label: t('cipher.password.new_otp')
+              label: <Tooltip
+                title={otpLimited ? t('cipher.otp.limited') : ''}
+                placement='right'
+              >
+                <span>{t('cipher.password.new_otp')}</span>
+              </Tooltip>,
+              disabled: otpLimited
             },
             {
               value: options.EXISTING_OTP,
@@ -116,6 +132,7 @@ function PasswordOTP(props) {
             disabled={disabled}
             placeholder={t('placeholder.select')}
             options={otps.map((otp) => ({ label: otp.name, value: otp.notes }))}
+            onChange={(v) => setTotp(v)}
           />
         </Form.Item>
       }
@@ -134,6 +151,7 @@ function PasswordOTP(props) {
             className='w-full'
             disabled={disabled}
             placeholder={t('placeholder.enter')}
+            onChange={(e) => setTotp(e.target.value)}
           />
         </Form.Item>
       }
@@ -148,7 +166,7 @@ function PasswordOTP(props) {
             onClick={() => {
               setOption(options.NO_OTP)
               setIsEdit(false);
-              form.setFieldValue('totp', null);
+              setTotp('');
             }}
           ></Button>
         </div>

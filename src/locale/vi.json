@@ -741,7 +741,8 @@
     },
     "otp": {
       "name": "OTP",
-      "secret_key": "Khóa bí mật"
+      "secret_key": "Khóa bí mật",
+      "limited": "Bạn đã vượt quá số lượng OTP được tạo cho gói Free. Xóa bớt OTP đang tồn tại để thêm mới."
     }
   },
   "shares": {

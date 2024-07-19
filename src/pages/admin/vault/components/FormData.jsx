@@ -17,6 +17,7 @@ import cipherFormComponents from '../../../../components/cipher/form';
 import foldersComponents from '../../folders/components';
 
 import { CipherType } from '../../../../core-js/src/enums';
+import { CipherView } from '../../../../core-js/src/models/view';
 
 import cipherServices from '../../../../services/cipher';
 
@@ -49,11 +50,13 @@ function FormData(props) {
     isTutorial = false,
     setCloneMode = () => {},
     onClose = () => {},
+    otpLimited = false
   } = props
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [folderVisible, setFolderVisible] = useState(false);
+  const [isCreateOtp, setIsCreateOtp] = useState(false);
   const allCollections = useSelector((state) => state.collection.allCollections)
 
   const cipherTypes = global.constants.CIPHER_TYPES.filter((t) => t.isCreate)
@@ -107,8 +110,9 @@ function FormData(props) {
       collectionIds,
       score: passwordStrength.score,
     }
-    await cipherServices.create(payload).then(() => {
-      global.pushSuccess(t('notification.success.cipher.created'))
+    await cipherServices.create(payload).then(async () => {
+      await createOtp(values);
+      global.pushSuccess(t('notification.success.cipher.created'));
     }).catch((error) => {
       global.pushError(error)
     })
@@ -134,13 +138,23 @@ function FormData(props) {
       collectionIds,
       score: passwordStrength.score,
     }
-    await cipherServices.update(item.id, payload).then(() => {
+    await cipherServices.update(item.id, payload).then(async () => {
+      await createOtp(values);
       global.pushSuccess(t('notification.success.cipher.updated'))
     }).catch((error) => {
       global.pushError(error)
     })
   }
 
+  const createOtp = async (values) => {
+    if (isCreateOtp && values.totp && !otpLimited) {
+      const otp = { notes: values.totp, name: values.name };
+      const cipher = common.convertFormToCipher({ ...otp, type: CipherType.TOTP });
+      const { data } = await common.getEncCipherForRequest( cipher )
+      const payload = { ...data, collectionIds: [] }
+      await cipherServices.create(payload)
+    }
+  }
 
   return (
     <div className={props.className}>
@@ -228,6 +242,8 @@ function FormData(props) {
                 form={form}
                 visible={visible}
                 disabled={callingAPI}
+                otpLimited={otpLimited}
+                setIsCreateOtp={setIsCreateOtp}
               />
             }            
           </div>

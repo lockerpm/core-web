@@ -741,7 +741,8 @@
     },
     "otp": {
       "name": "OTP",
-      "secret_key": "密鑰或路徑"
+      "secret_key": "密鑰或路徑",
+      "limited": "您已達到免費方案的 OTP 限制。刪除現有 OTP 以新增新的。"
     }
   },
   "shares": {
