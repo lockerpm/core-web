@@ -43,13 +43,18 @@ const PairingForm = (props) => {
 
   const connectDesktopService = async () => {
     setConnecting(true);
-    await service.grpcService?.resetConnection();
-    setTimeout(async () => {
-      setConnecting(false);
-      if (!isConnected) {
-        global.pushError({ message: t('passwordless.connect_service_fail') })
-      }
-    }, 1000);
+    const res = await service.grpcService?.resetConnection();
+    if (!res) {
+      global.pushError({ message: t('passwordless.connect_service_fail') })
+    }
+    setConnecting(false);
+  }
+
+  const connectDesktopSocket = async () => {
+    const res = await service.socketService?.connectSocket();
+    if (!res) {
+      await connectDesktopSocket();
+    }
   }
 
 
@@ -141,9 +146,10 @@ const PairingForm = (props) => {
             className="w-full"
             onClick={() => {
               common.openDesktopApp();
+              service.grpcService?.resetConnection();
               setTimeout(() => {
-                service.socketService?.connectSocket();
-              }, 2000)
+                connectDesktopSocket();
+              }, 5000)
             }}
           >
             {t('button.open_desktop_app')}
