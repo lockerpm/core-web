@@ -152,8 +152,9 @@
     "remove": "Remove",
     "close": "Close",
     "confirm": "Confirm",
-    "download_desktop_app": "Download desktop app",
-    "open_desktop_app": "Open desktop app",
+    "connect_desktop_app": "Connect Desktop App",
+    "download_desktop_app": "Download Desktop App",
+    "open_desktop_app": "Open Desktop App",
     "new_user": "New user",
     "new_group": "New group",
     "resend_invitation": "Resend invitation",
@@ -446,7 +447,7 @@
   },
   "passwordless": {
     "confirm_pairing": "Confirm pairing",
-    "pairing_required": "Desktop app pairing is required. On the desktop app, confirm the code below.",
+    "pairing_required": "Desktop app pairing is required. On the Desktop App, confirm the code below.",
     "confirm_code": "Confirm if the code in your browser matches the below",
     "reset_code": "Reset code",
     "repair": "Repair",
@@ -465,6 +466,7 @@
     "new_password": "Enter new Password",
     "connect_security_key_to_login": "Connect to a security key.",
     "connect_passkey_to_login": "Connect to a passkey.",
+    "connect_service_fail": "Desktop App connection failed! Make sure you’ve installed the app, then try again.",
     "errors": {
       "0000": "Unspecified error",
       "1000": "API error",
@@ -881,7 +883,7 @@
     },
     "cross_platform_sync": {
       "title": "Cross-platform sync",
-      "description": "Enable login sync for your account across the web app, extension, and desktop app on the same device. Desktop app installation is required.",
+      "description": "Enable login sync for your account across the web app, extension, and Desktop App on the same device. Desktop app installation is required.",
       "turn_on": "Turn on sync",
       "turn_off": "Turn off sync",
       "question": "Are you sure you want to {{action}}?"

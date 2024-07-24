@@ -152,6 +152,7 @@
     "remove": "移除",
     "close": "關",
     "confirm": "確認",
+    "connect_desktop_app": "連接桌面應用程式",
     "download_desktop_app": "下載桌面程式",
     "open_desktop_app": "開啟桌面應用程式",
     "new_user": "新用戶",
@@ -465,6 +466,7 @@
     "new_password": "輸入新密碼",
     "connect_security_key_to_login": "連線到安全金鑰。",
     "connect_passkey_to_login": "連線到密碼。",
+    "connect_service_fail": "桌面應用程式連線失敗！確保您已安裝該應用程序，然後重試。",
     "errors": {
       "0000": "未指定的錯誤",
       "1000": "API錯誤",

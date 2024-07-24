@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -10,8 +10,6 @@ import {
 import {
   ReloadOutlined
 } from "@ant-design/icons";
-
-import { } from '@ant-design/colors';
 
 import storeActions from "../../store/actions"
 
@@ -30,6 +28,9 @@ const PairingForm = (props) => {
   const approveCode = useSelector((state) => state.service.approveCode)
   const pairingConfirmed = useSelector((state) => state.service.pairingConfirmed)
 
+  const [connecting, setConnecting] = useState(false);
+  const [isClickDownload, setIsClickDownload] = useState(false);
+
   const confirmDesktopPairing = async () => {
     try {
       await service.confirmDesktopPairing();
@@ -38,6 +39,17 @@ const PairingForm = (props) => {
     } catch (error) {
       global.pushError(error)
     }
+  }
+
+  const connectDesktopService = async () => {
+    setConnecting(true);
+    await service.grpcService?.resetConnection();
+    setTimeout(async () => {
+      setConnecting(false);
+      if (!isConnected) {
+        global.pushError({ message: t('passwordless.connect_service_fail') })
+      }
+    }, 1000);
   }
 
 
@@ -95,14 +107,27 @@ const PairingForm = (props) => {
           <p className="mb-10 mt-6">
             { t('passwordless.install_desktop')}
           </p>
-          <Button
-            type="primary"
-            size="large"
-            className="w-full"
-            onClick={() => {}}
-          >
-            {t('button.download_desktop_app')}
-          </Button>
+          {
+            isClickDownload ? <Button
+              type="primary"
+              size="large"
+              className="w-full"
+              loading={connecting}
+              onClick={() => connectDesktopService()}
+            >
+              {t('button.connect_desktop_app')}
+            </Button> : <Button
+              type="primary"
+              size="large"
+              className="w-full"
+              onClick={() => {
+                common.openNewTab(global.urls.DOWNLOAD_DESKTOP_URL);
+                setIsClickDownload(true);
+              }}
+            >
+              {t('button.download_desktop_app')}
+            </Button>
+          }
         </div>
       }
       {
@@ -114,7 +139,12 @@ const PairingForm = (props) => {
             type="primary"
             size="large"
             className="w-full"
-            onClick={() => common.openDesktopApp()}
+            onClick={() => {
+              common.openDesktopApp();
+              setTimeout(() => {
+                service.socketService?.connectSocket();
+              }, 2000)
+            }}
           >
             {t('button.open_desktop_app')}
           </Button>

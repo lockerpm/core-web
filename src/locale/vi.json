@@ -152,6 +152,7 @@
     "remove": "Xóa",
     "close": "Đóng",
     "confirm": "Xác nhận",
+    "connect_desktop_app": "Kết nối ứng dụng máy tính",
     "download_desktop_app": "Tải ứng dụng máy tính",
     "open_desktop_app": "Mở ứng dụng máy tính",
     "new_user": "Người dùng mới",
@@ -465,6 +466,7 @@
     "new_password": "Nhập mật khẩu mới",
     "connect_security_key_to_login": "Kết nối với một khóa bảo mật.",
     "connect_passkey_to_login": "Kết nối với với một passkey",
+    "connect_service_fail": "Kết nối với ứng dụng máy tính thất bại! Đảm bảo rằng bạn đã cài đặt ứng dụng và thử lại.",
     "errors": {
       "0000": "Lỗi không xác định",
       "1000": "Lỗi API",
