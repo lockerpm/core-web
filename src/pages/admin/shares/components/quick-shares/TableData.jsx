@@ -44,6 +44,7 @@ const TableData = (props) => {
         dataIndex: 'title',
         key: 'name',
         align: 'left',
+        width: 250,
         render: (_, record) => <Name
           send={record}
         />
@@ -60,7 +61,7 @@ const TableData = (props) => {
         title: t('common.type'),
         dataIndex: 'title',
         key: 'name',
-        width: 100,
+        width: 150,
         align: 'left',
         render: (_, record) => t(common.cipherTypeInfo('type', record.cipher.type).name)
       },

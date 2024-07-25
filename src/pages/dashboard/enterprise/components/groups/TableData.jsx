@@ -20,6 +20,7 @@ import {
 import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
+import global from "../../../../../config/global"
 
 const TableData = (props) => {
   const { TextCopy } = itemsComponents;
@@ -123,7 +124,7 @@ const TableData = (props) => {
       pagination={false}
       rowKey={(record) => record?.id}
       size='small'
-      scroll={{ x: 1024 }}
+      scroll={{ x: global.constants.MAX_TABLE_WIDTH }}
     />
   )
 }

@@ -12,6 +12,7 @@ import folderComponents from "../../../../../components/folder";
 import inAppShareComponents from "../../../../../components/in-app-share";
 
 import common from "../../../../../utils/common";
+import global from "../../../../../config/global";
 
 const TableData = (props) => {
   const { TextCopy } = itemsComponents;
@@ -45,6 +46,7 @@ const TableData = (props) => {
         dataIndex: 'title',
         key: 'name',
         align: 'left',
+        width: 250,
         render: (_, record) => isFolder ? <FolderName item={record}/> : <CipherName cipher={record}/>
       },
       {
@@ -59,7 +61,7 @@ const TableData = (props) => {
         title: t('common.type'),
         dataIndex: 'title',
         key: 'name',
-        width: 100,
+        width: 150,
         align: 'left',
         hide: isFolder,
         render: (_, record) => t(common.cipherTypeInfo('type', record.cipher_type || record.type).name)
@@ -100,7 +102,7 @@ const TableData = (props) => {
       pagination={false}
       rowKey={(record) => record?.id}
       size="small"
-      scroll={{ x: 1024 }}
+      scroll={{ x: global.constants.MAX_TABLE_WIDTH }}
     />
   );
 }

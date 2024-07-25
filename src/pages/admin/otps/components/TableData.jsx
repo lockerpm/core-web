@@ -13,6 +13,7 @@ import itemsComponents from "../../../../components/items";
 import otpComponents from "../../../../components/otp";
 
 import common from "../../../../utils/common";
+import global from "../../../../config/global";
 
 const TableData = (props) => {
   const { TextCopy } = itemsComponents;
@@ -103,7 +104,7 @@ const TableData = (props) => {
         onChange: selectionChange,
         getCheckboxProps: getCheckboxProps,
       }}
-      scroll={{ x: 1024 }}
+      scroll={{ x: global.constants.MAX_TABLE_WIDTH }}
     />
   );
 }

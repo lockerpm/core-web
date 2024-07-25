@@ -14,6 +14,7 @@ import itemsComponents from "../items";
 import cipherComponents from "../cipher";
 
 import common from "../../utils/common";
+import global from "../../config/global";
 
 const TableData = (props) => {
   const { PasswordStrength } = itemsComponents;
@@ -90,7 +91,7 @@ const TableData = (props) => {
       pagination={false}
       rowKey={(record) => record?.id}
       size="small"
-      scroll={{ x: 1024 }}
+      scroll={{ x: global.constants.MAX_TABLE_WIDTH }}
     />
   );
 }
