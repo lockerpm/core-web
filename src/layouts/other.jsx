@@ -7,8 +7,8 @@ function OtherLayout(props) {
   const { PageContent } = layoutComponents;
   const { routers, pages } = props
   return (
-    <Layout className="authlayout">
-      <Layout.Content className="authlayout__content">
+    <Layout className="other-layout">
+      <Layout.Content className="other-layout__content">
         <PageContent routers={routers} pages={pages} />
       </Layout.Content>
     </Layout>
