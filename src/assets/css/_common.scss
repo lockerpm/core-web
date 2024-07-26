@@ -108,6 +108,10 @@
   }
 }
 
+.notification-menu-overlay {
+  top: 52px !important;
+}
+
 @media only screen and (max-width: 768px) {
   .layout-content {
     padding: var(--page-content-spacing-collapsed) !important;

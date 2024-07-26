@@ -299,7 +299,9 @@ function Notifications() {
       trigger={'click'}
       onOpenChange={(open) => setIsOpen(open)}
     >
-      <NotifyButton unreadCount={unreadCount}/>
+      <span>
+        <NotifyButton unreadCount={unreadCount}/>
+      </span>
     </Dropdown>
   );
 }
