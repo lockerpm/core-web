@@ -170,6 +170,7 @@ function AdminLayout(props) {
                 collapsed={collapsed}
                 routers={routers}
                 showBottom={showBottom}
+                setRespCollapsed={setRespCollapsed}
                 onClose={() => isMobile ? setRespCollapsed(true) : () => {}}
               />
               <SidebarBottom

@@ -21,7 +21,12 @@ function SidebarCenter(props) {
   const { t } = useTranslation();
   const location = useLocation();
   
-  const { collapsed, showBottom, onClose = () => {} } = props
+  const {
+    collapsed,
+    showBottom,
+    setRespCollapsed = () => {},
+    onClose = () => {}
+  } = props
   const currentPage = useSelector((state) => state.system.currentPage);
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
