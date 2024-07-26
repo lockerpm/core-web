@@ -6,7 +6,7 @@
   top: 0;
   left: var(--sidebar-width);
   right: 0px;
-  z-index: 1001;
+  z-index: 998;
   .admin-layout-header {
     height: 100%;
     padding: var(--page-content-spacing-collapsed) var(--page-content-spacing);
@@ -32,7 +32,8 @@
       position: absolute;
       top: var(--page-content-spacing-collapsed);
       right: calc(var(--page-content-spacing) + 80px);
-      width: 500px;
+      width: 486px;
+      max-width: 60%;
       .search-results {
         &__item {
           border-radius: 6px;
@@ -45,7 +46,8 @@
     &.mobile {
       .admin-layout-header__search-content {
         right: var(--page-content-spacing-collapsed);
-        width: calc(100% - var(--page-content-spacing-collapsed) * 2);
+        width: calc(100% - var(--page-content-spacing-collapsed) * 2) !important;
+        max-width: 100% !important;
       }
     }
   }
