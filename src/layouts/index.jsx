@@ -41,12 +41,12 @@ function AdminLayout(props) {
 
   const isMobile = useSelector((state) => state.system.isMobile)
   const collapsed = useSelector((state) => state.system.collapsed)
+  const respCollapsed = useSelector((state) => state.system.respCollapsed)
   const currentPage = useSelector((state) => state.system.currentPage)
   const isScrollToTop = useSelector((state) => state.system.isScrollToTop)
   const userInfo = useSelector((state) => state.auth.userInfo)
   const teams = useSelector((state) => state.enterprise.teams)
 
-  const [respCollapsed, setRespCollapsed] = useState(false)
   const [showBottom, setShowBottom] = useState(false)
   const [showFooter, setShowFooter] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
@@ -123,27 +123,34 @@ function AdminLayout(props) {
     }
   }
 
+  const setRespCollapsed = (value) => {
+    dispatch(storeActions.updateRespCollapsed(value))
+  }
+
+  const setCollapsed = (value) => {
+    dispatch(storeActions.updateCollapsed(value))
+  }
+
+  const setIsMobile = (value) => {
+    dispatch(storeActions.updateIsMobile(value))
+  }
+
+
   const convertSize = () => {
     if (window.innerWidth <= 768) {
-      dispatch(storeActions.updateIsMobile(true))
-      dispatch(storeActions.updateCollapsed(false))
+      setCollapsed(false)
       setRespCollapsed(true)
+      setIsMobile(true)
     } else if (window.innerWidth <= 1024) {
-      dispatch(storeActions.updateIsMobile(false))
       setRespCollapsed(false)
       if (!collapsed) {
-        dispatch(storeActions.updateCollapsed(true))
+        setCollapsed(true)
       }
-    } else if (window.innerWidth <= 1248) {
-      setRespCollapsed(false)
-      dispatch(storeActions.updateIsColumn(false))
-      dispatch(storeActions.updateIsMobile(false))
-      dispatch(storeActions.updateCollapsed(false))
+      setIsMobile(false)
     } else {
       setRespCollapsed(false)
-      dispatch(storeActions.updateIsColumn(false))
-      dispatch(storeActions.updateIsMobile(false))
-      dispatch(storeActions.updateCollapsed(false))
+      setCollapsed(false)
+      setIsMobile(false)
     }
   }
 
@@ -170,7 +177,6 @@ function AdminLayout(props) {
                 collapsed={collapsed}
                 routers={routers}
                 showBottom={showBottom}
-                setRespCollapsed={setRespCollapsed}
                 onClose={() => isMobile ? setRespCollapsed(true) : () => {}}
               />
               <SidebarBottom
@@ -178,11 +184,19 @@ function AdminLayout(props) {
                 showBottom={showBottom}
                 setShowBottom={setShowBottom}
               />
-              {isMobile && <div className="resp-collapsed-bg" onClick={() => setRespCollapsed(true)}>
-                <div className='resp-menu-toggle-icon mr-3' onClick={() => setRespCollapsed(true)}>
-                  <CloseOutlined />
+              {
+                isMobile && <div
+                  className="resp-collapsed-bg"
+                  onClick={() => setRespCollapsed(true)}
+                >
+                  <div
+                    className='resp-menu-toggle-icon mr-3'
+                    onClick={() => setRespCollapsed(true)}
+                  >
+                    <CloseOutlined />
+                  </div>
                 </div>
-              </div>}
+              }
             </Layout.Sider>
           )}
           <Layout
@@ -192,7 +206,7 @@ function AdminLayout(props) {
               <Header
                 className='admin-layout-header'
                 collapsed={collapsed}
-                setCollapsed={(v) => dispatch(storeActions.updateCollapsed(v))}
+                setCollapsed={setCollapsed}
                 setRespCollapsed={setRespCollapsed}
               />
             </Layout.Header>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 
 import {
   Button,
@@ -20,10 +20,16 @@ import '../css/header.scss';
 function Header(props) {
   const { ImageIcon } = itemsComponents;
   const { Breadcrumb, SearchContent, Notifications, DropdownMenu, SwitchProject } = layoutComponents;
-  const { t } = useTranslation()
+
+  const {
+    collapsed,
+    setCollapsed,
+    setRespCollapsed 
+  } = props;
+
   const isMobile = useSelector((state) => state.system.isMobile);
+
   const [search, setSearch] = useState(false);
-  const { collapsed, setCollapsed, setRespCollapsed } = props;
 
   document.addEventListener('click', (e) => {
     const searchContent = document.getElementById('search-content');

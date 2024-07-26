@@ -49,6 +49,13 @@ const updateCollapsed = data => {
   }
 }
 
+const updateRespCollapsed = data => {
+  return {
+    type: actionTypes.SET_RESP_COLLAPSED,
+    payload: data,
+  }
+}
+
 const updateServerType = data => {
   return {
     type: actionTypes.SET_SERVER_TYPE,
@@ -64,5 +71,6 @@ export default {
   updateIsColumn,
   updateIsScrollToTop,
   updateCollapsed,
+  updateRespCollapsed,
   updateServerType,
 }

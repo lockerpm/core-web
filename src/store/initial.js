@@ -7,6 +7,7 @@ export default {
     isColumn: true,
     isScrollToTop: false,
     collapsed: false,
+    respCollapsed: false,
     serverType: null,
   },
   auth: {

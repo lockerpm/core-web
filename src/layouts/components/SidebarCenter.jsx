@@ -24,7 +24,6 @@ function SidebarCenter(props) {
   const {
     collapsed,
     showBottom,
-    setRespCollapsed = () => {},
     onClose = () => {}
   } = props
   const currentPage = useSelector((state) => state.system.currentPage);
