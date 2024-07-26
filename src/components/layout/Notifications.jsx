@@ -25,7 +25,7 @@ import common from '../../utils/common';
 let interval = null;
 
 function Notifications() {
-  const { ImageIcon } = itemsComponents;
+  const { ImageIcon, NotifyButton } = itemsComponents;
   const { t } = useTranslation();
 
   const locale = useSelector((state) => state.system.locale);
@@ -294,16 +294,12 @@ function Notifications() {
           overflow: 'auto'
         }
       }}
+      overlayClassName='notification-menu-overlay'
       placement="bottomRight"
       trigger={'click'}
       onOpenChange={(open) => setIsOpen(open)}
     >
-      <Badge count={unreadCount}>
-        <Button
-          shape="circle"
-          icon={<BellOutlined />}
-        />
-      </Badge>
+      <NotifyButton unreadCount={unreadCount}/>
     </Dropdown>
   );
 }

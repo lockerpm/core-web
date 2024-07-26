@@ -5,7 +5,6 @@
     flex: 0 0 var(--sidebar-width) !important;
     background: none !important;
     background-color: var(--sidebar-background-color) !important;
-    border-right: 1px solid var(--border-color);
     max-width: max-content !important;
     position: fixed !important;
     top: 0;
@@ -21,6 +20,20 @@
       }
       .admin-layout-sidebar-center {
         width: var(--sidebar-width-collapsed) !important;
+        .ant-menu-inline-collapsed {
+          > li {
+            &.ant-menu-submenu {
+              display: flex;
+              justify-content: center;
+              .ant-menu-submenu-title {
+                width: 100%;
+              }
+            }
+            &.ant-menu-item {
+              width: 100%;
+            }
+          }
+        }
       }
       .admin-layout-sidebar-bottom {
         width: var(--sidebar-width-collapsed) !important;
@@ -28,13 +41,32 @@
     }
     .ant-layout-sider-children {
       width: var(--sidebar-width) !important;
+      .admin-layout-sidebar-top {
+        border-right: 1px solid var(--border-color);
+      }
       .admin-layout-sidebar-center {
+        border-right: 1px solid var(--border-color);
         width: var(--sidebar-width);
         padding: var(--page-content-spacing-collapsed);
         .ant-menu {
           background: none !important;
           border-inline-end: none !important;
         }
+        .ant-menu-inline {
+          > li {
+            &.ant-menu-submenu {
+              .ant-menu-submenu-title {
+                width: 100%;
+              }
+            }
+            &.ant-menu-item {
+              width: 100%;
+            }
+          }
+        }
+      }
+      .admin-layout-sidebar-bottom {
+        border-right: 1px solid var(--border-color);
       }
     }
   }
@@ -74,6 +106,16 @@
     bottom: 24px;
     right: 24px;
     z-index: 999;
+  }
+}
+
+.ant-menu-submenu-popup {
+  .ant-menu-sub {
+    padding: 4px 8px !important;
+    > li {
+      width: 100% !important;
+      padding-left: 12px !important
+    }
   }
 }
 

@@ -36,10 +36,10 @@ function SidebarCenter(props) {
 
   useEffect(() => {
     const cMenu = menus.find((m) => m.key === (currentPage?.parent || currentPage?.key));
-    if (cMenu && cMenu.isChildren) {
+    if (cMenu && cMenu.isChildren && !collapsed) {
       setOpenKeys([cMenu.parent]);
     }
-  }, [menus, currentPage])
+  }, [menus, currentPage, collapsed])
 
   const invitedCount = useMemo(() => {
     return invitations.filter((i) => i.status === global.constants.STATUS.INVITED).length
@@ -157,6 +157,7 @@ function SidebarCenter(props) {
         selectedKeys={[selectedKey]}
         mode="inline"
         collapsed={collapsed.toString()}
+        triggerSubMenuAction='click'
         items={sidebarMenus.map((m) => ({
           key: m.key,
           icon: m.icon,

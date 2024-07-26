@@ -112,12 +112,16 @@ function DropdownMenu() {
       placement="bottomLeft"
       trigger={'click'}
     >
-      <Button
-        type='text'
-        className='avatar-button'
-        shape='circle'
-        icon={<UserAvatar showInfo={false}/>}
-      />
+      <div
+        className='user-info flex item-center justify-center'
+      >
+        <Button
+          type='text'
+          className='avatar-button'
+          shape='circle'
+          icon={<UserAvatar showInfo={false}/>}
+        />
+      </div>
     </Dropdown>
   );
 }

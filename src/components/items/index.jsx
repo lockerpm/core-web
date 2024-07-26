@@ -7,6 +7,7 @@ import RouterLink from "./RouterLink";
 import SearchText from "./SearchText";
 import TextCopy from "./TextCopy";
 import PasswordStrength from "./PasswordStrength";
+import NotifyButton from "./NotifyButton";
 
 const itemsComponents = {
   FilterTime,
@@ -17,7 +18,8 @@ const itemsComponents = {
   RouterLink,
   SearchText,
   TextCopy,
-  PasswordStrength
+  PasswordStrength,
+  NotifyButton
 }
 
 export default itemsComponents

@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { useSelector } from 'react-redux';
+import { } from 'react-redux';
 import { } from "react-i18next";
 
 import {
@@ -14,11 +14,13 @@ import {
 import '../css/footer.scss';
 
 function Footer(props) {
-  const isMobile = useSelector((state) => state.system.isMobile);
-
+  const { showFooter } = props;
   return (
-    <div className={`${props.className} ${isMobile  ? 'mobile' : ''}`}>
-    </div>
+    <>
+      {
+        showFooter && <div className={`${props.className}`}></div>
+      }
+    </>
   );
 }
 
