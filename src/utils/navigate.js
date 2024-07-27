@@ -2,14 +2,21 @@ import storeActions from '../store/actions'
 import global from '../config/global'
 import common from './common'
 
-export const navigatePage = async (navigate, dispatch, name, params = {}, query = {}) => {
+export const navigatePage = async (
+  navigate,
+  dispatch,
+  name,
+  params = {},
+  query = {},
+  replace = false
+) => {
   if (name === global.keys.BACK) {
-    return navigate(-1)
+    return navigate(-1, { replace })
   }
 
   const currentRouter = common.getRouterByName(name)
   if (!currentRouter) {
-    return navigate('/')
+    return navigate('/', { replace })
   }
 
   dispatch(storeActions.updateCurrentPage({
@@ -24,5 +31,5 @@ export const navigatePage = async (navigate, dispatch, name, params = {}, query 
     common.getRouterParams(currentRouter.path, newParams),
     query
   )
-  return navigate(newPath)
+  return navigate(newPath, { replace })
 }
