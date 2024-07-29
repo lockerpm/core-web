@@ -204,14 +204,14 @@ const VaultDetail = () => {
         actions={[]}
         Back={() => <RouterLink
           label={''}
-          className={'font-semibold'}
+          className={'font-semibold mr-4'}
           routerName={listRouterName}
           routerParams={listRouterParams}
           routerQuery={listRouterQuery}
           icon={<ArrowLeftOutlined />}
         />}
         Logo={() => <CipherIcon
-          className="mx-4"
+          className="mr-4"
           size={48}
           item={originCipher}
           type={originCipher.type}

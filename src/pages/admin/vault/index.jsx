@@ -324,14 +324,14 @@ const Vault = () => {
         ]}
         Back={() => folderId ? <RouterLink
           label={''}
-          className={'font-semibold'}
+          className={'font-semibold mr-4'}
           routerName={listRouterName}
           routerParams={listRouterParams}
           routerQuery={listRouterQuery}
           icon={<ArrowLeftOutlined />}
         /> : <></>}
         Logo={() => folderId ? <ImageIcon
-          className="mx-4"
+          className="mr-4"
           name={originFolder?.isCollection ? 'folder-share' : 'folder'}
           width={48}
           height={48}

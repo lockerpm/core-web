@@ -148,14 +148,14 @@ const PasswordHealth = (props) => {
         actions={[]}
         Back={() => <RouterLink
           label={''}
-          className={'font-semibold'}
+          className={'font-semibold mr-4'}
           routerName={global.keys.SECURITY_TOOLS}
           routerParams={{ }}
           icon={<ArrowLeftOutlined />}
         />}
         Logo={() => <ImageIcon
           name="security-tools/pw-health"
-          className="mx-4"
+          className="mr-4"
           width={48}
           height={48}
         />}

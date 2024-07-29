@@ -61,14 +61,14 @@ const QuickShareDetail = () => {
             actions={[]}
             Back={() => <RouterLink
               label={''}
-              className={'font-semibold'}
+              className={'font-semibold mr-4'}
               routerName={global.keys.MY_SHARED_ITEMS}
               routerParams={{}}
               routerQuery={{ menu_type: global.constants.MENU_TYPES.QUICK_SHARES }}
               icon={<ArrowLeftOutlined />}
             />}
             Logo={() => <CipherIcon
-              className="mx-4"
+              className="mr-4"
               size={48}
               item={sendCipher}
               type={sendCipher.type}

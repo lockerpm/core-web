@@ -179,7 +179,7 @@ const VaultHistory = () => {
         subtitle={common.cipherSubtitle(originCipher)}
         actions={[]}
         Back={() => <RouterLink
-          className={'font-semibold'}
+          className={'font-semibold mr-4'}
           label={''}
           routerName={listRouterName}
           routerParams={listRouterParams}
@@ -187,7 +187,7 @@ const VaultHistory = () => {
           icon={<ArrowLeftOutlined />}
         />}
         Logo={() => <CipherIcon
-          className="mx-4"
+          className="mr-4"
           size={48}
           item={originCipher}
           type={originCipher.type}
