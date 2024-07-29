@@ -14,8 +14,6 @@ import {
   ExportOutlined,
 } from "@ant-design/icons";
 
-import { } from '@ant-design/colors';
-
 import modalsComponents from "../../../../../components/modals";
 
 import { Utils } from "../../../../../core-js/src/misc/utils";

@@ -13,8 +13,6 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 
-import { green } from '@ant-design/colors';
-
 import formsComponents from "../../../components/forms";
 
 import authServices from "../../../services/auth";
@@ -75,9 +73,8 @@ const Enable2FA = (props) => {
             >
               {
                 factor2?.mail_otp && <Card
-                  className="w-full cursor-pointer"
+                  className={`w-full cursor-pointer ${identity === global.constants.FACTOR2_IDENTITY.MAIL ? 'border-primary' : ''}`}
                   bodyStyle={{ padding: 12 }}
-                  style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.MAIL ? green[6] : '' }}
                   onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.MAIL)}
                 >
                   <Radio value={global.constants.FACTOR2_IDENTITY.MAIL}>
@@ -91,9 +88,8 @@ const Enable2FA = (props) => {
                 </Card>
               }
               <Card
-                className="w-full cursor-pointer mt-4"
+                className={`w-full cursor-pointer mt-4 ${identity === global.constants.FACTOR2_IDENTITY.SMART_OTP ? 'border-primary' : ''}`}
                 bodyStyle={{ padding: 12 }}
-                style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.SMART_OTP ? green[6] : '' }}
                 onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.SMART_OTP)}
               >
                 <Radio value={global.constants.FACTOR2_IDENTITY.SMART_OTP}>

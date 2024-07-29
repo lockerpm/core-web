@@ -12,8 +12,6 @@ import {
   InfoCircleFilled
 } from "@ant-design/icons";
 
-import { green } from '@ant-design/colors';
-
 import mailConfigServices from "../../../../services/mail-config";
 
 import global from "../../../../config/global";
@@ -50,9 +48,7 @@ const SendEmail = (props) => {
     <Modal
       title={
         <div className="flex items-center">
-          <InfoCircleFilled style={{
-            color: green[5]
-          }} />
+          <InfoCircleFilled className="text-primary"/>
           <p className="ml-2">
             {t('email_settings.send_test.title')}
           </p>

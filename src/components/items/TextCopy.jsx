@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import {
   Typography,
-  Input
 } from '@lockerpm/design';
 
 import {
@@ -13,8 +12,6 @@ import {
   EyeOutlined,
   EyeInvisibleOutlined
 } from '@ant-design/icons';
-
-import { gray } from '@ant-design/colors';
 
 import common from "../../utils/common";
 
@@ -61,8 +58,8 @@ const TextCopy = (props) => {
   const DisplayValue = useMemo(() => {
     if (show != null) {
       return <div
-        style={{ color: color || gray[6] }}
-        className={`flex items-center justify-${align} w-full`}
+        style={{ color: color }}
+        className={`flex items-center justify-${align} w-full ${color ? '' : 'text-black-500'}`}
       >
         <p
           className={`${limited ? 'text-limited' : ''}`}
@@ -82,8 +79,8 @@ const TextCopy = (props) => {
       </div>
     }
     return <div
-      className={`${limited ? 'text-limited' : ''}`}
-      style={{ color: color || gray[6] }}
+      className={`${limited ? 'text-limited' : ''} ${color ? '' : 'text-black-500'}`}
+      style={{ color: color }}
       title={value}
     >
       {value}

@@ -8,9 +8,6 @@ import {
 import {
 } from '@ant-design/icons'
 
-import {
-} from '@ant-design/colors';
-
 function Other(props) {
   const isMobile = useSelector((state) => state.system.isMobile);
 

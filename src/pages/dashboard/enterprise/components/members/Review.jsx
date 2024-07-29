@@ -13,9 +13,6 @@ import {
   ArrowDownOutlined
 } from '@ant-design/icons';
 
-import {
-} from '@ant-design/colors';
-
 import itemsComponents from '../../../../../components/items';
 
 import common from '../../../../../utils/common';

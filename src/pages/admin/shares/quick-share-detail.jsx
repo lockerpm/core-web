@@ -59,23 +59,21 @@ const QuickShareDetail = () => {
             title={sendCipher?.name}
             subtitle={common.cipherSubtitle(sendCipher)}
             actions={[]}
-            Logo={() => <div className="flex items-center">
-              <RouterLink
-                className={'font-semibold'}
-                label={''}
-                routerName={global.keys.MY_SHARED_ITEMS}
-                routerParams={{}}
-                routerQuery={{ menu_type: global.constants.MENU_TYPES.QUICK_SHARES }}
-                icon={<ArrowLeftOutlined />}
-              />
-              <CipherIcon
-                className="mx-4"
-                size={48}
-                item={sendCipher}
-                type={sendCipher.type}
-                isDeleted={sendCipher?.isDeleted}
-              />
-            </div>}
+            Back={() => <RouterLink
+              label={''}
+              className={'font-semibold'}
+              routerName={global.keys.MY_SHARED_ITEMS}
+              routerParams={{}}
+              routerQuery={{ menu_type: global.constants.MENU_TYPES.QUICK_SHARES }}
+              icon={<ArrowLeftOutlined />}
+            />}
+            Logo={() => <CipherIcon
+              className="mx-4"
+              size={48}
+              item={sendCipher}
+              type={sendCipher.type}
+              isDeleted={sendCipher?.isDeleted}
+            />}
             Right={() => <Actions
               size="medium"
               item={send}

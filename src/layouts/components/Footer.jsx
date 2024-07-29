@@ -8,9 +8,6 @@ import {
 import {
 } from '@ant-design/icons'
 
-import {
-} from '@ant-design/colors';
-
 import '../css/footer.scss';
 
 function Footer(props) {

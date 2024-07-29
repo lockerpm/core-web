@@ -9,10 +9,7 @@ import {
 } from '@lockerpm/design';
 
 import {
-  BellOutlined,
 } from '@ant-design/icons'
-
-import { gray } from '@ant-design/colors';
 
 import itemsComponents from '../items';
 
@@ -120,13 +117,12 @@ function Notifications() {
           label: <div className='flex items-center justify-between'>
             <div>
               <p
-                className='font-semibold text-limited text-limited__2'
+                className={`font-semibold text-limited text-limited__2 ${n.read ? 'text-black-500' : ''}`}
                 title={n.title[locale]}
-                style={{ color: n.read ? gray[5] : '' }}
               >
                 {n.title[locale]}
               </p>
-              <small style={{ color: gray[2] }}>
+              <small className='text-black-400'>
                 {common.timeFromNow(n.publish_time)}
               </small>
               {

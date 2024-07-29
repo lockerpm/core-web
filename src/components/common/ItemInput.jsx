@@ -11,10 +11,6 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons';
 
-import {
-  red
-} from '@ant-design/colors';
-
 import itemsComponents from "../items";
 
 import global from "../../config/global";
@@ -97,7 +93,7 @@ const ItemInput = (props) => {
             >
               <TextCopy
                 value={v}
-                color={items.includes(v) ? red.primary : ''}
+                className={items.includes(v) ? 'text-danger' : ''}
               />
               <Button
                 icon={<CloseCircleOutlined />}

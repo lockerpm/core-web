@@ -20,8 +20,6 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 
-import { green } from '@ant-design/colors';
-
 import modalsComponents from "../../../../../components/modals";
 import securityFormDataComponents from "./form-data";
 
@@ -146,9 +144,8 @@ const TwoFA = (props) => {
               {
                 factor2?.mail_otp && <Col lg={12} md={24} xs={24}>
                   <Card
-                    className="w-full cursor-pointer"
+                    className={`w-full cursor-pointer ${factor2?.mail_otp?.is_activate ? 'border-primary' : ''}`}
                     bodyStyle={{ padding: 16 }}
-                    style={{ borderColor: factor2?.mail_otp?.is_activate ? green[6] : '' }}
                     onClick={() => openForm(() => setMailOtpVisible(true), factor2?.mail_otp?.is_activate)}
                   >
                     <div className="flex items-center justify-between">
@@ -169,9 +166,8 @@ const TwoFA = (props) => {
               }
               <Col lg={12} md={24} xs={24}>
                 <Card
-                  className="w-full cursor-pointer"
+                  className={`w-full cursor-pointer ${factor2?.smart_otp?.is_activate ? 'border-primary' : ''}`}
                   bodyStyle={{ padding: 16 }}
-                  style={{ borderColor: factor2?.smart_otp?.is_activate ? green[6] : '' }}
                   onClick={() => openForm(() => setSmartOtpVisible(true), factor2?.smart_otp?.is_activate)}
                 >
                   <div className="flex items-center justify-between">

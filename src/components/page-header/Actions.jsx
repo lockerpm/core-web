@@ -10,9 +10,6 @@ import {
 import {
 } from '@ant-design/icons';
 
-import {
-} from '@ant-design/colors';
-
 const Actions = (props) => {
   const {
     actions = [],

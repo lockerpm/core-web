@@ -15,8 +15,6 @@ import {
   ArrowLeftOutlined
 } from "@ant-design/icons";
 
-import { red, green } from '@ant-design/colors';
-
 import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";
 import passwordHealthComponents from "../../../components/password-health";
@@ -148,21 +146,19 @@ const PasswordHealth = (props) => {
         title={t('security_tools.password_health.title')}
         subtitle={t('security_tools.password_health.description')}
         actions={[]}
-        Logo={() => <div className="flex items-center">
-          <RouterLink
-            className={'font-semibold'}
-            label={''}
-            routerName={global.keys.SECURITY_TOOLS}
-            routerParams={{ }}
-            icon={<ArrowLeftOutlined />}
-          />
-          <ImageIcon
-            name="security-tools/pw-health"
-            className="mx-4"
-            width={48}
-            height={48}
-          />
-        </div>}
+        Back={() => <RouterLink
+          label={''}
+          className={'font-semibold'}
+          routerName={global.keys.SECURITY_TOOLS}
+          routerParams={{ }}
+          icon={<ArrowLeftOutlined />}
+        />}
+        Logo={() => <ImageIcon
+          name="security-tools/pw-health"
+          className="mx-4"
+          width={48}
+          height={48}
+        />}
       />
       <Tabs
         activeKey={activeKey}
@@ -179,9 +175,8 @@ const PasswordHealth = (props) => {
                     height={28}
                   /> : <Avatar
                     size={28}
-                    className="mr-2"
+                    className={`mr-2 ${getCountByKey(m.key) > 0 ? 'bg-danger' : 'bg-primary'}`}
                     shape="square"
-                    style={{ backgroundColor: getCountByKey(m.key) > 0 ? red[4] : green[6] }}
                   >
                     {getCountByKey(m.key)}
                   </Avatar>
@@ -199,8 +194,7 @@ const PasswordHealth = (props) => {
                 style={{ padding: 12 }}
                 message={
                   <p
-                    className="font-semibold"
-                    style={{ color: getCountByKey(m.key) > 0 ? red[4] : green[6] }}
+                    className={`font-semibold ${getCountByKey(m.key) > 0 ? 'text-danger' : 'text-primary'}`}
                   >
                     { getCountByKey(m.key) > 0
                       ? t(`security_tools.password_health.${activeKey}.alert_title`).toUpperCase()

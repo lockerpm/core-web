@@ -13,8 +13,6 @@ import {
   CloseOutlined,
 } from '@ant-design/icons';
 
-import { gray } from '@ant-design/colors';
-
 import itemsComponents from '../items';
 import commonComponents from '../common';
 
@@ -143,7 +141,7 @@ function SearchContent(props) {
                       searchText={searchText}
                       value={item.name}
                     />
-                    <div style={{ color: gray[1], fontSize: 10 }}>
+                    <div className='text-[10px] text-black-500'>
                       <SearchText
                         className='text-2xs'
                         searchText={searchText}

@@ -19,8 +19,6 @@ import { useTranslation } from "react-i18next";
 
 import global from "../../../config/global";
 
-import { green } from '@ant-design/colors';
-
 const EnterOtp = (props) => {
   const { t } = useTranslation();
   const {
@@ -83,9 +81,8 @@ const EnterOtp = (props) => {
             >
               {
                 mailOtp?.is_active && <Card
-                  className="w-full mb-3 cursor-pointer"
+                  className={`w-full mb-3 cursor-pointer ${identity === global.constants.FACTOR2_IDENTITY.MAIL ? 'border-primary' : ''}`}
                   bodyStyle={{ padding: 12 }}
-                  style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.MAIL ? green[6] : '' }}
                   onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.MAIL)}
                 >
                   <Radio value={global.constants.FACTOR2_IDENTITY.MAIL}>
@@ -100,9 +97,8 @@ const EnterOtp = (props) => {
               }
               {
                 smartOtp?.is_active && <Card
-                  className="w-full cursor-pointer"
+                  className={`w-full cursor-pointer ${identity === global.constants.FACTOR2_IDENTITY.SMART_OTP ? 'border-primary' : ''}`}
                   bodyStyle={{ padding: 12 }}
-                  style={{ borderColor: identity === global.constants.FACTOR2_IDENTITY.SMART_OTP ? green[6] : '' }}
                   onClick={() => setIdentity(global.constants.FACTOR2_IDENTITY.SMART_OTP)}
                 >
                   <Radio value={global.constants.FACTOR2_IDENTITY.SMART_OTP}>

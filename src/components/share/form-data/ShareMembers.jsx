@@ -17,8 +17,6 @@ import {
   CloseOutlined
 } from '@ant-design/icons';
 
-import { red } from '@ant-design/colors';
-
 import enterpriseServices from '../../../services/enterprise';
 import sharingServices from '../../../services/sharing';
 
@@ -306,8 +304,7 @@ function ShareMembers(props) {
             <List.Item
               actions={[
                 <span
-                  style={{ color: red.primary }}
-                  className='cursor-pointer'
+                  className='cursor-pointer text-danger'
                   onClick={() => handleStopSharing(item)}
                 >
                   <CloseOutlined />

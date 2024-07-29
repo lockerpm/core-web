@@ -10,10 +10,6 @@ import {
 import {
 } from "@ant-design/icons";
 
-import {
-  red
-} from '@ant-design/colors';
-
 import modalsComponents from "../../../../../components/modals";
 
 import userServices from "../../../../../services/user";
@@ -47,7 +43,7 @@ const DangerZone = (props) => {
     <div>
       <Card bodyStyle={{ padding: 16 }} className="mb-4">
         <div className="flex justify-between">
-          <p className="font-semibold" style={{ color: red.primary }}>
+          <p className="font-semibold text-danger">
             {t('account_details.danger_zone.delete_data')}
           </p>
           <Button

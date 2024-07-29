@@ -17,8 +17,6 @@ import {
   SafetyCertificateOutlined
 } from "@ant-design/icons";
 
-import { red } from '@ant-design/colors';
-
 import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";
 import memberComponents from "../../../components/member";
@@ -68,7 +66,7 @@ const Member = () => {
       },
       {
         name: t('security_tools.password_health.title'),
-        value: <div style={{ color: red.primary }} className="font-semibold">
+        value: <div className="font-semibold text-danger">
           <SafetyCertificateOutlined className="mr-2"/>
           {member.cipher_overview?.cipher0 || 0} {t('security_tools.password_health.very_weak')} 
         </div>

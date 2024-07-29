@@ -12,8 +12,6 @@ import {
   EllipsisOutlined
 } from "@ant-design/icons";
 
-import { orange, green } from '@ant-design/colors';
-
 import emergencyAccessServices from "../../services/emergency-access";
 
 import common from "../../utils/common";
@@ -125,7 +123,7 @@ const Actions = (props) => {
         {
           key: 'reinvite',
           hide: contact?.status !== global.constants.STATUS.INVITED,
-          label: <span style={{ color: orange[5] }}>
+          label: <span className="text-warning">
             {t('security.emergency_access.actions.reinvite')}
           </span>,
           onClick: () => reinvite()
@@ -133,7 +131,7 @@ const Actions = (props) => {
         {
           key: 'confirm',
           hide: contact?.status !== global.constants.STATUS.ACCEPTED,
-          label: <span style={{ color: green[5] }}>
+          label: <span className="text-primary">
             {t('button.confirm')}
           </span>,
           onClick: () => confirm()
@@ -149,7 +147,7 @@ const Actions = (props) => {
         {
           key: 'reject',
           hide: ![global.constants.STATUS.RECOVERY_INITIATED, global.constants.STATUS.RECOVERY_APPROVED].includes(contact?.status),
-          label: <span style={{ color: orange[5] }}>
+          label: <span className="text-warning">
             {t('security.emergency_access.actions.reject')}
           </span>,
           onClick: () => reject()

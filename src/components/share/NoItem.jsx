@@ -10,8 +10,6 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { gray } from '@ant-design/colors';
-
 import itemsComponents from "../items";
 
 const NoItem = (props) => {
@@ -41,7 +39,7 @@ const NoItem = (props) => {
               <p className="text-xl font-semibold mt-4">
                 {t('shares.no_data.title')}
               </p>
-              <p className="text-sm mt-2" style={{ color: gray[1] }}>
+              <p className="text-sm mt-2 text-black-500">
                 {t(`shares.no_data.${isQuickShares ? 'quick_share_description' : 'description'}`)}
               </p>
               {

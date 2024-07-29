@@ -8,9 +8,6 @@ import {
 import {
 } from '@ant-design/icons'
 
-import {
-} from '@ant-design/colors';
-
 function SidebarBottom(props) {
   const { t } = useTranslation();
   const { collapsed } = props;

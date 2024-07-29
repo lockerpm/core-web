@@ -7,9 +7,6 @@ import {
 } from '@lockerpm/design';
 
 import {
-} from '@ant-design/colors';
-
-import {
 } from "@ant-design/icons";
 
 import formsComponents from "../../../../../../components/forms";

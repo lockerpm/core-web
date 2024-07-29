@@ -11,8 +11,6 @@ import {
 import {
 } from '@ant-design/icons'
 
-import { gray } from '@ant-design/colors';
-
 import layoutComponents from '../../components/layout';
 
 import images from '../../assets/images';

@@ -69,21 +69,19 @@ const BreachScanner = (props) => {
         title={t('security_tools.data_breach_scanner.title')}
         subtitle={t('security_tools.data_breach_scanner.description')}
         actions={[]}
-        Logo={() => <div className="flex items-center">
-          <RouterLink
-            className={'font-semibold'}
-            label={''}
-            routerName={global.keys.SECURITY_TOOLS}
-            routerParams={{ }}
-            icon={<ArrowLeftOutlined />}
-          />
-          <ImageIcon
-            name="security-tools/pw-breach"
-            className="mx-4"
-            width={48}
-            height={48}
-          />
-        </div>}
+        Back={() => <RouterLink
+          label={''}
+          className={'font-semibold'}
+          routerName={global.keys.SECURITY_TOOLS}
+          routerParams={{ }}
+          icon={<ArrowLeftOutlined />}
+        />}
+        Logo={() => <ImageIcon
+          name="security-tools/pw-breach"
+          className="mx-4"
+          width={48}
+          height={48}
+        />}
       />
       <Card
         className="mt-4"

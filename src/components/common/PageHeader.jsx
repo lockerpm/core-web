@@ -11,8 +11,6 @@ import {
   ArrowRightOutlined
 } from '@ant-design/icons';
 
-import { gray } from '@ant-design/colors';
-
 import pageHeaderComponents from "../page-header";
 
 const PageHeader = (props) => {
@@ -29,6 +27,7 @@ const PageHeader = (props) => {
     isMarginTop = true,
     docLink = '',
     docLabel = '',
+    Back = () => <></>,
     Logo = () => <></>,
     Right = () => null
   } = props
@@ -56,7 +55,10 @@ const PageHeader = (props) => {
         }}
       >
         <Col span={(isRight || actions.length > 0) ? 16 : 24} className="page-header__left flex items-center">
-          <Logo />
+          <div className="flex items-center">
+            <Back />
+            <Logo />
+          </div>
           <div
             className="text-limited"
           >
@@ -68,8 +70,7 @@ const PageHeader = (props) => {
             </h1>
             {
               ![null, undefined].includes(total) && <p
-                className="page-header__left--subtitle mt-1"
-                style={{ color: gray[1] }}
+                className="page-header__left--subtitle mt-1 text-black-500"
               >
                 {t('common.total')}: {total}
               </p>

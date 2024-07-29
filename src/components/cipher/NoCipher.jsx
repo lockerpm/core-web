@@ -11,8 +11,6 @@ import {
   PlusOutlined
 } from "@ant-design/icons";
 
-import { gray } from '@ant-design/colors';
-
 import itemsComponents from "../items";
 import commonComponents from "../common";
 
@@ -46,7 +44,7 @@ const NoCipher = (props) => {
               <p className="text-xl font-semibold mt-4">
                 {t(`inventory.${cipherType.key}.title`)}
               </p>
-              <p className="text-sm mt-2" style={{ color: gray[1] }}>
+              <p className="text-sm mt-2 text-black-500">
                 {t(`inventory.${cipherType.key}.description`)}
               </p>
               {

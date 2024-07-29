@@ -12,8 +12,6 @@ import {
   InfoCircleFilled
 } from "@ant-design/icons";
 
-import { orange } from '@ant-design/colors';
-
 import formsComponents from "../forms";
 
 import global from "../../config/global";
@@ -87,9 +85,7 @@ const PasswordConfirmModal = (props) => {
       className="confirm-password"
       title={
         <div className="flex items-center">
-          <InfoCircleFilled style={{
-            color: orange[5]
-          }} />
+          <InfoCircleFilled className="text-warning"/>
           <p className="ml-2">
             {title}
           </p>

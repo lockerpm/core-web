@@ -11,8 +11,6 @@ import {
   PlusOutlined
 } from "@ant-design/icons";
 
-import { gray } from '@ant-design/colors';
-
 import itemsComponents from "../../../../components/items";
 
 const NoFolder = (props) => {
@@ -39,7 +37,7 @@ const NoFolder = (props) => {
             <p className="text-xl font-semibold mt-4">
               {t('inventory.folders.title')}
             </p>
-            <p className="text-sm mt-2" style={{ color: gray[1] }}>
+            <p className="text-sm mt-2 text-black-500">
               {t('inventory.folders.description')}
             </p>
             <Button

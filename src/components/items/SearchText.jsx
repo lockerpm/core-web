@@ -4,12 +4,11 @@ import { useTranslation } from "react-i18next";
 import {
 } from '@lockerpm/design';
 
-import { green } from '@ant-design/colors';
-
 const SearchText = (props) => {
   const {
     className = '',
     searchText = '',
+    activeClassName = 'bg-green-400',
     value = '',
   } = props;
 
@@ -45,7 +44,7 @@ const SearchText = (props) => {
         results.map((r, index) => <span key={index}>
           {
             r.isSearch ? <span
-              style={{ backgroundColor: green[2] }}
+              className={activeClassName}
             >{r.text}</span> : <span>{r.text}</span>
           }
         </span>)

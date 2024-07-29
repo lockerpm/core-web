@@ -15,8 +15,6 @@ import {
   RedoOutlined
 } from "@ant-design/icons";
 
-import { green } from '@ant-design/colors';
-
 import itemsComponents from "../items";
 
 import commonServices from "../../services/common";
@@ -185,10 +183,9 @@ const SecurityKeyForm = (props) => {
             }
             {
               devices.map((d, index) => <Card
-                className="mt-4 cursor-pointer"
+                className={`mt-4 cursor-pointer ${selectedDevice?.path == d.path ? 'border-green-700' : ''}`}
                 key={index}
                 bodyStyle={{ padding: '9px 24px' }}
-                style={{ borderColor: selectedDevice?.path == d.path ? green[7] : '' }}
                 onClick={() => setSelectedDevice(d)}
               >
                 <div className="flex items-center">
@@ -221,9 +218,8 @@ const SecurityKeyForm = (props) => {
         }
         {
           (step !== 0 || (isTouch || isFingerprint)) && selectedDevice && <Card
-            className="mt-10"
+            className="mt-10 border-green-700"
             bodyStyle={{ padding: '9px 24px' }}
-            style={{ borderColor: green[7] }}
           >
             <div className="flex items-center">
               <UsbOutlined style={{ fontSize: 20 }} />
@@ -285,9 +281,7 @@ const SecurityKeyForm = (props) => {
         {
           passwordless && <div className="mt-10 text-primary">
             <Card>
-              <CheckCircleOutlined
-                style={{ fontSize: 40, color: green[7] }}
-              />
+              <CheckCircleOutlined className="text-[40px] text-green-700"/>
               <p className="text-xl mt-4">{t('common.successfully')}</p>
             </Card>
             {

@@ -9,8 +9,6 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { orange } from '@ant-design/colors';
-
 import securityEAComponents from "./emergency-access";
 import securityFormDataComponents from "./form-data";
 
@@ -106,7 +104,7 @@ const EmergencyAccess = (props) => {
                 {t('security.emergency_access.your_trusted_contacts')}
               </p>
               {
-                trustedPendingRequests > 0 && <small style={{ color: orange[5], fontSize: 12, fontWeight: 400 }}>
+                trustedPendingRequests > 0 && <small className="text-warning text-sm">
                   {t('security.emergency_access.pending_requests', { number: trustedPendingRequests })}
                 </small>
               }
@@ -134,7 +132,7 @@ const EmergencyAccess = (props) => {
                 {t('security.emergency_access.contacts_that_trusted_you')}
               </p>
               {
-                grantedPendingRequests > 0 && <small style={{ color: orange[5], fontSize: 12, fontWeight: 400 }}>
+                grantedPendingRequests > 0 && <small className="text-warning text-sm">
                   {t('security.emergency_access.pending_requests', { number: grantedPendingRequests })}
                 </small>
               }

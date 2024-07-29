@@ -8,8 +8,6 @@ import {
 import {
 } from "@ant-design/icons";
 
-import { orange } from '@ant-design/colors';
-
 import modalsComponents from "../../../../../../components/modals";
 
 import authServices from "../../../../../../services/auth";
@@ -80,7 +78,7 @@ const DeauthorizeSessionsModal = (props) => {
           <p className="mb-2">
             {t('security.manage_sessions.log_out_all_description')}
           </p>
-          <p style={{ color: orange[5] }}>
+          <p className="text-warning">
             {t('security.manage_sessions.log_out_all_note')}
           </p>
         </div>

@@ -202,23 +202,21 @@ const VaultDetail = () => {
         title={originCipher?.name}
         subtitle={common.cipherSubtitle(originCipher)}
         actions={[]}
-        Logo={() => <div className="flex items-center">
-          <RouterLink
-            className={'font-semibold'}
-            label={''}
-            routerName={listRouterName}
-            routerParams={listRouterParams}
-            routerQuery={listRouterQuery}
-            icon={<ArrowLeftOutlined />}
-          />
-          <CipherIcon
-            className="mx-4"
-            size={48}
-            item={originCipher}
-            type={originCipher.type}
-            isDeleted={originCipher?.isDeleted}
-          />
-        </div>}
+        Back={() => <RouterLink
+          label={''}
+          className={'font-semibold'}
+          routerName={listRouterName}
+          routerParams={listRouterParams}
+          routerQuery={listRouterQuery}
+          icon={<ArrowLeftOutlined />}
+        />}
+        Logo={() => <CipherIcon
+          className="mx-4"
+          size={48}
+          item={originCipher}
+          type={originCipher.type}
+          isDeleted={originCipher?.isDeleted}
+        />}
         Right={() => <Actions
           size="medium"
           cipher={originCipher}

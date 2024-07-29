@@ -11,8 +11,6 @@ import {
 
 import { } from "@ant-design/icons";
 
-import { red } from '@ant-design/colors';
-
 import QRCode from "react-qr-code";
 
 import { Utils } from "../../../../../../core-js/src/misc/utils";
@@ -114,7 +112,7 @@ const QrCodeModal = (props) => {
               level="H"
               value={qrValue}
             />
-            <div className="text-center my-6" style={{ color: red[5] }}>
+            <div className="text-center my-6 text-danger">
               {
                 expireCountdown > 0 ? t('security.mobile_passwordless.expire_in', { expireCountdown }) : t('security.mobile_passwordless.expired')
               }

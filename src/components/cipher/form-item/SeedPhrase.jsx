@@ -14,8 +14,6 @@ import {
   MinusCircleOutlined
 } from '@ant-design/icons';
 
-import { red } from '@ant-design/colors';
-
 function SeedPhrase(props) {
   const {
     value = '',
@@ -75,7 +73,7 @@ function SeedPhrase(props) {
                   className='cursor-pointer'
                   onClick={() => handleRemoveWord(index)}
                 >
-                  <MinusCircleOutlined style={{ color: red.primary }}/>
+                  <MinusCircleOutlined className='text-danger'/>
                 </span>
               }
               value={w}

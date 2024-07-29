@@ -322,22 +322,20 @@ const Vault = () => {
             }
           }
         ]}
-        Logo={() => folderId ? <div className="flex items-center">
-          <RouterLink
-            className={'font-semibold'}
-            label={''}
-            routerName={listRouterName}
-            routerParams={listRouterParams}
-            routerQuery={listRouterQuery}
-            icon={<ArrowLeftOutlined />}
-          />
-          <ImageIcon
-            className="mx-4"
-            name={originFolder?.isCollection ? 'folder-share' : 'folder'}
-            width={48}
-            height={48}
-          />
-        </div> : <></>}
+        Back={() => folderId ? <RouterLink
+          label={''}
+          className={'font-semibold'}
+          routerName={listRouterName}
+          routerParams={listRouterParams}
+          routerQuery={listRouterQuery}
+          icon={<ArrowLeftOutlined />}
+        /> : <></>}
+        Logo={() => folderId ? <ImageIcon
+          className="mx-4"
+          name={originFolder?.isCollection ? 'folder-share' : 'folder'}
+          width={48}
+          height={48}
+        />: <></>}
       />
       {
         !isEmpty && <>
