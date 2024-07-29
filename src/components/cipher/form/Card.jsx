@@ -35,7 +35,7 @@ function CardForm(props) {
               global.rules.REQUIRED(t('cipher.card.cardholder_name'))
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.card.cardholder_name')}
               </p>
             }
@@ -54,7 +54,7 @@ function CardForm(props) {
               global.rules.INVALID(t('cipher.card.card_number'), 'CARD_NUMBER')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.card.card_number')}
               </p>
             }
@@ -72,7 +72,7 @@ function CardForm(props) {
             name={'expMonth'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.card.expiration_month')}
               </p>
             }
@@ -93,7 +93,7 @@ function CardForm(props) {
               global.rules.INVALID(t('cipher.card.expiration_year'), 'EXPIRATION_YEAR')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.card.expiration_year')}
               </p>
             }
@@ -112,7 +112,7 @@ function CardForm(props) {
           global.rules.INVALID(t('cipher.card.security_code'), 'CVV')
         ]}
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.card.security_code')}
           </p>
         }

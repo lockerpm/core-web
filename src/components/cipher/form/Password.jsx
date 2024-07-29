@@ -38,7 +38,7 @@ function PasswordForm(props) {
           global.rules.INVALID(t('cipher.password.username'), 'USERNAME')
         ]}
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.password.username')}
           </p>
         }
@@ -52,7 +52,7 @@ function PasswordForm(props) {
         name={'password'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.password.password')}
           </p>
         }
@@ -74,7 +74,7 @@ function PasswordForm(props) {
           global.rules.INVALID(t('cipher.password.website'), 'LINK')
         ]}
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.password.website')}
           </p>
         }

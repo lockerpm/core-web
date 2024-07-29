@@ -47,7 +47,7 @@ function PersonalForm(props) {
             name={'title'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.title')}
               </p>
             }
@@ -68,7 +68,7 @@ function PersonalForm(props) {
             name={'firstName'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.first_name')}
               </p>
             }
@@ -84,7 +84,7 @@ function PersonalForm(props) {
             name={'lastName'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.last_name')}
               </p>
             }
@@ -103,7 +103,7 @@ function PersonalForm(props) {
               global.rules.INVALID(t('cipher.password.username'), 'USERNAME')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.username')}
               </p>
             }
@@ -119,7 +119,7 @@ function PersonalForm(props) {
             name={'company'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.company')}
               </p>
             }
@@ -138,7 +138,7 @@ function PersonalForm(props) {
               global.rules.INVALID(t('cipher.identity.email'), 'EMAIL')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.email')}
               </p>
             }
@@ -157,7 +157,7 @@ function PersonalForm(props) {
               global.rules.INVALID(t('cipher.identity.phone'), 'PHONE')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.phone')}
               </p>
             }
@@ -176,7 +176,7 @@ function PersonalForm(props) {
               global.rules.INVALID(t('cipher.identity.social_security_number'), 'NUMBER')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.social_security_number')}
               </p>
             }
@@ -195,7 +195,7 @@ function PersonalForm(props) {
               global.rules.INVALID(t('cipher.identity.passport_number'), 'PASSPORT_NUMBER')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.passport_number')}
               </p>
             }
@@ -214,7 +214,7 @@ function PersonalForm(props) {
               global.rules.INVALID(t('cipher.identity.license_number'), 'LICENSE_NUMBER')
             ]}
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.license_number')}
               </p>
             }

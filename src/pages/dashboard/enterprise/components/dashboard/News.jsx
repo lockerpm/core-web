@@ -25,7 +25,7 @@ const News = (props) => {
       hoverable={false}
       className="h-full"
     >
-      <p className="font-semibold text-gray mb-2 text-xl">
+      <p className="font-semibold text-black-500 mb-2 text-xl">
         {t('enterprise_dashboard.news.title')}
       </p>
       <List

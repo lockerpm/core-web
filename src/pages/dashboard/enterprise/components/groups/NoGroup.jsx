@@ -28,7 +28,7 @@ const NoEnterprise = (props) => {
         !loading ? <>
           {
             isEmpty ? <div className={`text-center ${className}`}>
-              <GroupOutlined className="text-gray" style={{ fontSize: 48 }} />
+              <GroupOutlined className="text-black-500" style={{ fontSize: 48 }} />
               <p className='text-xl font-semibold mt-4'>{t("enterprise_groups.no_data.title")}</p>
               <p className='text-sm mt-2 text-black-500'>
                 {t("enterprise_groups.no_data.description")}

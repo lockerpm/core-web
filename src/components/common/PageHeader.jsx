@@ -27,6 +27,7 @@ const PageHeader = (props) => {
     isMarginTop = true,
     docLink = '',
     docLabel = '',
+    isBack = true,
     Back = () => <></>,
     Logo = () => <></>,
     Right = () => null
@@ -56,7 +57,9 @@ const PageHeader = (props) => {
       >
         <Col span={(isRight || actions.length > 0) ? 16 : 24} className="page-header__left flex items-center">
           <div className="flex items-center">
-            <Back />
+            {
+              isBack && <Back />
+            }
             <Logo />
           </div>
           <div

@@ -31,7 +31,7 @@ const UsersBlocked = (props) => {
       className="h-full"
     >
       <div className="flex items-center justify-between">
-        <p className="font-semibold text-gray mb-2 text-xl">
+        <p className="font-semibold text-black-500 mb-2 text-xl">
           {t('enterprise_dashboard.users_blocked.title')}
         </p>
         <p

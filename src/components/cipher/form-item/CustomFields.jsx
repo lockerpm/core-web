@@ -53,13 +53,13 @@ function CustomFields(props) {
       {
         customFields?.length > 0 && <Row gutter={[8,8]} className='mb-1'>
           <Col span={6}>
-            <p className='text-gray font-semibold'>{t('common.type')}</p>
+            <p className='text-black-500 font-semibold'>{t('common.type')}</p>
           </Col>
           <Col span={6}>
-            <p className='text-gray font-semibold'>{t('common.name')}</p>
+            <p className='text-black-500 font-semibold'>{t('common.name')}</p>
           </Col>
           <Col span={12}>
-            <p className='text-gray font-semibold'>{t('common.value')}</p>
+            <p className='text-black-500 font-semibold'>{t('common.value')}</p>
           </Col>
         </Row>
       }

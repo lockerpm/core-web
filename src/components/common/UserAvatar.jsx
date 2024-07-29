@@ -57,7 +57,7 @@ function UserAvatar(props) {
       {
         showInfo && <div className='account-info ml-2'>
           <div className='font-semibold'>{userInfo?.name}</div>
-          <p className='text-gray'>{roleDisplay}</p>
+          <p className='text-black-500'>{roleDisplay}</p>
         </div>
       }
     </div>

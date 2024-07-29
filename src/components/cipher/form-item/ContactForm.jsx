@@ -29,7 +29,7 @@ function ContactForm(props) {
             name={'address1'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.address1')}
               </p>
             }
@@ -45,7 +45,7 @@ function ContactForm(props) {
             name={'address2'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.address2')}
               </p>
             }
@@ -61,7 +61,7 @@ function ContactForm(props) {
             name={'city'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.city_town')}
               </p>
             }
@@ -77,7 +77,7 @@ function ContactForm(props) {
             name={'state'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.state_province')}
               </p>
             }
@@ -93,7 +93,7 @@ function ContactForm(props) {
             name={'postalCode'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.zip_postal')}
               </p>
             }
@@ -109,7 +109,7 @@ function ContactForm(props) {
             name={'country'}
             className='mb-2'
             label={
-              <p className='text-gray'>
+              <p className='text-black-500'>
                 {t('cipher.identity.country')}
               </p>
             }

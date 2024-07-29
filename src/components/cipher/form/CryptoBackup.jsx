@@ -41,7 +41,7 @@ function CryptoBackupForm(props) {
         name={'walletApp'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.crypto_backup.wallet_app')}
           </p>
         }
@@ -71,7 +71,7 @@ function CryptoBackupForm(props) {
           global.rules.INVALID(t('cipher.password.username'), 'USERNAME')
         ]}
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.password.username')}
           </p>
         }
@@ -85,7 +85,7 @@ function CryptoBackupForm(props) {
         name={'password'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.password.password')}
           </p>
         }
@@ -105,7 +105,7 @@ function CryptoBackupForm(props) {
         name={'pin'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.crypto_backup.pin')}
           </p>
         }
@@ -119,7 +119,7 @@ function CryptoBackupForm(props) {
         name={'address'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.crypto_backup.wallet_address')}
           </p>
         }
@@ -133,7 +133,7 @@ function CryptoBackupForm(props) {
         name={'privateKey'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.crypto_backup.private_key')}
           </p>
         }
@@ -147,7 +147,7 @@ function CryptoBackupForm(props) {
         name={'seed'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.crypto_backup.seed_phrase')}
           </p>
         }
@@ -158,7 +158,7 @@ function CryptoBackupForm(props) {
         name={'networks'}
         className='mb-2'
         label={
-          <p className='text-gray'>
+          <p className='text-black-500'>
             {t('cipher.crypto_backup.networks')}
           </p>
         }

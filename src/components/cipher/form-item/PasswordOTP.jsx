@@ -121,7 +121,7 @@ function PasswordOTP(props) {
           name={'totp'}
           className='mb-2'
           label={
-            <p className='text-gray'>{t('cipher.password.select_otp')}</p>
+            <p className='text-black-500'>{t('cipher.password.select_otp')}</p>
           }
           rules={[
             global.rules.REQUIRED(t('cipher.otp.name'))
@@ -141,7 +141,7 @@ function PasswordOTP(props) {
           name={'totp'}
           className='mb-2'
           label={
-            <p className='text-gray'>{t('cipher.password.secret_key')}</p>
+            <p className='text-black-500'>{t('cipher.password.secret_key')}</p>
           }
           rules={[
             global.rules.REQUIRED(t('cipher.otp.secret_key'))

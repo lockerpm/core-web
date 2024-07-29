@@ -40,7 +40,7 @@ const AdoptionRate = (props) => {
       hoverable={false}
       className="h-full"
     >
-      <p className="font-semibold text-gray mb-2 text-xl">
+      <p className="font-semibold text-black-500 mb-2 text-xl">
         {t('enterprise_dashboard.adoption_rate.title')}
       </p>
       <Donut
