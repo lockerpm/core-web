@@ -131,9 +131,22 @@ const Vault = () => {
   }, [currentPage])
 
   useEffect(() => {
+    if (currentPage?.query?.is_create == 1) {
+      handleOpenForm(null, false);
+    }
+  }, [
+    currentPage.query?.is_create
+  ])
+
+  useEffect(() => {
     setSelectedRowKeys([]);
     fetchCiphers();
-  }, [currentPage.name, params.searchText, allCiphers, JSON.stringify(cipherType)])
+  }, [
+    currentPage.name,
+    params.searchText,
+    allCiphers,
+    JSON.stringify(cipherType)]
+  )
 
   useEffect(() => {
     setParams({
@@ -141,7 +154,19 @@ const Vault = () => {
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
-  }, [currentPage?.query?.searchText, cipherType.type, syncing])
+  }, [
+    currentPage?.query?.searchText,
+    cipherType.type,
+    syncing
+  ])
+
+  useEffect(() => {
+    setParams({
+      ...params,
+      page: 1,
+      size: global.constants.PAGE_SIZE
+    })
+  }, [isMobile])
 
   const filteredData = useMemo(() => {
     return common.paginationAndSortData(
@@ -151,14 +176,6 @@ const Vault = () => {
       params.orderDirection
     )
   }, [ciphers, JSON.stringify(params)])
-
-  useEffect(() => {
-    setParams({
-      ...params,
-      page: 1,
-      size: global.constants.PAGE_SIZE
-    })
-  }, [isMobile])
 
   const handleChangePage = (page, size) => {
     setSelectedRowKeys([])

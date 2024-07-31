@@ -27,11 +27,11 @@ import common from "../../../../../utils/common";
 import * as papa from 'papaparse';
 
 const Export = (props) => {
+  const { t } = useTranslation();
   const { PasswordConfirmModal } = modalsComponents;
   const {
     className = '',
   } = props;
-  const { t } = useTranslation();
   const [callingAPI, setCallingAPI] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
 

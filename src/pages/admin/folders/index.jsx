@@ -53,12 +53,28 @@ const Folders = () => {
   }, [allFolders, allCollections])
 
   useEffect(() => {
+    if (currentPage?.query?.is_create == 1) {
+      handleOpenForm(null);
+    }
+  }, [
+    currentPage.query?.is_create
+  ])
+
+  useEffect(() => {
     setParams({
       ...params,
       page: 1,
       searchText: currentPage?.query?.searchText,
     })
   }, [currentPage?.query?.searchText, syncing])
+
+  useEffect(() => {
+    setParams({
+      ...params,
+      page: 1,
+      size: global.constants.PAGE_SIZE,
+    })
+  }, [isMobile])
 
   const filteredData = useMemo(() => {
     return common.paginationAndSortData(
@@ -73,14 +89,6 @@ const Folders = () => {
     )
   }, [allFolders, allCollections, JSON.stringify(params)])
 
-  useEffect(() => {
-    setParams({
-      ...params,
-      page: 1,
-      size: global.constants.PAGE_SIZE,
-    })
-  }, [isMobile])
-
   const handleChangePage = (page, size) => {
     setParams({
       ...params,
@@ -89,7 +97,7 @@ const Folders = () => {
     })
   }
 
-  const handleOpenForm = (item = null, cloneMode = false) => {
+  const handleOpenForm = (item = null) => {
     setSelectedItem(item)
     setFormVisible(true)
   }

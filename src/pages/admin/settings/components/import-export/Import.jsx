@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -18,7 +18,17 @@ const Import = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
+
+  const currentPage = useSelector(state => state.system.currentPage)
   const [formVisible, setFormVisible] = useState(false);
+
+  useEffect(() => {
+    if (currentPage?.query?.is_import == 1) {
+      setFormVisible(true);
+    }
+  }, [
+    currentPage.query?.is_import
+  ])
 
   return (
     <div className={className}>
