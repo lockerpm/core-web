@@ -17,6 +17,7 @@ service.interceptors.request.use(
     config.headers['Authorization'] = `${accessTokenType} ${accessToken}`
     config.headers['CF-Access-Client-Id'] = process.env.REACT_APP_CF_ACCESS_CLIENT_ID
     config.headers['CF-Access-Client-Secret'] = process.env.REACT_APP_CF_ACCESS_CLIENT_SECRET
+    config.headers['Device-Id'] = common.deviceId()
     return config
   },
   error => {
