@@ -57,15 +57,17 @@ const Authenticate = () => {
   const [form] = Form.useForm()
 
   useEffect(() => {
-    if (currentPage?.query?.email) {
-      handlePrelogin();
-      if (currentPage?.query?.token) {
-        getAccessTokenByToken();
+    if (global.jsCore) {
+      if (currentPage?.query?.email) {
+        handlePrelogin();
+        if (currentPage?.query?.token) {
+          getAccessTokenByToken();
+        }
+      } else {
+        global.navigate(global.keys.SIGN_IN)
       }
-    } else {
-      global.navigate(global.keys.SIGN_IN)
     }
-  }, [])
+  }, [global.jsCore])
 
   useEffect(() => {
     if (preLogin) {
@@ -111,7 +113,6 @@ const Authenticate = () => {
   }, [preLogin, step])
 
   const getAccessTokenByToken = async () => {
-    global.jsCore = await jsCore();
     await userServices.users_access_token(currentPage.query?.token).then((response) => {
       setUserSession(response?.access_token);
     }).catch((error) => {

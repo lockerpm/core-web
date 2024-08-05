@@ -32,7 +32,8 @@ import pages from './pages'
 import { service } from './service'
 
 const App = () => {
-  window.service = service
+  window.service = service;
+  const jsCoreGlobal = { lockerContainerService: null };
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -92,7 +93,7 @@ const App = () => {
 
   const initJsCore = async () => {
     if (!global.jsCore) {
-      global.jsCore = await jsCore()
+      global.jsCore = await jsCore(jsCoreGlobal)
     }
   }
 
