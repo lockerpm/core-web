@@ -191,16 +191,17 @@ const DetailList = (props) => {
       ]
     }
     if (cipher.type === CipherType.CryptoWallet) {
+      const alias = global.constants.WALLET_APPS.find((a) => a.alias === cipher.cryptoWallet?.walletApp?.alias)
       return [
         {
           key: 'wallet_app',
           name: t('cipher.crypto_backup.wallet_app'),
-          value: cipher.cryptoWallet?.walletApp?.name ? <div>
+          value: alias ? <div>
             <Image
               className={'mr-2'}
               style={{ width: 28, height: 28 }}
               preview={false}
-              src={cipher.cryptoWallet?.walletApp.icon}
+              src={alias.icon}
             />
             {cipher.cryptoWallet?.walletApp.name}
           </div> : <></>
