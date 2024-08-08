@@ -11,11 +11,12 @@ import {
 import itemsComponents from "../../../../components/items";
 
 import common from "../../../../utils/common";
+import global from "../../../../config/global";
 
 const PasswordRequirements = (props) => {
-  const { PolicyResult } = itemsComponents;
-  const { policy } = props;
+  const { PolicyResult, RouterLink } = itemsComponents;
   const { t } = useTranslation();
+  const { policy } = props;
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
@@ -81,10 +82,13 @@ const PasswordRequirements = (props) => {
           <p className="mb-1">{t('policies.password_requirements.note_1')}</p>
           {
             violatedItems.length > 0 && <div className="mt-6">
-              <div className="flex items-center text-danger font-semibold cursor-pointer">
-                <p className="mr-2">{t('policies.password_requirements.violated_items', { number: violatedItems.length })}</p>
-                <ArrowRightOutlined />
-              </div>
+              <RouterLink
+                className={'font-semibold'}
+                label={t('policies.password_requirements.violated_items', { number: violatedItems.length })}
+                routerName={global.keys.POLICIES_VIOLATED}
+                type={'danger'}
+                icon={<ArrowRightOutlined />}
+              />
             </div>
           }
         </div>

@@ -20,7 +20,8 @@ const RouterLink = (props) => {
     blank = false,
     maxWidth = '100%',
     flex = 1,
-    icon = <></>
+    icon = <></>,
+    type = 'primary'
   } = props;
 
   const currentRouter = common.getRouterByName(routerName)
@@ -30,7 +31,7 @@ const RouterLink = (props) => {
   ) : '/'
   return (
     <Link
-      className={`cs-link ${className} text-primary text-limited`}
+      className={`cs-link ${className} text-${type} text-limited`}
       style={{ maxWidth: maxWidth, flex: flex }}
       target={blank ? '_blank' : ''}
       to={newPath}

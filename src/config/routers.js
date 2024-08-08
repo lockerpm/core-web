@@ -332,6 +332,13 @@ export default {
       label: 'policies.title',
     },
     {
+      name: keys.POLICIES_VIOLATED,
+      path: '/policies/violated',
+      element: 'PoliciesViolated',
+      label: 'policies_violated.title',
+      parent: keys.POLICIES,
+    },
+    {
       name: keys.SETTINGS_ACCOUNT,
       path: '/settings/account',
       element: 'SettingsAccount',

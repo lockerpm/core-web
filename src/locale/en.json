@@ -1326,5 +1326,13 @@
       "description": "Use Two-Factor Authentication (2FA) to login to Locker for the first time on new devices.",
       "note": "{{target}} are required to use Two-Factor Authentication (2FA) to login to Locker for the first time on new devices."
     }
+  },
+  "policies_violated": {
+    "title": "Violated Items",
+    "violations": "{{count}} violation(s)",
+    "modal": {
+      "title": "Password violated",
+      "description": "Your password violated the following policies of Your Enterprise:"
+    }
   }
 }

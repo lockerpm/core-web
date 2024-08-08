@@ -1,7 +1,9 @@
 import PasswordConfirmModal from "./PasswordConfirm";
+import PasswordViolatedModal from "./PasswordViolated";
 
 const modalsComponents = {
-  PasswordConfirmModal
+  PasswordConfirmModal,
+  PasswordViolatedModal
 }
 
 export default modalsComponents
