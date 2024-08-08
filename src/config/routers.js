@@ -326,6 +326,12 @@ export default {
       parent: keys.SECURITY_TOOLS,
     },
     {
+      name: keys.POLICIES,
+      path: '/policies',
+      element: 'Policies',
+      label: 'policies.title',
+    },
+    {
       name: keys.SETTINGS_ACCOUNT,
       path: '/settings/account',
       element: 'SettingsAccount',

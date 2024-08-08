@@ -51,6 +51,8 @@ const syncDataByWs = async (message) => {
     } else {
       await commonServices.sync_data();
     }
+  } else if (eventType.includes('enterprise_policy_update')) {
+    await common.syncPolicies()
   } else {
     await commonServices.sync_data();
   }

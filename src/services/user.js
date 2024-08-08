@@ -12,6 +12,13 @@ async function users_me() {
   })
 }
 
+async function users_me_violation() {
+  return request({
+    url: global.endpoint.USERS_ME_VIOLATION,
+    method: 'get',
+  })
+}
+
 async function update_users_me(data = {}) {
   return request({
     url: global.endpoint.USERS_ME,
@@ -234,6 +241,7 @@ async function reset_password(data = {}) {
 
 export default {
   users_me,
+  users_me_violation,
   update_users_me,
   users_me_devices,
   remove_device,

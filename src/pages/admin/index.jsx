@@ -10,6 +10,7 @@ import QuickShareDetail from './shares/quick-share-detail'
 import SecurityTools from './security-tools'
 import PasswordHealth from './security-tools/password-health'
 import BreachScanner from './security-tools/breach-scanner'
+import Policies from './policies'
 import SettingsAccount from './settings/settings-account'
 import SettingsImportExport from './settings/settings-import-export'
 import SettingsSecurity from './settings/settings-security'
@@ -30,6 +31,8 @@ export default {
   SecurityTools,
   PasswordHealth,
   BreachScanner,
+
+  Policies,
 
   SettingsAccount,
   SettingsImportExport,

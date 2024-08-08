@@ -13,6 +13,7 @@ import store from './store'
 import sync from './sync'
 import socket from './socket'
 import auth from './auth'
+import policy from './policy'
 
 export default {
   ...storage,
@@ -29,5 +30,6 @@ export default {
   ...store,
   ...sync,
   ...socket,
-  ...auth
+  ...auth,
+  ...policy
 }

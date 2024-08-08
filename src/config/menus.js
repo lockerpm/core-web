@@ -16,7 +16,8 @@ import {
   MailOutlined,
   KeyOutlined,
   GroupOutlined,
-  MessageOutlined
+  MessageOutlined,
+  BookOutlined
 } from '@ant-design/icons'
 
 import keys from './keys'
@@ -104,6 +105,11 @@ export default {
       key: keys.SECURITY_TOOLS,
       icon: <SecurityScanOutlined />,
       label: 'sidebar.security_tools',
+    },
+    {
+      key: keys.POLICIES,
+      icon: <BookOutlined />,
+      label: 'policies.title',
     },
     {
       key: keys.SETTINGS,

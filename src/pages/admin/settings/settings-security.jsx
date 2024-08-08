@@ -28,7 +28,7 @@ const Security = (props) => {
   const [expand, setExpand] = useState(false);
   
   return (
-    <div className="email-notifications layout-content">
+    <div className="layout-content">
       <PageHeader
         title={t('security_control.title')}
         subtitle={t('security_control.description')}

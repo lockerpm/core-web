@@ -8,6 +8,7 @@ import SearchText from "./SearchText";
 import TextCopy from "./TextCopy";
 import PasswordStrength from "./PasswordStrength";
 import NotifyButton from "./NotifyButton";
+import PolicyResult from "./PolicyResult";
 
 const itemsComponents = {
   FilterTime,
@@ -19,7 +20,8 @@ const itemsComponents = {
   SearchText,
   TextCopy,
   PasswordStrength,
-  NotifyButton
+  NotifyButton,
+  PolicyResult
 }
 
 export default itemsComponents

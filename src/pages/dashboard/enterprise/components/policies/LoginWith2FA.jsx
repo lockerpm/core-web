@@ -37,7 +37,7 @@ const LoginWith2FA = (props) => {
   useEffect(() => {
     setCallingAPI(false)
     if (policy && !common.isEmpty(policy)) {
-      setConfig({ ...policy?.config, min_length: policy.config?.min_length || 0 })
+      setConfig(policy?.config)
     }
   }, [JSON.stringify(policy), visible])
 

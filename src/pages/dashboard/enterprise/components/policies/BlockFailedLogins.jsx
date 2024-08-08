@@ -42,13 +42,13 @@ const BlockFailedLogins = (props) => {
   useEffect(() => {
     setCallingAPI(false)
     if (policy && !common.isEmpty(policy)) {
-      setConfig({ ...policy?.config, min_length: policy.config?.min_length || 0 })
+      setConfig(policy?.config)
     }
   }, [JSON.stringify(policy), visible])
 
   const handleSave = async (enabled = policy.enabled) => {
     setCallingAPI(true);
-    await enterprisePolicyServices.two_fa(enterpriseId, {
+    await enterprisePolicyServices.block_failed_login(enterpriseId, {
       enabled,
       ...config,
     }).then(() => {
@@ -151,6 +151,7 @@ const BlockFailedLogins = (props) => {
           />
           <p className="mb-2">{t('enterprise_policies.block_failed_logins.modal.how_long')}</p>
           <Select
+            className="w-1/2"
             value={config.failed_login_block_time}
             options={logging_times.map((o) => ({
               value: o,
@@ -166,7 +167,10 @@ const BlockFailedLogins = (props) => {
           <Radio.Group
             name="radiogroup"
             value={config.failed_login_owner_email}
-            onChange={(e) => setConfig({ failed_login_owner_email: e.target.value })}
+            onChange={(e) => setConfig({
+              ...policy?.config,
+              failed_login_owner_email: e.target.value
+            })}
           >
             <Radio value={true} className='mb-1'>
               <p>{t('enterprise_policies.block_failed_logins.modal.receive_an_email')}</p>

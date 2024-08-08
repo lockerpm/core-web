@@ -1290,5 +1290,41 @@
     "title": "Password History",
     "restore_password": "Restore password",
     "question": "Are you sure to restore this password? This will replace the current password?"
+  },
+  "policies": {
+    "title": "Policies",
+    "description": "Your account belongs to <span>{{enterprise_name}}</span>. Any active password policies will appear below.",
+    "issues": "{{number}} issue(s)",
+    "good": "Good",
+    "policy_details": "Policy details",
+    "password_requirements": {
+      "title": "Password requirements",
+      "description": "Your company has set best practices for your passwords.",
+      "policy_details_desc": "All password in your vault has to meet these requirements:",
+      "minimum_password_length": "Minimum password length is {{length}}",
+      "requires_special_character": "Requires special characters (@#!$%)",
+      "requires_lowercase": "Requires lowercase letters (abc)",
+      "requires_uppercase": "Requires uppercase letters (ABC)",
+      "requires_digit": "Requires digits (0 1 2 3)",
+      "note": "Note that you will still be able to create new passwords that don't meet the requirements. However your admins will be acknowledged about your violations. It is strongly recommended that you change your violated passwords for better security.",
+      "note_1": "(*) shared passwords won't be affected by this policy.",
+      "violated_items": "View {{number}} violated items"
+    },
+    "block_failed_logins": {
+      "title": "Block failed logins",
+      "description": "Block failed login attempts within a time range to prevent brute-fource attacks.",
+      "note": "Your workspace is blocking consecutive failed login attempts. If you got blocked from logging in to Locker, please contact your workspace admins to unblock.",
+      "you_have_been_blocked": "You have been blocked {{count}} time(s) this month"
+    },
+    "passwordless_login": {
+      "title": "Passwordless login",
+      "description": "Login to Locker using passwordless method.",
+      "note": "Your admin requires you to use passwordless methods (security key or passkey) to log in to Locker."
+    },
+    "log_in_with_2fa": {
+      "title": "Log in with 2FA",
+      "description": "Use Two-Factor Authentication (2FA) to login to Locker for the first time on new devices.",
+      "note": "{{target}} are required to use Two-Factor Authentication (2FA) to login to Locker for the first time on new devices."
+    }
   }
 }

@@ -20,6 +20,7 @@ export default {
   RESOURCES_MAIL_PROVIDERS: `${FLAT_FORM}/resources/mail_providers`,
 
   USERS_ME: `${FLAT_FORM}/users/me`,
+  USERS_ME_VIOLATION: `${FLAT_FORM}/users/me/violation`,
   USERS_EXIST: `${FLAT_FORM}/users/exist`,
   USERS_ACCESS_TOKEN: `${FLAT_FORM}/users/access_token`,
   USERS_SESSION: `${FLAT_FORM}/users/session`,
