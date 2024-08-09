@@ -18,16 +18,11 @@ const PoliciesViolated = (props) => {
   const { } = props;
   const { t } = useTranslation();
 
-  const syncPolicies = useSelector((state) => state.sync.syncPolicies);
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
-  const passwordRequirements = useMemo(() => {
-    return syncPolicies.find((p) => p.policyType === 'password_requirement')
-  }, [syncPolicies])
-
   const violatedItems = useMemo(() => {
-    return common.violatedPasswordCiphers(allCiphers, passwordRequirements)
-  }, [allCiphers, passwordRequirements]);
+    return common.violatedPasswordCiphers(allCiphers)
+  }, [allCiphers]);
 
   return (
     <div className="policies layout-content">

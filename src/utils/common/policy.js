@@ -1,14 +1,14 @@
+import global from "../../config/global";
 import { CipherType } from "../../core-js/src/enums";
 
-const checkPasswordPolicy = (
-  password,
-  policy
-) => {
-  const violations = []
+const checkPasswordPolicy = (password) => {
+  const violations = [];
+  const syncPolicies = global.store.getState().sync.syncPolicies || [];
+  const policy = syncPolicies.find((p) => p.policyType === 'password_requirement' && p.enabled)
   if (!policy || !password) {
     return []
   }
-  if (policy?.enabled && policy?.config) {
+  if (policy?.config) {
     if (policy.config.minLength && password.length < policy.config.minLength) {
       violations.push({ key: 'minLength', value: policy.config.minLength })
     }
@@ -44,7 +44,7 @@ const checkPasswordPolicy = (
   return violations
 }
 
-const violatedPasswordCiphers = (allCiphers, policy) => {
+const violatedPasswordCiphers = (allCiphers) => {
   const violatedCiphers = []
   allCiphers.forEach(c => {
     if (
@@ -55,10 +55,7 @@ const violatedPasswordCiphers = (allCiphers, policy) => {
     ) {
       return
     }
-    const violations = checkPasswordPolicy(
-      c.login.password || '',
-      policy
-    ) || []
+    const violations = checkPasswordPolicy(c.login.password || '') || []
     if (violations.length) {
       violatedCiphers.push({
         ...c,

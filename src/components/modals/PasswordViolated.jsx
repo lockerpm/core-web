@@ -42,7 +42,7 @@ const PasswordViolatedModal = (props) => {
       title={t('policies_violated.modal.title')}
       open={visible}
       onCancel={onClose}
-      width={360}
+      width={440}
       footer={false}
     >
       <p className="mb-2">

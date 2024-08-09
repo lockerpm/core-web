@@ -1297,6 +1297,8 @@
     "issues": "{{number}} issue(s)",
     "good": "Good",
     "policy_details": "Policy details",
+    "no_policies": "There are currently no active policies at the moment.",
+    "generator": "Your password must follow the enterprise's policy.",
     "password_requirements": {
       "title": "Password requirements",
       "description": "Your company has set best practices for your passwords.",
@@ -1306,7 +1308,7 @@
       "requires_lowercase": "Requires lowercase letters (abc)",
       "requires_uppercase": "Requires uppercase letters (ABC)",
       "requires_digit": "Requires digits (0 1 2 3)",
-      "note": "Note that you will still be able to create new passwords that don't meet the requirements. However your admins will be acknowledged about your violations. It is strongly recommended that you change your violated passwords for better security.",
+      "note": "It is strongly recommended that you change your violated passwords for better security.",
       "note_1": "(*) shared passwords won't be affected by this policy.",
       "violated_items": "View {{number}} violated items"
     },

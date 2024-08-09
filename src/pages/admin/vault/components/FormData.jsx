@@ -15,15 +15,14 @@ import {
 import cipherFormItemComponents from '../../../../components/cipher/form-item';
 import cipherFormComponents from '../../../../components/cipher/form';
 import foldersComponents from '../../folders/components';
+import modalsComponents from '../../../../components/modals';
 
 import { CipherType } from '../../../../core-js/src/enums';
-import { CipherView } from '../../../../core-js/src/models/view';
 
 import cipherServices from '../../../../services/cipher';
 
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
-
 
 function FormData(props) {
   const {
@@ -39,6 +38,11 @@ function FormData(props) {
     CryptoBackupForm,
     IdentityForm,
   } = cipherFormComponents;
+
+  const {
+    PasswordViolatedModal
+  } = modalsComponents;
+
   const FolderFormData = foldersComponents.FormData
 
   const {
@@ -56,7 +60,10 @@ function FormData(props) {
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [folderVisible, setFolderVisible] = useState(false);
+  const [violatedVisible, setViolatedVisible] = useState(false);
   const [isCreateOtp, setIsCreateOtp] = useState(false);
+  const [policyItem, setPolicyItem] = useState({ violations: [] });
+
   const allCollections = useSelector((state) => state.collection.allCollections)
 
   const cipherTypes = global.constants.CIPHER_TYPES.filter((t) => t.isCreate)
@@ -83,14 +90,25 @@ function FormData(props) {
 
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
-      setCallingAPI(true);
-      if (cloneMode || !item?.id) {
-        await createCipher(values);
-      } else {
-        await editCipher(values);
+      let policyInvalid = false;
+      if (type === CipherType.Login) {
+        const violations = common.checkPasswordPolicy(values.password);
+        if (violations.length > 0) {
+          setPolicyItem({ violations });
+          setViolatedVisible(true);
+          policyInvalid = true;
+        }
       }
-      onClose();
-      setCallingAPI(false);
+      if (!policyInvalid) {
+        setCallingAPI(true);
+        if (cloneMode || !item?.id) {
+          await createCipher(values);
+        } else {
+          await editCipher(values);
+        }
+        onClose();
+        setCallingAPI(false);
+      }
     })
   }
 
@@ -272,6 +290,11 @@ function FormData(props) {
             form.setFieldValue('folderId', res.id)
           }, 2000);
         }}
+      />
+      <PasswordViolatedModal
+        visible={violatedVisible}
+        item={policyItem}
+        onClose={() => setViolatedVisible(false)}
       />
     </div>
   );

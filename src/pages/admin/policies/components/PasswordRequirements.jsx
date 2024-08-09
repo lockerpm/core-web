@@ -23,8 +23,8 @@ const PasswordRequirements = (props) => {
   const [expand, setExpand] = useState(false);
 
   const violatedItems = useMemo(() => {
-    return common.violatedPasswordCiphers(allCiphers, policy)
-  }, [allCiphers, policy]);
+    return common.violatedPasswordCiphers(allCiphers)
+  }, [allCiphers]);
 
   return (
     <div className="mt-4">

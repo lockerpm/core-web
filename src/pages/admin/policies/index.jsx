@@ -16,7 +16,8 @@ const Policies = (props) => {
     PasswordRequirements,
     BlockFailedLogins,
     PasswordlessLogin,
-    LoginWith2FA
+    LoginWith2FA,
+    NoPolicies
   } = policiesComponents;
   const { } = props;
   const { t } = useTranslation();
@@ -39,6 +40,10 @@ const Policies = (props) => {
   const loginWith2FA = useMemo(() => {
     return syncPolicies.find((p) => p.policyType === '2fa')
   }, [syncPolicies])
+
+  const noPolicies = useMemo(() => {
+    return !syncPolicies.find((p) => p.enabled)
+  }, [syncPolicies])
   
   return (
     <div className="policies layout-content">
@@ -53,6 +58,9 @@ const Policies = (props) => {
         />}
         actions={[]}
       />
+      {
+        noPolicies && <NoPolicies />
+      }
       {
         passwordRequirements?.enabled && <>
           <PasswordRequirements policy={passwordRequirements}/>

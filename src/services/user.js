@@ -19,6 +19,13 @@ async function users_me_violation() {
   })
 }
 
+async function users_me_block_policy() {
+  return request({
+    url: global.endpoint.USERS_ME_BLOCK_POLICY,
+    method: 'get',
+  })
+}
+
 async function update_users_me(data = {}) {
   return request({
     url: global.endpoint.USERS_ME,
@@ -242,6 +249,7 @@ async function reset_password(data = {}) {
 export default {
   users_me,
   users_me_violation,
+  users_me_block_policy,
   update_users_me,
   users_me_devices,
   remove_device,

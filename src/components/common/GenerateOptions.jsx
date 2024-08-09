@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { } from 'react-redux';
+import React, { useEffect, useState, useMemo } from "react";
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -29,6 +29,8 @@ const GenerateOptions = (props) => {
     onFill = () => {},
   } = props;
 
+  const syncPolicies = useSelector((state) => state.sync.syncPolicies);
+
   const [showOptions, setShowOptions] = useState(isShowOptions)
   const [generatedPassword, setGeneratedPassword] = useState(null)
   const [generateOptions, setGenerateOptions] = useState({
@@ -39,6 +41,23 @@ const GenerateOptions = (props) => {
     special: true,
     ambiguous: false
   })
+
+  const policyConfig = useMemo(() => {
+    return syncPolicies.find((p) => p.policyType === 'password_requirement' && p.enabled)?.config
+  }, [syncPolicies])
+
+  useEffect(() => {
+    if (policyConfig) {
+      setGenerateOptions({
+        length: policyConfig?.minLength,
+        uppercase: policyConfig?.requireUpperCase,
+        lowercase: policyConfig?.requireLowerCase,
+        number: policyConfig?.requireDigit,
+        special: policyConfig?.requireSpecialCharacter,
+        ambiguous: generateOptions.ambiguous
+      })
+    }
+  }, [policyConfig])
 
   useEffect(() => {
     setShowOptions(isShowOptions);
@@ -69,7 +88,6 @@ const GenerateOptions = (props) => {
       <div className="flex items-center justify-between mb-2">
         <p
           className="text-limited text-md w-4/5"
-          style={{ display: 'block' }}
           title={generatedPassword}
         >
           {generatedPassword}
@@ -123,11 +141,14 @@ const GenerateOptions = (props) => {
           <p>{t('common.length')}</p>
           <Slider
             className="mx-0 my-1"
+            min={policyConfig?.minLength || 0}
             value={generateOptions.length}
+            
             onChange={(v) => setGenerateOptions({ ...generateOptions, length: v })}
           />
           <Checkbox
             className="w-full"
+            disabled={policyConfig?.requireUpperCase || false}
             checked={generateOptions.uppercase}
             onChange={(e) => setGenerateOptions({ ...generateOptions, uppercase: e.target.checked })}
           >
@@ -135,6 +156,7 @@ const GenerateOptions = (props) => {
           </Checkbox>
           <Checkbox
             className="w-full"
+            disabled={policyConfig?.requireLowerCase || false}
             checked={generateOptions.lowercase}
             onChange={(e) => setGenerateOptions({ ...generateOptions, lowercase: e.target.checked })}
           >
@@ -142,6 +164,7 @@ const GenerateOptions = (props) => {
           </Checkbox>
           <Checkbox
             className="w-full"
+            disabled={policyConfig?.requireDigit || false}
             checked={generateOptions.number}
             onChange={(e) => setGenerateOptions({ ...generateOptions, number: e.target.checked })}
           >
@@ -149,6 +172,7 @@ const GenerateOptions = (props) => {
           </Checkbox>
           <Checkbox
             className="w-full"
+            disabled={policyConfig?.requireSpecialCharacter || false}
             checked={generateOptions.special}
             onChange={(e) => setGenerateOptions({ ...generateOptions, special: e.target.checked })}
           >
@@ -162,6 +186,11 @@ const GenerateOptions = (props) => {
             {t('generate_password.options.ambiguous')}
           </Checkbox>
         </div>
+      }
+      {
+        policyConfig && <p className="text-danger mt-2">
+          (*) {t('policies.generator')}
+        </p>
       }
     </div>
   );
