@@ -55,6 +55,7 @@ const Folders = () => {
   useEffect(() => {
     if (currentPage?.query?.is_create == 1) {
       handleOpenForm(null);
+      global.navigate(currentPage.name, {}, {})
     }
   }, [
     currentPage.query?.is_create
@@ -187,9 +188,17 @@ const Folders = () => {
         </>
       )}
       {filteredData.total > global.constants.PAGE_SIZE && !isMobile && (
-        <Pagination params={params} total={filteredData.total} onChange={handleChangePage} />
+        <Pagination
+          params={params}
+          total={filteredData.total}
+          onChange={handleChangePage}
+        />
       )}
-      <FormData visible={formVisible} item={selectedItem} onClose={() => setFormVisible(false)} />
+      <FormData
+        visible={formVisible}
+        item={selectedItem}
+        onClose={() => setFormVisible(false)}
+      />
       <ShareFormData
         visible={shareVisible}
         item={selectedItem}

@@ -133,6 +133,7 @@ const Vault = () => {
   useEffect(() => {
     if (currentPage?.query?.is_create == 1) {
       handleOpenForm(null, false);
+      global.navigate(currentPage.name, {}, {})
     }
   }, [
     currentPage.query?.is_create
