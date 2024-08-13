@@ -15,7 +15,7 @@ const NoPolicies = (props) => {
 
   return (
     <div className="mt-4">
-      <Card className="text-center" bordered={false}>
+      <Card className="text-center" bordered={true}>
         <FileSearchOutlined className="text-[40px] text-black-500"/>
         <p className="mt-3">{t('policies.no_policies')}</p>
       </Card>

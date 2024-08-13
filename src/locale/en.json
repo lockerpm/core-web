@@ -1293,7 +1293,7 @@
   },
   "policies": {
     "title": "Policies",
-    "description": "Your account belongs to <span>{{enterprise_name}}</span>. Any active password policies will appear below.",
+    "description": "Your account belongs to <span>{{enterprise_name}}</span>. Any active password or login policies will appear below.",
     "issues": "{{number}} issue(s)",
     "good": "Good",
     "policy_details": "Policy details",
@@ -1301,21 +1301,21 @@
     "generator": "Your password must follow the enterprise's policy.",
     "password_requirements": {
       "title": "Password requirements",
-      "description": "Your company has set best practices for your passwords.",
-      "policy_details_desc": "All password in your vault has to meet these requirements:",
+      "description": "Your enterprise has set best password practices.",
+      "policy_details_desc": "All passwords in your vault has to meet these requirements:",
       "minimum_password_length": "Minimum password length is {{length}}",
       "requires_special_character": "Requires special characters (@#!$%)",
       "requires_lowercase": "Requires lowercase letters (abc)",
       "requires_uppercase": "Requires uppercase letters (ABC)",
       "requires_digit": "Requires digits (0 1 2 3)",
       "note": "It is strongly recommended that you change your violated passwords for better security.",
-      "note_1": "(*) shared passwords won't be affected by this policy.",
-      "violated_items": "View {{number}} violated items"
+      "note_1": "(*) Shared passwords are also affected by this policy.",
+      "violated_items": "View {{number}} violated item(s)"
     },
     "block_failed_logins": {
       "title": "Block failed logins",
-      "description": "Block failed login attempts within a time range to prevent brute-fource attacks.",
-      "note": "Your workspace is blocking consecutive failed login attempts. If you got blocked from logging in to Locker, please contact your workspace admins to unblock.",
+      "description": "Block failed login attempts within a time range to prevent brute-force attacks.",
+      "note": "Your vault can be blocked for consecutive failed login attempts. If you got blocked from logging in to Locker, please contact your admins to unblock.",
       "you_have_been_blocked": "You have been blocked {{count}} time(s) this month"
     },
     "passwordless_login": {
@@ -1325,8 +1325,8 @@
     },
     "log_in_with_2fa": {
       "title": "Log in with 2FA",
-      "description": "Use Two-Factor Authentication (2FA) to login to Locker for the first time on new devices.",
-      "note": "{{target}} are required to use Two-Factor Authentication (2FA) to login to Locker for the first time on new devices."
+      "description": "Use Two-Factor Authentication (2FA) to log in to Locker for the first time on new devices.",
+      "note": "Require {{target}} to use Two-Factor Authentication (2FA) to log in to Locker for the first time on new devices."
     }
   },
   "policies_violated": {

@@ -27,7 +27,7 @@ function DropdownMenu() {
   const userInfo = useSelector((state) => state.auth.userInfo);
   const teams = useSelector((state) => state.enterprise.teams);
 
-  const isEntepriseAdmin = useMemo(() => {
+  const isEnterpriseAdmin = useMemo(() => {
     return teams[0]?.role?.includes('admin')
   }, [teams])
 
@@ -89,7 +89,7 @@ function DropdownMenu() {
             key: 'enterprise',
             icon: <GroupOutlined />,
             label: <span>{t('sidebar.enterprise')}</span>,
-            hide: !(userInfo.is_super_admin || isEntepriseAdmin)
+            hide: !(userInfo.is_super_admin || isEnterpriseAdmin)
           },
           {
             type: 'divider',

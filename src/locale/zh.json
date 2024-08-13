@@ -1290,5 +1290,51 @@
     "title": "密碼歷史記錄",
     "restore_password": "恢復密碼",
     "question": "您確定要恢復此密碼嗎？這會取代目前密碼？"
+  },
+  "policies": {
+    "title": "Policies",
+    "description": "Your account belongs to <span>{{enterprise_name}}</span>. Any active password or login policies will appear below.",
+    "issues": "{{number}} issue(s)",
+    "good": "Good",
+    "policy_details": "Policy details",
+    "no_policies": "There are currently no active policies at the moment.",
+    "generator": "Your password must follow the enterprise's policy.",
+    "password_requirements": {
+      "title": "Password requirements",
+      "description": "Your enterprise has set best password practices.",
+      "policy_details_desc": "All passwords in your vault has to meet these requirements:",
+      "minimum_password_length": "Minimum password length is {{length}}",
+      "requires_special_character": "Requires special characters (@#!$%)",
+      "requires_lowercase": "Requires lowercase letters (abc)",
+      "requires_uppercase": "Requires uppercase letters (ABC)",
+      "requires_digit": "Requires digits (0 1 2 3)",
+      "note": "It is strongly recommended that you change your violated passwords for better security.",
+      "note_1": "(*) Shared passwords are also affected by this policy.",
+      "violated_items": "View {{number}} violated item(s)"
+    },
+    "block_failed_logins": {
+      "title": "Block failed logins",
+      "description": "Block failed login attempts within a time range to prevent brute-force attacks.",
+      "note": "Your vault can be blocked for consecutive failed login attempts. If you got blocked from logging in to Locker, please contact your admins to unblock.",
+      "you_have_been_blocked": "You have been blocked {{count}} time(s) this month"
+    },
+    "passwordless_login": {
+      "title": "Passwordless login",
+      "description": "Login to Locker using passwordless method.",
+      "note": "Your admin requires you to use passwordless methods (security key or passkey) to log in to Locker."
+    },
+    "log_in_with_2fa": {
+      "title": "Log in with 2FA",
+      "description": "Use Two-Factor Authentication (2FA) to log in to Locker for the first time on new devices.",
+      "note": "Require {{target}} to use Two-Factor Authentication (2FA) to log in to Locker for the first time on new devices."
+    }
+  },
+  "policies_violated": {
+    "title": "Violated Items",
+    "violations": "{{count}} violation(s)",
+    "modal": {
+      "title": "Password violated",
+      "description": "Your password violated the following policies of Your Enterprise:"
+    }
   }
 }

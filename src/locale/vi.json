@@ -1290,5 +1290,51 @@
     "title": "Lịch sử mật khẩu",
     "restore_password": "Khôi phục mật khẩu",
     "question": "Bạn có chắc chắn khôi phục lại mật khẩu này không? Mật khẩu này sẽ thay thế mật khẩu hiện tại?"
+  },
+  "policies": {
+    "title": "Chính sách",
+    "description": "Tài khoản của bạn thuộc về <span>{{enterprise_name}}</span>. Các chính sách mật khẩu và đăng nhập có hiệu lực sẽ xuất hiện dưới đây.",
+    "issues": "{{number}} vấn đề",
+    "good": "Tốt",
+    "policy_details": "Chi tiết chính sách",
+    "no_policies": "Hiện tại không có chính sách nào đang có hiệu lực.",
+    "generator": "Mật khẩu của bạn phải tuân theo chính sách của doanh nghiệp.",
+    "password_requirements": {
+      "title": "Yêu cầu mật khẩu",
+      "description": "Doanh nghiệp của bạn đã thiết lập các biện pháp tốt nhất cho mật khẩu của bạn.",
+      "policy_details_desc": "Tất cả mật khẩu trong kho lưu trữ của bạn phải đáp ứng các yêu cầu sau:",
+      "minimum_password_length": "Độ dài mật khẩu tối thiểu là {{length}}",
+      "requires_special_character": "Yêu cầu các ký tự đặc biệt (@#!$%)",
+      "requires_lowercase": "Yêu cầu chữ thường (abc)",
+      "requires_uppercase": "Yêu cầu chữ hoa (ABC)",
+      "requires_digit": "Yêu cầu chữ số (0 1 2 3)",
+      "note": "Chúng tôi khuyên bạn nên thay đổi mật khẩu đã vi phạm để bảo mật tốt hơn.",
+      "note_1": "(*) Mật khẩu được chia sẻ cũng bị ảnh hưởng bởi chính sách này.",
+      "violated_items": "Xem {{number}} mục bị vi phạm"
+    },
+    "block_failed_logins": {
+      "title": "Chặn các lần đăng nhập không thành công",
+      "description": "Chặn các lần đăng nhập không thành công trong một khoảng thời gian nhất định để ngăn chặn các cuộc tấn công brute-force.",
+      "note": "Tài khoản của bạn có thể bị chặn nếu đăng nhập không thành công liên tiếp. Nếu bạn bị chặn không cho đăng nhập vào Locker, vui lòng liên hệ với quản trị viên của bạn để bỏ chặn.",
+      "you_have_been_blocked": "Bạn đã bị chặn {{count}} lần trong tháng này"
+    },
+    "passwordless_login": {
+      "title": "Đăng nhập không cần mật khẩu",
+      "description": "Đăng nhập vào Locker bằng phương pháp không cần mật khẩu.",
+      "note": "Quản trị viên yêu cầu bạn sử dụng phương pháp không cần mật khẩu (khóa bảo mật hoặc khóa thông hành) để đăng nhập vào Locker."
+    },
+    "log_in_with_2fa": {
+      "title": "Đăng nhập bằng 2FA",
+      "description": "Sử dụng Xác thực hai yếu tố (2FA) để đăng nhập vào Locker lần đầu tiên trên các thiết bị mới.",
+      "note": "{{target}} được yêu cầu sử dụng Xác thực hai yếu tố (2FA) để đăng nhập vào Locker lần đầu tiên trên các thiết bị mới."
+    }
+  },
+  "policies_violated": {
+    "title": "Các mục bị vi phạm",
+    "violations": "{{count}} vi phạm",
+    "modal": {
+      "title": "Mật khẩu bị vi phạm",
+      "description": "Mật khẩu của bạn đã vi phạm các chính sách sau của Doanh nghiệp:"
+    }
   }
 }

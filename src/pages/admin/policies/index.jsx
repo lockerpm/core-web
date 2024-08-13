@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from "react-i18next";
 
@@ -25,6 +25,10 @@ const Policies = (props) => {
   const teams = useSelector((state) => state.enterprise.teams);
   const syncPolicies = useSelector((state) => state.sync.syncPolicies);
 
+  const isEnterpriseAdmin = useMemo(() => {
+    return teams[0]?.role?.includes('admin')
+  }, [teams])
+
   const passwordRequirements = useMemo(() => {
     return syncPolicies.find((p) => p.policyType === 'password_requirement')
   }, [syncPolicies])
@@ -38,12 +42,12 @@ const Policies = (props) => {
   }, [syncPolicies])
 
   const loginWith2FA = useMemo(() => {
-    return syncPolicies.find((p) => p.policyType === '2fa')
+    return syncPolicies.find((p) => p.policyType === '2fa' )
   }, [syncPolicies])
 
   const noPolicies = useMemo(() => {
-    return !syncPolicies.find((p) => p.enabled)
-  }, [syncPolicies])
+    return !syncPolicies.find((p) => p.enabled && (!p.config.onlyAdmin || isEnterpriseAdmin))
+  }, [syncPolicies, isEnterpriseAdmin])
   
   return (
     <div className="policies layout-content">
@@ -80,7 +84,7 @@ const Policies = (props) => {
         </>
       }
       {
-        loginWith2FA?.enabled && <>
+        loginWith2FA?.enabled && (!loginWith2FA.config.onlyAdmin || isEnterpriseAdmin) && <>
           <LoginWith2FA policy={loginWith2FA}/>
           <Divider />
         </>
