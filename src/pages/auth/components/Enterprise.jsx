@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import {
-  Card,
   Button,
   Spin
 } from '@lockerpm/design';
@@ -144,59 +143,50 @@ const Enterprise = (props) => {
 
   return (
     <div>
-      <div className="flex items-center justify-center">
-        <Card
-          className="w-[400px]"
-          bodyStyle={{
-            padding: '32px'
-          }}
-        >
-          <div className="w-full flex items-center mb-6">
-            {
-              isBack && <Button
-                className="mr-2"
-                type={'text'}
-                icon={<ArrowLeftOutlined />}
-                onClick={() => setStep(step - 1)}
-              />
-            }
-            <p className="text-2xl font-semibold">
-              {t('auth_pages.sign_in.title')}
-            </p>
-          </div>
-          {
-            step === 0 && <div>
-              <div className="flex items-center justify-center">
-                <Spin spinning={checking} size="large"></Spin>
-              </div>
-            </div>
-          }
-          {
-            step > 0 && <div>
-              <SignInForm
-                loading={loading}
-                step={step}
-                onSubmit={onSubmit}
-                setStep={setStep}
-              />
-            </div>
-          }
-          {
-            ssoAccount && <div className="mt-4 text-center">
-              <span>
-                {t('auth_pages.authenticate.note')}
-                <Button
-                  type="link"
-                  className="font-semibold"
-                  onClick={signOtherAccount}
-                >
-                  {t('auth_pages.sign_in.label')}
-                </Button>
-              </span>
-            </div>
-          }
-        </Card>
+      <div className="w-full flex items-center mb-6">
+        {
+          isBack && <Button
+            className="mr-2"
+            type={'text'}
+            icon={<ArrowLeftOutlined />}
+            onClick={() => setStep(step - 1)}
+          />
+        }
+        <p className="text-2xl font-semibold">
+          {t('auth_pages.sign_in.title')}
+        </p>
       </div>
+      {
+        step === 0 && <div>
+          <div className="flex items-center justify-center">
+            <Spin spinning={checking} size="large"></Spin>
+          </div>
+        </div>
+      }
+      {
+        step > 0 && <div>
+          <SignInForm
+            loading={loading}
+            step={step}
+            onSubmit={onSubmit}
+            setStep={setStep}
+          />
+        </div>
+      }
+      {
+        ssoAccount && <div className="mt-4 text-center">
+          <span>
+            {t('auth_pages.authenticate.note')}
+            <Button
+              type="link"
+              className="font-semibold"
+              onClick={signOtherAccount}
+            >
+              {t('auth_pages.sign_in.label')}
+            </Button>
+          </span>
+        </div>
+      }
     </div>
   );
 }

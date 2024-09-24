@@ -563,6 +563,7 @@
   "lock": {
     "title": "Sign in to your account",
     "description": "Enter your Password to unlock",
+    "pwl_required": "Passwordless Login is required on your account. Connect a key to unlock",
     "security_key_desc": "Sign in with a security key",
     "passkey_key_desc": "Sign in with a passkey",
     "master_password": "Password",

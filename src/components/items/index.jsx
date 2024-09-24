@@ -9,6 +9,7 @@ import TextCopy from "./TextCopy";
 import PasswordStrength from "./PasswordStrength";
 import NotifyButton from "./NotifyButton";
 import PolicyResult from "./PolicyResult";
+import UserInfo from "./UserInfo";
 
 const itemsComponents = {
   FilterTime,
@@ -21,7 +22,8 @@ const itemsComponents = {
   TextCopy,
   PasswordStrength,
   NotifyButton,
-  PolicyResult
+  PolicyResult,
+  UserInfo
 }
 
 export default itemsComponents

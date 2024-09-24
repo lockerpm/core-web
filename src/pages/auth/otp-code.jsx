@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
-  Card,
 } from '@lockerpm/design';
 
 import {
@@ -12,18 +11,13 @@ import {
 
 import authComponents from "./components";
 
-import images from "../../assets/images";
-
 import global from "../../config/global";
 import common from "../../utils/common";
 
 import './css/auth.scss';
 
 const OtpCode = () => {
-  const { Logo, EnterOtp } = authComponents;
-  const { AuthBgImage } = images;
-
-  const { t } = useTranslation();
+  const { AuthCard, EnterOtp } = authComponents;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,33 +49,15 @@ const OtpCode = () => {
     <div
       className="auth-page"
     >
-      <div
-        className="otp-code w-[600px]"
-        style={{
-          backgroundImage: `url(${AuthBgImage})`,
-          backgroundSize: 'contain',
-          paddingTop: 62,
-          height: 'max-content'
-        }}
-      >
-        <Logo />
-        <div className="flex items-center justify-center">
-          <Card
-            className="w-[400px]"
-            bodyStyle={{
-              padding: '32px'
-            }}
-          >
-            <EnterOtp
-              callingAPI={callingAPI}
-              factor2={factor2}
-              isAuth={true}
-              onVerify={onVerify}
-              onBack={() => signOtherAccount()}
-            />
-          </Card>
-        </div>
-      </div>
+      <AuthCard>
+        <EnterOtp
+          callingAPI={callingAPI}
+          factor2={factor2}
+          isAuth={true}
+          onVerify={onVerify}
+          onBack={() => signOtherAccount()}
+        />
+      </AuthCard>
     </div>
   );
 }

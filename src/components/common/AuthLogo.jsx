@@ -10,17 +10,17 @@ import { } from "react-i18next";
 import {
 } from "@ant-design/icons";
 
-import images from "../../../assets/images";
+import images from "../../assets/images";
 
-const Logo = (props) => {
-  const { AuthLogo } = images;
+const AuthLogo = (props) => {
+  const { AuthLogoImg } = images;
   const {
   } = props;
   return (
     <div className="flex items-center justify-center mb-8">
       <Image
         className='icon-logo'
-        src={AuthLogo}
+        src={AuthLogoImg}
         preview={false}
         height={48}
       />
@@ -28,4 +28,4 @@ const Logo = (props) => {
   );
 }
 
-export default Logo;
+export default AuthLogo;

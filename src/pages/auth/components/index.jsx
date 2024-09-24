@@ -1,13 +1,13 @@
 import EnterOtp from "./EnterOtp";
 import Enable2FA from "./Enable2FA";
-import Logo from "./Logo";
+import AuthCard from "./AuthCard";
 import Personal from "./Personal";
 import Enterprise from "./Enterprise";
 
 const authComponents = {
   EnterOtp,
   Enable2FA,
-  Logo,
+  AuthCard,
   Personal,
   Enterprise
 }

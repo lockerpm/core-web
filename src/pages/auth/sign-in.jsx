@@ -8,17 +8,14 @@ import {
 
 import authComponents from "./components";
 
-import images from "../../assets/images";
-
 import global from "../../config/global";
 import common from "../../utils/common";
 
 import './css/auth.scss';
 
 const SingIn = () => {
-  const { Logo, Personal, Enterprise } = authComponents;
-  const { AuthBgImage } = images;
   const { t } = useTranslation();
+  const { AuthCard, Personal, Enterprise } = authComponents;
   const isLoading = useSelector((state) => state.system.isLoading);
   const serverType = useSelector((state) => state.system.serverType);
 
@@ -39,17 +36,22 @@ const SingIn = () => {
       <div
         className="auth-page"
       >
-        <div
-          className="sign-in"
-          style={{
-            backgroundImage: `url(${AuthBgImage})`,
-            backgroundSize: 'contain',
-            paddingTop: 62,
-            paddingBottom: 16,
-            height: 'max-content'
-          }}
+        <AuthCard
+          other={
+            serverType === global.constants.SERVER_TYPE.PERSONAL && <div className="mt-4 text-center">
+              <span>
+                {t('auth_pages.sign_in.note')}
+                <Button
+                  type="link"
+                  className="font-semibold"
+                  onClick={() => global.navigate(global.keys.SIGN_UP)}
+                >
+                  {t('auth_pages.sign_up.label')}
+                </Button>
+              </span>
+            </div>
+          }
         >
-          <Logo />
           {
             !isLoading && <div>
               {
@@ -66,7 +68,7 @@ const SingIn = () => {
               }
             </div>
           }
-        </div>
+        </AuthCard>
       </div>
     </Spin>
   );

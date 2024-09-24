@@ -563,6 +563,7 @@
   "lock": {
     "title": "Đăng nhập vào tài khoản của bạn",
     "description": "Nhập mật khẩu",
+    "pwl_required": "Tài khoản của bạn cần phải đăng nhập không cần mật khẩu. Hãy kết nối chìa khóa để mở khóa",
     "security_key_desc": "Đăng nhập bằng khóa bảo mật",
     "passkey_key_desc": "Đăng nhập bằng mật mã",
     "master_password": "Mật khẩu",

@@ -563,6 +563,7 @@
   "lock": {
     "title": "登入",
     "description": "輸入您的密碼以解鎖",
+    "pwl_required": "您的帳戶需要無密碼登入。連線金鑰以解鎖",
     "security_key_desc": "使用安全金鑰登入",
     "passkey_key_desc": "使用密碼登入",
     "master_password": "密碼",

@@ -6,6 +6,7 @@ import UploadFile from "./UploadFile";
 import GenerateOptions from "./GenerateOptions";
 import ItemInput from "./ItemInput";
 import UserAvatar from "./UserAvatar";
+import AuthLogo from "./AuthLogo";
 
 const commonComponents = {
   CipherIcon,
@@ -15,7 +16,8 @@ const commonComponents = {
   UploadFile,
   GenerateOptions,
   ItemInput,
-  UserAvatar
+  UserAvatar,
+  AuthLogo
 }
 
 export default commonComponents
