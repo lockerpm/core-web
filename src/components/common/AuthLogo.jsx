@@ -15,6 +15,7 @@ import images from "../../assets/images";
 const AuthLogo = (props) => {
   const { AuthLogoImg } = images;
   const {
+    height = 48
   } = props;
   return (
     <div className="flex items-center justify-center mb-8">
@@ -22,7 +23,7 @@ const AuthLogo = (props) => {
         className='icon-logo'
         src={AuthLogoImg}
         preview={false}
-        height={48}
+        height={height}
       />
     </div>
   );

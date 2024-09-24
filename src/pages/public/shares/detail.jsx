@@ -10,7 +10,7 @@ import {
 } from '@lockerpm/design';
 
 
-import authComponents from "../../auth/components";
+import commonComponents from "../../../components/common";
 import quickShareDetailComponents from "./components";
 
 import quickShareServices from "../../../services/quick-share";
@@ -20,7 +20,7 @@ import common from "../../../utils/common";
 import '../css/index.scss';
 
 const ShareDetail = () => {
-  const { Logo } = authComponents;
+  const { AuthLogo } = commonComponents;
   const {
     Right,
     Bottom,
@@ -102,7 +102,7 @@ const ShareDetail = () => {
         <Col lg={18} md={15} sm={24} xs={24}>
           <div className="max-w-2xl mx-auto px-6 py-6">
             <div className="text-center mb-6">
-              <Logo />
+              <AuthLogo />
             </div>
             <Spin spinning={loading}>
               <div style={{ minHeight: 200 }}>
