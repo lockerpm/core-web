@@ -176,16 +176,17 @@ const SecurityKeyForm = (props) => {
             </p>
             {
               devices.length === 0 && <Card
-                bodyStyle={{ padding: '9px 24px' }}
+                className="no-key-found"
+                bodyStyle={{ padding: '8px 24px' }}
               >
                 {t('passwordless.no_key_found')}
               </Card>
             }
             {
               devices.map((d, index) => <Card
-                className={`mt-4 cursor-pointer ${selectedDevice?.path == d.path ? 'border-green-700' : ''}`}
+                className={`mt-4 device-key cursor-pointer ${selectedDevice?.path == d.path ? 'border-green-700' : ''}`}
                 key={index}
-                bodyStyle={{ padding: '9px 24px' }}
+                bodyStyle={{ padding: '8px 24px' }}
                 onClick={() => setSelectedDevice(d)}
               >
                 <div className="flex items-center">
@@ -219,7 +220,7 @@ const SecurityKeyForm = (props) => {
         {
           (step !== 0 || (isTouch || isFingerprint)) && selectedDevice && <Card
             className="mt-10 border-green-700"
-            bodyStyle={{ padding: '9px 24px' }}
+            bodyStyle={{ padding: '8px 24px' }}
           >
             <div className="flex items-center">
               <UsbOutlined style={{ fontSize: 20 }} />
