@@ -17,8 +17,6 @@ import commonServices from "../../services/common";
 import global from "../../config/global";
 import common from "../../utils/common";
 
-import './css/auth.scss';
-
 const SingUp = () => {
   const { AuthCard } = authComponents;
   const { t } = useTranslation();

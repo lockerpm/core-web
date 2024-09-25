@@ -29,9 +29,6 @@ import coreServices from "../../services/core";
 
 import global from "../../config/global";
 import common from "../../utils/common";
-import jsCore from "../../core-js";
-
-import './css/auth.scss';
 
 const Authenticate = () => {
   const { ChangePassword, Pairing, SecurityKey } = formsComponents;

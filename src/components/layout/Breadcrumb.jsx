@@ -12,8 +12,6 @@ import itemsComponents from '../items';
 import common from '../../utils/common';
 import global from '../../config/global';
 
-import '../css/breadcrumb.scss';
-
 function LayoutBreadcrumb() {
   const { RouterLink } = itemsComponents;
   const { t } = useTranslation();

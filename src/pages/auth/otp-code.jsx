@@ -14,8 +14,6 @@ import authComponents from "./components";
 import global from "../../config/global";
 import common from "../../utils/common";
 
-import './css/auth.scss';
-
 const OtpCode = () => {
   const { AuthCard, EnterOtp } = authComponents;
   const navigate = useNavigate();

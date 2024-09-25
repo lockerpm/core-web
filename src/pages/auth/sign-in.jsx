@@ -11,8 +11,6 @@ import authComponents from "./components";
 import global from "../../config/global";
 import common from "../../utils/common";
 
-import './css/auth.scss';
-
 const SingIn = () => {
   const { t } = useTranslation();
   const { AuthCard, Personal, Enterprise } = authComponents;

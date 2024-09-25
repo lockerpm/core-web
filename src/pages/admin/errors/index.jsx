@@ -11,8 +11,6 @@ import {
 
 import global from "../../../config/global";
 
-import './css/index.scss';
-
 const AdminErrorPage = () => {
   const { t } = useTranslation();
   const currentPage = useSelector((state) => state.system.currentPage);

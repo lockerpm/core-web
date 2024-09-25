@@ -10,8 +10,6 @@ import {
   PlusOutlined
 } from "@ant-design/icons";
 
-import '../css/upload-file.scss';
-
 function UploadFile(props) {
   const {
     value = '',

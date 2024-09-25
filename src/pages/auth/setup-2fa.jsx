@@ -29,8 +29,6 @@ import authServices from "../../services/auth";
 import global from "../../config/global";
 import common from "../../utils/common";
 
-import './css/auth.scss';
-
 const Setup2FA = () => {
   const { Pairing, SecurityKey, Passkey } = formsComponents;
   const { Enable2FA } = authComponents;

@@ -24,8 +24,6 @@ import authServices from "../../services/auth";
 import common from "../../utils/common";
 import global from "../../config/global";
 
-import './css/auth.scss';
-
 const Lock = () => {
   const { t } = useTranslation();
   const { Pairing, SecurityKey, Passkey } = formsComponents;

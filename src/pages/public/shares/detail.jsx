@@ -17,8 +17,6 @@ import quickShareServices from "../../../services/quick-share";
 
 import common from "../../../utils/common";
 
-import '../css/index.scss';
-
 const ShareDetail = () => {
   const { AuthLogo } = commonComponents;
   const {
