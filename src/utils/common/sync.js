@@ -46,8 +46,8 @@ const syncPolicies = async (data) => {
   if (!policies) {
     policies = await syncServices.sync_policies();
   }
-  global.store.dispatch(storeActions.updateSyncPolicies(policies))
   await global.jsCore.syncService.syncPolicies(policies);
+  await common.getAllPolicies();
 }
 
 const syncSettings = async(domains) => {

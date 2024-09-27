@@ -65,6 +65,11 @@ const getAllFolders = async () => {
   global.store.dispatch(storeActions.updateAllFolders(allFolders))
 }
 
+const getAllPolicies = async () => {
+  const result = await global.jsCore.policyService.getAll() || []
+  await global.store.dispatch(storeActions.updateSyncPolicies(result))
+}
+
 const getSends = async () => {
   const sends = await global.jsCore.sendService.getAllDecrypted() || []
   global.store.dispatch(storeActions.updateSends(sends))
@@ -92,6 +97,7 @@ export default {
   getAllCollections,
   getAllCiphers,
   getAllFolders,
+  getAllPolicies,
   getSends,
   getMyShares,
   getInvitations,
