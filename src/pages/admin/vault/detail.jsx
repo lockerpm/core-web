@@ -33,6 +33,7 @@ const VaultDetail = () => {
 
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const isMobile = useSelector((state) => state.system.isMobile);
 
   const [cloneMode, setCloneMode] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
@@ -212,7 +213,7 @@ const VaultDetail = () => {
         />}
         Logo={() => <CipherIcon
           className="mr-4"
-          size={48}
+          size={isMobile ? 36 : 48}
           item={originCipher}
           type={originCipher.type}
           isDeleted={originCipher?.isDeleted}

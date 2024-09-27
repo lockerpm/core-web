@@ -1,14 +1,14 @@
 import React, { useMemo, useState, useEffect } from "react";
 import {
-  Row,
-  Col,
+  Button,
   Input,
   Dropdown,
 } from '@lockerpm/design';
 
 import {
   SearchOutlined,
-  CaretDownOutlined
+  CaretDownOutlined,
+  Sor
 } from "@ant-design/icons";
 
 import { useSelector } from 'react-redux';
@@ -26,6 +26,8 @@ const Filter = (props) => {
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
+  const isMobile = useSelector((state) => state.system.isMobile);
+
   const [searchText, setSearchText] = useState(params.searchText)
 
   useEffect(() => {
@@ -54,55 +56,54 @@ const Filter = (props) => {
   }, [selectedSortOption, params, locale])
 
   return (
-    <Row
-      className={`filter ${className}`}
-      justify={'space-between'}
-      gutter={[0, 8]}
+    <div
+      className={`filter ${className} flex items-center justify-between`}
+      size={[0, 8]}
     >
-      <Col lg={12} span={12} className="w-full">
-        <Row
-          justify={'left'}
-          gutter={[12, 12]}
-        >
-          <Col xl={12} lg={12} md={12} xs={24}>
-            <Input
-              prefix={<SearchOutlined />}
-              value={searchText}
-              disabled={loading}
-              placeholder={t('placeholder.search')}
-              onChange={(e) => {
-                setSearchText(e.target.value)
-                setParams({
-                  ...params,
-                  searchText: e.target.value
-                })
-              }}
-              onPressEnter={() => setParams({ ...params, searchText })}
-            />
-          </Col>
-        </Row>
-      </Col>
-      <Col lg={12} span={12} className="w-full">
-        <Row
-          justify={'end'}
-          gutter={[12, 12]}
-        >
-          <Col>
-            <Dropdown.Button
+      <Input
+        className={`flex-1 max-w-[400px] mr-3 ${isMobile ? 'border' : ''}`}
+        prefix={<SearchOutlined />}
+        value={searchText}
+        disabled={loading}
+        placeholder={t('placeholder.search')}
+        style={{ boxShadow: isMobile ? 'none' : '' }}
+        onChange={(e) => {
+          setSearchText(e.target.value)
+          setParams({
+            ...params,
+            searchText: e.target.value
+          })
+        }}
+        onPressEnter={() => setParams({ ...params, searchText })}
+      />
+      <div>
+        {
+          isMobile ? <Dropdown
+            trigger={['click']}
+            disabled={loading}
+            menu={{
+              items: sortMenus,
+              selectedKeys: []
+            }}
+          >
+            <Button
+              style={{ boxShadow: 'none' }}
               icon={<CaretDownOutlined />}
-              trigger={['click']}
-              disabled={loading}
-              menu={{
-                items: sortMenus,
-                selectedKeys: []
-              }}
-            >
-              {t('sort_options.sort_by')}
-            </Dropdown.Button>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+            />
+          </Dropdown> : <Dropdown.Button
+            icon={<CaretDownOutlined />}
+            trigger={['click']}
+            disabled={loading}
+            menu={{
+              items: sortMenus,
+              selectedKeys: []
+            }}
+          >
+            {t('sort_options.sort_by')}
+          </Dropdown.Button>
+        }
+      </div>
+    </div>
   );
 }
 

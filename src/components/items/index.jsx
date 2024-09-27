@@ -23,7 +23,7 @@ const itemsComponents = {
   PasswordStrength,
   NotifyButton,
   PolicyResult,
-  UserInfo
+  UserInfo,
 }
 
 export default itemsComponents

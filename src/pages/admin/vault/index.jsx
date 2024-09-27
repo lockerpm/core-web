@@ -351,8 +351,8 @@ const Vault = () => {
         Logo={() => folderId ? <ImageIcon
           className="mr-4"
           name={originFolder?.isCollection ? 'folder-share' : 'folder'}
-          width={48}
-          height={48}
+          width={isMobile ? 36 : 48}
+          height={isMobile ? 36 : 48}
         />: <></>}
       />
       {

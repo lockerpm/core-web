@@ -17,6 +17,7 @@ const PageHeader = (props) => {
   const {
     EmergencyAccessInvitations,
     Actions,
+    HeaderTitle
   } = pageHeaderComponents;
   const {
     title = '',
@@ -28,6 +29,7 @@ const PageHeader = (props) => {
     docLink = '',
     docLabel = '',
     isBack = true,
+    showInvitation = true,
     Back = () => <></>,
     Logo = () => <></>,
     Right = () => null
@@ -42,7 +44,9 @@ const PageHeader = (props) => {
 
   return (
     <>
-      <EmergencyAccessInvitations />
+      {
+        showInvitation && <EmergencyAccessInvitations />
+      }
       <Row
         gutter={[24, 8]}
         className={`
@@ -62,31 +66,12 @@ const PageHeader = (props) => {
             }
             <Logo />
           </div>
-          <div
-            className="text-limited"
-          >
-            <h1
-              className={`page-header__left--title font-semibold w-full text-limited text-limited__block ${isMarginTop ? 'text-2xl' : 'text-xl'}`}
-              title={title}
-            >
-              {title}
-            </h1>
-            {
-              ![null, undefined].includes(total) && <p
-                className="page-header__left--subtitle mt-1 text-black-500"
-              >
-                {t('common.total')}: {total}
-              </p>
-            }
-            {
-              subtitle && <p
-                className="page-header__left--subtitle text-limited text-limited__block"
-                title={subtitle}
-              >
-                {subtitle}
-              </p>
-            }
-          </div>
+          <HeaderTitle
+            title={title}
+            total={total}
+            subtitle={subtitle}
+            isMarginTop={isMarginTop}
+          />
         </Col>
         <Col span={(isRight || actions.length > 0) ? 8 : 0} className="page-header__right" align="right">
           <Row gutter={[8, 8]} justify="end">

@@ -14,7 +14,6 @@ import itemsComponents from "../items";
 import commonComponents from "../common";
 
 import common from "../../utils/common";
-import global from "../../config/global";
 
 const Name = (props) => {
   const { TextCopy, RouterLink, ImageIcon } = itemsComponents;

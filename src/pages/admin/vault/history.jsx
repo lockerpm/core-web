@@ -188,7 +188,7 @@ const VaultHistory = () => {
         />}
         Logo={() => <CipherIcon
           className="mr-4"
-          size={48}
+          size={isMobile ? 36 : 48}
           item={originCipher}
           type={originCipher.type}
           isDeleted={originCipher?.isDeleted}

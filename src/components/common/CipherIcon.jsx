@@ -64,6 +64,7 @@ const CipherIcon = (props) => {
   return (
     <div className={className}>
       <Image
+        className="rounded-md"
         key={type}
         preview={false}
         width={size}

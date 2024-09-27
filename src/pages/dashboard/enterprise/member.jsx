@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -34,8 +34,10 @@ const Member = () => {
   const location = useLocation();
 
   const currentPage = common.getRouterByLocation(location);
-  const enterpriseId = currentPage?.params?.enterprise_id
-  const memberId = currentPage?.params?.member_id
+  const enterpriseId = currentPage?.params?.enterprise_id;
+  const memberId = currentPage?.params?.member_id;
+
+  const isMobile = useSelector((state) => state.system.isMobile);
 
   const [loading, setLoading] = useState(false)
   const [member, setMember] = useState({})
@@ -140,7 +142,7 @@ const Member = () => {
             actions={[]}
             Logo={() => <div className="mr-4">
               <Avatar
-                size={48}
+                size={isMobile ? 36 : 48}
                 src={member.avatar}
               />
             </div>}

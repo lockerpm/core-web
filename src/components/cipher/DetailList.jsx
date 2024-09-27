@@ -198,7 +198,7 @@ const DetailList = (props) => {
           name: t('cipher.crypto_backup.wallet_app'),
           value: alias ? <div>
             <Image
-              className={'mr-2'}
+              className={'mr-2 rounded-md'}
               style={{ width: 28, height: 28 }}
               preview={false}
               src={alias.icon}

@@ -4,30 +4,22 @@ import { useTranslation } from "react-i18next";
 
 import {
   List,
-  Popover,
-  Checkbox,
 } from '@lockerpm/design';
 
 import {
-  InfoCircleOutlined
 } from "@ant-design/icons";
 
 
-import itemsComponents from "../../../../components/items";
 import cipherComponents from "../../../../components/cipher";
 
-import common from "../../../../utils/common";
-
 const ListData = (props) => {
-  const { TextCopy } = itemsComponents;
-  const { Name, Actions } = cipherComponents;
   const { t } = useTranslation();
+  const { Name, Actions } = cipherComponents;
 
   const {
     loading = false,
     className = '',
     data = [],
-    selectedRowKeys = [],
     onMove = () => {},
     onUpdate = () => {},
     onDelete = () => {},
@@ -35,29 +27,7 @@ const ListData = (props) => {
     onShare = () => {},
     onStopSharing = () => {},
     onPermanentlyDelete = () => {},
-    selectionChange = () => {},
-    getCheckboxProps = () => {}
   } = props;
-
-  const GeneralInfo = (props) => {
-    const { record } = props;
-    return <div className="text-xs">
-      <div className="flex items-center mb-1">
-        <p className="font-semibold mr-2">{t('common.created_time')}:</p>
-        <TextCopy
-          className="text-xs"
-          value={common.timeFromNow(record.creationDate)}
-        />
-      </div>
-      <div className="flex items-center">
-        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
-        <TextCopy
-          className="text-xs"
-          value={common.timeFromNow(record.revisionDate)}
-        />
-      </div>
-    </div>
-  }
 
   return (
     <List
@@ -66,29 +36,18 @@ const ListData = (props) => {
       className={className}
       loading={loading}
       renderItem={(record) => (
-        <List.Item>
+        <List.Item
+          style={{ padding: 0 }}
+          className="mb-0"
+        >
           <div
             key={record.id}
-            className="flex items-center justify-between w-full"
+            className="flex items-center justify-between w-full py-1 rounded bg-white h-[52px]"
           >
-            <div className="flex items-center">
-              <Checkbox
-                className="mr-2"
-                checked={selectedRowKeys.includes(record.id)}
-                disabled={getCheckboxProps(record)?.disabled}
-                onChange={(e) => selectionChange(null, record.id, e.target.checked)}
-              />
+            <div className="flex items-center flex-1">
               <Name cipher={record}/>
             </div>
-            <div className="ml-2 flex items-center">
-              <Popover
-                className="cursor-pointer mr-2"
-                placement="right"
-                trigger="click"
-                content={() => <GeneralInfo record={record}/>}
-              >
-                <InfoCircleOutlined />
-              </Popover>
+            <div className="ml-2 flex items-center w-[112px] justify-end">
               <Actions
                 className="flex items-center"
                 cipher={record}
