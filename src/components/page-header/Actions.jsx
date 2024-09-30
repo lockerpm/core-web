@@ -32,6 +32,7 @@ const Actions = (props) => {
               disabled={a.disabled}
               onClick={() => a.click()}
               icon={a.icon}
+              shape={isMobile ? 'circle' : ''}
             >
               {isMobile ? '' : a.label}
             </Button>
