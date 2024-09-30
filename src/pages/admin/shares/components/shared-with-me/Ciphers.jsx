@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
 import { } from '@lockerpm/design';
@@ -15,7 +15,6 @@ import common from "../../../../../utils/common";
 const ShareCiphers = (props) => {
   const { FormData, MoveFolder } = vaultComponents;
   const { ListData, TableData } = sharedCiphersComponents;
-  const { t } = useTranslation();
   const location = useLocation();
 
   const {

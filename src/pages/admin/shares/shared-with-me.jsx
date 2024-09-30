@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -24,7 +24,10 @@ import sharingServices from "../../../services/sharing";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const SharedWithMe = (props) => {
+const SharedWithMe = () => {
+  const { t } = useTranslation();
+  const location = useLocation();
+
   const { PageHeader }  = commonComponents;
   const { Filter }  = vaultComponents;
   const { Pagination } = itemsComponents;
@@ -34,9 +37,6 @@ const SharedWithMe = (props) => {
     NoItem,
   }  = shareComponents;
 
-  const { t } = useTranslation();
-  const location = useLocation();
-  const dispatch = useDispatch();
   const menuTypes = global.constants.MENU_TYPES
   const currentPage = common.getRouterByLocation(location);
 

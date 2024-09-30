@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import {
   List,
-  Checkbox,
   Popover
 } from '@lockerpm/design';
 
@@ -25,11 +24,8 @@ const ListData = (props) => {
     loading = false,
     className = '',
     data = [],
-    selectedRowKeys = [],
     onUpdate = () => {},
     onDelete = () => {},
-    selectionChange = () => {},
-    getCheckboxProps = () => {}
   } = props;
 
   const GeneralInfo = (props) => {
@@ -59,24 +55,21 @@ const ListData = (props) => {
       className={className}
       loading={loading}
       renderItem={(record) => (
-        <List.Item>
+        <List.Item
+          style={{ padding: 0 }}
+          className="mb-0"
+        >
           <div
-            className="flex items-center justify-between w-full"
             key={record.id}
+            className="flex items-center justify-between w-full py-1"
           >
-            <div className="flex items-center">
-              <Checkbox
-                className="mr-2"
-                checked={selectedRowKeys.includes(record.id)}
-                disabled={getCheckboxProps(record)?.disabled}
-                onChange={(e) => selectionChange(null, record.id, e.target.checked)}
-              />
+            <div className="flex items-center flex-1">
               <Name cipher={record}/>
             </div>
-            <div className="flex items-center ml-2">
+            <div className="flex items-center ml-2 w-[64px] justify-end">
               <Popover
                 className="mr-2 cursor-pointer"
-                placement="right"
+                placement="top"
                 trigger="click"
                 content={() => <GeneralInfo record={record}/>}
               >

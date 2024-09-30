@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 import { } from 'react-router-dom';
 
 import { } from '@lockerpm/design';
@@ -12,7 +12,6 @@ import sharedCiphersComponents from "./shared-ciphers";
 const ShareFolders = (props) => {
   const { FormData } = foldersComponents;
   const { ListData, TableData } = sharedCiphersComponents;
-  const { t } = useTranslation();
 
   const {
     loading = false,

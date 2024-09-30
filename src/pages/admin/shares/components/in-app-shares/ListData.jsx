@@ -67,20 +67,23 @@ const ListData = (props) => {
       className={className}
       loading={loading}
       renderItem={(record) => (
-        <List.Item>
+        <List.Item
+          style={{ padding: 0 }}
+          className="mb-0"
+        >
           <div
             key={record.id}
-            className="flex items-center justify-between w-full"
+            className="flex items-center justify-between w-full py-1 h-[52px]"
           >
-            <div className="flex items-center">
+            <div className="flex items-center flex-1">
               {
                 isFolder ? <FolderName item={record}/> : <CipherName cipher={record}/>
               }
             </div>
-            <div className="ml-2 flex items-center">
+            <div className="ml-2 flex items-center w-[112px] justify-end">
               <Popover
                 className="cursor-pointer mr-2"
-                placement="right"
+                placement="top"
                 trigger="click"
                 content={() => <GeneralInfo record={record}/>}
               >

@@ -26,7 +26,10 @@ import commonServices from "../../../services/common";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
-const MySharedItems = (props) => {
+const MySharedItems = () => {
+  const { t } = useTranslation();
+  const location = useLocation();
+
   const { PageHeader }  = commonComponents;
   const { Filter }  = vaultComponents;
   const { Pagination } = itemsComponents;
@@ -41,8 +44,6 @@ const MySharedItems = (props) => {
   const QuickListData = quickSharesComponents.ListData;
   const QuickTableData = quickSharesComponents.TableData;
 
-  const { t } = useTranslation();
-  const location = useLocation();
   const menuTypes = global.constants.MENU_TYPES
 
   const currentPage = common.getRouterByLocation(location);

@@ -1,4 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
   Button,
   Input,
@@ -8,16 +11,16 @@ import {
 import {
   SearchOutlined,
   CaretDownOutlined,
-  Sor
 } from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import itemsComponents from "../../../../components/items";
 
 import global from "../../../../config/global";
 
 const Filter = (props) => {
   const { t } = useTranslation()
+  const { ImageIcon } = itemsComponents;
+
   const {
     className = '',
     params = {},
@@ -58,10 +61,9 @@ const Filter = (props) => {
   return (
     <div
       className={`filter ${className} flex items-center justify-between`}
-      size={[0, 8]}
     >
       <Input
-        className={`flex-1 max-w-[400px] mr-3 ${isMobile ? 'border' : ''}`}
+        className={`flex-1 max-w-[400px] mr-3 ${isMobile ? 'rounded-full' : ''}`}
         prefix={<SearchOutlined />}
         value={searchText}
         disabled={loading}
@@ -87,8 +89,12 @@ const Filter = (props) => {
             }}
           >
             <Button
-              style={{ boxShadow: 'none' }}
-              icon={<CaretDownOutlined />}
+              shape="circle"
+              icon={<ImageIcon
+                name={'sort'}
+                width={18}
+                height={18}
+              />}
             />
           </Dropdown> : <Dropdown.Button
             icon={<CaretDownOutlined />}

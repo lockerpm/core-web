@@ -74,31 +74,33 @@ const ListData = (props) => {
       className={className}
       loading={loading}
       renderItem={(record) => (
-        <List.Item>
-          <div key={record.id} className="w-full">
-            <div
-              className="flex items-center justify-between w-full"
-            >
-              <div className="flex items-center">
-                <CipherName
-                  send={record}
-                />
-              </div>
-              <div className="flex items-center">
-                <Popover
-                  className="mr-2 cursor-pointer"
-                  placement="right"
-                  trigger="click"
-                  content={() => <GeneralInfo record={record}/>}
-                >
-                  <InfoCircleOutlined />
-                </Popover>
-                <Actions
-                  className="flex items-center"
-                  item={record}
-                  onStopSharing={onStopSharing}
-                />
-              </div>
+        <List.Item
+          style={{ padding: 0 }}
+          className="mb-0"
+        >
+          <div
+            key={record.id}
+            className="flex items-center justify-between w-full py-1 h-[52px]"
+          >
+            <div className="flex items-center flex-1">
+              <CipherName
+                send={record}
+              />
+            </div>
+            <div className="flex items-center w-[112px] justify-end">
+              <Popover
+                className="mr-2 cursor-pointer"
+                placement="top"
+                trigger="click"
+                content={() => <GeneralInfo record={record}/>}
+              >
+                <InfoCircleOutlined />
+              </Popover>
+              <Actions
+                className="flex items-center"
+                item={record}
+                onStopSharing={onStopSharing}
+              />
             </div>
           </div>
         </List.Item>

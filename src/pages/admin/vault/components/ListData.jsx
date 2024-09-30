@@ -1,6 +1,6 @@
 import React, { } from "react";
 import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 
 import {
   List,
@@ -13,7 +13,6 @@ import {
 import cipherComponents from "../../../../components/cipher";
 
 const ListData = (props) => {
-  const { t } = useTranslation();
   const { Name, Actions } = cipherComponents;
 
   const {
@@ -42,7 +41,7 @@ const ListData = (props) => {
         >
           <div
             key={record.id}
-            className="flex items-center justify-between w-full py-1 rounded bg-white h-[52px]"
+            className="flex items-center justify-between w-full py-1 h-[52px]"
           >
             <div className="flex items-center flex-1">
               <Name cipher={record}/>

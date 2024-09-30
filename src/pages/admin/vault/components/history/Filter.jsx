@@ -1,21 +1,23 @@
 import React, { useMemo } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+
 import {
-  Row,
-  Col,
+  Button,
   Dropdown,
 } from '@lockerpm/design';
 
 import {
-  CaretDownOutlined
+  CaretDownOutlined,
 } from "@ant-design/icons";
 
-import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import itemsComponents from "../../../../../components/items";
 
 import global from "../../../../../config/global";
 
 const Filter = (props) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const { ImageIcon } = itemsComponents;
   const {
     className = '',
     params = {},
@@ -24,6 +26,7 @@ const Filter = (props) => {
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
+  const isMobile = useSelector((state) => state.system.isMobile);
 
   const sortOptions = global.constants.SORT_OPTIONS.filter((o) => o.orderField !== 'name')
 
@@ -47,34 +50,42 @@ const Filter = (props) => {
   }, [selectedSortOption, params, locale])
 
   return (
-    <Row
-      className={`filter ${className}`}
-      justify={'space-between'}
-      gutter={[0, 8]}
+    <div
+      className={`filter ${className} flex items-center justify-between`}
     >
-      <Col lg={12} span={12} className="w-full">
-      </Col>
-      <Col lg={12} span={12} className="w-full">
-        <Row
-          justify={'end'}
-          gutter={[12, 12]}
-        >
-          <Col>
-            <Dropdown.Button
-              icon={<CaretDownOutlined />}
-              trigger={['click']}
-              disabled={loading}
-              menu={{
-                items: sortMenus,
-                selectedKeys: []
-              }}
-            >
-              {t('sort_options.sort_by')}
-            </Dropdown.Button>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+      <div></div>
+      <div>
+        {
+          isMobile ? <Dropdown
+            trigger={['click']}
+            disabled={loading}
+            menu={{
+              items: sortMenus,
+              selectedKeys: []
+            }}
+          >
+            <Button
+              shape="circle"
+              icon={<ImageIcon
+                name={'sort'}
+                width={18}
+                height={18}
+              />}
+            />
+          </Dropdown> : <Dropdown.Button
+            icon={<CaretDownOutlined />}
+            trigger={['click']}
+            disabled={loading}
+            menu={{
+              items: sortMenus,
+              selectedKeys: []
+            }}
+          >
+            {t('sort_options.sort_by')}
+          </Dropdown.Button>
+        }
+      </div>
+    </div>
   );
 }
 

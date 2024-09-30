@@ -48,6 +48,7 @@ const TableData = (props) => {
         dataIndex: 'title',
         key: 'name',
         align: 'left',
+        width: 400,
         render: (_, record) => <Name cipher={record}/>
       },
       {

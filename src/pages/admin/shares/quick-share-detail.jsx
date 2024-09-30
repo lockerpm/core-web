@@ -21,11 +21,12 @@ import global from "../../../config/global";
 
 const QuickShareDetail = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+
   const { PageHeader, CipherIcon } = commonComponents;
   const { RouterLink } = itemsComponents;
   const { DetailList } = cipherComponents;
   const { Actions } = quickShareComponents;
-  const location = useLocation();
 
   const currentPage = common.getRouterByLocation(location);
   const sends = useSelector((state) => state.share.sends);

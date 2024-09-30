@@ -47,10 +47,13 @@ const ListData = (props) => {
       dataSource={data}
       className={className}
       renderItem={(record) => (
-        <List.Item>
+        <List.Item
+          style={{ padding: 0 }}
+          className="mb-0"
+        >
           <div
             key={record.id}
-            className="flex items-center justify-between w-full"
+            className="flex items-center justify-between w-full py-2"
           >
             <div className="flex items-center">
               <TextCopy
