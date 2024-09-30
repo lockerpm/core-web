@@ -141,10 +141,17 @@ const GenerateOptions = (props) => {
           <p>{t('common.length')}</p>
           <Slider
             className="mx-0 my-1"
-            min={policyConfig?.minLength || 0}
+            min={0}
+            max={64}
             value={generateOptions.length}
-            
-            onChange={(v) => setGenerateOptions({ ...generateOptions, length: v })}
+            onChange={(v) => {
+              let newValue = v
+              if (v <= (policyConfig?.minLength || 0)) {
+                newValue = policyConfig?.minLength || 0
+                generateOptions.length = newValue
+              }
+              setGenerateOptions({ ...generateOptions, length: newValue })
+            }}
           />
           <Checkbox
             className="w-full"
