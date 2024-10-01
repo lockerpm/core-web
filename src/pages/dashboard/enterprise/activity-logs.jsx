@@ -143,7 +143,7 @@ const EnterpriseActivityLogs = (props) => {
       />
       {
         isMobile ? <ListData
-          className='mt-4'
+          className='mt-2'
           loading={loading}
           data={activityLogs}
           params={params}

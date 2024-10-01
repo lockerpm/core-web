@@ -143,15 +143,25 @@ const Enterprises = () => {
         ]}
       />
       {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={loading} setParams={(v) => setParams({ ...v, page: 1 })} />
+        <Filter
+          className={"mt-2"}
+          params={params}
+          loading={loading}
+          setParams={(v) => setParams({ ...v, page: 1 })}
+        />
       )}
       {filteredData.total == 0 ? (
-        <NoEnterprise className={"mt-4"} loading={loading} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+        <NoEnterprise
+          className={"mt-4"}
+          loading={loading}
+          isEmpty={isEmpty}
+          onCreate={() => handleOpenForm()}
+        />
       ) : (
         <>
           {isMobile ? (
             <ListData
-              className='mt-4'
+              className='mt-2'
               loading={loading}
               data={filteredData.result}
               params={params}

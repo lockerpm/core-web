@@ -202,7 +202,7 @@ const VaultHistory = () => {
       />
       {
         isMobile ? <ListData
-          className="mt-4"
+          className="mt-2"
           isRestore={isRestore}
           data={filteredData.result}
           onRestore={(v) => handleRestore(v)}

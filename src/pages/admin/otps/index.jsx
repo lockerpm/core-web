@@ -219,7 +219,7 @@ const Authenticator = () => {
         /> : <>
           {
             isMobile ? <ListData
-              className="mt-4"
+              className="mt-2"
               loading={syncing || loading}
               data={filteredData.result}
               params={params}

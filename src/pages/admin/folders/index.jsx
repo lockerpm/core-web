@@ -139,7 +139,10 @@ const Folders = () => {
   }
 
   return (
-    <div className='vault layout-content' onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}>
+    <div
+      className='vault layout-content'
+      onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
+    >
       <PageHeader
         title={t("inventory.all_folders")}
         total={filteredData.total}
@@ -156,15 +159,25 @@ const Folders = () => {
         ]}
       />
       {!isEmpty && (
-        <Filter className={"mt-2"} params={params} loading={syncing} setParams={(v) => setParams({ ...v, page: 1 })} />
+        <Filter
+          className={"mt-2"}
+          params={params}
+          loading={syncing}
+          setParams={(v) => setParams({ ...v, page: 1 })}
+        />
       )}
       {filteredData.total == 0 ? (
-        <NoFolder className={"mt-4"} loading={syncing} isEmpty={isEmpty} onCreate={() => handleOpenForm()} />
+        <NoFolder
+          className={"mt-4"}
+          loading={syncing}
+          isEmpty={isEmpty}
+          onCreate={() => handleOpenForm()}
+        />
       ) : (
         <>
           {isMobile ? (
             <ListData
-              className='mt-4'
+              className='mt-2'
               loading={syncing}
               data={filteredData.result}
               params={params}

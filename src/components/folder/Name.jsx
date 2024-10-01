@@ -11,7 +11,6 @@ import {
 
 import itemsComponents from "../items";
 
-import global from "../../config/global";
 import common from "../../utils/common";
 
 const Name = (props) => {
@@ -44,17 +43,11 @@ const Name = (props) => {
   }, [item, allCiphers])
 
   const routerName = useMemo(() => {
-    if (currentPage?.name == global.keys.SHARED_WITH_ME) {
-      return global.keys.SHARED_WITH_ME_FOLDER
-    }
-    if (currentPage?.name == global.keys.MY_SHARED_ITEMS) {
-      return global.keys.MY_SHARED_ITEMS_FOLDER
-    }
-    return global.keys.FOLDER_DETAIL
+    return common.getFolderRouterName(currentPage)
   }, [currentPage])
 
   const routerParams = useMemo(() => {
-    return { folder_id: originFolder.id }
+    return common.getFolderRouterNameParams(originFolder.id)
   }, [originFolder])
 
 

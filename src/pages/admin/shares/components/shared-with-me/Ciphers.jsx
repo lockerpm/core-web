@@ -51,7 +51,7 @@ const ShareCiphers = (props) => {
     >
       {
         isMobile ? <ListData
-          className="mt-4"
+          className="mt-2"
           loading={loading}
           data={filteredData.result}
           params={params}

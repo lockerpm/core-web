@@ -15,7 +15,6 @@ import {
 import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";
 import shareComponents from "../../../components/share";
-import vaultComponents from "../vault/components";
 import inAppSharesComponents from "./components/in-app-shares";
 import quickSharesComponents from "./components/quick-shares";
 
@@ -31,14 +30,16 @@ const MySharedItems = () => {
   const location = useLocation();
 
   const { PageHeader }  = commonComponents;
-  const { Filter }  = vaultComponents;
+  const { Filter }  = inAppSharesComponents;
   const { Pagination } = itemsComponents;
+
   const {
     MenuTabs,
     NoItem,
     FormData,
     QuickShareReview
   }  = shareComponents;
+
   const InAppListData = inAppSharesComponents.ListData;
   const InAppTableData = inAppSharesComponents.TableData;
   const QuickListData = quickSharesComponents.ListData;

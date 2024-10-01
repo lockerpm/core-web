@@ -13,10 +13,7 @@ import {
 import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";
 import shareComponents from "../../../components/share";
-import vaultComponents from "../vault/components";
-
-import ShareCiphers from "./components/shared-with-me/Ciphers";
-import ShareFolders from "./components/shared-with-me/Folders";
+import sharedWithMeComponents from "./components/shared-with-me";
 
 import commonServices from "../../../services/common";
 import sharingServices from "../../../services/sharing";
@@ -29,13 +26,18 @@ const SharedWithMe = () => {
   const location = useLocation();
 
   const { PageHeader }  = commonComponents;
-  const { Filter }  = vaultComponents;
   const { Pagination } = itemsComponents;
 
   const {
     MenuTabs,
     NoItem,
   }  = shareComponents;
+
+  const {
+    Filter,
+    ShareCiphers,
+    ShareFolders,
+  }  = sharedWithMeComponents;
 
   const menuTypes = global.constants.MENU_TYPES
   const currentPage = common.getRouterByLocation(location);

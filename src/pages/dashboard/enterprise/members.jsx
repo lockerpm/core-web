@@ -224,7 +224,7 @@ const EnterpriseMembers = (props) => {
       <div key={selectedTab}>
         {
           isMobile ? <ListData
-            className='mt-4'
+            className='mt-2'
             loading={loading}
             enterpriseId={enterpriseId}
             data={members}

@@ -353,7 +353,7 @@ const Vault = () => {
           name={originFolder?.isCollection ? 'folder-share' : 'folder'}
           width={isMobile ? 36 : 48}
           height={isMobile ? 36 : 48}
-        />: <></>}
+        /> : <></>}
       />
       {
         !isEmpty && <>
@@ -390,7 +390,7 @@ const Vault = () => {
         /> : <>
           {
             isMobile ? <ListData
-              className="mt-4"
+              className="mt-2"
               loading={syncing || loading}
               data={filteredData.result}
               params={params}

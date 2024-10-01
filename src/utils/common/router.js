@@ -218,6 +218,20 @@ const getCipherHistoryRouterParams = (currentPage, cipherId) => {
   }
 }
 
+const getFolderRouterName = (currentPage) => {
+  if (currentPage?.name == global.keys.SHARED_WITH_ME) {
+    return global.keys.SHARED_WITH_ME_FOLDER
+  }
+  if (currentPage?.name == global.keys.MY_SHARED_ITEMS) {
+    return global.keys.MY_SHARED_ITEMS_FOLDER
+  }
+  return global.keys.FOLDER_DETAIL
+}
+
+const getFolderRouterNameParams = (folderId) => {
+  return { folder_id: folderId }
+}
+
 export default {
   convertQueryToString,
   convertStringToQuery,
@@ -228,5 +242,7 @@ export default {
   getCipherRouterName,
   getCipherRouterParams,
   getCipherHistoryRouterName,
-  getCipherHistoryRouterParams
+  getCipherHistoryRouterParams,
+  getFolderRouterName,
+  getFolderRouterNameParams
 }
