@@ -19,7 +19,10 @@ const DisplayOtp = (props) => {
   const {
     notes = null,
     justify = 'left',
-    showText = true
+    showText = true,
+    progressSize = 28,
+    codeSize = 76,
+    className = "text-2xl font-semibold"
   } = props;
 
   const [otp, setOtp] = useState('')
@@ -68,15 +71,15 @@ const DisplayOtp = (props) => {
       style={{ width: 160 }}
     >
       <p
-        className="text-2xl font-semibold text-primary cursor-pointer"
+        className={`text-primary cursor-pointer ${className} w-[${codeSize}px]`}
         style={{ marginBottom: 0 }}
         onClick={() => common.copyToClipboard(otp)}
       >
         {common.formatText(otpFormat, showText)}
       </p>
-      <span className="ml-2">
+      <span className={`ml-2 flex items-center w-[${progressSize}px]`}>
         <Progress
-          size={28}
+          size={progressSize}
           type="circle"
           percent={(start / period) * 100}
           showInfo={false}
