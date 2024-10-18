@@ -30,6 +30,7 @@ const Actions = (props) => {
               loading={a.loading}
               danger={a.danger}
               disabled={a.disabled}
+              ghost={a.ghost}
               onClick={() => a.click()}
               icon={a.icon}
               shape={isMobile ? 'circle' : ''}
