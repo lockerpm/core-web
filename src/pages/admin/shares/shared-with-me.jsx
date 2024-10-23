@@ -48,7 +48,7 @@ const SharedWithMe = () => {
   const allCollections = useSelector((state) => state.collection.allCollections)
   const invitations = useSelector((state) => state.share.invitations)
 
-  const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
+  const [menuType, setMenuType] = useState(menuTypes.CIPHERS);
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -117,6 +117,10 @@ const SharedWithMe = () => {
   }, [items, JSON.stringify(params)])
 
   useEffect(() => {
+    setMenuType(currentPage.query?.menu_type || menuTypes.CIPHERS)
+  }, [currentPage?.query?.menu_type])
+
+  useEffect(() => {
     setParams({
       ...params,
       page: 1,
@@ -133,7 +137,6 @@ const SharedWithMe = () => {
   };
   
   const handleChangeMenuType = (v) => {
-    setMenuType(v);
     setParams({ ...params, page: 1, searchText: null })
     global.navigate(currentPage.name, {}, { menu_type: v });
   }

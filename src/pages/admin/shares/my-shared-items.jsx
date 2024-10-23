@@ -57,7 +57,7 @@ const MySharedItems = () => {
   const sends = useSelector((state) => state.share.sends)
   const myShares = useSelector((state) => state.share.myShares);
 
-  const [menuType, setMenuType] = useState(currentPage.query?.menu_type || menuTypes.CIPHERS);
+  const [menuType, setMenuType] = useState(menuTypes.CIPHERS);
   const [formVisible, setFormVisible] = useState(false);
   const [reviewVisible, setReviewVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -99,6 +99,10 @@ const MySharedItems = () => {
   }, [items])
 
   useEffect(() => {
+    setMenuType(currentPage.query?.menu_type || menuTypes.CIPHERS)
+  }, [currentPage?.query?.menu_type])
+
+  useEffect(() => {
     setParams({
       ...params,
       page: 1,
@@ -135,7 +139,6 @@ const MySharedItems = () => {
   };
 
   const handleChangeMenuType = (v) => {
-    setMenuType(v);
     setParams({ ...params, page: 1, searchText: null })
     global.navigate(currentPage.name, {}, { menu_type: v });
   }
@@ -214,10 +217,7 @@ const MySharedItems = () => {
           menuType={menuType}
           menuTypes={menuTypes}
           setParams={(v) => setParams({ ...v, page: 1 })}
-          setMenuType={(v) => {
-            setMenuType(v);
-            global.navigate(currentPage.name, {}, { menu_type: v });
-          }}
+          setMenuType={(v) => { global.navigate(currentPage.name, {}, { menu_type: v })}}
         />
       }
       {
