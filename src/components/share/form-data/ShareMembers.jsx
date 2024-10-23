@@ -44,6 +44,7 @@ function ShareMembers(props) {
 
   const teams = useSelector((state) => state.enterprise.teams);
   const userInfo = useSelector((state) => state.auth.userInfo);
+  const isMobile = useSelector((state) => state.system.isMobile);
 
   const [memberGroupSearchText, setMemberGroupSearchText] = useState('')
   const [searching, setSearching] = useState(false)
@@ -285,19 +286,19 @@ function ShareMembers(props) {
           className='share-members'
           header={
             <div className='flex items-center justify-between font-semibold'>
-              <div style={{ width: 40 }}></div>
+              <div className='w-[40px]'></div>
               <div className='flex-1'>
                 {t('common.name')}
               </div>
               <div className='flex items-center'>
-                <div style={{ width: 108 }}>
+                <div className='w-[108px] px-1'>
                   {t('shares.share_type')}
                 </div>
-                <div style={{ width: 88 }}>
+                <div className='w-[88px] px-1'>
                   {t('common.status')}
                 </div>
               </div>
-              <div style={{ width: 28 }}></div>
+              <div className='w-[28px]'></div>
             </div>
           }
           renderItem={(item) => (
@@ -312,27 +313,26 @@ function ShareMembers(props) {
               ]}
             >
               <List.Item.Meta
-                avatar={<ItemAvatar item={item} size={24}/>}
+                avatar={<ItemAvatar item={item} size={isMobile ? 14 : 24}/>}
                 description={null}
                 title={
                   <div className='flex items-center justify-between'>
                     <div
-                      className='text-limited'
+                      className='text-limited text-limited__block flex-1'
                       title={item.username || item.name}
-                      style={{ width: 174, display: 'block !important' }}
                     >
                       {item.username || item.name}
                     </div>
                     <div className='flex items-center'>
-                      <Select
-                        size='small'
-                        value={item.role}
-                        className='mr-2'
-                        style={{ width: 100 }}
-                        options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: t(p.label) }))}
-                        onChange={(v) => handleChangePermission(item, v)}
-                      />
-                      <div style={{ width: 80 }}>
+                      <div className='w-[108px] px-1'>
+                        <Select
+                          size='small'
+                          value={item.role}
+                          options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: t(p.label) }))}
+                          onChange={(v) => handleChangePermission(item, v)}
+                        />
+                      </div>
+                      <div style={{ width: 88 }} className='w-[88px] px-1'>
                         {
                           (() => {
                             if (item.status === global.constants.STATUS.ACCEPTED) {

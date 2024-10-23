@@ -1,6 +1,6 @@
 import React, { } from "react";
 import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { } from "react-i18next";
 
 import {
   Tabs
@@ -10,7 +10,6 @@ import {
 } from "@ant-design/icons";
 
 const MenuTabs = (props) => {
-  const { t } = useTranslation()
   const {
     className = '',
     menus = [],
@@ -18,7 +17,7 @@ const MenuTabs = (props) => {
     onChange = () => {}
   } = props;
   return (
-    <div className={className}>
+    <div className={`menu-tabs ${className}`}>
       <Tabs
         activeKey={menu}
         items={menus.map((m) => {
