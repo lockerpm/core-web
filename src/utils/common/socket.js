@@ -12,15 +12,14 @@ const syncDataByWs = async (message) => {
     await commonServices.sync_data();
   } else if (eventType.includes('cipher')) {
     if (['cipher_update', 'cipher_delete', 'cipher_restore'].includes(eventType)) {
-      if (eventType === 'cipher_update') {
-        await common.syncProfile();
-      }
+      await common.syncProfile();
       if (message.data.id) {
         await common.syncItems([message.data.id])
       }
       if (message.data.ids) {
         await common.syncItems(message.data.ids)
       }
+      await common.getInvitations();
     } else if (eventType.includes('cipher_delete_permanent')) {
       await global.jsCore.cipherService.delete(message.data.ids);
       await common.getAllCiphers();
