@@ -1,10 +1,9 @@
-import React, { useMemo } from "react";
+import React, { } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
   Row,
-  Col,
 } from '@lockerpm/design';
 
 import {
@@ -38,17 +37,12 @@ const PageHeader = (props) => {
   const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
 
-  const isRight = useMemo(() => {
-    return !!Right()
-  }, [Right])
-
   return (
     <>
       {
         showInvitation && <EmergencyAccessInvitations />
       }
-      <Row
-        gutter={[24, 8]}
+      <div
         className={`
           page-header
           flex
@@ -59,7 +53,7 @@ const PageHeader = (props) => {
           height: (isMobile || description) ? 'auto' : `${60}px`,
         }}
       >
-        <Col span={(isRight || actions.length > 0) ? 16 : 24} className="page-header__left flex items-center">
+        <div className="page-header__left flex items-center mr-2 flex-1">
           <div className="flex items-center">
             {
               isBack && <Back />
@@ -72,14 +66,14 @@ const PageHeader = (props) => {
             subtitle={subtitle}
             isMarginTop={isMarginTop}
           />
-        </Col>
-        <Col span={(isRight || actions.length > 0) ? 8 : 0} className="page-header__right" align="right">
+        </div>
+        <div className="page-header__right">
           <Row gutter={[8, 8]} justify="end">
             <Actions actions={actions}/>
             <Right />
           </Row>
-        </Col>
-      </Row>
+        </div>
+      </div>
       {
         description && <p className="page-header__left--subtitle mt-2">
           {description}

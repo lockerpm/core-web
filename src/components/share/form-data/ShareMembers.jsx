@@ -288,7 +288,7 @@ function ShareMembers(props) {
             <div className='flex items-center justify-between font-semibold'>
               <div className='w-[40px]'></div>
               <div className='flex-1'>
-                {t('common.name')}
+                {t('common.email')}
               </div>
               <div className='flex items-center'>
                 <div className='w-[108px] px-1'>
