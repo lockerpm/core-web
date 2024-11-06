@@ -43,7 +43,7 @@ const ListData = (props) => {
             key={record.id}
             className="flex items-center justify-between w-full py-1 h-[52px]"
           >
-            <div className="flex items-center flex-1">
+            <div className="flex items-center" style={{ width: 'calc(100% - 120px)'}}>
               <Name cipher={record}/>
             </div>
             <div className="ml-2 flex items-center w-[112px] justify-end">

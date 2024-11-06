@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 
 import {
   List,
-  Popover
+  // Popover
 } from '@lockerpm/design';
 
 import {
-  InfoCircleOutlined
+  // InfoCircleOutlined
 } from "@ant-design/icons";
 
 import itemsComponents from "../../../../components/items";
@@ -28,25 +28,25 @@ const ListData = (props) => {
     onDelete = () => {},
   } = props;
 
-  const GeneralInfo = (props) => {
-    const { record } = props;
-    return <div className="text-xs">
-      <div className="flex items-center mb-2">
-        <p className="font-semibold mr-2">{t('common.created_time')}:</p>
-        <TextCopy
-          className="text-xs"
-          value={common.timeFromNow(record.creationDate)}
-        />
-      </div>
-      <div className="flex items-center">
-        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
-        <TextCopy
-          className="text-xs"
-          value={common.timeFromNow(record.revisionDate)}
-        />
-      </div>
-    </div>
-  }
+  // const GeneralInfo = (props) => {
+  //   const { record } = props;
+  //   return <div className="text-xs">
+  //     <div className="flex items-center mb-2">
+  //       <p className="font-semibold mr-2">{t('common.created_time')}:</p>
+  //       <TextCopy
+  //         className="text-xs"
+  //         value={common.timeFromNow(record.creationDate)}
+  //       />
+  //     </div>
+  //     <div className="flex items-center">
+  //       <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
+  //       <TextCopy
+  //         className="text-xs"
+  //         value={common.timeFromNow(record.revisionDate)}
+  //       />
+  //     </div>
+  //   </div>
+  // }
 
   return (
     <List
@@ -63,18 +63,21 @@ const ListData = (props) => {
             key={record.id}
             className="flex items-center justify-between w-full py-1"
           >
-            <div className="flex items-center flex-1">
-              <Name cipher={record}/>
+            <div className="flex items-center" style={{ width: 'calc(100% - 64px)' }}>
+              <Name
+                cipher={record}
+                className={'w-full'}
+              />
             </div>
             <div className="flex items-center ml-2 w-[64px] justify-end">
-              <Popover
+              {/* <Popover
                 className="mr-2 cursor-pointer"
                 placement="top"
                 trigger="click"
                 content={() => <GeneralInfo record={record}/>}
               >
                 <InfoCircleOutlined />
-              </Popover>
+              </Popover> */}
               <Actions
                 className="flex items-center"
                 cipher={record}

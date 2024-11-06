@@ -190,7 +190,8 @@
     "existed": "{{name}} is existed.",
     "least_length": "Ensure this {{name}} has at least {{ min }} characters.",
     "passwords_not_match": "The two passwords that you entered do not match!",
-    "key_existed": "This key already exists on the chosen environment"
+    "key_existed": "This key already exists on the chosen environment",
+    "expiration_year": "Enter the last two digits of the expiration year."
   },
   "notification": {
     "error": {

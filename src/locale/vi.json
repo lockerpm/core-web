@@ -190,7 +190,8 @@
     "existed": "{{name}} đã tồn tại.",
     "least_length": "Đảm bảo {{name}} có ít nhất {{ min }} ký tự.",
     "passwords_not_match": "Mật khẩu bạn nhập không trùng khớp!",
-    "key_existed": "khóa bạn nhập đã tồn tại trên môi trường được chọn"
+    "key_existed": "khóa bạn nhập đã tồn tại trên môi trường được chọn",
+    "expiration_year": "Chỉ nhập hai chữ số cuối của năm hết hạn."
   },
   "notification": {
     "error": {

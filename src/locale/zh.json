@@ -190,7 +190,8 @@
     "existed": "{{name}} 已經存在.",
     "least_length": "{{name}} 的最短密碼長度為 {{ min }}.",
     "passwords_not_match": "密碼驗證不符!",
-    "key_existed": "此密鑰已存在於所選環境中"
+    "key_existed": "此密鑰已存在於所選環境中",
+    "expiration_year": "輸入到期年份的最後兩位數字。"
   },
   "notification": {
     "error": {

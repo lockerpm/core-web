@@ -90,7 +90,7 @@ function CardForm(props) {
             name={'expYear'}
             className='mb-2'
             rules={[
-              global.rules.INVALID(t('cipher.card.expiration_year'), 'EXPIRATION_YEAR')
+              global.rules.INVALID_EXPIRATION_YEAR()
             ]}
             label={
               <p className='text-black-500'>

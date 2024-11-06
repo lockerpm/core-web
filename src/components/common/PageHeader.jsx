@@ -53,7 +53,7 @@ const PageHeader = (props) => {
           height: (isMobile || description) ? 'auto' : `${60}px`,
         }}
       >
-        <div className="page-header__left flex items-center mr-2 flex-1">
+        <div className="page-header__left flex items-center mr-2" style={{ width: 'calc(100% - 120px)' }}>
           <div className="flex items-center">
             {
               isBack && <Back />

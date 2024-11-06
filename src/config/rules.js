@@ -23,4 +23,10 @@ export default {
       message: <Trans i18nKey='validation.least_length' values={{ name: name, min: min }}/>
     }
   },
+  INVALID_EXPIRATION_YEAR: () => {
+    return {
+      pattern: PATTERNS.EXPIRATION_YEAR,
+      message: <Trans i18nKey='validation.expiration_year'/>
+    }
+  },
 }

@@ -75,7 +75,7 @@ const Name = (props) => {
         isDeleted={originCipher?.isDeleted}
         type={originCipher.type}
       />
-      <div className="ml-2 flex-1" style={{ width: 'calc(100% - 36px)' }}>
+      <div className="ml-2 flex-1" style={{ width: 'calc(100% - 40px)' }}>
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}

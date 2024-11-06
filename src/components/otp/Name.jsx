@@ -12,19 +12,20 @@ import commonComponents from "../common";
 
 const Name = (props) => {
   const { CipherIcon, DisplayOtp } = commonComponents;
-  const { cipher = {} } = props;
+  const { cipher = {}, className = 'flex-1' } = props;
 
   const isMobile = useSelector((state) => state.system.isMobile);
 
   return (
-    <div className="flex items-center flex-1">
+    <div className={`flex items-center ${className}`}>
       <CipherIcon
         type={cipher.type}
       />
-      <div className="ml-2 flex-1">
+      <div className="ml-2" style={{ width: 'calc(100% - 40px)' }}>
         <div className="block md:flex items-center justify-between">
           <p
-            className={'font-semibold flex-1 text-limited'}
+            className={'font-semibold flex-1 text-limited text-limited__block'}
+            title={cipher.name}
           >
             {cipher.name}
           </p>

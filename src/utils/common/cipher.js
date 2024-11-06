@@ -87,6 +87,7 @@ const convertCipherToForm = (cipher = {}) => {
     result = {
       ...result,
       ...(cipher.login || new LoginView()),
+      hasTotp: cipher?.login?.hasTotp,
       uri: cipher?.login?.uris?.length > 0 ? cipher?.login?.uris[0]?.uri : '',
     }
   } else if (cipher.type === CipherType.CryptoWallet) {
@@ -101,14 +102,18 @@ const convertCipherToForm = (cipher = {}) => {
     result = {
       ...result,
       ...(cipher.card || new CardView()),
+      number: cipher?.card?.number || null,
+      brand: cipher?.card?.brand || null,
+      expiration: cipher?.card?.expiration || null,
       expMonth: cipher?.card?.expMonth || null
     }
   } else if (cipher.type === CipherType.Identity) {
     result = {
       ...result,
       ...(cipher.identity || new IdentityView()),
-      firstName: cipher.identity?.firstName || '',
-      lastName: cipher.identity?.lastName || ''
+      firstName: cipher.identity?.firstName || null,
+      lastName: cipher.identity?.lastName || null,
+      fullName: cipher.identity.fullName
     }
   }
   return result
