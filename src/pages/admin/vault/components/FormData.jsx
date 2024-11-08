@@ -88,8 +88,8 @@ function FormData(props) {
     }
   }, [visible, cipherType])
 
-  const handleSave = async () => {
-    form.validateFields().then(async (values) => {
+  const checkingPolicyItem = (callback = () => {}) => {
+    form.validateFields().then((values) => {
       let policyInvalid = false;
       if (type === CipherType.Login) {
         const violations = common.checkPasswordPolicy(values.password);
@@ -100,15 +100,23 @@ function FormData(props) {
         }
       }
       if (!policyInvalid) {
-        setCallingAPI(true);
-        if (cloneMode || !item?.id) {
-          await createCipher(values);
-        } else {
-          await editCipher(values);
-        }
-        onClose();
-        setCallingAPI(false);
+        callback()
       }
+    })
+  }
+
+  const handleSave = async () => {
+    form.validateFields().then(async (values) => {
+      setCallingAPI(true);
+      if (cloneMode || !item?.id) {
+        await createCipher(values);
+      } else {
+        await editCipher(values);
+      }
+      setCallingAPI(false);
+      setPolicyItem({ violations: [] });
+      setViolatedVisible(false);
+      onClose();
     })
   }
 
@@ -197,7 +205,7 @@ function FormData(props) {
               className="vault-form-save-btn"
               type="primary"
               loading={callingAPI}
-              onClick={handleSave}
+              onClick={() => checkingPolicyItem(handleSave)}
             >
             { t('button.save') } 
             </Button>
@@ -294,6 +302,9 @@ function FormData(props) {
       <PasswordViolatedModal
         visible={violatedVisible}
         item={policyItem}
+        callingAPI={callingAPI}
+        isForm={true}
+        onOk={() => handleSave()}
         onClose={() => setViolatedVisible(false)}
       />
     </div>

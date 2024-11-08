@@ -1336,7 +1336,9 @@
     "violations": "{{count}} vi phạm",
     "modal": {
       "title": "Mật khẩu bị vi phạm",
-      "description": "Mật khẩu của bạn đã vi phạm các chính sách sau của Doanh nghiệp:"
+      "description": "Mật khẩu của bạn đã vi phạm các chính sách sau của Doanh nghiệp:",
+      "still_use_this_password": "Vẫn dùng mật khẩu này",
+      "change_password": "Đổi mật khẩu"
     }
   }
 }

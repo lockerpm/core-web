@@ -1294,49 +1294,51 @@
     "question": "您確定要恢復此密碼嗎？這會取代目前密碼？"
   },
   "policies": {
-    "title": "Policies",
-    "description": "Your account belongs to <span>{{enterprise_name}}</span>. Any active password or login policies will appear below.",
-    "issues": "{{number}} issue(s)",
-    "good": "Good",
-    "policy_details": "Policy details",
-    "no_policies": "There are currently no active policies at the moment.",
-    "generator": "Your password must follow the enterprise's policy.",
+    "title": "政策",
+    "description": "您的帳號屬於<span>{{enterprise_name}}</span>。任何有效的密碼或登入原則都會顯示在下方。",
+    "issues": "{{number}} 個問題",
+    "good": "好",
+    "policy_details": "政策詳情",
+    "no_policies": "目前沒有有效的政策。",
+    "generator": "您的密碼必須符合企業的政策。",
     "password_requirements": {
-      "title": "Password requirements",
-      "description": "Your enterprise has set best password practices.",
-      "policy_details_desc": "All passwords in your vault has to meet these requirements:",
-      "minimum_password_length": "Minimum password length is {{length}}",
-      "requires_special_character": "Requires special characters (@#!$%)",
-      "requires_lowercase": "Requires lowercase letters (abc)",
-      "requires_uppercase": "Requires uppercase letters (ABC)",
-      "requires_digit": "Requires digits (0 1 2 3)",
-      "note": "It is strongly recommended that you change your violated passwords for better security.",
-      "note_1": "(*) Shared passwords are also affected by this policy.",
-      "violated_items": "View {{number}} violated item(s)"
+      "title": "密碼要求",
+      "description": "您的企業已設定最佳密碼實務。",
+      "policy_details_desc": "您保管庫中的所有密碼都必須符合下列要求：",
+      "minimum_password_length": "最小密碼長度為 {{length}}",
+      "requires_special_character": "需要特殊字元 (@#!$%)",
+      "requires_lowercase": "需要小寫字母 (abc)",
+      "requires_uppercase": "需要大寫字母 (ABC)",
+      "requires_digit": "需要數字 (0 1 2 3)",
+      "note": "強烈建議您更改被盜的密碼以提高安全性。",
+      "note_1": "(*) 共用密碼也受此政策影響。",
+      "violated_items": "查看 {{number}} 個違規項目"
     },
     "block_failed_logins": {
-      "title": "Block failed logins",
-      "description": "Block failed login attempts within a time range to prevent brute-force attacks.",
-      "note": "Your vault can be blocked for consecutive failed login attempts. If you got blocked from logging in to Locker, please contact your admins to unblock.",
-      "you_have_been_blocked": "You have been blocked {{count}} time(s) this month"
+      "title": "阻止失敗的登入",
+      "description": "在一定時間內阻止失敗的登入嘗試，防止暴力攻擊。",
+      "note": "連續嘗試登入失敗，您的保管庫可能會被阻止。如果您被阻止登入 Locker，請聯絡您的管理員以解除封鎖。",
+      "you_have_been_blocked": "本月您已被封鎖 {{count}} 次"
     },
     "passwordless_login": {
-      "title": "Passwordless login",
-      "description": "Login to Locker using passwordless method.",
-      "note": "Your admin requires you to use passwordless methods (security key or passkey) to log in to Locker."
+      "title": "無密碼登入",
+      "description": "使用無密碼方式登入Locker。",
+      "note": "您的管理者要求您使用無密碼方法（安全金鑰或金鑰）登入 Locker。"
     },
     "log_in_with_2fa": {
-      "title": "Log in with 2FA",
-      "description": "Use Two-Factor Authentication (2FA) to log in to Locker for the first time on new devices.",
-      "note": "Require {{target}} to use Two-Factor Authentication (2FA) to log in to Locker for the first time on new devices."
+      "title": "使用 2FA 登入",
+      "description": "在新裝置上首次登入Locker時使用雙重認證(2FA)。",
+      "note": "在新裝置上首次登入 Locker 時需要 {{target}} 使用雙重認證 (2FA)。"
     }
   },
   "policies_violated": {
-    "title": "Violated Items",
-    "violations": "{{count}} violation(s)",
+    "title": "違規項目",
+    "violations": "{{count}} 次違規",
     "modal": {
-      "title": "Password violated",
-      "description": "Your password violated the following policies of Your Enterprise:"
+      "title": "密碼被侵犯",
+      "description": "您的密碼違反了您企業的以下政策：",
+      "still_use_this_password": "仍在使用此密碼",
+      "change_password": "更改密碼"
     }
   }
 }

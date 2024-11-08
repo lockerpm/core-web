@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   Modal,
-  Button
+  Button,
 } from '@lockerpm/design';
 
 import { } from "@ant-design/icons";
@@ -13,7 +13,10 @@ const PasswordViolatedModal = (props) => {
   const { t } = useTranslation()
   const {
     visible = false,
+    callingAPI = false,
+    isForm = false,
     item = { violations: [] },
+    onOk = () => {},
     onClose = () => { },
   } = props;
 
@@ -75,13 +78,36 @@ const PasswordViolatedModal = (props) => {
           </li>
         }
       </ul>
-      <Button
-        type="primary"
-        className="mt-6 w-full"
-        onClick={() => onClose()}
-      >
-        {t('button.ok')}
-      </Button>
+      {
+        isForm && <div className="w-full mt-6">
+          <Button
+            type="primary"
+            className="w-full"
+            disabled={callingAPI}
+            onClick={() => onClose()}
+          >
+            {t('policies_violated.modal.change_password')}
+          </Button>
+          <Button
+            type="primary"
+            ghost
+            className="mt-2 w-full"
+            loading={callingAPI}
+            onClick={() => onOk()}
+          >
+            {t('policies_violated.modal.still_use_this_password')}
+          </Button>
+        </div>
+      }
+      {
+        !isForm && <Button
+          type="primary"
+          className="mt-6 w-full"
+          onClick={() => onClose()}
+        >
+          {t('button.ok')}
+        </Button>
+      }
     </Modal>
   );
 }
