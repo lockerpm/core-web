@@ -110,10 +110,10 @@ const convertCipherToForm = (cipher = {}) => {
   } else if (cipher.type === CipherType.Identity) {
     result = {
       ...result,
-      ...(cipher.identity || new IdentityView()),
-      firstName: cipher.identity?.firstName || null,
-      lastName: cipher.identity?.lastName || null,
-      fullName: cipher.identity.fullName
+      ...(cipher?.identity || new IdentityView()),
+      firstName: cipher?.identity?.firstName || null,
+      lastName: cipher?.identity?.lastName || null,
+      fullName: cipher?.identity?.fullName || null,
     }
   }
   return result
