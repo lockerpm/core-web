@@ -33,7 +33,6 @@ const Actions = (props) => {
               ghost={a.ghost}
               onClick={() => a.click()}
               icon={a.icon}
-              shape={isMobile ? 'circle' : ''}
             >
               {isMobile ? '' : a.label}
             </Button>

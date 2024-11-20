@@ -43,9 +43,11 @@ const ItemInput = (props) => {
     return global.patterns.USERNAME
   }, [type])
 
-  const handleChange = (value) => {
+  const handleChange = (value, isBlur = false) => {
     setNewValues(value)
-    if (value.includes(' ') || value.includes(',') || value.includes('/')) {
+    if (isBlur) {
+      handleEnter()
+    } else if (value.includes(' ') || value.includes(',') || value.includes('/')) {
       handleEnter()
     }
   }
@@ -80,6 +82,7 @@ const ItemInput = (props) => {
         disabled={disabled}
         onPressEnter={handleEnter}
         onChange={(e) => handleChange(e.target.value)}
+        onBlur={(e) => handleChange(e.target.value, true)}
       />
       <small className="my-1">
         {note}

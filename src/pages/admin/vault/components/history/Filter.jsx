@@ -65,7 +65,6 @@ const Filter = (props) => {
             }}
           >
             <Button
-              shape="circle"
               icon={<ImageIcon
                 name={'sort'}
                 width={18}

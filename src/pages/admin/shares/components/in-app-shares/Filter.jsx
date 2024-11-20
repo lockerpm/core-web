@@ -62,7 +62,7 @@ const Filter = (props) => {
       className={`filter ${className} flex items-center justify-between`}
     >
       <Input
-        className={`flex-1 max-w-[400px] mr-3 ${isMobile ? 'rounded-full' : ''}`}
+        className={`flex-1 max-w-[400px] mr-3`}
         prefix={<SearchOutlined />}
         value={searchText}
         disabled={loading}
@@ -88,7 +88,6 @@ const Filter = (props) => {
             }}
           >
             <Button
-              shape="circle"
               icon={<ImageIcon
                 name={'sort'}
                 width={18}
