@@ -23,21 +23,26 @@ const Actions = (props) => {
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
+  const sends = useSelector((state) => state.share.sends);
+
+  const originSend = useMemo(() => {
+    return sends.find((d) => d.id === item?.id)
+  }, [sends, item])
 
   const generalMenus = useMemo(() => {
     return [
       {
         key: 'copy',
         label: t('inventory.actions.copy_link'),
-        onClick: () => common.copyToClipboard(common.getPublicShareUrl(item))
+        onClick: () => common.copyToClipboard(common.getPublicShareUrl(originSend))
       },
       {
         key: 'stop_sharing',
         label: t('inventory.actions.stop_sharing'),
-        onClick: () => onStopSharing(item)
+        onClick: () => onStopSharing(originSend)
       },
     ]
-  }, [item, locale])
+  }, [originSend, locale])
 
   return (
     <div className={className}>
