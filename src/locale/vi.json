@@ -898,14 +898,14 @@
       "setup_on": "Xác thực hai lớp là",
       "your_second_step": "Bước đăng nhập thứ hai của bạn",
       "your_second_step_description": "Sau khi nhập mật khẩu, bạn sẽ được yêu cầu nhập mã xác thực để đăng nhập vào tài khoản Locker.",
+      "require_2fa": "Xác thực hai bước được yêu cầu luôn bật trong doanh nghiệp và không thể bị tắt.",
       "email_otp": {
         "name": "Email xác thực",
         "description": "Chúng tôi sẽ yêu cầu mã bảo mật nếu phát hiện đăng nhập từ một thiết bị bất thường.",
         "send_code": "Gửi mã tới email",
         "have_code": "Tôi có một mã",
         "enter_code": "Nhập mã xác thực ở đây",
-        "sent_to": "Một email đã được gửi tới địa chỉ {{email}}",
-        "require_2fa": "Xác thực hai bước được yêu cầu luôn bật trong doanh nghiệp và không thể bị tắt."
+        "sent_to": "Một email đã được gửi tới địa chỉ {{email}}"
       },
       "smart_otp": {
         "description": "Giữ tài khoản của bạn thêm bảo mật với một bước đăng nhập bổ sung.",
