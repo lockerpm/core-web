@@ -71,6 +71,7 @@ const CrossPlatformSync = (props) => {
         <Button
           type='primary'
           ghost
+          danger={!!userInfo.sync_all_platforms}
           icon={<RedoOutlined />}
           onClick={() => setConfirmVisible(true)}
         >

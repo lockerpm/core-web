@@ -104,6 +104,7 @@ const TwoFA = (props) => {
             <Button
               type='primary'
               ghost
+              danger
               icon={<MinusCircleOutlined />}
               disabled={userInfo?.is_require_2fa}
               onClick={() => setConfirmVisible(true)}
