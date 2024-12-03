@@ -27,14 +27,16 @@ const unlockToVault = async (
       common.updateUnlockMethod(payload.unlock_method);
       await common.fetchUserInfo();
       await coreServices.unlock({ ...response, ...payload });
-      await commonServices.sync_data();
-      if (payload.sync_all_platforms) {
-        await commonServices.service_login(payload);
-      }
-      if (query) {
-        callback();
-      } else {
-        global.navigate(global.keys.VAULT);
+      const isSynced = await commonServices.sync_data();
+      if (isSynced) {
+        if (payload.sync_all_platforms) {
+          await commonServices.service_login(payload);
+        }
+        if (query) {
+          callback();
+        } else {
+          global.navigate(global.keys.VAULT);
+        }
       }
     }
   }).catch((error) => {

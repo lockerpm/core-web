@@ -38,8 +38,10 @@ const SingUp = () => {
         common.updateAccessToken(response.access_token);
         await common.fetchUserInfo();
         await coreServices.unlock({ ...response, ...values })
-        await commonServices.sync_data()
-        global.navigate(global.keys.VAULT)
+        const isSynced = await commonServices.sync_data();
+        if (isSynced) {
+          global.navigate(global.keys.VAULT)
+        }
       }).catch((error) => {
         global.pushError(error)
       });

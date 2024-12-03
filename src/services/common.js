@@ -30,17 +30,18 @@ async function init_server() {
 }
 
 async function sync_data(syncing = true) {
+  let result = false;
   global.store.dispatch(storeActions.updateSyncing(syncing));
   const syncCount = await syncServices.sync_count();
   const size = 500;
   const maxCount = syncCount.count.ciphers || 0
-  const request = []
+  const requests = []
   for (let page = 1; page <= (Math.ceil(maxCount / size) || 1); page += 1) {
-    request.push(syncServices.sync({ page, size }))
+    requests.push(syncServices.sync({ page, size }))
   }
-  await Promise.all(request).then(async (result) => {
-    const { profile, collections, policies, folders, domains } = result[0]
-    const ciphers = result.map((r) => r.ciphers).flat();
+  await Promise.all(requests).then(async (responses) => {
+    const { profile, collections, policies, folders, domains } = responses[0]
+    const ciphers = responses.map((r) => r.ciphers).flat();
     await common.syncProfile(profile);
     await Promise.all([
       common.syncFolders(folders),
@@ -55,10 +56,13 @@ async function sync_data(syncing = true) {
       common.getTeams(),
       common.getQuickShares()
     ])
+    result = true;
   }).catch((error) => {
-    console.log(error);
+    global.pushError(error);
+    result = false;
   });
-  global.store.dispatch(storeActions.updateSyncing(false))
+  global.store.dispatch(storeActions.updateSyncing(false));
+  return result;
 }
 
 async function stop_sharing_cipher(cipher) {
