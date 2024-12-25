@@ -129,15 +129,17 @@ const getClientInfo = (clientId) => {
   return global.constants.CLIENTS.find((s) => !s.value || s.value === clientId)
 }
 
-const getToken = (email) => {
+const getToken = (email, id) => {
   try {
     const token = JSON.parse(localStorage.getItem(`token_${email}`))
     if (token.expiredTime * 1000 < Date.now()) {
       localStorage.removeItem(`token_${email}`)
       return null
-    } else {
+    }
+    if (!token.id || id === token.id) {
       return token.value
     }
+    return null
   } catch (error) {
     localStorage.removeItem(`token_${email}`)
     return null

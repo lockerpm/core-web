@@ -65,7 +65,7 @@ const ShareDetail = () => {
     for (const key in localStorage) {
       if (key.startsWith('token_')) {
         const email = key.split('token_')[1]
-        const token = common.getToken(email)
+        const token = common.getToken(email, id)
         if (token) {
           try {
             const isSuccess = await submitToken(token, email)

@@ -41,7 +41,7 @@ const VerifyEmail = (props) => {
   const submitEmail = () => {
     form.validateFields().then(async () => {
       setCallingAPI(true);
-      const token = common.getToken(email);
+      const token = common.getToken(email, sendId);
       if (token) {
         const isSuccess = await submitToken(token, email)
         if (!isSuccess) {
@@ -81,7 +81,7 @@ const VerifyEmail = (props) => {
         setShowOtp(false);
         setRequireOtp(false);
         if (res.token) {
-          localStorage.setItem(`token_${email}`, JSON.stringify(res.token))
+          localStorage.setItem(`token_${email}`, JSON.stringify({ ...res.token, id: sendId }))
         }
       }).catch((error) => {
         global.pushError(error)
