@@ -67,9 +67,12 @@ const ShareDetail = () => {
         const email = key.split('token_')[1]
         const token = common.getToken(email)
         if (token) {
-          const isSuccess = await submitToken(token, email)
-          if (isSuccess) {
-            return true
+          try {
+            const isSuccess = await submitToken(token, email)
+            if (isSuccess) {
+              return true
+            }
+          } catch (error) {
           }
         }
       }
