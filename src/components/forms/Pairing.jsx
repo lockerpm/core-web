@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -30,6 +30,12 @@ const PairingForm = (props) => {
 
   const [connecting, setConnecting] = useState(false);
   const [isClickDownload, setIsClickDownload] = useState(false);
+
+  useEffect(() => {
+    if (pairingConfirmed) {
+      confirmDesktopPairing();
+    }
+  }, [pairingConfirmed])
 
   const confirmDesktopPairing = async () => {
     try {
@@ -73,38 +79,32 @@ const PairingForm = (props) => {
             </div>
           }
           {
-            approveCode ? <Button
-              type="primary"
-              className="w-full"
-              disabled={!pairingConfirmed}
-              size="large"
-              loading={callingAPI}
-              onClick={() => confirmDesktopPairing()}
-            >
-              {t('button.confirm')}
-            </Button> : <Button
-              type="primary"
-              size="large"
-              className="w-full"
-              onClick={() => service.sendPairingRequest()}
-            >
-              {t('button.continue')}
-            </Button>
-          }
-          {
-            approveCode && <div>
-              <Button
-                type="text"
-                size="large"
-                className="mt-2 w-full"
-                icon={<ReloadOutlined />}
-                onClick={() => service.sendPairingRequest()}
-              >
-                {t('passwordless.repair')}
-              </Button>
+            callingAPI && <div className="flex justify-center my-2">
+              <Spin></Spin>
             </div>
           }
-          
+          {
+            !callingAPI && <div>
+              {
+                !approveCode ? <Button
+                  type="primary"
+                  size="large"
+                  className="w-full"
+                  onClick={() => service.sendPairingRequest()}
+                >
+                  {t('button.continue')}
+                </Button> : <Button
+                  type="text"
+                  size="large"
+                  className="mt-2 w-full"
+                  icon={<ReloadOutlined />}
+                  onClick={() => service.sendPairingRequest()}
+                >
+                  {t('passwordless.reset_code')}
+                </Button>
+              }
+            </div>
+          }
         </div>
       }
       {

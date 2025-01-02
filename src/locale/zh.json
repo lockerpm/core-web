@@ -451,7 +451,6 @@
     "pairing_required": "需要桌面應用程式配對。在桌面應用程式上，確認以下程式碼.",
     "confirm_code": "確認瀏覽器中的程式碼是否與下列內容相符",
     "reset_code": "重置程式碼",
-    "repair": "再次配對",
     "open_desktop": "需要連接桌面應用，請開啟Locker桌面應用程式",
     "install_desktop": "需要安裝桌面應用程序，請下載並安裝Locker桌面應用程式",
     "connect_key": "連線要新增的金鑰",
