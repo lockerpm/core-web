@@ -1,5 +1,5 @@
-import React, { } from 'react';
-import { } from 'react-redux';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -27,6 +27,8 @@ function CustomFields(props) {
     disabled = false
   } = props
 
+  const locale = useSelector((state) => state.system.locale);
+
   const fieldTypes = global.constants.FIELD_TYPES
 
   const customFields = Form.useWatch('fields', form) || []
@@ -44,6 +46,16 @@ function CustomFields(props) {
       value: i === index ? field?.defaultValue || '' : f.value,
     })))
   }
+
+  const dateFormat = useMemo(() => {
+    if (global.constants.LANGUAGE.VI === locale) {
+      return 'DD/MM/YYYY'
+    }
+    if (global.constants.LANGUAGE.ZH === locale) {
+      return 'YYYY/MM/DD'
+    }
+    return 'MM/DD/YYYY'
+  }, [locale])
 
   return (
     <div className={`custom-fields ${className}`}>
@@ -114,7 +126,7 @@ function CustomFields(props) {
                         field?.key === 'date' && <DatePicker
                           disabled={disabled}
                           className='w-full'
-                          format={'DD/MM/YYYY'}
+                          format={dateFormat}
                         />
                       }
                       {

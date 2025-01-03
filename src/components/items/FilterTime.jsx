@@ -13,6 +13,7 @@ import {
 } from "@ant-design/icons";
 
 import common from '../../utils/common';
+import global from "../../config/global";
 
 import dayjs from 'dayjs'
 
@@ -26,6 +27,16 @@ const FilterTime = (props) => {
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
 
+  const dateFormat = useMemo(() => {
+    if (global.constants.LANGUAGE.VI === locale) {
+      return 'DD/MM/YYYY'
+    }
+    if (global.constants.LANGUAGE.ZH === locale) {
+      return 'YYYY/MM/DD'
+    }
+    return 'MM/DD/YYYY'
+  }, [locale])
+
   const items = useMemo(() => {
     return [
       {
@@ -33,36 +44,25 @@ const FilterTime = (props) => {
         label: <span>
           {t('common.all_time')}
         </span>,
-        form: <></>
       },
       {
         key: 'last_week',
         label: <span>
           {t('common.last_week')}
         </span>,
-        form: <></>
       },
       {
         key: 'last_month',
         label: <span>
           {t('common.last_month')}
         </span>,
-        form: <></>
       },
       {
         key: 'custom_time',
         label: <span>
           {t('common.custom_time')}
         </span>,
-        form: <DatePicker.RangePicker
-          value={params.dates.map((d) => dayjs(d))}
-          onChange={(v) => changeCustomTime(v)}
-          size="medium"
-          allowClear={false}
-          className="mr-2 filter-filed__m"
-          placement="bottomRight"
-        />,
-      },
+      }
     ]
   }, [locale])
 
@@ -84,12 +84,22 @@ const FilterTime = (props) => {
   }
 
   const changeCustomTime = (value = []) => {
-    onChange({ dates: value })
+    onChange({ dates: value, time_option: 'custom_time' })
   }
 
   return (
     <div>
-      {itemInfo.form}
+      {
+        params.time_option === 'custom_time' && <DatePicker.RangePicker
+          value={params.dates.map((d) => dayjs(d))}
+          onChange={(v) => changeCustomTime(v)}
+          size="medium"
+          allowClear={false}
+          className="mr-2 filter-filed__m"
+          placement="bottomRight"
+          format={dateFormat}
+        />
+      }
       <Dropdown
         menu={{ items, onClick: ({ key }) => changeOption(key) }}
         placement="bottomRight"
