@@ -4,15 +4,18 @@ import { useTranslation } from "react-i18next";
 
 import {
   Button,
-  Spin
+  Spin,
 } from '@lockerpm/design';
 
 import {
-  PlusOutlined
+  PlusOutlined,
+  ImportOutlined
 } from "@ant-design/icons";
 
 import itemsComponents from "../items";
 import commonComponents from "../common";
+
+import global from "../../config/global";
 
 const NoCipher = (props) => {
   const { NoData } = itemsComponents;
@@ -48,14 +51,26 @@ const NoCipher = (props) => {
                 {t(`inventory.${cipherType.key}.description`)}
               </p>
               {
-                cipherType.key !== 'trash' && <Button
-                  className="mt-6"
-                  type="primary"
-                  icon={<PlusOutlined />}
-                  onClick={onCreate}
-                >
-                  {t(`inventory.${cipherType.key}.add`)}
-                </Button>
+                cipherType.key !== 'trash' && <div className="flex items-center justify-center mt-6">
+                  <Button
+                    className="mr-2"
+                    type="primary"
+                    icon={<ImportOutlined />}
+                    ghost
+                    onClick={() => {
+                      global.navigate(global.keys.SETTINGS_IMPORT_EXPORT, {}, { is_import: 1 })
+                    }}
+                  >
+                    {t('button.import')}
+                  </Button>
+                  <Button
+                    type="primary"
+                    icon={<PlusOutlined />}
+                    onClick={onCreate}
+                  >
+                    {t(`inventory.${cipherType.key}.add`)}
+                  </Button>
+                </div>
               }
             </div> : <NoData />
           }

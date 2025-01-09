@@ -7,7 +7,8 @@ import { } from '@lockerpm/design';
 
 import {
   PlusOutlined,
-  ArrowLeftOutlined
+  ArrowLeftOutlined,
+  ImportOutlined
 } from "@ant-design/icons";
 
 import itemsComponents from "../../../components/items";
@@ -327,6 +328,18 @@ const Vault = () => {
         title={folderId ? originFolder?.name : t(cipherType.title)}
         total={filteredData.total}
         actions={[
+          {
+            key: 'import',
+            label: t('button.import'),
+            type: 'primary',
+            ghost: true,
+            icon: <ImportOutlined />,
+            hide: currentPage.name === global.keys.TRASH || isEmpty || !canChangeFolder,
+            disabled: syncing || loading,
+            click: () => {
+              global.navigate(global.keys.SETTINGS_IMPORT_EXPORT, {}, { is_import: 1 })
+            }
+          },
           {
             key: 'add',
             label: t('button.new_item'),
