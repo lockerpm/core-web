@@ -103,7 +103,7 @@ const Vault = () => {
 
   const isEmpty = useMemo(() => {
     return !allCiphers.find(
-      (c) => c.isDeleted === cipherType.isDeleted && (cipherType.type ? cipherType.type === c.type : true)
+      (c) => c.isDeleted === cipherType.isDeleted && (cipherType.type ? cipherType.type === c.type : c.type !== CipherType.MasterPassword)
     )
   }, [allCiphers, JSON.stringify(cipherType)])
 
