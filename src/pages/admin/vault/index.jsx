@@ -434,6 +434,14 @@ const Vault = () => {
               getCheckboxProps={getCheckboxProps}
             />
           }
+          {
+            isEmpty && !cipherType.type && <NoCipher
+              className={'mt-10'}
+              cipherType={cipherType}
+              isEmpty={isEmpty}
+              onCreate={() => handleOpenForm()}
+            />
+          }
         </>
       }
       {
