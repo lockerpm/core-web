@@ -2,6 +2,7 @@
 import moment from 'moment'
 import dayjs from 'dayjs'
 import common from '.'
+import global from '../../config/global'
 
 require('dayjs/locale/en')
 require('dayjs/locale/vi')
@@ -30,11 +31,20 @@ const timeFromNow = time => {
 }
 
 const convertDateTime = (date, format = 'HH:mm DD-MM-YYYY') => {
-  dayjs.locale(common.getLanguage())
-  if (date && typeof date === 'number') {
-    return dayjs(date * 1000).format(format)
+  dayjs.locale();
+  const locale = common.getLanguage();
+  let formatByLocale = format
+  if (format.includes('DD-MM-YYYY')) {
+    if (locale === global.constants.LANGUAGE.EN) {
+      formatByLocale = format.replace('DD-MM-YYYY', 'MM-DD-YYYY')
+    } else if (locale === global.constants.LANGUAGE.ZH) {
+      formatByLocale = format.replace('DD-MM-YYYY', 'YYYY-MM-DD')
+    }
   }
-  return dayjs(date).format(format)
+  if (date && typeof date === 'number') {
+    return dayjs(date * 1000).format(formatByLocale)
+  }
+  return dayjs(date).format(formatByLocale)
 }
 
 const disabledDate = current => {
@@ -90,8 +100,11 @@ const getTimeByOption = (key, value = []) => {
 
 const convertCipherFieldDate = (date) => {
   dayjs.locale(common.getLanguage())
-  const newDate = date.split('-').reverse();
-  return dayjs(newDate.join('-'))
+  if (date?.includes('-')) {
+    const newDate = date.split('-').reverse();
+    return dayjs(newDate.join('-'))
+  }
+  return date ? dayjs(date) : null
 }
 
 const displayTimes = (second) => {

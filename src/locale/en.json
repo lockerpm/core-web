@@ -218,8 +218,8 @@
         "purged": "Your vault has been purged!"
       },
       "factor2": {
-        "enabled": "Tow Factor Authentication has been enabled",
-        "disabled": "Tow Factor Authentication has been disabled"
+        "enabled": "Two Factor Authentication has been enabled",
+        "disabled": "Two Factor Authentication has been disabled"
       },
       "email_settings": {
         "updated": "Mail plugin has been set up success.",

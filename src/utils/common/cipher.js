@@ -17,13 +17,13 @@ import {
 import global from '../../config/global';
 import cloneDeep from 'lodash/cloneDeep';
 import newTypes from '../new-types';
-import time from './time';
 
 import { Utils } from '../../core-js/src/misc/utils';
 import { CryptoWalletData } from '../new-types/crypto-wallet';
 import { CipherMapper } from '../../core-js/src/constants';
 
 import common from '.';
+import dayjs from 'dayjs'
 
 const newCipherTypes = [
   CipherType.TOTP,
@@ -78,7 +78,7 @@ const convertCipherToForm = (cipher = {}) => {
     name: cipher.name || '',
     fields: cipher.fields?.map((f) => ({
       ...f,
-      value: f.type === FieldType.Date ? time.convertCipherFieldDate(f.value) : f.value
+      value: f.type === FieldType.Date ? common.convertCipherFieldDate(f.value) : f.value
     })) || [],
     folderId: folder?.id || '',
     notes: cipher.notes || '',
@@ -127,7 +127,7 @@ const convertFormToCipher = (form = {}, isNewCipher = true) => {
   result.notes = form.notes || '',
   result.fields = form.fields?.map((f) => ({
     ...f,
-    value: f.type === FieldType.Date ? time.convertDateTime(f.value, 'DD-MM-YYYY') : f.value
+    value: f.type === FieldType.Date ? dayjs(f.value).toString() : f.value
   })) || []
   if (form.type === CipherType.Login) {
     const loginUri = new LoginUriView()

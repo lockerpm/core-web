@@ -519,17 +519,24 @@ const DetailList = (props) => {
         />
       },
       ...cipherTypeData,
-      ...(cipher.fields || []).map((f) => ({
-        key: f.key,
-        name: f.name,
-        value: <TextCopy
-          value={f.value}
-          showIcon={true}
-          show={showText}
-          defaultShow={f.type !== FieldType.Hidden}
-          align="between"
-        />
-      })),
+      ...(cipher.fields || []).map((f) => {
+        let newValue = f.value;
+        if (f.type === FieldType.Date) {
+          const dateValue = common.convertCipherFieldDate(f.value);
+          newValue = common.convertDateTime(dateValue, 'DD-MM-YYYY')
+        }
+        return {
+          key: f.key,
+          name: f.name,
+          value: <TextCopy
+            value={newValue}
+            showIcon={true}
+            show={showText}
+            defaultShow={f.type !== FieldType.Hidden}
+            align="between"
+          />
+        }
+      }),
       {
         key: 'owner',
         name: t('roles.owner'),
