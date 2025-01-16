@@ -1,5 +1,4 @@
 import ChangePassword from "./ChangePassword"
-import CrossPlatformSync from "./CrossPlatformSync"
 import EmergencyAccess from "./EmergencyAccess"
 import ManageSessions from "./ManageSessions"
 import MobilePasswordless from "./MobilePasswordless"
@@ -9,7 +8,6 @@ import TwoFA from "./TwoFA"
 
 const securityComponents = {
   ChangePassword,
-  CrossPlatformSync,
   EmergencyAccess,
   ManageSessions,
   MobilePasswordless,

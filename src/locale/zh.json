@@ -882,13 +882,6 @@
       "expire_in": "二維碼過期時間：{{expireCountdown}}s",
       "expired": "二維碼已過期"
     },
-    "cross_platform_sync": {
-      "title": "跨平台同步",
-      "description": "在同一裝置上的網頁應用程式、擴充功能和桌面應用程式中為您的帳戶啟用登入同步。需要安裝桌面應用程式。",
-      "turn_on": "開啟同步",
-      "turn_off": "關閉同步",
-      "question": "您確定要執行 {{action}} 嗎？"
-    },
     "two_fa": {
       "title": "雙因素認證（2FA）",
       "description": "為您的 Locker 帳戶設雙因素認證，打造更安全的防護。",

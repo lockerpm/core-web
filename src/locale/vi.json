@@ -882,13 +882,6 @@
       "expire_in": "Mã QR hết hạn trong: {{expireCountdown}}s",
       "expired": "Mã QR đã hết hạn"
     },
-    "cross_platform_sync": {
-      "title": "Đồng bộ đa nền tảng",
-      "description": "Cho phép đồng bộ đăng nhập vào trình duyệt web, tiện ích mở rộng và ứng dụng máy tính ở trên cùng một thiết bị. Yêu cầu cài đặt ứng dụng máy tính.",
-      "turn_on": "Bật đồng bộ",
-      "turn_off": "Tắt đồng bộ",
-      "question": "Bạn có chắc muốn {{action}}?"
-    },
     "two_fa": {
       "title": "Xác thực hai lớp (2FA)",
       "description": "Tăng cường bảo mật bằng cách thiết lập 2FA cho tài khoản Locker của bạn.",

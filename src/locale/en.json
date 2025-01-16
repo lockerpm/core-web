@@ -882,13 +882,6 @@
       "expire_in": "QR Code Expire in: {{expireCountdown}}s",
       "expired": "QR Code Expired"
     },
-    "cross_platform_sync": {
-      "title": "Cross-platform sync",
-      "description": "Enable login sync for your account across the web app, extension, and Desktop App on the same device. Desktop app installation is required.",
-      "turn_on": "Turn on sync",
-      "turn_off": "Turn off sync",
-      "question": "Are you sure you want to {{action}}?"
-    },
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",

@@ -19,7 +19,6 @@ const Security = (props) => {
     SecurityKey,
     TwoFA,
     MobilePasswordless,
-    CrossPlatformSync,
     EmergencyAccess,
     ManageSessions
   } = securityComponents;
@@ -63,8 +62,6 @@ const Security = (props) => {
       </div>
       <Divider />
       <MobilePasswordless />
-      <Divider />
-      <CrossPlatformSync />
       <Divider />
       <TwoFA />
       <Divider />
