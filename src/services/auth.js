@@ -68,10 +68,6 @@ async function logout(query = {}) {
     } catch (error) {
     }
   }
-  const userInfo = global.store.getState().auth.userInfo
-  if (userInfo?.sync_all_platforms) {
-    await commonServices.service_logout();
-  }
   common.updateUnlockMethod(null);
   common.updateAccessToken(null);
   common.updateSsoAccount(null)

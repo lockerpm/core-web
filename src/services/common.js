@@ -201,18 +201,6 @@ async function reset_service() {
   }
 }
 
-async function service_logout() {
-  if (global.store.getState().service.isConnected) {
-    try {
-      if (service.pairingService?.hasKey) {
-        await service.logout();
-      }
-      await service.setCacheData({});
-    } catch (error) {
-    }
-  }
-}
-
 export default {
   init_server,
   sync_data,
@@ -223,5 +211,4 @@ export default {
   delete_folder,
   leave_share,
   reset_service,
-  service_logout
 }
