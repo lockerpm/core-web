@@ -2,7 +2,6 @@ import global from '../config/global'
 import storeActions from '../store/actions'
 import common from '../utils/common'
 
-import coreServices from './core'
 import userServices from './user'
 import authServices from './auth'
 import syncServices from './sync'
@@ -202,25 +201,6 @@ async function reset_service() {
   }
 }
 
-async function service_login(data) {
-  if (global.store.getState().service.isConnected && service.pairingService?.hasKey) {
-    const cacheData = await service.getCacheData();
-    await service.setCacheData({ ...cacheData, unlock_method: data.unlock_method })
-    let hashedPassword = data?.hashedPassword
-    let key = data?.keyB64
-    if (data.password) {
-      const makeKey = await coreServices.make_key(data.email, data.password)
-      hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
-      key = makeKey.keyB64
-    }
-    await service.login({
-      email: data.email,
-      key: key,
-      hashedPassword: hashedPassword
-    })
-  }
-}
-
 async function service_logout() {
   if (global.store.getState().service.isConnected) {
     try {
@@ -243,6 +223,5 @@ export default {
   delete_folder,
   leave_share,
   reset_service,
-  service_login,
   service_logout
 }

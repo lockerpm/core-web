@@ -29,9 +29,6 @@ const unlockToVault = async (
       await coreServices.unlock({ ...response, ...payload });
       const isSynced = await commonServices.sync_data();
       if (isSynced) {
-        if (payload.sync_all_platforms) {
-          await commonServices.service_login(payload);
-        }
         if (query) {
           callback();
         } else {
