@@ -66,15 +66,12 @@ const updateLanguage = (data) => {
 }
 
 const getLanguage = () => {
+  const langDefault = global.constants.LANGUAGE.EN;
   try {
     const lang = JSON.parse(localStorage.getItem('passwords-language'))
-    return [
-      global.constants.LANGUAGE.EN,
-      global.constants.LANGUAGE.VI,
-      global.constants.LANGUAGE.ZH
-    ].includes(lang) ? lang : global.constants.LANGUAGE.EN
+    return Object.values(global.constants.LANGUAGE).includes(lang) ? lang : langDefault
   } catch (_) {
-    return global.constants.LANGUAGE.EN
+    return langDefault
   }
 }
 

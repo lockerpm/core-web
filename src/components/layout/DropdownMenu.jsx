@@ -45,9 +45,7 @@ function DropdownMenu() {
         global.navigate(global.keys.ENTERPRISE_DASHBOARD, { enterprise_id: teams[0]?.id })
       }
     } else if (
-      item.key === global.constants.LANGUAGE.EN ||
-      item.key === global.constants.LANGUAGE.VI ||
-      item.key === global.constants.LANGUAGE.ZH
+      Object.values(global.constants.LANGUAGE).includes(item.key)
     ) {
       handleUpdateAccount(item.key)
     }

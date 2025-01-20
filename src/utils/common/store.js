@@ -13,12 +13,20 @@ const fetchUserInfo = async () => {
   await userServices.users_me().then(async (response) => {
     await global.jsCore.vaultTimeoutService.setVaultTimeoutOptions(response.timeout, response.timeout_action);
     global.store.dispatch(storeActions.updateUserInfo(response));
-    global.store.dispatch(storeActions.changeLanguage(response.language || global.constants.LANGUAGE.EN));
-    common.updateLanguage(response.language || global.constants.LANGUAGE.EN);
-    i18n.changeLanguage(response.language || global.constants.LANGUAGE.EN);
+    updateLocale(response.language);
   }).catch(async () => {
     await authServices.logout();
   })
+}
+
+const updateLocale = async (language) => {
+  let locale = language;
+  if (!global.constants.LANGUAGES.find((l) => l.value === language)) {
+    locale = global.constants.LANGUAGE.EN
+  }
+  global.store.dispatch(storeActions.changeLanguage(locale));
+  common.updateLanguage(locale);
+  i18n.changeLanguage(locale);
 }
 
 const clearStoreData = async () => {
@@ -96,4 +104,5 @@ export default {
   getMyShares,
   getInvitations,
   getTeams,
+  updateLocale
 }

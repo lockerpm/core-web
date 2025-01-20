@@ -76,8 +76,7 @@ const App = () => {
   useEffect(() => {
     commonServices.init_server();
     const locale = common.getLanguage()
-    dispatch(storeActions.changeLanguage(locale))
-    i18n.changeLanguage(locale)
+    common.updateLocale(locale)
     initJsCore()
   }, [])
 

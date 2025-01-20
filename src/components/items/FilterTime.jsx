@@ -13,28 +13,20 @@ import {
 } from "@ant-design/icons";
 
 import common from '../../utils/common';
-import global from "../../config/global";
-
 import dayjs from 'dayjs'
 
 const FilterTime = (props) => {
+  const { t } = useTranslation();
   const {
     disabled = false,
     params = {},
     onChange = () => { },
   } = props;
 
-  const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
 
   const dateFormat = useMemo(() => {
-    if (global.constants.LANGUAGE.VI === locale) {
-      return 'DD/MM/YYYY'
-    }
-    if (global.constants.LANGUAGE.ZH === locale) {
-      return 'YYYY/MM/DD'
-    }
-    return 'MM/DD/YYYY'
+    return common.datePickerFormat(locale)
   }, [locale])
 
   const items = useMemo(() => {

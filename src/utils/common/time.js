@@ -7,6 +7,7 @@ import global from '../../config/global'
 require('dayjs/locale/en')
 require('dayjs/locale/vi')
 require('dayjs/locale/zh')
+require('dayjs/locale/ru')
 
 var relativeTime = require('dayjs/plugin/relativeTime')
 const localizedFormat = require('dayjs/plugin/localizedFormat')
@@ -146,6 +147,17 @@ const displayTimes = (second) => {
   }
 }
 
+const datePickerFormat = (locale) => {
+  if (global.constants.LANGUAGE.VI === locale) {
+    return 'DD/MM/YYYY'
+  }
+  if (global.constants.LANGUAGE.ZH === locale) {
+    return 'YYYY/MM/DD'
+  }
+
+  return 'MM/DD/YYYY'
+}
+
 export default {
   convertTime,
   timeFromNow,
@@ -156,5 +168,6 @@ export default {
   convertDateNow,
   getTimeByOption,
   convertCipherFieldDate,
-  displayTimes
+  displayTimes,
+  datePickerFormat
 }

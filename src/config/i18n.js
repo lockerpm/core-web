@@ -5,6 +5,7 @@ import { initReactI18next } from 'react-i18next'
 import en from '../locale/en.json'
 import vi from '../locale/vi.json'
 import zh from '../locale/zh.json'
+import ru from '../locale/ru.json'
 
 const resources = {
   en: {
@@ -15,6 +16,9 @@ const resources = {
   },
   zh: {
     translation: zh,
+  },
+  ru: {
+    translation: ru,
   }
 }
 

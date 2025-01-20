@@ -18,6 +18,7 @@ import {
 } from '@ant-design/icons';
 
 import global from '../../../config/global';
+import common from '../../../utils/common';
 
 function CustomFields(props) {
   const { t } = useTranslation()
@@ -48,13 +49,7 @@ function CustomFields(props) {
   }
 
   const dateFormat = useMemo(() => {
-    if (global.constants.LANGUAGE.VI === locale) {
-      return 'DD/MM/YYYY'
-    }
-    if (global.constants.LANGUAGE.ZH === locale) {
-      return 'YYYY/MM/DD'
-    }
-    return 'MM/DD/YYYY'
+    return common.datePickerFormat(locale)
   }, [locale])
 
   return (

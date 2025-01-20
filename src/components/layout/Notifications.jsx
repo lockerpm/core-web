@@ -284,7 +284,8 @@ function Notifications() {
         onScroll: scrollEnd,
         className: 'notification-menu',
         style: {
-          maxWidth: 360,
+          maxWidth: 400,
+          minWidth: 360,
           maxHeight: 480,
           padding: '8px 0',
           overflow: 'auto'
