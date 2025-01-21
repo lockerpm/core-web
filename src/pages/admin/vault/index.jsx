@@ -334,7 +334,7 @@ const Vault = () => {
             type: 'primary',
             ghost: true,
             icon: <ImportOutlined />,
-            hide: currentPage.name === global.keys.TRASH || isEmpty || !canChangeFolder,
+            hide: currentPage.name !== global.keys.VAULT || isEmpty || !canChangeFolder,
             disabled: syncing || loading,
             click: () => {
               global.navigate(global.keys.SETTINGS_IMPORT_EXPORT, {}, { is_import: 1 })
