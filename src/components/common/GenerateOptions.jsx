@@ -84,7 +84,7 @@ const GenerateOptions = (props) => {
   }
 
   return (
-    <div className={className} style={{ width: width }}>
+    <div className={className} style={{ width: width, overflow: "auto" }}>
       <div className="flex items-center justify-between mb-2">
         <p
           className="text-limited text-md w-4/5"

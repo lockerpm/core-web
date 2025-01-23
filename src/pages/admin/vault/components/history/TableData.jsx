@@ -68,6 +68,7 @@ const TableData = (props) => {
         width: 150,
         render: (_, record) => (
           <HistoryActions
+            className="flex items-center justify-end"
             item={record}
             isRestore={isRestore}
             onRestore={onRestore}

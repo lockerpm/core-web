@@ -79,7 +79,7 @@ const TableData = (props) => {
         dataIndex: "status",
         key: "status",
         align: "center",
-        width: 120,
+        width: 180,
         render: (_, record) => {
           const status = common.getStatus(record.status)
           return <Tag color={status.color}>

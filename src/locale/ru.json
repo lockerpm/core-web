@@ -382,8 +382,8 @@
       "description": "Please enter a full name for your account, then create a new password to replace the temporary password given.",
       "setup_pwl": "Set up Passwordless login",
       "setup_pwl_description": "Ваша учетная запись настроена на вход без пароля. Настройте вход без пароля, чтобы продолжить.",
-      "note": "Already have an other account?",
-      "link_invalid": "Reset password link is invalid. Please enter password to update account information."
+      "note": "Уже есть другая учетная запись?",
+      "link_invalid": "Ссылка для сброса пароля недействительна. Введите пароль для обновления информации об учетной записи."
     },
     "setup_2fa": {
       "title": "Настроить 2FA",
@@ -405,12 +405,12 @@
     }
   },
   "roles": {
-    "supper_admin": "Supper Admin",
-    "primary_admin": "Primary Admin",
-    "owner": "Owner",
-    "admin": "Admin",
-    "member": "Member"
-  },
+    "supper_admin": "Администратор ужина",
+    "primary_admin": "Основной администратор",
+    "owner": "Владелец",
+    "admin": "Администратор",
+    "member": "Участник"
+    },
   "statuses": {
     "confirmed": "Подтверждено",
     "invited": "Приглашён",

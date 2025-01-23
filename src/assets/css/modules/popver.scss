@@ -5,4 +5,12 @@
   .ant-popover-inner {
     padding: 8px;
   }
+  &.generate-password-popover {
+    .ant-popover-content {
+      .ant-popover-inner {
+        max-height: 260px;
+        overflow-y: auto;
+      }
+    }
+  }
 }

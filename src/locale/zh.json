@@ -339,9 +339,9 @@
     "shared_with_me": "跟我分享",
     "my_shared_items": "我的股票",
     "enterprise": "企業儀表板",
-    "enterprises": "Companies",
-    "email_settings": "Email Settings",
-    "sso_configuration": "SSO Configuration",
+    "enterprises": "公司",
+    "email_settings": "電子郵件設定",
+    "sso_configuration": "SSO 設定",
     "enterprise_dashboard": "儀表板",
     "enterprise_members": "使用者",
     "enterprise_groups": "群組",
@@ -405,11 +405,11 @@
     }
   },
   "roles": {
-    "supper_admin": "Supper Admin",
-    "primary_admin": "Primary Admin",
-    "owner": "Owner",
-    "admin": "Admin",
-    "member": "Member"
+    "supper_admin": "晚餐管理員",
+    "primary_admin": "管理員",
+    "owner": "所有者",
+    "admin": "管理員",
+    "member": "會員"
   },
   "statuses": {
     "confirmed": "已確認",

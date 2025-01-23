@@ -31,11 +31,11 @@ const GeneratePassword = (props) => {
         <Popover
           placement="bottomRight"
           trigger={['hover']}
-          className="generate-password-popover"
+          overlayClassName="generate-password-popover"
           content={
             <GenerateOptions
               className="p-2"
-              width={250}
+              width={280}
               onFill={onFill}
             />
           }
