@@ -131,6 +131,7 @@ function PasswordOTP(props) {
             className='w-full'
             disabled={disabled}
             placeholder={t('placeholder.select')}
+            showSearch={true}
             options={otps.map((otp) => ({ label: otp.name, value: otp.notes }))}
             onChange={(v) => setTotp(v)}
           />

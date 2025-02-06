@@ -145,8 +145,9 @@ function FormData(props) {
   }
 
   const editCipher = async (values) => {
+    const oldValues = common.convertCipherToForm(item)
     const cipher = {
-      ...common.convertFormToCipher({ ...values, type: type }),
+      ...common.convertFormToCipher({ ...oldValues, ...values, type: type }),
       id: item.id,
       passwordHistory: item.passwordHistory,
       organizationId: item.organizationId
