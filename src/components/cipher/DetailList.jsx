@@ -551,8 +551,8 @@ const DetailList = (props) => {
         key: 'folder',
         name: t('common.folder'),
         hide: isPublic || common.isProtectedCipher(cipher),
-        value: cipher.folderId ? <FolderName
-          item={{ id: cipher.folderId }}
+        value: (cipher.folderId || cipher.collectionIds.length) ? <FolderName
+          item={{ id: cipher.folderId || cipher.collectionIds[0] }}
           showItems={false}
         /> : <></>
       },

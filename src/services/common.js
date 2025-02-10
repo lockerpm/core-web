@@ -9,6 +9,7 @@ import folderServices from './folder'
 import sharingServices from './sharing'
 import quickShareServices from './quick-share'
 import resourceServices from './resource'
+import cipherServices from './cipher'
 
 async function init_server() {
   const currentPage = common.getRouterByLocation(global.location)
@@ -201,6 +202,41 @@ async function reset_service() {
   }
 }
 
+async function remove_from_collection(cipher) {
+  const personalKey = await global.jsCore.cryptoService.getEncKey()
+  if (cipher.collectionIds?.length) {
+    const { data } = await common.getEncCipherForRequest(cipher, {
+      noCheck: true,
+      encKey: personalKey
+    })
+    await sharingServices.update_sharing_folder_items(
+      cipher.organizationId,
+      cipher.collectionIds[0],
+      { cipher: { ...data, id: cipher.id }}
+    )
+  }
+}
+
+async function before_delete_ciphers(ciphers) {
+  const folderCiphers = ciphers.filter((c) => c.folderId);
+  const collectionCiphers = ciphers.filter((c) => c.collectionIds?.length > 0);
+
+  if (folderCiphers.length > 0) {
+    await cipherServices.move({ ids: folderCiphers.map((c) => c.id), folderId: null })
+  }
+
+  if (collectionCiphers.length > 0) {
+    const requests = collectionCiphers.map((cipher) => remove_from_collection(cipher));
+    await Promise.all(requests);
+  }
+
+  const sharingCiphers = ciphers.filter((c) => c.organizationId).map((cipher) => ({ ...cipher, folderId: null, collectionIds: null }));
+  if (sharingCiphers.length > 0) {
+    const requests = sharingCiphers.map((cipher) => stop_sharing_cipher(cipher));
+    await Promise.all(requests);
+  }
+}
+
 export default {
   init_server,
   sync_data,
@@ -211,4 +247,6 @@ export default {
   delete_folder,
   leave_share,
   reset_service,
+  remove_from_collection,
+  before_delete_ciphers,
 }

@@ -244,6 +244,7 @@ const Vault = () => {
   const deleteItems = (cipherIds) => {
     global.confirm(async () => {
       setCallingAPI(true)
+      await commonServices.before_delete_ciphers(allCiphers.filter((cipher) => cipherIds.includes(cipher.id)));
       await cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         if (filteredData.length === 1 && params.page > 1) {

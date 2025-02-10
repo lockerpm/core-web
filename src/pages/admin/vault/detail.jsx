@@ -140,6 +140,7 @@ const VaultDetail = () => {
 
   const deleteItems = (cipherIds) => {
     global.confirm(async () => {
+      await commonServices.before_delete_ciphers(allCiphers.filter((cipher) => cipherIds.includes(cipher.id)));
       await cipherServices.multiple_delete({ ids: cipherIds }).then(async () => {
         global.pushSuccess(t('notification.success.cipher.deleted'));
         navigateListPage()

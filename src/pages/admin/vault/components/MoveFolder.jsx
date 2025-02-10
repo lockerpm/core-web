@@ -17,6 +17,7 @@ import foldersComponents from '../../folders/components';
 
 import sharingServices from '../../../../services/sharing';
 import cipherServices from '../../../../services/cipher';
+import commonServices from '../../../../services/common';
 
 import global from '../../../../config/global';
 import common from '../../../../utils/common';
@@ -53,7 +54,7 @@ function MoveFolder(props) {
     form.validateFields().then(async () => {
       setCallingAPI(true);
       const collection = allCollections.find(c => c.id === folderId)
-      const personalKey = await global.jsCore.cryptoService.getEncKey()
+      
       try {
         const ciphers = await Promise.all(cipherIds.map(async (id) => {
           const encCipher = await global.jsCore.cipherService.get(id)
@@ -61,7 +62,7 @@ function MoveFolder(props) {
           return { ...decCipher, id }
         }))
         // Remove from collection
-        const removeRequests = ciphers.map((cipher) => removeFromCollection(cipher, personalKey));
+        const removeRequests = ciphers.map((cipher) => commonServices.remove_from_collection(cipher));
         await Promise.all(removeRequests);
   
         if (collection) {
@@ -80,20 +81,6 @@ function MoveFolder(props) {
       }
       setCallingAPI(false);
     })
-  }
-
-  const removeFromCollection = async (cipher, personalKey) => {
-    if (cipher.collectionIds?.length) {
-      const { data } = await common.getEncCipherForRequest(cipher, {
-        noCheck: true,
-        encKey: personalKey
-      })
-      await sharingServices.update_sharing_folder_items(
-        cipher.organizationId,
-        cipher.collectionIds[0],
-        { cipher: { ...data, id: cipher.id }}
-      )
-    }
   }
 
   const addToCollection = async (cipher, orgKey, collection) => {
