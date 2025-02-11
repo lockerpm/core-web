@@ -68,17 +68,16 @@ const Vault = () => {
     return currentPage?.params?.folder_id || null
   }, [currentPage])
 
-  const canChangeFolder = useMemo(() => {
-    const memberCollections = allCollections.filter((c) => !common.isOwner(c))
-    if (folderId) {
-      return !memberCollections.some(f => f.id === folderId)
-    }
-    return true
-  }, [folderId, allCollections])
-
   const originFolder = useMemo(() => {
     return [...allFolders, ...allCollections].find((c) => c.id === folderId)
   }, [allFolders, allCollections, folderId])
+
+  const canChangeFolder = useMemo(() => {
+    if (originFolder) {
+      return common.isOwner(originFolder)
+    }
+    return true
+  }, [originFolder])
 
   const cipherType = useMemo(() => {
     const type = common.cipherTypeInfo('listRouter', currentPage.name)

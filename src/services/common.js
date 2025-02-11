@@ -220,6 +220,7 @@ async function remove_from_collection(cipher) {
 async function before_delete_ciphers(ciphers) {
   const folderCiphers = ciphers.filter((c) => c.folderId);
   const collectionCiphers = ciphers.filter((c) => c.collectionIds?.length > 0);
+  const sharingCiphers = ciphers.filter((c) => c.organizationId && collectionCiphers.length === 0).map((cipher) => ({ ...cipher, folderId: null, collectionIds: null }));
 
   if (folderCiphers.length > 0) {
     await cipherServices.move({ ids: folderCiphers.map((c) => c.id), folderId: null })
@@ -230,7 +231,6 @@ async function before_delete_ciphers(ciphers) {
     await Promise.all(requests);
   }
 
-  const sharingCiphers = ciphers.filter((c) => c.organizationId).map((cipher) => ({ ...cipher, folderId: null, collectionIds: null }));
   if (sharingCiphers.length > 0) {
     const requests = sharingCiphers.map((cipher) => stop_sharing_cipher(cipher));
     await Promise.all(requests);

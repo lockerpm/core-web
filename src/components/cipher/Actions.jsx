@@ -180,6 +180,7 @@ const Actions = (props) => {
         {
           key: 'move_to_folder',
           label: t('inventory.actions.move_to_folder'),
+          hide: !(common.isOwner(originCipher) || (common.isChangeCipher(originCipher) && !originCipher.collectionIds.length)),
           onClick: () => onMove(originCipher)
         },
         {

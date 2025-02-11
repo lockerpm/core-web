@@ -286,7 +286,7 @@ function FormData(props) {
           <SelectFolder
             form={form}
             disabled={callingAPI}
-            folderId={item?.folderId}
+            item={item}
             onCreate={() => setFolderVisible(true)}
           />
         </Form>

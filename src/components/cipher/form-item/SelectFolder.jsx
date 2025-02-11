@@ -18,8 +18,7 @@ import common from '../../../utils/common';
 function SelectFolder(props) {
   const {
     disabled = false,
-    isMove = false,
-    folderId = null,
+    item = null,
     onCreate = () => {},
   } = props
   const { t } = useTranslation();
@@ -28,20 +27,29 @@ function SelectFolder(props) {
   const allCollections = useSelector((state) => state.collection.allCollections);
   const locale = useSelector((state) => state.system.locale);
 
+  const originFolder = useMemo(() => {
+    return [...allFolders, ...allCollections].find((c) => c.id === item?.folderId)
+  }, [allFolders, allCollections, item])
+
   const canChangeFolder = useMemo(() => {
-    const memberCollections = allCollections.filter((c) => !common.isOwner(c))
-    if (folderId) {
-      return !memberCollections.some(f => f.id === folderId)
+    if (originFolder) {
+      return common.isOwner(originFolder)
+    }
+    if (item) {
+      return common.isOwner(item) || (common.isChangeCipher(item) && !item.collectionIds.length)
     }
     return true
-  }, [allCollections])
+  }, [originFolder, item])
 
   const options = useMemo(() => {
-    const ownerCollections = allCollections.filter((c) => common.isOwner(c))
     const result = [
       ...allFolders,
-      ...((isMove || canChangeFolder) ? ownerCollections : allCollections)
-    ].map((f) => ({ value: f.id, label: f.name }))
+      ...allCollections
+    ].map((f) => ({
+      value: f.id,
+      label: f.name,
+      disabled: !common.isOwner(f)
+    }))
     return [
       {
         value: '',
@@ -52,8 +60,6 @@ function SelectFolder(props) {
   }, [
     allFolders,
     allCollections,
-    canChangeFolder,
-    isMove,
     locale
   ])
 

@@ -131,7 +131,6 @@ function MoveFolder(props) {
         >
           <SelectFolder
             disabled={callingAPI}
-            isMove={true}
             onCreate={() => setFolderVisible(true)}
           />
         </Form>
