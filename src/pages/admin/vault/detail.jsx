@@ -183,7 +183,7 @@ const VaultDetail = () => {
   const permanentlyDeleteItems = (cipherIds) => {
     global.confirm(async () => {
       await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
-        global.pushSuccess(t('notification.success.cipher.deleted'));
+        global.pushSuccess(t('notification.success.cipher.permanently_deleted'));
         navigateListPage()
       }).catch((error) => {
         global.pushError(error)

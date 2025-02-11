@@ -300,7 +300,7 @@ const Vault = () => {
     global.confirm(async () => {
       setCallingAPI(true)
       await cipherServices.permanent_delete({ ids: cipherIds }).then(async () => {
-        global.pushSuccess(t('notification.success.cipher.deleted'));
+        global.pushSuccess(t('notification.success.cipher.permanently_deleted'));
         if (filteredData.length === 1 && params.page > 1) {
           setParams({
             ...params,
