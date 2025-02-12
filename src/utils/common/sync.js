@@ -65,7 +65,7 @@ const syncCiphers = async(ciphers) => {
       deletedIds.push(cipher.id)
     }
   })
-  await Promise.all(deletedIds.map(async id => await global.jsCore.cipherService.delete(id)))
+  await Promise.all(deletedIds.filter(Boolean).map(async id => await global.jsCore.cipherService.delete(id)))
   await global.jsCore.syncService.syncSomeCiphers(userId, ciphers)
   await common.getAllCiphers();
 }
