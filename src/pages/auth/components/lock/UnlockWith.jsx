@@ -26,7 +26,7 @@ const UnlockWith = (props) => {
   return (
     <div>
       <Button
-        className="w-full mb-4"
+        className="w-full"
         size="large"
         ghost
         type="primary"
@@ -37,7 +37,7 @@ const UnlockWith = (props) => {
         {t('auth_pages.sign_in.your_passkey')}
       </Button>
       <Button
-        className="w-full"
+        className="w-full mt-2"
         size="large"
         ghost
         type="primary"

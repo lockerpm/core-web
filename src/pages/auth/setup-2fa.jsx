@@ -144,9 +144,6 @@ const Setup2FA = () => {
 
   const signOtherAccount = () => {
     common.updateSsoAccount(null);
-    if (isConnected) {
-      service.setCacheData({})
-    }
     global.navigate(global.keys.SIGN_IN)
   }
 

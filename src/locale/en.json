@@ -159,7 +159,8 @@
     "new_user": "New user",
     "new_group": "New group",
     "resend_invitation": "Resend invitation",
-    "restore": "Restore"
+    "restore": "Restore",
+    "use_mp_instead": "Use Password instead"
   },
   "placeholder": {
     "name": "Enter name",

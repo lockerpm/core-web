@@ -159,7 +159,8 @@
     "new_user": "Người dùng mới",
     "new_group": "Nhóm mới",
     "resend_invitation": "Gửi lại lời mời",
-    "restore": "Khôi phục"
+    "restore": "Khôi phục",
+    "use_mp_instead": "Sử dụng Mật khẩu thay thế"
   },
   "placeholder": {
     "name": "Nhập tên",

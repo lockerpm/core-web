@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 
 import {
   Card,
-  Button
+  Button,
+  Spin
 } from '@lockerpm/design';
 
 import {
@@ -20,7 +21,7 @@ const PairingForm = (props) => {
   const { t } = useTranslation()
   const {
     callingAPI = false,
-    onConfirm = () => {}
+    onConfirm = () => {},
   } = props;
 
   const isConnected = useSelector((state) => state.service.isConnected)
@@ -68,12 +69,12 @@ const PairingForm = (props) => {
     <div className="pairing-form text-center">
       {
         isConnected && isDesktopConnected && <div>
-          <p className="mb-10 mt-6 text-left">
+          <p className="my-8 text-left">
             {t('passwordless.pairing_required')}
           </p>
           {
             approveCode && <div className="flex justify-center">
-              <Card className="mb-6 w-full" bodyStyle={{ padding: '6px 24px' }}>
+              <Card className="w-full" bodyStyle={{ padding: '6px 24px' }}>
                 <p className="font-semibold text-xl">{approveCode}</p>
               </Card>
             </div>
@@ -84,7 +85,7 @@ const PairingForm = (props) => {
             </div>
           }
           {
-            !callingAPI && <div>
+            !callingAPI && <div className="mt-2">
               {
                 !approveCode ? <Button
                   type="primary"
@@ -93,15 +94,12 @@ const PairingForm = (props) => {
                   onClick={() => service.sendPairingRequest()}
                 >
                   {t('button.continue')}
-                </Button> : <Button
-                  type="text"
-                  size="large"
-                  className="mt-2 w-full"
-                  icon={<ReloadOutlined />}
+                </Button> : <p
+                  className="text-center text-black-500 hover:text-primary cursor-pointer"
                   onClick={() => service.sendPairingRequest()}
                 >
-                  {t('passwordless.reset_code')}
-                </Button>
+                  <ReloadOutlined className="text-[13px]"/> <span>{t('passwordless.reset_code')}</span>
+                </p>
               }
             </div>
           }
@@ -109,7 +107,7 @@ const PairingForm = (props) => {
       }
       {
         !isConnected && <div>
-          <p className="mb-10 mt-6">
+          <p className="my-8">
             { t('passwordless.install_desktop')}
           </p>
           {
@@ -137,7 +135,7 @@ const PairingForm = (props) => {
       }
       {
         isConnected && !isDesktopConnected && <div>
-          <p className="mb-10 mt-6">
+          <p className="my-8">
             { t('passwordless.open_desktop')}
           </p>
           <Button

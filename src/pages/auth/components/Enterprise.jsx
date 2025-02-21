@@ -80,9 +80,6 @@ const Enterprise = (props) => {
   const openOtherClient = async () => {
     const redirectClientId = common.getRedirectClientId();
     if (redirectClientId) {
-      if (isConnected) {
-        await service.setCacheData({ email: ssoUser.mail })
-      }
       if (redirectClientId === 'browser') {
         window.postMessage({
           command: 'sso-authResult',
@@ -135,9 +132,6 @@ const Enterprise = (props) => {
 
   const signOtherAccount = () => {
     common.updateSsoAccount(null);
-    if (isConnected) {
-      service.setCacheData({})
-    }
     redirectToAuthSSO(ssoConfig)
   }
 

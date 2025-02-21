@@ -34,7 +34,6 @@ const Lock = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isConnected = useSelector((state) => state.service.isConnected)
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const isLoading = useSelector((state) => state.system.isLoading);
@@ -61,17 +60,11 @@ const Lock = () => {
         global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
       } else if (!userInfo.is_password_changed || (userInfo.is_require_passwordless && userInfo.login_method === 'password')) {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })
-      } else {
+      } else if (userInfo?.sync_all_platforms) {
         getServiceUser();
       }
     }
-  }, [userInfo?.email, isConnected])
-
-  useEffect(() => {
-    if (step === 1) {
-      setIsPair(false)
-    }
-  }, [step, isPair])
+  }, [userInfo])
 
   const showMpForm = useMemo(() => {
     return userInfo?.email && !userInfo?.is_require_passwordless
@@ -99,28 +92,23 @@ const Lock = () => {
 
   const getServiceUser = async () => {
     setLoading(true);
-    if (userInfo?.sync_all_platforms) {
-      setIsPair(isConnected && !service.pairingService?.hasKey)
-      if (isConnected && service.pairingService?.hasKey) {
-        try {
-          const serviceUser = await service.getCurrentUser();
-          if (serviceUser?.email === userInfo.email) {
-            const cacheData = await service.getCacheData();
-            setOtherMethod(cacheData?.unlock_method || null);
-            setServiceUser(serviceUser);
-          } else {
-            setStep(1)
-          }
-        } catch (error) {
-          await commonServices.reset_service();
+    setIsPair(!service.pairingService?.hasKey)
+    if (service.pairingService?.hasKey) {
+      try {
+        const serviceUser = await service.getCurrentUser();
+        if (serviceUser?.email === userInfo.email) {
+          const cacheData = await service.getCacheData();
+          setOtherMethod(cacheData?.unlock_method || null);
+          setServiceUser(serviceUser);
+        } else {
           setStep(1)
         }
-      } else {
+      } catch (error) {
+        await commonServices.reset_service();
         setStep(1)
       }
     } else {
       setStep(1)
-      setIsPair(false)
     }
     setLoading(false)
   }
@@ -129,7 +117,7 @@ const Lock = () => {
     setStep(2);
     setOtherMethod(method);
     if (method === 'security_key') {
-      setIsPair(!isConnected || !service.pairingService?.hasKey);
+      setIsPair(!service.pairingService?.hasKey);
     } else {
       setIsPair(false)
     }
@@ -213,7 +201,18 @@ const Lock = () => {
                       onConfirm={() => handlePairConfirm()}
                     />
                     <Button
-                      className="w-full mt-6"
+                      className="w-full mt-8"
+                      type="primary"
+                      ghost
+                      size="large"
+                      onClick={() => {
+                        setIsPair(false);
+                      }}
+                    >
+                      {t('button.use_mp_instead')}
+                    </Button>
+                    <Button
+                      className="w-full mt-2"
                       size="large"
                       htmlType="submit"
                       loading={logging}
