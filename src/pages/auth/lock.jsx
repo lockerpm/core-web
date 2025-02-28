@@ -86,7 +86,7 @@ const Lock = () => {
 
   const handleLogout = async () => {
     setLogging(true);
-    await authServices.logout();
+    await authServices.logout(true);
     setLogging(false);
   }
 

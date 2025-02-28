@@ -57,8 +57,8 @@ async function redirect_login() {
   }
 }
 
-async function logout(query = {}) {
-  if (common.getAccessToken()) {
+async function logout(isLogoutId = false) {
+  if (common.getAccessToken() && isLogoutId) {
     try {
       await request({
         url: global.endpoint.LOGOUT,
@@ -71,7 +71,7 @@ async function logout(query = {}) {
   common.updateUnlockMethod(null);
   common.updateAccessToken(null);
   common.updateSsoAccount(null)
-  global.navigate(global.keys.SIGN_IN, {}, query);
+  global.navigate(global.keys.SIGN_IN, {}, {});
 }
 
 export default {

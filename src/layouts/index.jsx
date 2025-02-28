@@ -118,7 +118,7 @@ function AdminLayout(props) {
       if (timeoutAction == global.constants.TIMEOUT_ACTION.LOCK) {
         await authServices.redirect_login()
       } else {
-        await authServices.logout()
+        await authServices.logout(true)
       }
     }
   }

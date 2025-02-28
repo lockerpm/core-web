@@ -35,7 +35,7 @@ function DropdownMenu() {
     if (item.key === 'account') {
       global.navigate(global.keys.SETTINGS_ACCOUNT)
     } else if (item.key === 'logout') {
-      authServices.logout();
+      authServices.logout(true);
     } else if (item.key === 'lock') {
       await authServices.redirect_login();
     } else if (item.key === 'enterprise') {

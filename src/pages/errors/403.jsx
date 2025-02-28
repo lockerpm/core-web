@@ -14,7 +14,7 @@ const Permission = () => {
       <p className="content">{t('error_pages.permission.title')}</p>
       <p className="note">
       {t('error_pages.permission.login_other_account')}
-        <a onClick={() => authServices.logout()}> {t('common.here')}</a>
+        <a onClick={() => authServices.logout(true)}> {t('common.here')}</a>
       </p>
     </div>
   );

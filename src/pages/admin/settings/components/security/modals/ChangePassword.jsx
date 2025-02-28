@@ -38,7 +38,7 @@ const ChangePasswordModal = (props) => {
     }).then(async () => {
       global.pushSuccess(t('notification.success.change_password.changed'));
       onClose();
-      authServices.logout();
+      authServices.logout(true);
     }).catch((error) => {
       global.pushError(error)
     })
