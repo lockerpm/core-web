@@ -16,7 +16,7 @@ const syncProfile = async (data) => {
     key: profile?.key,
     privateKey: profile?.privateKey,
     organizations: profile?.organizations,
-    securityStamp: profile?.securityStamp || null,
+    securityStamp: profile?.securityStamp || "",
     emailVerified: profile?.emailVerified || false
   })
   await common.getAllOrganizations();
