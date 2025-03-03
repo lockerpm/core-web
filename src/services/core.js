@@ -47,6 +47,7 @@ async function lock () {
       global.jsCore.cryptoService.clearKeyPair(true),
       global.jsCore.cryptoService.clearEncKey(true)
     ])
+    await global.jsCore.userService.setSecurityStamp(null)
     await global.jsCore.cipherService.clear()
     await global.jsCore.searchService.clearIndex()
   }
