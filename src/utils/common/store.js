@@ -23,7 +23,6 @@ const fetchUserInfo = async () => {
       ...response,
       passkeys: backupPwl?.filter((k) => k.type !== 'hmac'),
       security_keys: backupPwl?.filter((k) => k.type === 'hmac'),
-      sync_all_platforms: true
     }));
     updateLocale(response.language);
   }).catch(async () => {
