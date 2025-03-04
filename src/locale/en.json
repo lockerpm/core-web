@@ -160,7 +160,8 @@
     "new_group": "New group",
     "resend_invitation": "Resend invitation",
     "restore": "Restore",
-    "use_mp_instead": "Use Password instead"
+    "use_mp_instead": "Use Password instead",
+    "sync_with_desktop": "Sync with Desktop app"
   },
   "placeholder": {
     "name": "Enter name",

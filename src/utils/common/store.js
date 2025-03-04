@@ -12,7 +12,19 @@ import common from '.'
 const fetchUserInfo = async () => {
   await userServices.users_me().then(async (response) => {
     await global.jsCore.vaultTimeoutService.setVaultTimeoutOptions(response.timeout, response.timeout_action);
-    global.store.dispatch(storeActions.updateUserInfo(response));
+    let backupPwl = []
+    try {
+      await service?.setApiToken(common.getAccessToken());
+      backupPwl = await service?.listBackupPasswordless() || [];
+    } catch (error) {
+      backupPwl = []
+    }
+    global.store.dispatch(storeActions.updateUserInfo({
+      ...response,
+      passkeys: backupPwl?.filter((k) => k.type !== 'hmac'),
+      security_keys: backupPwl?.filter((k) => k.type === 'hmac'),
+      sync_all_platforms: true
+    }));
     updateLocale(response.language);
   }).catch(async () => {
     await authServices.logout();

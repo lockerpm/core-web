@@ -1,22 +1,16 @@
 /* eslint-disable no-import-assign */
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
-  Form,
-  Button,
   Spin
 } from '@lockerpm/design';
 
 import {
 } from "@ant-design/icons";
 
-import formsComponents from "../../components/forms";
-import itemsComponents from "../../components/items";
 import authComponents from "./components";
-import lockComponents from "./components/lock";
 
 import commonServices from "../../services/common";
 import authServices from "../../services/auth";
@@ -25,16 +19,11 @@ import common from "../../utils/common";
 import global from "../../config/global";
 
 const Lock = () => {
-  const { t } = useTranslation();
-  const { Pairing, SecurityKey, Passkey } = formsComponents;
-  const { AuthCard } = authComponents;
-  const { UserInfo  } = itemsComponents;
-  const { UnlockTitle, MPForm, FormFooter, UnlockWith } = lockComponents;
+  const { AuthCard, LockForm } = authComponents;
   
   const navigate = useNavigate();
   const location = useLocation();
 
-  const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
   const isLoading = useSelector((state) => state.system.isLoading);
 
@@ -42,7 +31,6 @@ const Lock = () => {
   const [callingAPI, setCallingAPI] = useState(false);
   const [logging, setLogging] = useState(false);
   const [isPair, setIsPair] = useState(false)
-  const [form] = Form.useForm();
   const [serviceUser, setServiceUser] = useState(false)
   const [step, setStep] = useState(0);
   const [otherMethod, setOtherMethod] = useState(null)
@@ -64,10 +52,6 @@ const Lock = () => {
         getServiceUser();
       }
     }
-  }, [userInfo])
-
-  const showMpForm = useMemo(() => {
-    return userInfo?.email && !userInfo?.is_require_passwordless
   }, [userInfo])
 
   const initState = () => {
@@ -113,43 +97,6 @@ const Lock = () => {
     setLoading(false)
   }
 
-  const selectOtherMethod = (method) => {
-    setStep(2);
-    setOtherMethod(method);
-    if (method === 'security_key') {
-      setIsPair(!service.pairingService?.hasKey);
-    } else {
-      setIsPair(false)
-    }
-  }
-
-  const handleUnlock = async () => {
-    if (serviceUser) {
-      await handleSubmit(serviceUser)
-    } else {
-      form.validateFields().then(async (values) => {
-        await handleSubmit(values)
-      })
-    }
-  }
-
-  const handlePairConfirm = async () => {
-    setIsPair(false)
-    if (userInfo?.sync_all_platforms) {
-      try {
-        const serviceUser = await service.getCurrentUser();
-        if (serviceUser?.email === userInfo.email) {
-          const cacheData = await service.getCacheData();
-          setOtherMethod(cacheData?.unlock_method || null);
-          setServiceUser(serviceUser)
-          await handleSubmit({ ...serviceUser, unlock_method: cacheData?.unlock_method })
-        }
-      } catch (error) {
-        await commonServices.reset_service();
-      }
-    }
-  }
-
   const handleSubmit = async (values) => {
     setCallingAPI(true);
     const payload = {
@@ -175,139 +122,21 @@ const Lock = () => {
         <AuthCard
           className="w-[600px]"
         >
-          <>
-            <UnlockTitle
-              step={step}
-              otherMethod={otherMethod}
-              showMpForm={showMpForm}
-              callingAPI={callingAPI}
-              setStep={setStep}
-              setIsPair={setIsPair}
-              setOtherMethod={setOtherMethod}
-            />
-            <Form
-              form={form}
-              key={locale}
-            >
-              <div className="mt-6 mb-10 flex items-center justify-center">
-                <UserInfo />
-              </div>
-              <div>
-                {
-                  isPair && <div>
-                    <Pairing
-                      userInfo={userInfo}
-                      callingAPI={callingAPI}
-                      onConfirm={() => handlePairConfirm()}
-                    />
-                    <Button
-                      className="w-full mt-8"
-                      type="primary"
-                      ghost
-                      size="large"
-                      onClick={() => {
-                        setIsPair(false);
-                      }}
-                    >
-                      {t('button.use_mp_instead')}
-                    </Button>
-                    <Button
-                      className="w-full mt-2"
-                      size="large"
-                      htmlType="submit"
-                      loading={logging}
-                      onClick={() => handleLogout()}
-                    >
-                      {t('sidebar.logout')}
-                    </Button>
-                  </div>
-                }
-                {
-                  !isPair && <div>
-                    {
-                      !!serviceUser && <div>
-                        <FormFooter
-                          logging={logging}
-                          callingAPI={callingAPI}
-                          handleUnlock={handleUnlock}
-                          handleLogout={handleLogout}
-                        />
-                      </div>
-                    }
-                    {
-                      !serviceUser && <div>
-                        {
-                          step === 1 && <div>
-                            {
-                              userInfo?.login_method === 'password' && <div>
-                                <MPForm
-                                  logging={logging}
-                                  callingAPI={callingAPI}
-                                  handleUnlock={handleUnlock}
-                                />
-                               <FormFooter
-                                  className="mt-6"
-                                  logging={logging}
-                                  callingAPI={callingAPI}
-                                  handleUnlock={handleUnlock}
-                                  handleLogout={handleLogout}
-                                />
-                                <p className="my-4 text-center">
-                                  {t('auth_pages.sign_in.or_login_with')}
-                                </p>
-                              </div>
-                            }
-                            <UnlockWith
-                              loading={loading}
-                              userInfo={userInfo}
-                              logging={logging}
-                              callingAPI={callingAPI}
-                              selectOtherMethod={selectOtherMethod}
-                              handleLogout={handleLogout}
-                            />
-                          </div>
-                        }
-                        {
-                          step === 2 && <div>
-                            {
-                              otherMethod === 'security_key' && <SecurityKey
-                                changing={callingAPI}
-                                userInfo={userInfo}
-                                onRepair={() => setIsPair(true)}
-                                onConfirm={(password) => handleSubmit({
-                                  password
-                                })}
-                              />
-                            }
-                            {
-                              otherMethod === 'passkey' && <Passkey
-                                changing={loading}
-                                userInfo={userInfo}
-                                onConfirm={(password) => handleSubmit({
-                                  password
-                                })}
-                              />
-                            }
-                            {
-                              !callingAPI && <Button
-                                className="w-full mt-6"
-                                size="large"
-                                htmlType="submit"
-                                loading={logging}
-                                onClick={() => handleLogout()}
-                              >
-                                {t('sidebar.logout')}
-                              </Button>
-                            }
-                          </div>
-                        }
-                      </div>
-                    }
-                  </div>
-                }
-              </div>
-            </Form>
-          </>
+          <LockForm
+            step={step}
+            isPair={isPair}
+            logging={logging}
+            loading={loading}
+            callingAPI={callingAPI}
+            serviceUser={serviceUser}
+            otherMethod={otherMethod}
+            setStep={setStep}
+            setIsPair={setIsPair}
+            setServiceUser={setServiceUser}
+            setOtherMethod={setOtherMethod}
+            onSubmit={handleSubmit}
+            onLogout={handleLogout}
+          />
         </AuthCard>
       </div>
     </Spin>

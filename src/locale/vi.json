@@ -160,7 +160,8 @@
     "new_group": "Nhóm mới",
     "resend_invitation": "Gửi lại lời mời",
     "restore": "Khôi phục",
-    "use_mp_instead": "Sử dụng Mật khẩu thay thế"
+    "use_mp_instead": "Sử dụng Mật khẩu thay thế",
+    "sync_with_desktop": "Đồng bộ với Ứng dụng máy tính"
   },
   "placeholder": {
     "name": "Nhập tên",

@@ -1,7 +1,5 @@
 import React, { } from "react";
-import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { } from 'react-router-dom';
 
 import {
   Form,
@@ -18,7 +16,9 @@ const MPForm = (props) => {
   const {
     logging = false,
     callingAPI = false,
-    handleUnlock = () => {},
+    isShowMPHint = false,
+    onUnlock = () => {},
+    setMPHintVisible = () => {}
   } = props;
 
   return (
@@ -34,9 +34,17 @@ const MPForm = (props) => {
           placeholder={t('lock.master_password')}
           size="large"
           disabled={callingAPI || logging}
-          onPressEnter={handleUnlock}
+          onPressEnter={onUnlock}
         />
       </Form.Item>
+      {
+        isShowMPHint && <p
+          className="font-semibold text-primary mt-2 cursor-pointer"
+          onClick={() => setMPHintVisible(true)}
+        >
+          {t('lock.master_password_hint')}
+        </p>
+      }
     </div>
   );
 }

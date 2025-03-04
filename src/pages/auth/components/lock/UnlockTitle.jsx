@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
-import { } from 'react-router-dom';
 
 import {
   Button,
@@ -19,9 +18,9 @@ const UnlockTitle = (props) => {
   const {
     step,
     otherMethod,
-    showMpForm,
-    callingAPI,
-    setStep,
+    showMpForm = true,
+    callingAPI = false,
+    setStep = () => {},
     setIsPair = () => {},
     setOtherMethod = () => {},
   } = props;

@@ -1,7 +1,5 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { } from 'react-router-dom';
 
 import {
   Button,
@@ -18,8 +16,8 @@ const FormFooter = (props) => {
     className = '',
     logging = false,
     callingAPI = false,
-    handleUnlock = () => {},
-    handleLogout = () => {}
+    onUnlock = () => {},
+    onLogout = () => {}
   } = props;
   return (
     <Row gutter={[8, 0]} className={className}>
@@ -30,7 +28,7 @@ const FormFooter = (props) => {
           htmlType="submit"
           disabled={callingAPI}
           loading={logging}
-          onClick={() => handleLogout()}
+          onClick={() => onLogout()}
         >
           {t('sidebar.logout')}
         </Button>
@@ -43,7 +41,7 @@ const FormFooter = (props) => {
           htmlType="submit"
           disabled={logging}
           loading={callingAPI}
-          onClick={handleUnlock}
+          onClick={onUnlock}
         >
           {t('lock.unlock')}
         </Button>
