@@ -25,7 +25,6 @@ const FormFooter = (props) => {
         <Button
           className="w-full"
           size="large"
-          htmlType="submit"
           disabled={callingAPI}
           loading={logging}
           onClick={() => onLogout()}

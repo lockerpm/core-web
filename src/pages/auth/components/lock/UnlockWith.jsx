@@ -78,7 +78,6 @@ const UnlockWith = (props) => {
         !callingAPI && !showMpForm && <Button
           className="w-full mt-6"
           size="large"
-          htmlType="submit"
           loading={logging}
           onClick={onLogout}
         >

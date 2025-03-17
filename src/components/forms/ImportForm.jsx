@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -35,7 +35,6 @@ function ImportForm(props) {
     onClose = () => {},
   } = props
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);

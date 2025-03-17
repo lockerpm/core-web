@@ -134,7 +134,6 @@ const LockForm = (props) => {
               <Button
                 className="w-full mt-2"
                 size="large"
-                htmlType="submit"
                 loading={logging}
                 onClick={() => onLogout()}
               >
@@ -213,7 +212,6 @@ const LockForm = (props) => {
                         !callingAPI && <Button
                           className="w-full mt-6"
                           size="large"
-                          htmlType="submit"
                           loading={logging}
                           onClick={() => onLogout()}
                         >
