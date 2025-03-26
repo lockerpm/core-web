@@ -6,6 +6,7 @@ import {
   Card,
   Form,
   Select,
+  Alert
 } from '@lockerpm/design';
 
 import {
@@ -49,7 +50,7 @@ const Preferences = (props) => {
           >
             <Select
               style={{ width: 160 }}
-              options={global.constants.VAULT_TIMEOUTS.map((o) => ({
+              options={global.constants.VAULT_TIMEOUTS.filter((v) => v.value !== -1).map((o) => ({
                 ...o,
                 label: t(o.label)
               }))}
@@ -58,6 +59,9 @@ const Preferences = (props) => {
         </div>
         <p className="mt-1">
           {t('account_details.preferences.timeout_desc')}
+        </p>
+        <p className="mt-1 text-warning">
+          {t('account_details.preferences.timeout_note')}
         </p>
       </Card>
     </div>

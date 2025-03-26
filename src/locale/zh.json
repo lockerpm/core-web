@@ -515,6 +515,7 @@
       "language": "語言",
       "timeout": "閒置多久後自動上鎖",
       "timeout_desc": "指定一段裝置閒置時間後，自動為保險庫上鎖.",
+      "timeout_note": "注意：如果您的瀏覽器重新載入，您的保險庫將始終自動鎖定。",
       "timeout_action": "上鎖後動作",
       "timeout_action_lock_desc": "上鎖後需要重新輸入主密碼解鎖.",
       "timeout_action_logout_desc": "上鎖後須重新登入."

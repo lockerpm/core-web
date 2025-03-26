@@ -515,6 +515,7 @@
       "language": "Ngôn ngữ",
       "timeout": "Hết thời gian",
       "timeout_desc": "Tự động khóa ứng dụng sau một khoảng thời gian không hoạt động.",
+      "timeout_note": "Lưu ý: Nếu trình duyệt của bạn tải lại, Vault của bạn sẽ luôn tự động khóa.",
       "timeout_action": "Hành động",
       "timeout_action_lock_desc": "Khi khóa, bạn sẽ được yêu cầu nhập Master Password để truy cập lại.",
       "timeout_action_logout_desc": "Khi đăng xuất, bạn cần đăng nhập lại tài khoản Locker và Master Password để truy cập lại."
