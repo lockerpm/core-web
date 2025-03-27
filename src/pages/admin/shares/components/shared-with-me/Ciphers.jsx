@@ -13,7 +13,7 @@ import sharedCiphersComponents from "./shared-ciphers";
 import common from "../../../../../utils/common";
 
 const ShareCiphers = (props) => {
-  const { FormData, MoveFolder } = vaultComponents;
+  const { FormData, MoveFolder, FormAttachment } = vaultComponents;
   const { ListData, TableData } = sharedCiphersComponents;
   const location = useLocation();
 
@@ -33,6 +33,7 @@ const ShareCiphers = (props) => {
   const [formVisible, setFormVisible] = useState(false);
   const [moveVisible, setMoveVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [formAttachmentVisible, setFormAttachmentVisible] = useState(false);
 
   const handleOpenForm = (item = null, cloneMode = false) => {
     setSelectedItem(item);
@@ -43,6 +44,11 @@ const ShareCiphers = (props) => {
   const handleOpenMoveForm = (item = null) => {
     setSelectedItem(item);
     setMoveVisible(true);
+  }
+
+  const handleOpenFormAttachment = (item) => {
+    setSelectedItem(item);
+    setFormAttachmentVisible(true);
   }
 
   return (
@@ -59,6 +65,7 @@ const ShareCiphers = (props) => {
           onUpdate={handleOpenForm}
           onLeave={onLeave}
           onUpdateStatus={onUpdateStatus}
+          onAttachment={handleOpenFormAttachment}
         /> : <TableData
           className="mt-4"
           loading={loading}
@@ -68,6 +75,7 @@ const ShareCiphers = (props) => {
           onUpdate={handleOpenForm}
           onLeave={onLeave}
           onUpdateStatus={onUpdateStatus}
+          onAttachment={handleOpenFormAttachment}
         />
       }
       <FormData
@@ -87,6 +95,14 @@ const ShareCiphers = (props) => {
         cipherIds={[selectedItem]}
         onClose={() => {
           setMoveVisible(false);
+          setSelectedItem(null);
+        }}
+      />
+      <FormAttachment
+        visible={formAttachmentVisible}
+        item={selectedItem}
+        onClose={() => {
+          setFormAttachmentVisible(false);
           setSelectedItem(null);
         }}
       />

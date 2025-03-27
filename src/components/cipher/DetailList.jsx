@@ -25,7 +25,7 @@ import common from "../../utils/common";
 import global from "../../config/global";
 
 const DetailList = (props) => {
-  const { TextCopy, PasswordStrength } = itemsComponents;
+  const { TextCopy, PasswordStrength, Attachment } = itemsComponents;
   const { DisplayOtp } = commonComponents;
   const { SeedPhrase } = cipherFormItemComponents;
   const { SharedWith } = inAppShareComponents;
@@ -625,6 +625,21 @@ const DetailList = (props) => {
         )}
       />
       <Divider className="my-1" />
+      {
+        12 > 0 && <div className='detail-attachments mt-6 flex flex-col gap-3'>
+          <h2 className="font-semibold">File Attachment</h2>
+          <Row gutter={[12, 12]}>
+            {
+              [1,2,3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
+                <Col xl={6} lg={8} md={12} span={24}>
+                  <Attachment className="w-full" key={index} data={item}/>
+                </Col>
+              ))
+            }
+          </Row>
+        </div>
+      }
+      
     </div>
   );
 }

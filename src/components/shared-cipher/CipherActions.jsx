@@ -29,7 +29,8 @@ const CipherActions = (props) => {
     onMove = () => {},
     onUpdate = () => {},
     onLeave = () => {},
-    onUpdateStatus = () => {}
+    onUpdateStatus = () => {},
+    onAttachment = () => {}
   } = props;
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -42,7 +43,6 @@ const CipherActions = (props) => {
   const isAccepted = useMemo(() => {
     return cipher.status === global.constants.STATUS.ACCEPTED
   }, [cipher])
-
 
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === cipher.id) || cipher
@@ -133,6 +133,12 @@ const CipherActions = (props) => {
           hide: !common.isChangeCipher(originCipher),
           label: t('inventory.actions.edit'),
           onClick: () => onUpdate(originCipher)
+        },
+        {
+          key: 'file',
+          hide: false,
+          label: 'File Attachment',
+          onClick: () => onAttachment(originCipher)
         },
         {
           key: 'clone',
