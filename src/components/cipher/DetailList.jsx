@@ -100,6 +100,7 @@ const DetailList = (props) => {
             value={cipher.login.uri}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -185,6 +186,7 @@ const DetailList = (props) => {
             value={cipher?.notes}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -310,6 +312,7 @@ const DetailList = (props) => {
             value={cipher?.cryptoWallet?.notes}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -364,6 +367,7 @@ const DetailList = (props) => {
             value={cipher.identity?.company}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -424,6 +428,7 @@ const DetailList = (props) => {
             value={cipher.identity?.address1}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -434,6 +439,7 @@ const DetailList = (props) => {
             value={cipher.identity?.address2}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -444,6 +450,7 @@ const DetailList = (props) => {
             value={cipher.identity?.city}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -454,6 +461,7 @@ const DetailList = (props) => {
             value={cipher.identity?.state}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -484,6 +492,7 @@ const DetailList = (props) => {
             value={cipher?.notes}
             showIcon={true}
             show={showText}
+            limited={false}
             align="between"
           />
         },
@@ -497,6 +506,7 @@ const DetailList = (props) => {
           value={cipher?.notes}
           showIcon={true}
           show={showText}
+          limited={false}
           align="between"
         />
       },

@@ -24,7 +24,6 @@ import OtherLayout from './layouts/other'
 import storeActions from './store/actions'
 import commonServices from './services/common'
 
-import i18n from './config/i18n'
 import global from './config/global'
 import jsCore from './core-js/index'
 
