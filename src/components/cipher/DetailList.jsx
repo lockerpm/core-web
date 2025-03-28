@@ -542,7 +542,7 @@ const DetailList = (props) => {
             value={newValue}
             showIcon={true}
             show={showText}
-            defaultShow={f.type !== FieldType.Hidden}
+            defaultShow={f.type === FieldType.Hidden ? false : showText}
             align="between"
           />
         }
