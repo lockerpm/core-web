@@ -59,11 +59,13 @@ function FormAttachment(props) {
     })
     if (res?.upload_form) {
       const uploadId = res.upload_id;
+      const fileSizeEnc = common.getFileSizeFromBase64(encryptFile);
       await attachmentServices.upload_file(res?.upload_form?.url, encryptFile)
         .then(async () => {
           const newAttachments = [
             {
               ...newFile,
+              size: fileSizeEnc,
               url: uploadId
             },
             ...item.attachments,
@@ -101,25 +103,23 @@ function FormAttachment(props) {
     accept: '*/*',
     beforeUpload: async (file) => {
       // Checking validate file
+      if (file.size >= global.constants.MAX_ATTACHMENT_SIZE) {
+        message.error(t('attachments.errors.large'));
+        return;
+      }
       setCallingAPI(true);
+      const newFile = {
+        id: Date.now(),
+        fileName: file.name,
+        size: file.size,
+        url: null,
+        key: key.toString("base64"),
+      }
+      setAttachments([newFile, ...attachments])
       const key = crypto.randomBytes(32);
       const encryptFile = await attachmentServices.encrypt_file(file, key);
-      const fileSizeEnc = common.getFileSizeFromBase64(encryptFile);
-      if (fileSizeEnc >= global.constants.MAX_ATTACHMENT_SIZE) {
-        message.error(t('attachments.errors.large'))
-      } else {
-        const newFile = {
-          id: Date.now(),
-          fileName: file.name,
-          size: fileSizeEnc,
-          url: null,
-          key: key.toString("base64"),
-        }
-        setAttachments([newFile, ...attachments])
-        
-        if (encryptFile) {
-          await handleUploadFile(newFile, encryptFile);
-        }
+      if (encryptFile) {
+        await handleUploadFile(newFile, encryptFile);
       }
       setCallingAPI(false);
     },
