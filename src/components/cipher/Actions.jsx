@@ -36,7 +36,8 @@ const Actions = (props) => {
     onRestore = () => {},
     onShare = () => {},
     onStopSharing = () => {},
-    onPermanentlyDelete = () => {}
+    onPermanentlyDelete = () => {},
+    onAttachment = () => {}
   } = props;
 
   const currentPage = common.getRouterByLocation(location);
@@ -171,6 +172,12 @@ const Actions = (props) => {
           hide: !common.isChangeCipher(originCipher),
           label: t('inventory.actions.edit'),
           onClick: () => onUpdate(originCipher)
+        },
+        {
+          key: 'file',
+          hide: !common.isOwner(originCipher) && originCipher?.attachments?.length === 0,
+          label: t('attachments.title'),
+          onClick: () => onAttachment(originCipher)
         },
         {
           key: 'clone',

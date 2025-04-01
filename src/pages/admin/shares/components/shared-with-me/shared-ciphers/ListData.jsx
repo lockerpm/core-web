@@ -35,7 +35,8 @@ const ListData = (props) => {
     onMove = () => {},
     onUpdate = () => {},
     onLeave = () => {},
-    onUpdateStatus = () => {}
+    onUpdateStatus = () => {},
+    onAttachment = () => {}
   } = props;
 
   const GeneralInfo = (props) => {
@@ -131,6 +132,7 @@ const ListData = (props) => {
                   onUpdate={onUpdate}
                   onLeave={onLeave}
                   onUpdateStatus={onUpdateStatus}
+                  onAttachment={onAttachment}
                 />
               }
             </div>

@@ -26,6 +26,7 @@ const ListData = (props) => {
     onShare = () => {},
     onStopSharing = () => {},
     onPermanentlyDelete = () => {},
+    onAttachment = () => {}
   } = props;
 
   return (
@@ -57,6 +58,7 @@ const ListData = (props) => {
                 onShare={onShare}
                 onStopSharing={onStopSharing}
                 onPermanentlyDelete={onPermanentlyDelete}
+                onAttachment={onAttachment}
               />
             </div>
           </div>

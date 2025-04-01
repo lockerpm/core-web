@@ -306,6 +306,11 @@
       "sso_configuration": {
         "updated": "The SSO Configuration has been updated.",
         "reset": "The SSO Configuration has been reset."
+      },
+      "attachment": {
+        "uploaded": "Файл успешно загружен!",
+        "downloaded": "Файл успешно загружен!",
+        "deleted": "Прикрепленный файл удален."
       }
     },
     "warning": {
@@ -1335,6 +1340,18 @@
       "description": "Ваш пароль нарушает следующие политики вашего предприятия:",
       "still_use_this_password": "Все еще используйте этот пароль",
       "change_password": "Изменить пароль"
+    }
+  },
+  "attachments": {
+    "title": "Прикрепленный файл",
+    "delete_question": "Вы уверены, что хотите удалить этот файл?",
+    "upload": {
+      "title": "Нажмите или перетащите, чтобы загрузить",
+      "description": "SVG, PNG, JPG, GIF,... (максимальный размер 50 МБ)"
+    },
+    "errors": {
+      "large": "Файл слишком большой! Максимальный размер 50 МБ.",
+      "limited": "Вы превысили лимит хранилища в 1 ГБ. Удалите ненужные файлы, чтобы освободить место."
     }
   }
 }

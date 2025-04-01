@@ -34,7 +34,8 @@ const TableData = (props) => {
     onMove = () => {},
     onUpdate = () => {},
     onLeave = () => {},
-    onUpdateStatus = () => {}
+    onUpdateStatus = () => {},
+    onAttachment = () => {}
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -129,6 +130,7 @@ const TableData = (props) => {
             onUpdate={onUpdate}
             onLeave={onLeave}
             onUpdateStatus={onUpdateStatus}
+            onAttachment={onAttachment}
           />
         ),
       },

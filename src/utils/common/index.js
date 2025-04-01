@@ -14,6 +14,7 @@ import sync from './sync'
 import socket from './socket'
 import auth from './auth'
 import policy from './policy'
+import attachment from './attachment'
 
 export default {
   ...storage,
@@ -31,5 +32,6 @@ export default {
   ...sync,
   ...socket,
   ...auth,
-  ...policy
+  ...policy,
+  ...attachment
 }
