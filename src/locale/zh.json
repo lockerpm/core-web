@@ -306,6 +306,11 @@
       "sso_configuration": {
         "updated": "SSO 設定已更新。",
         "reset": "SSO 設定已重設。"
+      },
+      "attachment": {
+        "uploaded": "檔案上傳成功！",
+        "downloaded": "檔案下載成功！",
+        "deleted": "檔案附件已刪除。"
       }
     },
     "warning": {
@@ -1335,6 +1340,18 @@
       "description": "您的密碼違反了您企業的以下政策：",
       "still_use_this_password": "仍在使用此密碼",
       "change_password": "更改密碼"
+    }
+  },
+  "attachments": {
+    "title": "文件附件",
+    "delete_question": "您確定要刪除此檔案嗎？",
+    "upload": {
+      "title": "點選或拖曳以上傳",
+      "description": "SVG、PNG、JPG、GIF、...（最大尺寸為 50MB）"
+    },
+    "errors": {
+      "large": "檔案太大！最大為 50MB。",
+      "limited": "您已超出 1GB 的儲存限制。請刪除不必要的檔案以釋放空間。" 
     }
   }
 }

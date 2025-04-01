@@ -1,5 +1,6 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React, { useMemo, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 
 import {
   Card,
@@ -8,14 +9,85 @@ import {
 import {
   FileTextOutlined,
   DownloadOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  LoadingOutlined
 } from "@ant-design/icons";
 
+import attachmentServices from "../../services/attachment";
+import cipherServices from '../../services/cipher';
+import global from "../../config/global";
+import common from "../../utils/common";
+
 const Attachment = (props) => {
+  const { t } = useTranslation();
   const {
     className = '',
-    data = null,
+    cipher = {},
+    attachment = null,
+    setAttachments = () => {}
   } = props;
+
+  const allCollections = useSelector((state) => state.collection.allCollections);
+
+  const [downloading, setDownloading] = useState(false);
+
+  const loading = useMemo(() => {
+    return !attachment?.url
+  }, [attachment])
+
+  const deleteAttachment = () => {
+    global.confirm(async () => {
+      await attachmentServices.remove({ paths: [attachment?.url] }).then(async () => {
+        await editCipher();
+      }).catch((error) => {
+        global.pushError(error)
+      });
+    }, {
+      title: t('common.warning'),
+      content: t('attachments.delete_question'),
+      okText: t('button.ok'),
+      okButtonProps: { danger: false },
+    });
+  };
+
+  const editCipher = async () => {
+    const newAttachments = cipher?.attachments?.filter((attach) => attach.id !== attachment?.id);
+    const { data, collectionIds } = await common.getEncCipherForRequest(
+      {
+        ...cipher,
+        attachments: newAttachments
+      },
+      {
+        writeableCollections: allCollections.filter((c) => common.isOwner(c)),
+        nonWriteableCollections: allCollections.filter((c) => !common.isOwner(c)),
+      }
+    )
+    await cipherServices.update(cipher.id, { ...data, collectionIds }).then(() => {
+      setAttachments(newAttachments);
+      global.pushSuccess(t('notification.success.attachment.deleted'));
+    }).catch((error) => {
+      global.pushError(error)
+    })
+  }
+
+  const downloadAttachment = async () => {
+    if (downloading) {
+      return;
+    }
+    setDownloading(true);
+    attachmentServices.get_file_url(attachment?.url).then(async (res) => {
+      const fileRes = await fetch(res.url);
+      const blob = await fileRes.blob();
+      const key = Buffer.from(attachment.key, "base64");
+      const fileDecrypted = await attachmentServices.decrypt_file(blob, key);
+      common.downloadBase64(fileDecrypted, attachment.fileName);
+      global.pushSuccess(t('notification.success.attachment.downloaded'))
+    }).catch((error) => {
+      global.pushError(error)
+    }).finally(() => {
+      setDownloading(false)
+    })
+  }
 
   return (
     <Card className={`${className} rounded-xl`} bodyStyle={{ padding: 16 }}>
@@ -25,17 +97,32 @@ const Attachment = (props) => {
             <FileTextOutlined className="text-primary font-bold text-[36px]"/>
           </div>
           <div className="flex flex-col" style={{ width: 'calc(100% - 44px)' }}>
-            <p className="font-semibold text-limited text-limited__block text-black-500">Github_Recovery_Code.pdf</p>
-            <p className="text-black-500">45 KB</p>
+            <p className="font-semibold text-limited text-limited__block text-black-500">
+              {attachment.fileName}
+            </p>
+            <p className="text-black-500">
+              {common.formatFileSizeIntl(attachment.size)}
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-semibold cursor-pointer text-black-500">
-            <DownloadOutlined className="text-[16px]"/>
-          </span>
-          <span className="font-semibold cursor-pointer text-danger">
-            <DeleteOutlined className="text-[16px]"/>
-          </span>
+          {
+            loading && <span className="font-semibold text-primary">
+              <LoadingOutlined className="text-[32px]"/>
+            </span>
+          }
+          {
+            !loading && <>
+              <span className="font-semibold cursor-pointer text-black-500" onClick={downloadAttachment}>
+                { downloading ? <LoadingOutlined className="text-[16px]"/> : <DownloadOutlined className="text-[16px]" /> }
+              </span>
+              {
+                !!cipher && common.isOwner(cipher) && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
+                  <DeleteOutlined className="text-[16px]"/>
+                </span>
+              }
+            </>
+          }
         </div>
       </div>
     </Card>

@@ -136,6 +136,10 @@ export default {
   ENTERPRISE_POLICY_PASSWORD_PASSWORLESS: `${FLAT_FORM}/enterprises/:enterprise_id/policy/passwordless`,
   ENTERPRISE_POLICY_PASSWORD_2FA: `${FLAT_FORM}/enterprises/:enterprise_id/policy/2fa`,
 
+  ATTACHMENTS: `${FLAT_FORM}/attachments`,
+  ATTACHMENTS_URL: `${FLAT_FORM}/attachments/url`,
+  ATTACHMENTS_MULTIPLE_DELETE: `${FLAT_FORM}/attachments/multiple_delete`,
+
   // Admin
   ADMIN_ENTERPRISES: `${ADMIN}/enterprises`,
 

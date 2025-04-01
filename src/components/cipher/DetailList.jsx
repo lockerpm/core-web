@@ -626,20 +626,19 @@ const DetailList = (props) => {
       />
       <Divider className="my-1" />
       {
-        12 > 0 && <div className='detail-attachments mt-6 flex flex-col gap-3'>
-          <h2 className="font-semibold">File Attachment</h2>
+        cipher?.attachments?.length > 0 && <div className='detail-attachments mt-6 flex flex-col gap-3'>
+          <h3 className="font-semibold">{t('attachments.title')}</h3>
           <Row gutter={[12, 12]}>
             {
-              [1,2,3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
-                <Col xl={6} lg={8} md={12} span={24}>
-                  <Attachment className="w-full" key={index} data={item}/>
+              (cipher?.attachments || []).map((attachment, index) => (
+                <Col lg={8} md={12} span={24} key={index}>
+                  <Attachment className="w-full" attachment={attachment} cipher={cipher}/>
                 </Col>
               ))
             }
           </Row>
         </div>
       }
-      
     </div>
   );
 }
