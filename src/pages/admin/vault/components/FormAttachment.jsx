@@ -108,6 +108,7 @@ function FormAttachment(props) {
         return;
       }
       setCallingAPI(true);
+      const key = crypto.randomBytes(32);
       const newFile = {
         id: Date.now(),
         fileName: file.name,
@@ -116,7 +117,6 @@ function FormAttachment(props) {
         key: key.toString("base64"),
       }
       setAttachments([newFile, ...attachments])
-      const key = crypto.randomBytes(32);
       const encryptFile = await attachmentServices.encrypt_file(file, key);
       if (encryptFile) {
         await handleUploadFile(newFile, encryptFile);
