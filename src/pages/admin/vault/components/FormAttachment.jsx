@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 import crypto from "crypto-browserify";
@@ -38,23 +38,28 @@ function FormAttachment(props) {
   } = props;
 
   const allCollections = useSelector((state) => state.collection.allCollections)
+  const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
   const [callingAPI, setCallingAPI] = useState(false);
   const [attachments, setAttachments] = useState([]);
 
+  const originCipher = useMemo(() => {
+    return allCiphers.find((d) => d.id === item?.id)
+  }, [allCiphers, item])
+
   useEffect(() => {
     if (visible) {
-      setAttachments(item?.attachments || [])
+      setAttachments(originCipher?.attachments || [])
     } else {
       setAttachments([])
     }
-  }, [visible, item?.attachments])
+  }, [visible, originCipher])
 
   const handleUploadFile = async (newFile, encryptFile) => {
     const res = await attachmentServices.get_upload_form({
       file_name: newFile.fileName,
       metadata: {
-        cipher_id: item?.id
+        cipher_id: originCipher?.id
       }
     })
     if (res?.upload_form) {
@@ -68,7 +73,7 @@ function FormAttachment(props) {
               size: fileSizeEnc,
               url: uploadId
             },
-            ...item.attachments,
+            ...originCipher.attachments,
           ]
           await editCipher(newAttachments)
         }
@@ -81,7 +86,7 @@ function FormAttachment(props) {
   const editCipher = async (newAttachments) => {
     const { data, collectionIds } = await common.getEncCipherForRequest(
       {
-        ...item,
+        ...originCipher,
         attachments: newAttachments,
       },
       {
@@ -89,41 +94,46 @@ function FormAttachment(props) {
         nonWriteableCollections: allCollections.filter((c) => !common.isOwner(c)),
       }
     )
-    await cipherServices.update(item.id, { ...data, collectionIds }).then(() => {
+    await cipherServices.update(originCipher.id, { ...data, collectionIds }).then(() => {
       global.pushSuccess(t('notification.success.attachment.uploaded'));
-      setAttachments(newAttachments);
     }).catch((error) => {
       global.pushError(error)
     })
   }
 
-  const uploadProps = {
-    name: 'file',
-    showUploadList: false,
-    accept: '*/*',
-    beforeUpload: async (file) => {
-      // Checking validate file
-      if (file.size >= global.constants.MAX_ATTACHMENT_SIZE) {
-        message.error(t('attachments.errors.large'));
-        return;
-      }
-      setCallingAPI(true);
-      const key = crypto.randomBytes(32);
-      const newFile = {
-        id: Date.now(),
-        fileName: file.name,
-        size: file.size,
-        url: null,
-        key: key.toString("base64"),
-      }
-      setAttachments([newFile, ...attachments])
-      const encryptFile = await attachmentServices.encrypt_file(file, key);
-      if (encryptFile) {
-        await handleUploadFile(newFile, encryptFile);
-      }
-      setCallingAPI(false);
-    },
-  };
+  const uploadProps = useMemo(() => {
+    return {
+      name: 'file',
+      showUploadList: false,
+      accept: '*/*',
+      beforeUpload: async (file) => {
+        // Checking validate file
+        if (file.size >= global.constants.MAX_ATTACHMENT_SIZE) {
+          message.error(t('attachments.errors.large'));
+          return;
+        }
+        setCallingAPI(true);
+        const key = crypto.randomBytes(32);
+        const newFile = {
+          id: Date.now(),
+          fileName: file.name,
+          size: file.size,
+          url: null,
+          key: key.toString("base64"),
+        }
+        setAttachments([newFile, ...attachments])
+        const encryptFile = await attachmentServices.encrypt_file(file, key);
+        if (encryptFile) {
+          await handleUploadFile(newFile, encryptFile);
+        }
+        setCallingAPI(false);
+      },
+    }
+  }, [
+    attachments,
+    originCipher,
+    handleUploadFile
+  ]);
 
   return (
     <div className={className}>
@@ -149,7 +159,7 @@ function FormAttachment(props) {
       >
         <div className='flex flex-col gap-6'>
           {
-            !!item && common.isOwner(item) && <div>
+            !!originCipher && common.isOwner(originCipher) && <div>
               <Upload.Dragger
                 {...uploadProps}
                 style={{
@@ -191,8 +201,7 @@ function FormAttachment(props) {
                 <Attachment
                   key={index}
                   attachment={attachment}
-                  cipher={item}
-                  setAttachments={setAttachments}
+                  cipher={originCipher}
                 />
               ))
             }

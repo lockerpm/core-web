@@ -24,7 +24,6 @@ const Attachment = (props) => {
     className = '',
     cipher = {},
     attachment = null,
-    setAttachments = () => {}
   } = props;
 
   const allCollections = useSelector((state) => state.collection.allCollections);
@@ -63,7 +62,6 @@ const Attachment = (props) => {
       }
     )
     await cipherServices.update(cipher.id, { ...data, collectionIds }).then(() => {
-      setAttachments(newAttachments);
       global.pushSuccess(t('notification.success.attachment.deleted'));
     }).catch((error) => {
       global.pushError(error)
