@@ -21,18 +21,7 @@ const FormFooter = (props) => {
   } = props;
   return (
     <Row gutter={[8, 0]} className={className}>
-      <Col span={12}>
-        <Button
-          className="w-full"
-          size="large"
-          disabled={callingAPI}
-          loading={logging}
-          onClick={() => onLogout()}
-        >
-          {t('sidebar.logout')}
-        </Button>
-      </Col>
-      <Col span={12}>
+      <Col span={12} style={{ order: 2 }}>
         <Button
           className="w-full"
           size="large"
@@ -43,6 +32,17 @@ const FormFooter = (props) => {
           onClick={onUnlock}
         >
           {t('lock.unlock')}
+        </Button>
+      </Col>
+      <Col span={12} style={{ order: 1 }}>
+        <Button
+          className="w-full"
+          size="large"
+          disabled={callingAPI}
+          loading={logging}
+          onClick={() => onLogout()}
+        >
+          {t('sidebar.logout')}
         </Button>
       </Col>
     </Row>
