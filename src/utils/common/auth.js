@@ -24,6 +24,7 @@ const unlockToVault = async (
     } else {
       common.updateAccessTokenType(response.token_type)
       common.updateAccessToken(response.access_token);
+      await common.fetchUserInfo();
       common.updateUnlockMethod(payload.unlock_method);
       await coreServices.unlock({ ...response, ...payload });
       const isSynced = await commonServices.sync_data();
