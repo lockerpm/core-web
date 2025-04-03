@@ -8,7 +8,6 @@ import {
   Button,
   Drawer,
   Upload,
-  message,
   Card
 } from '@lockerpm/design';
 
@@ -46,6 +45,10 @@ function FormAttachment(props) {
   const originCipher = useMemo(() => {
     return allCiphers.find((d) => d.id === item?.id)
   }, [allCiphers, item])
+
+  const isUploading = useMemo(() => {
+    return !!attachments.find((attach) => !attach.url)
+  }, [attachments])
 
   useEffect(() => {
     if (visible) {
@@ -109,7 +112,7 @@ function FormAttachment(props) {
       beforeUpload: async (file) => {
         // Checking validate file
         if (file.size >= global.constants.MAX_ATTACHMENT_SIZE) {
-          message.error(t('attachments.errors.large'));
+          global.notification('error', t('notification.error.title'), t('attachments.errors.large'))
           return;
         }
         setCallingAPI(true);
@@ -141,10 +144,10 @@ function FormAttachment(props) {
         className="vault-attachment-form-drawer"
         title={t("attachments.title")}
         placement="right"
-        onClose={() => {}}
+        onClose={isUploading ? () => {} : onClose}
         open={visible}
         width={600}
-        closable={false}
+        closable={!isUploading}
         footer={
           <Space className='flex items-center justify-end'>
             <Button
@@ -162,6 +165,7 @@ function FormAttachment(props) {
             !!originCipher && common.isOwner(originCipher) && <div>
               <Upload.Dragger
                 {...uploadProps}
+                disabled={isUploading}
                 style={{
                   borderRadius: 12
                 }}
