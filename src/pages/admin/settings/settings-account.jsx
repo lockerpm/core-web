@@ -21,7 +21,7 @@ import userServices from "../../../services/user";
 import global from "../../../config/global";
 import common from "../../../utils/common";
 
-const AccountDetails = (props) => {
+const AccountDetails = () => {
   const { PageHeader } = commonComponents;
   const { PersonalInfo, Preferences, DangerZone } = accountComponents;
   const { t } = useTranslation();

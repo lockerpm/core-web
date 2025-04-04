@@ -143,7 +143,7 @@ function QuickShare(props) {
                   },
                   {
                     value: expirationOptions.DAYS,
-                    label: t('shares.quick_shares.expire_options.14_days')
+                    label: t('shares.quick_shares.expire_options.two_weeks')
                   },
                   {
                     value: expirationOptions.A_MONTH,
