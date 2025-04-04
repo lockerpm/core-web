@@ -22,7 +22,7 @@ const FormFooter = (props) => {
   } = props;
   return (
     <Row gutter={[8, 0]} className={className}>
-      <Col span={12} style={{ order: 2 }}>
+      <Col span={12}>
         <Button
           className="w-full"
           size="large"
@@ -35,7 +35,7 @@ const FormFooter = (props) => {
           {t('lock.unlock')}
         </Button>
       </Col>
-      <Col span={12} style={{ order: 1 }}>
+      <Col span={12}>
         <div
           className={`pm-button w-full ${logging ? 'pm-button__loading' : ''} ${callingAPI ? 'pm-button__disabled' : ''}`}
           onClick={() => onLogout()}
