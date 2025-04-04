@@ -21,7 +21,7 @@ const LockForm = (props) => {
   const { t } = useTranslation();
   const { UserInfo  } = itemsComponents;
   const { Pairing, SecurityKey, Passkey } = formsComponents;
-  const { UnlockTitle, MPForm, FormFooter, UnlockWith } = lockComponents;
+  const { UnlockTitle, MPForm, UnlockWith } = lockComponents;
 
   const {
     step,
@@ -52,6 +52,10 @@ const LockForm = (props) => {
       return !(userInfo?.passkeys.length > 0 || userInfo?.security_keys?.length > 0)
     }
     return true
+  }, [userInfo])
+
+  const isUnlockWith = useMemo(() => {
+    return userInfo?.passkeys.length > 0 || userInfo?.security_keys.length > 0 || userInfo?.sync_all_platforms
   }, [userInfo])
 
   const selectOtherMethod = (method) => {
@@ -120,37 +124,54 @@ const LockForm = (props) => {
                 callingAPI={callingAPI}
                 onConfirm={() => handlePairConfirm()}
               />
-              <Button
-                className="w-full mt-8"
-                type="primary"
-                ghost
-                size="large"
-                onClick={() => {
-                  setIsPair(false);
-                }}
-              >
-                {t('button.use_mp_instead')}
-              </Button>
-              <Button
-                className="w-full mt-2"
-                size="large"
-                loading={logging}
-                onClick={() => onLogout()}
-              >
-                {t('sidebar.logout')}
-              </Button>
+              <div className="mt-8 flex flex-col gap-2">
+                <Button
+                  className="w-full"
+                  type="primary"
+                  ghost
+                  size="large"
+                  onClick={() => {
+                    setIsPair(false);
+                    setStep(1);
+                  }}
+                >
+                  {t('button.use_mp_instead')}
+                </Button>
+                <Button
+                  className="w-full"
+                  size="large"
+                  loading={logging}
+                  onClick={() => onLogout()}
+                >
+                  {t('sidebar.logout')}
+                </Button>
+              </div>
             </div>
           }
           {
             !isPair && <div>
               {
                 !!serviceUser && <div>
-                  <FormFooter
-                    logging={logging}
-                    callingAPI={callingAPI}
-                    onUnlock={handleUnlock}
-                    onLogout={onLogout}
-                  />
+                  <Button
+                    className="w-full"
+                    size="large"
+                    type="primary"
+                    htmlType="submit"
+                    disabled={logging}
+                    loading={callingAPI}
+                    onClick={onUnlock}
+                  >
+                    {t('lock.unlock')}
+                  </Button>
+                  <Button
+                    className="w-full"
+                    size="large"
+                    disabled={callingAPI}
+                    loading={logging}
+                    onClick={onLogout}
+                  >
+                    {t('sidebar.logout')}
+                  </Button>
                 </div>
               }
               {
@@ -158,33 +179,33 @@ const LockForm = (props) => {
                   {
                     step === 1 && <div>
                       {
-                        showMpForm && <div>
-                          <MPForm
-                            logging={logging}
-                            callingAPI={callingAPI}
-                            isShowMPHint={isShowMPHint}
-                            onUnlock={handleUnlock}
-                            setMPHintVisible={setMPHintVisible}
-                          />
-                          <FormFooter
-                            className="mt-6"
-                            logging={logging}
-                            callingAPI={callingAPI}
-                            onUnlock={handleUnlock}
-                            onLogout={onLogout}
-                          />
-                        </div>
+                        showMpForm && <MPForm
+                          logging={logging}
+                          callingAPI={callingAPI}
+                          isShowMPHint={isShowMPHint}
+                          onUnlock={handleUnlock}
+                          setMPHintVisible={setMPHintVisible}
+                        />
                       }
-                      <UnlockWith
-                        loading={loading}
-                        userInfo={userInfo}
-                        logging={logging}
-                        callingAPI={callingAPI}
-                        showMpForm={showMpForm}
-                        selectOtherMethod={selectOtherMethod}
-                        onLogout={onLogout}
-                        setIsPair={setIsPair}
-                      />
+                      {
+                        isUnlockWith && <UnlockWith
+                          loading={loading}
+                          userInfo={userInfo}
+                          callingAPI={callingAPI}
+                          setIsPair={setIsPair}
+                          selectOtherMethod={selectOtherMethod}
+                        />
+                      }
+                      {
+                        !callingAPI && <Button
+                          className={`w-full ${isUnlockWith ? 'mt-8' : 'mt-2'}`}
+                          size="large"
+                          loading={logging}
+                          onClick={onLogout}
+                        >
+                          {t('sidebar.logout')}
+                        </Button>
+                      }
                     </div>
                   }
                   {
@@ -210,7 +231,7 @@ const LockForm = (props) => {
                       }
                       {
                         !callingAPI && <Button
-                          className="w-full mt-6"
+                          className="w-full mt-8"
                           size="large"
                           loading={logging}
                           onClick={() => onLogout()}

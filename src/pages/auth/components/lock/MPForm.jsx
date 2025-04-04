@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   Form,
   Input,
+  Button,
 } from '@lockerpm/design';
 
 import {
@@ -45,6 +46,17 @@ const MPForm = (props) => {
           {t('lock.master_password_hint')}
         </p>
       }
+      <Button
+        className="w-full mt-4"
+        size="large"
+        type="primary"
+        htmlType="submit"
+        disabled={logging}
+        loading={callingAPI}
+        onClick={onUnlock}
+      >
+        {t('lock.unlock')}
+      </Button>
     </div>
   );
 }
