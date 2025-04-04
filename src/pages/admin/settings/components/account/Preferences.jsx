@@ -6,7 +6,6 @@ import {
   Card,
   Form,
   Select,
-  Alert
 } from '@lockerpm/design';
 
 import {
@@ -50,7 +49,7 @@ const Preferences = (props) => {
           >
             <Select
               style={{ width: 160 }}
-              options={global.constants.VAULT_TIMEOUTS.filter((v) => v.value !== -1).map((o) => ({
+              options={global.constants.VAULT_TIMEOUTS.map((o) => ({
                 ...o,
                 label: t(o.label)
               }))}
