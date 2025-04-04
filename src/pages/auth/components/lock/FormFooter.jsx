@@ -8,6 +8,7 @@ import {
 } from '@lockerpm/design';
 
 import {
+  LoadingOutlined
 } from "@ant-design/icons";
 
 const FormFooter = (props) => {
@@ -35,15 +36,13 @@ const FormFooter = (props) => {
         </Button>
       </Col>
       <Col span={12} style={{ order: 1 }}>
-        <Button
-          className="w-full"
-          size="large"
-          disabled={callingAPI}
-          loading={logging}
+        <div
+          className={`pm-button w-full ${logging ? 'pm-button__loading' : ''} ${callingAPI ? 'pm-button__disabled' : ''}`}
           onClick={() => onLogout()}
         >
+          { logging && <LoadingOutlined className="mr-2"/> }
           {t('sidebar.logout')}
-        </Button>
+        </div>
       </Col>
     </Row>
   );
