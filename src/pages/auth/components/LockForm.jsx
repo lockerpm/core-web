@@ -143,7 +143,7 @@ const LockForm = (props) => {
                   loading={logging}
                   onClick={() => onLogout()}
                 >
-                  {t('sidebar.logout')}
+                  {t('button.logout')}
                 </Button>
               </div>
             </div>
@@ -170,7 +170,7 @@ const LockForm = (props) => {
                     loading={logging}
                     onClick={onLogout}
                   >
-                    {t('sidebar.logout')}
+                    {t('button.logout')}
                   </Button>
                 </div>
               }
@@ -203,7 +203,7 @@ const LockForm = (props) => {
                           loading={logging}
                           onClick={onLogout}
                         >
-                          {t('sidebar.logout')}
+                          {t('button.logout')}
                         </Button>
                       }
                     </div>
@@ -236,7 +236,7 @@ const LockForm = (props) => {
                           loading={logging}
                           onClick={() => onLogout()}
                         >
-                          {t('sidebar.logout')}
+                          {t('button.logout')}
                         </Button>
                       }
                     </div>
