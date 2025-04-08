@@ -62,15 +62,8 @@ const isCipherQuickShareable = (cipher) => {
   )
 }
 
-const isOwnerCipher = (cipher) => {
-  const organizations = global.store.getState().organization.allOrganizations;
-  const organization = organizations.find((o) => o.id === cipher.organizationId)
-  if (organization?.id) {
-    return [
-      global.constants.ACCOUNT_ROLE.OWNER,
-    ].includes(organization.type)
-  }
-  return true
+const isChangeAttachment = (cipher) => {
+  return isOwner(cipher)
 }
 
 export default {
@@ -81,5 +74,5 @@ export default {
   isCipherSharedWithMe,
   isCipherShareable,
   isCipherQuickShareable,
-  isOwnerCipher
+  isChangeAttachment
 }
