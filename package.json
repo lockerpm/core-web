@@ -19,6 +19,7 @@
     "extract-domain": "^4.1.5",
     "fs": "^0.0.1-security",
     "i18next": "^22.5.0",
+    "jszip": "^3.10.1",
     "lodash": "^4.17.21",
     "lunr": "^2.3.9",
     "moment": "^2.29.4",

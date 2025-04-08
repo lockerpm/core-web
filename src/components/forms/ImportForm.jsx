@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import JSZip from "jszip";
 
 import {
   Form,
@@ -8,7 +9,6 @@ import {
   Button,
   Drawer,
   Upload,
-  message,
   Select,
   Input,
 } from '@lockerpm/design';
@@ -59,6 +59,7 @@ function ImportForm(props) {
   })
 
   useEffect(() => {
+    setCallingAPI(false);
     setSelectedFile(null);
     form.setFieldsValue({
       format: featuredImportOptions[0].id,
@@ -76,13 +77,7 @@ function ImportForm(props) {
     showUploadList: false,
     accept: `.${acceptFileType}`,
     beforeUpload: async (file) => {
-      const fileType = file.type;
-      const isFormat = fileType.includes(acceptFileType);
-      if (!isFormat) {
-        message.error(t('drag_upload.invalid', {type: acceptFileType}));
-      } else {
-        setSelectedFile(file)
-      }
+      setSelectedFile(file)
     },
   };
 
@@ -90,7 +85,7 @@ function ImportForm(props) {
     return await new Promise((resolve, reject) => {
       const reader = new FileReader()
       reader.readAsText(file, 'utf-8')
-      reader.onload = evt => {
+      reader.onload = async evt => {
         if (format === 'lastpasscsv' && file.type === 'text/html') {
           const parser = new DOMParser()
           const doc = parser.parseFromString(evt.target.result, 'text/html')
@@ -102,8 +97,25 @@ function ImportForm(props) {
           reject(Error(''))
           return
         }
+        if (format === '1password1pux') {
+          const zip = new JSZip()
+          try {
+            const contents = await zip.loadAsync(file)
+            if (!contents.files['export.data']) {
+              reject(Error(''))
+              return
+            }
+            const fileData = await contents.files['export.data'].async('string')
+            resolve(fileData)
+            return
+          } catch (error) {
+            reject(Error(''))
+            return
+          }
+        }
         resolve(evt.target.result)
       }
+
       reader.onerror = () => {
         reject(Error(''))
       }
