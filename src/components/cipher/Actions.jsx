@@ -175,7 +175,7 @@ const Actions = (props) => {
         },
         {
           key: 'file',
-          hide: !common.isOwner(originCipher) && originCipher?.attachments?.length === 0,
+          hide: !common.isChangeAttachment(originCipher) && originCipher?.attachments?.length === 0,
           label: t('attachments.title'),
           onClick: () => onAttachment(originCipher)
         },
@@ -192,7 +192,7 @@ const Actions = (props) => {
         },
         {
           key: 'view_password_history',
-          hide: originCipher.type !== CipherType.Login || !common.isOwnerCipher(originCipher),
+          hide: originCipher.type !== CipherType.Login || !common.isOwner(originCipher),
           disabled: !originCipher?.passwordHistory?.length,
           label: t('inventory.actions.view_password_history'),
           onClick: () => viewHistory()
