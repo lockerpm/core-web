@@ -136,8 +136,8 @@ const CipherActions = (props) => {
         },
         {
           key: 'file',
-          hide: false,
-          label: 'File Attachment',
+          hide: !common.isOwner(originCipher) && originCipher?.attachments?.length === 0,
+          label: t('attachments.title'),
           onClick: () => onAttachment(originCipher)
         },
         {
