@@ -159,7 +159,7 @@ const LockForm = (props) => {
                     htmlType="submit"
                     disabled={logging}
                     loading={callingAPI}
-                    onClick={onUnlock}
+                    onClick={handleUnlock}
                   >
                     {t('lock.unlock')}
                   </Button>
