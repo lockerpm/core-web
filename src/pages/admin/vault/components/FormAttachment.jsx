@@ -162,7 +162,7 @@ function FormAttachment(props) {
       >
         <div className='flex flex-col gap-6'>
           {
-            !!originCipher && common.isOwner(originCipher) && <div>
+            !!originCipher && common.isChangeAttachment(originCipher) && <div>
               <Upload.Dragger
                 {...uploadProps}
                 disabled={isUploading}
