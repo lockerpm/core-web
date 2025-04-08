@@ -29,7 +29,7 @@ const Vault = () => {
   const { Pagination, MultipleSelect, RouterLink, ImageIcon } = itemsComponents;
   const { NoCipher } = cipherComponents;
   const { PageHeader } = commonComponents;
-  const { Filter, TableData, ListData, FormData, MoveFolder } = vaultComponents;
+  const { Filter, TableData, ListData, FormData, MoveFolder, FormAttachment } = vaultComponents;
   const { QuickShareReview } = shareComponents;
   const ShareFormData = shareComponents.FormData;
   
@@ -56,6 +56,8 @@ const Vault = () => {
   const [sendId, setSendId] = useState(null);
   const [ciphers, setCiphers] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [formAttachmentVisible, setFormAttachmentVisible] = useState(false);
+
   const [params, setParams] = useState({
     page: 1,
     size: global.constants.PAGE_SIZE,
@@ -219,6 +221,12 @@ const Vault = () => {
     setSendId(sendId);
     setReviewVisible(true);
   }
+
+  const handleOpenFormAttachment = (item) => {
+    setSelectedItem(item);
+    setFormAttachmentVisible(true);
+  }
+
 
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
@@ -417,6 +425,7 @@ const Vault = () => {
               onPermanentlyDelete={permanentlyDeleteItems}
               selectionChange={handleSelectionChange}
               getCheckboxProps={getCheckboxProps}
+              onAttachment={handleOpenFormAttachment}
             /> : <TableData
               className="mt-4"
               loading={syncing || loading}
@@ -432,6 +441,7 @@ const Vault = () => {
               onPermanentlyDelete={permanentlyDeleteItems}
               selectionChange={handleSelectionChange}
               getCheckboxProps={getCheckboxProps}
+              onAttachment={handleOpenFormAttachment}
             />
           }
           {
@@ -489,6 +499,14 @@ const Vault = () => {
         onClose={() => {
           setReviewVisible(false);
           setSendId(null);
+        }}
+      />
+      <FormAttachment
+        visible={formAttachmentVisible}
+        item={selectedItem}
+        onClose={() => {
+          setFormAttachmentVisible(false);
+          setSelectedItem(null);
         }}
       />
     </div>

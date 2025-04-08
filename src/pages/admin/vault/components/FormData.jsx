@@ -149,6 +149,7 @@ function FormData(props) {
     const cipher = {
       ...common.convertFormToCipher({ ...oldValues, ...values, type: type }),
       id: item.id,
+      attachments: item.attachments,
       passwordHistory: item.passwordHistory,
       organizationId: item.organizationId
     };

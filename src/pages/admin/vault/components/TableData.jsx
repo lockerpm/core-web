@@ -33,7 +33,8 @@ const TableData = (props) => {
     onStopSharing = () => {},
     onPermanentlyDelete = () => {},
     selectionChange = () => {},
-    getCheckboxProps = () => {}
+    getCheckboxProps = () => {},
+    onAttachment = () => {}
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -93,6 +94,7 @@ const TableData = (props) => {
             onShare={onShare}
             onStopSharing={onStopSharing}
             onPermanentlyDelete={onPermanentlyDelete}
+            onAttachment={onAttachment}
           />
         ),
       },

@@ -306,6 +306,11 @@
       "sso_configuration": {
         "updated": "The SSO Configuration has been updated.",
         "reset": "The SSO Configuration has been reset."
+      },
+      "attachment": {
+        "uploaded": "File uploaded successfully!",
+        "downloaded": "File downloaded successfully!",
+        "deleted": "File attachment has been deleted."
       }
     },
     "warning": {
@@ -1335,6 +1340,18 @@
       "description": "Your password violates the following policies of Your Enterprise:",
       "still_use_this_password": "Still use this password",
       "change_password": "Change password"
+    }
+  },
+  "attachments": {
+    "title": "File attachment",
+    "delete_question": "Are you sure you want to delete this file?",
+    "upload": {
+      "title": "Click or drag to upload",
+      "description": "SVG, PNG, JPG, GIF,... (max size is 50MB)"
+    },
+    "errors": {
+      "large": "File is too large! Max size is 50MB.",
+      "limited": "You have exceeded the 1GB storage limit. Please delete unnecessary files to free up space." 
     }
   }
 }

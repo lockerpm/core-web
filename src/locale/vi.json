@@ -306,6 +306,11 @@
       "sso_configuration": {
         "updated": "Cấu hình SSO đã được cập nhật.",
         "reset": "Cấu hình SSO đã được đặt lại."
+      },
+      "attachment": {
+        "uploaded": "Đã tải tệp lên thành công!",
+        "downloaded": "Đã tải tệp xuống thành công!",
+        "deleted": "Đã xóa tệp đính kèm."
       }
     },
     "warning": {
@@ -1335,6 +1340,18 @@
       "description": "Mật khẩu của bạn đã vi phạm các chính sách sau của Doanh nghiệp:",
       "still_use_this_password": "Vẫn dùng mật khẩu này",
       "change_password": "Đổi mật khẩu"
+    }
+  },
+  "attachments": {
+    "title": "Tệp đính kèm",
+    "delete_question": "Bạn có chắc chắn muốn xóa tệp này không?",
+    "upload": {
+      "title": "Nhấp hoặc kéo để tải lên",
+      "description": "SVG, PNG, JPG, GIF,... (kích thước tối đa là 50MB)"
+    },
+    "errors": {
+      "large": "Tệp quá lớn! Kích thước tối đa là 50MB.",
+      "limited": "Bạn đã vượt quá giới hạn lưu trữ 1GB. Vui lòng xóa các tệp không cần thiết để giải phóng dung lượng."
     }
   }
 }

@@ -65,11 +65,19 @@ const formatText = (value, show) => {
   return value
 }
 
+const formatFileSizeIntl = (bytes) => {
+  if (bytes === 0) return "0 Bytes";
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  return new Intl.NumberFormat().format((bytes / Math.pow(1024, i)).toFixed(2)) + " " + sizes[i];
+}
+
 export default {
   formatCurrency,
   separatorNumber,
   convertCurrency,
   camelCaseToWords,
   formatOTP,
-  formatText
+  formatText,
+  formatFileSizeIntl
 }

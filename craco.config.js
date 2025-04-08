@@ -1,4 +1,5 @@
-const CracoLessPlugin = require('craco-less')
+const CracoLessPlugin = require('craco-less');
+const webpack = require("webpack");
 
 module.exports = {
   babel: {
@@ -24,5 +25,25 @@ module.exports = {
   ],
   typescript: {
     enableTypeChecking: false,
+  },
+  webpack: {
+    configure: (config) => {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        'process/browser': require.resolve("process/browser"),
+        process: require.resolve("process/browser"),
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("stream-browserify"),
+        buffer: require.resolve("buffer"),
+        vm: false,
+      };
+      config.plugins.push(
+        new webpack.ProvidePlugin({
+          Buffer: ["buffer", "Buffer"],
+          process: "process/browser",
+        })
+      );
+      return config;
+    },
   },
 }

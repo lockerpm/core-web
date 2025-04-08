@@ -25,7 +25,7 @@ import common from "../../utils/common";
 import global from "../../config/global";
 
 const DetailList = (props) => {
-  const { TextCopy, PasswordStrength } = itemsComponents;
+  const { TextCopy, PasswordStrength, Attachment } = itemsComponents;
   const { DisplayOtp } = commonComponents;
   const { SeedPhrase } = cipherFormItemComponents;
   const { SharedWith } = inAppShareComponents;
@@ -625,6 +625,20 @@ const DetailList = (props) => {
         )}
       />
       <Divider className="my-1" />
+      {
+        cipher?.attachments?.length > 0 && <div className='detail-attachments mt-6 flex flex-col gap-3'>
+          <h3 className="font-semibold">{t('attachments.title')}</h3>
+          <Row gutter={[12, 12]}>
+            {
+              (cipher?.attachments || []).map((attachment, index) => (
+                <Col lg={8} md={12} span={24} key={index}>
+                  <Attachment className="w-full" attachment={attachment} cipher={cipher}/>
+                </Col>
+              ))
+            }
+          </Row>
+        </div>
+      }
     </div>
   );
 }

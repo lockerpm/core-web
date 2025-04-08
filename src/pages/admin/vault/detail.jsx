@@ -25,7 +25,7 @@ const VaultDetail = () => {
   const { PageHeader, CipherIcon } = commonComponents;
   const { RouterLink } = itemsComponents;
   const { DetailList, Actions } = cipherComponents;
-  const { FormData, MoveFolder } = vaultComponents;
+  const { FormData, MoveFolder, FormAttachment } = vaultComponents;
   const { QuickShareReview } = shareComponents;
   const ShareFormData = shareComponents.FormData;
   const { t } = useTranslation();
@@ -42,6 +42,7 @@ const VaultDetail = () => {
   const [shareVisible, setShareVisible] = useState(false);
   const [reviewVisible, setReviewVisible] = useState(false);
   const [sendId, setSendId] = useState(null);
+  const [formAttachmentVisible, setFormAttachmentVisible] = useState(false);
 
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
@@ -132,6 +133,10 @@ const VaultDetail = () => {
   const handleOpenReview = (sendId) => {
     setSendId(sendId);
     setReviewVisible(true);
+  }
+
+  const handleOpenFormAttachment = () => {
+    setFormAttachmentVisible(true);
   }
   
   const navigateListPage = () => {
@@ -229,6 +234,7 @@ const VaultDetail = () => {
           onShare={handleOpenShareForm}
           onStopSharing={stopSharingItem}
           onPermanentlyDelete={permanentlyDeleteItems}
+          onAttachment={handleOpenFormAttachment}
         />}
       />
       <DetailList
@@ -268,6 +274,13 @@ const VaultDetail = () => {
         onClose={() => {
           setReviewVisible(false);
           setSendId(null);
+        }}
+      />
+      <FormAttachment
+        visible={formAttachmentVisible}
+        item={originCipher}
+        onClose={() => {
+          setFormAttachmentVisible(false);
         }}
       />
     </div>

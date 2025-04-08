@@ -10,6 +10,7 @@ import PasswordStrength from "./PasswordStrength";
 import NotifyButton from "./NotifyButton";
 import PolicyResult from "./PolicyResult";
 import UserInfo from "./UserInfo";
+import Attachment from "./Attachment";
 
 const itemsComponents = {
   FilterTime,
@@ -24,6 +25,7 @@ const itemsComponents = {
   NotifyButton,
   PolicyResult,
   UserInfo,
+  Attachment
 }
 
 export default itemsComponents
