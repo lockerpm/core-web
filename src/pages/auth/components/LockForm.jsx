@@ -151,7 +151,7 @@ const LockForm = (props) => {
           {
             !isPair && <div>
               {
-                !!serviceUser && <div>
+                !!serviceUser && <div className="flex flex-col gap-2">
                   <Button
                     className="w-full"
                     size="large"
