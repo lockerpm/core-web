@@ -59,31 +59,36 @@ function FormAttachment(props) {
   }, [visible, originCipher])
 
   const handleUploadFile = async (newFile, encryptFile) => {
-    const res = await attachmentServices.get_upload_form({
+    await attachmentServices.get_upload_form({
       file_name: newFile.fileName,
       metadata: {
         cipher_id: originCipher?.id
       }
+    }).then(async (res) => {
+      if (res?.upload_form) {
+        const uploadId = res.upload_id;
+        const fileSizeEnc = common.getFileSizeFromBase64(encryptFile);
+        await attachmentServices.upload_file(res?.upload_form?.url, encryptFile)
+          .then(async () => {
+            const newAttachments = [
+              {
+                ...newFile,
+                size: fileSizeEnc,
+                url: uploadId
+              },
+              ...originCipher.attachments,
+            ]
+            await editCipher(newAttachments)
+          }
+        ).catch((error) => {
+          setAttachments(originCipher?.attachments || [])
+          global.pushError(error)
+        })
+      }
+    }).catch((error) => {
+      setAttachments(originCipher?.attachments || [])
+      global.pushError(error)
     })
-    if (res?.upload_form) {
-      const uploadId = res.upload_id;
-      const fileSizeEnc = common.getFileSizeFromBase64(encryptFile);
-      await attachmentServices.upload_file(res?.upload_form?.url, encryptFile)
-        .then(async () => {
-          const newAttachments = [
-            {
-              ...newFile,
-              size: fileSizeEnc,
-              url: uploadId
-            },
-            ...originCipher.attachments,
-          ]
-          await editCipher(newAttachments)
-        }
-      ).catch((error) => {
-        global.pushError(error)
-      })
-    }
   }
 
   const editCipher = async (newAttachments) => {
