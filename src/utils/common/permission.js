@@ -62,8 +62,8 @@ const isCipherQuickShareable = (cipher) => {
   )
 }
 
-const isChangeAttachment = (cipher) => {
-  return isOwner(cipher)
+const checkingHandleAttachment = () => {
+  return true;
 }
 
 export default {
@@ -74,5 +74,5 @@ export default {
   isCipherSharedWithMe,
   isCipherShareable,
   isCipherQuickShareable,
-  isChangeAttachment
+  checkingHandleAttachment,
 }

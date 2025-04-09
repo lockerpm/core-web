@@ -175,7 +175,7 @@ const Actions = (props) => {
         },
         {
           key: 'file',
-          hide: !common.isChangeAttachment(originCipher) && originCipher?.attachments?.length === 0,
+          hide: !common.isOwner(originCipher) && originCipher?.attachments?.length === 0,
           label: t('attachments.title'),
           onClick: () => onAttachment(originCipher)
         },

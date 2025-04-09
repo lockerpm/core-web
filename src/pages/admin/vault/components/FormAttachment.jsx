@@ -116,6 +116,9 @@ function FormAttachment(props) {
       accept: '*/*',
       beforeUpload: async (file) => {
         // Checking validate file
+        if (!common.checkingHandleAttachment()) {
+          return;
+        }
         if (file.size >= global.constants.MAX_ATTACHMENT_SIZE) {
           global.notification('error', t('notification.error.title'), t('attachments.errors.large'))
           return;
@@ -167,7 +170,7 @@ function FormAttachment(props) {
       >
         <div className='flex flex-col gap-6'>
           {
-            !!originCipher && common.isChangeAttachment(originCipher) && <div>
+            !!originCipher && common.isOwner(originCipher) && <div>
               <Upload.Dragger
                 {...uploadProps}
                 disabled={isUploading}

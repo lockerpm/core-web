@@ -69,7 +69,7 @@ const Attachment = (props) => {
   }
 
   const downloadAttachment = async () => {
-    if (downloading) {
+    if (downloading || !common.checkingHandleAttachment()) {
       return;
     }
     setDownloading(true);
@@ -115,7 +115,7 @@ const Attachment = (props) => {
                 { downloading ? <LoadingOutlined className="text-[16px]"/> : <DownloadOutlined className="text-[16px]" /> }
               </span>
               {
-                !!cipher && common.isChangeAttachment(cipher) && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
+                !!cipher && common.isOwner(cipher) && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
                   <DeleteOutlined className="text-[16px]"/>
                 </span>
               }
