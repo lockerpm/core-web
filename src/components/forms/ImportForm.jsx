@@ -347,7 +347,7 @@ function ImportForm(props) {
             </div>}
           >
             <Input.TextArea
-              rows={8}
+              autoSize={{ minRows: 4 }}
               placeholder={t('placeholder.enter')}
             />
           </Form.Item>
