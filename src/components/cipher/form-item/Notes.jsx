@@ -29,7 +29,7 @@ function Notes(props) {
         }
       >
         <Input.TextArea
-          rows={4}
+          autoSize={{ minRows: 4 }}
           placeholder={t('placeholder.enter')}
           disabled={disabled}
         />
