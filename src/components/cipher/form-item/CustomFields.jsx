@@ -43,7 +43,7 @@ function CustomFields(props) {
     form.setFieldValue('fields', customFields.map((f, i) => ({
       ...f,
       type: i === index ? type : f.type,
-      name: i === index ? t(`cipher.custom_fields.${field.key}`).toString() : f.name,
+      name: i === index ? t(`cipher.custom_fields.${field?.key}`).toString() : f.name,
       value: i === index ? field?.defaultValue || '' : f.value,
     })))
   }
@@ -103,7 +103,7 @@ function CustomFields(props) {
                       <Input
                         disabled={disabled}
                         placeholder={
-                          field?.fieldPlaceholder ? t(`placeholder.${field?.fieldPlaceholder}`) : t(`cipher.custom_fields.${field.key}`)
+                          field?.fieldPlaceholder ? t(`placeholder.${field?.fieldPlaceholder}`) : t(`cipher.custom_fields.${field?.key}`)
                         }
                       />
                     </Form.Item>
@@ -113,8 +113,8 @@ function CustomFields(props) {
                       {...restField}
                       className='mb-1'
                       name={[name, 'value']}
-                      rules={field.pattern ? [
-                        global.rules.INVALID(t('common.value'), field.pattern)
+                      rules={field?.pattern ? [
+                        global.rules.INVALID(t('common.value'), field?.pattern)
                       ] : []}
                     >
                       {
