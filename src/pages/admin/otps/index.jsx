@@ -56,6 +56,15 @@ const Authenticator = () => {
   }, [JSON.stringify(currentPage)])
 
   useEffect(() => {
+    if (currentPage?.query?.is_create == 1) {
+      handleOpenForm(null);
+      global.navigate(currentPage.name, {}, {})
+    }
+  }, [
+    currentPage.query?.is_create
+  ])
+
+  useEffect(() => {
     fetchCiphers();
   }, [params.searchText, allCiphers])
 
