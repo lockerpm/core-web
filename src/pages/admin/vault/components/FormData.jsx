@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -30,7 +30,8 @@ function FormData(props) {
     Notes,
     SelectFolder,
     CustomFields,
-    PasswordOTP
+    PasswordOTP,
+    Attachments
   } = cipherFormItemComponents;
   const {
     PasswordForm,
@@ -56,37 +57,56 @@ function FormData(props) {
     onClose = () => {},
     otpLimited = false
   } = props
-  const { t } = useTranslation()
+
+  const { t } = useTranslation();
+
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [folderVisible, setFolderVisible] = useState(false);
   const [violatedVisible, setViolatedVisible] = useState(false);
   const [isCreateOtp, setIsCreateOtp] = useState(false);
   const [policyItem, setPolicyItem] = useState({ violations: [] });
+  const [originCipher, setOriginCipher] = useState(null);
+  const [attachments, setAttachments] = useState([]);
+  const [isUpload, setIsUpload] = useState(false);
 
+  const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allCollections = useSelector((state) => state.collection.allCollections)
 
   const cipherTypes = global.constants.CIPHER_TYPES.filter((t) => t.isCreate)
   const type = Form.useWatch('type', form) || cipherType.type
 
+  const originItem = useMemo(() => {
+    return allCiphers.find((d) => d.id === item?.id)
+  }, [allCiphers, item])
+
+  const isUploading = useMemo(() => {
+    return !!attachments.find((attach) => !attach.url)
+  }, [attachments])
+
   useEffect(() => {
+    setIsUpload(false);
     if (visible) {
       form.resetFields();
-      if (item?.id) {
-        const formData = common.convertCipherToForm(item)
+      if (originItem?.id) {
+        const formData = common.convertCipherToForm(originItem)
         form.setFieldsValue(formData)
+        setOriginCipher(originItem);
+        setAttachments(originItem?.attachments || []);
       } else {
         const formData = common.convertCipherToForm({
           type: cipherType.type || cipherTypes[0].type,
           folderId: folderId || '',
         })
         form.setFieldsValue(formData)
+        setOriginCipher(null);
+        setAttachments([]);
       }
     } else {
       setCloneMode(false);
       setCallingAPI(false);
     }
-  }, [visible, cipherType])
+  }, [originItem, visible, cipherType])
 
   const checkingPolicyItem = (callback = () => {}) => {
     form.validateFields().then((values) => {
@@ -105,18 +125,26 @@ function FormData(props) {
     })
   }
 
+  const handleCloseFormData = () => {
+    setCallingAPI(false);
+    setViolatedVisible(false);
+    onClose();
+  }
+
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
-      if (cloneMode || !item?.id) {
+      if (cloneMode || !originItem?.id) {
         await createCipher(values);
       } else {
         await editCipher(values);
       }
-      setCallingAPI(false);
       setPolicyItem({ violations: [] });
-      setViolatedVisible(false);
-      onClose();
+      if (isUploading) {
+        setIsUpload(true);
+      } else {
+        handleCloseFormData();
+      }
     })
   }
 
@@ -136,7 +164,8 @@ function FormData(props) {
       collectionIds,
       score: passwordStrength.score,
     }
-    await cipherServices.create(payload).then(async () => {
+    await cipherServices.create(payload).then(async (response) => {
+      setOriginCipher({ ...cipher, id: response.id })
       await createOtp(values);
       global.pushSuccess(t('notification.success.cipher.created'));
     }).catch((error) => {
@@ -145,13 +174,13 @@ function FormData(props) {
   }
 
   const editCipher = async (values) => {
-    const oldValues = common.convertCipherToForm(item)
+    const oldValues = common.convertCipherToForm(originItem)
     const cipher = {
       ...common.convertFormToCipher({ ...oldValues, ...values, type: type }),
-      id: item.id,
-      attachments: item.attachments,
-      passwordHistory: item.passwordHistory,
-      organizationId: item.organizationId
+      id: originItem.id,
+      attachments: originItem.attachments,
+      passwordHistory: originItem.passwordHistory,
+      organizationId: originItem.organizationId
     };
     const passwordStrength = values.password ? common.getPasswordStrength(values.password) : {};
     const { data, collectionIds } = await common.getEncCipherForRequest(
@@ -166,7 +195,8 @@ function FormData(props) {
       collectionIds,
       score: passwordStrength.score,
     }
-    await cipherServices.update(item.id, payload).then(async () => {
+    await cipherServices.update(originItem.id, payload).then(async () => {
+      setOriginCipher(cipher)
       await createOtp(values);
       global.pushSuccess(t('notification.success.cipher.updated'))
     }).catch((error) => {
@@ -188,7 +218,7 @@ function FormData(props) {
     <div className={props.className}>
       <Drawer
         className="vault-form-drawer"
-        title={t( `inventory.${cipherType.key}.${item && !cloneMode ? 'edit' : 'add'}`)}
+        title={t( `inventory.${cipherType.key}.${originItem && !cloneMode ? 'edit' : 'add'}`)}
         placement="right"
         onClose={onClose}
         open={visible}
@@ -222,7 +252,7 @@ function FormData(props) {
         >
           <ItemName
             className={'mb-4'}
-            item={item}
+            item={originItem}
             cipherTypes={cipherTypes}
             cipherType={cipherType}
             disabled={callingAPI}
@@ -266,7 +296,7 @@ function FormData(props) {
             {
               type === CipherType.Login && <PasswordOTP
                 className={'mb-4'}
-                item={item}
+                item={originItem}
                 form={form}
                 visible={visible}
                 disabled={callingAPI}
@@ -284,10 +314,24 @@ function FormData(props) {
             form={form}
             disabled={callingAPI}
           />
+          <div className={'mb-4'}>
+            <p className='font-semibold mb-1'>{t('attachments.title')}</p>
+            <Attachments
+              isUpload={isUpload}
+              originCipher={originCipher}
+              isUploading={isUploading}
+              isCipherForm={true}
+              callingAPI={callingAPI}
+              attachments={attachments}
+              setCallingAPI={setCallingAPI}
+              setAttachments={setAttachments}
+              uploaded={handleCloseFormData}
+            />
+          </div>
           <SelectFolder
             form={form}
             disabled={callingAPI}
-            item={item}
+            item={originItem}
             onCreate={() => setFolderVisible(true)}
           />
         </Form>
