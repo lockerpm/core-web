@@ -24,6 +24,9 @@ const Attachment = (props) => {
     className = '',
     cipher = {},
     attachment = null,
+    isCipherForm = false,
+    callingAPI = false,
+    onDelete = () => {}
   } = props;
 
   const allCollections = useSelector((state) => state.collection.allCollections);
@@ -31,22 +34,40 @@ const Attachment = (props) => {
   const [downloading, setDownloading] = useState(false);
 
   const loading = useMemo(() => {
+    if (isCipherForm) {
+      return callingAPI && !attachment?.url;
+    }
     return !attachment?.url
-  }, [attachment])
+  }, [attachment, isCipherForm, callingAPI])
+
+  const isDownload = useMemo(() => {
+    return !!attachment?.url && (!isCipherForm || !!cipher)
+  }, [attachment, isCipherForm, cipher])
+
+  const isDelete = useMemo(() => {
+    if (!attachment?.url) {
+      return true
+    }
+    return !!cipher && common.isOwner(cipher)
+  }, [cipher]);
 
   const deleteAttachment = () => {
-    global.confirm(async () => {
-      await attachmentServices.remove({ paths: [attachment?.url] }).then(async () => {
-        await editCipher();
-      }).catch((error) => {
-        global.pushError(error)
+    if (!attachment?.url) {
+      onDelete();
+    } else {
+      global.confirm(async () => {
+        await attachmentServices.remove({ paths: [attachment?.url] }).then(async () => {
+          await editCipher();
+        }).catch((error) => {
+          global.pushError(error)
+        });
+      }, {
+        title: t('common.warning'),
+        content: t('attachments.delete_question'),
+        okText: t('button.ok'),
+        okButtonProps: { danger: false },
       });
-    }, {
-      title: t('common.warning'),
-      content: t('attachments.delete_question'),
-      okText: t('button.ok'),
-      okButtonProps: { danger: false },
-    });
+    }
   };
 
   const editCipher = async () => {
@@ -112,10 +133,14 @@ const Attachment = (props) => {
           {
             !loading && <>
               <span className="font-semibold cursor-pointer text-black-500" onClick={downloadAttachment}>
-                { downloading ? <LoadingOutlined className="text-[16px]"/> : <DownloadOutlined className="text-[16px]" /> }
+                { downloading ? <LoadingOutlined className="text-[16px]"/> : <>
+                  {
+                    isDownload && <DownloadOutlined className="text-[16px]" />
+                  }
+                </> }
               </span>
               {
-                !!cipher && common.isOwner(cipher) && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
+                isDelete && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
                   <DeleteOutlined className="text-[16px]"/>
                 </span>
               }
