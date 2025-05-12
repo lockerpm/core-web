@@ -164,10 +164,10 @@ function Attachments(props) {
   ]);
 
   const showUploadButton = useMemo(() => {
-    if (isCipherForm) {
+    if (!originCipher) {
       return true
     }
-    return !!originCipher && common.isOwner(originCipher)
+    return common.isOwner(originCipher)
   }, [originCipher])
 
   const deleteAttachment = (attachment) => {
