@@ -37,6 +37,7 @@ const AccountDetails = () => {
       name: userInfo.name,
       language: userInfo.language,
       timeout: userInfo.timeout,
+      hideMP: userInfo.hide_master_password
     })
   }, [userInfo])
 
@@ -46,6 +47,7 @@ const AccountDetails = () => {
       name: userInfo.name,
       language: userInfo.language,
       timeout: userInfo.timeout,
+      hideMP: userInfo.hide_master_password
     })
   }
 
@@ -54,7 +56,8 @@ const AccountDetails = () => {
       email: userInfo.email,
       full_name: values.name,
       language: values.language,
-      timeout: values.timeout
+      timeout: values.timeout,
+      hide_master_password: values.hideMP
     }).then(() => {
       common.fetchUserInfo();
       global.pushSuccess(t('notification.success.account_details.updated'));

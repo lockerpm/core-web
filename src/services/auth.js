@@ -1,6 +1,5 @@
 import request from '../utils/request'
 import coreServices from './core'
-import commonServices from './common'
 import global from '../config/global'
 import common from '../utils/common'
 

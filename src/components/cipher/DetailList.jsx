@@ -518,16 +518,6 @@ const DetailList = (props) => {
       return []
     }
     return [
-      {
-        key: 'name',
-        name: t('cipher.item_name'),
-        value: <TextCopy
-          value={cipher?.name}
-          showIcon={true}
-          show={showText}
-          align="between"
-        />
-      },
       ...cipherTypeData,
       ...(cipher.fields || []).map((f) => {
         let newValue = f.value;

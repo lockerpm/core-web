@@ -1,11 +1,11 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   Card,
   Form,
   Select,
+  Switch
 } from '@lockerpm/design';
 
 import {
@@ -62,6 +62,20 @@ const Preferences = (props) => {
         <p className="mt-1 text-warning">
           {t('account_details.preferences.timeout_note')}
         </p>
+      </Card>
+      <Card bodyStyle={{ padding: 16 }} className="mb-4">
+        <div className="flex justify-between">
+          <p className="font-semibold">
+            {t('account_details.preferences.hide_mp')}
+          </p>
+          <Form.Item
+            name={'hideMP'}
+            className="mb-0"
+            valuePropName="checked"
+          >
+            <Switch />
+          </Form.Item>
+        </div>
       </Card>
     </div>
   );

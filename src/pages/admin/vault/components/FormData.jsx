@@ -154,7 +154,7 @@ function FormData(props) {
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,
       {
-        writeableCollections: allCollections.filter((c) => common.isOwner(c)),
+        writeableCollections: allCollections.filter((c) => common.isChangeCipher(c)),
         isNewCipher: true,
         cloneMode
       }
@@ -186,8 +186,8 @@ function FormData(props) {
     const { data, collectionIds } = await common.getEncCipherForRequest(
       cipher,
       {
-        writeableCollections: allCollections.filter((c) => common.isOwner(c)),
-        nonWriteableCollections: allCollections.filter((c) => !common.isOwner(c)),
+        writeableCollections: allCollections.filter((c) => common.isChangeCipher(c)),
+        nonWriteableCollections: allCollections.filter((c) => !common.isChangeCipher(c)),
       }
     )
     const payload = {

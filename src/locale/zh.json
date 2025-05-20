@@ -523,7 +523,8 @@
       "timeout_note": "注意：如果您的瀏覽器重新載入，您的保險庫將始終自動鎖定。",
       "timeout_action": "上鎖後動作",
       "timeout_action_lock_desc": "上鎖後需要重新輸入主密碼解鎖.",
-      "timeout_action_logout_desc": "上鎖後須重新登入."
+      "timeout_action_logout_desc": "上鎖後須重新登入.",
+      "hide_mp": "隱藏 Locker 密碼"
     },
     "danger_zone": {
       "title": "危險區域",

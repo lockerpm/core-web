@@ -523,7 +523,8 @@
       "timeout_note": "Lưu ý: Nếu trình duyệt của bạn tải lại, Vault của bạn sẽ luôn tự động khóa.",
       "timeout_action": "Hành động",
       "timeout_action_lock_desc": "Khi khóa, bạn sẽ được yêu cầu nhập Master Password để truy cập lại.",
-      "timeout_action_logout_desc": "Khi đăng xuất, bạn cần đăng nhập lại tài khoản Locker và Master Password để truy cập lại."
+      "timeout_action_logout_desc": "Khi đăng xuất, bạn cần đăng nhập lại tài khoản Locker và Master Password để truy cập lại.",
+      "hide_mp": "Ẩn mật khẩu Locker"
     },
     "danger_zone": {
       "title": "Khu vực nguy hiểm",

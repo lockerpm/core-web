@@ -48,7 +48,7 @@ function SelectFolder(props) {
     ].map((f) => ({
       value: f.id,
       label: f.name,
-      disabled: !common.isOwner(f)
+      disabled: !common.isChangeCipher(f)
     }))
     return [
       {
