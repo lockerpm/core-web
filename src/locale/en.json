@@ -679,6 +679,7 @@
     "restore_question": "Are you sure you want to restore this item?",
     "permanently_delete_question": "Are you sure you want to permanently delete this item?",
     "master_password_note": "This is your Locker Master Password. It will change accordingly as you change your Master Password. We created this item for you so you don't forget your Master Password. Don't worry, this operation happens within your device and we still can't see or edit your Master Password from our server. Have fun using Locker.",
+    "folder_shared_note": "This is a shared folder. Any items added to this folder will belong to the folder's owner.",
     "types": {
       "password": "Password",
       "note": "Note",

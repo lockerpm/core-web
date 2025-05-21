@@ -6,11 +6,13 @@ import {
   Select,
   Form,
   Divider,
-  Button
+  Button,
+  Tooltip
 } from '@lockerpm/design';
 
 import {
-  PlusOutlined
+  PlusOutlined,
+  InfoCircleOutlined
 } from '@ant-design/icons';
 
 import common from '../../../utils/common';
@@ -47,7 +49,19 @@ function SelectFolder(props) {
       ...allCollections
     ].map((f) => ({
       value: f.id,
-      label: f.name,
+      label: <div className='flex items-center justify-between gap-2'>
+        <span className='flex-1 text-limited' title={f.name}>
+          {f.name}
+        </span>
+        {
+          !common.isOwner(f) && common.isChangeCipher(f) && <Tooltip
+            placement='topRight'
+            title={t('cipher.folder_shared_note')}
+          >
+            <InfoCircleOutlined className='text-warning'/>
+          </Tooltip>
+        }
+      </div>,
       disabled: !common.isChangeCipher(f)
     }))
     return [

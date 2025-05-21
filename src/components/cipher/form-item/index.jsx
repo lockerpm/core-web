@@ -7,6 +7,7 @@ import PersonalForm from "./PersonalForm";
 import SeedPhrase from "./SeedPhrase";
 import SelectFolder from "./SelectFolder";
 import Attachments from "./Attachments";
+import AlertWarning from "./AlertWarning";
 
 const cipherFormItemComponents = {
   ContactForm,
@@ -17,7 +18,8 @@ const cipherFormItemComponents = {
   PersonalForm,
   SeedPhrase,
   SelectFolder,
-  Attachments
+  Attachments,
+  AlertWarning
 }
 
 export default cipherFormItemComponents

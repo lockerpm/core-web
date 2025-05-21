@@ -31,7 +31,8 @@ function FormData(props) {
     SelectFolder,
     CustomFields,
     PasswordOTP,
-    Attachments
+    Attachments,
+    AlertWarning
   } = cipherFormItemComponents;
   const {
     PasswordForm,
@@ -248,10 +249,12 @@ function FormData(props) {
           form={form}
           layout="vertical"
           labelAlign={'left'}
-          className='vault-form'
+          className='vault-form flex flex-col gap-4'
         >
+          <AlertWarning
+            folderId={folderId}
+          />
           <ItemName
-            className={'mb-4'}
             item={originItem}
             cipherTypes={cipherTypes}
             cipherType={cipherType}
@@ -265,7 +268,7 @@ function FormData(props) {
               form.setFieldsValue(formData)
             }}
           />
-          <div className='mb-4'>
+          <div>
             {
               type === CipherType.Login && <PasswordForm
                 visible={visible}
@@ -295,7 +298,6 @@ function FormData(props) {
           <div>
             {
               type === CipherType.Login && <PasswordOTP
-                className={'mb-4'}
                 item={originItem}
                 form={form}
                 visible={visible}
@@ -306,15 +308,13 @@ function FormData(props) {
             }            
           </div>
           <Notes
-            className={'mb-4'}
             disabled={callingAPI}
           />
           <CustomFields
-            className={'mb-4'}
             form={form}
             disabled={callingAPI}
           />
-          <div className={'mb-4'}>
+          <div>
             <p className='font-semibold mb-1'>{t('attachments.title')}</p>
             <Attachments
               isUpload={isUpload}
@@ -330,7 +330,7 @@ function FormData(props) {
           </div>
           <SelectFolder
             form={form}
-            disabled={callingAPI}
+            disabled={callingAPI || !!folderId}
             item={originItem}
             onCreate={() => setFolderVisible(true)}
           />
