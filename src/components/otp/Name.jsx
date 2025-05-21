@@ -28,15 +28,16 @@ const Name = (props) => {
   }, [allCiphers])
 
   return (
-    <div className={`flex items-center ${className}`}>
+    <div className={`flex items-center ${className} flex-1`}>
       <CipherIcon
+        className="w-[32px]"
         type={cipher.type}
       />
       <div className="ml-2" style={{ width: 'calc(100% - 40px)' }}>
-        <div className="block md:flex items-center justify-between flex-1">
-          <div className="flex flex-col" style={{ width: 'calc(100% - 116px)' }}>
+        <div className="flex items-center justify-between">
+          <div style={{ width: 'calc(100% - 124px)' }}>
             <p
-              className={'font-semibold flex-1 text-limited text-limited_block'}
+              className={`font-semibold text-limited w-full flex-shrink-0 ${isMobile ? 'text-limited__block' : ''}`}
               title={cipher.name}
             >
               {cipher.name}
@@ -51,7 +52,8 @@ const Name = (props) => {
           <DisplayOtp
             notes={cipher.notes}
             justify="end"
-            className={isMobile ? "text-lg" : "text-xl font-semibold"}
+            className="w-[116px]"
+            codeClassName={isMobile ? "text-lg" : "text-xl font-semibold"}
             codeSize={isMobile ? 52 : 76}
             progressSize={isMobile ? 20 : 24}
           />

@@ -37,15 +37,14 @@ const ListData = (props) => {
             className="flex items-center justify-between w-full py-1"
           >
             <div
-              className="flex items-center"
-              style={{ width: 'calc(100% - 64px)' }}
+              style={{ width: 'calc(100% - 72px)' }}
             >
               <Name
                 cipher={record}
                 className={'w-full'}
               />
             </div>
-            <div className="flex items-center ml-2 w-[64px] justify-end">
+            <div className="flex items-center ml-2 w-[64px] justify-end flex-shrink-0">
               <Actions
                 className="flex items-center"
                 cipher={record}
