@@ -52,7 +52,7 @@ const App = () => {
     )
   }
   global.pushError = error => {
-    const message = common.getErrorMessage(error)
+    const { message } = common.getErrorMessage(error)
     global.notification(
       'error',
       t('notification.error.title'),

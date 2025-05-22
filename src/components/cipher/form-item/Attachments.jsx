@@ -75,7 +75,13 @@ function Attachments(props) {
     }).then(() => {
       global.pushSuccess(t('notification.success.attachment.uploaded'));
     }).catch((error) => {
-      global.pushError(error)
+      setAttachments(originCipher?.attachments || [])
+      const { code } = common.getErrorMessage(error)
+      if (code === "0004") {
+        global.pushError({ message: t('notification.error.attachment.file_name') })
+      } else {
+        global.pushError(error);
+      }
     })
   }
 

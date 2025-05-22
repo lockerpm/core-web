@@ -1,6 +1,7 @@
 import global from '../../config/global';
 import { Trans } from 'react-i18next';
 import creditCardType from 'credit-card-type';
+import common from '.';
 
 const has = Object.prototype.hasOwnProperty
 
@@ -146,14 +147,28 @@ const getToken = (email, id) => {
   }
 }
 
+const getMessage = (error) => {
+  if (Array.isArray(error)) {
+    return getMessage(error[0])
+  }
+  if (typeof error === "object") {
+    const keys = Object.keys(error)
+    return getMessage(error[keys[0]])
+  }
+  return error
+}
+
 const getErrorMessage = (error) => {
   const errorData = error?.response?.data || error?.response || error;
-  const message = errorData?.message || error?.message || error.toString();
-  if (errorData?.details && !isEmpty(errorData?.details)) {
+  let message = errorData?.message || error?.message || error.toString();
+  if (errorData?.details && !common.isEmpty(errorData?.details)) {
     const errorKeys = Object.keys(errorData.details)
-    return errorData.details[errorKeys[0]][0] || errorData.details[errorKeys[0]] || message;
+    message = getMessage(errorData.details[errorKeys[0]]) || message;
   }
-  return message
+  return {
+    code: errorData?.code || null,
+    message: message,
+  }
 }
 
 const getUserRole = (role) => {
