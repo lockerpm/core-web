@@ -202,6 +202,9 @@
       "message": {
         "default": "Đã có lỗi xảy ra, vui lòng thử lại lần sau!",
         "error_occurred": "Đã có lỗi xảy ra"
+      },
+      "attachment": {
+        "file_name": "Tên tệp có nhiều hơn 255 ký tự"
       }
     },
     "success": {

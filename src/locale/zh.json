@@ -202,6 +202,9 @@
       "message": {
         "default": "發生錯誤, 請再試一次!",
         "error_occurred": "發生錯誤"
+      },
+      "attachment": {
+        "file_name": "檔案名稱超過 255 個字符"
       }
     },
     "success": {

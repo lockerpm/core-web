@@ -202,6 +202,9 @@
       "message": {
         "default": "An error occurred, please try again later!",
         "error_occurred": "An error has occurred"
+      },
+      "attachment": {
+        "file_name": "File name has more than 255 characters"
       }
     },
     "success": {
