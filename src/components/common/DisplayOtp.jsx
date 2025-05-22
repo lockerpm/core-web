@@ -22,7 +22,8 @@ const DisplayOtp = (props) => {
     showText = true,
     progressSize = 28,
     codeSize = 76,
-    className = "text-2xl font-semibold"
+    className = "w-[160px]",
+    codeClassName = "text-2xl font-semibold"
   } = props;
 
   const [otp, setOtp] = useState('')
@@ -67,11 +68,10 @@ const DisplayOtp = (props) => {
 
   return (
     <div
-      className={`flex items-center justify-${justify}`}
-      style={{ width: 160 }}
+      className={`flex items-center justify-${justify} ${className}`}
     >
       <p
-        className={`text-primary cursor-pointer ${className} w-[${codeSize}px]`}
+        className={`text-primary cursor-pointer ${codeClassName} w-[${codeSize}px]`}
         style={{ marginBottom: 0 }}
         onClick={() => common.copyToClipboard(otp)}
       >

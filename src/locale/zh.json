@@ -523,7 +523,8 @@
       "timeout_note": "注意：如果您的瀏覽器重新載入，您的保險庫將始終自動鎖定。",
       "timeout_action": "上鎖後動作",
       "timeout_action_lock_desc": "上鎖後需要重新輸入主密碼解鎖.",
-      "timeout_action_logout_desc": "上鎖後須重新登入."
+      "timeout_action_logout_desc": "上鎖後須重新登入.",
+      "hide_mp": "隱藏 Locker 密碼"
     },
     "danger_zone": {
       "title": "危險區域",
@@ -678,6 +679,7 @@
     "restore_question": "您確定要復原這個項目嗎？",
     "permanently_delete_question": "您確定要永久刪除此項目嗎？",
     "master_password_note": "此項是您的 Locker 主密碼。它會隨著您更改主密碼而變動。我們自動建立了這個項目,讓您不會忘記主密碼。不用擔心,這個操作只會在您的裝置上進行,我們依然無法從伺服器端查看或編輯您的主密碼。享受使用 Locker 的樂趣吧!",
+    "folder_shared_note": "這是一個共享資料夾。新增至此資料夾的任何項目都將屬於該資料夾的擁有者。",
     "types": {
       "password": "密碼",
       "note": "安全筆記",

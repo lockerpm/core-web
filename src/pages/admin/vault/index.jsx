@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import { } from '@lockerpm/design';
-
 import {
   PlusOutlined,
   ArrowLeftOutlined,
@@ -42,6 +40,7 @@ const Vault = () => {
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allFolders = useSelector((state) => state.folder.allFolders);
   const allCollections = useSelector((state) => state.collection.allCollections);
+  const userInfo = useSelector((state) => state.auth.userInfo);
 
   const [loading, setLoading] = useState(true);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -76,7 +75,7 @@ const Vault = () => {
 
   const canChangeFolder = useMemo(() => {
     if (originFolder) {
-      return common.isOwner(originFolder)
+      return common.isChangeCipher(originFolder)
     }
     return true
   }, [originFolder])
@@ -91,6 +90,9 @@ const Vault = () => {
 
   const filters = useMemo(() => {
     const f = []
+    if (userInfo?.hide_master_password) {
+      f.push((c) => c.type !== CipherType.MasterPassword)
+    }
     if (cipherType.type) {
       f.push((c) => c.type === cipherType.type)
     } else {
@@ -100,7 +102,7 @@ const Vault = () => {
       }
     }
     return f
-  }, [cipherType, folderId])
+  }, [cipherType, folderId, userInfo?.hide_master_password])
 
   const isEmpty = useMemo(() => {
     return !allCiphers.find(
@@ -148,8 +150,10 @@ const Vault = () => {
     currentPage.name,
     params.searchText,
     allCiphers,
-    JSON.stringify(cipherType)]
-  )
+    filters,
+    JSON.stringify(filters),
+    JSON.stringify(cipherType)
+  ])
 
   useEffect(() => {
     setParams({
@@ -226,7 +230,6 @@ const Vault = () => {
     setSelectedItem(item);
     setFormAttachmentVisible(true);
   }
-
 
   const getCheckboxProps = (record) => {
     const originCipher = allCiphers.find((cipher) => cipher.id === record.id)
