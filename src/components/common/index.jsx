@@ -7,6 +7,7 @@ import GenerateOptions from "./GenerateOptions";
 import ItemInput from "./ItemInput";
 import UserAvatar from "./UserAvatar";
 import AuthLogo from "./AuthLogo";
+import DataNotFound from "./DataNotFound";
 
 const commonComponents = {
   CipherIcon,
@@ -17,7 +18,8 @@ const commonComponents = {
   GenerateOptions,
   ItemInput,
   UserAvatar,
-  AuthLogo
+  AuthLogo,
+  DataNotFound
 }
 
 export default commonComponents
