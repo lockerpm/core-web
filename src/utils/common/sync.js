@@ -58,7 +58,7 @@ const syncSettings = async(domains) => {
 const syncCiphers = async(ciphers) => {
   await global.jsCore.syncService.setLastSync(new Date())
   const userId = await global.jsCore.userService.getUserId()
-  const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || []
+  const decryptedCipherCache = global.jsCore.cipherService.decryptedCipherCache || [];
   const deletedIds = []
   decryptedCipherCache.forEach(cipher => {
     if (ciphers.findIndex(c => c.id === cipher.id) < 0) {
@@ -66,7 +66,7 @@ const syncCiphers = async(ciphers) => {
     }
   })
   await Promise.all(deletedIds.filter(Boolean).map(async id => await global.jsCore.cipherService.delete(id)))
-  await global.jsCore.syncService.syncSomeCiphers(userId, ciphers)
+  await global.jsCore.syncService.syncCiphers(userId, ciphers)
   await common.getAllCiphers();
 }
 
