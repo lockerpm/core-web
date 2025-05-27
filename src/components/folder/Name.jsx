@@ -47,14 +47,14 @@ const Name = (props) => {
   }, [currentPage])
 
   const routerParams = useMemo(() => {
-    return common.getFolderRouterNameParams(originFolder.id)
+    return common.getFolderRouterNameParams(originFolder?.id)
   }, [originFolder])
 
 
   return (
     <div className="flex items-center">
       <ImageIcon
-        name={originFolder.isCollection ? 'folder-share' : 'folder'}
+        name={originFolder?.isCollection ? 'folder-share' : 'folder'}
         width={32}
         height={32}
       />
@@ -62,7 +62,7 @@ const Name = (props) => {
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}
-            label={originFolder.name}
+            label={originFolder?.name}
             routerName={routerName}
             routerParams={routerParams}
           />

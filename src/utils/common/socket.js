@@ -9,15 +9,6 @@ const syncDataByWs = async (message) => {
   const eventType = message.type;
   global.store.dispatch(storeActions.updateSyncing(true))
 
-  const currentPage = global.store.getState().system.currentPage;
-  const paramCipherId = currentPage?.params?.cipher_id;
-  const paramFolderId = currentPage?.params?.folder_id;
-  if (eventType.includes("delete") || message.data?.action === "delete") {
-    if (paramCipherId === message.data?.id || message.data?.ids?.includes(paramCipherId) || paramFolderId === message.data?.id || message.data?.ids?.includes(paramFolderId)) {
-      global.navigate(global.keys.VAULT)
-    }
-  }
-
   if (['cipher_share', 'collection_update', 'cipher_invitation'].includes(eventType)) {
     await commonServices.sync_data();
   } else if (eventType.includes('cipher')) {
@@ -65,6 +56,7 @@ const syncDataByWs = async (message) => {
   } else {
     await commonServices.sync_data();
   }
+
   global.store.dispatch(storeActions.updateSyncing(false))
 }
 

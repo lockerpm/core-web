@@ -7,13 +7,13 @@ const DataNotFound = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="page-not-found w-full">
+    <div className="page-not-found" style={{ width: '100%', height: '100%' }}>
       <img src={require("../../assets/images/errors/404.jpg")} />
-      <p className="content">{t('error_pages.page_not_found.title')}</p>
+      <p className="content">{t('common.data_not_found')}</p>
       <p className="note">
         <a onClick={() => {
           global.navigate(global.keys.VAULT)
-        }}>{t('error_pages.page_not_found.go_back_dashboard')}</a>
+        }}>{t('common.go_back_inventory')}</a>
       </p>
     </div>
   );

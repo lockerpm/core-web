@@ -103,7 +103,9 @@
     "hours": "giờ",
     "joined_at": "Tham gia vào",
     "option": "Chọn",
-    "last_updated": "Cập nhật lần cuối"
+    "last_updated": "Cập nhật lần cuối",
+    "data_not_found": "Không tìm thấy dữ liệu",
+    "go_back_inventory": "Quay lại Kho hàng"
   },
   "button": {
     "add": "Thêm",
