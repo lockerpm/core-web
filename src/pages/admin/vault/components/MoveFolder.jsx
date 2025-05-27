@@ -33,8 +33,10 @@ function MoveFolder(props) {
   const { t } = useTranslation();
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
   const allCollections = useSelector((state) => state.collection.allCollections)
+  const syncing = useSelector((state) => state.sync.syncing)
 
   const [form] = Form.useForm()
+  const [loading, setLoading] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
   const [folderVisible, setFolderVisible] = useState(false);
 
@@ -106,13 +108,14 @@ function MoveFolder(props) {
         footer={
           <Space className='flex items-center justify-end'>
             <Button
-              disabled={callingAPI}
+              disabled={callingAPI || loading || syncing}
               onClick={onClose}
             >
               {t('button.cancel')}
             </Button>
             <Button
               type="primary"
+              disabled={loading || syncing}
               loading={callingAPI}
               onClick={handleSave}
             >
@@ -130,7 +133,7 @@ function MoveFolder(props) {
           labelAlign={'left'}
         >
           <SelectFolder
-            disabled={callingAPI}
+            disabled={callingAPI || loading || syncing}
             onCreate={() => setFolderVisible(true)}
           />
         </Form>
@@ -139,8 +142,10 @@ function MoveFolder(props) {
         visible={folderVisible}
         onClose={() => setFolderVisible(false)}
         callback={(res) => {
+          setLoading(true)
           setTimeout(() => {
-            form.setFieldValue('folderId', res.id)
+            form.setFieldValue('folderId', res.id);
+            setLoading(false)
           }, 2000);
         }}
       />
