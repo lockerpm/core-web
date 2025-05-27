@@ -22,7 +22,7 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 
 const VaultDetail = () => {
-  const { PageHeader, CipherIcon } = commonComponents;
+  const { PageHeader, CipherIcon, DataNotFound } = commonComponents;
   const { RouterLink } = itemsComponents;
   const { DetailList, Actions } = cipherComponents;
   const { FormData, MoveFolder, FormAttachment } = vaultComponents;
@@ -44,6 +44,10 @@ const VaultDetail = () => {
   const [sendId, setSendId] = useState(null);
   const [formAttachmentVisible, setFormAttachmentVisible] = useState(false);
 
+  const cipherId = useMemo(() => {
+    return currentPage?.params?.cipher_id || null
+  }, [currentPage])
+
   const originCipher = useMemo(() => {
     return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
   }, [currentPage, allCiphers])
@@ -53,7 +57,7 @@ const VaultDetail = () => {
   }, [currentPage])
 
   const cipherType = useMemo(() => {
-    return common.cipherTypeInfo('type', originCipher.type)
+    return common.cipherTypeInfo('type', originCipher?.type)
   }, [originCipher])
 
   const listRouterName = useMemo(() => {
@@ -108,14 +112,11 @@ const VaultDetail = () => {
     }
     return {}
   }, [currentPage])
+
+  const isNotfound = useMemo(() => {
+    return cipherId && originCipher && !originCipher.id;
+  }, [cipherId, originCipher])
   
-
-  useEffect(() => {
-    if (originCipher && !originCipher.id) {
-      global.navigate(global.keys.VAULT)
-    }
-  }, [originCipher])
-
   const handleOpenForm = (item = null, cloneMode = false) => {
     setFormVisible(true);
     setCloneMode(cloneMode)
@@ -205,84 +206,88 @@ const VaultDetail = () => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, {}, 0)}
     >
-      <PageHeader
-        title={originCipher?.name}
-        subtitle={common.cipherSubtitle(originCipher)}
-        actions={[]}
-        Back={() => <RouterLink
-          label={''}
-          className={'font-semibold mr-4'}
-          routerName={listRouterName}
-          routerParams={listRouterParams}
-          routerQuery={listRouterQuery}
-          icon={<ArrowLeftOutlined />}
-        />}
-        Logo={() => <CipherIcon
-          className="mr-4"
-          size={isMobile ? 36 : 48}
-          item={originCipher}
-          type={originCipher.type}
-          isDeleted={originCipher?.isDeleted}
-        />}
-        Right={() => <Actions
-          size="medium"
-          cipher={originCipher}
-          onMove={handleOpenMoveForm}
-          onUpdate={handleOpenForm}
-          onDelete={deleteItems}
-          onRestore={restoreItems}
-          onShare={handleOpenShareForm}
-          onStopSharing={stopSharingItem}
-          onPermanentlyDelete={permanentlyDeleteItems}
-          onAttachment={handleOpenFormAttachment}
-        />}
-      />
-      <DetailList
-        className="mt-4"
-        cipher={originCipher}
-      />
-      <FormData
-        visible={formVisible}
-        item={originCipher}
-        cipherType={cipherType}
-        cloneMode={cloneMode}
-        setCloneMode={setCloneMode}
-        onClose={() => {
-          setFormVisible(false);
-        }}
-      />
-      <MoveFolder
-        visible={moveVisible}
-        cipherIds={[originCipher?.id]}
-        onClose={() => {
-          setMoveVisible(false);
-        }}
-      />
-      <ShareFormData
-        visible={shareVisible}
-        item={originCipher}
-        menuType={menuType}
-        menuTypes={global.constants.MENU_TYPES}
-        onClose={() => {
-          setShareVisible(false);
-        }}
-        onReview={handleOpenReview}
-      />
-      <QuickShareReview
-        visible={reviewVisible}
-        sendId={sendId}
-        onClose={() => {
-          setReviewVisible(false);
-          setSendId(null);
-        }}
-      />
-      <FormAttachment
-        visible={formAttachmentVisible}
-        item={originCipher}
-        onClose={() => {
-          setFormAttachmentVisible(false);
-        }}
-      />
+      {
+        isNotfound ? <DataNotFound /> : <>
+          <PageHeader
+            title={originCipher?.name}
+            subtitle={common.cipherSubtitle(originCipher)}
+            actions={[]}
+            Back={() => <RouterLink
+              label={''}
+              className={'font-semibold mr-4'}
+              routerName={listRouterName}
+              routerParams={listRouterParams}
+              routerQuery={listRouterQuery}
+              icon={<ArrowLeftOutlined />}
+            />}
+            Logo={() => <CipherIcon
+              className="mr-4"
+              size={isMobile ? 36 : 48}
+              item={originCipher}
+              type={originCipher.type}
+              isDeleted={originCipher?.isDeleted}
+            />}
+            Right={() => <Actions
+              size="medium"
+              cipher={originCipher}
+              onMove={handleOpenMoveForm}
+              onUpdate={handleOpenForm}
+              onDelete={deleteItems}
+              onRestore={restoreItems}
+              onShare={handleOpenShareForm}
+              onStopSharing={stopSharingItem}
+              onPermanentlyDelete={permanentlyDeleteItems}
+              onAttachment={handleOpenFormAttachment}
+            />}
+          />
+          <DetailList
+            className="mt-4"
+            cipher={originCipher}
+          />
+          <FormData
+            visible={formVisible}
+            item={originCipher}
+            cipherType={cipherType}
+            cloneMode={cloneMode}
+            setCloneMode={setCloneMode}
+            onClose={() => {
+              setFormVisible(false);
+            }}
+          />
+          <MoveFolder
+            visible={moveVisible}
+            cipherIds={[originCipher?.id]}
+            onClose={() => {
+              setMoveVisible(false);
+            }}
+          />
+          <ShareFormData
+            visible={shareVisible}
+            item={originCipher}
+            menuType={menuType}
+            menuTypes={global.constants.MENU_TYPES}
+            onClose={() => {
+              setShareVisible(false);
+            }}
+            onReview={handleOpenReview}
+          />
+          <QuickShareReview
+            visible={reviewVisible}
+            sendId={sendId}
+            onClose={() => {
+              setReviewVisible(false);
+              setSendId(null);
+            }}
+          />
+          <FormAttachment
+            visible={formAttachmentVisible}
+            item={originCipher}
+            onClose={() => {
+              setFormAttachmentVisible(false);
+            }}
+          />
+        </>
+      }
     </div>
   );
 }

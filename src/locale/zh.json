@@ -103,7 +103,9 @@
     "hours": "小時",
     "joined_at": "加入於",
     "option": "選項",
-    "last_updated": "最後更新"
+    "last_updated": "最後更新",
+    "data_not_found": "未找到資料",
+    "go_back_inventory":"返回庫存"
   },
   "button": {
     "add": "新增",

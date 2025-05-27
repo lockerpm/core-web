@@ -20,7 +20,7 @@ import common from "../../../utils/common";
 import global from "../../../config/global";
 
 const VaultHistory = () => {
-  const { PageHeader, CipherIcon } = commonComponents;
+  const { PageHeader, CipherIcon, DataNotFound } = commonComponents;
   const { RouterLink, Pagination } = itemsComponents;
   const { Filter, ListData, TableData, ConfirmRestoreModal } = vaultHistoryComponents;
 
@@ -42,9 +42,17 @@ const VaultHistory = () => {
     orderDirection: 'desc',
   });
 
+  const cipherId = useMemo(() => {
+    return currentPage?.params?.cipher_id || null
+  }, [currentPage])
+
   const originCipher = useMemo(() => {
-    return allCiphers.find((c) => c.id === currentPage.params?.cipher_id) || {}
+    return allCiphers.find((c) => c.id === cipherId) || {}
   }, [currentPage, allCiphers])
+
+  const isNotfound = useMemo(() => {
+    return cipherId && originCipher && !originCipher.id;
+  }, [cipherId, originCipher])
 
   useEffect(() => {
     if (originCipher && !originCipher.id) {
@@ -174,59 +182,63 @@ const VaultHistory = () => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <PageHeader
-        title={originCipher?.name}
-        subtitle={common.cipherSubtitle(originCipher)}
-        actions={[]}
-        Back={() => <RouterLink
-          className={'font-semibold mr-4'}
-          label={''}
-          routerName={listRouterName}
-          routerParams={listRouterParams}
-          routerQuery={listRouterQuery}
-          icon={<ArrowLeftOutlined />}
-        />}
-        Logo={() => <CipherIcon
-          className="mr-4"
-          size={isMobile ? 36 : 48}
-          item={originCipher}
-          type={originCipher.type}
-          isDeleted={originCipher?.isDeleted}
-        />}
-        Right={() => <></>}
-      />
-      <Filter
-        className={'mt-2'}
-        params={params}
-        setParams={(v) => setParams(v)}
-      />
       {
-        isMobile ? <ListData
-          className="mt-2"
-          isRestore={isRestore}
-          data={filteredData.result}
-          onRestore={(v) => handleRestore(v)}
-        /> : <TableData
-          className="mt-4"
-          isRestore={isRestore}
-          data={filteredData.result}
-          onRestore={(v) => handleRestore(v)}
-        />
+        isNotfound ? <DataNotFound /> : <>
+          <PageHeader
+            title={originCipher?.name}
+            subtitle={common.cipherSubtitle(originCipher)}
+            actions={[]}
+            Back={() => <RouterLink
+              className={'font-semibold mr-4'}
+              label={''}
+              routerName={listRouterName}
+              routerParams={listRouterParams}
+              routerQuery={listRouterQuery}
+              icon={<ArrowLeftOutlined />}
+            />}
+            Logo={() => <CipherIcon
+              className="mr-4"
+              size={isMobile ? 36 : 48}
+              item={originCipher}
+              type={originCipher.type}
+              isDeleted={originCipher?.isDeleted}
+            />}
+            Right={() => <></>}
+          />
+          <Filter
+            className={'mt-2'}
+            params={params}
+            setParams={(v) => setParams(v)}
+          />
+          {
+            isMobile ? <ListData
+              className="mt-2"
+              isRestore={isRestore}
+              data={filteredData.result}
+              onRestore={(v) => handleRestore(v)}
+            /> : <TableData
+              className="mt-4"
+              isRestore={isRestore}
+              data={filteredData.result}
+              onRestore={(v) => handleRestore(v)}
+            />
+          }
+          {
+            filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
+              params={params}
+              total={filteredData.total}
+              onChange={handleChangePage}
+            />
+          }
+          <ConfirmRestoreModal
+            visible={restoreVisible}
+            item={selectedHistory}
+            callingAPI={callingAPI}
+            onConfirm={() => onUpdateCipher()}
+            onClose={() => setRestoreVisible(false)}
+          />
+        </>
       }
-      {
-        filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
-          params={params}
-          total={filteredData.total}
-          onChange={handleChangePage}
-        />
-      }
-      <ConfirmRestoreModal
-        visible={restoreVisible}
-        item={selectedHistory}
-        callingAPI={callingAPI}
-        onConfirm={() => onUpdateCipher()}
-        onClose={() => setRestoreVisible(false)}
-      />
     </div>
   );
 }

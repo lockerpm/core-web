@@ -26,7 +26,7 @@ import global from "../../../config/global";
 const Vault = () => {
   const { Pagination, MultipleSelect, RouterLink, ImageIcon } = itemsComponents;
   const { NoCipher } = cipherComponents;
-  const { PageHeader } = commonComponents;
+  const { PageHeader, DataNotFound } = commonComponents;
   const { Filter, TableData, ListData, FormData, MoveFolder, FormAttachment } = vaultComponents;
   const { QuickShareReview } = shareComponents;
   const ShareFormData = shareComponents.FormData;
@@ -70,11 +70,11 @@ const Vault = () => {
   }, [currentPage])
 
   const originFolder = useMemo(() => {
-    return [...allFolders, ...allCollections].find((c) => c.id === folderId)
+    return [...allFolders, ...allCollections].find((c) => c.id === folderId) || {}
   }, [allFolders, allCollections, folderId])
 
   const canChangeFolder = useMemo(() => {
-    if (originFolder) {
+    if (originFolder?.id) {
       return common.isChangeCipher(originFolder)
     }
     return true
@@ -133,6 +133,10 @@ const Vault = () => {
     }
     return {}
   }, [currentPage])
+
+  const isNotfound = useMemo(() => {
+    return folderId && originFolder && !originFolder?.id;
+  }, [folderId, originFolder])
 
   useEffect(() => {
     if (currentPage?.query?.is_create == 1) {
@@ -335,183 +339,187 @@ const Vault = () => {
       className="vault layout-content"
       onScroll={(e) => common.scrollEnd(e, params, filteredData.total, setParams)}
     >
-      <PageHeader
-        title={folderId ? originFolder?.name : t(cipherType.title)}
-        total={filteredData.total}
-        actions={[
-          {
-            key: 'import',
-            label: t('button.import'),
-            type: 'primary',
-            ghost: true,
-            icon: <ImportOutlined />,
-            hide: currentPage.name !== global.keys.VAULT || isEmpty || !canChangeFolder,
-            disabled: syncing || loading,
-            click: () => {
-              global.navigate(global.keys.SETTINGS_IMPORT_EXPORT, {}, { is_import: 1 })
-            }
-          },
-          {
-            key: 'add',
-            label: t('button.new_item'),
-            type: 'primary',
-            icon: <PlusOutlined />,
-            hide: currentPage.name === global.keys.TRASH || isEmpty || !canChangeFolder,
-            disabled: syncing || loading,
-            click: (isTutorial = false) => {
-              setIsTutorial(isTutorial)
-              handleOpenForm();
-            }
-          }
-        ]}
-        Back={() => folderId ? <RouterLink
-          label={''}
-          className={'font-semibold mr-4'}
-          routerName={listRouterName}
-          routerParams={listRouterParams}
-          routerQuery={listRouterQuery}
-          icon={<ArrowLeftOutlined />}
-        /> : <></>}
-        Logo={() => folderId ? <ImageIcon
-          className="mr-4"
-          name={originFolder?.isCollection ? 'folder-share' : 'folder'}
-          width={isMobile ? 36 : 48}
-          height={isMobile ? 36 : 48}
-        /> : <></>}
-      />
       {
-        !isEmpty && <>
+        isNotfound ? <DataNotFound /> : <>
+          <PageHeader
+            title={folderId ? originFolder?.name : t(cipherType.title)}
+            total={filteredData.total}
+            actions={[
+              {
+                key: 'import',
+                label: t('button.import'),
+                type: 'primary',
+                ghost: true,
+                icon: <ImportOutlined />,
+                hide: currentPage.name !== global.keys.VAULT || isEmpty || !canChangeFolder,
+                disabled: syncing || loading,
+                click: () => {
+                  global.navigate(global.keys.SETTINGS_IMPORT_EXPORT, {}, { is_import: 1 })
+                }
+              },
+              {
+                key: 'add',
+                label: t('button.new_item'),
+                type: 'primary',
+                icon: <PlusOutlined />,
+                hide: currentPage.name === global.keys.TRASH || isEmpty || !canChangeFolder,
+                disabled: syncing || loading,
+                click: (isTutorial = false) => {
+                  setIsTutorial(isTutorial)
+                  handleOpenForm();
+                }
+              }
+            ]}
+            Back={() => folderId ? <RouterLink
+              label={''}
+              className={'font-semibold mr-4'}
+              routerName={listRouterName}
+              routerParams={listRouterParams}
+              routerQuery={listRouterQuery}
+              icon={<ArrowLeftOutlined />}
+            /> : <></>}
+            Logo={() => folderId ? <ImageIcon
+              className="mr-4"
+              name={originFolder?.isCollection ? 'folder-share' : 'folder'}
+              width={isMobile ? 36 : 48}
+              height={isMobile ? 36 : 48}
+            /> : <></>}
+          />
           {
-            selectedRowKeys.length > 0 ? <MultipleSelect
-              selectedRowKeys={selectedRowKeys}
-              callingAPI={callingAPI}
-              isMove={currentPage.name !== global.keys.TRASH}
-              isDelete={currentPage.name !== global.keys.TRASH}
-              isRestore={currentPage.name === global.keys.TRASH}
-              isPermanentlyDelete={currentPage.name === global.keys.TRASH}
-              onMove={() => handleOpenMoveForm(null)}
-              onDelete={deleteItems}
-              onRestore={restoreItems}
-              onPermanentlyDelete={permanentlyDeleteItems}
-              onCancel={() => setSelectedRowKeys([])}
-            /> : <Filter
-              className={'mt-2'}
-              params={params}
-              loading={syncing}
-              setParams={(v) => setParams({ ...v, page: 1 })}
-            />
+            !isEmpty && <>
+              {
+                selectedRowKeys.length > 0 ? <MultipleSelect
+                  selectedRowKeys={selectedRowKeys}
+                  callingAPI={callingAPI}
+                  isMove={currentPage.name !== global.keys.TRASH}
+                  isDelete={currentPage.name !== global.keys.TRASH}
+                  isRestore={currentPage.name === global.keys.TRASH}
+                  isPermanentlyDelete={currentPage.name === global.keys.TRASH}
+                  onMove={() => handleOpenMoveForm(null)}
+                  onDelete={deleteItems}
+                  onRestore={restoreItems}
+                  onPermanentlyDelete={permanentlyDeleteItems}
+                  onCancel={() => setSelectedRowKeys([])}
+                /> : <Filter
+                  className={'mt-2'}
+                  params={params}
+                  loading={syncing}
+                  setParams={(v) => setParams({ ...v, page: 1 })}
+                />
+              }
+            </>
           }
-        </>
-      }
-      {
-        filteredData.total == 0 ? <NoCipher
-          className={'mt-4'}
-          cipherType={cipherType}
-          loading={syncing || loading}
-          isEmpty={isEmpty}
-          isTrash={currentPage.name === global.keys.TRASH}
-          onCreate={() => handleOpenForm()}
-        /> : <>
           {
-            isMobile ? <ListData
-              className="mt-2"
-              loading={syncing || loading}
-              data={filteredData.result}
-              params={params}
-              selectedRowKeys={selectedRowKeys}
-              onMove={handleOpenMoveForm}
-              onUpdate={handleOpenForm}
-              onDelete={deleteItems}
-              onRestore={restoreItems}
-              onShare={handleOpenShareForm}
-              onStopSharing={stopSharingItem}
-              onPermanentlyDelete={permanentlyDeleteItems}
-              selectionChange={handleSelectionChange}
-              getCheckboxProps={getCheckboxProps}
-              onAttachment={handleOpenFormAttachment}
-            /> : <TableData
-              className="mt-4"
-              loading={syncing || loading}
-              data={filteredData.result}
-              params={params}
-              selectedRowKeys={selectedRowKeys}
-              onMove={handleOpenMoveForm}
-              onUpdate={handleOpenForm}
-              onDelete={deleteItems}
-              onRestore={restoreItems}
-              onShare={handleOpenShareForm}
-              onStopSharing={stopSharingItem}
-              onPermanentlyDelete={permanentlyDeleteItems}
-              selectionChange={handleSelectionChange}
-              getCheckboxProps={getCheckboxProps}
-              onAttachment={handleOpenFormAttachment}
-            />
-          }
-          {
-            isEmpty && !cipherType.type && <NoCipher
-              className={'mt-10'}
+            filteredData.total == 0 ? <NoCipher
+              className={'mt-4'}
               cipherType={cipherType}
+              loading={syncing || loading}
               isEmpty={isEmpty}
+              isTrash={currentPage.name === global.keys.TRASH}
               onCreate={() => handleOpenForm()}
+            /> : <>
+              {
+                isMobile ? <ListData
+                  className="mt-2"
+                  loading={syncing || loading}
+                  data={filteredData.result}
+                  params={params}
+                  selectedRowKeys={selectedRowKeys}
+                  onMove={handleOpenMoveForm}
+                  onUpdate={handleOpenForm}
+                  onDelete={deleteItems}
+                  onRestore={restoreItems}
+                  onShare={handleOpenShareForm}
+                  onStopSharing={stopSharingItem}
+                  onPermanentlyDelete={permanentlyDeleteItems}
+                  selectionChange={handleSelectionChange}
+                  getCheckboxProps={getCheckboxProps}
+                  onAttachment={handleOpenFormAttachment}
+                /> : <TableData
+                  className="mt-4"
+                  loading={syncing || loading}
+                  data={filteredData.result}
+                  params={params}
+                  selectedRowKeys={selectedRowKeys}
+                  onMove={handleOpenMoveForm}
+                  onUpdate={handleOpenForm}
+                  onDelete={deleteItems}
+                  onRestore={restoreItems}
+                  onShare={handleOpenShareForm}
+                  onStopSharing={stopSharingItem}
+                  onPermanentlyDelete={permanentlyDeleteItems}
+                  selectionChange={handleSelectionChange}
+                  getCheckboxProps={getCheckboxProps}
+                  onAttachment={handleOpenFormAttachment}
+                />
+              }
+              {
+                isEmpty && !cipherType.type && <NoCipher
+                  className={'mt-10'}
+                  cipherType={cipherType}
+                  isEmpty={isEmpty}
+                  onCreate={() => handleOpenForm()}
+                />
+              }
+            </>
+          }
+          {
+            filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
+              params={params}
+              total={filteredData.total}
+              onChange={handleChangePage}
             />
           }
+          <FormData
+            visible={formVisible}
+            item={selectedItem}
+            cipherType={cipherType}
+            cloneMode={cloneMode}
+            folderId={folderId}
+            isTutorial={isTutorial}
+            setCloneMode={setCloneMode}
+            onClose={() => {
+              setFormVisible(false);
+              setSelectedItem(null);
+            }}
+          />
+          <MoveFolder
+            visible={moveVisible}
+            cipherIds={selectedItem ? [selectedItem.id] : selectedRowKeys}
+            onClose={() => {
+              setMoveVisible(false);
+              setSelectedItem(null);
+            }}
+          />
+          <ShareFormData
+            visible={shareVisible}
+            item={selectedItem}
+            menuType={menuType}
+            menuTypes={global.constants.MENU_TYPES}
+            onClose={() => {
+              setShareVisible(false);
+              setSelectedItem(null);
+            }}
+            onReview={handleOpenReview}
+          />
+          <QuickShareReview
+            visible={reviewVisible}
+            sendId={sendId}
+            onClose={() => {
+              setReviewVisible(false);
+              setSendId(null);
+            }}
+          />
+          <FormAttachment
+            visible={formAttachmentVisible}
+            item={selectedItem}
+            onClose={() => {
+              setFormAttachmentVisible(false);
+              setSelectedItem(null);
+            }}
+          />
         </>
       }
-      {
-        filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
-          params={params}
-          total={filteredData.total}
-          onChange={handleChangePage}
-        />
-      }
-      <FormData
-        visible={formVisible}
-        item={selectedItem}
-        cipherType={cipherType}
-        cloneMode={cloneMode}
-        folderId={folderId}
-        isTutorial={isTutorial}
-        setCloneMode={setCloneMode}
-        onClose={() => {
-          setFormVisible(false);
-          setSelectedItem(null);
-        }}
-      />
-      <MoveFolder
-        visible={moveVisible}
-        cipherIds={selectedItem ? [selectedItem.id] : selectedRowKeys}
-        onClose={() => {
-          setMoveVisible(false);
-          setSelectedItem(null);
-        }}
-      />
-      <ShareFormData
-        visible={shareVisible}
-        item={selectedItem}
-        menuType={menuType}
-        menuTypes={global.constants.MENU_TYPES}
-        onClose={() => {
-          setShareVisible(false);
-          setSelectedItem(null);
-        }}
-        onReview={handleOpenReview}
-      />
-      <QuickShareReview
-        visible={reviewVisible}
-        sendId={sendId}
-        onClose={() => {
-          setReviewVisible(false);
-          setSendId(null);
-        }}
-      />
-      <FormAttachment
-        visible={formAttachmentVisible}
-        item={selectedItem}
-        onClose={() => {
-          setFormAttachmentVisible(false);
-          setSelectedItem(null);
-        }}
-      />
     </div>
   );
 }

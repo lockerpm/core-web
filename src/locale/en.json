@@ -103,7 +103,9 @@
     "hours": "hours",
     "joined_at": "Joined at",
     "option": "Option",
-    "last_updated": "Last Updated"
+    "last_updated": "Last Updated",
+    "data_not_found": "Data not found",
+    "go_back_inventory":"Go back to the Inventory"
   },
   "button": {
     "add": "Add",
