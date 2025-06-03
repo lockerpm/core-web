@@ -2,6 +2,7 @@ import global from '../../config/global'
 import storeActions from '../../store/actions'
 
 import syncServices from '../../services/sync'
+import commonServices from '../../services/common'
 import quickShareServices from '../../services/quick-share'
 
 import common from '.'
@@ -88,6 +89,18 @@ const syncItems = async (cipherIds) => {
   global.store.dispatch(storeActions.updateSyncing(false))
 };
 
+const syncItemsWhenFolderDeleted = async (folderId) => {
+  const allCiphers = global.store.getState().cipher.allCiphers || []
+  const folderItems = allCiphers.filter((c) => c.folderId === folderId);
+  if (folderItems.length > 0) {
+    if (folderItems.length < 100) {
+      await syncItems(folderItems.map((c) => c.id))
+    } else {
+      await commonServices.sync_data();
+    }
+  }
+};
+
 export default {
   syncProfile,
   syncFolders,
@@ -96,5 +109,6 @@ export default {
   syncSettings,
   syncCiphers,
   getQuickShares,
-  syncItems
+  syncItems,
+  syncItemsWhenFolderDeleted
 }
