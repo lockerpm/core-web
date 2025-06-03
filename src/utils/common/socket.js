@@ -35,6 +35,12 @@ const syncDataByWs = async (message) => {
     } else if (eventType.includes('delete')) {
       await global.jsCore.folderService.delete(message.data.ids);
       await common.getAllFolders();
+      if (message.data.id) {
+        await common.syncItemsWhenFolderDeleted(message.data.id)
+      }
+      if (message.data.ids) {
+        await common.syncItemsWhenFolderDeleted(message.data.ids[0])
+      }
     } else {
       await commonServices.sync_data();
     }
@@ -48,6 +54,12 @@ const syncDataByWs = async (message) => {
     } else if (eventType.includes('delete')) {
       await global.jsCore.collectionService.delete(message.data.ids);
       await common.getAllCollections();
+      if (message.data.id) {
+        await common.syncItemsWhenFolderDeleted(message.data.id)
+      }
+      if (message.data.ids) {
+        await common.syncItemsWhenFolderDeleted(message.data.ids[0])
+      }
     } else {
       await commonServices.sync_data();
     }
