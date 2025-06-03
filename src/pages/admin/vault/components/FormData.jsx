@@ -181,7 +181,8 @@ function FormData(props) {
       id: originItem.id,
       attachments: originItem.attachments,
       passwordHistory: originItem.passwordHistory,
-      organizationId: originItem.organizationId
+      organizationId: originItem.organizationId,
+      favorite: originItem.favorite,
     };
     const passwordStrength = values.password ? common.getPasswordStrength(values.password) : {};
     const { data, collectionIds } = await common.getEncCipherForRequest(
