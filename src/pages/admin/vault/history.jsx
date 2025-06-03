@@ -152,7 +152,8 @@ const VaultHistory = () => {
       ...common.convertFormToCipher(formData),
       id: originCipher.id,
       passwordHistory: originCipher.passwordHistory,
-      organizationId: originCipher.organizationId
+      organizationId: originCipher.organizationId,
+      favorite: originCipher.favorite,
     }
     const passwordStrength = formData.password ? common.getPasswordStrength(formData.password) : {};
     const { data, collectionIds } = await common.getEncCipherForRequest(
