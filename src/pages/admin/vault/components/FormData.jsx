@@ -333,6 +333,7 @@ function FormData(props) {
             form={form}
             disabled={callingAPI || !!folderId}
             item={originItem}
+            placement="topLeft"
             onCreate={() => setFolderVisible(true)}
           />
         </Form>
