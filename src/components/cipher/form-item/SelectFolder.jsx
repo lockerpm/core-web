@@ -21,6 +21,7 @@ function SelectFolder(props) {
   const {
     disabled = false,
     item = null,
+    placement = "bottomLeft",
     onCreate = () => {},
   } = props
   const { t } = useTranslation();
@@ -91,6 +92,7 @@ function SelectFolder(props) {
           disabled={disabled || !canChangeFolder}
           placeholder={t('placeholder.select')}
           options={options}
+          placement={placement}
           dropdownRender={(menu) => (
             <>
               {menu}
