@@ -50,12 +50,18 @@ function AdminLayout(props) {
   const [showBottom, setShowBottom] = useState(false)
   const [showFooter, setShowFooter] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
-  
-  const accessToken = common.getAccessToken();
+  const [accessToken, setAccessToken] = useState(null)
+
   const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`, {
     shouldReconnect: () => true,
     reconnectInterval: 5000
   })
+
+  useEffect(() => {
+    common.getAccessToken().then((res) => {
+      setAccessToken(res)
+    })
+  }, [])
 
   useEffect(() => {
     if (lastMessage) {
@@ -66,10 +72,6 @@ function AdminLayout(props) {
       }
     }
   }, [lastMessage])
-
-  const hideLayout = useMemo(() => {
-    return !!currentPage.hideLayout
-  }, [currentPage])
 
   useEffect(() => {
     dispatch(storeActions.updateIsScrollToTop(false))
@@ -107,6 +109,10 @@ function AdminLayout(props) {
   useEffect(() => {
     checkVaultTimeOut();
   }, [isLocked, currentPage, userInfo])
+
+  const hideLayout = useMemo(() => {
+    return !!currentPage.hideLayout
+  }, [currentPage])
 
   window.addEventListener("resize", (event) => {
     convertSize()

@@ -32,7 +32,8 @@ const DeauthorizeSessionsModal = (props) => {
     setCallingAPI(true)
     if (device) {
       await deauthorizeDevice();
-      if (device.device_identifier === common.deviceId()) {
+      const deviceId = await common.getDeviceId();
+      if (device.device_identifier === deviceId) {
         await authServices.logout();
       } else {
         onConfirm();

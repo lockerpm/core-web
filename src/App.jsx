@@ -97,7 +97,7 @@ const App = () => {
 
   const beforeRedirect = async () => {
     const currentPage = common.getRouterByLocation(location)
-    const accessToken = common.getAccessToken()
+    const accessToken = await common.getAccessToken()
     if (accessToken) {
       if (!currentPage) {
         global.navigate(global.keys.ADMIN_ERROR)

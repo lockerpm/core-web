@@ -35,12 +35,13 @@ async function factor2_activate_code(data) {
 }
 
 async function redirect_login() {
-  common.updateUnlockMethod(null)
+  await common.updateUnlockMethod(null)
   await coreServices.lock();
-  const currentPage = common.getRouterByLocation(global.location)
+  const currentPage = common.getRouterByLocation(global.location);
+  const accessToken = await common.getAccessToken();
   if ([global.keys.AUTHENTICATE, global.keys.SETUP_2FA].includes(currentPage?.name)) {
     return;
-  } else if (common.getAccessToken()) {
+  } else if (accessToken) {
     const isError = currentPage?.name === global.keys.ADMIN_ERROR
     const isAdmin = currentPage?.type === 'admin'
     const clientId = currentPage?.query?.client_id || common.getRedirectClientId();
@@ -57,7 +58,8 @@ async function redirect_login() {
 }
 
 async function logout(isLogoutId = false) {
-  if (common.getAccessToken() && isLogoutId) {
+  const accessToken = await common.getAccessToken();
+  if (accessToken && isLogoutId) {
     try {
       await request({
         url: global.endpoint.LOGOUT,
@@ -67,8 +69,8 @@ async function logout(isLogoutId = false) {
     } catch (error) {
     }
   }
-  common.updateUnlockMethod(null);
-  common.updateAccessToken(null);
+  await common.updateUnlockMethod(null);
+  await common.updateAccessToken(null);
   common.updateSsoAccount(null)
   global.navigate(global.keys.SIGN_IN, {}, {});
 }

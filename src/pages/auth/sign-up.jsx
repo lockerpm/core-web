@@ -34,8 +34,8 @@ const SingUp = () => {
         password: values.password,
         email: values.username
       }).then(async (response) => {
-        common.updateAccessTokenType(response.token_type)
-        common.updateAccessToken(response.access_token);
+        await common.updateAccessTokenType(response.token_type)
+        await common.updateAccessToken(response.access_token);
         await common.fetchUserInfo();
         await coreServices.unlock({ ...response, ...values })
         const isSynced = await commonServices.sync_data();

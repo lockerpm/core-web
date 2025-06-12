@@ -40,9 +40,15 @@ const PasswordConfirmModal = (props) => {
   const [isPair, setIsPair] = useState(false)
   const [checking, setChecking] = useState(false);
   const [timeNow, setTimeNow] = useState(new Date().getTime());
+  const [unlockMethod, setUnlockMethod] = useState('');
 
-  const unlockMethod = common.getUnlockMethod();
   const inputPassword = Form.useWatch('password', form);
+
+  useEffect(() => {
+    common.getUnlockMethod().then((res) => {
+      setUnlockMethod(res)
+    })
+  }, [])
 
   useEffect(() => {
     form.resetFields();

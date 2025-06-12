@@ -41,7 +41,8 @@ const Passkey = (props) => {
 
   const getBackupKeys = async () => {
     if (isConnected) {
-      await service.setApiToken(common.getAccessToken());
+      const apiToken = await common.getAccessToken();
+      await service.setApiToken(apiToken);
       const response = await service.listBackupPasswordless();
       setBackupKeys(response?.filter((k) => k.type !== 'hmac') || [])
     }
@@ -58,7 +59,8 @@ const Passkey = (props) => {
   const handleRemoveKey = async (keyId) => {
     global.confirm(async () => {
       try {
-        await service.setApiToken(common.getAccessToken())
+        const apiToken = await common.getAccessToken();
+        await service.setApiToken(apiToken)
         await service.deleteBackupPasswordless(keyId)
         await getBackupKeys();
       } catch (error) {

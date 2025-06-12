@@ -30,7 +30,7 @@ const SecurityKeyForm = (props) => {
     changing = false,
     userInfo = {},
     isAddKey = false,
-    accessToken = common.getAccessToken(),
+    accessToken = null,
     onRepair = () => { },
     onConfirm = () => { }
   } = props;
@@ -81,7 +81,8 @@ const SecurityKeyForm = (props) => {
     if (!isAddKey) {
       await getPwl();
     } else {
-      await service.setApiToken(accessToken);
+      const apiToken = accessToken || await common.getAccessToken();
+      await service.setApiToken(apiToken);
       await setBackupPwl();
     }
   }

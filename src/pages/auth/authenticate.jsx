@@ -206,8 +206,8 @@ const Authenticate = () => {
           login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
         })
       } else {
-        common.updateAccessTokenType(userSession.token_type)
-        common.updateAccessToken(userSession.access_token);
+        await common.updateAccessTokenType(userSession.token_type)
+        await common.updateAccessToken(userSession.access_token);
         if (newFullName || data.full_name) {
           await userServices.update_users_me({
             email: preLogin?.email,

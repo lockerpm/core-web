@@ -14,7 +14,8 @@ const fetchUserInfo = async () => {
     await global.jsCore.vaultTimeoutService.setVaultTimeoutOptions(response.timeout, response.timeout_action);
     let backupPwl = []
     try {
-      await service?.setApiToken(common.getAccessToken());
+      const apiToken = await common.getAccessToken();
+      await service?.setApiToken(apiToken);
       backupPwl = await service?.listBackupPasswordless() || [];
     } catch (error) {
       backupPwl = []
@@ -36,8 +37,8 @@ const updateLocale = async (language) => {
     locale = global.constants.LANGUAGE.EN
   }
   global.store.dispatch(storeActions.changeLanguage(locale));
-  common.updateLanguage(locale);
   i18n.changeLanguage(locale);
+  common.updateLanguage(locale);
 }
 
 const clearStoreData = async () => {
