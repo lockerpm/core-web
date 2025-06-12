@@ -98,6 +98,7 @@ async function users_prelogin(data) {
 }
 
 async function users_access_token(token) {
+  const deviceId = await common.getDeviceId();
   return request({
     url: global.endpoint.USERS_ACCESS_TOKEN,
     method: 'post',
@@ -106,7 +107,7 @@ async function users_access_token(token) {
       client_id: global.constants.CLIENT_ID,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: common.deviceId()
+      device_identifier: deviceId
     }
   })
 }
@@ -118,7 +119,8 @@ async function users_session(data) {
     const key = await coreServices.make_key(data.email, data.password)
     hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
   }
-  return await request({
+  const deviceId = await common.getDeviceId();
+  return request({
     url: global.endpoint.USERS_SESSION,
     method: "post",
     data: {
@@ -127,7 +129,7 @@ async function users_session(data) {
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: common.deviceId()
+      device_identifier: deviceId
     }
   });
 }
@@ -139,7 +141,8 @@ async function users_session_otp(data) {
     const key = await coreServices.make_key(data.email, data.password)
     hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
   }
-  return await request({
+  const deviceId = await common.getDeviceId();
+  return request({
     url: global.endpoint.USERS_SESSION_OTP,
     method: "post",
     data: {
@@ -148,7 +151,7 @@ async function users_session_otp(data) {
       password: hashedPassword,
       device_name: global.jsCore.platformUtilsService.getDeviceString(),
       device_type: global.jsCore.platformUtilsService.getDevice(),
-      device_identifier: common.deviceId(),
+      device_identifier: deviceId,
       method: data.method,
       save_device: data.save_device || false,
       otp: data.otp
@@ -214,7 +217,7 @@ async function register(data) {
     is_trial_promotion: false,
     enterprise_name: null
   }
-  return await request({
+  return request({
     url: global.endpoint.USERS_REGISTER,
     method: "post",
     data: payload

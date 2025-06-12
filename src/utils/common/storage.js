@@ -1,6 +1,7 @@
 import global from "../../config/global"
 
-const deviceId = () => {
+// Start Sync Function
+const getDeviceId = async () => {
   let deviceId = localStorage.getItem('device_id')
   if (!deviceId) {
     deviceId = crypto.randomUUID()
@@ -9,11 +10,11 @@ const deviceId = () => {
   return deviceId
 }
 
-const updateAccessToken = (data) => {
+const updateAccessToken = async (data) => {
   localStorage.setItem('access_token', JSON.stringify(data))
 }
 
-const getAccessToken = () => {
+const getAccessToken = async () => {
   try {
     return JSON.parse(localStorage.getItem('access_token'))
   } catch (_) {
@@ -21,15 +22,38 @@ const getAccessToken = () => {
   }
 }
 
-const updateAccessTokenType = (data) => {
+const updateAccessTokenType = async (data) => {
   localStorage.setItem('access_token_type', JSON.stringify(data))
 }
 
-const getAccessTokenType = () => {
+const getAccessTokenType = async () => {
   try {
     return JSON.parse(localStorage.getItem('access_token_type'))
   } catch (_) {
     return ''
+  }
+}
+
+const updateUnlockMethod = async (data) => {
+  sessionStorage.setItem('unlock_method', data)
+}
+
+const getUnlockMethod = async () => {
+  return sessionStorage.getItem('unlock_method')
+}
+// End Sync Function
+
+const updateLanguage = (data) => {
+  localStorage.setItem('passwords-language', JSON.stringify(data))
+}
+
+const getLanguage = () => {
+  const langDefault = global.constants.LANGUAGE.EN;
+  try {
+    const lang = JSON.parse(localStorage.getItem('passwords-language'))
+    return Object.values(global.constants.LANGUAGE).includes(lang) ? lang : langDefault
+  } catch (_) {
+    return langDefault
   }
 }
 
@@ -53,30 +77,8 @@ const getRedirectClientId = () => {
   return sessionStorage.getItem('redirect_client_id')
 }
 
-const updateUnlockMethod = (data) => {
-  sessionStorage.setItem('unlock_method', data)
-}
-
-const getUnlockMethod = () => {
-  return sessionStorage.getItem('unlock_method')
-}
-
-const updateLanguage = (data) => {
-  localStorage.setItem('passwords-language', JSON.stringify(data))
-}
-
-const getLanguage = () => {
-  const langDefault = global.constants.LANGUAGE.EN;
-  try {
-    const lang = JSON.parse(localStorage.getItem('passwords-language'))
-    return Object.values(global.constants.LANGUAGE).includes(lang) ? lang : langDefault
-  } catch (_) {
-    return langDefault
-  }
-}
-
 export default {
-  deviceId,
+  getDeviceId,
   updateAccessToken,
   getAccessToken,
   updateAccessTokenType,

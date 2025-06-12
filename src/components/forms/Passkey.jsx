@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { } from 'react-redux';
 import { Trans, useTranslation } from "react-i18next";
 
@@ -20,7 +20,7 @@ const PasskeyForm = (props) => {
     changing = false,
     userInfo = {},
     isAddKey = false,
-    accessToken = common.getAccessToken(),
+    accessToken = null,
     onConfirm = () => { },
   } = props;
 
@@ -43,7 +43,8 @@ const PasskeyForm = (props) => {
 
   const setBackupPwl = async (values) => {
     setCallingAPI(true)
-    await service.setApiToken(accessToken);
+    const apiToken = accessToken || await common.getAccessToken();
+    await service.setApiToken(apiToken);
     const encKey = await global.jsCore.cryptoService.getEncKey();
     await service.setBackupPasswordlessUsingPasskey({
       email: userInfo.email,

@@ -10,9 +10,9 @@ const service = axios.create({
 
 // request interceptor
 service.interceptors.request.use(
-  config => {
-    const accessToken = common.getAccessToken() || ''
-    const accessTokenType = common.getAccessTokenType() || 'Bearer'
+  async config => {
+    const accessToken = await common.getAccessToken() || ''
+    const accessTokenType = await common.getAccessTokenType() || 'Bearer'
     config.headers['Content-Type'] = 'multipart/form-data'
     config.headers['Authorization'] = `${accessTokenType} ${accessToken}`
     return config

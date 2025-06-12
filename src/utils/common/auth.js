@@ -22,10 +22,10 @@ const unlockToVault = async (
       global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
       global.navigate(global.keys.SETUP_2FA, {}, query || {})
     } else {
-      common.updateAccessTokenType(response.token_type)
-      common.updateAccessToken(response.access_token);
+      await common.updateAccessTokenType(response.token_type)
+      await common.updateAccessToken(response.access_token);
       await common.fetchUserInfo();
-      common.updateUnlockMethod(payload.unlock_method);
+      await common.updateUnlockMethod(payload.unlock_method);
       await coreServices.unlock({ ...response, ...payload });
       const isSynced = await commonServices.sync_data();
       if (isSynced) {
