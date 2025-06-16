@@ -1,6 +1,4 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 import {
   Progress
@@ -15,7 +13,6 @@ import common from "../../utils/common";
 import global from "../../config/global";
 
 const DisplayOtp = (props) => {
-  const { t } = useTranslation()
   const {
     notes = null,
     justify = 'left',

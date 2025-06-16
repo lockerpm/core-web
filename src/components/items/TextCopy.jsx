@@ -93,6 +93,23 @@ const TextCopy = (props) => {
     locale
   ])
 
+  const OtherDisplayValue = useMemo(() => {
+    if (!display) {
+      return <></>
+    }
+    return <div className="flex items-center justify-between w-full">
+        {display(showText)}
+      <span
+        className="ml-2 cursor-pointer text-black-500"
+        onClick={() => setShowText(!showText)}
+      >
+        {
+          !showText ? <EyeOutlined /> : <EyeInvisibleOutlined />
+        }
+      </span>
+    </div>
+  }, [display, showText])
+
   return (
     <Typography.Text
       className={`text-copy flex items-center cursor-pointer justify-${align} ${className}`}
@@ -107,7 +124,9 @@ const TextCopy = (props) => {
         text: value
       }}
     >
-      {display || DisplayValue}
+      {
+        display ? OtherDisplayValue : DisplayValue
+      }
     </Typography.Text>
   );
 }
