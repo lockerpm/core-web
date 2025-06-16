@@ -8,7 +8,8 @@ import {
   Row,
   Col,
   Image,
-  Space
+  Space,
+  Tag
 } from '@lockerpm/design';
 
 import { } from "@ant-design/icons";
@@ -96,14 +97,18 @@ const DetailList = (props) => {
         },
         {
           key: 'website',
-          name: t('cipher.password.website'),
-          value: <TextCopy
-            value={cipher.login.uri}
-            showIcon={true}
-            show={showText}
-            limited={false}
-            align="between"
-          />
+          name: t('cipher.password.websites.title'),
+          value: <div className="flex flex-col gap-1">
+            {
+              cipher?.login?.uris?.map((uri) => <TextCopy
+                value={uri.uri}
+                showIcon={true}
+                show={showText}
+                limited={false}
+                align="between"
+              />)
+            }
+          </div>
         },
         {
           key: 'notes',

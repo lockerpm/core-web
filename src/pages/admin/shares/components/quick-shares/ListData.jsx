@@ -60,7 +60,7 @@ const ListData = (props) => {
         <p className="font-semibold mr-2">{t('shares.quick_shares.expiration')}:</p>
         <TextCopy
           className="text-xs"
-          value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : 'N/A'}
+          value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : t('shares.quick_shares.expire_options.no_expiration')}
           align={'center'}
         />
       </div>

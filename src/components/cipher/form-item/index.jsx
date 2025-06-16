@@ -8,6 +8,7 @@ import SeedPhrase from "./SeedPhrase";
 import SelectFolder from "./SelectFolder";
 import Attachments from "./Attachments";
 import AlertWarning from "./AlertWarning";
+import WebsiteAddresses from "./WebsiteAddresses";
 
 const cipherFormItemComponents = {
   ContactForm,
@@ -19,7 +20,8 @@ const cipherFormItemComponents = {
   SeedPhrase,
   SelectFolder,
   Attachments,
-  AlertWarning
+  AlertWarning,
+  WebsiteAddresses
 }
 
 export default cipherFormItemComponents

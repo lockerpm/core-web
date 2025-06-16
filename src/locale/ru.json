@@ -105,7 +105,8 @@
     "option": "Вариант",
     "last_updated": "Последнее обновление",
     "data_not_found": "Данные не найдены",
-    "go_back_inventory":"Вернуться к инвентарю"
+    "go_back_inventory":"Вернуться к инвентарю",
+    "website_address": "Адрес веб-сайта"
   },
   "button": {
     "add": "Добавить",
@@ -709,14 +710,17 @@
       "title": "Информация для входа",
       "username": "Электронная почта/Имя пользователя",
       "password": "Пароль",
-      "website": "Адрес веб страницы",
       "setup_otp": "Настройка 2FA",
       "totp": "TOTP",
       "no_otp": "Нет OTP",
       "new_otp": "Добавить новый OTP",
       "existing_otp": "Настроить из существующего OTP",
       "secret_key": "Секретный ключ или путь",
-      "select_otp": "Выбрать OTP"
+      "select_otp": "Выбрать OTP",
+      "websites": {
+        "title": "Адреса веб-сайтов",
+        "new": "Новый адрес"
+      }
     },
     "card": {
       "title": "Информация о карте",

@@ -105,7 +105,8 @@
     "option": "Chọn",
     "last_updated": "Cập nhật lần cuối",
     "data_not_found": "Không tìm thấy dữ liệu",
-    "go_back_inventory": "Quay lại Kho hàng"
+    "go_back_inventory": "Quay lại Kho hàng",
+    "website_address": "Địa chỉ trang web"
   },
   "button": {
     "add": "Thêm",
@@ -709,14 +710,17 @@
       "title": "Thông tin đăng nhập",
       "username": "Email/Tên đăng nhập",
       "password": "Mật khẩu",
-      "website": "Địa chỉ website",
       "setup_otp": "Thiết lập 2FA",
       "totp": "TOTP",
       "no_otp": "Không có OTP",
       "new_otp": "Thêm mới OTP",
       "existing_otp": "Thiết lập từ OTP có sẵn",
       "secret_key": "Mã cài đặt hoặc đường dẫn",
-      "select_otp": "Chọn một OTP"
+      "select_otp": "Chọn một OTP",
+      "websites": {
+        "title": "Địa chỉ trang web",
+        "new": "Địa chỉ mới"
+      }
     },
     "card": {
       "title": "Thông tin thẻ",
