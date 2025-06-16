@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { } from 'react-redux';
-import { } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 import {
@@ -50,7 +48,7 @@ const ShareDetail = () => {
           setRequireOtp(!isSuccess)
         } else {
           const cipher = await common.decryptCipher(res.cipher, key)
-          setCipher(cipher)
+          setCipher(common.parseNotesOfNewTypes(cipher))
         }
       }).catch(() => {
         setInvalid(true)
@@ -86,7 +84,7 @@ const ShareDetail = () => {
     }
     return await quickShareServices.submit(id, { email, token }).then(async (res) => {
       const cipher = await common.decryptCipher(res.cipher, key)
-      setCipher(cipher)
+      setCipher(common.parseNotesOfNewTypes(cipher))
       setRequireOtp(false)
       return true
     }).catch(() => {

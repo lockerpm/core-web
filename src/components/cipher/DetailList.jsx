@@ -77,10 +77,11 @@ const DetailList = (props) => {
             value={common.getTOTP(cipher.login.totp)}
             showIcon={true}
             align="between"
+            show={showText}
             display={
-              <DisplayOtp
+              (sText = showText) => <DisplayOtp
                 notes={cipher.login.totp}
-                showText={showText}
+                showText={sText}
               />
             }
           />
@@ -275,11 +276,12 @@ const DetailList = (props) => {
           value: <TextCopy
             value={cipher.cryptoWallet?.seed}
             showIcon={true}
+            show={showText}
             align="between"
             display={
-              <SeedPhrase
+              (sText = showText) => <SeedPhrase
                 className="w-3/4"
-                value={common.formatText(cipher.cryptoWallet?.seed, showText)}
+                value={common.formatText(cipher.cryptoWallet?.seed, sText)}
                 readOnly={true}
               />
             }

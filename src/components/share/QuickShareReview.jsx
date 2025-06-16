@@ -59,9 +59,13 @@ function QuickShareReview(props) {
               <p className="font-semibold mr-2">{t('common.receiver')}:</p>
               <SharedWith send={originSend}/>
             </div>
-            <p>
-              {t('shares.quick_shares.expiration_description', { time: common.convertDateTime(originSend.expirationDate, 'DD MMMM, YYYY hh:mm A') })}
-            </p>
+            {
+              !originSend.expirationDate ? <p>
+                {t('shares.quick_shares.expire_options.no_expiration')}
+              </p> : <p>
+                {t('shares.quick_shares.expiration_description', { time: common.convertDateTime(originSend.expirationDate, 'DD MMMM, YYYY hh:mm A')})}
+              </p>
+            }
           </div>
         }
       </Drawer>
