@@ -105,7 +105,8 @@
     "option": "選項",
     "last_updated": "最後更新",
     "data_not_found": "未找到資料",
-    "go_back_inventory":"返回庫存"
+    "go_back_inventory":"返回庫存",
+    "website_address": "網站位址"
   },
   "button": {
     "add": "新增",
@@ -709,14 +710,17 @@
       "title": "登入資訊",
       "username": "電子郵件/使用者名稱",
       "password": "密碼",
-      "website": "網址",
       "setup_otp": "雙因素認證設定",
       "totp": "TOTP",
       "no_otp": "暫不啟用雙因素認證",
       "new_otp": "新增雙因素認證設定",
       "existing_otp": "套用現有雙因素認證設定",
       "secret_key": "密鑰或路徑",
-      "select_otp": "選擇雙因素認證設定"
+      "select_otp": "選擇雙因素認證設定",
+      "websites": {
+        "title": "網址",
+        "new": "新地址"
+      }
     },
     "card": {
       "title": "卡片資訊",

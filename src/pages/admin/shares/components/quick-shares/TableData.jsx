@@ -91,7 +91,7 @@ const TableData = (props) => {
         align: 'center',
         width: 200,
         render: (_, record) => <TextCopy
-          value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : 'N/A'}
+          value={record.expirationDate ? common.convertDateTime(record.expirationDate, 'DD MMMM, YYYY hh:mm A') : t('shares.quick_shares.expire_options.no_expiration')}
           align={'center'}
         />
       },

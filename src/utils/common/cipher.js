@@ -88,7 +88,7 @@ const convertCipherToForm = (cipher = {}) => {
       ...result,
       ...(cipher.login || new LoginView()),
       hasTotp: cipher?.login?.hasTotp,
-      uri: cipher?.login?.uris?.length > 0 ? cipher?.login?.uris[0]?.uri : '',
+      uris: cipher?.login?.uris?.map((u) => ({ uri: u.uri })) || []
     }
   } else if (cipher.type === CipherType.CryptoWallet) {
     result = {
@@ -130,14 +130,16 @@ const convertFormToCipher = (form = {}, isNewCipher = true) => {
     value: f.type === FieldType.Date ? dayjs(f.value).toString() : f.value
   })) || []
   if (form.type === CipherType.Login) {
-    const loginUri = new LoginUriView()
-    loginUri.uri = form.uri;
     result.login = {
       username: form.username,
       password: form.password,
       passwordRevisionDate: null,
       totp: form.totp || '',
-      uris: [loginUri],
+      uris: (form.uris || []).filter((u) => !!u?.uri?.trim()).map((u) => {
+        const loginUri = new LoginUriView();
+        loginUri.uri = u.uri;
+        return loginUri
+      }),
     }
   } else if (form.type === CipherType.CryptoWallet) {
     result.cryptoWallet = new CryptoWalletData({

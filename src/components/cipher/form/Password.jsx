@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -11,10 +10,13 @@ import {
 } from '@ant-design/icons';
 
 import formsComponents from '../../forms';
+import cipherFormItemComponents from '../form-item';
+
 import global from '../../../config/global';
 
 function PasswordForm(props) {
   const { GeneratePassword } = formsComponents;
+  const { WebsiteAddresses } = cipherFormItemComponents;
   const {
     form,
     disabled = false
@@ -67,23 +69,10 @@ function PasswordForm(props) {
         disabled={disabled}
         onFill={(v) => form.setFieldValue('password', v)}
       />
-      <Form.Item
-        name={'uri'}
-        className='mb-2'
-        rules={[
-          global.rules.INVALID(t('cipher.password.website'), 'LINK')
-        ]}
-        label={
-          <p className='text-black-500'>
-            {t('cipher.password.website')}
-          </p>
-        }
-      >
-        <Input
-          placeholder={t('placeholder.enter')}
-          disabled={disabled}
-        />
-      </Form.Item>
+      <WebsiteAddresses
+        form={form}
+        disabled={disabled}
+      />
     </div>
   );
 }
