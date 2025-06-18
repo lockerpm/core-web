@@ -37,7 +37,7 @@ const Name = (props) => {
         <div className="flex items-center justify-between">
           <div style={{ width: 'calc(100% - 124px)' }}>
             <p
-              className={`font-semibold text-limited w-full flex-shrink-0 ${isMobile ? 'text-limited__block' : ''}`}
+              className={`font-semibold text-limited w-full flex-shrink-0`}
               title={cipher.name}
             >
               {cipher.name}
