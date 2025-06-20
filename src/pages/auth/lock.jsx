@@ -26,6 +26,9 @@ const Lock = () => {
 
   const userInfo = useSelector((state) => state.auth.userInfo);
   const isLoading = useSelector((state) => state.system.isLoading);
+  const isConnected = useSelector((state) => state.service.isConnected)
+  const isDesktopConnected = useSelector((state) => state.service.isDesktopConnected)
+  const cacheData = useSelector((state) => state.service.cacheData);
 
   const [loading, setLoading] = useState(false);
   const [callingAPI, setCallingAPI] = useState(false);
@@ -36,6 +39,10 @@ const Lock = () => {
   const [otherMethod, setOtherMethod] = useState(null)
 
   const query = common.convertStringToQuery(location.search);
+
+  const isUnlockByDesktop = useMemo(() => {
+    return userInfo?.sync_all_platforms && cacheData?.email === userInfo?.email && !!cacheData?.unlock_method
+  }, [userInfo?.sync_all_platforms, userInfo?.email, cacheData, isConnected])
 
   useEffect(() => {
     initState();
@@ -48,11 +55,11 @@ const Lock = () => {
         global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
       } else if (!userInfo.is_password_changed || (userInfo.is_require_passwordless && userInfo.login_method === 'password')) {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })
-      } else if (userInfo?.sync_all_platforms) {
+      } else if (isUnlockByDesktop) {
         getServiceUser();
       }
     }
-  }, [userInfo])
+  }, [userInfo, isUnlockByDesktop])
 
   const initState = () => {
     setCallingAPI(false);
@@ -76,12 +83,11 @@ const Lock = () => {
 
   const getServiceUser = async () => {
     setLoading(true);
-    setIsPair(!service.pairingService?.hasKey)
+    setIsPair(isDesktopConnected && !service.pairingService?.hasKey)
     if (service.pairingService?.hasKey) {
       try {
         const serviceUser = await service.getCurrentUser();
-        if (serviceUser?.email === userInfo.email) {
-          const cacheData = await service.getCacheData();
+        if (serviceUser) {
           setOtherMethod(cacheData?.unlock_method || null);
           setServiceUser(serviceUser);
         } else {
@@ -130,6 +136,7 @@ const Lock = () => {
             callingAPI={callingAPI}
             serviceUser={serviceUser}
             otherMethod={otherMethod}
+            isUnlockByDesktop={isUnlockByDesktop}
             setStep={setStep}
             setIsPair={setIsPair}
             setServiceUser={setServiceUser}

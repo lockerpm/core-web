@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import storeActions from '../../store/actions'
@@ -7,6 +8,7 @@ import global from '../../config/global'
 
 function ClientService() {
   const userInfo = useSelector((state) => state.auth.userInfo);
+  const isConnected = useSelector((state) => state.service.isConnected);
 
   service.on('serviceReady', () => {
     global.store.dispatch(storeActions.updateIsConnected(service.grpcService?.isReady));
@@ -41,9 +43,6 @@ function ClientService() {
   service.on('fidoRequestFingerprint', () => {
     global.store.dispatch(storeActions.updateIsFingerprint(true));
   })
-  service.on('userLogin', (data) => {
-    // setMsg(`User ${data.email} just login`)
-  })
   service.on('userLock', async (data) => {
     if (data.email === userInfo?.email && userInfo?.sync_all_platforms) {
       authServices.redirect_login();
@@ -55,6 +54,21 @@ function ClientService() {
       authServices.logout();
     }
   })
+
+  useEffect(() => {
+    if (isConnected) {
+      setInterval(() => {
+        service.getCacheData().then((res) => {
+          global.store.dispatch(storeActions.updateCacheData(res))
+        }).catch(() => {
+          global.store.dispatch(storeActions.updateCacheData({}))
+          service.resetBackgroundService();
+        })
+      }, 5 * 1000);
+    } else {
+      global.store.dispatch(storeActions.updateCacheData({}))
+    }
+  }, [isConnected])
 
   return (
     <></>

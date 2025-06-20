@@ -63,6 +63,13 @@ const updateIsDesktopConnected = isDesktopConnected => {
   }
 }
 
+const updateCacheData = data => {
+  return {
+    type: actionTypes.SET_CACHE_DATA,
+    payload: data,
+  }
+}
+
 export default {
   updateRequirePairing,
   updateIsConnected,
@@ -73,4 +80,5 @@ export default {
   updateIsTouch,
   updateIsFingerprint,
   updateIsDesktopConnected,
+  updateCacheData,
 }

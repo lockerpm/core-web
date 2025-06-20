@@ -21,6 +21,8 @@ const service = (state = initial.service, action) => {
     return { ...state, isFingerprint: action.payload }
   case actionTypes.SET_IS_DESKTOP_CONNECTED:
     return { ...state, isDesktopConnected: action.payload }
+  case actionTypes.SET_CACHE_DATA:
+    return { ...state, cacheData: action.payload }
   default:
     return state
   }

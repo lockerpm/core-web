@@ -32,6 +32,7 @@ const LockForm = (props) => {
     serviceUser,
     otherMethod,
     isShowMPHint,
+    isUnlockByDesktop,
     setStep = () => {},
     setIsPair = () => {},
     setServiceUser = () => {},
@@ -42,6 +43,7 @@ const LockForm = (props) => {
   } = props;
   
   const isConnected = useSelector((state) => state.service.isConnected)
+  const cacheData = useSelector((state) => state.service.cacheData);
   const locale = useSelector((state) => state.system.locale);
   const userInfo = useSelector((state) => state.auth.userInfo);
 
@@ -55,8 +57,8 @@ const LockForm = (props) => {
   }, [userInfo])
 
   const isUnlockWith = useMemo(() => {
-    return userInfo?.passkeys.length > 0 || userInfo?.security_keys.length > 0 || userInfo?.sync_all_platforms
-  }, [userInfo])
+    return userInfo?.passkeys?.length > 0 || userInfo?.security_keys?.length > 0 || isUnlockByDesktop
+  }, [userInfo?.passkeys, userInfo?.security_keys, isUnlockByDesktop])
 
   const selectOtherMethod = (method) => {
     setStep(2);
@@ -80,20 +82,22 @@ const LockForm = (props) => {
 
   const handlePairConfirm = async () => {
     setIsPair(false)
-    if (userInfo?.sync_all_platforms) {
+    if (isUnlockByDesktop) {
       try {
         const serviceUser = await service.getCurrentUser();
-        if (serviceUser?.email === userInfo.email) {
-          const cacheData = await service.getCacheData();
+        if (serviceUser) {
           setOtherMethod(cacheData?.unlock_method || null);
           setServiceUser(serviceUser)
           await onSubmit({
             ...serviceUser,
             unlock_method: cacheData?.unlock_method
           })
+        } else {
+          setStep(1)
         }
       } catch (error) {
         await commonServices.reset_service();
+        setStep(1)
       }
     }
   }
@@ -189,9 +193,9 @@ const LockForm = (props) => {
                       }
                       {
                         isUnlockWith && <UnlockWith
-                          loading={loading}
+                          loading={loading || callingAPI}
                           userInfo={userInfo}
-                          callingAPI={callingAPI}
+                          isUnlockByDesktop={isUnlockByDesktop}
                           setIsPair={setIsPair}
                           selectOtherMethod={selectOtherMethod}
                         />
