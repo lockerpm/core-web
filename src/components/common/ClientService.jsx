@@ -57,18 +57,23 @@ function ClientService() {
 
   useEffect(() => {
     if (isConnected) {
+      getCacheData();
       setInterval(() => {
-        service.getCacheData().then((res) => {
-          global.store.dispatch(storeActions.updateCacheData(res))
-        }).catch(() => {
-          global.store.dispatch(storeActions.updateCacheData({}))
-          service.resetBackgroundService();
-        })
+        getCacheData();
       }, 5 * 1000);
     } else {
       global.store.dispatch(storeActions.updateCacheData({}))
     }
   }, [isConnected])
+
+  const getCacheData = () => {
+    service.getCacheData().then((res) => {
+      global.store.dispatch(storeActions.updateCacheData(res))
+    }).catch(() => {
+      global.store.dispatch(storeActions.updateCacheData({}))
+      service.resetBackgroundService();
+    })
+  }
 
   return (
     <></>
