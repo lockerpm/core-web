@@ -1,7 +1,5 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { } from 'react-router-dom';
 
 import {
   Button,
@@ -17,8 +15,8 @@ const UnlockWith = (props) => {
   const { t } = useTranslation();
   const {
     loading = false,
-    callingAPI = false,
     userInfo = {},
+    isUnlockByDesktop = false,
     setIsPair = () => {},
     selectOtherMethod = () => {},
   } = props;
@@ -36,7 +34,7 @@ const UnlockWith = (props) => {
             ghost
             type="primary"
             icon={<KeyOutlined />}
-            disabled={loading || callingAPI}
+            disabled={loading}
             onClick={() => selectOtherMethod('passkey')}
           >
             {t('auth_pages.sign_in.your_passkey')}
@@ -49,18 +47,18 @@ const UnlockWith = (props) => {
             ghost
             type="primary"
             icon={<UsbOutlined />}
-            disabled={loading || callingAPI}
+            disabled={loading}
             onClick={() => selectOtherMethod('security_key')}
           >
             {t('auth_pages.sign_in.your_security_key')}
           </Button>
         }
         {
-          userInfo?.sync_all_platforms && <Button
+          isUnlockByDesktop && <Button
             className="w-full"
             size="large"
             icon={<SyncOutlined />}
-            disabled={loading || callingAPI}
+            disabled={loading}
             onClick={() => setIsPair(true)}
           >
             {t('button.sync_with_desktop')}

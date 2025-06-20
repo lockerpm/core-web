@@ -38,6 +38,7 @@ const SignInForm = (props) => {
 
   const locale = useSelector((state) => state.system.locale);
   const isConnected = useSelector((state) => state.service.isConnected);
+  const cacheData = useSelector((state) => state.service.cacheData);
 
   const ssoAccount = common.getSsoAccount();
   const email = ssoAccount?.email;
@@ -112,7 +113,6 @@ const SignInForm = (props) => {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === preLogin.email) {
-            const cacheData = await service.getCacheData();
             setOtherMethod(cacheData?.unlock_method || null);
             await onSubmit({
               username: serviceUser?.email,
@@ -140,7 +140,6 @@ const SignInForm = (props) => {
       try {
         const serviceUser = await service.getCurrentUser();
         if (serviceUser?.email === preLogin.email) {
-          const cacheData = await service.getCacheData();
           setOtherMethod(cacheData?.unlock_method || null);
           await onSubmit({
             username: serviceUser?.email,

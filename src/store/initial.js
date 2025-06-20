@@ -51,5 +51,6 @@ export default {
     clientId: null,
     clientType: null,
     pairingConfirmed: false,
+    cacheData: {}
   }
 }
