@@ -1,5 +1,5 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import {
@@ -21,22 +21,30 @@ const RouterLink = (props) => {
     maxWidth = '100%',
     flex = 1,
     icon = <></>,
-    type = 'primary'
+    type = 'primary',
   } = props;
 
   const currentRouter = common.getRouterByName(routerName)
   const newPath = currentRouter ? common.convertQueryToString(
     common.getRouterParams(currentRouter?.path, routerParams),
     routerQuery
-  ) : '/'
+  ) : '/';
+
+  const isMobile = useSelector((state) => state.system.isMobile);
+  
   return (
     <Link
-      className={`cs-link ${className} text-${type} text-limited`}
+      className={`cs-link ${className} text-${type}`}
       style={{ maxWidth: maxWidth, flex: flex }}
       target={blank ? '_blank' : ''}
       to={newPath}
     >
-      <span title={label}>{label}</span> {icon}
+      <span
+        title={label}
+        className={`text-limited ${isMobile ? 'text-limited__block' : ''}`}
+      >
+        {label}
+      </span> {icon}
     </Link>
   );
 }

@@ -1,6 +1,5 @@
-import React, { } from "react";
+import React from "react";
 import { useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
 
 import {
   Row,
@@ -34,7 +33,6 @@ const PageHeader = (props) => {
     Right = () => null
   } = props
 
-  const { t } = useTranslation()
   const isMobile = useSelector((state) => state.system.isMobile);
 
   return (

@@ -1,0 +1,1370 @@
+{
+  "common": {
+    "app_name": "Locker Password Manager",
+    "app_title": "Password Manager",
+    "total": "Total",
+    "status": "Statut",
+    "created_time": "Date de création",
+    "updated_time": "Heure mise à jour",
+    "created_by": "Créé Par",
+    "title": "Titre",
+    "action": "Action",
+    "actions": "Actions",
+    "type": "Type",
+    "here": "ici",
+    "assignee": "Cessionnaire",
+    "products": "Produits",
+    "no_data": "Pas de données",
+    "confirm": "Confirmer",
+    "confirmed": "Confirmé",
+    "warning": "Attention",
+    "delete_question": "Voulez-vous vraiment supprimer ?",
+    "information": "Informations",
+    "value": "Valeur",
+    "error": "Erreur",
+    "all_time": "Tous les temps",
+    "last_week": "La semaine dernière",
+    "last_month": "Mois dernier",
+    "custom_time": "Heure personnalisée",
+    "public": "Publique",
+    "private": "Privé",
+    "language": "Langue",
+    "english": "English (US)",
+    "vietnamese": "Tiếng Việt",
+    "chinese": "繁體中文",
+    "russian": "Русский",
+    "french": "Français",
+    "count": "Compter",
+    "search_all": "Rechercher toutes les données système",
+    "back": "Revenir en arrière",
+    "all": "Tout",
+    "all_default": "Tout (*)",
+    "copy": "Copier",
+    "copied": "Copié",
+    "users": "Utilisateurs",
+    "access_type": "Type d'Accès",
+    "client": "Client",
+    "location": "Géolocalisation",
+    "time": "Date/Heure",
+    "ip_address": "Adresse IP",
+    "last_used": "Dernière utilisation",
+    "last_ip_address": "Dernière adresse IP",
+    "read": "Lire",
+    "write": "Lire et Écrire",
+    "items": "Éléments",
+    "folders": "Dossiers",
+    "description": "Description",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "role": "Rôle",
+    "full_name": "Nom complet",
+    "access_date": "Date d'accès",
+    "email": "E-mail",
+    "username": "Nom d’utilisateur",
+    "on": "Activé",
+    "off": "Désactivé",
+    "no": "Non.",
+    "coming_soon": "Bientôt disponible",
+    "results": "Résultats",
+    "no_file_chosen": "Aucun fichier sélectionné",
+    "name": "Nom",
+    "other": "Autre",
+    "length": "Longueur",
+    "mr": "M.",
+    "mrs": "Mme",
+    "ms": "Mlle",
+    "dr": "Dr",
+    "detail": "Détails",
+    "selected_items": "{{amount}} éléments sélectionnés",
+    "member": "Membre",
+    "folder": "Dossier",
+    "or": "ou",
+    "item": "Élément",
+    "email_addresses": "Adresse e-mail",
+    "receiver": "Destinataire",
+    "days_number": "{{number}} jours",
+    "one_day": "1 jour",
+    "username_or_email": "Adresse e-mail ou nom d'utilisateur",
+    "password": "Mot de passe",
+    "me": "Moi",
+    "otp_code": "Code OTP",
+    "successfully": "Conforme",
+    "group": "Groupe",
+    "password_strength": "Robustesse du mot de passe",
+    "number_members": "Nombre de membres",
+    "user": "Utilisateur",
+    "members": "membres",
+    "configuration": "Configuration",
+    "characters": "caractères",
+    "second": "seconde",
+    "minute": "minute",
+    "hour": "heure",
+    "seconds": "secondes",
+    "minutes": "minutes",
+    "hours": " heures",
+    "joined_at": "Inscrit le",
+    "option": "Option",
+    "last_updated": "Dernière mise à jour",
+    "data_not_found": "Données introuvables",
+    "go_back_inventory": "Retour à l'inventaire",
+    "website_address": "Adresse du site web"
+  },
+  "button": {
+    "add": "Ajouter",
+    "edit": "Éditer",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "detail": "Détails",
+    "delete": "Supprimer",
+    "next": "Suivant",
+    "back": "Revenir en arrière",
+    "review": "Révision",
+    "submit": "Soumettre",
+    "reset": "Réinitialiser",
+    "see_more": "Voir plus",
+    "cancel": "Annuler",
+    "save": "Économisez",
+    "go_back": "Revenir en arrière",
+    "sign_in": "Se connecter",
+    "sign_up": "S'inscrire",
+    "activate": "Activer",
+    "deactivate": "Désactiver",
+    "regenerate": "Regénérer",
+    "import": "Importer",
+    "export": "Exporter",
+    "download": "Téléchargement",
+    "new_member": "Nouveau Membre",
+    "lock": "Verrouiller",
+    "logout": "Se déconnecter",
+    "save_changes": "Enregistrer les modifications",
+    "enable": "Activer",
+    "disable": "Désactiver",
+    "verify": "Vérifier",
+    "send_test": "Envoyer l'e-mail test",
+    "send": "Envoyer",
+    "choose_file": "Choisir un fichier",
+    "reinvite": "Réinviter",
+    "select": "Sélectionner",
+    "continue": "Continuer",
+    "new_item": "Nouvel élément",
+    "new_folder": "Nouveau dossier",
+    "new_share": "Nouveau partage",
+    "new_enterprise": "Nouvelle société",
+    "share": "Partager",
+    "view": "Voir",
+    "copy_link": "Copier le lien",
+    "ok": "Ok",
+    "remove": "Supprimer",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "connect_desktop_app": "Connecter l'application de bureau",
+    "download_desktop_app": "Télécharger l’application de bureau",
+    "open_desktop_app": "Ouvrir l'application de bureau",
+    "new_user": "Nouvel utilisateur",
+    "new_group": "Nouveau groupe",
+    "resend_invitation": "Renvoyer l'invitation",
+    "restore": "Restaurer",
+    "use_mp_instead": "Utiliser le mot de passe à la place",
+    "sync_with_desktop": "Synchroniser avec l'application de bureau"
+  },
+  "placeholder": {
+    "name": "Saisir un nom ",
+    "search": "Entrez les informations de recherche...",
+    "description": "Saisir une description",
+    "type": "Sélectionner le type",
+    "value": "Saisissez une valeur",
+    "select": "Veuillez sélectionner",
+    "enter": "Veuillez saisir",
+    "ip": "Veuillez entrer une nouvelle adresse IP",
+    "username": "Saisissez votre e-mail",
+    "password": "Entrez votre mot de passe",
+    "code": "J'espère que vous avez obtenu le code...",
+    "otp": "Saisissez le code à 6 chiffres",
+    "text": "Texte",
+    "email": "Example@gmail.com",
+    "phone": "0123456789",
+    "month_year": "MM/AA",
+    "date": "JJ/MM/AAAA",
+    "url": "https://",
+    "field_name": "Nom du champ",
+    "wallet_app": "Sélectionnez une application de portefeuille",
+    "networks": "Sélectionner le réseau",
+    "select_users": "Entrez l'email pour sélectionner les utilisateurs"
+  },
+  "validation": {
+    "required": "{{name}} est requis !",
+    "invalid": "{{name}} n'est pas valide.",
+    "existed": "{{name}} existe.",
+    "least_length": "Assurez-vous que cette {{name}} a au moins un caractère {{ min }}",
+    "passwords_not_match": "Les deux mots de passe que vous avez saisis ne correspondent pas!",
+    "key_existed": "Cette clé existe déjà sur l'environnement choisi",
+    "expiration_year": "Entrez les deux derniers chiffres de l'année d'expiration."
+  },
+  "notification": {
+    "error": {
+      "title": "Erreur",
+      "message": {
+        "default": "Une erreur est survenue, veuillez réessayer plus tard !",
+        "error_occurred": "Une erreur est survenue"
+      },
+      "attachment": {
+        "file_name": "File name has more than 255 characters"
+      }
+    },
+    "success": {
+      "title": "Succès",
+      "copied": "Copié dans le presse-papiers",
+      "member": {
+        "created": "Le nouveau membre a été ajouté",
+        "updated": "Les informations du membre ont été mises à jour.",
+        "deleted": "Le membre a été supprimé .",
+        "reinvited": "L'e-mail d'invitation a été envoyé avec succès"
+      },
+      "change_password": {
+        "changed": "Votre mot de passe a été modifié."
+      },
+      "account_details": {
+        "updated": "Les détails du compte ont été mis à jour.",
+        "purged": "Votre coffre a été purgé !"
+      },
+      "factor2": {
+        "enabled": "L'authentification à deux facteurs a été activée",
+        "disabled": "L'authentification à deux facteurs a été désactivée"
+      },
+      "email_settings": {
+        "updated": "Le plugin Mail a été configuré avec succès.",
+        "reset": "Réglage de la messagerie réinitialisé avec succès.",
+        "send_test": "Envoi de l'e-mail de test réussi."
+      },
+      "cipher": {
+        "created": "Le nouvel élément a été ajouté.",
+        "updated": "Les informations de l'élément ont été mises à jour.",
+        "deleted": "L'élément a été déplacé dans la corbeille !.",
+        "permanently_deleted": "L'élément a été définitivement supprimé.",
+        "restored": "L'objet a été restauré !",
+        "moved": "Le nouvel élément a été déplacé !"
+      },
+      "folder": {
+        "created": "Le nouveau dossier a été ajouté .",
+        "updated": "Les informations du dossier ont été mises à jour.",
+        "deleted": "Le dossier a été supprimé ."
+      },
+      "sharing": {
+        "accepted": "Invitation acceptée",
+        "rejected": "Invitation rejetée",
+        "leave_group_success": "Groupe de partage quitté avec succès",
+        "confirm_member_success": "Le membre a été confirmé !",
+        "update_share_success": "Les membres du partage ont été mis à jour avec succès",
+        "share_items_success": "Les éléments ont été partagés !",
+        "share_item_success": "Les éléments ont été partagés !",
+        "share_folder_success": "Les éléments ont été partagés !",
+        "stop_share_success": "Arrêt du partage réussi",
+        "shared_to_new_member": "Partage de l’élément avec le nouveau membre avec succès"
+      },
+      "notification": {
+        "updated": "Vos notifications par e-mail ont été mises à jour !"
+      },
+      "emergency_access": {
+        "accepted": "Accès d'urgence accepté",
+        "removed": "Utilisateur {{user}} supprimé",
+        "rejected": "Accès d’urgence refusé",
+        "invited": "Utilisateur invité",
+        "reinvited": "{{user}} a été réinvité",
+        "confirmed": "{{user}} a été confirmé",
+        "approved": "Accès d’urgence approuvé",
+        "takeover_password": "Réinitialisation du mot de passe pour {{user}}. Vous pouvez maintenant vous connecter à Locker en utilisant le nouveau mot de passe."
+      },
+      "manage_sessions": {
+        "logout_device": "L'appareil a été déconnecté !",
+        "logout_all_devices": "Toutes les sessions ont été révoquées"
+      },
+      "import_export": {
+        "exported": "Les éléments ont été exportés !"
+      },
+      "quick_share_detail": {
+        "check_mail": "Veuillez vérifier votre e-mail."
+      },
+      "enterprise": {
+        "created": "La nouvelle société a été ajoutée.",
+        "updated": "Les informations sur l'entreprise ont été mises à jour.",
+        "deleted": "L'entreprise a bien été supprimée."
+      },
+      "enterprise_members": {
+        "created": "Le nouvel utilisateur a été ajouté.",
+        "updated": "Les informations de l'utilisateur ont été mises à jour.",
+        "deleted": "L'utilisateur a été supprimé.",
+        "reinvited": "L'e-mail d'invitation a été envoyé avec succès"
+      },
+      "enterprise_groups": {
+        "created": "Le nouvel groupe a été ajouté.",
+        "updated": "Les informations de groupe ont été mises à jour.",
+        "deleted": "Le groupe a été supprimé .",
+        "users_updated": "Les utilisateurs du groupe ont été mis à jour."
+      },
+      "policy": {
+        "updated": "La politique a été modifiée "
+      },
+      "passkey": {
+        "added": "Le nouveau passkey a été ajouté"
+      },
+      "security_key": {
+        "added": "Une nouvelle clé de sécurité a été ajoutée"
+      },
+      "sso_configuration": {
+        "updated": "La configuration SSO a été mise à jour.",
+        "reset": "La configuration SSO a été réinitialisée."
+      },
+      "attachment": {
+        "uploaded": "Fichier téléversé avec succès !",
+        "downloaded": "Fichier téléchargé avec succès!",
+        "deleted": "La pièce jointe a été supprimée."
+      }
+    },
+    "warning": {
+      "title": "Attention"
+    }
+  },
+  "sidebar": {
+    "account_setting": "Paramètre",
+    "lock_your_account": "Verrouiller votre compte",
+    "logout": "Se déconnecter",
+    "your_account": "Mon compte",
+    "locker_help_center": "Centre d'aide du Locker",
+    "locker_community_forum": "Forum communautaire Locker",
+    "status_page": "Page d'état",
+    "terms_policy": "Termes et Conditions",
+    "inventory": "Inventaire",
+    "all": "Tout",
+    "passwords": "Mots de passe",
+    "notes": "Notes",
+    "cards": "Cartes",
+    "crypto_backups": "Sauvegardes Crypto",
+    "identities": "Identités",
+    "folders": "Dossiers",
+    "authenticator": "Autentification",
+    "security_tools": "Outils de sécurité",
+    "shares": "Partages",
+    "trash": "Corbeille",
+    "settings": "Paramètres",
+    "account": "Compte",
+    "import_export": "Importer/Exporter",
+    "security": "Sécurité",
+    "notifications": "Notifications",
+    "shared_with_me": "Partagé avec moi",
+    "my_shared_items": "Mes partages",
+    "enterprise": "Tableau de bord de l’entreprise",
+    "enterprises": "Entreprises",
+    "email_settings": "Paramètres d’e-mail",
+    "sso_configuration": "Configuration SSO",
+    "enterprise_dashboard": "Tableau de bord",
+    "enterprise_members": "Utilisateurs",
+    "enterprise_groups": "Groupes",
+    "enterprise_policies": "Politiques",
+    "enterprise_activity_logs": "Journal des activités",
+    "secrets_manager": "Secrets Manager",
+    "password_manager": "Password Manager"
+  },
+  "auth_pages": {
+    "username": "E-mail",
+    "password": "Mot de passe",
+    "otp": "Code OTP",
+    "confirm_password": "Confirmez le mot de passe",
+    "password_hint": "Indice mot de passe",
+    "sign_in": {
+      "title": "Bienvenue à nouveau !",
+      "label": "Se connecter",
+      "note": "Vous n'avez pas encore de compte ?",
+      "single_sign_on": "Single Sign-On",
+      "or_login_with": "ou déverrouiller avec",
+      "your_passkey": "Passkey",
+      "your_security_key": "Votre clé de sécurité"
+    },
+    "sign_up": {
+      "title": "Créer un compte administrateur",
+      "label": "S'inscrire",
+      "note": "Vous avez déjà un compte ?"
+    },
+    "otp_code": {
+      "title": "Saisir le code 2FA",
+      "description": "Entrez le code à 6 chiffres envoyé à votre appareil enregistré",
+      "remember_device": "Se souvenir de cet appareil",
+      "sign_in_account": "Se connecter à votre compte",
+      "verify_identity": "Vérifiez votre identité"
+    },
+    "authenticate": {
+      "title": "Mise à jour du compte",
+      "description": "Veuillez entrer un nom complet pour votre compte, puis créer un nouveau mot de passe pour remplacer le mot de passe temporaire donné.",
+      "setup_pwl": "Configurer la connexion sans mot de passe",
+      "setup_pwl_description": "Une connexion sans mot de passe est requise sur votre compte. Configurez la connexion sans mot de passe pour continuer.",
+      "note": "Vous avez déjà un compte ?",
+      "link_invalid": "Le lien de réinitialisation du mot de passe n'est pas valide. Veuillez entrer le mot de passe pour mettre à jour les informations du compte."
+    },
+    "setup_2fa": {
+      "title": "Configurer 2FA",
+      "description": "L'authentification à deux facteurs est requise. Choisissez une méthode 2FA pour votre compte"
+    }
+  },
+  "error_pages": {
+    "admin_error": {
+      "title": "Une erreur est survenue",
+      "description": "Nous avons rencontré un problème et nous n'avons pas pu continuer. Vous pouvez demander à votre administrateur ou réessayer plus tard."
+    },
+    "permission": {
+      "title": "Vous n’avez pas l’autorisation pour cette fonctionnalité",
+      "login_other_account": "Se connecter à un autre compte"
+    },
+    "page_not_found": {
+      "title": "Page introuvable",
+      "go_back_dashboard": "Retourner au tableau de bord"
+    }
+  },
+  "roles": {
+    "supper_admin": "Supper Admin",
+    "primary_admin": "Primary Admin",
+    "owner": "Propriétaire",
+    "admin": "Admin",
+    "member": "Member"
+  },
+  "statuses": {
+    "confirmed": "Confirmé",
+    "invited": "Invité",
+    "accepted": "Accepté",
+    "created": "Créé",
+    "expired": "Expiré",
+    "accessed": "Accès",
+    "shared": "Partagé",
+    "rejected": "Rejetée",
+    "pending": "En attente",
+    "requested": "Demandé",
+    "recovery_initiated": "Récupération initiée",
+    "recovery_approved": "Récupération approuvée"
+  },
+  "permissions": {
+    "editable": "Modifiable",
+    "viewable": "Visible",
+    "only_use": "Utiliser uniquement"
+  },
+  "sort_options": {
+    "sort_by": "Trier par",
+    "name_ascending": "Nom croissant",
+    "name_descending": "Nom décroissant",
+    "time_ascending": "Temps croissant",
+    "time_descending": "Temps décroissant"
+  },
+  "notice": {
+    "emergency_access_invitations": {
+      "title": "Invitation à devenir un contact d’urgence",
+      "description": "Vous avez été invité à devenir un contact d’urgence pour {{owner}}.",
+      "access_type": "Type d'accès : {{type}}"
+    }
+  },
+  "password_confirm": {
+    "confirm_note": "Saisis ton mot de passe pour continuer"
+  },
+  "passwordless": {
+    "confirm_pairing": "Confirmer l'appairage",
+    "pairing_required": "L'appairage de l'application de bureau est requis. Sur l'application de bureau, confirmez le code ci-dessous.",
+    "confirm_code": "Confirmez si le code de votre navigateur correspond à ce qui suit",
+    "reset_code": "Code de réinitialisation",
+    "open_desktop": "La connexion à l'application de bureau est requise. Veuillez ouvrir l'application Locker Desktop",
+    "install_desktop": "L'installation de l'application de bureau est requise. Veuillez télécharger et installer l'application Locker Desktop",
+    "connect_key": "Connectez la clé que vous souhaitez ajouter",
+    "no_key_found": "Aucune clé trouvée",
+    "scan_fingerprint": "Scannez votre empreinte digitale",
+    "scan_fingerprint_twice": "Numérisez votre empreinte digitale. Vous devez le faire deux fois.",
+    "enter_key_pin": "Entrez le code PIN de votre clé de sécurité",
+    "touch_key": "Touchez votre clé de sécurité pour terminer",
+    "touch_key_when_add": "Touchez votre clé de sécurité pour terminer. Vous devez la toucher deux fois.",
+    "reload_devices": "Recharger la liste",
+    "reload_keys": "Recharger la liste",
+    "choose_a_key": "Choisissez une clé pour vous vérifier",
+    "new_password": "Saisissez le nouveau mot de passe",
+    "connect_security_key_to_login": "Se connecter à une clé de sécurité.",
+    "connect_passkey_to_login": "Se connecter à une passkey.",
+    "connect_service_fail": "Échec de la connexion à l'application de bureau! Assurez-vous que vous avez installé l'application, puis réessayez.",
+    "errors": {
+      "0000": "Erreur non spécifiée",
+      "1000": "Erreur d'API",
+      "1001": "Jeton API introuvable",
+      "1002": "Le mode sans mot de passe n'est pas activé",
+      "2001": "Impossible de se connecter à la clé Fido",
+      "2002": "Impossible de créer les identifiants, la clé renvoie un secret vide",
+      "2003": "Code NIP invalide",
+      "2004": "Impossible de trouver le groupe de confiance",
+      "2005": "Impossible de trouver un identifiant valide dans cette clé",
+      "2006": "Impossible de trouver les informations d'identification requises dans cette clé",
+      "2007": "Impossible d'utiliser l'empreinte digitale, veuillez utiliser le code PIN à la place",
+      "2008": "La validation du code PIN a échoué à plusieurs reprises, la clé est bloquée",
+      "2009": "Échec de la vérification de l'empreinte digitale",
+      "2011": "L'action FIDO a expiré",
+      "3001": "Le client n'est pas confirmé",
+      "3002": "Aucune clé",
+      "3003": "Impossible de chiffrer la charge utile",
+      "3004": "Impossible de déchiffrer la réponse",
+      "3005": "Le bureau n'est pas appairé",
+      "3006": "Le bureau n'est pas confirmé",
+      "4001": "Client introuvable",
+      "4002": "Impossible de diffuser un message sécurisé",
+      "5001": "Le service d'arrière-plan n'est pas connecté",
+      "5002": "Le service d'arrière-plan n'a pas pu déchiffrer la requête"
+    }
+  },
+  "change_password": {
+    "title": "Changer le mot de passe",
+    "subtitle": "Veuillez entrer votre mot de passe actuel pour changer votre mot de passe.",
+    "your_password": "Votre mot de passe",
+    "current_password": "Mot de passe actuel",
+    "new_password": "Nouveau mot de passe",
+    "confirm_new_password": "Confirmer le nouveau mot de passe"
+  },
+  "account_details": {
+    "title": "Détails du Compte",
+    "description": "Gérez les détails de votre profil, les préférences de votre compte, la sécurité de votre compte et la vie privée.",
+    "personal_info": "Informations personnelles",
+    "profile_photo": "Votre photo de profil",
+    "preferences": {
+      "title": "Préférences",
+      "language": "Langue",
+      "timeout": "Délai d’expiration",
+      "timeout_desc": "Verrouiller automatiquement l’application après une période d’inactivité de l’appareil.",
+      "timeout_note": "Remarque : Si votre navigateur se recharge, votre coffre se verrouille toujours automatiquement.",
+      "timeout_action": "Action à l’expiration",
+      "timeout_action_lock_desc": "Un coffre verrouillé requiert la saisie de votre mot de passe pour y avoir à nouveau accès.",
+      "timeout_action_logout_desc": "Un coffre déconnecté nécessite que vous vous re-authentifiez pour y accéder de nouveau.",
+      "hide_mp": "Masquer le mot de passe du casier"
+    },
+    "danger_zone": {
+      "title": "Zone de danger",
+      "delete_data": "Supprimer les données de Locker",
+      "delete_data_desc": "Supprimer toutes les données de votre compte Locker. Votre compte Locker sera toujours existant.",
+      "delete_account": "Supprimer le compte",
+      "delete_account_desc": "Supprimer définitivement votre compte Locker.",
+      "delete_all_account_items": "Supprimer tous les éléments du compte"
+    }
+  },
+  "security_control": {
+    "title": "Contrôle de sécurité",
+    "description": "Gérez votre sécurité et votre confidentialité."
+  },
+  "email_notifications": {
+    "title": "Notifications par e-mail"
+  },
+  "generate_password": {
+    "title": "Générer un mot de passe aléatoire",
+    "fill_password": "Remplir le mot de passe",
+    "copy_password": "Copier le mot de passe",
+    "show_options": "Afficher les options",
+    "options": {
+      "uppercase": "Utiliser des lettres majuscules (A-Z)",
+      "lowercase": "Utiliser des lettres minuscules (a-z)",
+      "digits": "Utiliser des chiffres (0-9)",
+      "symbols": "Utiliser des symboles (@!$%*)",
+      "ambiguous": "Éviter les caractères ambigus"
+    },
+    "status": {
+      "very_weak": "Très faible",
+      "weak": "Faible",
+      "medium": "Moyen",
+      "good": "Bien",
+      "strong": "Fort"
+    }
+  },
+  "drag_upload": {
+    "action": "Cliquez ou faites glisser",
+    "description": "fichier à télécharger dans cette zone",
+    "note": "SVG, PNG, JPG ou GIF (max. 800x400px)",
+    "invalid": "Invalide ! Le type de fichier est {{type}}",
+    "large": "La taille du fichier est très grande! Veuillez sélectionner un fichier a une taille de 800x400px",
+    "content_invalid": "Le contenu du fichier est invalide."
+  },
+  "lock": {
+    "title": "Se connecter à votre compte",
+    "description": "Saisissez votre mot de passe pour déverrouiller",
+    "pwl_required": "La connexion sans mot de passe est requise sur votre compte. Connectez une clé pour déverrouiller",
+    "security_key_desc": "Connectez-vous avec une clé de sécurité",
+    "passkey_key_desc": "Se connecter avec une passkey",
+    "master_password": "Mot de passe",
+    "master_password_hint": "Obtenir l'indice de mot de passe",
+    "unlock": "Déverrouiller",
+    "cross_platform_sync_enable": "Votre compte a activé la synchronisation inter-plateforme"
+  },
+  "inventory": {
+    "all_items": "Tous les éléments",
+    "all_folders": "Tous les dossiers",
+    "shared": "Partagé dans Locker",
+    "vault": {
+      "title": "C'est parti !",
+      "description": "Ajoutez votre premier élément. Vous le trouverez ici quand vous en aurez besoin.",
+      "add": "Ajouter un élément",
+      "edit": "Éditer l'article"
+    },
+    "identity": {
+      "title": "Remplir les formulaires en ligne plus rapidement",
+      "description": "Ajoutez une carte d’identité pour que Locker puisse remplir automatiquement les formulaires en ligne en votre nom.",
+      "add": "Ajouter une carte d’identité",
+      "edit": "Éditer l'article"
+    },
+    "crypto_backup": {
+      "title": "Ajoutez votre première sauvegarde crypto",
+      "description": "Conservez votre compte/portefeuille crypto en lieu sûr.",
+      "add": "Ajouter une sauvegarde crypto",
+      "edit": "Modifier la sauvegarde crypto"
+    },
+    "card": {
+      "title": "Simplifier les achats en ligne",
+      "description": "Ajouter une carte de paiement pour permettre le remplissage automatique lors de vos achats en ligne.",
+      "add": "Ajouter une carte de paiement",
+      "edit": "Éditer la carte de paiement"
+    },
+    "note": {
+      "title": "Libérez votre mémoire",
+      "description": "Enregistrez les codes Wi-Fi, les codes d’alarmes de sécurité de bureau ou les anniversaires de vos amis...",
+      "add": "Ajouter une note",
+      "edit": "Modifier une note"
+    },
+    "password": {
+      "title": "C'est parti !",
+      "description": "Ajoutez vos mots de passe et accédez-y sur n’importe quel appareil, à tout moment.",
+      "add": "Ajouter un mot de passe",
+      "edit": "Modifier le mot de passe"
+    },
+    "authenticator": {
+      "title": "Sécurisez votre compte",
+      "description": "Ajoutez une couche de sécurité supplémentaire pour vos comptes en ligne en configurant l'authentification à deux facteurs avec Locker.",
+      "add": "Configurer l’authentification à deux facteurs",
+      "edit": "Modifier l'OTP"
+    },
+    "folders": {
+      "title": "Ajouter votre premier dossier",
+      "description": "Ajouter un dossier pour gérer les chiffres.",
+      "add": "Ajouter un dossier",
+      "edit": "Renommer le dossier"
+    },
+    "trash": {
+      "title": "Il n’y a aucun élément à lister.",
+      "description": "Tous les éléments déplacés dans la corbeille peuvent être restaurés jusqu’à ce que vous les supprimiez définitivement "
+    },
+    "actions": {
+      "go_to_web": "Accéder au site",
+      "copy_username": "Copier le nom d’utilisateur",
+      "copy_password": "Copier le mot de passe",
+      "copy_totp": "Copier le code OTP",
+      "copy_note": "Copier la note",
+      "copy_seed_phrase": "Copier la phrase mnémonique",
+      "copy_wallet_address": "Copier adresse du portefeuille",
+      "copy_private_key": "Copier la clé privée",
+      "copy_password_pin": "Copier le mot de passe/PIN",
+      "edit": "Éditer",
+      "clone": "Cloner",
+      "move_to_folder": "Déplacer vers un dossier",
+      "stop_sharing": "Arrêter le partage",
+      "restore": "Restaurer",
+      "permanently_deleted": "Supprimer définitivement",
+      "delete": "Supprimer",
+      "share": "Partager",
+      "leave": "Quitter",
+      "accept": "Accepter",
+      "decline": "Refuser",
+      "copy_link": "Copier le lien",
+      "view_password_history": "Voir l'historique des mots de passe"
+    },
+    "move_to": {
+      "title": "Déplacer vers",
+      "description": "Choisissez le dossier vers lequel vous souhaitez déplacer les {{amount}} élément(s) sélectionné(s)."
+    }
+  },
+  "cipher": {
+    "type": "Type d'élément",
+    "item_name": "Nom de l’élément",
+    "others": "Autres",
+    "notes": "Notes",
+    "select_folder": "Sélectionner un dossier",
+    "folder_name": "Nom du dossier",
+    "no_folder": "Aucun dossier",
+    "add_folder": "Ajouter un dossier",
+    "delete_question": "Cet sera déplacé dans la corbeille. Les éléments de la corbeille seront définitivement supprimés après 30 jours.",
+    "restore_question": "Êtes-vous sûr(e) de vouloir restaurer cet élément ?",
+    "permanently_delete_question": "Êtes-vous sûr de vouloir supprimer définitivement cet élément ?",
+    "master_password_note": "Ceci est votre mot de passe maître Locker. Il changera en conséquence lorsque vous changerez votre mot de passe maître. Nous avons créé cet élément pour que vous n’oubliiez pas votre mot de passe principal. Ne vous inquiétez pas, cette opération est réalisée sur votre appareil et nous ne pouvons jamais voir ou modifier votre mot de passe maître sur notre serveur. Amusez-vous avec Locker.",
+    "folder_shared_note": "Il s'agit d'un dossier partagé. Tous les éléments ajoutés à ce dossier appartiendront à son propriétaire.",
+    "types": {
+      "password": "Mot de passe",
+      "note": "Note",
+      "card": "Carte",
+      "crypto_backup": "Sauvegarde de crypto",
+      "identity": "Identité",
+      "master_password": "Mot de passe",
+      "otp": "OTP"
+    },
+    "custom_fields": {
+      "title": "Champs personnalisés",
+      "new": "Nouveau champ personnalisé",
+      "text": "Texte",
+      "hidden_field": "Champ caché",
+      "url": "URL",
+      "email": "E-mail",
+      "date": "Date",
+      "month_year": "Mois / Année",
+      "phone": "Téléphone",
+      "otp": "OTP"
+    },
+    "password": {
+      "title": "Information de connexion",
+      "username": "E-mail/Nom d'utilisateur",
+      "password": "Mot de passe",
+      "setup_otp": "Configuration 2FA",
+      "totp": "TOTP",
+      "no_otp": "Pas de clé OTP",
+      "new_otp": "Ajouter un nouveau code OTP",
+      "existing_otp": "Configurer à partir d'une clé OTP existante",
+      "secret_key": "Clé secrète ou chemin d’accès",
+      "select_otp": "Sélectionner une clé OTP",
+      "sites web": {
+        "titre": "Adresses de sites web",
+        "nouveau": "Nouvelle adresse"
+      }
+    },
+    "card": {
+      "title": "Informations de la carte",
+      "cardholder_name": "Titulaire de la carte",
+      "brand": "Marque",
+      "card_number": "Numéro de carte",
+      "expiration_month": "Mois d’expiration",
+      "expiration_year": "Année d’expiration",
+      "security_code": "Code de sécurité (CVC)"
+    },
+    "crypto_backup": {
+      "title": "Informations de sauvegarde des crypto-monnaies",
+      "wallet_app": "Application de portefeuille",
+      "username": "Nom d’utilisateur",
+      "password": "Mot de passe",
+      "pin": "PIN",
+      "wallet_address": "Adresse du portefeuille",
+      "private_key": "Clé privée",
+      "seed_phrase": "Phrase mnémonique",
+      "networks": "Réseaux"
+    },
+    "identity": {
+      "personal_title": "Informations personnelles",
+      "title": "Titre",
+      "first_name": "Prénom",
+      "last_name": "Nom de famille",
+      "username": "Nom d’utilisateur",
+      "company": "Entreprise",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "social_security_number": "Numéro de sécurité sociale",
+      "passport_number": "Numéro de passeport",
+      "license_number": "Numéro de permis",
+      "contact_title": "Informations de contact",
+      "address1": "Adresse1",
+      "address2": "Adresse2",
+      "city_town": "Ville",
+      "state_province": "État / Province",
+      "zip_postal": "Code postal",
+      "country": "Pays"
+    },
+    "otp": {
+      "name": "OTP",
+      "secret_key": "Clé secrète",
+      "limited": "Vous avez atteint la limite OTP du Plan Gratuit. Supprimez le(s) OTP(s) existant pour en ajouter de nouveaux."
+    }
+  },
+  "shares": {
+    "encrypted_content": "Contenu chiffré",
+    "share_type": "Permission",
+    "share_items": "Partager l'élément",
+    "share_item": "Partager l'élément",
+    "share_folder": "Partager le dossier",
+    "leave_question": "Êtes-vous sûr de vouloir quitter ce groupe de partage ?",
+    "shared_with": "Partagé avec",
+    "in_app_shares": {
+      "items": "Éléments partagés dans l'application",
+      "folders": "Dossiers partagés dans l'application",
+      "quick_shares": "Éléments partagés rapides"
+    },
+    "no_data": {
+      "title": "Il n’y a aucun élément à lister.",
+      "description": "Les éléments partagés entre vous et les autres apparaîtront ici",
+      "quick_share_description": "Envoyez un lien vers l’élément à n’importe qui, il n'a pas besoin d’un compte Locker pour le voir.",
+      "add": "Nouveau partage"
+    },
+    "quick_shares": {
+      "sharing_time": "Nombre de partages",
+      "views": "Vues",
+      "expiration": "Expiration",
+      "anyone": "Tout le monde",
+      "nobody": "Personne",
+      "choose_an_item": "Choisir un élément",
+      "share_with": "Partager avec",
+      "anyone_with_the_link": "N’importe qui disposant du lien",
+      "only_invited_people": "Seulement les personnes invitées",
+      "link_expires_after": "Le lien expirera après",
+      "unlimited_access": "Accès illimité",
+      "times_access": "Nombre d’accès",
+      "get_link_to_share": "Obtenir le lien à partager",
+      "email_addresses_share": "Adresses e-mail des destinataires du partage",
+      "email_addresses_share_note": "Ils devront vérifier leur adresse e-mail avant d’accéder à l’élément",
+      "expiration_description": "Le lien de partage de cet élément expirera à {{time}}",
+      "expire_options": {
+        "an_hour": "1 heure",
+        "a_day": "1 jour",
+        "a_week": "1 semaine",
+        "two_weeks": "2 semaines",
+        "a_month": "1 mois",
+        "no_expiration": "Pas d’expiration"
+      }
+    },
+    "new_share": {
+      "choose_option": "Choisissez votre option de partage",
+      "in_app_share_items": "Partages dans l’application",
+      "in_app_share_items_note": "Partagez avec des utilisateurs de Locker ou un groupe d’utilisateurs de Locker (uniquement avec Locker professionnel). Ils peuvent voir ou modifier votre élément.",
+      "in_app_share_folder": "Dossiers partagés dans l'application",
+      "in_app_share_folder_note": "Partagez avec les utilisateurs de Locker (uniquement pour les entreprises Locker). Ils peuvent voir ou modifier votre dossier.",
+      "quick_shares": "Partages rapides",
+      "get_shareable_link": "Obtenir un lien de partage",
+      "get_shareable_link_note": "Envoyez un lien vers l’élément à n’importe qui, il n'a pas besoin d’un compte Locker pour le voir.",
+      "choose_items": "Sélectionner les éléments",
+      "choose_items_note": "Vous pouvez en choisir autant que vous le souhaitez.",
+      "personal_email_or_group": "E-mail personnel ou nom du groupe",
+      "search_email_or_group_note": "Ajoutez une adresse e-mail ou un nom de groupe, puis appuyez sur la touche Entrée.",
+      "search_inventory": "Rechercher dans l’inventaire",
+      "personal_email_or_group_placeholder": "Entrez l'email ou le nom du groupe à rechercher",
+      "choose_folder": "Choisir un dossier",
+      "search_folder": "Rechercher dans le répertoire",
+      "personal_email": "Email personnel",
+      "personal_email_placeholder": "Entrez l'email à rechercher",
+      "personal_email_note": "Ajoutez une adresse e-mail, puis appuyez sur la touche Entrée."
+    }
+  },
+  "import_export": {
+    "title": "Import/Export",
+    "description": "Gérer les détails de votre profil et les préférences de votre compte.",
+    "import": "Importer des éléments",
+    "file_content": "Contenu du fichier",
+    "import_description": "Transférer des mots de passe et d’autres éléments à partir du navigateur ou de fichiers.",
+    "export": "Exporter les éléments",
+    "export_description": "Entrez votre mot de passe pour exporter les données de votre coffre.",
+    "choose_format": "Choisissez un format de fichier :",
+    "upload_file": "Télécharger un fichier depuis votre ordinateur",
+    "confirm": "{{type}}",
+    "popular": "Populaires",
+    "others": "Autres",
+    "copy_paste_file_contents": "ou copiez/collez le contenu du fichier à importer",
+    "instructions": "Instructions {{name}}",
+    "select_appropriate_file": "Veuillez sélectionner le fichier approprié",
+    "incorrect_format": "Les données ne sont pas dans le format attendu",
+    "import_failed": "Échec de l’importation des données",
+    "no_data": "Pas de données",
+    "import_success": "{{foldersCount}} dossiers importés, {{ciphersCount}}/{{total}} éléments"
+  },
+  "instructions": {
+    "see_details": "Voir les instructions détaillées sur notre site d’aide à"
+  },
+  "timeouts": {
+    "one_minute": "1 minute",
+    "five_minutes": "5 minutes",
+    "fifteen_minutes": "15 minutes",
+    "thirty_minutes": "30 minutes",
+    "one_hour": "1 heure",
+    "four_hours": "4 heures",
+    "two_weeks": "2 semaines",
+    "on_refresh": "Au rechargement du navigateur"
+  },
+  "security": {
+    "unlock_methods": {
+      "title": "Méthode de déverrouillage",
+      "description": "Déverrouillez votre coffre avec le mot de passe maître, passkey ou les clés de sécurité. Vous pouvez utiliser toutes les méthodes disponibles."
+    },
+    "change_password": {
+      "title": "Mot de passe du compte",
+      "description": "Tous les comptes Locker sont protégés avec le cryptage AES-256 et la technologie Zero Knowledge pour une meilleure sécurité et une meilleure confidentialité, quel que soit le forfait choisi."
+    },
+    "passkey": {
+      "title": "Passkeys",
+      "add_new_key": "Ajouter un nouveau passkey",
+      "add_new_key_note": "Utilisez une clé de sécurité ou un téléphone Android pour créer passkey. Vous devez authentifier <b>deux fois</b> avec votre appareil.",
+      "add_new_key_description": "Tout d'abord, entrez le nom de passkey.",
+      "description": "Utilisez Visage, Empreinte digitale ou PIN sur un téléphone Android ou une clé de sécurité pour déverrouiller votre coffre. Disponible sur le navigateur Web."
+    },
+    "passwordless": {
+      "title": "Clés de sécurité",
+      "description": "Authentifiez-vous avec une clé de sécurité physique pour déverrouiller votre coffre (vous pouvez ajouter jusqu’à 3 clés). L'installation de l'application de bureau est requise.",
+      "security_keys_added": "Clés de sécurité ajoutées",
+      "add_new_key": "Ajouter une nouvelle clé",
+      "require_passwordless": "Une connexion sans mot de passe est requise dans votre entreprise et ne peut pas être désactivée."
+    },
+    "mobile_passwordless": {
+      "title": "Connexion sans mot de passe mobile",
+      "description": "Scannez un code QR pour vous connecter à l'application mobile.",
+      "action": "Scanner le QR code",
+      "enter_code": "Entrez le code OTP depuis l'application mobile ici",
+      "code": "Code OTP",
+      "point_phone": "Pointez l'appareil photo de votre téléphone sur le QR Code ci-dessous pour confirmer la connexion",
+      "expire_in": "Le code expire dans : {{expireCountdown}}s",
+      "expired": "Code QR expiré"
+    },
+    "two_fa": {
+      "title": "Authentification à deux facteurs (2FA)",
+      "description": "Créez un niveau de sécurité supplémentaire en configurant 2FA pour votre compte Locker.",
+      "turn_on": "Activer la vérification en 2 étapes",
+      "turn_off": "Désactiver la vérification en deux étapes",
+      "setup_on": "L'authentification en deux étapes est",
+      "your_second_step": "Votre deuxième étape",
+      "your_second_step_description": "Après avoir entré votre mot de passe, on vous demandera une deuxième étape de vérification.",
+      "require_2fa": "L'authentification à deux facteurs (2FA) est requise dans votre entreprise et ne peut pas être désactivée.",
+      "email_otp": {
+        "name": "E-mail d’authentification",
+        "description": "Nous vous demanderons un code de sécurité si nous remarquons une connexion depuis un appareil inhabituel.",
+        "send_code": "Envoyer le code par e-mail",
+        "have_code": "J’ai un code",
+        "enter_code": "Entrez le code de vérification ici",
+        "sent_to": "Un e-mail a été envoyé à {{email}}"
+      },
+      "smart_otp": {
+        "description": "Gardez votre compte plus sécurisé avec une deuxième étape de connexion.",
+        "name": "Authentification de l'application",
+        "name_description": "Gardez votre compte plus sécurisé avec une deuxième étape de connexion.",
+        "enter_code": "Entrez le code qui a été généré ici",
+        "step1": {
+          "title": "Télécharger le gestionnaire de mots de passe Locker",
+          "description": "Téléchargez l'application Locker Password Manager pour votre téléphone mobile, ordinateur de bureau ou installez-la dans l'extension de votre navigateur."
+        },
+        "step2": {
+          "title": "Écrivez cette clé suivante",
+          "description": "Notez cette clé <key>{{key}}</key> sur papier et conservez-la en lieu sûr. Vous en aurez besoin si vous perdez ou changez votre appareil."
+        },
+        "step3": {
+          "title": "Allez dans l'onglet OTP dans l'application Locker Password Manager",
+          "description": "Ouvrez l’application Locker Password Manager et accédez à l’onglet OTP. Scannez le QR-code ci-dessous avec l’application mobile."
+        },
+        "step4": {
+          "title": "Saisissez un code d'authentification",
+          "description": "Entrez le code d’authentification donné par votre application dans la boîte."
+        }
+      }
+    },
+    "emergency_access": {
+      "title": "Accès d’urgence",
+      "description": "Cette fonctionnalité permet à d’autres propriétaires de compte Locker d’accéder à votre coffre dans certaines situations d'urgence.",
+      "add": "Ajouter un contact d’urgence",
+      "your_trusted_contacts": "Vos contacts de confiance",
+      "contacts_that_trusted_you": "Contacts qui vous ont fait confiance",
+      "pending_requests": "{{number}} Demandes en attente",
+      "grantor_recovery_initiated_info": "L’utilisateur recevra un accès après {{day}} jour(s) ou lorsque vous approuverez manuellement la demande.",
+      "grantee_recovery_initiated_info": "Vous recevrez un accès après {{day}} jour(s) ou lorsque l’utilisateur approuvera manuellement la demande.",
+      "approve_question": "Êtes-vous sûr de vouloir approuver l’accès d’urgence ? Cela autorisera {{user}} à {{type}} votre compte.",
+      "delete_question": "Êtes-vous sûr de vouloir supprimer ce contact en cas d’urgence ?",
+      "initiate_question": "Êtes-vous sûr de vouloir demander un accès d’urgence ? Vous recevrez un accès après {{day}} jour(s) ou lorsque l’utilisateur approuvera manuellement la demande.",
+      "actions": {
+        "accept": "Accepter",
+        "request_access": "Demander l’accès",
+        "view": "Voir",
+        "reset_their_lp": "Réinitialiser leur mot de passe Locker",
+        "reinvite": "Renvoyer l'invitation",
+        "reject": "Rejeter",
+        "approve": "Approuver"
+      },
+      "emergency_contact": {
+        "invite": "Inviter un contact d’urgence",
+        "user_access": "Accès utilisateur",
+        "view": "Voir",
+        "view_description": "Ils peuvent voir tous les éléments de votre coffre",
+        "takeover": "Prise de contrôle",
+        "takeover_description": "Ils peuvent réinitialiser votre mot de passe",
+        "wait_time": "Temps d’attente",
+        "wait_time_description": "Temps d’attente avant autorisation automatique de l’accès."
+      },
+      "takeover": {
+        "title": "Prise de contrôle",
+        "new_id_password": "Nouveau mot de passe de Locker ID",
+        "re_new_id_password": "Re-rentrer le nouveau mot de passe de Locker ID",
+        "new_master_password": "Saisissez le nouveau mot de passe",
+        "re_new_master_password": "Ré-entrez votre nouveau mot de passe"
+      }
+    },
+    "manage_sessions": {
+      "title": "Gestion des sessions",
+      "description": "",
+      "logout": "Déconnecter de tous les appareils",
+      "log_out_of": "Se déconnecter de ce {{device_name}}",
+      "log_out_of_description": "Cela supprimera l'accès à votre compte Locker de l'appareil. Entrez le mot de passe pour confirmer.",
+      "log_out_all": "Révoquer les sessions",
+      "log_out_all_description": "Inquiet que votre compte soit connecté sur un autre appareil ? Continuez ci-dessous pour interdire tous les ordinateurs ou appareils que vous avez précédemment utilisés. Cette étape de sécurité est recommandée si vous avez déjà utilisé un ordinateur public ou si vous avez accidentellement enregistré votre mot de passe sur un appareil qui n’est pas le vôtre.",
+      "log_out_all_note": "En continuant, vous serez également déconnecté de votre session actuelle, ce qui nécessitera de vous reconnecter."
+    }
+  },
+  "emergency_access_view": {
+    "title": "Vue d'accès d'urgence",
+    "description": "Créé par: {{owner}}",
+    "view_item": "Afficher l’élément"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark_all_as_read": "Tout marquer comme lu",
+    "no_notifications": "Pas de nouvelle notification",
+    "item_no_longer_shared": "Cet élément n’est plus partagé"
+  },
+  "security_tools": {
+    "title": "Outils de sécurité",
+    "description": "Outils de sécurité du gestionnaire de Locker",
+    "password_generate": {
+      "title": "Générateur de mot de passe",
+      "description": "Créez des mots de passe sécurisés pour vos comptes"
+    },
+    "password_health": {
+      "title": "Santé de mot de passe",
+      "description": "Identifier les mots de passe qui peuvent vous mettre en danger",
+      "exposed_time": "Temps d'exposition (s)",
+      "exposed_time_count": "Exposé {{count}} fois",
+      "good_news": "Bonnes nouvelles",
+      "good_news_details": "Tous les éléments de votre coffre avec des mots de passe forts",
+      "used_time_count": "Utilisé {{count}} fois",
+      "very_weak": "mot de passe très faible",
+      "weak_passwords": {
+        "title": "Mots de passe faibles",
+        "description": "Facile à deviner",
+        "alert_title": "Mots de passe faibles trouvés",
+        "alert_description": "Nous avons trouvé {{count}} éléments dans votre coffre avec des mots de passe qui ne sont pas forts. Vous devriez les mettre à jour pour utiliser des mots de passe plus forts."
+      },
+      "reused_passwords": {
+        "title": "Mots de passe réutilisés",
+        "description": "Utilisé pour plusieurs comptes",
+        "alert_title": "Mots de passe réutilisés trouvés",
+        "alert_description": "Nous avons trouvé {{count}} mots de passe qui sont réutilisés dans votre coffre. Vous devriez les changer pour utiliser des mots de passe différents."
+      },
+      "exposed_passwords": {
+        "title": "Mots de passe exposés",
+        "description": "Les mots de passe exposés sont des mots de passe qui ont été découverts lors de fuites de données connues qui ont été rendues publiques ou vendues sur le Web par des pirates informatiques.",
+        "alert_title": "Mots de passe exposés trouvés",
+        "alert_description": "Nous avons trouvé {{count}} éléments dans votre coffre qui ont des mots de passe exposés dans des fuites de données connues. Vous devriez les changer pour utiliser un nouveau mot de passe."
+      }
+    },
+    "data_breach_scanner": {
+      "title": "Analyseur de brèches de données",
+      "description": "Vérifiez si vos données sensibles ont été divulguées en ligne",
+      "content_title": "Une &quot; brèche&quot; est un incident où les données d'un site ont été obtenues illégalement par des pirates informatiques, puis rendues publiques. Examinez les types de données qui ont été compromis (adresses électroniques, mots de passe, cartes de crédit, etc.) et prenez les mesures appropriées, comme la modification des mots de passe.",
+      "input_label": "Vérifiez tous les noms d'utilisateur ou les adresses e-mails que vous utilisez.",
+      "action": "Vérifier les brèches",
+      "breach_not_found_details": "{{username}} n’a été trouvé dans aucune brèche de données en ligne.",
+      "alert_title": "Des comptes ayant fuité ont été trouvés",
+      "alert_description": "{{username}} a été trouvé dans {{different_count}} brèches différentes de données en ligne.",
+      "compromised_data": "Données compromises",
+      "website": "Site Web",
+      "affected_users": "Utilisateurs concernés",
+      "breach_occurred": "Brèche ayant eu lieu",
+      "added_occurred": "Ajouté s'est produit"
+    }
+  },
+  "quick_share_detail": {
+    "title": "Simple et rapide",
+    "description": "Locker Quick Share vous permet de partager des informations sensibles (y compris des mots de passe, des cryptomonnaies…) avec le chiffrement et un lien qui expire automatiquement. Ainsi, vous pouvez garder ce que vous partagez en privé et vous assurer que vos données ne restent pas en ligne pour toujours.",
+    "action": "Essayez Locker maintenant !",
+    "product_of": "Un produit de",
+    "copyright": "Copyright ©️ {{year}} Locker.io · Tous droits réservés.",
+    "terms": "Termes",
+    "privacy_policy": "Politique de confidentialité",
+    "reveal_information": "Afficher l’information",
+    "hide_information": "Masquer l’information",
+    "not_fond": {
+      "title": "Désolé, il n’y a aucun élément à afficher.",
+      "description": {
+        "title": "Vous pouvez trouver la raison dans l’un des cas suivants :",
+        "note1": "Le lien pour voir l’élément a expiré ou a atteint un accès limité.",
+        "note2": "Le propriétaire a cessé de partager l’élément.",
+        "note3": "Le lien que vous avez saisi est incorrect."
+      }
+    },
+    "verify_email": {
+      "title": "Vous avez été partagé des données sensibles",
+      "description": " Vous devez vous vérifier avant de voir l’élément. Veuillez entrer votre e-mail pour recevoir un code OTP.",
+      "enter_otp": "Veuillez entrer votre code OTP.",
+      "action": "Envoyer le code",
+      "resend": "Renvoyer le code"
+    }
+  },
+  "enterprises": {
+    "title": "Sociétés",
+    "add": "Nouvelle société",
+    "edit": "Modifier les informations de la société",
+    "name": "Nom de la société",
+    "subtitle": "Subtitle"
+  },
+  "email_settings": {
+    "title": "Paramètres d’e-mail",
+    "description": "Intégrez un fournisseur de services de messagerie pour activer les notifications par courriel pour les membres de votre groupe.",
+    "email_provider": {
+      "title": "Fournisseur De Messagerie",
+      "description": "Choisissez un fournisseur de messagerie que vous souhaitez utiliser pour l'envoi d'e-mails."
+    },
+    "set_up_integration": {
+      "title": "Configurer l'intégration"
+    },
+    "general": {
+      "from_email": "E-mail de l'expéditeur",
+      "from_email_placeholder": "Adresse par défaut à partir de laquelle les e-mails seront envoyés",
+      "from_name": "Nom de l'expéditeur",
+      "from_name_placeholder": "Nom par défaut à partir duquel les e-mails seront envoyés"
+    },
+    "smtp": {
+      "title": "SMTP",
+      "provider": "Fournisseur SMTP",
+      "description": "Les identifiants SMTP seront stockés dans votre base de données. Quelques attentes importantes à propos de votre serveur:",
+      "description1": "Il doit supporter l'authentification LOGIN",
+      "description2": "Il doit supporter TLS 1.0 ou supérieur",
+      "note": "Besoin d'aide pour s'intégrer au SMTP?",
+      "note_link": "Suivez nos instructions",
+      "host": "Hôte",
+      "host_placeholder": "Votre hôte SMTP",
+      "port": "Port",
+      "port_placeholder": "Port SMTP",
+      "port_description": "Les ports communs pour la transmission SMTP sont 25, 465, 587.",
+      "username": "Nom d’utilisateur",
+      "username_placeholder": "Votre nom d'utilisateur SMTP",
+      "password": "Mot de passe",
+      "password_placeholder": "Votre mot de passe SMTP "
+    },
+    "amazon_ses": {
+      "title": "Amazon SES"
+    },
+    "send_grid": {
+      "title": "SendGrid",
+      "api_key": "Clé API",
+      "api_key_placeholder": "Clé API de SendGrid",
+      "domain": "Domaine/Sous-Domaine",
+      "domain_placeholder": "Domaine/Sous-domaine configuré dans SendGrid"
+    },
+    "sendinblue": {
+      "title": "Sendinblue"
+    },
+    "google": {
+      "title": "Google"
+    },
+    "outlook": {
+      "title": "Aperçu"
+    },
+    "send_test": {
+      "title": "Envoyer l'e-mail test",
+      "description": "Entrez une adresse e-mail pour envoyer un e-mail de test à"
+    },
+    "reset": {
+      "title": "Réinitialiser le plugin de messagerie ?",
+      "description": "Êtes-vous sûr de vouloir réinitialiser ? Toutes les modifications que vous avez apportées seront réinitialisées et vos utilisateurs ne recevront plus d'e-mails."
+    }
+  },
+  "sso_configuration": {
+    "title": "Configuration OAuth",
+    "description": "Configuration OAuth pour obliger les utilisateurs à se connecter en utilisant SSO",
+    "sso_provider": "Fournisseur",
+    "identifier": "Identifiant",
+    "oauth_authorization_url": "URL d'autorisation OAuth",
+    "oauth_token_url": "URL du jeton OAuth",
+    "redirect_behavior": "Comportement de redirection",
+    "api_url": "URL de l'API fournissant les détails de l'utilisateur lorsque vous êtes authentifié",
+    "oauth_client_id": "ID client OAuth",
+    "oauth_client_secret": "Secret client OAuth",
+    "oauth_scopes": "Portées OAuth à demander",
+    "email_claim_types": "Types de réclamation par courriel",
+    "name_claim_types": "Types de revendication de nom",
+    "reset_question": "Êtes-vous sûr de vouloir réinitialiser la configuration ?",
+    "placeholder": {
+      "sso_provider": "oauth2",
+      "identifier": "vincs-sso",
+      "https": "https://",
+      "enter_id": "Saisir l'ID",
+      "enter_secret": "Entrez le secret",
+      "enter_scopes": "Lire ou ...",
+      "email_claim_types": "EX: email",
+      "name_claim_types": "EX: nom"
+    }
+  },
+  "enterprise_dashboard": {
+    "title": "Tableau de bord",
+    "adoption_rate": {
+      "title": "Adoption",
+      "accessed": "Accès",
+      "requested": "Demandé",
+      "created": "Créé",
+      "total": "Total des utilisateurs"
+    },
+    "news": {
+      "title": "Actualités",
+      "users_blocked": "Utilisateurs bloqués par les connexions échouées"
+    },
+    "user_login": {
+      "title": "Connexion de l'utilisateur par temps",
+      "user": "Utilisateur"
+    },
+    "password_security": {
+      "title": "Sécurité de mot de passe",
+      "weak_password": "Utilisateurs avec un mot de passe faible",
+      "more_than_weak_passwords": "Utilisateurs avec plus de 10 mots de passe faibles",
+      "leaked_account": "Utilisateurs avec au moins 1 compte fuite"
+    },
+    "users_blocked": {
+      "title": "Utilisateurs bloqués par les connexions échouées"
+    }
+  },
+  "enterprise_members": {
+    "title": "Utilisateurs",
+    "user_email": "E-mail de l’utilisateur",
+    "role": "Rôle",
+    "upload_file": "Transférer un fichier",
+    "upload_file_guide": "ou télécharger le fichier des utilisateurs (format CSV)",
+    "add": "Inviter un utilisateur",
+    "edit": "Éditer mes détails",
+    "all_roles": "Tous les rôles",
+    "all_statuses": "Tous les statuts",
+    "tabs": {
+      "active": "Licences actives",
+      "pending": "Membres en attente",
+      "disabled": "Membres désactivés",
+      "blocked": "Membres bloqués"
+    },
+    "form": {
+      "title": "Inviter des gens dans l'entreprise",
+      "username_description": "Ajouter un courriel et appuyer sur la touche Entrée",
+      "role_description": "Rôle des nouveaux membres",
+      "full_name_description": "Nom complet du nouveau membre",
+      "new_member_info": "Informations sur le nouveau membre",
+      "new_member_description": "Le ou les mots de passe seront affichés une fois. Copiez ou téléchargez pour partager avec les bonnes personnes. Vous pouvez sauter cette étape si vous avez configuré {{mail}} pour envoyer des invitations par e-mail",
+      "new_member_invite": "Si vous avez configuré {{mail}}, le ou les nouveaux membres recevront une invitation via leur adresse e-mail"
+    }
+  },
+  "enterprise_groups": {
+    "title": "Groupes",
+    "group_name": "Nom du groupe",
+    "add": "Nouveau groupe",
+    "edit": "Modifier les informations du groupe",
+    "users": "Utilisateurs du Groupe",
+    "users_of_group": "Liste des utilisateurs des groupes",
+    "no_data": {
+      "title": "Ajouter votre premier groupe de société",
+      "description": "Ajouter un groupe pour gérer les utilisateurs."
+    }
+  },
+  "enterprise_policies": {
+    "title": "Politiques",
+    "password_requirements": {
+      "title": "Exigences de mot de passe",
+      "description": "Forcer les utilisateurs à utiliser un mot de passe fort.",
+      "modal": {
+        "description": "Définissez les exigences de mot de passe pour vos membres. Ces règles s'appliquent à tous les mots de passe dans leur coffre.",
+        "minimum_password_length": "Longueur minimale du mot de passe",
+        "password_complexity": "Complexité du mot de passe",
+        "requires_lowercase": "Nécessite des minuscules",
+        "requires_uppercase": "Nécessite des UPPERCASE",
+        "requires_digit": "Nécessite des chiffres",
+        "requires_special_character": "Nécessite des caractères spéciaux"
+      }
+    },
+    "block_failed_logins": {
+      "title": "Bloquer les connexions échouées",
+      "description": "Bloquer l'utilisateur lorsqu'il y a plusieurs tentatives de connexion échouées.",
+      "modal": {
+        "description": "Empêcher les utilisateurs de se connecter à Locker quand il y a trop de connexions échouées.",
+        "block_when": "Bloquer un utilisateur quand il y a :",
+        "how_long": "Combien de temps souhaitez-vous bloquer la connexion de l'utilisateur ?",
+        "receive_an_email": "Recevoir un email quand un membre est bloqué",
+        "do_not_notify_me": "Ne pas recevoir de notifications",
+        "failed_login_attempts": "tentatives de connexion infructueuses"
+      }
+    },
+    "passwordless_login": {
+      "title": "Connexion sans mot de passe",
+      "description": "Les utilisateurs sont forcés d'utiliser un mot de passe sans mot de passe pour se connecter à Locker.",
+      "modal": {
+        "description": "Exiger que les utilisateurs se connectent en utilisant la méthode sans mot de passe (actuellement standard FIDO2).",
+        "choose_password_or_passwordless": "L'utilisateur peut choisir entre un mot de passe ou une méthode sans mot de passe",
+        "only_allow_passwordless": "Autoriser uniquement la méthode sans mot de passe (le mot de passe est désactivé)"
+      }
+    },
+    "log_in_with_2fa": {
+      "title": "Se connecter avec 2FA",
+      "description": "Utilisez l’authentification à deux facteurs (2FA) pour vous connecter à Locker pour la première fois sur de nouveaux appareils.",
+      "modal": {
+        "description": "Les utilisateurs doivent utiliser l'authentification à deux facteurs (2FA) pour se connecter à Locker pour la première fois sur de nouveaux appareils.",
+        "description1": "Quand activé, les utilisateurs sont forcés d'utiliser un authentificateur de leurs choix (ex: Google Authenticator, Authy, Locker,...)",
+        "only_admin_and_primary_admin": "Uniquement l'administrateur et l'administrateur principal",
+        "apply_to_all_users": "Appliquer à tous les utilisateurs"
+      }
+    }
+  },
+  "enterprise_activity_logs": {
+    "title": "Journal des activités",
+    "all_actions": "Toutes les actions",
+    "all_users": "Tous les membres",
+    "actions": {
+      "member_status": "Statut du membre",
+      "role_changes": "Modifications de rôle",
+      "policy_violations": "Violations de politique",
+      "user_login": "Connexion utilisateur",
+      "sharing": "Partage du fichier"
+    }
+  },
+  "password_history": {
+    "title": "Historique des mots de passe",
+    "restore_password": "Restaurer le mot de passe",
+    "question": "Êtes-vous sûr de vouloir restaurer ce mot de passe ? Cela remplacera le mot de passe actuel ?"
+  },
+  "policies": {
+    "title": "Politiques",
+    "description": "Votre compte appartient à <span>{{enterprise_name}}</span>. Toute politique de mot de passe ou de connexion active apparaîtra ci-dessous.",
+    "issues": "{{number}} problème(s)",
+    "good": "Correct",
+    "policy_details": "Détails de la politique",
+    "no_policies": "Il n’y a actuellement aucune politique active.",
+    "generator": "Votre mot de passe doit suivre la politique de l'entreprise.",
+    "password_requirements": {
+      "title": "Exigences de mot de passe",
+      "description": "Votre entreprise a défini les meilleures pratiques en matière de mots de passe.",
+      "policy_details_desc": "Tous les mots de passe de votre coffre doivent répondre à ces exigences :",
+      "minimum_password_length": "La longueur minimale du mot de passe est {{length}}",
+      "requires_special_character": "Nécessite des caractères spéciaux (@#!$%)",
+      "requires_lowercase": "Nécessite des lettres minuscules (abc)",
+      "requires_uppercase": "Nécessite des lettres majuscules (ABC)",
+      "requires_digit": "Nécessite des chiffres (0 1 2 3)",
+      "note": "Il est fortement recommandé de changer vos mots de passe violés pour une meilleure sécurité.",
+      "note_1": "(*) Les mots de passe partagés sont également affectés par cette politique.",
+      "violated_items": "Voir les articles violés à {{number}}"
+    },
+    "block_failed_logins": {
+      "title": "Bloquer les connexions échouées",
+      "description": "Bloquer les tentatives de connexion échouées dans un laps de temps pour éviter les attaques par force brute.",
+      "note": "Votre coffre peut être bloqué pour des tentatives de connexion infructueuses consécutives. Si vous avez été empêché de vous connecter à Locker, veuillez contacter vos administrateurs pour le débloquer.",
+      "you_have_been_blocked": "Vous avez été bloqué {{count}} fois ce mois-ci"
+    },
+    "passwordless_login": {
+      "title": "Connexion sans mot de passe",
+      "description": "Connexion à Locker en utilisant la méthode sans mot de passe.",
+      "note": "Votre administrateur vous demande d'utiliser une méthode sans mot de passe (clé de sécurité ou mot de passe) pour se connecter votre coffre Locker."
+    },
+    "log_in_with_2fa": {
+      "title": "Se connecter avec 2FA",
+      "description": "Utilisez l’authentification à deux facteurs (2FA) pour vous connecter à Locker pour la première fois sur de nouveaux appareils.",
+      "note": "{target} sont requis pour utiliser l’authentification à deux facteurs (2FA) pour se connecter à Locker pour la première fois sur de nouveaux appareils."
+    }
+  },
+  "policies_violated": {
+    "title": "Éléments violés",
+    "violations": "{{count}} violation(s)",
+    "modal": {
+      "title": "Mot de passe violé",
+      "description": "Votre mot de passe a enfreint les politiques suivantes:",
+      "still_use_this_password": "Toujours utiliser ce mot de passe",
+      "change_password": "Changer le mot de passe"
+    }
+  },
+  "attachments": {
+    "title": "Fichier joint",
+    "delete_question": "Souhaitez-vous vraiment supprimer ce fichier ?",
+    "upload": {
+      "title": "Cliquez ou faites glisser pour télécharger",
+      "description": "SVG, PNG, JPG, GIF,... (la taille maximale est de 50MB)"
+    },
+    "errors": {
+      "large": "Le fichier est trop volumineux! La taille maximale est de 50 Mo.",
+      "limited": "Vous avez dépassé la limite de stockage de 1Go. Veuillez supprimer les fichiers inutiles pour libérer de l'espace."
+    }
+  }
+}

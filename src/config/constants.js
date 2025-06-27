@@ -70,7 +70,8 @@ const LANGUAGE = {
   VI: 'vi',
   EN: 'en',
   ZH: 'zh',
-  RU: 'ru'
+  RU: 'ru',
+  FR: 'fr'
 }
 
 const NOTIFICATION_TYPE = {
@@ -158,6 +159,10 @@ export default {
     {
       value: LANGUAGE.RU,
       label: 'common.russian',
+    },
+    {
+      value: LANGUAGE.FR,
+      label: 'common.french',
     },
   ],
   IMPORT_FILE_TYPES: [],
@@ -482,6 +487,11 @@ export default {
       key: 'phone',
       value: FieldType.Phone,
       pattern: 'PHONE'
+    },
+    {
+      key: 'otp',
+      value: FieldType.TOTP,
+      placeholder: 'value'
     }
   ],
   CARD_BRAND_OPTIONS: [

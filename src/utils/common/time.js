@@ -8,6 +8,7 @@ require('dayjs/locale/en')
 require('dayjs/locale/vi')
 require('dayjs/locale/zh')
 require('dayjs/locale/ru')
+require('dayjs/locale/fr')
 
 var relativeTime = require('dayjs/plugin/relativeTime')
 const localizedFormat = require('dayjs/plugin/localizedFormat')

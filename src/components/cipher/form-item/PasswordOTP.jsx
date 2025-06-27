@@ -158,7 +158,10 @@ function PasswordOTP(props) {
       }
       {
         totp && <div className='flex items-center justify-between'>
-          <DisplayOtp notes={totp}/>
+          <DisplayOtp
+            notes={totp}
+            codeSize={96}
+          />
           <Button
             type={'text'}
             disabled={disabled}

@@ -7,42 +7,44 @@ import vi_VN from '@lockerpm/design/es/locale/vi_VN'
 import en_US from '@lockerpm/design/es/locale/en_US'
 import zh_CN from '@lockerpm/design/es/locale/zh_CN'
 import ru_RU from "@lockerpm/design/es/locale/ru_RU";
+import fr_FR from "@lockerpm/design/es/locale/fr_FR";
 
 import moment from 'moment'
 import 'moment/locale/vi'
 import "moment/locale/ru";
 import 'moment/locale/zh-cn'
 
-import vi from '../locale/vi.json'
-import en from '../locale/en.json'
-import zh from '../locale/zh.json'
-import ru from '../locale/ru.json'
-
 import global from '../config/global'
 
 const getLocale = (locale) => {
   if (locale === global.constants.LANGUAGE.EN) {
     return {
-      value: en,
+      value: en_US,
       default: en_US
     }
   }
   if (locale === global.constants.LANGUAGE.VI) {
     return {
-      value: vi,
+      value: vi_VN,
       default: vi_VN
     }
   }
   if (locale === global.constants.LANGUAGE.ZH) {
     return {
-      value: zh,
+      value: zh_CN,
       default: zh_CN
     }
   }
   if (locale === global.constants.LANGUAGE.RU) {
     return {
-      value: ru,
+      value: ru_RU,
       default: ru_RU
+    }
+  }
+  if (locale === global.constants.LANGUAGE.FR) {
+    return {
+      value: fr_FR,
+      default: fr_FR
     }
   }
 }
