@@ -465,7 +465,7 @@ export default {
     },
     {
       key: 'url',
-      value: FieldType.Url,
+      value: FieldType.URL,
       defaultValue: 'https://',
       pattern: 'URL'
     },

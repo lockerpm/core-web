@@ -152,7 +152,7 @@ function CustomFields(props) {
             {
               !disabled && <Dropdown
                 menu={{
-                  items: fieldTypes.map((f) => ({ ...f, label: t(`cipher.custom_fields.${f.key}`) })),
+                  items: fieldTypes.map((f) => ({ key: f.key, label: t(`cipher.custom_fields.${f.key}`) })),
                   onClick: ({ key }) => addNewCustomField(key)
                 }}
                 trigger={['click']}
