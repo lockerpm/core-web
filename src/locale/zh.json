@@ -33,6 +33,7 @@
     "vietnamese": "Tiếng Việt",
     "chinese": "繁體中文",
     "russian": "Русский",
+    "french": "Français",
     "count": "數數",
     "search_all": "搜尋全部",
     "back": "返回",
@@ -704,7 +705,8 @@
       "email": "電子信箱",
       "date": "電子信箱",
       "month_year": "月/年",
-      "phone": "電話號碼"
+      "phone": "電話號碼",
+      "otp": "OTP"
     },
     "password": {
       "title": "登入資訊",

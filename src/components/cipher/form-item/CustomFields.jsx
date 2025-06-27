@@ -4,12 +4,12 @@ import { useTranslation } from "react-i18next";
 
 import {
   Input,
-  Select,
   Form,
   Button,
   Row,
   Col,
-  DatePicker
+  DatePicker,
+  Dropdown
 } from '@lockerpm/design';
 
 import {
@@ -17,11 +17,14 @@ import {
   CloseOutlined
 } from '@ant-design/icons';
 
+import commonComponents from '../../common';
+
 import global from '../../../config/global';
 import common from '../../../utils/common';
 
 function CustomFields(props) {
-  const { t } = useTranslation()
+  const { DisplayOtp } = commonComponents;
+  const { t } = useTranslation();
   const {
     form,
     className,
@@ -38,19 +41,21 @@ function CustomFields(props) {
     return fieldTypes.find((t) => t.value === type)
   }
 
-  const resetField = (type, index) => {
-    const field = getFieldInfo(type)
-    form.setFieldValue('fields', customFields.map((f, i) => ({
-      ...f,
-      type: i === index ? type : f.type,
-      name: i === index ? t(`cipher.custom_fields.${field?.key}`).toString() : f.name,
-      value: i === index ? field?.defaultValue || '' : f.value,
-    })))
-  }
-
   const dateFormat = useMemo(() => {
     return common.datePickerFormat(locale)
   }, [locale])
+
+  const addNewCustomField = (key) => {
+    const fieldType = fieldTypes.find((f) => f.key == key) || fieldTypes[0];
+    form.setFieldValue('fields', [
+      ...customFields,
+      {
+        type: fieldType.value,
+        name: t(`cipher.custom_fields.${fieldType.key}`).toString(),
+        value: fieldType.defaultValue || '',
+      }
+    ])
+  }
 
   return (
     <div className={`custom-fields ${className}`}>
@@ -59,9 +64,6 @@ function CustomFields(props) {
       </p>
       {
         customFields?.length > 0 && <Row gutter={[8,8]} className='mb-1'>
-          <Col span={6}>
-            <p className='text-black-500 font-semibold'>{t('common.type')}</p>
-          </Col>
           <Col span={6}>
             <p className='text-black-500 font-semibold'>{t('common.name')}</p>
           </Col>
@@ -81,21 +83,6 @@ function CustomFields(props) {
                     <Form.Item
                       {...restField}
                       className='mb-1'
-                      name={[name, 'type']}
-                      rules={[]}
-                    >
-                      <Select
-                        className='w-full'
-                        disabled={disabled}
-                        options={fieldTypes.map((f) => ({ ...f, label: t(`cipher.custom_fields.${f.key}`) }))}
-                        onChange={(v) => resetField(v, index)}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                    <Form.Item
-                      {...restField}
-                      className='mb-1'
                       name={[name, 'name']}
                       rules={[]}
                       
@@ -108,7 +95,7 @@ function CustomFields(props) {
                       />
                     </Form.Item>
                   </Col>
-                  <Col span={10}>
+                  <Col span={16}>
                     <Form.Item
                       {...restField}
                       className='mb-1'
@@ -131,7 +118,19 @@ function CustomFields(props) {
                         />
                       }
                       {
-                        !['date', 'hidden_field'].includes(field?.key) && <Input
+                        field?.key === 'otp' && <Input.Password
+                          disabled={disabled}
+                          placeholder={t(`placeholder.${field?.placeholder || field?.key}`)}
+                          addonAfter={customFields[index].value ? <DisplayOtp
+                            notes={customFields[index].value}
+                            className="w-[76px]"
+                            codeClassName="text-md font-semibold"
+                            progressSize={16}
+                          /> : undefined}
+                        />
+                      }
+                      {
+                        !['date', 'hidden_field', 'otp'].includes(field?.key) && <Input
                           disabled={disabled}
                           placeholder={t(`placeholder.${field?.placeholder || field?.key}`)}
                         />
@@ -151,24 +150,22 @@ function CustomFields(props) {
               )
             })}
             {
-              !disabled && <Button
-                type={'primary'}
-                className={customFields.length === 0 ? 'mt-2' : ''}
-                ghost
-                onClick={() => {
-                  form.setFieldValue('fields', [
-                    ...customFields,
-                    {
-                      type: fieldTypes[0].value,
-                      name: t(`cipher.custom_fields.${fieldTypes[0].key}`).toString(),
-                      value: fieldTypes[0].defaultValue || '',
-                    }
-                  ])
+              !disabled && <Dropdown
+                menu={{
+                  items: fieldTypes.map((f) => ({ key: f.key, label: t(`cipher.custom_fields.${f.key}`) })),
+                  onClick: ({ key }) => addNewCustomField(key)
                 }}
-                icon={<PlusCircleOutlined />}
+                trigger={['click']}
               >
-                {t('cipher.custom_fields.new')}
-              </Button>
+                <Button
+                  type={'primary'}
+                  className={customFields.length === 0 ? 'mt-2' : ''}
+                  ghost
+                  icon={<PlusCircleOutlined />}
+                >
+                  {t('cipher.custom_fields.new')}
+                </Button>
+              </Dropdown>
             }
           </>
         )}

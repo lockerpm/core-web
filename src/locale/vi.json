@@ -33,6 +33,7 @@
     "vietnamese": "Tiếng Việt",
     "chinese": "繁體中文",
     "russian": "Русский",
+    "french": "Français",
     "count": "Đếm",
     "search_all": "Tìm kiếm tất cả dữ liệu",
     "back": "Quay lại",
@@ -704,7 +705,8 @@
       "email": "Email",
       "date": "Ngày",
       "month_year": "Tháng / Năm",
-      "phone": "Điện thoại"
+      "phone": "Điện thoại",
+      "otp": "OTP"
     },
     "password": {
       "title": "Thông tin đăng nhập",

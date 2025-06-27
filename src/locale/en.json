@@ -33,6 +33,7 @@
     "vietnamese": "Tiếng Việt",
     "chinese": "繁體中文",
     "russian": "Русский",
+    "french": "Français",
     "count": "Count",
     "search_all": "Search all system data",
     "back": "Back",
@@ -704,7 +705,8 @@
       "email": "Email",
       "date": "Date",
       "month_year": "Month / Year",
-      "phone": "Phone"
+      "phone": "Phone",
+      "otp": "OTP"
     },
     "password": {
       "title": "Login Information",

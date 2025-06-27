@@ -1,7 +1,7 @@
 {
   "common": {
     "app_name": "Locker Password Manager",
-    "app_title": "менеджера паролей",
+    "app_title": "Password Manager",
     "total": "Итого",
     "status": "Статус",
     "created_time": "Время создания",
@@ -33,6 +33,7 @@
     "vietnamese": "Tiếng Việt",
     "chinese": "繁體中文",
     "russian": "Русский",
+    "french": "Français",
     "count": "Считать",
     "search_all": "Искать везде...",
     "back": "назад",
@@ -360,8 +361,8 @@
     "enterprise_groups": "Группы",
     "enterprise_policies": "Правила",
     "enterprise_activity_logs": "Журналы активности",
-    "secrets_manager": "Менеджер секретов",
-    "password_manager": "Менеджер паролей"
+    "secrets_manager": "Secrets Manager",
+    "password_manager": "Password Manager"
   },
   "auth_pages": {
     "username": "Электронная почта",
@@ -704,7 +705,8 @@
       "email": "Электронная почта",
       "date": "Дата",
       "month_year": "Месяц/Год",
-      "phone": "Номер телефона"
+      "phone": "Номер телефона",
+      "otp": "OTP"
     },
     "password": {
       "title": "Информация для входа",
