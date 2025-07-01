@@ -79,8 +79,12 @@ function PasswordOTP(props) {
       setIsCreateOtp(false)
     }
     setOption(v)
-    setTotp('')
-    form.setFieldValue('totp', null)
+    changeTotp(null)
+  }
+
+  const changeTotp = (v) => {
+    setTotp(v || '')
+    form.setFieldValue('totp', v)
   }
 
   return (
@@ -133,7 +137,7 @@ function PasswordOTP(props) {
             placeholder={t('placeholder.select')}
             showSearch={true}
             options={otps.map((otp) => ({ label: otp.name, value: otp.notes }))}
-            onChange={(v) => setTotp(v)}
+            onChange={(v) => changeTotp(v)}
           />
         </Form.Item>
       }
@@ -152,7 +156,7 @@ function PasswordOTP(props) {
             className='w-full'
             disabled={disabled}
             placeholder={t('placeholder.enter')}
-            onChange={(e) => setTotp(e.target.value)}
+            onChange={(e) => changeTotp(e.target.value)}
           />
         </Form.Item>
       }

@@ -20,7 +20,7 @@ const RouterLink = (props) => {
     blank = false,
     maxWidth = '100%',
     flex = 1,
-    icon = <></>,
+    icon = null,
     type = 'primary',
   } = props;
 
@@ -34,7 +34,7 @@ const RouterLink = (props) => {
   
   return (
     <Link
-      className={`cs-link ${className} text-${type}`}
+      className={`cs-link ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
       style={{ maxWidth: maxWidth, flex: flex }}
       target={blank ? '_blank' : ''}
       to={newPath}
