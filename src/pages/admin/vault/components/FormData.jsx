@@ -138,7 +138,11 @@ function FormData(props) {
       if (cloneMode || !originItem?.id) {
         await createCipher(values);
       } else {
-        await editCipher(values);
+        if (type === CipherType.Login) {
+          await editCipher({ ...values, totp: values.totp || "" });
+        } else {
+          await editCipher(values)
+        }
       }
       setPolicyItem({ violations: [] });
       if (isUploading) {

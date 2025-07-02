@@ -608,6 +608,7 @@ const DetailList = (props) => {
         itemLayout="horizontal"
         dataSource={data}
         loading={loading}
+        rowKey={(r) => r.key}
         renderItem={(item, index) => (
           <List.Item>
             <Row className="w-full" align={'middle'}>
