@@ -83,6 +83,7 @@ const DetailList = (props) => {
               (sText = showText) => <DisplayOtp
                 notes={cipher.login.totp}
                 showText={sText}
+                codeSize={96}
               />
             }
           />
@@ -526,21 +527,35 @@ const DetailList = (props) => {
     }
     return [
       ...cipherTypeData,
-      ...(cipher.fields || []).map((f) => {
+      ...(cipher.fields || []).map((f, index) => {
         let newValue = f.value;
         if (f.type === FieldType.Date) {
           const dateValue = common.convertCipherFieldDate(f.value);
           newValue = common.convertDateTime(dateValue, 'DD-MM-YYYY')
         }
         return {
-          key: f.key,
+          key: `${f.key}_${index}`,
           name: f.name,
-          value: <TextCopy
+          value: f.type !== FieldType.TOTP ? <TextCopy
             value={newValue}
             showIcon={true}
             show={showText}
             defaultShow={f.type === FieldType.Hidden ? false : showText}
             align="between"
+          /> : <TextCopy
+            value={common.getTOTP(newValue)}
+            showIcon={true}
+            align="between"
+            show={showText}
+            display={
+              (sText = showText) => <DisplayOtp
+                notes={newValue}
+                showText={sText}
+                className="w-[96px]"
+                codeClassName="text-lg font-semibold"
+                progressSize={20}
+              />
+            }
           />
         }
       }),
