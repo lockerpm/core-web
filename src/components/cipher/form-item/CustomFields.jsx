@@ -121,12 +121,12 @@ function CustomFields(props) {
                         field?.key === 'otp' && <Input.Password
                           disabled={disabled}
                           placeholder={t(`placeholder.${field?.placeholder || field?.key}`)}
-                          addonAfter={customFields[index].value ? <DisplayOtp
+                          addonAfter={<DisplayOtp
                             notes={customFields[index].value}
                             className="w-[76px]"
                             codeClassName="text-md font-semibold"
                             progressSize={16}
-                          /> : undefined}
+                          />}
                         />
                       }
                       {

@@ -57,10 +57,15 @@ const DisplayOtp = (props) => {
   }, [notes])
 
   const getOTP = async () => {
-    const otp = await global.jsCore.totpService.getCode(notes)
-    const period = await global.jsCore.totpService.getTimeInterval(notes)
-    setOtp(otp)
-    setPeriod(period)
+    if (notes) {
+      const otp = await global.jsCore.totpService.getCode(notes)
+      const period = await global.jsCore.totpService.getTimeInterval(notes)
+      setOtp(otp)
+      setPeriod(period)
+    } else {
+      setOtp('')
+      setPeriod(0)
+    }
   }
 
   return (
