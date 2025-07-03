@@ -9,7 +9,6 @@ import {
   Col,
   Image,
   Space,
-  Tag
 } from '@lockerpm/design';
 
 import { } from "@ant-design/icons";
@@ -101,7 +100,8 @@ const DetailList = (props) => {
           name: t('cipher.password.websites.title'),
           value: <div className="flex flex-col gap-1">
             {
-              cipher?.login?.uris?.map((uri) => <TextCopy
+              cipher?.login?.uris?.map((uri, index) => <TextCopy
+                key={index}
                 value={uri.uri}
                 showIcon={true}
                 show={showText}
@@ -534,7 +534,7 @@ const DetailList = (props) => {
           newValue = common.convertDateTime(dateValue, 'DD-MM-YYYY')
         }
         return {
-          key: `${f.key}_${index}`,
+          key: `custom_field_${index}`,
           name: f.name,
           value: f.type !== FieldType.TOTP ? <TextCopy
             value={newValue}
@@ -624,7 +624,7 @@ const DetailList = (props) => {
         dataSource={data}
         loading={loading}
         rowKey={(r) => r.key}
-        renderItem={(item, index) => (
+        renderItem={(item) => (
           <List.Item>
             <Row className="w-full" align={'middle'}>
               <Col lg={8} md={8} sm={24} xs={24}>
