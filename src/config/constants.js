@@ -323,6 +323,51 @@ export default {
       icon: require('../assets/images/icons/wallet-apps/trustwallet.webp'),
     },
     {
+      name: "OKX Exchange",
+      alias: 'okx',
+      icon: require('../assets/images/icons/wallet-apps/okx.png'),
+    },
+    {
+      name: "Bybit Exchange",
+      alias: 'bybit',
+      icon: require('../assets/images/icons/wallet-apps/bybit.png'),
+    },
+    {
+      name: "Ledger",
+      alias: 'ledger',
+      icon: require('../assets/images/icons/wallet-apps/ledger.png'),
+    },
+    {
+      name: "Backpack",
+      alias: 'backpack',
+      icon: require('../assets/images/icons/wallet-apps/backpack.png'),
+    },
+    {
+      name: "Electrum",
+      alias: 'electrum',
+      icon: require('../assets/images/icons/wallet-apps/electrum.png'),
+    },
+    {
+      name: "Ellipal",
+      alias: 'ellipal',
+      icon: require('../assets/images/icons/wallet-apps/ellipal.png'),
+    },
+    {
+      name: "Phantom",
+      alias: 'phantom',
+      icon: require('../assets/images/icons/wallet-apps/phantom.png'),
+    },
+    {
+      name: "Rabby",
+      alias: 'rabby',
+      icon: require('../assets/images/icons/wallet-apps/rabby.png'),
+    },
+    {
+      name: "Tonkeeper",
+      alias: 'tonkeeper',
+      icon: require('../assets/images/icons/wallet-apps/tonkeeper.png'),
+    },
+    {
       name: 'Other',
       alias: 'other',
       icon: require('../assets/images/icons/wallet-apps/crypto-wallet.png'),

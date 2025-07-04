@@ -50,6 +50,7 @@ function CryptoBackupForm(props) {
           className='w-full'
           disabled={disabled}
           placeholder={t('placeholder.wallet_app')}
+          showSearch
           options={global.constants.WALLET_APPS.map((c) => ({
             value: c.alias,
             label: <div>
