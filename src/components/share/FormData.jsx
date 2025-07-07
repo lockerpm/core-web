@@ -89,7 +89,7 @@ function FormData(props) {
   }, [allCollections, item, folderId])
 
   const collectionCiphers = useMemo(() => {
-    return allCiphers.filter((f) => f.collectionIds.length > 0 && f.collectionIds[0] === originCollection?.id)
+    return allCiphers.filter((f) => f.collectionIds?.length > 0 && f.collectionIds[0] === originCollection?.id)
   }, [allCiphers, item, originCollection])
 
   useEffect(() => {
