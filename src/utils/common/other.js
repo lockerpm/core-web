@@ -81,15 +81,9 @@ const detectCardBrand = (cardNumber) => {
 }
 
 const cardBrandByNumber = (number) => {
-  const cardLabel = detectCardBrand(number)
+  const cardLabel = detectCardBrand(number) || "Other"
   const brandOption = global.constants.CARD_BRAND_OPTIONS.find(o => o.label === cardLabel)
-  if (brandOption) {
-    return brandOption.value
-  }
-  if (cardLabel) {
-    return 'Other'
-  }
-  return null
+  return brandOption || global.constants.CARD_BRAND_OPTIONS[0]
 }
 
 const selectedWalletApp = (alias) => {

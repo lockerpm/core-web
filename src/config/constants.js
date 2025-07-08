@@ -540,16 +540,51 @@ export default {
     }
   ],
   CARD_BRAND_OPTIONS: [
-    { label: '----', value: '', icon: '' },
-    { label: 'Visa', value: 'Visa' },
-    { label: 'Mastercard', value: 'Mastercard' },
-    { label: 'American Express', value: 'Amex' },
-    { label: 'Discover', value: 'Discover' },
-    { label: 'Diners Club', value: 'Diners Club' },
-    { label: 'JCB', value: 'JCB' },
-    { label: 'Maestro', value: 'Maestro' },
-    { label: 'UnionPay', value: 'UnionPay' },
-    { label: 'Other', value: 'Other' }
+    {
+      label: 'Other',
+      value: 'Other',
+      icon: require('../assets/images/icons/cards/card.png'),
+    },
+    {
+      label: 'Visa',
+      value: 'Visa',
+      icon: require('../assets/images/icons/cards/visa.png'),
+    },
+    {
+      label: 'Mastercard',
+      value: 'Mastercard',
+      icon: require('../assets/images/icons/cards/mastercard.png'),
+    },
+    {
+      label: 'American Express',
+      value: 'Amex',
+      icon: require('../assets/images/icons/cards/american-express.png'),
+    },
+    {
+      label: 'Discover',
+      value: 'Discover',
+      icon: require('../assets/images/icons/cards/discover.png'),
+    },
+    {
+      label: 'Diners Club',
+      value: 'Diners Club',
+      icon: require('../assets/images/icons/cards/diners-club.png'),
+    },
+    {
+      label: 'JCB',
+      value: 'JCB',
+      icon: require('../assets/images/icons/cards/jcb.png'),
+    },
+    {
+      label: 'Maestro',
+      value: 'Maestro',
+      icon: require('../assets/images/icons/cards/maestro.png'),
+    },
+    {
+      label: 'UnionPay',
+      value: 'UnionPay',
+      icon: require('../assets/images/icons/cards/union-pay.png'),
+    },
   ],
   EXP_MONTH_OPTIONS: [
     { label: '01', value: '1' },

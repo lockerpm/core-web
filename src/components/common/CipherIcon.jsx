@@ -52,6 +52,13 @@ const CipherIcon = (props) => {
             shape: 'square'
           }
         }
+      } else if (cipher.type === CipherType.Card) {
+        const brand = common.cardBrandByNumber(cipher?.card?.number)
+        logo = {
+          src: brand.icon,
+          alt: brand.label,
+          shape: 'square'
+        }
       }
     }
     const cipherType = typeKey ? common.cipherTypeInfo('key', typeKey) : common.cipherTypeInfo('type', type)

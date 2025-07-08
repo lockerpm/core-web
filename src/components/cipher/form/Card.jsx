@@ -7,19 +7,24 @@ import {
   Form,
   Row,
   Col,
-  Select
+  Select,
+  Image
 } from '@lockerpm/design';
 
 import {
 } from '@ant-design/icons';
 
 import global from '../../../config/global';
+import common from '../../../utils/common';
 
 function CardForm(props) {
+  const { t } = useTranslation()
   const {
+    form,
     disabled = false
   } = props
-  const { t } = useTranslation()
+
+  const number = Form.useWatch('number', form) || ''
   
   return (
     <div className={props.className}>
@@ -62,6 +67,13 @@ function CardForm(props) {
             <Input
               placeholder={t('placeholder.enter')}
               disabled={disabled}
+              addonAfter={
+                <Image
+                  style={{ width: 18, height: 18 }}
+                  preview={false}
+                  src={common.cardBrandByNumber(number).icon}
+                />
+              }
             />
           </Form.Item>
         </Col>
