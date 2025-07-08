@@ -150,7 +150,7 @@ const convertFormToCipher = (form = {}, isNewCipher = true) => {
     })
   } else if (form.type === CipherType.Card) {
     result.card = {
-      brand: common.cardBrandByNumber(form.number),
+      brand: common.cardBrandByNumber(form.number).value,
       cardholderName: form.cardholderName,
       code: form.code,
       expMonth: form.expMonth,
