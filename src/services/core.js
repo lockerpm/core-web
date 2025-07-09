@@ -43,9 +43,9 @@ async function lock () {
   if (global.jsCore) {
     await Promise.all([
       global.jsCore.cryptoService.clearKey(),
-      global.jsCore.cryptoService.clearOrgKeys(true),
-      global.jsCore.cryptoService.clearKeyPair(true),
-      global.jsCore.cryptoService.clearEncKey(true)
+      global.jsCore.cryptoService.clearOrgKeys(),
+      global.jsCore.cryptoService.clearKeyPair(),
+      global.jsCore.cryptoService.clearEncKey()
     ])
     await global.jsCore.userService.setSecurityStamp(null)
     await global.jsCore.cipherService.clear()
