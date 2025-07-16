@@ -52,13 +52,13 @@ const Name = (props) => {
 
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center w-full">
       <ImageIcon
         name={originFolder?.isCollection ? 'folder-share' : 'folder'}
         width={32}
         height={32}
       />
-      <div className="ml-2 flex-1">
+      <div className="ml-2" style={{ width: 'calc(100% - 40px)' }}>
         <div className="flex items-center">
           <RouterLink
             className={'font-semibold'}

@@ -4,10 +4,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-
-  &__block {
-    display: block !important;
-  }
+  word-break: break-all;
 
   &__2 {
     -webkit-line-clamp: 2;

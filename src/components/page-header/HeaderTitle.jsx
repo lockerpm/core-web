@@ -24,7 +24,7 @@ const HeaderTitle = (props) => {
       className="text-limited"
     >
       <p
-        className={`page-header__left--title font-semibold w-full text-limited text-limited__block ${isMarginTop && !isMobile ? 'text-2xl' : 'text-xl'}`}
+        className={`page-header__left--title font-semibold w-full text-limited ${isMarginTop && !isMobile ? 'text-2xl' : 'text-xl'}`}
         title={title}
       >
         {title}
@@ -38,7 +38,7 @@ const HeaderTitle = (props) => {
       }
       {
         subtitle && <p
-          className="page-header__left--subtitle text-limited text-limited__block"
+          className="page-header__left--subtitle text-limited"
           title={subtitle}
         >
           {subtitle}

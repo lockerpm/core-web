@@ -87,16 +87,12 @@ const Name = (props) => {
                 className="ml-1"
                 name={'shares-icon'}
                 title={t('inventory.shared')}
-              /> : <>
-                {
-                  send && common.isExpired(send) && <Tag
-                    className="ml-2"
-                    color="error"
-                  >
-                    {t('statuses.expired')}
-                  </Tag>
-                }
-              </>
+              /> : send && common.isExpired(send) ? <Tag
+                className="ml-2"
+                color="error"
+              >
+                {t('statuses.expired')}
+              </Tag> : null
             }
           />
         </div>

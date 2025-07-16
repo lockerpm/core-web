@@ -116,7 +116,7 @@ const Attachment = (props) => {
             <FileTextOutlined className="text-primary font-bold text-[36px]"/>
           </div>
           <div className="flex flex-col" style={{ width: 'calc(100% - 44px)' }}>
-            <p className="font-semibold text-limited text-limited__block text-black-500">
+            <p className="font-semibold text-limited text-black-500">
               {attachment.fileName}
             </p>
             <p className="text-black-500">
