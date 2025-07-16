@@ -318,7 +318,7 @@ function ShareMembers(props) {
                 title={
                   <div className='flex items-center justify-between'>
                     <div
-                      className='text-limited text-limited__block flex-1'
+                      className='text-limited flex-1'
                       title={item.username || item.name}
                     >
                       {item.username || item.name}

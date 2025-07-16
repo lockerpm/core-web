@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import {
@@ -30,8 +29,6 @@ const RouterLink = (props) => {
     routerQuery
   ) : '/';
 
-  const isMobile = useSelector((state) => state.system.isMobile);
-  
   return (
     <Link
       className={`cs-link ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
@@ -41,7 +38,7 @@ const RouterLink = (props) => {
     >
       <span
         title={label}
-        className={`text-limited ${isMobile ? 'text-limited__block' : ''}`}
+        className={`text-limited`}
       >
         {label}
       </span> {icon}
