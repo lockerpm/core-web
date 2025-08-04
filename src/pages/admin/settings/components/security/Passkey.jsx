@@ -26,7 +26,6 @@ const Passkey = (props) => {
     className = '',
   } = props;
   const { t } = useTranslation();
-  const isConnected = useSelector(state => state.service.isConnected)
   const isMobile = useSelector(state => state.system.isMobile);
 
   const [newKeyVisible, setNewKeyVisible] = useState(false);
@@ -37,15 +36,13 @@ const Passkey = (props) => {
 
   useEffect(() => {
     getBackupKeys();
-  }, [isConnected])
+  }, [])
 
   const getBackupKeys = async () => {
-    if (isConnected) {
-      const apiToken = await common.getAccessToken();
-      await service.setApiToken(apiToken);
-      const response = await service.listBackupPasswordless();
-      setBackupKeys(response?.filter((k) => k.type !== 'hmac') || [])
-    }
+    const apiToken = await common.getAccessToken();
+    await service.setApiToken(apiToken);
+    const response = await service.listBackupPasswordless();
+    setBackupKeys(response?.filter((k) => k.type !== 'hmac') || [])
   }
 
   const handleAddedKey = async () => {
