@@ -177,11 +177,6 @@ export default {
       icon: 'files/json',
       label: 'JSON'
     },
-    {
-      value: FILE_TYPE.ENCRYPTED_JSON,
-      icon: 'files/encrypted_json',
-      label: 'ENCRYPTED_JSON'
-    }
   ],
   CIPHER_TYPES: [
     {
