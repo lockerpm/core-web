@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
@@ -30,6 +30,8 @@ function SelectFolder(props) {
   const allCollections = useSelector((state) => state.collection.allCollections);
   const locale = useSelector((state) => state.system.locale);
 
+  const [searchText, setSearchText] = useState('')
+
   const originFolder = useMemo(() => {
     return [...allFolders, ...allCollections].find((c) => c.id === item?.folderId)
   }, [allFolders, allCollections, item])
@@ -48,7 +50,11 @@ function SelectFolder(props) {
     const result = [
       ...allFolders,
       ...allCollections
-    ].map((f) => ({
+    ]
+    .filter((f) => {
+      return f.name?.toLowerCase()?.includes(searchText?.toLowerCase())
+    })
+    .map((f) => ({
       value: f.id,
       label: <div className='flex items-center justify-between gap-2'>
         <span className='flex-1 text-limited' title={f.name}>
@@ -75,7 +81,8 @@ function SelectFolder(props) {
   }, [
     allFolders,
     allCollections,
-    locale
+    locale,
+    searchText
   ])
 
   return (
@@ -93,6 +100,8 @@ function SelectFolder(props) {
           placeholder={t('placeholder.select')}
           options={options}
           placement={placement}
+          showSearch
+          filterOption={false}
           dropdownRender={(menu) => (
             <>
               {menu}
@@ -107,6 +116,7 @@ function SelectFolder(props) {
               </Button>
             </>
           )}
+          onSearch={(v) => setSearchText(v)}
         />
       </Form.Item>
     </div>

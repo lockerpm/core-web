@@ -977,8 +977,6 @@
       },
       "takeover": {
         "title": "Chiếm quyền",
-        "new_id_password": "Mật khẩu Locker ID mới",
-        "re_new_id_password": "Nhập lại mật khẩu Locker ID mới",
         "new_master_password": "Mật khẩu mới",
         "re_new_master_password": "Nhập lại mật khẩu mới"
       }

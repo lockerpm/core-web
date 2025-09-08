@@ -977,8 +977,6 @@
       },
       "takeover": {
         "title": "接管",
-        "new_id_password": "新的 Locker ID 密碼",
-        "re_new_id_password": "再次輸入 Locker ID 密碼",
         "new_master_password": "輸入新的密碼",
         "re_new_master_password": "再次輸入新的密碼"
       }

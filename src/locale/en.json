@@ -977,8 +977,6 @@
       },
       "takeover": {
         "title": "Takeover",
-        "new_id_password": "New Locker ID password",
-        "re_new_id_password": "Re-Enter new Locker ID password",
         "new_master_password": "Enter new Password",
         "re_new_master_password": "Re-Enter new Password"
       }

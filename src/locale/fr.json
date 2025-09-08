@@ -977,8 +977,6 @@
       },
       "takeover": {
         "title": "Prise de contrôle",
-        "new_id_password": "Nouveau mot de passe de Locker ID",
-        "re_new_id_password": "Re-rentrer le nouveau mot de passe de Locker ID",
         "new_master_password": "Saisissez le nouveau mot de passe",
         "re_new_master_password": "Ré-entrez votre nouveau mot de passe"
       }
