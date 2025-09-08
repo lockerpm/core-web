@@ -182,6 +182,7 @@ const DetailList = (props) => {
           value: <TextCopy
             value={cipher.card.code}
             showIcon={true}
+            defaultShow={false}
             show={showText}
             align="between"
           />

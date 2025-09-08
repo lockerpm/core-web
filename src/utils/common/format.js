@@ -60,7 +60,7 @@ const formatText = (value, show) => {
     return result
   }
   if (!value && !show) {
-    return '********'
+    return ''
   }
   return value
 }

@@ -977,8 +977,6 @@
       },
       "takeover": {
         "title": "Перенять доступ",
-        "new_id_password": "Новый пароль Locker ID",
-        "re_new_id_password": "Введите Locker ID ещё раз",
         "new_master_password": "Введите новый пароль",
         "re_new_master_password": "Повторите новый пароль."
       }

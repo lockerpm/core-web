@@ -129,7 +129,7 @@ function CardForm(props) {
           </p>
         }
       >
-        <Input
+        <Input.Password
           placeholder={t('placeholder.enter')}
           disabled={disabled}
         />
