@@ -46,6 +46,12 @@ function PasswordOTP(props) {
   const [searchText, setSearchText] = useState('')
   const [totp, setTotp] = useState('')
 
+  const filteredOtps = useMemo(() => {
+    return otps
+      .map((otp) => ({ label: otp.name, value: otp.notes }))
+      .filter((o) => o.label?.toLowerCase()?.includes(searchText?.toLowerCase()))
+  }, [otps, searchText])
+
   useEffect(() => {
     setSearchText('')
     if (item?.login?.totp) {
@@ -61,12 +67,11 @@ function PasswordOTP(props) {
 
   useEffect(() => {
     fetchCiphers();
-  }, [searchText])
+  }, [])
 
   const fetchCiphers = async () => {
     const result = await common.listCiphers({
       deleted: false,
-      searchText: searchText,
       filters: [(c) => c.type === CipherType.TOTP]
     }, allCiphers)
     setOtps(result);
@@ -136,7 +141,9 @@ function PasswordOTP(props) {
             disabled={disabled}
             placeholder={t('placeholder.select')}
             showSearch={true}
-            options={otps.map((otp) => ({ label: otp.name, value: otp.notes }))}
+            filterOption={false}
+            options={filteredOtps}
+            onSearch={(v) => setSearchText(v)}
             onChange={(v) => changeTotp(v)}
           />
         </Form.Item>
