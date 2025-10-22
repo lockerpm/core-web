@@ -4,6 +4,7 @@
     "app_title": "Password Manager",
     "total": "全部的",
     "status": "狀態",
+    "created": "創建",
     "created_time": "建立時間",
     "updated_time": "更新時間",
     "created_by": "誰創造了",
@@ -335,7 +336,7 @@
     "terms_policy": "條款內容與條件",
     "inventory": "清單",
     "all": "所有項目",
-    "passwords": "密碼",
+    "passwords": "登入",
     "notes": "安全筆記",
     "cards": "付款卡",
     "crypto_backups": "加密資產備份",
@@ -688,7 +689,7 @@
     "master_password_note": "此項是您的 Locker 主密碼。它會隨著您更改主密碼而變動。我們自動建立了這個項目,讓您不會忘記主密碼。不用擔心,這個操作只會在您的裝置上進行,我們依然無法從伺服器端查看或編輯您的主密碼。享受使用 Locker 的樂趣吧!",
     "folder_shared_note": "這是一個共享資料夾。新增至此資料夾的任何項目都將屬於該資料夾的擁有者。",
     "types": {
-      "password": "密碼",
+      "password": "登入",
       "note": "安全筆記",
       "card": "卡片",
       "crypto_backup": "加密資產備份",
@@ -719,6 +720,7 @@
       "existing_otp": "套用現有雙因素認證設定",
       "secret_key": "密鑰或路徑",
       "select_otp": "選擇雙因素認證設定",
+      "passkey": "金鑰",
       "websites": {
         "title": "網址",
         "new": "新地址"
@@ -1117,9 +1119,9 @@
       "port": "連接埠",
       "port_placeholder": "SMTP 連接埠",
       "port_description": "SMTP傳輸常用埠為25、465、587。",
-      "使用者名稱": "使用者名稱",
+      "username": "使用者名稱",
       "username_placeholder": "您的 SMTP 使用者名稱",
-      "密碼": "密碼",
+      "password": "密碼",
       "password_placeholder": "您的 SMTP 密碼 "
     },
     "amazon_ses": {

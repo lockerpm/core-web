@@ -9,6 +9,7 @@ import SelectFolder from "./SelectFolder";
 import Attachments from "./Attachments";
 import AlertWarning from "./AlertWarning";
 import WebsiteAddresses from "./WebsiteAddresses";
+import Fido2Credentials from "./Fido2Credentials";
 
 const cipherFormItemComponents = {
   ContactForm,
@@ -21,7 +22,8 @@ const cipherFormItemComponents = {
   SelectFolder,
   Attachments,
   AlertWarning,
-  WebsiteAddresses
+  WebsiteAddresses,
+  Fido2Credentials
 }
 
 export default cipherFormItemComponents

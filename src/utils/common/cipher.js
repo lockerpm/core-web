@@ -140,6 +140,7 @@ const convertFormToCipher = (form = {}, isNewCipher = true) => {
         loginUri.uri = u.uri;
         return loginUri
       }),
+      fido2Credentials: form.fido2Credentials
     }
   } else if (form.type === CipherType.CryptoWallet) {
     result.cryptoWallet = new CryptoWalletData({
