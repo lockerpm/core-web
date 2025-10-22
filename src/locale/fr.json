@@ -336,7 +336,7 @@
     "terms_policy": "Termes et Conditions",
     "inventory": "Inventaire",
     "all": "Tout",
-    "passwords": "Mots de passe",
+    "passwords": "Connexions",
     "notes": "Notes",
     "cards": "Cartes",
     "crypto_backups": "Sauvegardes Crypto",
@@ -689,7 +689,7 @@
     "master_password_note": "Ceci est votre mot de passe maître Locker. Il changera en conséquence lorsque vous changerez votre mot de passe maître. Nous avons créé cet élément pour que vous n’oubliiez pas votre mot de passe principal. Ne vous inquiétez pas, cette opération est réalisée sur votre appareil et nous ne pouvons jamais voir ou modifier votre mot de passe maître sur notre serveur. Amusez-vous avec Locker.",
     "folder_shared_note": "Il s'agit d'un dossier partagé. Tous les éléments ajoutés à ce dossier appartiendront à son propriétaire.",
     "types": {
-      "password": "Mot de passe",
+      "password": "Se connecter",
       "note": "Note",
       "card": "Carte",
       "crypto_backup": "Sauvegarde de crypto",

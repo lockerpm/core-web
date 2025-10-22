@@ -336,7 +336,7 @@
     "terms_policy": "Điều khoản & Chính sách",
     "inventory": "Kho",
     "all": "Tất cả",
-    "passwords": "Mật khẩu",
+    "passwords": "Đăng nhập",
     "notes": "Ghi chú",
     "cards": "Thẻ",
     "crypto_backups": "Ví crypto",
@@ -689,7 +689,7 @@
     "master_password_note": "Đây là Master Password Locker của bạn. Mật khẩu này sẽ tự động thay đổi khi bạn thay đổi Master Password trong phần Cài Đặt. Chúng tôi tạo ra mục này để bạn xem lại khi quên Master Password. Đừng lo, việc tái tạo Master Password diễn ra ngay tại thiết bị của bạn, đội ngũ Locker vẫn không thể xem, sửa, can thiệp tới Master Password của bạn.",
     "folder_shared_note": "Đây là thư mục được chia sẻ. Những mục được bạn thêm vào đây sẽ thuộc về chủ sở hữu của thư mục.",
     "types": {
-      "password": "Mật khẩu",
+      "password": "Đăng nhập",
       "note": "Ghi chú",
       "card": "Thẻ",
       "crypto_backup": "Ví crypto",
