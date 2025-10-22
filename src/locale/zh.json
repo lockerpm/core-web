@@ -4,6 +4,7 @@
     "app_title": "Password Manager",
     "total": "全部的",
     "status": "狀態",
+    "created": "創建",
     "created_time": "建立時間",
     "updated_time": "更新時間",
     "created_by": "誰創造了",
@@ -719,6 +720,7 @@
       "existing_otp": "套用現有雙因素認證設定",
       "secret_key": "密鑰或路徑",
       "select_otp": "選擇雙因素認證設定",
+      "passkey": "金鑰",
       "websites": {
         "title": "網址",
         "new": "新地址"

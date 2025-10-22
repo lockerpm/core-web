@@ -4,6 +4,7 @@
     "app_title": "Password Manager",
     "total": "Итого",
     "status": "Статус",
+    "created": "Созданный",
     "created_time": "Время создания",
     "updated_time": "Время обновления",
     "created_by": "Владелец",
@@ -719,6 +720,7 @@
       "existing_otp": "Настроить из существующего OTP",
       "secret_key": "Секретный ключ или путь",
       "select_otp": "Выбрать OTP",
+      "passkey": "Пароль",
       "websites": {
         "title": "Адреса веб-сайтов",
         "new": "Новый адрес"

@@ -4,6 +4,7 @@
     "app_title": "Password Manager",
     "total": "Total",
     "status": "Status",
+    "created": "Created",
     "created_time": "Created Time",
     "updated_time": "Updated Time",
     "created_by": "Created by",
@@ -719,6 +720,7 @@
       "existing_otp": "Set up from an existing OTP",
       "secret_key": "Secret key or Path",
       "select_otp": "Select an OTP",
+      "passkey": "Passkey",
       "websites": {
         "title": "Website addresses",
         "new": "New address"

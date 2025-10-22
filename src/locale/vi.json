@@ -4,6 +4,7 @@
     "app_title": "Password Manager",
     "total": "Tổng",
     "status": "Trạng thái",
+    "created": "Đã tạo",
     "created_time": "Thời gian tạo",
     "updated_time": "Cập nhật lần cuối",
     "created_by": "Tạo bởi",
@@ -719,6 +720,7 @@
       "existing_otp": "Thiết lập từ OTP có sẵn",
       "secret_key": "Mã cài đặt hoặc đường dẫn",
       "select_otp": "Chọn một OTP",
+      "passkey": "Khóa",
       "websites": {
         "title": "Địa chỉ trang web",
         "new": "Địa chỉ mới"

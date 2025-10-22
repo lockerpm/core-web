@@ -16,10 +16,12 @@ import global from '../../../config/global';
 
 function PasswordForm(props) {
   const { GeneratePassword } = formsComponents;
-  const { WebsiteAddresses } = cipherFormItemComponents;
+  const { Fido2Credentials, WebsiteAddresses } = cipherFormItemComponents;
   const {
     form,
-    disabled = false
+    disabled = false,
+    fido2Credentials,
+    setFido2Credentials = () => {}
   } = props
   const { t } = useTranslation()
 
@@ -69,6 +71,13 @@ function PasswordForm(props) {
         disabled={disabled}
         onFill={(v) => form.setFieldValue('password', v)}
       />
+      {
+        fido2Credentials.length > 0 && <Fido2Credentials
+          disabled={disabled}
+          fido2Credentials={fido2Credentials}
+          setFido2Credentials={setFido2Credentials}
+        />
+      }
       <WebsiteAddresses
         form={form}
         disabled={disabled}

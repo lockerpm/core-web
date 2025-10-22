@@ -4,6 +4,7 @@
     "app_title": "Password Manager",
     "total": "Total",
     "status": "Statut",
+    "created": "Créé",
     "created_time": "Date de création",
     "updated_time": "Heure mise à jour",
     "created_by": "Créé Par",
@@ -719,6 +720,7 @@
       "existing_otp": "Configurer à partir d'une clé OTP existante",
       "secret_key": "Clé secrète ou chemin d’accès",
       "select_otp": "Sélectionner une clé OTP",
+      "passkey": "Clé d'accès",
       "sites web": {
         "titre": "Adresses de sites web",
         "nouveau": "Nouvelle adresse"

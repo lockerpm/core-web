@@ -70,6 +70,7 @@ function FormData(props) {
   const [originCipher, setOriginCipher] = useState(null);
   const [attachments, setAttachments] = useState([]);
   const [isUpload, setIsUpload] = useState(false);
+  const [fido2Credentials, setFido2Credentials] = useState([])
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allCollections = useSelector((state) => state.collection.allCollections)
@@ -94,6 +95,7 @@ function FormData(props) {
         form.setFieldsValue(formData)
         setOriginCipher(originItem);
         setAttachments(originItem?.attachments || []);
+        setFido2Credentials(originItem?.login?.fido2Credentials || [])
       } else {
         const formData = common.convertCipherToForm({
           type: cipherType.type || cipherTypes[0].type,
@@ -102,6 +104,7 @@ function FormData(props) {
         form.setFieldsValue(formData)
         setOriginCipher(null);
         setAttachments([]);
+        setFido2Credentials([]);
       }
     } else {
       setCloneMode(false);
@@ -139,7 +142,11 @@ function FormData(props) {
         await createCipher(values);
       } else {
         if (type === CipherType.Login) {
-          await editCipher({ ...values, totp: values.totp || "" });
+          await editCipher({
+            ...values,
+            totp: values.totp || "",
+            fido2Credentials
+          });
         } else {
           await editCipher(values)
         }
@@ -279,6 +286,8 @@ function FormData(props) {
                 visible={visible}
                 form={form}
                 disabled={callingAPI}
+                fido2Credentials={fido2Credentials}
+                setFido2Credentials={setFido2Credentials}
               />
             }
             {
