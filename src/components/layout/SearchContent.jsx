@@ -9,7 +9,6 @@ import {
 
 import {
   SearchOutlined,
-  LoadingOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
 
@@ -20,7 +19,7 @@ import common from '../../utils/common';
 import global from '../../config/global';
 
 function SearchContent(props) {
-  const { NoData, SearchText, ImageIcon } = itemsComponents;
+  const { NoData, SearchText, ImageIcon, RouterLink } = itemsComponents;
   const { CipherIcon } = commonComponents;
   const {
     onClose = () => {}
@@ -32,7 +31,6 @@ function SearchContent(props) {
   const allCollections = useSelector((state) => state.collection.allCollections)
 
   const [searchText, setSearchText] = useState(null);
-  const [searching, setSearching] = useState(false);
 
   const filteredCiphers = useMemo(() => {
     return [
@@ -95,7 +93,7 @@ function SearchContent(props) {
             size="medium"
             bordered={false}
             autoFocus={true}
-            prefix={searching ? <LoadingOutlined /> : <SearchOutlined />}
+            prefix={<SearchOutlined />}
             placeholder={t('placeholder.search')}
             onInput={(e) => setSearchText(e.target.value)}
           />
@@ -111,10 +109,21 @@ function SearchContent(props) {
         items.length <= 0 && <NoData />
       }
       {
-        items.length > 0 && <div>
-          <p className='text-l font-semibold mb-1'>
-            {t('common.results')} ({items.length})
-          </p>
+        items.length > 0 && <div className='flex flex-col gap-1'>
+          <div className='flex items-center justify-between'>
+            <p className='text-l font-semibold'>
+              {t('common.results')} ({items.length})
+            </p>
+            <div onClick={onClose}>
+              <RouterLink
+                className={'font-semibold w-auto w-max'}
+                label={'Xem tất cả'}
+                routerName={global.keys.INVENTORY}
+                routerParams={{}}
+                routerQuery={{ searchText }}
+              />
+            </div>
+          </div>
           <div className='search-results'>
             {
               items.map((item) => <div
