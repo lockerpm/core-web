@@ -24,7 +24,8 @@ const Name = (props) => {
 
   const {
     cipher = {},
-    send = null
+    send = null,
+    onClick = undefined
   } = props;
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -94,6 +95,7 @@ const Name = (props) => {
                 {t('statuses.expired')}
               </Tag> : null
             }
+            onClick={onClick}
           />
         </div>
         <TextCopy

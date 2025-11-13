@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
@@ -102,15 +102,19 @@ const VaultDetail = () => {
   const listRouterQuery = useMemo(() => {
     if (currentPage?.name === global.keys.PASSWORD_HEALTH_REUSED_ITEM) {
       return {
+        ...currentPage.query,
         active_key: 'reused_passwords'
       }
     }
     if (currentPage?.name === global.keys.PASSWORD_HEALTH_EXPOSED_ITEM) {
       return {
+        ...currentPage.query,
         active_key: 'exposed_passwords'
       }
     }
-    return {}
+    return {
+      ...currentPage.query
+    }
   }, [currentPage])
 
   const isNotfound = useMemo(() => {

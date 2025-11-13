@@ -27,7 +27,7 @@ const Vault = () => {
   const { Pagination, MultipleSelect, RouterLink, ImageIcon } = itemsComponents;
   const { NoCipher } = cipherComponents;
   const { PageHeader, DataNotFound } = commonComponents;
-  const { Filter, TableData, ListData, FormData, MoveFolder, FormAttachment } = vaultComponents;
+  const { Filter, TableData, ListData, FormData, MoveFolder, FormAttachment, DetailData } = vaultComponents;
   const { QuickShareReview } = shareComponents;
   const ShareFormData = shareComponents.FormData;
   
@@ -56,6 +56,7 @@ const Vault = () => {
   const [ciphers, setCiphers] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [formAttachmentVisible, setFormAttachmentVisible] = useState(false);
+  const [detailVisible, setDetailVisible] = useState(false);
 
   const [params, setParams] = useState({
     page: 1,
@@ -233,6 +234,11 @@ const Vault = () => {
   const handleOpenFormAttachment = (item) => {
     setSelectedItem(item);
     setFormAttachmentVisible(true);
+  }
+
+  const handleOpenDetailData = (item) => {
+    setSelectedItem(item);
+    setDetailVisible(true);
   }
 
   const getCheckboxProps = (record) => {
@@ -435,6 +441,7 @@ const Vault = () => {
                   selectionChange={handleSelectionChange}
                   getCheckboxProps={getCheckboxProps}
                   onAttachment={handleOpenFormAttachment}
+                  onDetail={handleOpenDetailData}
                 /> : <TableData
                   className="mt-4"
                   loading={syncing || loading}
@@ -451,6 +458,7 @@ const Vault = () => {
                   selectionChange={handleSelectionChange}
                   getCheckboxProps={getCheckboxProps}
                   onAttachment={handleOpenFormAttachment}
+                  onDetail={handleOpenDetailData}
                 />
               }
               {
@@ -515,6 +523,14 @@ const Vault = () => {
             item={selectedItem}
             onClose={() => {
               setFormAttachmentVisible(false);
+              setSelectedItem(null);
+            }}
+          />
+          <DetailData
+            visible={detailVisible}
+            item={selectedItem}
+            onClose={() => {
+              setDetailVisible(false);
               setSelectedItem(null);
             }}
           />

@@ -166,7 +166,8 @@
     "resend_invitation": "Resend invitation",
     "restore": "Restore",
     "use_mp_instead": "Use Password instead",
-    "sync_with_desktop": "Sync with Desktop app"
+    "sync_with_desktop": "Sync with Desktop app",
+    "view_full_page": "View full page"
   },
   "placeholder": {
     "name": "Enter name",
