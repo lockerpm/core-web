@@ -1,6 +1,4 @@
-import React, { } from "react";
-import { } from 'react-redux';
-import { } from "react-i18next";
+import React from "react";
 
 import {
   List,
@@ -26,7 +24,8 @@ const ListData = (props) => {
     onShare = () => {},
     onStopSharing = () => {},
     onPermanentlyDelete = () => {},
-    onAttachment = () => {}
+    onAttachment = () => {},
+    onDetail = () => {}
   } = props;
 
   return (
@@ -45,7 +44,10 @@ const ListData = (props) => {
             className="flex items-center justify-between w-full py-1 h-[52px]"
           >
             <div className="flex items-center" style={{ width: 'calc(100% - 120px)'}}>
-              <Name cipher={record}/>
+              <Name
+                cipher={record}
+                onClick={() => onDetail(record)}
+              />
             </div>
             <div className="ml-2 flex items-center w-[112px] justify-end">
               <Actions

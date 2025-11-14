@@ -17,6 +17,7 @@ import commonComponents from "../../../components/common";
 import shareComponents from "../../../components/share";
 import inAppSharesComponents from "./components/in-app-shares";
 import quickSharesComponents from "./components/quick-shares";
+import vaultComponents from "../vault/components";
 
 import { CipherType } from "../../../core-js/src/enums";
 
@@ -45,6 +46,8 @@ const MySharedItems = () => {
   const QuickListData = quickSharesComponents.ListData;
   const QuickTableData = quickSharesComponents.TableData;
 
+  const { DetailData } = vaultComponents;
+
   const menuTypes = global.constants.MENU_TYPES
 
   const currentPage = common.getRouterByLocation(location);
@@ -62,6 +65,7 @@ const MySharedItems = () => {
   const [reviewVisible, setReviewVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [sendId, setSendId] = useState(null);
+  const [detailVisible, setDetailVisible] = useState(false);
 
   const [params, setParams] = useState({
     page: 1,
@@ -151,6 +155,11 @@ const MySharedItems = () => {
   const handleOpenReview = (sendId) => {
     setSendId(sendId);
     setReviewVisible(true);
+  }
+
+  const handleOpenDetailData = (item) => {
+    setSelectedItem(item);
+    setDetailVisible(true);
   }
 
   const stopSharingItem = async (item) => {
@@ -245,6 +254,7 @@ const MySharedItems = () => {
                   isFolder={menuType === menuTypes.FOLDERS}
                   onUpdate={handleOpenForm}
                   onStopSharing={stopSharingItem}
+                  onDetail={handleOpenDetailData}
                 /> : <InAppTableData
                   className="mt-4"
                   loading={syncing}
@@ -253,6 +263,7 @@ const MySharedItems = () => {
                   isFolder={menuType === menuTypes.FOLDERS}
                   onUpdate={handleOpenForm}
                   onStopSharing={stopSharingItem}
+                  onDetail={handleOpenDetailData}
                 />
               }
             </div>
@@ -269,6 +280,7 @@ const MySharedItems = () => {
                   params={params}
                   isFolder={false}
                   onStopSharing={stopSharingItem}
+                  onDetail={handleOpenDetailData}
                 /> : <QuickTableData
                   className="mt-4"
                   loading={syncing}
@@ -276,6 +288,7 @@ const MySharedItems = () => {
                   params={params}
                   isFolder={false}
                   onStopSharing={stopSharingItem}
+                  onDetail={handleOpenDetailData}
                 />
               }
             </div>
@@ -307,6 +320,14 @@ const MySharedItems = () => {
         onClose={() => {
           setReviewVisible(false);
           setSendId(null);
+        }}
+      />
+      <DetailData
+        visible={detailVisible}
+        item={selectedItem}
+        onClose={() => {
+          setDetailVisible(false);
+          setSelectedItem(null);
         }}
       />
     </div>

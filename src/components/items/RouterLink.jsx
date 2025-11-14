@@ -21,6 +21,7 @@ const RouterLink = (props) => {
     flex = 1,
     icon = null,
     type = 'primary',
+    onClick = undefined,
   } = props;
 
   const currentRouter = common.getRouterByName(routerName)
@@ -30,19 +31,33 @@ const RouterLink = (props) => {
   ) : '/';
 
   return (
-    <Link
-      className={`cs-link ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
-      style={{ maxWidth: maxWidth, flex: flex }}
-      target={blank ? '_blank' : ''}
-      to={newPath}
-    >
-      <span
-        title={label}
-        className={`text-limited`}
-      >
-        {label}
-      </span> {icon}
-    </Link>
+    <>
+      {
+        onClick ? <div
+          className={`cursor-pointer ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
+          onClick={onClick}
+        >
+          <span
+            title={label}
+            className={`text-limited`}
+          >
+            {label}
+          </span> {icon}
+        </div> : <Link
+          className={`cs-link ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
+          style={{ maxWidth: maxWidth, flex: flex }}
+          target={blank ? '_blank' : ''}
+          to={newPath}
+        >
+          <span
+            title={label}
+            className={`text-limited`}
+          >
+            {label}
+          </span> {icon}
+        </Link>
+      }
+    </>
   );
 }
 

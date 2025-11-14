@@ -280,47 +280,43 @@ function FormData(props) {
               form.setFieldsValue(formData)
             }}
           />
-          <div>
-            {
-              type === CipherType.Login && <PasswordForm
-                visible={visible}
-                form={form}
-                disabled={callingAPI}
-                fido2Credentials={fido2Credentials}
-                setFido2Credentials={setFido2Credentials}
-              />
-            }
-            {
-              type === CipherType.Card && <CardForm
-                form={form}
-                disabled={callingAPI}
-              />
-            }
-            {
-              type === CipherType.CryptoWallet && <CryptoBackupForm
-                form={form}
-                disabled={callingAPI}
-              />
-            }
-            {
-              type === CipherType.Identity && <IdentityForm
-                form={form}
-                disabled={callingAPI}
-              />
-            }
-          </div>
-          <div>
-            {
-              type === CipherType.Login && <PasswordOTP
-                item={originItem}
-                form={form}
-                visible={visible}
-                disabled={callingAPI}
-                otpLimited={otpLimited}
-                setIsCreateOtp={setIsCreateOtp}
-              />
-            }            
-          </div>
+          {
+            type === CipherType.Login && <PasswordForm
+              visible={visible}
+              form={form}
+              disabled={callingAPI}
+              fido2Credentials={fido2Credentials}
+              setFido2Credentials={setFido2Credentials}
+            />
+          }
+          {
+            type === CipherType.Card && <CardForm
+              form={form}
+              disabled={callingAPI}
+            />
+          }
+          {
+            type === CipherType.CryptoWallet && <CryptoBackupForm
+              form={form}
+              disabled={callingAPI}
+            />
+          }
+          {
+            type === CipherType.Identity && <IdentityForm
+              form={form}
+              disabled={callingAPI}
+            />
+          }
+          {
+            type === CipherType.Login && <PasswordOTP
+              item={originItem}
+              form={form}
+              visible={visible}
+              disabled={callingAPI}
+              otpLimited={otpLimited}
+              setIsCreateOtp={setIsCreateOtp}
+            />
+          }            
           <Notes
             disabled={callingAPI}
           />

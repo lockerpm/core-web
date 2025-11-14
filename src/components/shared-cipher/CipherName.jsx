@@ -15,7 +15,7 @@ const CipherName = (props) => {
   const { TextCopy, ImageIcon } = itemsComponents;
   const { Name } = cipherComponents;
   const { t } = useTranslation()
-  const { cipher = {} } = props;
+  const { cipher = {}, onClick } = props;
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
 
   const originCipher = useMemo(() => {
@@ -25,7 +25,10 @@ const CipherName = (props) => {
   return (
     <div className="flex items-center w-full">
       {
-        originCipher ? <Name cipher={cipher}/> : <div className="flex items-center w-full">
+        originCipher ? <Name
+          cipher={cipher}
+          onClick={onClick}
+        /> : <div className="flex items-center w-full">
           <ImageIcon
             name={'any-icon'}
             width={32}

@@ -26,6 +26,7 @@ const TableData = (props) => {
     data = [],
     params = {},
     onStopSharing = () => {},
+    onDetail = () => {}
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -47,6 +48,7 @@ const TableData = (props) => {
         width: 250,
         render: (_, record) => <Name
           send={record}
+          onClick={() => onDetail(record)}
         />
       },
       {

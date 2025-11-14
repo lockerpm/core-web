@@ -24,17 +24,15 @@ const Name = (props) => {
 
   const {
     cipher = {},
-    send = null
+    send = null,
+    onClick = undefined
   } = props;
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
   const locale = useSelector((state) => state.system.locale)
 
   const originCipher = useMemo(() => {
-    if (send) {
-      return send.cipher
-    }
-    return allCiphers.find((d) => d.id === cipher.id) || cipher
+    return allCiphers.find((d) => send ? send.cipherId === d.id : d.id === cipher.id) || cipher
   }, [allCiphers, cipher])
 
   const isCipherShare = useMemo(() => {
@@ -94,6 +92,7 @@ const Name = (props) => {
                 {t('statuses.expired')}
               </Tag> : null
             }
+            onClick={onClick}
           />
         </div>
         <TextCopy

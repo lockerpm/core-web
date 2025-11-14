@@ -28,6 +28,7 @@ const TableData = (props) => {
     isFolder = false,
     onUpdate = () => {},
     onStopSharing = () => {},
+    onDetail = () => {}
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -47,7 +48,10 @@ const TableData = (props) => {
         key: 'name',
         align: 'left',
         width: 250,
-        render: (_, record) => isFolder ? <FolderName item={record}/> : <CipherName cipher={record}/>
+        render: (_, record) => isFolder ? <FolderName item={record}/> : <CipherName
+          cipher={record}
+          onClick={() => onDetail(record)}
+        />
       },
       {
         title: t('shares.shared_with'),

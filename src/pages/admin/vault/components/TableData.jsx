@@ -34,7 +34,8 @@ const TableData = (props) => {
     onPermanentlyDelete = () => {},
     selectionChange = () => {},
     getCheckboxProps = () => {},
-    onAttachment = () => {}
+    onAttachment = () => {},
+    onDetail = () => {}
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -53,7 +54,10 @@ const TableData = (props) => {
         dataIndex: 'title',
         key: 'name',
         align: 'left',
-        render: (_, record) => <Name cipher={record}/>
+        render: (_, record) => <Name
+          cipher={record}
+          onClick={() => onDetail(record)}
+        />
       },
       {
         title: t('common.created_time'),

@@ -35,7 +35,8 @@ const TableData = (props) => {
     onUpdate = () => {},
     onLeave = () => {},
     onUpdateStatus = () => {},
-    onAttachment = () => {}
+    onAttachment = () => {},
+    onDetail = () => {}
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -55,7 +56,10 @@ const TableData = (props) => {
         key: 'name',
         align: 'left',
         width: 250,
-        render: (_, record) => isFolder ? <FolderName folder={record}/> : <CipherName cipher={record}/>
+        render: (_, record) => isFolder ? <FolderName folder={record}/> : <CipherName
+          cipher={record}
+          onClick={() => onDetail(record)}
+        />
       },
       {
         title: t('roles.owner'),
