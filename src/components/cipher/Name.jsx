@@ -32,10 +32,7 @@ const Name = (props) => {
   const locale = useSelector((state) => state.system.locale)
 
   const originCipher = useMemo(() => {
-    if (send) {
-      return send.cipher
-    }
-    return allCiphers.find((d) => d.id === cipher.id) || cipher
+    return allCiphers.find((d) => send ? send.cipherId === d.id : d.id === cipher.id) || cipher
   }, [allCiphers, cipher])
 
   const isCipherShare = useMemo(() => {

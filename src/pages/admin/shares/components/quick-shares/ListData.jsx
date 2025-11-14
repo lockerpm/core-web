@@ -20,7 +20,7 @@ import common from "../../../../../utils/common";
 const ListData = (props) => {
   const { TextCopy } = itemsComponents;
   const { Actions, SharedWith } = quickShareComponents;
-  const CipherName = cipherComponents.Name;
+  const { Name } = cipherComponents;
   const { t } = useTranslation();
 
   const {
@@ -28,6 +28,7 @@ const ListData = (props) => {
     className = '',
     data = [],
     onStopSharing = () => {},
+    onDetail = () => {}
   } = props;
 
   const GeneralInfo = (props) => {
@@ -83,8 +84,9 @@ const ListData = (props) => {
             className="flex items-center justify-between w-full py-1 h-[52px]"
           >
             <div className="flex items-center flex-1">
-              <CipherName
+              <Name
                 send={record}
+                onClick={() => onDetail(record)}
               />
             </div>
             <div className="flex items-center w-[112px] justify-end">

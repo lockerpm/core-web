@@ -26,15 +26,21 @@ function DetailData(props) {
   const {
     visible = false,
     item = null,
-    send,
     onClose = () => {},
   } = props;
   const currentPage = common.getRouterByLocation(location);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
+  const send = useMemo(() => {
+    if (item?.cipher) {
+      return item
+    }
+    return null
+  }, [item])
+
   const originCipher = useMemo(() => {
-    return allCiphers.find((d) => d.id === item?.id)
-  }, [allCiphers, item])
+    return allCiphers.find((d) => send?.cipherId ? send?.cipherId === d.id : d.id === item?.id)
+  }, [allCiphers, item, send])
 
   const cipherType = useMemo(() => {
     return common.cipherTypeInfo('listRouter', currentPage.name, originCipher?.type)
@@ -95,6 +101,7 @@ function DetailData(props) {
       >
         <DetailList
           cipher={originCipher}
+          isDrawer
         />
       </Drawer>
     </div>

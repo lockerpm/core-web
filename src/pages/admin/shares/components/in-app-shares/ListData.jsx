@@ -32,6 +32,7 @@ const ListData = (props) => {
     isFolder = false,
     onUpdate = () => {},
     onStopSharing = () => {},
+    onDetail = () => {}
   } = props;
 
   const GeneralInfo = (props) => {
@@ -77,7 +78,12 @@ const ListData = (props) => {
           >
             <div className="flex items-center flex-1">
               {
-                isFolder ? <FolderName item={record}/> : <CipherName cipher={record}/>
+                isFolder ? <FolderName
+                  item={record}
+                /> : <CipherName
+                  cipher={record}
+                  onClick={() => onDetail(record)}
+                />
               }
             </div>
             <div className="ml-2 flex items-center w-[112px] justify-end">

@@ -27,7 +27,7 @@ function CustomFields(props) {
   const { t } = useTranslation();
   const {
     form,
-    className,
+    className = '',
     disabled = false
   } = props
 

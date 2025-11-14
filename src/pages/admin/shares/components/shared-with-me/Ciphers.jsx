@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
 import { } from '@lockerpm/design';
@@ -13,7 +12,7 @@ import sharedCiphersComponents from "./shared-ciphers";
 import common from "../../../../../utils/common";
 
 const ShareCiphers = (props) => {
-  const { FormData, MoveFolder, FormAttachment } = vaultComponents;
+  const { FormData, MoveFolder, FormAttachment, DetailData } = vaultComponents;
   const { ListData, TableData } = sharedCiphersComponents;
   const location = useLocation();
 
@@ -34,6 +33,7 @@ const ShareCiphers = (props) => {
   const [moveVisible, setMoveVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [formAttachmentVisible, setFormAttachmentVisible] = useState(false);
+  const [detailVisible, setDetailVisible] = useState(false);
 
   const handleOpenForm = (item = null, cloneMode = false) => {
     setSelectedItem(item);
@@ -51,6 +51,11 @@ const ShareCiphers = (props) => {
     setFormAttachmentVisible(true);
   }
 
+  const handleOpenDetailData = (item) => {
+    setSelectedItem(item);
+    setDetailVisible(true);
+  }
+
   return (
     <div
       className="share-ciphers"
@@ -66,6 +71,7 @@ const ShareCiphers = (props) => {
           onLeave={onLeave}
           onUpdateStatus={onUpdateStatus}
           onAttachment={handleOpenFormAttachment}
+          onDetail={handleOpenDetailData}
         /> : <TableData
           className="mt-4"
           loading={loading}
@@ -76,6 +82,7 @@ const ShareCiphers = (props) => {
           onLeave={onLeave}
           onUpdateStatus={onUpdateStatus}
           onAttachment={handleOpenFormAttachment}
+          onDetail={handleOpenDetailData}
         />
       }
       <FormData
@@ -103,6 +110,14 @@ const ShareCiphers = (props) => {
         item={selectedItem}
         onClose={() => {
           setFormAttachmentVisible(false);
+          setSelectedItem(null);
+        }}
+      />
+      <DetailData
+        visible={detailVisible}
+        item={selectedItem}
+        onClose={() => {
+          setDetailVisible(false);
           setSelectedItem(null);
         }}
       />

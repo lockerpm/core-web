@@ -61,13 +61,13 @@ const TextCopy = (props) => {
         style={{ color: color }}
         className={`flex items-center justify-${align} w-full ${color ? '' : 'text-black-500'}`}
       >
-        <p
+        <div
           className={`${limited ? 'text-limited' : ''}`}
           title={common.formatText(value, showText)}
-          style={{ marginBottom: 0 }}
+          style={{ marginBottom: 0, whiteSpace: "pre-wrap" }}
         >
           {common.formatText(value, showText)}
-        </p>
+        </div>
         <span
           className="ml-2 cursor-pointer"
           onClick={() => setShowText(!showText)}

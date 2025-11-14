@@ -11,8 +11,6 @@ import {
   Space,
 } from '@lockerpm/design';
 
-import { } from "@ant-design/icons";
-
 import itemsComponents from "../items";
 import folderComponents from "../folder";
 import commonComponents from "../common";
@@ -36,7 +34,8 @@ const DetailList = (props) => {
     cipher,
     loading,
     showText = true,
-    isPublic = false
+    isPublic = false,
+    isDrawer = false
   } = props;
 
   const { t } = useTranslation();
@@ -645,7 +644,7 @@ const DetailList = (props) => {
           <Row gutter={[12, 12]}>
             {
               (cipher?.attachments || []).map((attachment, index) => (
-                <Col lg={8} md={12} span={24} key={index}>
+                <Col lg={isDrawer ? 12 : 8} md={12} span={24} key={index}>
                   <Attachment className="w-full" attachment={attachment} cipher={cipher}/>
                 </Col>
               ))

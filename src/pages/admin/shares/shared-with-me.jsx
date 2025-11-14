@@ -252,7 +252,6 @@ const SharedWithMe = () => {
           }
         </>
       }
-      
       {
         filteredData.total > global.constants.PAGE_SIZE && !isMobile && <Pagination
           params={params}

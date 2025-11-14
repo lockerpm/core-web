@@ -36,7 +36,8 @@ const ListData = (props) => {
     onUpdate = () => {},
     onLeave = () => {},
     onUpdateStatus = () => {},
-    onAttachment = () => {}
+    onAttachment = () => {},
+    onDetail = () => {}
   } = props;
 
   const GeneralInfo = (props) => {
@@ -106,7 +107,10 @@ const ListData = (props) => {
           >
             <div className="flex items-center flex-1">
               {
-                isFolder ? <FolderName folder={record}/> : <CipherName cipher={record}/>
+                isFolder ? <FolderName folder={record}/> : <CipherName
+                  cipher={record}
+                  onClick={() => onDetail(record)}
+                />
               }
             </div>
             <div className="flex items-center ml-2 w-[112px] justify-end">
