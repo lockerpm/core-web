@@ -166,7 +166,8 @@
     "resend_invitation": "重新邀請",
     "restore": "恢復",
     "use_mp_instead": "改用密碼",
-    "sync_with_desktop": "連接桌面應用"
+    "sync_with_desktop": "連接桌面應用",
+    "view_full_page": "查看完整頁面"
   },
   "placeholder": {
     "name": "輸入名字",
