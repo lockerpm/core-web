@@ -1,13 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import {
   Image
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import { CipherType } from "../../core-js/src/enums";
 
@@ -69,7 +65,7 @@ const CipherIcon = (props) => {
     }
   }, [cipher, type])
   return (
-    <div className={className}>
+    <div className={`relative ${className}`}>
       <Image
         className="rounded-md"
         key={type}
@@ -80,6 +76,14 @@ const CipherIcon = (props) => {
         style={{ filter: isDeleted ? 'grayscale(100%)' : '' }}
         onError={() => setCipher(null)}
       />
+      {
+        item?.login?.fido2Credentials?.length > 0 && <div className="absolute bottom-[-2px] right-[-2px] w-5 h-5 bg-black-100 rounded-full flex items-center justify-center">
+          <img
+            src={require("../../assets/images/icons/key.svg").default}
+            className="w-3 h-3"
+          />
+        </div>
+      }
     </div>
   );
 }
