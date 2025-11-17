@@ -166,7 +166,8 @@
     "resend_invitation": "Renvoyer l'invitation",
     "restore": "Restaurer",
     "use_mp_instead": "Utiliser le mot de passe à la place",
-    "sync_with_desktop": "Synchroniser avec l'application de bureau"
+    "sync_with_desktop": "Synchroniser avec l'application de bureau",
+    "view_full_page": "Afficher la page entière"
   },
   "placeholder": {
     "name": "Saisir un nom ",
