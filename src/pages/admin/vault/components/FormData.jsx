@@ -71,6 +71,7 @@ function FormData(props) {
   const [attachments, setAttachments] = useState([]);
   const [isUpload, setIsUpload] = useState(false);
   const [fido2Credentials, setFido2Credentials] = useState([])
+  const [totp, setTotp] = useState(null);
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allCollections = useSelector((state) => state.collection.allCollections)
@@ -95,7 +96,8 @@ function FormData(props) {
         form.setFieldsValue(formData)
         setOriginCipher(originItem);
         setAttachments(originItem?.attachments || []);
-        setFido2Credentials(originItem?.login?.fido2Credentials || [])
+        setFido2Credentials(originItem?.login?.fido2Credentials || []);
+        setTotp(originItem.login?.totp)
       } else {
         const formData = common.convertCipherToForm({
           type: cipherType.type || cipherTypes[0].type,
@@ -105,6 +107,7 @@ function FormData(props) {
         setOriginCipher(null);
         setAttachments([]);
         setFido2Credentials([]);
+        setTotp(null)
       }
     } else {
       setCloneMode(false);
@@ -144,7 +147,7 @@ function FormData(props) {
         if (type === CipherType.Login) {
           await editCipher({
             ...values,
-            totp: values.totp || "",
+            totp,
             fido2Credentials
           });
         } else {
@@ -310,10 +313,11 @@ function FormData(props) {
           {
             type === CipherType.Login && <PasswordOTP
               item={originItem}
-              form={form}
+              totp={totp}
               visible={visible}
               disabled={callingAPI}
               otpLimited={otpLimited}
+              setTotp={setTotp}
               setIsCreateOtp={setIsCreateOtp}
             />
           }            

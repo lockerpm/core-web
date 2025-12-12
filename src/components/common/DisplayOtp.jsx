@@ -20,7 +20,8 @@ const DisplayOtp = (props) => {
     progressSize = 28,
     codeSize = 76,
     className = "w-[160px]",
-    codeClassName = "text-2xl font-semibold"
+    codeClassName = "text-2xl font-semibold",
+    onReset = () => {}
   } = props;
 
   const [otp, setOtp] = useState('')
@@ -62,6 +63,7 @@ const DisplayOtp = (props) => {
       const period = await global.jsCore.totpService.getTimeInterval(notes)
       setOtp(otp)
       setPeriod(period)
+      onReset()
     } else {
       setOtp('')
       setPeriod(0)

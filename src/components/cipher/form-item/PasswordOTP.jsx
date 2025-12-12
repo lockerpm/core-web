@@ -30,11 +30,12 @@ const options = {
 function PasswordOTP(props) {
   const { DisplayOtp } = commonComponents;
   const {
-    form,
     item,
+    totp,
     visible,
     disabled = false,
     otpLimited = false,
+    setTotp = () => {},
     setIsCreateOtp = () => {},
   } = props
   const { t } = useTranslation();
@@ -44,7 +45,6 @@ function PasswordOTP(props) {
   const [option, setOption] = useState('')
   const [otps, setOtps] = useState([])
   const [searchText, setSearchText] = useState('')
-  const [totp, setTotp] = useState('')
 
   const filteredOtps = useMemo(() => {
     return otps
@@ -56,11 +56,9 @@ function PasswordOTP(props) {
     setSearchText('')
     if (item?.login?.totp) {
       setIsEdit(true)
-      setTotp(item?.login?.totp)
       setOption('')
     } else {
       setIsEdit(false)
-      setTotp('')
       setOption(options.NO_OTP)
     }
   }, [visible, item])
@@ -84,12 +82,7 @@ function PasswordOTP(props) {
       setIsCreateOtp(false)
     }
     setOption(v)
-    changeTotp(null)
-  }
-
-  const changeTotp = (v) => {
-    setTotp(v || '')
-    form.setFieldValue('totp', v)
+    setTotp(null)
   }
 
   return (
@@ -127,7 +120,7 @@ function PasswordOTP(props) {
       }
       {
         option === options.EXISTING_OTP && <Form.Item
-          name={'totp'}
+          name={' '}
           className='mb-2'
           label={
             <p className='text-black-500'>{t('cipher.password.select_otp')}</p>
@@ -144,13 +137,13 @@ function PasswordOTP(props) {
             filterOption={false}
             options={filteredOtps}
             onSearch={(v) => setSearchText(v)}
-            onChange={(v) => changeTotp(v)}
+            onChange={(v) => setTotp(v)}
           />
         </Form.Item>
       }
       {
         option === options.NEW_OTP && <Form.Item
-          name={'totp'}
+          name={' '}
           className='mb-2'
           label={
             <p className='text-black-500'>{t('cipher.password.secret_key')}</p>
@@ -163,7 +156,7 @@ function PasswordOTP(props) {
             className='w-full'
             disabled={disabled}
             placeholder={t('placeholder.enter')}
-            onChange={(e) => changeTotp(e.target.value)}
+            onChange={(e) => setTotp(e.target.value)}
           />
         </Form.Item>
       }
