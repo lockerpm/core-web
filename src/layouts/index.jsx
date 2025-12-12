@@ -52,7 +52,7 @@ function AdminLayout(props) {
   const [isLocked, setIsLocked] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
 
-  const { lastMessage } = useWebSocket(`${global.endpoint.WS_SYNC}?token=${accessToken}`, {
+  const { lastMessage } = useWebSocket(accessToken ? `${global.endpoint.WS_SYNC}?token=${accessToken}` : null, {
     shouldReconnect: () => true,
     reconnectInterval: 5000
   })

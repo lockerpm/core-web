@@ -14,6 +14,7 @@ import {
 import itemsComponents from "../items";
 import folderComponents from "../folder";
 import commonComponents from "../common";
+import otpComponents from "../otp";
 import cipherFormItemComponents from "./form-item";
 import inAppShareComponents from "../in-app-share";
 
@@ -27,6 +28,7 @@ const DetailList = (props) => {
   const { DisplayOtp } = commonComponents;
   const { SeedPhrase } = cipherFormItemComponents;
   const { SharedWith } = inAppShareComponents;
+  const { OtpTextCopy } = otpComponents;
   const FolderName = folderComponents.Name;
 
   const {
@@ -72,18 +74,10 @@ const DetailList = (props) => {
           key: 'totp',
           name: t('cipher.password.totp'),
           hide: !cipher.login.totp,
-          value: <TextCopy
-            value={common.getTOTP(cipher.login.totp)}
-            showIcon={true}
-            align="between"
-            show={showText}
-            display={
-              (sText = showText) => <DisplayOtp
-                notes={cipher.login.totp}
-                showText={sText}
-                codeSize={96}
-              />
-            }
+          value: <OtpTextCopy
+            totp={cipher.login.totp}
+            showText={showText}
+            codeSize={100}
           />
         },
         {
@@ -542,20 +536,13 @@ const DetailList = (props) => {
             show={showText}
             defaultShow={f.type === FieldType.Hidden ? false : showText}
             align="between"
-          /> : <TextCopy
-            value={common.getTOTP(newValue)}
-            showIcon={true}
-            align="between"
-            show={showText}
-            display={
-              (sText = showText) => <DisplayOtp
-                notes={newValue}
-                showText={sText}
-                className="w-[96px]"
-                codeClassName="text-lg font-semibold"
-                progressSize={20}
-              />
-            }
+          /> : <OtpTextCopy
+            totp={newValue}
+            showText={showText}
+            codeSize={100}
+            className="w-[96px]"
+            codeClassName="text-lg font-semibold"
+            progressSize={20}
           />
         }
       }),
