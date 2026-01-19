@@ -4,9 +4,6 @@ import {
   Spin
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import images from "../../assets/images";
 
 const NoData = (props) => {

@@ -7,9 +7,6 @@ import {
   Button,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import global from "../../../../config/global";
 
 const MPForm = (props) => {

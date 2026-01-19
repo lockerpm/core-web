@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { IntlProvider } from 'react-intl'
 import { ConfigProvider } from '@lockerpm/design'

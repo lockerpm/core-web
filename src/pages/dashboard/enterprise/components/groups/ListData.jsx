@@ -1,5 +1,4 @@
-import React, { } from "react"
-import { } from "react-redux"
+import React from "react"
 import { useTranslation } from "react-i18next"
 
 import {

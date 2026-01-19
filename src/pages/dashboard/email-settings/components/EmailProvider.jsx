@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
@@ -9,9 +8,6 @@ import {
   Button,
   Badge
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import { green } from '@ant-design/colors';
 

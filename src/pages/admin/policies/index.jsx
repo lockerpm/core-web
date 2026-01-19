@@ -4,9 +4,6 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { Divider } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import commonComponents from "../../../components/common";
 import policiesComponents from "./components";
 

@@ -1,13 +1,8 @@
 import React from "react";
 
-import { } from "react-i18next";
-
 import {
   List,
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import folderComponents from "../../../../components/folder";
 

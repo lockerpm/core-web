@@ -3,10 +3,6 @@ import React from "react";
 import {
   Image
 } from '@lockerpm/design';
-import { } from "react-i18next";
-
-import {
-} from "@ant-design/icons";
 
 import images from "../../assets/images";
 

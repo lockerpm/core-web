@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { } from "react-i18next";
 
 import {
   Button,

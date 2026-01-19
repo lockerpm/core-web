@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React from 'react';
 import { Layout } from '@lockerpm/design';
 
 import layoutComponents from '../components/layout';

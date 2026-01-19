@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import {
@@ -7,9 +6,6 @@ import {
   Form,
   Input
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import global from "../../config/global";
 import common from "../../utils/common";

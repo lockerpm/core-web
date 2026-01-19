@@ -1,17 +1,6 @@
-import React, { } from 'react';
+import React from 'react';
 
-import { useTranslation } from "react-i18next";
-
-import {
-} from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons'
-
-function SidebarBottom(props) {
-  const { t } = useTranslation();
-  const { collapsed } = props;
-
+function SidebarBottom() {
   return (
     <div className="admin-layout-sidebar-bottom">
     </div>

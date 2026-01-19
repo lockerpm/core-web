@@ -4,9 +4,6 @@ import {
   Progress
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import { green } from '@ant-design/colors';
 
 import common from "../../utils/common";

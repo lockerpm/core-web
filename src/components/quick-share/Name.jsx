@@ -1,11 +1,5 @@
 import React from "react";
-import {
-} from '@lockerpm/design';
-
 import { useTranslation } from "react-i18next";
-
-import {
-} from "@ant-design/icons";
 
 import itemsComponents from "../items";
 import commonComponents from "../common";

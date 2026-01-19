@@ -1,13 +1,9 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   List,
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import emergencyAccessComponents from "../../../../../../components/emergency-access";
 

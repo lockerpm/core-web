@@ -7,9 +7,6 @@ import {
   Spin
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import authComponents from "./components";
 
 import commonServices from "../../services/common";

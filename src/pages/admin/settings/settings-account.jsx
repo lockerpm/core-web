@@ -10,9 +10,6 @@ import {
   Button
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import commonComponents from "../../../components/common";
 import accountComponents from "./components/account";
 

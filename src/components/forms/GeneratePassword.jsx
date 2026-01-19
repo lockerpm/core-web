@@ -6,9 +6,6 @@ import {
   Popover,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import itemsComponents from "../items";
 import commonComponents from "../common";
 
