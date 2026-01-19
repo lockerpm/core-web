@@ -24,7 +24,7 @@ ARG REACT_APP_LOCKER_SECRETS_URL
 
 RUN yarn build
 
-FROM nginx:latest
+FROM nginx:stable-alpine3.23
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
