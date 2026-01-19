@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
@@ -8,9 +8,6 @@ import {
   Select,
   Image
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 import formsComponents from '../../forms';
 import cipherFormItemComponents from '../form-item';

@@ -49,8 +49,6 @@ const Name = (props) => {
   const routerParams = useMemo(() => {
     return common.getFolderRouterNameParams(originFolder?.id)
   }, [originFolder])
-
-
   return (
     <div className="flex items-center w-full">
       <ImageIcon

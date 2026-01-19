@@ -10,9 +10,6 @@ import {
   InputNumber
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import commonComponents from '../../common';;
 
 import common from '../../../utils/common';

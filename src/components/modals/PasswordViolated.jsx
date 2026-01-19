@@ -1,13 +1,11 @@
 import React, { useMemo } from "react";
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
   Modal,
   Button,
 } from '@lockerpm/design';
-
-import { } from "@ant-design/icons";
 
 const PasswordViolatedModal = (props) => {
   const { t } = useTranslation()

@@ -1,11 +1,5 @@
 import React, { useMemo } from "react";
-import { } from 'react-redux';
-
 import Chart from "react-apexcharts";
-
-import {
-} from "@ant-design/icons";
-
 import common from "../../utils/common";
 
 const Line = (props) => {

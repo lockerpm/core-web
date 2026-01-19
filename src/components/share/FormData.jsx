@@ -7,9 +7,6 @@ import {
   Drawer,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import shareFormDataComponents from './form-data';
 
 import sharingServices from '../../services/sharing';

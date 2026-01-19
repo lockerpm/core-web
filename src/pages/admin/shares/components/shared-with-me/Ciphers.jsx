@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import { } from '@lockerpm/design';
-
-import { } from "@ant-design/icons";
-
 import vaultComponents from "../../../vault/components";
 import sharedCiphersComponents from "./shared-ciphers";
 

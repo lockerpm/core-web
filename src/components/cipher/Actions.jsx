@@ -132,6 +132,7 @@ const Actions = (props) => {
         key: 'in_app_shares',
         hide: !common.isCipherShareable(originCipher),
         label: <Tooltip
+          placement="left"
           title={t('shares.new_share.in_app_share_items_note')}
         >
           <p>{t('shares.new_share.in_app_share_items')}</p>
@@ -142,6 +143,7 @@ const Actions = (props) => {
         key: 'get_shareable_link',
         hide: !common.isCipherQuickShareable(originCipher),
         label: <Tooltip
+          placement="left"
           title={t('shares.new_share.get_shareable_link_note')}
         >
           <p>{t('shares.new_share.get_shareable_link')}</p>

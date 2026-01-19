@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
@@ -8,9 +8,6 @@ import {
   Row,
   Col,
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 function ContactForm(props) {
   const {

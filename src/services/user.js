@@ -165,8 +165,6 @@ async function change_password(data = {}) {
 
   const mewMakeKey = await coreServices.make_key(data.username, data.new_password)
   const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
-
-
   let encKey = null
   const existingEncKey = await global.jsCore.cryptoService.getEncKey();
   if (existingEncKey) {

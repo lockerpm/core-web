@@ -51,8 +51,6 @@ function SearchContent(props) {
       ...filteredFolders.map((f) => ({ ...f, isFolder: true }))
     ]
   }, [filteredCiphers, filteredFolders])
-
-
   const onClickItem = (item) => {
     if (item.isFolder) {
       global.navigate(global.keys.FOLDER_DETAIL, { folder_id: item.id })

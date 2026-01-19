@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
   Drawer,
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 import cipherComponents from '../../../../../../components/cipher';
 
@@ -22,8 +19,6 @@ function ViewItem(props) {
 
   useEffect(() => {
   }, [visible])
-
-
   return (
     <div className={props.className}>
       <Drawer

@@ -1,14 +1,11 @@
 import React, { } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
   Form,
   Radio
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 function ShareOption(props) {
   const {

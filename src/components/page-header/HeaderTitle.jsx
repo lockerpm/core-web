@@ -1,12 +1,9 @@
-import React, { } from "react";
+import React from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 const HeaderTitle = (props) => {
   const {

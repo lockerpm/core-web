@@ -80,8 +80,6 @@ const ListData = (props) => {
       </div>
     </div>
   }
-
-
   return (
     <List
       bordered={false}

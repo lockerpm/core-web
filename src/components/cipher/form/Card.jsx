@@ -1,5 +1,4 @@
-import React, { } from 'react';
-import { } from 'react-redux';
+import React from 'react';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -10,9 +9,6 @@ import {
   Select,
   Image
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 import global from '../../../config/global';
 import common from '../../../utils/common';

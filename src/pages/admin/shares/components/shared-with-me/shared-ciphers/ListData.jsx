@@ -1,5 +1,5 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
+
 import { useTranslation } from "react-i18next";
 
 import {
@@ -88,8 +88,6 @@ const ListData = (props) => {
       </div>
     </div>
   }
-
-
   return (
     <List
       bordered={false}

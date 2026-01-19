@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { } from 'react-redux';
+
 import { Trans, useTranslation } from "react-i18next";
 
 import {
@@ -7,9 +7,6 @@ import {
   Input,
   Collapse
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 import QRCode from "react-qr-code";
 

@@ -7,9 +7,6 @@ import {
   Col,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 const Actions = (props) => {
   const {
     actions = [],

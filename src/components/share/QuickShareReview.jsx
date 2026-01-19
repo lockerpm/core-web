@@ -7,9 +7,6 @@ import {
   Button
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import cipherComponents from '../cipher';
 import quickShareComponents from '../quick-share';
 

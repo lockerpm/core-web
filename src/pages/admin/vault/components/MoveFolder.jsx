@@ -9,9 +9,6 @@ import {
   Drawer,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import cipherFormItemComponents from '../../../../components/cipher/form-item';
 import foldersComponents from '../../folders/components';
 
@@ -50,8 +47,6 @@ function MoveFolder(props) {
       setCallingAPI(false);
     }
   }, [visible, cipherIds, allCiphers])
-
-
   const handleSave = async () => {
     form.validateFields().then(async () => {
       setCallingAPI(true);
@@ -96,8 +91,6 @@ function MoveFolder(props) {
       { cipher: { ...data, id: cipher.id }}
     )
   }
-
-
   return (
     <div className={props.className}>
       <Drawer

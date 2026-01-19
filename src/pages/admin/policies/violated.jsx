@@ -2,11 +2,6 @@ import React, { useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
-import {} from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
-
 import commonComponents from "../../../components/common";
 import policiesComponents from "./components";
 

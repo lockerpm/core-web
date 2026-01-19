@@ -1,5 +1,5 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
+
 import { } from "react-i18next";
 
 import {

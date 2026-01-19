@@ -8,9 +8,6 @@ import {
   Drawer,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import formsComponents from '../../../../../../components/forms';
 
 import authServices from '../../../../../../services/auth';
@@ -42,8 +39,6 @@ function MailOtpFormData(props) {
     setStep(0);
     setOtp('')
   }, [visible])
-
-
   const handleSave = async () => {
     setCallingAPI(true);
     await authServices.update_factor2({

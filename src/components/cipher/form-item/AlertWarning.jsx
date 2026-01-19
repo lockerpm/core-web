@@ -6,9 +6,6 @@ import {
   Alert,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import common from '../../../utils/common';
 
 function AlertWarning(props) {

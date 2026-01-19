@@ -140,8 +140,6 @@ function AdminLayout(props) {
   const setIsMobile = (value) => {
     dispatch(storeActions.updateIsMobile(value))
   }
-
-
   const convertSize = () => {
     if (window.innerWidth <= 768) {
       setCollapsed(false)

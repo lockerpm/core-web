@@ -6,8 +6,6 @@ import {
   Row,
   Col,
 } from '@lockerpm/design';
-
-
 import commonComponents from "../../../components/common";
 import quickShareDetailComponents from "./components";
 
