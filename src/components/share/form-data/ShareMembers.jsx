@@ -224,14 +224,14 @@ function ShareMembers(props) {
       if (item.isNew) {
         setNewGroups(newGroups.filter((g) => g.id !== item.id))
       } else {
-        stopSharing(item);
+        await stopSharing(item);
         setCurrentGroups(currentGroups.filter((g) => g.id !== item.id))
       }
     } else {
       if (item.isNew) {
         setNewMembers(newMembers.filter((m) => m.username !== item.username))
       } else {
-        stopSharing(item);
+        await stopSharing(item);
         setCurrentMembers(currentMembers.filter((m) => m.username !== item.username))
       }
     }
@@ -243,10 +243,17 @@ function ShareMembers(props) {
     const key = response?.public_key ? await common.clientGenerateMemberKey(response?.public_key, orgKey) : null
     sharingServices.add_sharing_member(cipherOrFolder.organizationId, item.id, { key }).then(() => {
       global.pushSuccess(t('notification.success.sharing.confirm_member_success'))
-      setNewMembers(newMembers.map((m) => ({
-        ...m,
-        status: item.username === m.username ? global.constants.STATUS.CONFIRMED : m.status
-      })))
+      if (item.isNew) {
+        setNewMembers(newMembers.map((m) => ({
+          ...m,
+          status: item.username === m.username ? global.constants.STATUS.CONFIRMED : m.status
+        })))
+      } else {
+        setCurrentMembers(currentMembers.map((m) => ({
+          ...m,
+          status: item.username === m.username ? global.constants.STATUS.CONFIRMED : m.status
+        })))
+      }
     }).catch((error) => {
       global.pushError(error)
     })

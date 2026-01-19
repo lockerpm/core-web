@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -9,7 +8,9 @@ import {
   Select
 } from "@lockerpm/design"
 
-import { SearchOutlined } from "@ant-design/icons"
+import {
+  SearchOutlined
+} from "@ant-design/icons"
 
 import global from "../../../../../config/global"
 
@@ -19,7 +20,6 @@ const Filter = (props) => {
     className = "",
     params = {},
     loading = false,
-    activeTab = '',
     setParams = () => { }
   } = props
 

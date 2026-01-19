@@ -7,10 +7,7 @@ import {
   Input
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
 
-import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import { CipherType } from '../../../../core-js/src/enums';
@@ -44,8 +41,6 @@ function FormData(props) {
       setCallingAPI(false);
     }
   }, [visible, item])
-
-
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);

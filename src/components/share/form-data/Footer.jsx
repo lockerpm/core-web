@@ -7,9 +7,6 @@ import {
   Button,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import sharingServices from '../../../services/sharing';
 import quickShareServices from '../../../services/quick-share';
 

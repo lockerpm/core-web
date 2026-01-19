@@ -57,8 +57,6 @@ const EnterpriseMembers = (props) => {
   useEffect(() => {
     setSelectedTab(currentPage.query?.tab || 'active')
   }, [currentPage.query?.tab])
-
-
   const payload = useMemo(() => {
     const p = {
       page: params.page,

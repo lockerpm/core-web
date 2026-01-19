@@ -1,5 +1,4 @@
 import React, { useMemo } from "react"
-import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -9,7 +8,9 @@ import {
   Avatar
 } from "@lockerpm/design"
 
-import { EditOutlined } from "@ant-design/icons"
+import {
+  EditOutlined
+} from "@ant-design/icons"
 
 import itemsComponents from "../../../../components/items"
 

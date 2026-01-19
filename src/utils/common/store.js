@@ -61,8 +61,6 @@ const getAllOrganizations = async () => {
   const allOrganizations = await global.jsCore.userService.getAllOrganizations() || []
   global.store.dispatch(storeActions.updateAllOrganizations(allOrganizations))
 }
-
-
 const getAllCollections = async () => {
   const result = await global.jsCore.collectionService.getAllDecrypted() || []
   const allCollections = result.filter(f => f.id).map((c) => ({ ...c, isCollection: true }))

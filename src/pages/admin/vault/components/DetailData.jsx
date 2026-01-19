@@ -9,9 +9,6 @@ import {
   Drawer,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import cipherComponents from '../../../../components/cipher';
 import commonComponents from '../../../../components/common';
 

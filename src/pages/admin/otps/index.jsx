@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-import { } from '@lockerpm/design';
-
-import { PlusOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined
+} from "@ant-design/icons";
 
 import itemsComponents from "../../../components/items";
 import commonComponents from "../../../components/common";

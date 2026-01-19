@@ -53,7 +53,7 @@ const PasswordHealth = (props) => {
 
   const ciphersWithPasswords = useMemo(() => {
     return allCiphers
-      .filter((c) => c.type === CipherType.Login && !c.isDeleted)
+      .filter((c) => c.type === CipherType.Login && !c.isDeleted && !!c.login.password)
   }, [allCiphers])
 
   const weakPasswordsData = useMemo(() => {

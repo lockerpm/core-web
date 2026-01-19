@@ -1,10 +1,7 @@
-import React, { } from "react";
-import { } from 'react-redux';
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Divider } from '@lockerpm/design';
-
-import { } from "@ant-design/icons";
 
 import commonComponents from "../../../components/common";
 import securityToolsComponents from "./components";

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -8,8 +7,6 @@ import {
   Input,
   Button
 } from '@lockerpm/design';
-
-import { } from "@ant-design/icons";
 
 import QRCode from "react-qr-code";
 

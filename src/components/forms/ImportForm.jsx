@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 import JSZip from "jszip";
 

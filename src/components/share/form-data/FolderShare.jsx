@@ -7,9 +7,6 @@ import {
   Select,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import common from '../../../utils/common';
 import global from '../../../config/global';
 
@@ -34,8 +31,6 @@ function FolderShare(props) {
       .filter((c) => c.name?.toLowerCase()?.includes(searchText))
       .map((c) => ({ label: c.name, value: c.id }))
   }, [allFolders, allCollections, searchText])
-
-
   return (
     <div>
       <Form.Item

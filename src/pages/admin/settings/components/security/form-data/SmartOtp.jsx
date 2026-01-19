@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
@@ -7,9 +7,6 @@ import {
   Button,
   Drawer,
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 import formsComponents from '../../../../../../components/forms';
 
@@ -38,8 +35,6 @@ function SmartOtpFormData(props) {
     setCallingAPI(false);
     setOtp('')
   }, [visible])
-
-
   const handleSave = async () => {
     setCallingAPI(true);
     await authServices.update_factor2({
@@ -54,8 +49,6 @@ function SmartOtpFormData(props) {
     })
     setCallingAPI(false);
   }
-
-
   return (
     <div className={props.className}>
       <Drawer

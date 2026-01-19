@@ -9,9 +9,6 @@ import {
   Drawer,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import cipherFormItemComponents from '../../../../components/cipher/form-item';
 import cipherFormComponents from '../../../../components/cipher/form';
 import foldersComponents from '../../folders/components';

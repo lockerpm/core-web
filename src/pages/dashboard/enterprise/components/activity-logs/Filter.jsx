@@ -1,5 +1,4 @@
-import React, { } from "react"
-import { } from "react-redux"
+import React from "react"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -8,8 +7,6 @@ import {
   Select,
   Avatar
 } from "@lockerpm/design"
-
-import { } from "@ant-design/icons"
 
 import itemsComponents from "../../../../../components/items"
 

@@ -1,6 +1,4 @@
-import React, { } from "react";
-import { } from 'react-redux';
-
+import React from "react";
 import {
   Image,
 } from '@lockerpm/design';

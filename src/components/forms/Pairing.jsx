@@ -63,8 +63,6 @@ const PairingForm = (props) => {
       await connectDesktopSocket();
     }
   }
-
-
   return (
     <div className="pairing-form text-center">
       {

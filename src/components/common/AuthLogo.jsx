@@ -1,10 +1,8 @@
-import React, { } from "react";
+import React from "react";
 
 import {
   Image
 } from '@lockerpm/design';
-
-import { } from 'react-redux';
 import { } from "react-i18next";
 
 import {

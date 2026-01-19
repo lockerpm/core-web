@@ -36,8 +36,6 @@ const FolderActions = (props) => {
   const isAccepted = useMemo(() => {
     return folder.status === global.constants.STATUS.ACCEPTED
   }, [folder])
-
-
   const originFolder = useMemo(() => {
     return allFolders.find((d) => d.id === folder.id) || folder
   }, [allFolders, folder])

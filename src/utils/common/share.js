@@ -29,8 +29,6 @@ const clientGenerateMemberKey = async (publicKey, orgKey) => {
   const key = await global.jsCore.cryptoService.rsaEncrypt(orgKey.key, pk.buffer)
   return key.encryptedString
 }
-
-
 export default {
   isExpired,
   getPublicShareUrl,

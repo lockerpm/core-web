@@ -6,9 +6,6 @@ import {
   Form,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons';
-
 import formsComponents from '../../forms';
 import cipherFormItemComponents from '../form-item';
 

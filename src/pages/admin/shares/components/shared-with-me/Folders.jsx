@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { } from "react-i18next";
-import { } from 'react-router-dom';
-
-import { } from '@lockerpm/design';
-import { } from "@ant-design/icons";
 
 import foldersComponents from "../../../folders/components";
 import sharedCiphersComponents from "./shared-ciphers";

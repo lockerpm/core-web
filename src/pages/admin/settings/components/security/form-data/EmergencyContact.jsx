@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { } from 'react-redux';
+
 import { useTranslation } from "react-i18next";
 
 import {
@@ -11,9 +11,6 @@ import {
   Select,
   Radio
 } from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons';
 
 import sharingServices from '../../../../../../services/sharing';
 import emergencyAccessServices from '../../../../../../services/emergency-access';
@@ -43,8 +40,6 @@ function EmergencyContactFormData(props) {
     }
     setCallingAPI(false);
   }, [visible])
-
-
   const handleSave = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
