@@ -1,13 +1,9 @@
 import React, { useMemo } from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   Card,
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import {
   blue,

@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   Card,
   Button,
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import modalsComponents from "../../../../../components/modals";
 

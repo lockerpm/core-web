@@ -6,9 +6,6 @@ import {
   Tag
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import enterpriseMemberServices from "../../services/enterprise-member";
 
 import global from "../../config/global";

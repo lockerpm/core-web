@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
@@ -7,9 +6,6 @@ import {
   List,
   Avatar
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import itemsComponents from "../../../../../components/items";
 

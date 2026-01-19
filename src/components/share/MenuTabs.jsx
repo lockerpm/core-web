@@ -1,13 +1,8 @@
 import React from "react";
 
-import { } from "react-i18next";
-
 import {
   Tabs
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 const MenuTabs = (props) => {
   const {

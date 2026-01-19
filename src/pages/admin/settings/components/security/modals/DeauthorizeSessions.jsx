@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-
 import { useTranslation } from "react-i18next";
-
-import {
-} from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import modalsComponents from "../../../../../../components/modals";
 

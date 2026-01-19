@@ -3,12 +3,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import {
-} from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
-
 import securityEAComponents from "./emergency-access";
 import securityFormDataComponents from "./form-data";
 

@@ -1,9 +1,6 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import {
-} from '@lockerpm/design';
-
 const SearchText = (props) => {
   const {
     className = '',

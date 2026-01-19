@@ -4,8 +4,6 @@ import {
   List,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
 import cipherComponents from "../../../../components/cipher";
 
 const ListData = (props) => {

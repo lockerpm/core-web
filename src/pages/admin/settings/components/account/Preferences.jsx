@@ -8,9 +8,6 @@ import {
   Switch
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import global from "../../../../../config/global";
 
 const Preferences = (props) => {

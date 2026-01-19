@@ -1,13 +1,4 @@
-import React, { } from 'react';
-
-import { } from "react-i18next";
-
-import {
-} from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons'
-
+import React from 'react';
 import '../css/footer.scss';
 
 function Footer(props) {

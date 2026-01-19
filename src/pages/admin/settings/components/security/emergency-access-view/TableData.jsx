@@ -6,9 +6,6 @@ import {
   Table,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import emergencyAccessComponents from "../../../../../../components/emergency-access";
 
 import global from "../../../../../../config/global";

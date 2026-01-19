@@ -5,9 +5,6 @@ import {
   Avatar,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 const UserInfo = (props) => {
   const {
     isEmail = false

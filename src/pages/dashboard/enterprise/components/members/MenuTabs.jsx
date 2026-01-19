@@ -1,13 +1,9 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   Tabs
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 const MenuTabs = (props) => {
   const { t } = useTranslation()

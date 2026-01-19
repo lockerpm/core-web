@@ -1,12 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import {
-} from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
-
 import common from "../../utils/common";
 
 const RouterLink = (props) => {

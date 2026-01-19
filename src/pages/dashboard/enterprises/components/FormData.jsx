@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -9,9 +8,6 @@ import {
   Drawer,
   Input
 } from "@lockerpm/design"
-
-import {
-} from "@ant-design/icons"
 
 import enterpriseServices from "../../../../services/enterprise"
 

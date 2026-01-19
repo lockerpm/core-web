@@ -6,9 +6,6 @@ import {
   Table,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import itemsComponents from "../../../../../components/items";
 import cipherComponents from "../../../../../components/cipher";
 

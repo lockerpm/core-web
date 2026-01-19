@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   List,
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import cipherComponents from "../../../../components/cipher";
 import modalsComponents from "../../../../components/modals";

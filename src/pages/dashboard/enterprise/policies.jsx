@@ -8,9 +8,6 @@ import {
   Col
 } from "@lockerpm/design"
 
-import {
-} from "@ant-design/icons"
-
 import commonComponents from "../../../components/common";
 import policiesComponents from "./components/policies";
 

@@ -8,9 +8,6 @@ import {
   Badge,
 } from '@lockerpm/design';
 
-import {
-} from '@ant-design/icons'
-
 import itemsComponents from '../items';
 
 import notificationServices from "../../services/notification";

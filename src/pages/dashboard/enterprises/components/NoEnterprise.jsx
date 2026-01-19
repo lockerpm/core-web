@@ -1,14 +1,10 @@
 import React from "react"
-import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import {
   Button,
   Spin
 } from "@lockerpm/design"
-
-import {
-} from "@ant-design/icons"
 
 import itemsComponents from "../../../../components/items"
 

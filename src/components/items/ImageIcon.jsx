@@ -3,9 +3,6 @@ import {
   Image,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 const ImageIcon = (props) => {
   const {
     className = '',

@@ -6,9 +6,6 @@ import {
   Modal,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import formsComponents from "../../../../../../components/forms";
 
 import userServices from '../../../../../../services/user';

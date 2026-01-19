@@ -7,9 +7,6 @@ import {
   Tooltip
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import common from "../../utils/common";
 
 const SharedWith = (props) => {

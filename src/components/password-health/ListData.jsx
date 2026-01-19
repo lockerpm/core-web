@@ -1,14 +1,10 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   List,
   Tag
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import itemsComponents from "../items";
 import cipherComponents from "../cipher";

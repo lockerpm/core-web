@@ -1,14 +1,10 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 
 import {
   Card,
   List
 } from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 const PasswordSecurity = (props) => {
   const {

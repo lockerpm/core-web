@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { } from "react-i18next";
 import { useNavigate, useLocation } from 'react-router-dom';
-
-import {
-} from '@lockerpm/design';
-
-import {
-} from "@ant-design/icons";
 
 import authComponents from "./components";
 
@@ -20,7 +13,6 @@ const OtpCode = () => {
   const location = useLocation();
 
   const factor2 = useSelector((state) => state.auth.factor2);
-  const isConnected = useSelector((state) => state.service.isConnected);
 
   const [callingAPI, setCallingAPI] = useState(false);
 

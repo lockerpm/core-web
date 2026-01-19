@@ -8,9 +8,6 @@ import {
   Button,
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import formsComponents from "../../../components/forms";
 import itemsComponents from "../../../components/items";
 import lockComponents from "./lock";

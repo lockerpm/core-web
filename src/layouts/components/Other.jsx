@@ -1,12 +1,5 @@
-import React, { } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { } from "react-i18next";
-
-import {
-} from '@lockerpm/design';
-
-import {
-} from '@ant-design/icons'
 
 function Other(props) {
   const isMobile = useSelector((state) => state.system.isMobile);

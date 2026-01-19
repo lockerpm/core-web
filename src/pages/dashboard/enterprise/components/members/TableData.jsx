@@ -1,5 +1,4 @@
 import React, { useMemo } from "react"
-import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import {
@@ -8,9 +7,6 @@ import {
   Avatar,
   Tag
 } from "@lockerpm/design"
-
-import {
-} from "@ant-design/icons"
 
 import itemsComponents from "../../../../../components/items";
 import memberComponents from "../../../../../components/member";

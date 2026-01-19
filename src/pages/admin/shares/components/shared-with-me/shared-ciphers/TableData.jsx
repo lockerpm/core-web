@@ -7,9 +7,6 @@ import {
   Tag
 } from '@lockerpm/design';
 
-import {
-} from "@ant-design/icons";
-
 import itemsComponents from "../../../../../../components/items";
 import sharedCipherComponents from "../../../../../../components/shared-cipher";
 

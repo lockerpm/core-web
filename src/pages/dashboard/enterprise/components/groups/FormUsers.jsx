@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { } from "react-redux"
 import { useTranslation } from "react-i18next"
 
 import {

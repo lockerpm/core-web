@@ -7,9 +7,6 @@ import {
   Avatar
 } from "@lockerpm/design"
 
-import {
-} from "@ant-design/icons"
-
 import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
