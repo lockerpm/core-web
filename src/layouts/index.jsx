@@ -14,6 +14,7 @@ import {
 
 import layoutComponents from "../components/layout"
 import layoutsComponents from "./components"
+import commonComponents from "../components/common"
 
 import authServices from "../services/auth"
 import enterpriseServices from "../services/enterprise"
@@ -35,6 +36,7 @@ function AdminLayout(props) {
     SidebarCenter,
     SidebarBottom
   } = layoutsComponents;
+  const { NoticeCards } = commonComponents;
   const { routers, pages } = props
   const dispatch = useDispatch()
   const location = useLocation()
@@ -162,7 +164,8 @@ function AdminLayout(props) {
     <>
       {hideLayout && (
         <Layout className='admin-no-layout'>
-          <Layout.Content className='admin-no-layout__content'>
+          <Layout.Content className='admin-no-layout__content flex flex-col gap-4'>
+            <NoticeCards />
             <PageContent routers={routers} pages={pages} />
           </Layout.Content>
         </Layout>
@@ -215,8 +218,9 @@ function AdminLayout(props) {
               />
             </Layout.Header>
             <Layout.Content
-              className={`admin-layout-content  ${showFooter ? 'is-footer' : ''}`}
+              className={`admin-layout-content flex flex-col gap-4  ${showFooter ? 'is-footer' : ''}`}
             >
+              <NoticeCards />
               <PageContent routers={routers} pages={pages} />
             </Layout.Content>
             <Layout.Footer style={{ padding: 0 }}>

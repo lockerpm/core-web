@@ -52,5 +52,8 @@ export default {
     clientType: null,
     pairingConfirmed: false,
     cacheData: {}
+  },
+  notice: {
+    confirmMyShareVisible: false
   }
 }

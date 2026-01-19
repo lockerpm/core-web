@@ -458,6 +458,10 @@
       "title": "Invitation à devenir un contact d’urgence",
       "description": "Vous avez été invité à devenir un contact d’urgence pour {{owner}}.",
       "access_type": "Type d'accès : {{type}}"
+    },
+    "confirm_my_share": {
+      "description": "Certains dossiers ou éléments ont été partagés avec de nouveaux utilisateurs et nécessitent votre confirmation.",
+      "button": "Voir le partage"
     }
   },
   "password_confirm": {

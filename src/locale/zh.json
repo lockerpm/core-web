@@ -458,6 +458,10 @@
       "title": "成為緊急聯絡人邀請",
       "description": "您受邀成為以下聯絡人的緊急聯絡人 {{owner}}.",
       "access_type": "存取權限類型: {{type}}"
+    },
+    "confirm_my_share": {
+      "description": "部分資料夾或項目已與新註冊使用者共用，需要您確認。",
+      "button": "檢視分享"
     }
   },
   "password_confirm": {

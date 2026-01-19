@@ -13,7 +13,6 @@ import pageHeaderComponents from "../page-header";
 
 const PageHeader = (props) => {
   const {
-    EmergencyAccessInvitations,
     Actions,
     HeaderTitle
   } = pageHeaderComponents;
@@ -27,7 +26,6 @@ const PageHeader = (props) => {
     docLink = '',
     docLabel = '',
     isBack = true,
-    showInvitation = true,
     Back = () => <></>,
     Logo = () => <></>,
     Right = () => null
@@ -37,9 +35,6 @@ const PageHeader = (props) => {
 
   return (
     <>
-      {
-        showInvitation && <EmergencyAccessInvitations />
-      }
       <div
         className={`
           page-header

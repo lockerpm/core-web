@@ -8,6 +8,7 @@ import ItemInput from "./ItemInput";
 import UserAvatar from "./UserAvatar";
 import AuthLogo from "./AuthLogo";
 import DataNotFound from "./DataNotFound";
+import NoticeCards from "./NoticeCards";
 
 const commonComponents = {
   CipherIcon,
@@ -19,7 +20,8 @@ const commonComponents = {
   ItemInput,
   UserAvatar,
   AuthLogo,
-  DataNotFound
+  DataNotFound,
+  NoticeCards
 }
 
 export default commonComponents
