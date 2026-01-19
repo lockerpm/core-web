@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-
 import { useTranslation } from "react-i18next";
 
 import {
@@ -72,7 +71,7 @@ function EmergencyAccessInvitations() {
     <>
       {
         !!invitation && <div
-          className="emergency-access-invitations mb-4"
+          className="px-4 pt-4 md:px-8"
           style={{ height: 'auto' }}
         >
           <Card>

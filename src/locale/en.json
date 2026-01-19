@@ -458,6 +458,10 @@
       "title": "Invitation to become an emergency contact",
       "description": "You’ve been invited to become an emergency contact for {{owner}}.",
       "access_type": "Access type: {{type}}"
+    },
+    "confirm_my_share": {
+      "description": "Some folders or items have been shared with newly registered users, and need your confirmation.",
+      "button": "View share"
     }
   },
   "password_confirm": {

@@ -7,6 +7,7 @@ import {
   Slider,
   Checkbox
 } from '@lockerpm/design';
+
 import {
   ReloadOutlined,
   DownOutlined,

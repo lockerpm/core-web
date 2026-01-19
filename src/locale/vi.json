@@ -458,8 +458,12 @@
       "title": "Bạn có lời mời trở thành liên hệ khẩn cấp",
       "description": "Bạn được mời trở thành liên hệ khẩn cấp của {{owner}}.",
       "access_type": "Quyền truy cập: {{type}}"
+    },
+    "confirm_my_share": {
+      "description": "Một số mục/thư mục đã được chia sẻ với các người dùng mới đăng ký, và cần bạn xác nhận lại.",
+      "button": "Xem mục chia sẻ"
     }
-  },
+  }, 
   "password_confirm": {
     "confirm_note": "Nhập mật khẩu để xác nhận"
   },

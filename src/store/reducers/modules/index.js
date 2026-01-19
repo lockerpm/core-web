@@ -8,6 +8,7 @@ import collection from "./collection"
 import organization from "./organization"
 import enterprise from "./enterprise"
 import service from "./service"
+import notice from "./notice"
 
 export default {
   auth,
@@ -20,4 +21,5 @@ export default {
   organization,
   enterprise,
   service,
+  notice
 }
