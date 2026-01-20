@@ -164,7 +164,7 @@ function AdminLayout(props) {
     <>
       {hideLayout && (
         <Layout className='admin-no-layout'>
-          <Layout.Content className='admin-no-layout__content flex flex-col gap-4'>
+          <Layout.Content className='admin-no-layout__content'>
             <NoticeCards />
             <PageContent routers={routers} pages={pages} />
           </Layout.Content>
@@ -218,7 +218,7 @@ function AdminLayout(props) {
               />
             </Layout.Header>
             <Layout.Content
-              className={`admin-layout-content flex flex-col gap-4  ${showFooter ? 'is-footer' : ''}`}
+              className={`admin-layout-content ${showFooter ? 'is-footer' : ''}`}
             >
               <NoticeCards />
               <PageContent routers={routers} pages={pages} />
