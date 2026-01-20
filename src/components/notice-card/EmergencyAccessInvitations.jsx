@@ -71,7 +71,7 @@ function EmergencyAccessInvitations() {
     <>
       {
         !!invitation && <div
-          className="px-4 pt-4 md:px-8 emergency-access-invitations"
+          className="p-4 md:px-8 emergency-access-invitations"
           style={{ height: 'auto' }}
         >
           <Card>
