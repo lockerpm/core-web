@@ -6,11 +6,13 @@ import noticeCardComponents from '../notice-card';
 import global from '../../config/global';
 import storeActions from '../../store/actions';
 
-function NoticeCards() {
+function NoticeCards(props) {
   const {
     ConfirmMyShare,
     EmergencyAccessInvitations
   } = noticeCardComponents;
+
+  const { className } = props;
 
   const myShares = useSelector((state) => state.share.myShares);
   const isConfirmMyShare = useMemo(() => {
@@ -28,14 +30,14 @@ function NoticeCards() {
   }
 
   return (
-    <>
+    <div className={`notice-cards ${className}`}>
       {
         isConfirmMyShare && <ConfirmMyShare />
       }
       {
         !isConfirmMyShare && <EmergencyAccessInvitations />
       }
-    </>
+    </div>
   );
 }
 
