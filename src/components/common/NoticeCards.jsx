@@ -15,8 +15,10 @@ function NoticeCards(props) {
   const { className } = props;
 
   const myShares = useSelector((state) => state.share.myShares);
+  const confirmMyShareVisible = useSelector((state) => state.notice.confirmMyShareVisible);
+
   const isConfirmMyShare = useMemo(() => {
-    return !!myShares.find((s) => {
+    return !myShares.find((s) => {
       return s.members.filter((m) => m.status === global.constants.STATUS.ACCEPTED).length > 0
     })
   }, [myShares])
@@ -32,10 +34,10 @@ function NoticeCards(props) {
   return (
     <div className={`notice-cards ${className}`}>
       {
-        isConfirmMyShare && <ConfirmMyShare />
+        confirmMyShareVisible && <ConfirmMyShare />
       }
       {
-        !isConfirmMyShare && <EmergencyAccessInvitations />
+        !confirmMyShareVisible && <EmergencyAccessInvitations />
       }
     </div>
   );
