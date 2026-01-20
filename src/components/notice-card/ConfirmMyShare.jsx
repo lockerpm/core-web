@@ -17,7 +17,7 @@ import storeActions from '../../store/actions';
 function ConfirmMyShare() {
   const { t } = useTranslation();
   return (
-    <div className="px-4 pt-4 md:px-8">
+    <div className="px-4 pt-4 md:px-8 confirm-my-share">
       <Card>
         <div className='flex flex-col gap-2'>
           <div className='flex justify-between'>
