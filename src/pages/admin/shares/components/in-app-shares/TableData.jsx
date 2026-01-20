@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   Table,
+  Tag
 } from '@lockerpm/design';
 
 import itemsComponents from "../../../../../components/items";
@@ -32,6 +33,7 @@ const TableData = (props) => {
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
+  const myShares = useSelector((state) => state.share.myShares);
 
   const columns = useMemo(() => {
     return [
@@ -88,14 +90,27 @@ const TableData = (props) => {
         align: 'right',
         fixed: 'right',
         width: 150,
-        render: (_, record) => <Actions
-          item={record}
-          onUpdate={onUpdate}
-          onStopSharing={onStopSharing}
-        />
+        render: (_, record) => {
+          let status = <></>
+          const share = myShares.find(s => s.id === record.organizationId) || { members: [], groups: [] }
+          const confirmMember = share.members.find((m) => m.status === global.constants.STATUS.ACCEPTED);
+          if (confirmMember) {
+            status = <Tag color="warning">
+              {t('common.confirm_required')}
+            </Tag>
+          }
+          return <div className="flex items-center gap-2 justify-end">
+            {status}
+            <Actions
+              item={record}
+              onUpdate={onUpdate}
+              onStopSharing={onStopSharing}
+            />
+          </div>
+        }
       },
     ].filter((c) => !c.hide)
-  }, [isFolder, locale])
+  }, [isFolder, locale, myShares])
 
   return (
     <Table

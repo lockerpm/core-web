@@ -108,7 +108,8 @@
     "last_updated": "最後更新",
     "data_not_found": "未找到資料",
     "go_back_inventory":"返回庫存",
-    "website_address": "網站位址"
+    "website_address": "網站位址",
+    "confirm_required": "需要確認"
   },
   "button": {
     "add": "新增",

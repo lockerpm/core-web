@@ -108,7 +108,8 @@
     "last_updated": "Dernière mise à jour",
     "data_not_found": "Données introuvables",
     "go_back_inventory": "Retour à l'inventaire",
-    "website_address": "Adresse du site web"
+    "website_address": "Adresse du site web",
+    "confirm_required": "Confirmation requise"
   },
   "button": {
     "add": "Ajouter",
