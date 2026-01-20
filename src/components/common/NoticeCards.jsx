@@ -18,7 +18,7 @@ function NoticeCards(props) {
   const confirmMyShareVisible = useSelector((state) => state.notice.confirmMyShareVisible);
 
   const isConfirmMyShare = useMemo(() => {
-    return !myShares.find((s) => {
+    return !!myShares.find((s) => {
       return s.members.filter((m) => m.status === global.constants.STATUS.ACCEPTED).length > 0
     })
   }, [myShares])
