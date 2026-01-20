@@ -39,6 +39,7 @@ function ConfirmMyShare() {
               ghost
               className='font-semibold'
               onClick={() => {
+                global.store.dispatch(storeActions.updateConfirmMyShareVisible(false))
                 global.navigate(global.keys.MY_SHARED_ITEMS, {}, { menu_type: global.constants.MENU_TYPES.CIPHERS });
               }}
             >
