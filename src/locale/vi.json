@@ -108,7 +108,8 @@
     "last_updated": "Cập nhật lần cuối",
     "data_not_found": "Không tìm thấy dữ liệu",
     "go_back_inventory": "Quay lại Kho hàng",
-    "website_address": "Địa chỉ trang web"
+    "website_address": "Địa chỉ trang web",
+    "confirm_required": "Cần xác nhận"
   },
   "button": {
     "add": "Thêm",

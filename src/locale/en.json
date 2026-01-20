@@ -108,7 +108,8 @@
     "last_updated": "Last Updated",
     "data_not_found": "Data not found",
     "go_back_inventory":"Go back to the Inventory",
-    "website_address": "Website address"
+    "website_address": "Website address",
+    "confirm_required": "Confirmation required"
   },
   "button": {
     "add": "Add",

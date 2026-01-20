@@ -1,10 +1,11 @@
 import React from "react";
-
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import {
   List,
-  Popover
+  Popover,
+  Tag
 } from '@lockerpm/design';
 
 import {
@@ -17,6 +18,7 @@ import folderComponents from "../../../../../components/folder";
 import inAppShareComponents from "../../../../../components/in-app-share";
 
 import common from "../../../../../utils/common";
+import global from "../../../../../config/global";
 
 const ListData = (props) => {
   const { TextCopy } = itemsComponents;
@@ -34,6 +36,8 @@ const ListData = (props) => {
     onStopSharing = () => {},
     onDetail = () => {}
   } = props;
+
+  const myShares = useSelector((state) => state.share.myShares);
 
   const GeneralInfo = (props) => {
     const { record } = props;
@@ -86,21 +90,36 @@ const ListData = (props) => {
                 />
               }
             </div>
-            <div className="ml-2 flex items-center w-[112px] justify-end">
+            <div className="ml-2 flex items-center w-[112px] justify-end gap-4">
               <Popover
-                className="cursor-pointer mr-2"
+                className="cursor-pointer"
                 placement="top"
                 trigger="click"
                 content={() => <GeneralInfo record={record}/>}
               >
                 <InfoCircleOutlined />
               </Popover>
-              <Actions
-                item={record}
-                className="flex items-center"
-                onUpdate={onUpdate}
-                onStopSharing={onStopSharing}
-              />
+              {
+                (() => {
+                  let status = <></>
+                    const share = myShares.find(s => s.id === record.organizationId) || { members: [], groups: [] }
+                    const confirmMember = share.members.find((m) => m.status === global.constants.STATUS.ACCEPTED);
+                    if (confirmMember) {
+                      status = <Tag color="warning">
+                        {t('common.confirm_required')}
+                      </Tag>
+                    }
+                    return <div className="flex items-center gap-2 justify-end">
+                      {status}
+                      <Actions
+                        item={record}
+                        className="flex items-center"
+                        onUpdate={onUpdate}
+                        onStopSharing={onStopSharing}
+                      />
+                    </div>
+                })()
+              }
             </div>
           </div>
         </List.Item>
