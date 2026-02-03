@@ -93,6 +93,10 @@ const ShareDetail = () => {
     })
   }
 
+  const removeToken = (email) => {
+    localStorage.removeItem(`token_${email}`)
+  }
+
   return (
     <div className="public-page">
       <Row>
