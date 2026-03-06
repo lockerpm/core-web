@@ -68,7 +68,7 @@ const SharedWithMe = () => {
   const items = useMemo(() => {
     if (menuType === menuTypes.CIPHERS) {
       return [
-        ...invitations.filter((i) => i.item_type === 'cipher'),
+        ...invitations.filter((i) => i.item_type === 'cipher').map((i) => ({ ...i, revisionDate: new Date(i.access_time * 1000) })),
         ...allCiphers
           .filter((c) => !c.isDeleted && !c.collectionIds.length && !common.isOwner(c))
           .map((c) => ({
@@ -80,7 +80,7 @@ const SharedWithMe = () => {
       ]
     }
     return [
-      ...invitations.filter((i) => i.item_type === 'folder'),
+      ...invitations.filter((i) => i.item_type === 'folder').map((i) => ({ ...i, revisionDate: new Date(i.access_time * 1000) })),
       ...allCollections
         .filter((c) => !common.isOwner(c))
         .map((c) => ({
