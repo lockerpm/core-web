@@ -864,7 +864,16 @@
     "incorrect_format": "資料格式不正確",
     "import_failed": "資料匯入失敗",
     "no_data": "沒有資料",
-    "import_success": "已匯入 {{foldersCount}} 個資料夾，{{ciphersCount}}/{{total}} 個項目"
+    "import_success": "已匯入 {{foldersCount}} 個資料夾，{{ciphersCount}}/{{total}} 個項目",
+    "duplicate_popup": {
+      "title": "偵測到重複項目",
+      "desc": "您要匯入的檔案包含：",
+      "desc1": "{{count}} 個與保存庫中現有項目重複",
+      "desc2": "{{count}} 個檔案內重複項目",
+      "question": "您是否要在匯入保存庫之前刪除重複項目？",
+      "not_delete_btn": "不刪除並繼續",
+      "delete_btn": "刪除重複項目"
+    }
   },
   "instructions": {
     "see_details": "請至我們的說明網頁查看詳細操作說明："

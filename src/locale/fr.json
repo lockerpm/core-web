@@ -864,7 +864,16 @@
     "incorrect_format": "Les données ne sont pas dans le format attendu",
     "import_failed": "Échec de l’importation des données",
     "no_data": "Pas de données",
-    "import_success": "{{foldersCount}} dossiers importés, {{ciphersCount}}/{{total}} éléments"
+    "import_success": "{{foldersCount}} dossiers importés, {{ciphersCount}}/{{total}} éléments",
+    "duplicate_popup": {
+      "title": "Doublons détectés",
+      "desc": "Le fichier que vous importez contient :",
+      "desc1": "{{count}} éléments qui existent déjà trong le Coffre-fort",
+      "desc2": "{{count}} éléments en double dans le fichier",
+      "question": "Souhaitez-vous supprimer les doublons avant l'importation dans le Coffre-fort ?",
+      "not_delete_btn": "Ne pas supprimer et continuer",
+      "delete_btn": "Supprimer les doublons"
+    }
   },
   "instructions": {
     "see_details": "Voir les instructions détaillées sur notre site d’aide à"

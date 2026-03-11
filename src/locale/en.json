@@ -864,7 +864,16 @@
     "incorrect_format": "The data is not in the correct format",
     "import_failed": "Data import failed",
     "no_data": "No data",
-    "import_success": "Imported {{foldersCount}} folders, {{ciphersCount}}/{{total}} items"
+    "import_success": "Imported {{foldersCount}} folders, {{ciphersCount}}/{{total}} items",
+    "duplicate_popup": {
+      "title": "Duplicate items detected",
+      "desc": "The file you are importing contains:",
+      "desc1": "{{count}} items that already exist in the Vault",
+      "desc2": "{{count}} duplicate items within the file",
+      "question": "Would you like to remove these duplicates before importing into the Vault?",
+      "not_delete_btn": "Keep all and continue",
+      "delete_btn": "Remove duplicates"
+    }
   },
   "instructions": {
     "see_details": "See detailed instructions on our help site at"

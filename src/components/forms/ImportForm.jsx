@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import JSZip from "jszip";
 
@@ -18,17 +18,21 @@ import {
   LinkOutlined
 } from '@ant-design/icons';
 
+import modalsComponents from '../modals';
+
 import importServices from '../../services/import';
 import commonServices from '../../services/common';
 
 import { FolderRequest } from '../../core-js/src/models/request';
 import { KvpRequest } from '../../core-js/src/models/request/kvpRequest';
 import { ImportCiphersRequest } from '../../core-js/src/models/request/importCiphersRequest';
+import { CipherType } from '../../core-js/src/enums';
 
 import global from '../../config/global';
 import common from '../../utils/common';
 
 function ImportForm(props) {
+  const { ImportDuplicateModal } = modalsComponents;
   const {
     visible = false,
     isTutorial = false,
@@ -36,9 +40,18 @@ function ImportForm(props) {
   } = props
   const { t } = useTranslation();
 
+  const allCiphers = useSelector((state) => state.cipher.allCiphers);
+  const allFolders = useSelector((state) => state.folder.allFolders);
+
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
+  const [importData, setImportData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [duplicateVisible, setDuplicateVisible] = useState(false);
+  const [duplicateCiphers, setDuplicateCiphers] = useState({
+    current: [],
+    import: []
+  });
 
   const format = Form.useWatch('format', form);
   const fileContent = Form.useWatch('fileContent', form);
@@ -155,20 +168,8 @@ function ImportForm(props) {
               global.pushError({ message: t('import_export.incorrect_format') })
               return
             }
-          }
-          try {
-            const importResponse = await postImport(importResult)
-            global.pushSuccess(
-              t('import_export.import_success', {
-                foldersCount: importResponse.foldersCount,
-                ciphersCount: importResponse.ciphersCount,
-                total: importResponse.totalCipherImport
-              })
-            )
-            await commonServices.sync_data();
-            onClose();
-          } catch (error) {
-            global.pushError(error)
+            importResult.ciphers = importResult.ciphers.map((c, index) => ({ ...c, id: index }))
+            await checkingDuplicate(importResult)
           }
         } else {
           global.pushError({ message: t('import_export.incorrect_format') })
@@ -180,16 +181,63 @@ function ImportForm(props) {
     setCallingAPI(false);
   }
 
-  const postImport = async (importResult) => {
-    let request = new ImportCiphersRequest()
-    for (let i = 0; i < importResult.ciphers.length; i++) {
-      const { data } = await common.getEncCipherForRequest(
-        importResult.ciphers[i],
-        {
-          noCheck: true
-        }
+  const checkingDuplicate = async (importResult) => {
+    const currentCiphers = allCiphers
+      .filter((c) => !c.isDeleted && c.type !== CipherType.MasterPassword)
+      .map((c) => ({ id: c.id, data: { ...common.convertCipherToForm(c), folderId: "", _subTitle: null, fido2Credentials: c.fido2Credentials || [] }}));
+    const importCiphers = importResult.ciphers
+      .map((c) => common.parseNotesOfNewTypes(c))
+      .map((c) => ({ id: c.id, data: { ...common.convertCipherToForm(c), folderId: "", _subTitle: null, fido2Credentials: c.fido2Credentials || [] }}));
+
+    const currentCipherStrings = currentCiphers.map((c) => JSON.stringify(c.data));
+
+    const currentDuplicateCiphers = importCiphers.filter((c) => currentCipherStrings.includes(JSON.stringify(c.data))).map((c) => ({ id: c.id, ...c.data }));
+    const importDuplicateCiphers = common.getDuplicateObjects(importCiphers.map((c) => c.data));
+
+    const result = currentDuplicateCiphers.length > 0 || importDuplicateCiphers.length > 0;
+    if (result) {
+      setImportData(importResult);
+      setDuplicateCiphers({
+        current: currentDuplicateCiphers,
+        import: importDuplicateCiphers,
+      })
+      setDuplicateVisible(true)
+    } else {
+      setImportData(null);
+      await handlePostImport(importResult)
+    }
+  }
+
+  const handlePostImport = async (importResult, duplicatedCiphers = []) => {
+    try {
+      const importResponse = await postImport(importResult, duplicatedCiphers)
+      global.pushSuccess(
+        t('import_export.import_success', {
+          foldersCount: importResponse.foldersCount,
+          ciphersCount: importResponse.ciphersCount,
+          total: importResponse.totalCipherImport
+        })
       )
-      request.ciphers.push(data)
+      await commonServices.sync_data();
+      onClose();
+    } catch (error) {
+      global.pushError(error)
+    }
+  }
+
+  const postImport = async (importResult, duplicatedCiphers = []) => {
+    const duplicatedCipherIds = duplicatedCiphers.map((c) => c.id);
+    let request = new ImportCiphersRequest();
+    for (let i = 0; i < importResult.ciphers.length; i++) {
+      if (!duplicatedCipherIds.includes(i)) {
+        const { data } = await common.getEncCipherForRequest(
+          importResult.ciphers[i],
+          {
+            noCheck: true
+          }
+        )
+        request.ciphers.push(data)
+      }
     }
     if (importResult.folders != null) {
       for (let i = 0; i < importResult.folders.length; i++) {
@@ -210,14 +258,13 @@ function ImportForm(props) {
         importedFolders,
         importedFolders + 1000
       )
-      const importResult = await importServices.import_folders({ folders })
-      folderImportResults = folderImportResults.concat(importResult.ids || [])
+      const importFolderRes = await importServices.import_folders({ folders })
+      folderImportResults = folderImportResults.concat(importFolderRes.ids || [])
       importedFolders += 1000
     }
-    request.ciphers = request.ciphers.map((cipher, index) => {
-      const folderRelationship = folderRelationships.find(
-        item => item.key === index
-      )
+    request.ciphers = request.ciphers.map((cipher) => {
+      const folderRelationship = folderRelationships.find(item => item.key === cipher.id);
+      delete cipher.id
       return {
         ...cipher,
         folderId: folderRelationship
@@ -353,6 +400,13 @@ function ImportForm(props) {
           </Form.Item>
         </Form>
       </Drawer>
+      <ImportDuplicateModal
+        visible={duplicateVisible}
+        duplicateCiphers={duplicateCiphers}
+        importData={importData}
+        handlePostImport={handlePostImport}
+        onClose={() => setDuplicateVisible(false)}
+      />
     </div>
   );
 }
