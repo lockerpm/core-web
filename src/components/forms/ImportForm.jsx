@@ -42,15 +42,17 @@ function ImportForm(props) {
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
   const allFolders = useSelector((state) => state.folder.allFolders);
+  const allCollections = useSelector((state) => state.collection.allCollections);
 
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
   const [importData, setImportData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [duplicateVisible, setDuplicateVisible] = useState(false);
-  const [duplicateCiphers, setDuplicateCiphers] = useState({
+  const [duplicateData, setDuplicateData] = useState({
     current: [],
-    import: []
+    import: [],
+    folder: []
   });
 
   const format = Form.useWatch('format', form);
@@ -188,18 +190,30 @@ function ImportForm(props) {
     const importCiphers = importResult.ciphers
       .map((c) => common.parseNotesOfNewTypes(c))
       .map((c) => ({ id: c.id, data: { ...common.convertCipherToForm(c), folderId: "", _subTitle: null, fido2Credentials: c.fido2Credentials || [] }}));
+    const currentFolders = [...allFolders, ...allCollections]
+      .map((f) => ({ id: f.id, name: f.name }))
+    const importFolders = importResult.folders
+      .map((f, index) => ({ id: index, name: f.name }))
 
     const currentCipherStrings = currentCiphers.map((c) => JSON.stringify(c.data));
+    const currentFolderNames = currentFolders.map((c) => c.name);
 
-    const currentDuplicateCiphers = importCiphers.filter((c) => currentCipherStrings.includes(JSON.stringify(c.data))).map((c) => ({ id: c.id, ...c.data }));
+    const currentDuplicateCiphers = importCiphers
+      .filter((c) => currentCipherStrings.includes(JSON.stringify(c.data)))
+      .map((c) => ({ id: c.id, ...c.data }));
     const importDuplicateCiphers = common.getDuplicateObjects(importCiphers.map((c) => c.data));
+    const importDuplicateFolders = importFolders.filter((f) => {
+      const folderRelationships = importResult.folderRelationships.filter((r) => r[1] == f.id && !currentDuplicateCiphers.map((c) => c.id).includes(r[0]));
+      return currentFolderNames.includes(f.name) && folderRelationships.length === 0
+    })
 
     const result = currentDuplicateCiphers.length > 0 || importDuplicateCiphers.length > 0;
     if (result) {
       setImportData(importResult);
-      setDuplicateCiphers({
+      setDuplicateData({
         current: currentDuplicateCiphers,
         import: importDuplicateCiphers,
+        folder: importDuplicateFolders
       })
       setDuplicateVisible(true)
     } else {
@@ -208,9 +222,9 @@ function ImportForm(props) {
     }
   }
 
-  const handlePostImport = async (importResult, duplicatedCiphers = []) => {
+  const handlePostImport = async (importResult, duplicatedCiphers = [], duplicateFolders = []) => {
     try {
-      const importResponse = await postImport(importResult, duplicatedCiphers)
+      const importResponse = await postImport(importResult, duplicatedCiphers, duplicateFolders)
       global.pushSuccess(
         t('import_export.import_success', {
           foldersCount: importResponse.foldersCount,
@@ -225,8 +239,11 @@ function ImportForm(props) {
     }
   }
 
-  const postImport = async (importResult, duplicatedCiphers = []) => {
+  const postImport = async (importResult, duplicatedCiphers = [], duplicateFolders = []) => {
     const duplicatedCipherIds = duplicatedCiphers.map((c) => c.id);
+    const duplicatedFolderIds = duplicateFolders.map((c) => c.id);
+    const requestFolders = [];
+
     let request = new ImportCiphersRequest();
     for (let i = 0; i < importResult.ciphers.length; i++) {
       if (!duplicatedCipherIds.includes(i)) {
@@ -241,8 +258,11 @@ function ImportForm(props) {
     }
     if (importResult.folders != null) {
       for (let i = 0; i < importResult.folders.length; i++) {
-        const f = await global.jsCore.folderService.encrypt(importResult.folders[i])
-        request.folders.push(new FolderRequest(f))
+        if (!duplicatedFolderIds.includes(i)) {
+          const f = await global.jsCore.folderService.encrypt(importResult.folders[i])
+          request.folders.push(new FolderRequest(f))
+          requestFolders.push({ ...importResult.folders[i], id: i })
+        }
       }
     }
     if (importResult.folderRelationships != null) {
@@ -264,11 +284,12 @@ function ImportForm(props) {
     }
     request.ciphers = request.ciphers.map((cipher) => {
       const folderRelationship = folderRelationships.find(item => item.key === cipher.id);
+      const requestFoldersIndex = requestFolders.findIndex((f) => f.id == folderRelationship?.value)
       delete cipher.id
       return {
         ...cipher,
         folderId: folderRelationship
-          ? folderImportResults[folderRelationship.value]
+          ? folderImportResults[requestFoldersIndex]
           : null
       }
     })
@@ -402,7 +423,7 @@ function ImportForm(props) {
       </Drawer>
       <ImportDuplicateModal
         visible={duplicateVisible}
-        duplicateCiphers={duplicateCiphers}
+        duplicateData={duplicateData}
         importData={importData}
         handlePostImport={handlePostImport}
         onClose={() => setDuplicateVisible(false)}

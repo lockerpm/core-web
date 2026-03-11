@@ -870,7 +870,8 @@
       "desc": "Trong file bạn muốn nhập có:",
       "desc1": "{{count}} mục trùng với mục đã tồn tại trong Vault",
       "desc2": "{{count}} mục trùng nhau",
-      "question": "Bạn có muốn xóa các mục bị trùng trước khi nhập mục vào Vault?",
+      "desc3": "{{count}} thư mục trùng với thư mục đã tồn tại trong Vault và không chứa mục nào",
+      "question": "Bạn có muốn xóa các mục, thư mục bị trùng trước khi nhập vào Vault?",
       "not_delete_btn": "Không xóa và tiếp tục",
       "delete_btn": "Xóa mục trùng"
     }

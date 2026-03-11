@@ -13,9 +13,10 @@ const ImportDuplicateModal = (props) => {
     visible = false,
     callingAPI = false,
     importData = [],
-    duplicateCiphers = {
+    duplicateData = {
       current: [],
-      import: []
+      import: [],
+      folder: []
     },
     onClose = () => {},
     handlePostImport = () => {}
@@ -23,10 +24,16 @@ const ImportDuplicateModal = (props) => {
 
   const duplicatedCiphers = useMemo(() => {
     return [
-      ...duplicateCiphers.current,
-      ...duplicateCiphers.import
+      ...duplicateData.current,
+      ...duplicateData.import,
     ]
-  }, [duplicateCiphers])
+  }, [duplicateData])
+
+  const duplicatedFolders = useMemo(() => {
+    return [
+      ...duplicateData.folder,
+    ]
+  }, [duplicateData])
 
   return (
     <Modal
@@ -42,13 +49,18 @@ const ImportDuplicateModal = (props) => {
           <span>{t("import_export.duplicate_popup.desc")}</span>
           <ul>
             {
-              duplicateCiphers.current.length > 0 && <li>
-                <span>{t("import_export.duplicate_popup.desc1", { count: duplicateCiphers.current.length })}</span>
+              duplicateData.current.length > 0 && <li>
+                <span>{t("import_export.duplicate_popup.desc1", { count: duplicateData.current.length })}</span>
               </li>
             }
             {
-              duplicateCiphers.import.length > 0 && <li>
-                <span>{t("import_export.duplicate_popup.desc2", { count: duplicateCiphers.import.length })}</span>
+              duplicateData.import.length > 0 && <li>
+                <span>{t("import_export.duplicate_popup.desc2", { count: duplicateData.import.length })}</span>
+              </li>
+            }
+            {
+              duplicateData.folder.length > 0 && <li>
+                <span>{t("import_export.duplicate_popup.desc3", { count: duplicateData.folder.length })}</span>
               </li>
             }
           </ul>
@@ -72,7 +84,7 @@ const ImportDuplicateModal = (props) => {
             type="primary"
             loading={callingAPI}
             onClick={() => {
-              handlePostImport(importData, duplicatedCiphers);
+              handlePostImport(importData, duplicatedCiphers, duplicatedFolders);
               onClose();
             }}
           >

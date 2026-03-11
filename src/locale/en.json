@@ -870,7 +870,8 @@
       "desc": "The file you are importing contains:",
       "desc1": "{{count}} items that already exist in the Vault",
       "desc2": "{{count}} duplicate items within the file",
-      "question": "Would you like to remove these duplicates before importing into the Vault?",
+      "desc3": "{{count}} folders already exist in the Vault and contain no items",
+      "question": "Would you like to remove duplicate items and folders before importing into the Vault?",
       "not_delete_btn": "Keep all and continue",
       "delete_btn": "Remove duplicates"
     }
