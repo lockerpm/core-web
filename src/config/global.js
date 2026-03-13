@@ -8,7 +8,6 @@ import routers from '../config/routers'
 import menus from '../config/menus'
 import store from '../store'
 
-global.store = store
 export default {
   endpoint,
   constants,
