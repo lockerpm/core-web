@@ -186,10 +186,10 @@ function ImportForm(props) {
   const checkingDuplicate = async (importResult) => {
     const currentCiphers = allCiphers
       .filter((c) => !c.isDeleted && c.type !== CipherType.MasterPassword)
-      .map((c) => ({ id: c.id, data: { ...common.convertCipherToForm(c), folderId: "", _subTitle: null, fido2Credentials: c.fido2Credentials || [] }}));
+      .map((c) => ({ id: c.id, data: common.convertCipherToImportForm(c)}));
     const importCiphers = importResult.ciphers
       .map((c) => common.parseNotesOfNewTypes(c))
-      .map((c) => ({ id: c.id, data: { ...common.convertCipherToForm(c), folderId: "", _subTitle: null, fido2Credentials: c.fido2Credentials || [] }}));
+      .map((c) => ({ id: c.id, data: common.convertCipherToImportForm(c)}));
     const currentFolders = [...allFolders, ...allCollections]
       .map((f) => ({ id: f.id, name: f.name }))
     const importFolders = importResult.folders
@@ -201,6 +201,7 @@ function ImportForm(props) {
     const currentDuplicateCiphers = importCiphers
       .filter((c) => currentCipherStrings.includes(JSON.stringify(c.data)))
       .map((c) => ({ id: c.id, ...c.data }));
+
     const importDuplicateCiphers = common.getDuplicateObjects(importCiphers.map((c) => c.data));
     const importDuplicateFolders = importFolders.filter((f) => {
       const folderRelationships = importResult.folderRelationships.filter((r) => r[1] == f.id && !currentDuplicateCiphers.map((c) => c.id).includes(r[0]));
@@ -305,7 +306,7 @@ function ImportForm(props) {
     return {
       ciphersCount: request.ciphers.length,
       foldersCount: request.folders.length,
-      totalCipherImport: request.ciphers.length
+      totalCipherImport: importResult.ciphers.length
     }
   }
 
