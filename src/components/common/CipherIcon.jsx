@@ -59,7 +59,7 @@ const CipherIcon = (props) => {
     }
     const cipherType = typeKey ? common.cipherTypeInfo('key', typeKey) : common.cipherTypeInfo('type', type)
     return logo || {
-      src: cipherType.icon.default,
+      src: cipherType.icon,
       alt: cipherType.key,
       shape: 'square'
     }
@@ -79,7 +79,7 @@ const CipherIcon = (props) => {
       {
         item?.login?.fido2Credentials?.length > 0 && <div className="absolute bottom-[-2px] right-[-2px] w-5 h-5 bg-black-100 rounded-full flex items-center justify-center">
           <img
-            src={require("../../assets/images/icons/key.svg").default}
+            src={require("../../assets/images/icons/key.svg")}
             className="w-3 h-3"
           />
         </div>
