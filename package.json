@@ -98,5 +98,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "svgo": "^4.0.1",
+    "serialize-javascript": "^7.0.3",
+    "nth-check": "^2.0.1",
+    "@tootallnate/once": "^3.0.1"
   }
 }
