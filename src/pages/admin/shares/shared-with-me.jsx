@@ -47,6 +47,7 @@ const SharedWithMe = () => {
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
   const allCollections = useSelector((state) => state.collection.allCollections)
   const invitations = useSelector((state) => state.share.invitations)
+  const locale = useSelector((state) => state.system.locale);
 
   const [menuType, setMenuType] = useState(menuTypes.CIPHERS);
   const [params, setParams] = useState({
@@ -68,7 +69,34 @@ const SharedWithMe = () => {
   const items = useMemo(() => {
     if (menuType === menuTypes.CIPHERS) {
       return [
-        ...invitations.filter((i) => i.item_type === 'cipher').map((i) => ({ ...i, revisionDate: new Date(i.access_time * 1000) })),
+        ...invitations
+          .filter((i) => i.item_type === 'cipher')
+          .map((i) => ({ ...i, name: t('shares.encrypted_content') }))
+          .sort((d1, d2) => {
+            if (params.orderField === 'revisionDate') {
+              let a = d1.access_time, b = d2.access_time
+              if (!a) {
+                return 0
+              }
+              if (params.orderDirection === 'asc') {
+                if (a < b) {
+                  return -1
+                }
+                if (a > b) {
+                  return 1
+                }
+                return 0
+              }
+              if (a < b) {
+                return 1
+              }
+              if (a > b) {
+                return -1
+              }
+              return 0
+            }
+            return 0
+          }),
         ...allCiphers
           .filter((c) => !c.isDeleted && !c.collectionIds.length && !common.isOwner(c))
           .map((c) => ({
@@ -80,7 +108,34 @@ const SharedWithMe = () => {
       ]
     }
     return [
-      ...invitations.filter((i) => i.item_type === 'folder').map((i) => ({ ...i, revisionDate: new Date(i.access_time * 1000) })),
+      ...invitations
+        .filter((i) => i.item_type === 'folder')
+        .map((i) => ({ ...i, name: t('shares.encrypted_content') }))
+        .sort((d1, d2) => {
+          if (params.orderField === 'revisionDate') {
+            let a = d1.access_time, b = d2.access_time
+            if (!a) {
+              return 0
+            }
+            if (params.orderDirection === 'asc') {
+              if (a < b) {
+                return -1
+              }
+              if (a > b) {
+                return 1
+              }
+              return 0
+            }
+            if (a < b) {
+              return 1
+            }
+            if (a > b) {
+              return -1
+            }
+            return 0
+          }
+          return 0
+        }),
       ...allCollections
         .filter((c) => !common.isOwner(c))
         .map((c) => ({
@@ -90,7 +145,7 @@ const SharedWithMe = () => {
             : (!c.hidePasswords ? global.constants.PERMISSION.VIEW : global.constants.PERMISSION.ONLY_USE)
         }))
     ]
-  }, [allCiphers, allCollections, invitations, menuType])
+  }, [allCiphers, allCollections, invitations, menuType, t, locale, params.orderField, params.orderDirection])
 
   const isEmpty = useMemo(() => {
     return items.length === 0

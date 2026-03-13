@@ -200,6 +200,27 @@ const allMenus = () => {
   return global.menus.ADMIN_MENUS;
 }
 
+const getDuplicateObjects = (arr) => {
+  const map = new Map()
+  const duplicates = []
+
+  arr.forEach((obj, index) => {
+    const newId = obj.id || index
+    delete obj.id;
+    const key = JSON.stringify(obj)
+    if (map.has(key)) {
+      duplicates.push({
+        ...obj,
+        id: newId
+      })
+    } else {
+      map.set(key, true)
+    }
+  });
+
+  return duplicates
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -226,5 +247,6 @@ export default {
   redirectToAuthSSO,
   openDesktopApp,
   allRouters,
-  allMenus
+  allMenus,
+  getDuplicateObjects
 }

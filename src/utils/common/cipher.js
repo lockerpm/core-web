@@ -425,6 +425,21 @@ const decryptCipher = async (cipher, key) => {
   return cipherView
 }
 
+const convertCipherToImportForm = (cipher = {}) => {
+  const cipherForm = convertCipherToForm(cipher);
+  return {
+    ...cipherForm,
+    folderId: "",
+    _subTitle: null,
+    fido2Credentials: cipherForm.fido2Credentials || [],
+    uris: (cipherForm.uris || []).filter((u) => !!u.uri),
+    fields: (cipherForm.fields || []).map((f) => ({
+      name: f.name || '',
+      value: f.type === FieldType.Date && f.value ? new Date(f.value).toUTCString() : (f.value || null)
+    }))
+  }
+}
+
 export default {
   newCipherTypes,
   listCiphers,
@@ -438,5 +453,6 @@ export default {
   createEncryptedMasterPw,
   badData,
   buildCommonCipher,
-  decryptCipher
+  decryptCipher,
+  convertCipherToImportForm
 }

@@ -864,7 +864,17 @@
     "incorrect_format": "Dữ liệu không đúng định dạng",
     "import_failed": "Nhập dữ liệu thất bại",
     "no_data": "Không có dữ liệu",
-    "import_success": "Đã nhập {{foldersCount}} thư mục, {{ciphersCount}}/{{total}} mục"
+    "import_success": "Đã nhập {{foldersCount}} thư mục, {{ciphersCount}}/{{total}} mục",
+    "duplicate_popup": {
+      "title": "Phát hiện mục bị trùng trong file",
+      "desc": "Trong file bạn muốn nhập có:",
+      "desc1": "{{count}} mục trùng với mục đã tồn tại trong Vault",
+      "desc2": "{{count}} mục trùng nhau",
+      "desc3": "{{count}} thư mục trùng với thư mục đã tồn tại trong Vault và không chứa mục nào",
+      "question": "Bạn có muốn xóa các mục, thư mục bị trùng trước khi nhập vào Vault?",
+      "not_delete_btn": "Không xóa và tiếp tục",
+      "delete_btn": "Xóa mục trùng"
+    }
   },
   "instructions": {
     "see_details": "Xem hướng dẫn chi tiết trên trang trợ giúp của chúng tôi tại: https://support.locker.io/vi/locker-password-manager/get-started/import-and-export"
