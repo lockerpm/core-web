@@ -431,7 +431,14 @@ const convertCipherToImportForm = (cipher = {}) => {
     ...cipherForm,
     folderId: "",
     _subTitle: null,
-    fido2Credentials: cipherForm.fido2Credentials || [],
+    fido2Credentials: (cipherForm.fido2Credentials || []).filter(Boolean).map((cre) => {
+      const newCre = {};
+      const keys = Object.keys(cre);
+      keys.forEach(key => {
+        newCre[key] = cre[key]?.toString() || '';
+      });
+      return newCre
+    }),
     uris: (cipherForm.uris || []).filter((u) => !!u.uri),
     fields: (cipherForm.fields || []).map((f) => ({
       name: f.name || '',
