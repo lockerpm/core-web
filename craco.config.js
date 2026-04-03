@@ -1,5 +1,6 @@
 const CracoLessPlugin = require('craco-less');
 const webpack = require("webpack");
+const fs = require("fs");
 
 module.exports = {
   babel: {
@@ -69,4 +70,10 @@ module.exports = {
       return config;
     },
   },
+  devServer: {
+    https: {
+      key: fs.readFileSync("./demo.locker.io-key.pem"),
+      cert: fs.readFileSync("./demo.locker.io.pem"),
+    }
+  }
 }

@@ -70,6 +70,7 @@ const Actions = (props) => {
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
+            hide: common.isHidePassword(originCipher),
             onClick: () => common.copyToClipboard(originCipher.login.password)
           },
           {
@@ -78,7 +79,7 @@ const Actions = (props) => {
             disabled: !originCipher.login.totp,
             onClick: () => common.copyToClipboard(common.getTOTP(originCipher.login.totp))
           }
-        ]
+        ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
       case CipherType.SecureNote:
         return [
           {
@@ -184,6 +185,7 @@ const Actions = (props) => {
         {
           key: 'clone',
           label: t('inventory.actions.clone'),
+          hide: common.isHidePassword(originCipher),
           onClick: () => onUpdate(originCipher, true)
         },
         {

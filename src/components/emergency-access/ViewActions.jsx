@@ -54,6 +54,7 @@ const ViewActions = (props) => {
           {
             key: 'copy_password',
             label: t('inventory.actions.copy_password'),
+            hide: common.isHidePassword(originCipher),
             onClick: () => common.copyToClipboard(originCipher.login.password)
           },
           {
@@ -62,7 +63,7 @@ const ViewActions = (props) => {
             disabled: !originCipher.login.totp,
             onClick: () => common.copyToClipboard(common.getTOTP(originCipher.login.totp))
           }
-        ]
+        ].filter((m) => !m.hide).map((m) => { delete m.hide; return m })
       case CipherType.SecureNote:
         return [
           {
