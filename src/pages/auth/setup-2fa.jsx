@@ -96,6 +96,8 @@ const Setup2FA = () => {
       email: preLogin?.email,
       username: preLogin?.email,
       password: values.current_password,
+      kdf: preLogin?.kdf,
+      kdf_iterations: preLogin?.kdf_iterations
     }
     await userServices.users_session(payload).then(async (response) => {
       setFactor2(response);
@@ -123,7 +125,9 @@ const Setup2FA = () => {
           username: preLogin.email,
           email: preLogin.email,
           sync_all_platforms: preLogin.sync_all_platforms,
-          unlock_method: otherMethod
+          unlock_method: otherMethod,
+          kdf: preLogin.kdf,
+          kdf_iterations: preLogin.kdf_iterations
         })
       }
     }).catch((error) => {

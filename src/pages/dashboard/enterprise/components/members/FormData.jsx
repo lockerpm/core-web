@@ -70,9 +70,11 @@ function FormData(props) {
       special: true,
       ambiguous: false
     }
+    const kdf = global.constants.CORE_JS_INFO.KDF;
+    const kdfIterations = global.constants.CORE_JS_INFO.KDF_ITERATIONS;
     const requests = usernames.map(async (u) => {
       const password = await global.jsCore.passwordGenerationService.generatePassword(options)
-      const makeKey = await coreServices.make_key(u, password)
+      const makeKey = await coreServices.make_key(u, password, kdf, kdfIterations)
       const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
       const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
       const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
@@ -84,8 +86,8 @@ function FormData(props) {
         role: role,
         master_password_hash: hashedPassword,
         full_name: '',
-        kdf: global.constants.CORE_JS_INFO.KDF,
-        kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS,
+        kdf,
+        kdf_iterations: kdfIterations,
         master_password_hint: '',
         key: encKey[1].encryptedString,
         master_password_score: passwordStrength.score,

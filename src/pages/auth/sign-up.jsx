@@ -22,7 +22,6 @@ const SingUp = () => {
   const { t } = useTranslation();
   const locale = useSelector((state) => state.system.locale);
   const serverType = useSelector((state) => state.system.serverType);
-  const isConnected = useSelector((state) => state.service.isConnected)
 
   const [form] = Form.useForm();
   const [callingAPI, setCallingAPI] = useState(false);

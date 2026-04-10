@@ -84,7 +84,9 @@ const SignInForm = (props) => {
       onSubmit({
         ...values,
         sync_all_platforms: preLogin.sync_all_platforms,
-        unlock_method: values.unlock_method || otherMethod
+        unlock_method: values.unlock_method || otherMethod,
+        kdf: preLogin?.kdf,
+        kdf_iterations: preLogin?.kdf_iterations
       })
     } else {
       handlePrelogin(values)
@@ -118,7 +120,9 @@ const SignInForm = (props) => {
               username: serviceUser?.email,
               hashedPassword: serviceUser?.hashedPassword,
               keyB64: serviceUser?.key,
-              unlock_method: cacheData?.unlock_method || null
+              unlock_method: cacheData?.unlock_method || null,
+              kdf: preLogin?.kdf,
+              kdf_iterations: preLogin?.kdf_iterations
             })
           } else {
             setStep(2)
@@ -145,7 +149,9 @@ const SignInForm = (props) => {
             username: serviceUser?.email,
             hashedPassword: serviceUser?.hashedPassword,
             keyB64: serviceUser?.key,
-            unlock_method: cacheData?.unlock_method || null
+            unlock_method: cacheData?.unlock_method || null,
+            kdf: preLogin?.kdf,
+            kdf_iterations: preLogin?.kdf_iterations
           })
         }
       } catch (error) {

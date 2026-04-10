@@ -36,6 +36,7 @@ export default {
   USERS_ME_DEVICE: `${FLAT_FORM}/users/me/devices/:device_id`,
   USERS_SESSION_REVOKE_ALL: `${FLAT_FORM}/users/session/revoke_all`,
   USERS_ON_PREMISE_PRELOGIN: `${FLAT_FORM}/onpremise/prelogin`,
+  USERS_ME_PRELOGIN: `${FLAT_FORM}/users/me/prelogin`,
 
   SYNC: `${FLAT_FORM}/sync`,
   SYNC_COUNT: `${FLAT_FORM}/sync/count`,

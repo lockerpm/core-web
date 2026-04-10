@@ -31,6 +31,7 @@ const EnterOtp = (props) => {
   } = props
 
   const locale = useSelector((state) => state.system.locale);
+  const userInfo = useSelector((state) => state.auth.userInfo);
 
   const [form] = Form.useForm();
   const [step, setStep] = useState(0);
@@ -55,6 +56,8 @@ const EnterOtp = (props) => {
         method: identity,
         otp: values.otp,
         save_device: values.save_device || false,
+        kdf: userInfo.kdf,
+        kdf_iterations: userInfo.kdf_iterations
       }
       onVerify(payload)
     })
