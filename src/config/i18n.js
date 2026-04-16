@@ -1,28 +1,23 @@
 /* eslint-disable import/no-named-as-default-member */
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-
-import en from '../locale/en.json'
-import vi from '../locale/vi.json'
-import zh from '../locale/zh.json'
-import ru from '../locale/ru.json'
-import fr from '../locale/fr.json'
+import locale from '../locale/index';
 
 const resources = {
   en: {
-    translation: en,
+    translation: locale.en,
   },
   vi: {
-    translation: vi,
+    translation: locale.vi,
   },
   zh: {
-    translation: zh,
+    translation: locale.zh,
   },
   ru: {
-    translation: ru,
+    translation: locale.ru,
   },
   fr: {
-    translation: fr
+    translation: locale.fr
   }
 }
 
