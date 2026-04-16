@@ -368,18 +368,16 @@ function ShareMembers(props) {
                           }
                         </div>
                       </div>
-                      {
-                        menuType === menuTypes.CIPHERS && <div className='flex items-center gap-2 px-1'>
-                          <span className='text-xs font-semibold'>
-                            Ẩn Password:
-                          </span>
-                          <Switch
-                            size='small'
-                            value={item.hide_passwords}
-                            onChange={(v) => handleChangePermission(item, item.role, v)}
-                          />
-                        </div>
-                      }
+                      <div className='flex items-center gap-2 px-1'>
+                        <span className='text-xs font-semibold'>
+                          Ẩn Password:
+                        </span>
+                        <Switch
+                          size='small'
+                          value={item.hide_passwords}
+                          onChange={(v) => handleChangePermission(item, item.role, v)}
+                        />
+                      </div>
                     </div>
                   </div>
                 }
