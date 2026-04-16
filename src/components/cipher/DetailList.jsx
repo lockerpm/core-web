@@ -13,7 +13,6 @@ import {
 
 import itemsComponents from "../items";
 import folderComponents from "../folder";
-import commonComponents from "../common";
 import otpComponents from "../otp";
 import cipherFormItemComponents from "./form-item";
 import inAppShareComponents from "../in-app-share";
@@ -25,7 +24,6 @@ import global from "../../config/global";
 
 const DetailList = (props) => {
   const { TextCopy, PasswordStrength, Attachment } = itemsComponents;
-  const { DisplayOtp } = commonComponents;
   const { SeedPhrase } = cipherFormItemComponents;
   const { SharedWith } = inAppShareComponents;
   const { OtpTextCopy } = otpComponents;
@@ -68,6 +66,7 @@ const DetailList = (props) => {
             defaultShow={false}
             show={showText}
             align="between"
+            hideValue={common.isHidePassword(cipher)}
           />
         },
         {

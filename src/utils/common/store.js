@@ -20,8 +20,11 @@ const fetchUserInfo = async () => {
     } catch (error) {
       backupPwl = []
     }
+
+    const userMePrelogin = await userServices.users_me_prelogin();
     global.store.dispatch(storeActions.updateUserInfo({
       ...response,
+      ...userMePrelogin,
       passkeys: backupPwl?.filter((k) => k.type !== 'hmac'),
       security_keys: backupPwl?.filter((k) => k.type === 'hmac'),
     }));

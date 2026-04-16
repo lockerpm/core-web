@@ -145,6 +145,8 @@ const Authenticate = () => {
       email: currentPage.query?.email,
       username: currentPage.query?.email,
       password: values.current_password,
+      kdf: preLogin?.kdf,
+      kdf_iterations: preLogin.kdf_iterations
     }
     await userServices.users_session(payload).then(async (response) => {
       if (response.is_factor2) {
@@ -180,6 +182,8 @@ const Authenticate = () => {
       ...payload,
       email: preLogin?.email,
       password: currentPassword,
+      kdf: preLogin?.kdf,
+      kdf_iterations: preLogin?.kdf_iterations
     }).then(async (response) => {
       setUserSession({ ...payload, ...response });
       if (preLogin?.is_password_changed) {
@@ -203,7 +207,9 @@ const Authenticate = () => {
           full_name: data.full_name || newFullName,
           new_password: data.new_password,
           token: currentPage?.query?.token,
-          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
+          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method,
+          kdf: preLogin?.kdf,
+          kdf_iterations: preLogin?.kdf_iterations
         })
       } else {
         await common.updateAccessTokenType(userSession.token_type)
@@ -219,7 +225,9 @@ const Authenticate = () => {
           username: preLogin.email,
           password: currentPassword,
           new_password: data.new_password,
-          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method
+          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method,
+          kdf: preLogin?.kdf,
+          kdf_iterations: preLogin?.kdf_iterations
         })
       }
       global.pushSuccess(t('notification.success.change_password.changed'));
@@ -237,7 +245,9 @@ const Authenticate = () => {
       username: preLogin.email,
       email: preLogin.email,
       sync_all_platforms: preLogin.sync_all_platforms,
-      unlock_method: otherMethod
+      unlock_method: otherMethod,
+      kdf: preLogin.kdf,
+      kdf_iterations: preLogin.kdf_iterations
     }
     await common.unlockToVault(payload)
   }

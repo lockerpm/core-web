@@ -3,33 +3,34 @@ import { ConstantsService } from '../core-js/src/services/constants.service';
 import { SymmetricCryptoKey } from '../core-js/src/models/domain';
 import { Utils } from '../core-js/src/misc/utils';
 
-async function make_key(username, password) {
+async function make_key(username, password, kdf = null, kdfIterations = null) {
   if (global.jsCore) {
     return await global.jsCore.cryptoService.makeKey(
       password,
       username,
-      global.constants.CORE_JS_INFO.KDF,
-      global.constants.CORE_JS_INFO.KDF_ITERATIONS
+      kdf || global.constants.CORE_JS_INFO.KDF,
+      kdfIterations || global.constants.CORE_JS_INFO.KDF_ITERATIONS
     )
   }
   return ''
 }
 
 async function unlock(data) {
-  if (global.jsCore) {
+  const userInfo = global.store.getState().auth.userInfo;
+  if (global.jsCore && userInfo) {
     await global.jsCore.cryptoService.clearKeys()
     let hashedPassword = data?.hashedPassword;
     let makeKey = data?.keyB64 ? new SymmetricCryptoKey(Utils.fromB64ToArray(data?.keyB64).buffer) : null
     if (data.password) {
-      makeKey = await make_key(data.username, data.password)
+      makeKey = await make_key(data.username, data.password, userInfo.kdf, userInfo.kdf_iterations)
       hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
     }
-    await global.jsCore.tokenService.setTokens(data.access_token, null)
+    await global.jsCore.tokenService.setTokens(data.access_token, null);
     await global.jsCore.userService.setInformation(
       global.jsCore.tokenService.getUserId(),
       data.username,
-      global.constants.CORE_JS_INFO.KDF,
-      global.constants.CORE_JS_INFO.KDF_ITERATIONS
+      userInfo.kdf,
+      userInfo.kdf_iterations
     )
     await global.jsCore.cryptoService.setKey(makeKey)
     await global.jsCore.cryptoService.setKeyHash(hashedPassword)

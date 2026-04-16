@@ -25,7 +25,8 @@ const TextCopy = (props) => {
     showIcon = false,
     display = null,
     show = null,
-    defaultShow = null
+    defaultShow = null,
+    hideValue = false
   } = props;
 
   const locale = useSelector((state) => state.system.locale);
@@ -43,7 +44,7 @@ const TextCopy = (props) => {
   }, [])
 
   const icons = useMemo(() => {
-    if (isHover || showIcon) {
+    if ((isHover || showIcon) && !hideValue) {
       return [
         <CopyOutlined/>,
         <CheckOutlined/>
@@ -53,7 +54,7 @@ const TextCopy = (props) => {
       <></>,
       <></>
     ]
-  }, [isHover])
+  }, [isHover, showIcon, hideValue])
 
   const DisplayValue = useMemo(() => {
     if (show != null) {
@@ -68,14 +69,16 @@ const TextCopy = (props) => {
         >
           {common.formatText(value, showText)}
         </div>
-        <span
-          className="ml-2 cursor-pointer"
-          onClick={() => setShowText(!showText)}
-        >
-          {
-            !showText ? <EyeOutlined /> : <EyeInvisibleOutlined />
-          }
-        </span>
+        {
+          !hideValue && <span
+            className="ml-2 cursor-pointer"
+            onClick={() => setShowText(!showText)}
+          >
+            {
+              !showText ? <EyeOutlined /> : <EyeInvisibleOutlined />
+            }
+          </span>
+        }
       </div>
     }
     return <div
@@ -98,7 +101,7 @@ const TextCopy = (props) => {
       return <></>
     }
     return <div className="flex items-center justify-between w-full">
-        {display(showText)}
+      {display(showText)}
       <span
         className="ml-2 cursor-pointer text-black-500"
         onClick={() => setShowText(!showText)}
@@ -112,7 +115,7 @@ const TextCopy = (props) => {
 
   return (
     <Typography.Text
-      className={`text-copy flex items-center cursor-pointer justify-${align} ${className}`}
+      className={`text-copy flex items-center ${hideValue ? '' : 'cursor-pointer'} justify-${align} ${className}`}
       onMouseOver={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       copyable={{
