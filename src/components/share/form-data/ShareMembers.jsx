@@ -374,7 +374,7 @@ function ShareMembers(props) {
                         </span>
                         <Switch
                           size='small'
-                          value={item.hide_passwords}
+                          checked={item.hide_passwords}
                           onChange={(v) => handleChangePermission(item, item.role, v)}
                         />
                       </div>
