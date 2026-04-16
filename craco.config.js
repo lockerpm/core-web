@@ -1,6 +1,19 @@
 const CracoLessPlugin = require('craco-less');
 const webpack = require("webpack");
 const fs = require("fs");
+const path = require('path');
+
+const keyPath = path.resolve(__dirname, './demo.locker.io-key.pem');
+const certPath = path.resolve(__dirname, './demo.locker.io.pem');
+
+let httpsConfig = {};
+
+if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+  httpsConfig = {
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(certPath),
+  };
+}
 
 module.exports = {
   babel: {
@@ -71,9 +84,6 @@ module.exports = {
     },
   },
   devServer: {
-    https: {
-      key: fs.readFileSync("./demo.locker.io-key.pem"),
-      cert: fs.readFileSync("./demo.locker.io.pem"),
-    }
+    https: httpsConfig
   }
 }
