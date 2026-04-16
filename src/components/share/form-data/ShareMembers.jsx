@@ -8,7 +8,8 @@ import {
   Avatar,
   List,
   Tag,
-  Button
+  Button,
+  Switch
 } from '@lockerpm/design';
 
 import {
@@ -44,7 +45,6 @@ function ShareMembers(props) {
 
   const teams = useSelector((state) => state.enterprise.teams);
   const userInfo = useSelector((state) => state.auth.userInfo);
-  const isMobile = useSelector((state) => state.system.isMobile);
 
   const [memberGroupSearchText, setMemberGroupSearchText] = useState('')
   const [searching, setSearching] = useState(false)
@@ -155,6 +155,7 @@ function ShareMembers(props) {
       role: global.constants.PERMISSION_ROLE.MEMBER,
       type: 'group',
       isNew: true,
+      hide_passwords: false,
       members: groupMembers
     }])
   }
@@ -176,6 +177,7 @@ function ShareMembers(props) {
             role: global.constants.PERMISSION_ROLE.MEMBER,
             avatar: m.avatar,
             isNew: true,
+            hide_passwords: false,
           }
         }
       )
@@ -183,12 +185,12 @@ function ShareMembers(props) {
     setNewMembers([ ...newMembers, ...result])
   }
 
-  const handleChangePermission = async (item, value) => {
+  const handleChangePermission = async (item, value, hidePassword) => {
     if (item.id && !item.isNew && cipherOrFolder) {
       if (item.type === 'group') {
-        await sharingServices.update_sharing_group(cipherOrFolder.organizationId, item.id, { role: value })
+        await sharingServices.update_sharing_group(cipherOrFolder.organizationId, item.id, { role: value, hide_passwords: hidePassword })
       } else {
-        await sharingServices.update_sharing_member(cipherOrFolder.organizationId, item.id, { role: value })
+        await sharingServices.update_sharing_member(cipherOrFolder.organizationId, item.id, { role: value, hide_passwords: hidePassword })
       }
       await common.getMyShares();
     }
@@ -196,24 +198,28 @@ function ShareMembers(props) {
       if (item.isNew) {
         setNewGroups(newGroups.map((g) => ({
           ...g,
-          role: item.id === g.id ? value : g.role
+          role: item.id === g.id ? value : g.role,
+          hide_passwords: item.id === g.id ? hidePassword : g.hide_passwords,
         })))
       } else {
         setCurrentGroups(currentGroups.map((g) => ({
           ...g,
-          role: item.id === g.id ? value : g.role
+          role: item.id === g.id ? value : g.role,
+          hide_passwords: item.id === g.id ? hidePassword : g.hide_passwords,
         })))
       }
     } else {
       if (item.isNew) {
         setNewMembers(newMembers.map((m) => ({
           ...m,
-          role: item.username === m.username ? value : m.role
+          role: item.username === m.username ? value : m.role,
+          hide_passwords: item.username === m.username ? hidePassword : m.hide_passwords,
         })))
       } else {
         setCurrentMembers(currentMembers.map((m) => ({
           ...m,
-          role: item.username === m.username ? value : m.role
+          role: item.username === m.username ? value : m.role,
+          hide_passwords: item.username === m.username ? hidePassword : m.hide_passwords,
         })))
       }
     }
@@ -298,10 +304,10 @@ function ShareMembers(props) {
                 {t('common.email')}
               </div>
               <div className='flex items-center'>
-                <div className='w-[108px] px-1'>
+                <div className='w-[108px] px-1 flex justify-start'>
                   {t('shares.share_type')}
                 </div>
-                <div className='w-[88px] px-1'>
+                <div className='w-[88px] px-1 flex justify-start'>
                   {t('common.status')}
                 </div>
               </div>
@@ -320,7 +326,7 @@ function ShareMembers(props) {
               ]}
             >
               <List.Item.Meta
-                avatar={<ItemAvatar item={item} size={isMobile ? 14 : 24}/>}
+                avatar={<ItemAvatar item={item} size={24}/>}
                 description={null}
                 title={
                   <div className='flex items-center justify-between'>
@@ -330,35 +336,50 @@ function ShareMembers(props) {
                     >
                       {item.username || item.name}
                     </div>
-                    <div className='flex items-center'>
-                      <div className='w-[108px] px-1'>
-                        <Select
-                          size='small'
-                          value={item.role}
-                          options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: t(p.label) }))}
-                          onChange={(v) => handleChangePermission(item, v)}
-                        />
+                    <div className='flex flex-col gap-2'>
+                      <div className='flex items-center'>
+                        <div className='w-[108px] px-1 flex justify-start'>
+                          <Select
+                            size='small'
+                            value={item.role}
+                            className='w-full'
+                            options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: t(p.label) }))}
+                            onChange={(v) => handleChangePermission(item, v, item.hide_passwords)}
+                          />
+                        </div>
+                        <div style={{ width: 88 }} className='w-[88px] px-1 flex justify-start'>
+                          {
+                            (() => {
+                              if (item.status === global.constants.STATUS.ACCEPTED) {
+                                return <Button
+                                  size="small"
+                                  type="primary"
+                                  disabled={callingAPI}
+                                  onClick={() => handleConfirmMember(item)}
+                                >
+                                  {t('button.confirm')}
+                                </Button>
+                              }
+                              const status = item.status ? common.getStatus(item.status) : null
+                              if (status) {
+                                return <Tag color={status.color} className='mr-0'>{t(status?.label)}</Tag>
+                              }
+                            })()
+                          }
+                        </div>
                       </div>
-                      <div style={{ width: 88 }} className='w-[88px] px-1'>
-                        {
-                          (() => {
-                            if (item.status === global.constants.STATUS.ACCEPTED) {
-                              return <Button
-                                size="small"
-                                type="primary"
-                                disabled={callingAPI}
-                                onClick={() => handleConfirmMember(item)}
-                              >
-                                {t('button.confirm')}
-                              </Button>
-                            }
-                            const status = item.status ? common.getStatus(item.status) : null
-                            if (status) {
-                              return <Tag color={status.color}>{t(status?.label)}</Tag>
-                            }
-                          })()
-                        }
-                      </div>
+                      {
+                        menuType === menuTypes.CIPHERS && <div className='flex items-center gap-2 px-1'>
+                          <span className='text-xs font-semibold'>
+                            Ẩn Password:
+                          </span>
+                          <Switch
+                            size='small'
+                            value={item.hide_passwords}
+                            onChange={(v) => handleChangePermission(item, item.role, v)}
+                          />
+                        </div>
+                      }
                     </div>
                   </div>
                 }

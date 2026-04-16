@@ -82,7 +82,7 @@ const ListData = (props) => {
         {
           (() => {
             const permission = common.getSharePermission(record.share_type)
-            return t(permission.label)
+            return t(permission?.label)
           })()
         }
       </div>
