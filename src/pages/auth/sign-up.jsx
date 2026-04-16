@@ -31,7 +31,9 @@ const SingUp = () => {
     await userServices.register(values).then(async () => {
       await userServices.users_session({
         password: values.password,
-        email: values.username
+        email: values.username,
+        kdf: global.constants.CORE_JS_INFO.KDF,
+        kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS
       }).then(async (response) => {
         await common.updateAccessTokenType(response.token_type)
         await common.updateAccessToken(response.access_token);

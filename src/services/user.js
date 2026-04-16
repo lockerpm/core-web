@@ -121,7 +121,6 @@ async function users_access_token(token) {
 
 async function users_session(data) {
   const userInfo = global.store.getState().auth.userInfo;
-  console.log('userInfo', userInfo);
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
   if (data.password) {

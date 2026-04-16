@@ -68,7 +68,7 @@ const checkingHandleAttachment = () => {
 
 const isHidePassword = (cipher) => {
   if (cipher.type === CipherType.Login) {
-    return false;
+    return !cipher.viewPassword
   }
   return false;
 }
