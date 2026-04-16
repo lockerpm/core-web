@@ -31,6 +31,8 @@ const ChangePasswordModal = (props) => {
       username: userInfo.email,
       password: currentPassword,
       login_method: 'password',
+      kdf: userInfo.kdf,
+      kdf_iterations: userInfo.kdf_iterations,
       ...values,
     }).then(async () => {
       global.pushSuccess(t('notification.success.change_password.changed'));

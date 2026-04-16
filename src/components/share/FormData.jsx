@@ -315,7 +315,6 @@ function FormData(props) {
               {
                 menuType === menuTypes.CIPHERS && <ItemsShare
                   item={item}
-
                 />
               }
               {

@@ -66,6 +66,13 @@ const checkingHandleAttachment = () => {
   return true;
 }
 
+const isHidePassword = (cipher) => {
+  if (cipher.type === CipherType.Login) {
+    return !cipher.viewPassword
+  }
+  return false;
+}
+
 export default {
   isProtectedCipher,
   isOwner,
@@ -75,4 +82,5 @@ export default {
   isCipherShareable,
   isCipherQuickShareable,
   checkingHandleAttachment,
+  isHidePassword
 }

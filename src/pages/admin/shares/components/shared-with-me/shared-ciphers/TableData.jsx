@@ -109,7 +109,7 @@ const TableData = (props) => {
         align: 'center',
         render: (_, record) => {
           const permission = common.getSharePermission(record.share_type)
-          return t(permission.label)
+          return t(permission?.label)
         }
       },
       {

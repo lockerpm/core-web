@@ -49,7 +49,7 @@ const formatOTP = (otp) => {
 
 const formatText = (value, show) => {
   if (value && !show) {
-    return value.replace(/[^\s]/g, "*");
+    return "********";
   }
   if (!value && !show) {
     return ''
