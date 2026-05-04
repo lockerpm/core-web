@@ -18,6 +18,7 @@ import { SymmetricCryptoKey } from '../../../../../../core-js/src/models/domain'
 
 import global from '../../../../../../config/global';
 import common from '../../../../../../utils/common';
+import coreServices from '../../../../../../services/core';
 
 function ResetPasswordFormData(props) {
   const { GeneratePassword } = formsComponents;
@@ -46,9 +47,9 @@ function ResetPasswordFormData(props) {
         global.pushError(t('notification.error.message.error_occurred'))
         return;
       }
-      const key = await global.jsCore.cryptoService.makeKey(
-        values.new_password,
+      const key = await coreServices.make_key(
         item.email,
+        values.new_password,
         response.kdf,
         response.kdf_iterations
       )

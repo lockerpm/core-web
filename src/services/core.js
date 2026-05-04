@@ -3,13 +3,22 @@ import { ConstantsService } from '../core-js/src/services/constants.service';
 import { SymmetricCryptoKey } from '../core-js/src/models/domain';
 import { Utils } from '../core-js/src/misc/utils';
 
-async function make_key(username, password, kdf = null, kdfIterations = null) {
+async function make_key(
+  username,
+  password,
+  kdf = null,
+  kdfIterations = null,
+  kdfMemory = undefined,
+  kdfParallelism = undefined
+) {
   if (global.jsCore) {
     return await global.jsCore.cryptoService.makeKey(
       password,
       username,
       kdf || global.constants.CORE_JS_INFO.KDF,
-      kdfIterations || global.constants.CORE_JS_INFO.KDF_ITERATIONS
+      kdfIterations || global.constants.CORE_JS_INFO.KDF_ITERATIONS,
+      kdfMemory,
+      kdfParallelism
     )
   }
   return ''
