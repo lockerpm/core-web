@@ -119,12 +119,21 @@ async function users_access_token(token) {
   })
 }
 
-async function users_session(data) {
-  const userInfo = global.store.getState().auth.userInfo;
+async function users_session(data = {
+  email,
+  password,
+  kdf,
+  kdf_iterations
+}) {
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
   if (data.password) {
-    const key = await coreServices.make_key(data.email, data.password, data.kdf, data.kdf_iterations)
+    const key = await coreServices.make_key(
+      data.email,
+      data.password,
+      data.kdf,
+      data.kdf_iterations
+    )
     hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
   }
   const deviceId = await common.getDeviceId();
@@ -142,11 +151,25 @@ async function users_session(data) {
   });
 }
 
-async function users_session_otp(data) {
+async function users_session_otp(data = {
+  hashedPassword,
+  password,
+  email,
+  kdf,
+  kdf_iterations,
+  method,
+  save_device,
+  otp
+}) {
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
   if (data.password) {
-    const key = await coreServices.make_key(data.email, data.password, data.kdf, data.kdf_iterations)
+    const key = await coreServices.make_key(
+      data.email,
+      data.password,
+      data.kdf,
+      data.kdf_iterations
+    )
     hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, key)
   }
   const deviceId = await common.getDeviceId();
@@ -167,11 +190,29 @@ async function users_session_otp(data) {
   });
 }
 
-async function change_password(data = {}) {
-  const makeKey = await coreServices.make_key(data.username, data.password, data.kdf, data.kdf_iterations)
+async function change_password(data = {
+  username,
+  password,
+  kdf,
+  kdf_iterations,
+  new_password,
+  password_hint,
+  login_method
+}) {
+  const makeKey = await coreServices.make_key(
+    data.username,
+    data.password,
+    data.kdf,
+    data.kdf_iterations
+  )
   const password = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
 
-  const mewMakeKey = await coreServices.make_key(data.username, data.new_password, data.kdf, data.kdf_iterations)
+  const mewMakeKey = await coreServices.make_key(
+    data.username,
+    data.new_password,
+    data.kdf,
+    data.kdf_iterations
+  )
   const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
   let encKey = null
   const existingEncKey = await global.jsCore.cryptoService.getEncKey();
@@ -204,7 +245,12 @@ async function change_password(data = {}) {
 async function register(data) {
   const kdf = global.constants.CORE_JS_INFO.KDF;
   const kdfIterations = global.constants.CORE_JS_INFO.KDF_ITERATIONS;
-  const makeKey = await coreServices.make_key(data.username, data.password, kdf, kdfIterations)
+  const makeKey = await coreServices.make_key(
+    data.username,
+    data.password,
+    kdf,
+    kdfIterations
+  )
   const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
   const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
   const hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
@@ -232,8 +278,21 @@ async function register(data) {
   });
 }
 
-async function reset_password(data = {}) {
-  const mewMakeKey = await coreServices.make_key(data.username, data.new_password, data.kdf, data.kdf_iterations)
+async function reset_password(data = {
+  username,
+  new_password,
+  kdf,
+  kdf_iterations,
+  token,
+  full_name,
+  login_method
+}) {
+  const mewMakeKey = await coreServices.make_key(
+    data.username,
+    data.new_password,
+    data.kdf,
+    data.kdf_iterations
+  )
   const newPassword = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
   const encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
   const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])

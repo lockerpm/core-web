@@ -72,16 +72,21 @@ function FormData(props) {
     }
     const kdf = global.constants.CORE_JS_INFO.KDF;
     const kdfIterations = global.constants.CORE_JS_INFO.KDF_ITERATIONS;
-    const requests = usernames.map(async (u) => {
+    const requests = usernames.map(async (username) => {
       const password = await global.jsCore.passwordGenerationService.generatePassword(options)
-      const makeKey = await coreServices.make_key(u, password, kdf, kdfIterations)
+      const makeKey = await coreServices.make_key(
+        username,
+        password,
+        kdf,
+        kdfIterations
+      )
       const hashedPassword = await global.jsCore.cryptoService.hashPassword(password, makeKey)
       const encKey = await global.jsCore.cryptoService.makeEncKey(makeKey)
       const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
       const passwordStrength = common.getPasswordStrength(password);
 
       return {
-        email: u,
+        email: username,
         password: password,
         role: role,
         master_password_hash: hashedPassword,
