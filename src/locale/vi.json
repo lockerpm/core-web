@@ -942,12 +942,18 @@
         "note3": "Cài đặt này sẽ áp dụng cho tất cả các phương thức mở khóa. Nếu bạn sử dụng phương thức khác lần sau, bạn sẽ cần xác thực lại một lần.",
         "explore_more": "Tìm hiểu thêm"
       },
-      "updated": {
-        "title": "Cập nhật thành công",
-        "description": "Thuật toán khóa chính đã được cập nhật thành công!",
-        "note1": "Bạn vẫn còn {{methods}} phương thức mở khóa khác cần được cập nhật.",
-        "note2": "Để hoàn tất, hãy đăng xuất và mở khóa lại kho bằng từng phương thức còn lại, hoặc xóa các phương thức bạn không còn sử dụng.",
-        "action": "Tôi đã hiểu"
+      "confirm_update": {
+        "title": "Xác nhận cập nhật khóa mã hóa",
+        "description": "Sau khi bạn nhấn nút <b>Xác nhận</b> bên dưới, khóa sẽ được cập nhật.",
+        "note": "Bạn sẽ bị đăng xuất khỏi Vault một lần trong quá trình này.",
+        "action": "Xác nhận"
+      },
+      "update_now": {
+        "title": "Cập nhật mã hóa",
+        "tag": "Hành động được đề xuất",
+        "description": "Cập nhật phái sinh khóa mã hóa để bảo mật tốt hơn.",
+        "learn_more": "Tìm hiểu thêm",
+        "action": "Cập nhật ngay"
       }
     },
     "two_fa": {

@@ -17,6 +17,7 @@ import {
 } from "@ant-design/icons";
 
 import itemsComponents from '../../../../../../components/items';
+import securityModalsComponents from '../modals';
 
 import common from '../../../../../../utils/common';
 import global from '../../../../../../config/global';
@@ -27,6 +28,7 @@ import authServices from '../../../../../../services/auth';
 
 function UpdateEncryptionSettingsDrawer(props) {
   const { RouterLink } = itemsComponents;
+  const { ConfirmEncryptionUpdateModal } = securityModalsComponents;
   const {
     visible = false,
     masterPassword,
@@ -40,6 +42,7 @@ function UpdateEncryptionSettingsDrawer(props) {
 
   const [form] = Form.useForm()
   const [callingAPI, setCallingAPI] = useState(false);
+  const [confirmVisible, setConfirmVisible] = useState(false);
 
   const kdf = Form.useWatch('kdf', form)
 
@@ -75,7 +78,16 @@ function UpdateEncryptionSettingsDrawer(props) {
     }
   }, [kdf])
 
-  const handleSave = async () => {
+  const handleUpdate = () => {
+    if (userInfo.is_require_passwordless) {
+      return;
+    }
+    form.validateFields().then(() => {
+      setConfirmVisible(true)
+    })
+  }
+
+  const handleConfirm = async () => {
     if (userInfo.is_require_passwordless) {
       return;
     }
@@ -97,6 +109,7 @@ function UpdateEncryptionSettingsDrawer(props) {
         kdf_parallelism: values.kdf_parallelism
       }).then(async () => {
         global.pushSuccess(commonT('notification.success.change_password.changed'));
+        setConfirmVisible(false);
         onClose();
         authServices.logout(true);
       }).catch((error) => {
@@ -126,7 +139,7 @@ function UpdateEncryptionSettingsDrawer(props) {
               type="primary"
               loading={callingAPI}
               disabled={userInfo.is_require_passwordless}
-              onClick={handleSave}
+              onClick={handleUpdate}
             >
             { buttonT('update')} 
             </Button>
@@ -246,6 +259,12 @@ function UpdateEncryptionSettingsDrawer(props) {
           }
         </Form>
       </Drawer>
+      <ConfirmEncryptionUpdateModal
+        visible={confirmVisible}
+        callingAPI={callingAPI}
+        onClose={() => setConfirmVisible(false)}
+        onConfirm={() => handleConfirm()}
+      />
     </div>
   );
 }
