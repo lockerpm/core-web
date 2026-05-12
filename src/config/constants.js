@@ -1,6 +1,7 @@
 import React from 'react'
 import { CipherType } from '../core-js/src/enums'
 import { FieldType } from '../core-js/src/enums/fieldType'
+import { KdfType } from '../core-js/src/enums/kdfType';
 
 import {
   DesktopOutlined,
@@ -140,8 +141,8 @@ export default {
   MAX_TABLE_WIDTH: 748,
   MAX_ATTACHMENT_SIZE: 50 * 1024 * 1024,
   CORE_JS_INFO: {
-    KDF: 0,
-    KDF_ITERATIONS: 100000
+    KDF: KdfType.PBKDF2_SHA256,
+    KDF_ITERATIONS: 600000
   },
   LANGUAGES: [
     {

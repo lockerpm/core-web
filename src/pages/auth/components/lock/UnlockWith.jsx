@@ -17,18 +17,21 @@ const UnlockWith = (props) => {
     loading = false,
     userInfo = {},
     isUnlockByDesktop = false,
+    showMpForm = false,
     setIsPair = () => {},
     selectOtherMethod = () => {},
   } = props;
 
   return (
     <div>
-      <p className="my-4 text-center">
-        {t('auth_pages.sign_in.or_login_with')}
-      </p>
+      {
+        showMpForm && <p className="my-4 text-center">
+          {t('auth_pages.sign_in.or_login_with')}
+        </p>
+      }
       <div className="flex flex-col gap-2">
         {
-          userInfo?.passkeys?.length > 0 && <Button
+          (userInfo?.passkeys?.length > 0 || !showMpForm) && <Button
             className="w-full"
             size="large"
             ghost
@@ -41,7 +44,7 @@ const UnlockWith = (props) => {
           </Button>
         }
         {
-          userInfo?.security_keys?.length > 0 && <Button
+          (userInfo?.security_keys?.length > 0 || !showMpForm) && <Button
             className="w-full"
             size="large"
             ghost

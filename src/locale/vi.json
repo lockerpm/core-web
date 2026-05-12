@@ -201,7 +201,10 @@
     "least_length": "Đảm bảo {{name}} có ít nhất {{ min }} ký tự.",
     "passwords_not_match": "Mật khẩu bạn nhập không trùng khớp!",
     "key_existed": "khóa bạn nhập đã tồn tại trên môi trường được chọn",
-    "expiration_year": "Chỉ nhập hai chữ số cuối của năm hết hạn."
+    "expiration_year": "Chỉ nhập hai chữ số cuối của năm hết hạn.",
+    "min": "Giá trị tối thiểu là {{min}}",
+    "between": "Giá trị phải nằm trong khoảng từ {{min}} đến {{max}}",
+    "max": "Giá trị tối đa là {{max}}"
   },
   "notification": {
     "error": {
@@ -921,6 +924,31 @@
       "point_phone": "Hãy quét mã QR bằng ứng dụng Locker trên điện thoại của bạn.",
       "expire_in": "Mã QR hết hạn trong: {{expireCountdown}}s",
       "expired": "Mã QR đã hết hạn"
+    },
+    "encryption_key_settings": {
+      "title": "Cài đặt khóa mã hóa",
+      "description": "Chọn thuật toán mã hóa được Locker sử dụng để bảo vệ dữ liệu của bạn.",
+      "algorithm": "Thuật toán",
+      "iterations": "Số vòng lặp",
+      "memory": "Bộ nhớ KDF (MB)",
+      "parallelism": "Độ song song",
+      "recommendation": "Khuyến nghị",
+      "action": "Cập nhật",
+      "form_data": {
+        "title": "Cài đặt khóa mã hóa",
+        "security_note": "Lưu ý bảo mật",
+        "note1": "Sử dụng ít nhất PBKDF2 với 600.000 vòng lặp. Các thuật toán mạnh hơn có thể làm tăng thời gian mở khóa kho.",
+        "note2": "Bạn nên xuất dữ liệu kho trong trường hợp hiếm khi xảy ra sự cố.",
+        "note3": "Cài đặt này sẽ áp dụng cho tất cả các phương thức mở khóa. Nếu bạn sử dụng phương thức khác lần sau, bạn sẽ cần xác thực lại một lần.",
+        "explore_more": "Tìm hiểu thêm"
+      },
+      "updated": {
+        "title": "Cập nhật thành công",
+        "description": "Thuật toán khóa chính đã được cập nhật thành công!",
+        "note1": "Bạn vẫn còn {{methods}} phương thức mở khóa khác cần được cập nhật.",
+        "note2": "Để hoàn tất, hãy đăng xuất và mở khóa lại kho bằng từng phương thức còn lại, hoặc xóa các phương thức bạn không còn sử dụng.",
+        "action": "Tôi đã hiểu"
+      }
     },
     "two_fa": {
       "title": "Xác thực hai lớp (2FA)",

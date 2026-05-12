@@ -18,9 +18,9 @@ const Security = (props) => {
     Passkey,
     SecurityKey,
     TwoFA,
-    MobilePasswordless,
     EmergencyAccess,
-    ManageSessions
+    ManageSessions,
+    EncryptionKeySettings
   } = securityComponents;
   const { } = props;
   const { t } = useTranslation();
@@ -61,7 +61,7 @@ const Security = (props) => {
         }
       </div>
       <Divider />
-      <MobilePasswordless />
+      <EncryptionKeySettings />
       <Divider />
       <TwoFA />
       <Divider />

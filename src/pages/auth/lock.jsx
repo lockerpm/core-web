@@ -108,9 +108,7 @@ const Lock = () => {
       email: userInfo.email,
       username: userInfo.email,
       sync_all_platforms: userInfo.sync_all_platforms,
-      unlock_method: values.unlock_method || otherMethod,
-      kdf: userInfo.kdf,
-      kdf_iterations: userInfo.kdf_iterations
+      unlock_method: values.unlock_method || otherMethod
     }
     await common.unlockToVault(payload, query, () => {
       const returnUrl = query?.return_url ? decodeURIComponent(query?.return_url) : '/';

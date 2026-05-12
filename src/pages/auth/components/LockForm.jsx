@@ -47,15 +47,15 @@ const LockForm = (props) => {
   const [form] = Form.useForm();
 
   const showMpForm = useMemo(() => {
-    if (userInfo?.email && userInfo?.is_require_passwordless) {
-      return !(userInfo?.passkeys.length > 0 || userInfo?.security_keys?.length > 0)
+    if (userInfo?.is_require_passwordless || (userInfo?.login_method === 'passwordless' && userInfo?.set_up_passwordless)) {
+      return false
     }
     return true
   }, [userInfo])
 
   const isUnlockWith = useMemo(() => {
-    return userInfo?.passkeys?.length > 0 || userInfo?.security_keys?.length > 0 || isUnlockByDesktop
-  }, [userInfo?.passkeys, userInfo?.security_keys, isUnlockByDesktop])
+    return userInfo?.passkeys?.length > 0 || userInfo?.security_keys?.length > 0 || isUnlockByDesktop || !showMpForm
+  }, [userInfo?.passkeys, userInfo?.security_keys, isUnlockByDesktop, showMpForm])
 
   const selectOtherMethod = (method) => {
     setStep(2);
@@ -68,13 +68,15 @@ const LockForm = (props) => {
   }
 
   const handleUnlock = async () => {
-    if (serviceUser) {
-      await onSubmit(serviceUser)
-    } else {
-      form.validateFields().then(async (values) => {
-        await onSubmit(values)
+    form.validateFields().then(async (values) => {
+      await onSubmit({
+        password: values.password,
+        kdf: userInfo.kdf,
+        kdf_iterations: userInfo.kdf_iterations,
+        kdf_memory: userInfo.kdf_memory,
+        kdf_parallelism: userInfo.kdf_parallelism
       })
-    }
+    })
   }
 
   const handlePairConfirm = async () => {
@@ -160,7 +162,7 @@ const LockForm = (props) => {
                     htmlType="submit"
                     disabled={logging}
                     loading={callingAPI}
-                    onClick={handleUnlock}
+                    onClick={() => onSubmit(serviceUser)}
                   >
                     {t('lock.unlock')}
                   </Button>
@@ -184,8 +186,8 @@ const LockForm = (props) => {
                           logging={logging}
                           callingAPI={callingAPI}
                           isShowMPHint={isShowMPHint}
-                          onUnlock={handleUnlock}
                           setMPHintVisible={setMPHintVisible}
+                          onUnlock={handleUnlock}
                         />
                       }
                       {
@@ -193,6 +195,7 @@ const LockForm = (props) => {
                           loading={loading || callingAPI}
                           userInfo={userInfo}
                           isUnlockByDesktop={isUnlockByDesktop}
+                          showMpForm={showMpForm}
                           setIsPair={setIsPair}
                           selectOtherMethod={selectOtherMethod}
                         />
@@ -216,8 +219,13 @@ const LockForm = (props) => {
                           changing={callingAPI}
                           userInfo={userInfo}
                           onRepair={() => setIsPair(true)}
-                          onConfirm={(password) => onSubmit({
-                            password
+                          onConfirm={(p) => onSubmit({
+                            password: p.secret,
+                            pwl_id: p.pwl_id,
+                            kdf: p.kdf,
+                            kdf_iterations: p.kdf_iterations,
+                            kdf_memory: p.kdf_memory,
+                            kdf_parallelism: p.kdf_parallelism
                           })}
                         />
                       }
@@ -225,8 +233,13 @@ const LockForm = (props) => {
                         otherMethod === 'passkey' && <Passkey
                           changing={loading}
                           userInfo={userInfo}
-                          onConfirm={(password) => onSubmit({
-                            password
+                          onConfirm={(p) => onSubmit({
+                            password: p.secret,
+                            pwl_id: p.pwl_id,
+                            kdf: p.kdf,
+                            kdf_iterations: p.kdf_iterations,
+                            kdf_memory: p.kdf_memory,
+                            kdf_parallelism: p.kdf_parallelism
                           })}
                         />
                       }

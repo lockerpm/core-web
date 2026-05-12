@@ -57,7 +57,9 @@ const EnterOtp = (props) => {
         otp: values.otp,
         save_device: values.save_device || false,
         kdf: userInfo.kdf,
-        kdf_iterations: userInfo.kdf_iterations
+        kdf_iterations: userInfo.kdf_iterations,
+        kdf_memory: userInfo.kdf_memory,
+        kdf_parallelism: userInfo.kdf_parallelism
       }
       onVerify(payload)
     })

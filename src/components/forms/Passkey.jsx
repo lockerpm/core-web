@@ -16,6 +16,7 @@ const PasskeyForm = (props) => {
     changing = false,
     userInfo = {},
     isAddKey = false,
+    isNewKey = false,
     accessToken = null,
     onConfirm = () => { },
   } = props;
@@ -55,23 +56,40 @@ const PasskeyForm = (props) => {
     setCallingAPI(false);
   }
 
+  const setNewPwl = async (values) => {
+    setCallingAPI(true)
+    await service.setApiToken(accessToken);
+    await service.setNewPasswordlessUsingPasskey({
+      email: userInfo.email,
+      name: userInfo.name,
+      passkeyName: values.passkeyName
+    }).then((response) => {
+      onConfirm(response);
+    }).catch((error) => {
+      global.pushError(error);
+    });
+    setCallingAPI(false);
+  }
+
   return (
     <div className="passwordless-form">
       {
         isAddKey && <div>
-          <div className="mb-2">
-            <Trans
-              i18nKey={'security.passkey.add_new_key_note'}
-              components={{
-                b: <b className="font-semibold"></b>
-              }}
-            />
-          </div>
+          {
+            !isNewKey && <div className="mb-2">
+              <Trans
+                i18nKey={'security.passkey.add_new_key_note'}
+                components={{
+                  b: <b className="font-semibold"></b>
+                }}
+              />
+            </div>
+          }
           <Form
             form={form}
             layout="vertical"
             disabled={callingAPI}
-            onFinish={setBackupPwl}
+            onFinish={isNewKey ? setNewPwl : setBackupPwl}
           >
             <Form.Item
               name={'passkeyName'}
