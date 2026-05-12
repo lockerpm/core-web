@@ -942,14 +942,20 @@
         "note3": "This setting will apply to all your unlock methods. If you unlock with a different method next time, you will need to re-authenticate it once.",
         "explore_more": "Explore more"
       },
-      "updated": {
-        "title": "Updated successfully",
-        "description": "Master key algorithm updated successfully!",
-        "note1": "You still have {{methods}} other unlock methods that need to be updated.",
-        "note2": "To complete the update, log out and unlock your vault again using each other method, or remove any methods you no longer use.",
-        "action": "I got it"
+      "confirm_update": {
+        "title": "Confirm to update the Encryption key",
+        "description": "Once you click the <b>Confirm</b> button below, the key will be updated. ",
+        "note": "You will be logged out of your Vault once during the process.",
+        "action": "Confirm"
+      },
+      "update_now": {
+        "title": "Encryption Update",
+        "tag": "Recommended action",
+        "description": "Update Encryption key derivation for better security.",
+        "learn_more": "Learn more",
+        "action": "Update now"
       }
-    },
+    }, 
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",
