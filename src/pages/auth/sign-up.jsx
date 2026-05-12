@@ -28,17 +28,30 @@ const SingUp = () => {
 
   const handleSignUp = async (values) => {
     setCallingAPI(true)
-    await userServices.register(values).then(async () => {
+    const kdf = global.constants.CORE_JS_INFO.KDF;
+    const kdfIterations = global.constants.CORE_JS_INFO.KDF_ITERATIONS;
+    await userServices.register({
+      ...values,
+      kdf: kdf,
+      kdf_iterations: kdfIterations,
+      kdf_memory: null,
+      kdf_parallelism: null
+    }).then(async () => {
       await userServices.users_session({
         password: values.password,
         email: values.username,
-        kdf: global.constants.CORE_JS_INFO.KDF,
-        kdf_iterations: global.constants.CORE_JS_INFO.KDF_ITERATIONS
+        kdf: kdf,
+        kdf_iterations: kdfIterations,
+        kdf_memory: null,
+        kdf_parallelism: null
       }).then(async (response) => {
         await common.updateAccessTokenType(response.token_type)
         await common.updateAccessToken(response.access_token);
         await common.fetchUserInfo();
-        await coreServices.unlock({ ...response, ...values })
+        await coreServices.unlock({
+          ...response,
+          ...values,
+        })
         const isSynced = await commonServices.sync_data();
         if (isSynced) {
           global.navigate(global.keys.VAULT)

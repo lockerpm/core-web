@@ -28,7 +28,7 @@ const RouterLink = (props) => {
     <>
       {
         onClick ? <div
-          className={`cursor-pointer ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
+          className={`cursor-pointer ${className} text-${type} ${icon ? 'flex items-center gap-1' : ''}`}
           onClick={onClick}
         >
           <span
@@ -38,7 +38,7 @@ const RouterLink = (props) => {
             {label}
           </span> {icon}
         </div> : <Link
-          className={`cs-link ${className} text-${type} ${icon ? 'flex items-center' : ''}`}
+          className={`cs-link ${className} text-${type} ${icon ? 'flex items-center gap-1' : ''}`}
           style={{ maxWidth: maxWidth, flex: flex }}
           target={blank ? '_blank' : ''}
           to={newPath}

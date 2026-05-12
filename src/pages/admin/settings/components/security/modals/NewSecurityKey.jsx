@@ -40,6 +40,7 @@ const NewSecurityKeyModal = (props) => {
         !isPair && <SecurityKey
           changing={changing}
           userInfo={userInfo}
+          isAddKey={true}
           onConfirm={onConfirm}
           onRepair={() => setIsPair(true)}
         />

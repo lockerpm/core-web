@@ -30,6 +30,7 @@ const SecurityKeyForm = (props) => {
     changing = false,
     userInfo = {},
     isAddKey = false,
+    isNewKey = false,
     accessToken = null,
     onRepair = () => { },
     onConfirm = () => { }
@@ -80,16 +81,36 @@ const SecurityKeyForm = (props) => {
     setPin(pin);
     if (!isAddKey) {
       await getPwl();
+    } else if (isNewKey) {
+      await setNewPwl();
     } else {
-      const apiToken = accessToken || await common.getAccessToken();
-      await service.setApiToken(apiToken);
       await setBackupPwl();
     }
+  }
+
+  const getPwl = async () => {
+    setCallingAPI(true)
+    try {
+      const response = await service.getPasswordless({
+        email: userInfo.email,
+        devicePath: selectedDevice.path,
+        pin: pin,
+        onlyBackup: userInfo.login_method === 'password'
+      })
+      setStep(2);
+      setPasswordless(response)
+      await onConfirm(response)
+    } catch (error) {
+      redirectByError(error)
+    }
+    setCallingAPI(false)
   }
 
   const setBackupPwl = async () => {
     setCallingAPI(true)
     try {
+      const apiToken = accessToken || await common.getAccessToken();
+      await service.setApiToken(apiToken);
       const encKey = await global.jsCore.cryptoService.getEncKey();
       const response = await service.setBackupPasswordless({
         email: userInfo.email,
@@ -108,18 +129,20 @@ const SecurityKeyForm = (props) => {
     setCallingAPI(false)
   }
 
-  const getPwl = async () => {
+  const setNewPwl = async () => {
     setCallingAPI(true)
     try {
-      const response = await service.getPasswordless({
+      await service.setApiToken(accessToken);
+      const response = await service.setNewPasswordless({
         email: userInfo.email,
+        name: selectedDevice.name,
         devicePath: selectedDevice.path,
-        pin: pin,
-        onlyBackup: userInfo.login_method === 'password'
+        deviceName: selectedDevice.name,
+        pin: pin
       })
       setStep(2);
-      setPasswordless(response)
-      await onConfirm(response)
+      setPasswordless(response);
+      await onConfirm(response);
     } catch (error) {
       redirectByError(error)
     }

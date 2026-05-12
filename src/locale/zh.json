@@ -201,7 +201,10 @@
     "least_length": "{{name}} 的最短密碼長度為 {{ min }}.",
     "passwords_not_match": "密碼驗證不符!",
     "key_existed": "此密鑰已存在於所選環境中",
-    "expiration_year": "輸入到期年份的最後兩位數字。"
+    "expiration_year": "輸入到期年份的最後兩位數字。",
+    "min": "最小值為 {{min}}",
+    "between": "數值必須介於 {{min}} 和 {{max}} 之間",
+    "max": "最大值為 {{max}}"
   },
   "notification": {
     "error": {
@@ -921,6 +924,31 @@
       "point_phone": "將手機相機對準下面的二維碼以確認登入",
       "expire_in": "二維碼過期時間：{{expireCountdown}}s",
       "expired": "二維碼已過期"
+    },
+    "encryption_key_settings": {
+      "title": "加密金鑰設定",
+      "description": "選擇 Locker 用於保護您資料的加密演算法。",
+      "algorithm": "演算法",
+      "iterations": "迭代次數",
+      "memory": "KDF 記憶體 (MB)",
+      "parallelism": "並行度",
+      "recommendation": "建議",
+      "action": "更新",
+      "form_data": {
+        "title": "加密金鑰設定",
+        "security_note": "安全提示",
+        "note1": "至少使用 PBKDF2 並設定 600,000 次迭代。更強的演算法可能會增加解鎖保險庫所需的時間。",
+        "note2": "建議您在可能發生問題的情況下匯出您的保險庫資料。",
+        "note3": "此設定將套用於所有解鎖方式。若您下次使用不同方式解鎖，需重新驗證一次。",
+        "explore_more": "了解更多"
+      },
+      "updated": {
+        "title": "更新成功",
+        "description": "主金鑰演算法已成功更新！",
+        "note1": "您仍有 {{methods}} 種其他解鎖方式需要更新。",
+        "note2": "為完成更新，請登出並使用其他方式逐一重新解鎖保險庫，或移除不再使用的方式。",
+        "action": "我知道了"
+      }
     },
     "two_fa": {
       "title": "雙因素認證（2FA）",

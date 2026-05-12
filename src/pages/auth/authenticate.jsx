@@ -26,12 +26,13 @@ import images from "../../assets/images";
 
 import userServices from "../../services/user";
 import coreServices from "../../services/core";
+import cipherServices from "../../services/cipher";
 
 import global from "../../config/global";
 import common from "../../utils/common";
 
 const Authenticate = () => {
-  const { ChangePassword, Pairing, SecurityKey } = formsComponents;
+  const { ChangePassword, Pairing, SecurityKey, Passkey } = formsComponents;
   const { EnterOtp } = authComponents;
 
   const { t } = useTranslation();
@@ -69,11 +70,11 @@ const Authenticate = () => {
   useEffect(() => {
     if (preLogin) {
       if (!preLogin?.is_factor2 && preLogin?.require_2fa && preLogin?.is_password_changed) {
-        global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
+        global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin?.email });
         return;
       }
       if (preLogin?.is_password_changed && !(preLogin?.require_passwordless && preLogin?.login_method === 'password')) {
-        global.navigate(global.keys.SIGN_IN, {}, { email: preLogin.email });
+        global.navigate(global.keys.SIGN_IN, {}, { email: preLogin?.email });
         return;
       }
       if (currentPage?.query?.token) {
@@ -146,7 +147,9 @@ const Authenticate = () => {
       username: currentPage.query?.email,
       password: values.current_password,
       kdf: preLogin?.kdf,
-      kdf_iterations: preLogin.kdf_iterations
+      kdf_iterations: preLogin?.kdf_iterations,
+      kdf_memory: preLogin?.kdf_memory,
+      kdf_parallelism: preLogin?.kdf_parallelism
     }
     await userServices.users_session(payload).then(async (response) => {
       if (response.is_factor2) {
@@ -183,7 +186,9 @@ const Authenticate = () => {
       email: preLogin?.email,
       password: currentPassword,
       kdf: preLogin?.kdf,
-      kdf_iterations: preLogin?.kdf_iterations
+      kdf_iterations: preLogin?.kdf_iterations,
+      kdf_memory: preLogin?.kdf_memory,
+      kdf_parallelism: preLogin?.kdf_parallelism
     }).then(async (response) => {
       setUserSession({ ...payload, ...response });
       if (preLogin?.is_password_changed) {
@@ -203,13 +208,15 @@ const Authenticate = () => {
     try {
       if (currentPage?.query?.token) {
         await userServices.reset_password({
-          username: preLogin.email,
+          username: preLogin?.email,
           full_name: data.full_name || newFullName,
           new_password: data.new_password,
           token: currentPage?.query?.token,
-          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method,
+          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin?.login_method,
           kdf: preLogin?.kdf,
-          kdf_iterations: preLogin?.kdf_iterations
+          kdf_iterations: preLogin?.kdf_iterations,
+          kdf_memory: preLogin?.kdf_memory,
+          kdf_parallelism: preLogin?.kdf_parallelism
         })
       } else {
         await common.updateAccessTokenType(userSession.token_type)
@@ -220,14 +227,34 @@ const Authenticate = () => {
             full_name: newFullName || data.full_name,
           })
         }
+
+        await common.fetchUserInfo();
         await coreServices.unlock(userSession);
+
+        if (userSession.has_no_master_pw_item) {
+          const encMasterPwItem = await common.createEncryptedMasterPw(currentPassword)
+          const { score } = common.getPasswordStrength(currentPassword)
+          await cipherServices.create({
+            ...encMasterPwItem,
+            score,
+            collectionIds: []
+          })
+        }
+
         await userServices.change_password({
-          username: preLogin.email,
+          username: preLogin?.email,
+          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin?.login_method,
           password: currentPassword,
-          new_password: data.new_password,
-          login_method: preLogin?.require_passwordless ? 'passwordless' : preLogin.login_method,
           kdf: preLogin?.kdf,
-          kdf_iterations: preLogin?.kdf_iterations
+          kdf_iterations: preLogin?.kdf_iterations,
+          kdf_memory: preLogin?.kdf_memory,
+          kdf_parallelism: preLogin?.kdf_parallelism
+        }, {
+          password: data.new_password,
+          kdf: preLogin?.kdf,
+          kdf_iterations: preLogin?.kdf_iterations,
+          kdf_memory: preLogin?.kdf_memory,
+          kdf_parallelism: preLogin?.kdf_parallelism
         })
       }
       global.pushSuccess(t('notification.success.change_password.changed'));
@@ -242,32 +269,16 @@ const Authenticate = () => {
   const handleSignIn = async (newPassword) => {
     const payload = {
       password: newPassword,
-      username: preLogin.email,
-      email: preLogin.email,
-      sync_all_platforms: preLogin.sync_all_platforms,
+      username: preLogin?.email,
+      email: preLogin?.email,
+      sync_all_platforms: preLogin?.sync_all_platforms,
       unlock_method: otherMethod,
-      kdf: preLogin.kdf,
-      kdf_iterations: preLogin.kdf_iterations
+      kdf: preLogin?.kdf,
+      kdf_iterations: preLogin?.kdf_iterations,
+      kdf_memory: preLogin?.kdf_memory,
+      kdf_parallelism: preLogin?.kdf_parallelism
     }
     await common.unlockToVault(payload)
-  }
-
-  const setPasswordLessByPasskey = async (values) => {
-    try {
-      setCallingAPI(true);
-      await service.setApiToken(userSession?.access_token);
-      const response = await service.setNewPasswordlessUsingPasskey({
-        email: preLogin.email,
-        name: newFullName || preLogin.name,
-        passkeyName: values.passkeyName,
-      })
-      handleSave({
-        new_password: response
-      })
-    } catch (error) {
-      global.pushError(error)
-      setCallingAPI(false);
-    }
   }
 
   const signOtherAccount = () => {
@@ -310,7 +321,7 @@ const Authenticate = () => {
                     type={'text'}
                     icon={<ArrowLeftOutlined />}
                     onClick={() => {
-                      if (step === 2 && preLogin.is_password_changed) {
+                      if (step === 2 && preLogin?.is_password_changed) {
                         setStep(0)
                       } else {
                         setStep(step -1 )
@@ -439,56 +450,41 @@ const Authenticate = () => {
               {
                 step === 3 && <div>
                   {
-                    otherMethod === 'security_key' && <div>
-                      {
-                        isPair && <Pairing
-                          userInfo={preLogin}
-                          onConfirm={() => setIsPair(false)}
-                        />
-                      }
-                      {
-                        !isPair && preLogin?.require_passwordless && <SecurityKey
-                          changing={callingAPI}
-                          userInfo={preLogin}
-                          accessToken={userSession?.access_token}
-                          onRepair={() => setIsPair(true)}
-                          onConfirm={(password) => handleSave({ new_password: password })}
-                        />
-                      }
-                    </div>
+                    isPair && <Pairing
+                      userInfo={preLogin}
+                      onConfirm={() => setIsPair(false)}
+                    />
                   }
                   {
-                    otherMethod === 'passkey' && <div>
-                      <Form
-                        form={form}
-                        layout="vertical"
-                        disabled={callingAPI}
-                        onFinish={setPasswordLessByPasskey}
-                      >
-                        <Form.Item
-                          name={'passkeyName'}
-                          label={t('security.passkey.add_new_key_description')}
-                          rules={[
-                            global.rules.REQUIRED(t('common.name')),
-                          ]}
-                        >
-                          <Input
-                            size="large"
-                            autoFocus={true}
-                            placeholder={t('placeholder.enter')}
-                          />
-                        </Form.Item>
-                        <Button
-                          className="mt-4 w-full"
-                          type="primary"
-                          size="large"
-                          htmlType="submit"
-                          loading={callingAPI}
-                        >
-                          {t('button.continue')}
-                        </Button>
-                      </Form>
-                    </div>
+                    !isPair && otherMethod === 'security_key' && <SecurityKey
+                      changing={callingAPI}
+                      userInfo={{
+                        ...preLogin,
+                        name: newFullName || preLogin?.name,
+                      }}
+                      accessToken={userSession?.access_token}
+                      isAddKey={true}
+                      isNewKey={true}
+                      onRepair={() => setIsPair(true)}
+                      onConfirm={(p) => handleSave({
+                        new_password: p,
+                      })}
+                    />
+                  }
+                  {
+                    otherMethod === 'passkey' && <Passkey
+                      changing={callingAPI}
+                      userInfo={{
+                        ...preLogin,
+                        name: newFullName || preLogin?.name,
+                      }}
+                      accessToken={userSession?.access_token}
+                      isAddKey={true}
+                      isNewKey={true}
+                      onConfirm={(p) => handleSave({
+                        new_password: p,
+                      })}
+                    />
                   }
                 </div>
               }

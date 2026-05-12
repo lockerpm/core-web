@@ -28,12 +28,20 @@ const ChangePasswordModal = (props) => {
   const handleSave = async (values) => {
     setCallingAPI(true);
     await userServices.change_password({
+      ...values,
       username: userInfo.email,
-      password: currentPassword,
       login_method: 'password',
+      password: currentPassword,
       kdf: userInfo.kdf,
       kdf_iterations: userInfo.kdf_iterations,
-      ...values,
+      kdf_memory: userInfo.kdf_memory,
+      kdf_parallelism: userInfo.kdf_parallelism,
+    }, {
+      password: values.new_password,
+      kdf: userInfo.kdf,
+      kdf_iterations: userInfo.kdf_iterations,
+      kdf_memory: userInfo.kdf_memory,
+      kdf_parallelism: userInfo.kdf_parallelism,
     }).then(async () => {
       global.pushSuccess(t('notification.success.change_password.changed'));
       onClose();

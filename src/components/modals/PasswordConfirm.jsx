@@ -155,7 +155,7 @@ const PasswordConfirmModal = (props) => {
                 <SecurityKey
                   changing={callingAPI}
                   userInfo={userInfo}
-                  onConfirm={(p) => handleConfirm(p)}
+                  onConfirm={(p) => handleConfirm(p.secret)}
                   onRepair={() => setIsPair(true)}
                 />
               </div>
@@ -165,7 +165,7 @@ const PasswordConfirmModal = (props) => {
                 <Passkey
                   changing={callingAPI}
                   userInfo={userInfo}
-                  onConfirm={(p) => handleConfirm(p)}
+                  onConfirm={(p) => handleConfirm(p.secret)}
                 />
               </div>
             }

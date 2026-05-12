@@ -37,6 +37,7 @@ function ResetPasswordFormData(props) {
     form.resetFields();
     setCallingAPI(false);
   }, [visible])
+
   const handleConfirm = async () => {
     form.validateFields().then(async (values) => {
       setCallingAPI(true);
@@ -51,7 +52,9 @@ function ResetPasswordFormData(props) {
         item.email,
         values.new_password,
         response.kdf,
-        response.kdf_iterations
+        response.kdf_iterations,
+        response.kdf_memory,
+        response.kdf_parallelism
       )
       const masterPasswordHash = await global.jsCore.cryptoService.hashPassword(
         values.new_password,
@@ -70,6 +73,7 @@ function ResetPasswordFormData(props) {
         score: passwordStrength.score,
         master_password_cipher: encMasterPwItem
       }
+
       await emergencyAccessServices.password(item.id, payload)
         .then(() => {
           global.pushSuccess(t('notification.success.emergency_access.takeover_password', { user: item.email }))

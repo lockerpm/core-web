@@ -201,7 +201,10 @@
     "least_length": "Assurez-vous que cette {{name}} a au moins un caractère {{ min }}",
     "passwords_not_match": "Les deux mots de passe que vous avez saisis ne correspondent pas!",
     "key_existed": "Cette clé existe déjà sur l'environnement choisi",
-    "expiration_year": "Entrez les deux derniers chiffres de l'année d'expiration."
+    "expiration_year": "Entrez les deux derniers chiffres de l'année d'expiration.",
+    "min": "La valeur minimale est {{min}}",
+    "between": "La valeur doit être comprise entre {{min}} et {{max}}",
+    "max": "La valeur maximale est {{max}}"
   },
   "notification": {
     "error": {
@@ -921,6 +924,31 @@
       "point_phone": "Pointez l'appareil photo de votre téléphone sur le QR Code ci-dessous pour confirmer la connexion",
       "expire_in": "Le code expire dans : {{expireCountdown}}s",
       "expired": "Code QR expiré"
+    },
+    "encryption_key_settings": {
+      "title": "Paramètres de clé de chiffrement",
+      "description": "Sélectionnez l’algorithme de chiffrement utilisé par Locker pour protéger vos données.",
+      "algorithm": "Algorithme",
+      "iterations": "Itérations",
+      "memory": "Mémoire KDF (Mo)",
+      "parallelism": "Parallélisme",
+      "recommendation": "Recommandation",
+      "action": "Mettre à jour",
+      "form_data": {
+        "title": "Paramètres de clé de chiffrement",
+        "security_note": "Note de sécurité",
+        "note1": "Utilisez au minimum PBKDF2 avec 600 000 itérations. Des algorithmes plus puissants peuvent augmenter le temps nécessaire pour déverrouiller votre coffre.",
+        "note2": "Vous devriez exporter les données de votre coffre en cas de problème improbable.",
+        "note3": "Ce paramètre s’appliquera à toutes vos méthodes de déverrouillage. Si vous utilisez une méthode différente la prochaine fois, vous devrez la réauthentifier une fois.",
+        "explore_more": "En savoir plus"
+      },
+      "updated": {
+        "title": "Mise à jour réussie",
+        "description": "L’algorithme de la clé maître a été mis à jour avec succès !",
+        "note1": "Il vous reste {{methods}} autres méthodes de déverrouillage à mettre à jour.",
+        "note2": "Pour finaliser, déconnectez-vous puis déverrouillez à nouveau votre coffre avec chaque autre méthode, ou supprimez celles que vous n’utilisez plus.",
+        "action": "J’ai compris"
+      }
     },
     "two_fa": {
       "title": "Authentification à deux facteurs (2FA)",
