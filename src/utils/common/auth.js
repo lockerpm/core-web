@@ -57,6 +57,7 @@ const unlockToVault = async (
   callback = () => { }
 ) => {
   const request = payload?.is_otp ? userServices.users_session_otp(payload) : userServices.users_session(payload);
+  const isOtp = payload.is_otp || false;
   delete payload.is_otp
   await request.then(async (response) => {
     if (response.is_factor2) {
@@ -78,6 +79,7 @@ const unlockToVault = async (
       if (remakeResponse) {
         const newPayload = {
           ...payload,
+          is_otp: isOtp,
           password: null,
           hashedPassword: remakeResponse.hashedPassword,
           keyB64: remakeResponse.key.keyB64,
