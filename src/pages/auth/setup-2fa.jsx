@@ -46,7 +46,7 @@ const Setup2FA = () => {
   const [callingAPI, setCallingAPI] = useState(false)
   const [isPair, setIsPair] = useState(false)
   const [otherMethod, setOtherMethod] = useState('')
-  const [currentPassword, setCurrentPassword] = useState(null)
+  const [signInInfo, setSignInInfo] = useState(null)
 
   const [form] = Form.useForm()
 
@@ -69,10 +69,10 @@ const Setup2FA = () => {
   useEffect(() => {
     if (preLogin) {
       if (!preLogin?.is_password_changed) {
-        global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
+        global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin?.email });
       } else if (preLogin?.is_factor2 || !preLogin?.require_2fa) {
         if (preLogin?.require_passwordless && preLogin?.login_method === 'password') {
-          global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
+          global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin?.email });
           return;
         }
         global.navigate(global.keys.SIGN_IN)
@@ -93,20 +93,18 @@ const Setup2FA = () => {
   const handleSignIn = async (values) => {
     setCallingAPI(true)
     const payload = {
+      ...values,
       email: preLogin?.email,
       username: preLogin?.email,
-      password: values.current_password,
-      kdf: preLogin?.kdf,
-      kdf_iterations: preLogin?.kdf_iterations
     }
     await userServices.users_session(payload).then(async (response) => {
       setFactor2(response);
       setStep(2);
-      setCurrentPassword(values.current_password);
+      setSignInInfo(payload);
     }).catch((error) => {
       setFactor2(null)
       setStep(0)
-      setCurrentPassword(null);
+      setSignInInfo(null);
       global.pushError(error)
     }).finally(() => {
       setCallingAPI(false)
@@ -118,16 +116,12 @@ const Setup2FA = () => {
     await authServices.update_factor2(payload).then(async () => {
       global.pushSuccess(t('notification.success.factor2.enabled'));
       if (preLogin?.require_passwordless && preLogin?.login_method === 'password') {
-        global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email });
+        global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin?.email });
       } else {
         await common.unlockToVault({
-          password: currentPassword,
-          username: preLogin.email,
-          email: preLogin.email,
-          sync_all_platforms: preLogin.sync_all_platforms,
+          ...signInInfo,
+          sync_all_platforms: preLogin?.sync_all_platforms,
           unlock_method: otherMethod,
-          kdf: preLogin.kdf,
-          kdf_iterations: preLogin.kdf_iterations
         })
       }
     }).catch((error) => {
@@ -190,7 +184,13 @@ const Setup2FA = () => {
                       layout="vertical"
                       labelAlign={'left'}
                       disabled={callingAPI}
-                      onFinish={handleSignIn}
+                      onFinish={(values) => handleSignIn({
+                        password: values.current_password,
+                        kdf: preLogin.kdf,
+                        kdf_iterations: preLogin.kdf_iterations,
+                        kdf_memory: preLogin.kdf_memory,
+                        kdf_parallelism: preLogin.kdf_parallelism
+                      })}
                     >
                       <Form.Item
                         name={'current_password'}
@@ -259,14 +259,28 @@ const Setup2FA = () => {
                       changing={callingAPI}
                       userInfo={preLogin}
                       onRepair={() => setIsPair(true)}
-                      onConfirm={(password) => handleSignIn({ current_password: password })}
+                      onConfirm={(p) => handleSignIn({
+                        password: p.secret,
+                        pwl_id: p.pwl_id,
+                        kdf: p.kdf,
+                        kdf_iterations: p.kdf_iterations,
+                        kdf_memory: p.kdf_memory,
+                        kdf_parallelism: p.kdf_parallelism
+                      })}
                     />
                   }
                   {
                     !isPair && otherMethod === 'passkey' && <Passkey
                       changing={loading}
                       userInfo={preLogin}
-                      onConfirm={(password) => handleSignIn({ current_password: password })}
+                      onConfirm={(p) => handleSignIn({
+                        password: p.secret,
+                        pwl_id: p.pwl_id,
+                        kdf: p.kdf,
+                        kdf_iterations: p.kdf_iterations,
+                        kdf_memory: p.kdf_memory,
+                        kdf_parallelism: p.kdf_parallelism
+                      })}
                     />
                   }
                 </div>

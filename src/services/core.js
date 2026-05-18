@@ -15,8 +15,8 @@ async function make_key(
     return await global.jsCore.cryptoService.makeKey(
       password,
       username,
-      kdf || global.constants.CORE_JS_INFO.KDF,
-      kdfIterations || global.constants.CORE_JS_INFO.KDF_ITERATIONS,
+      kdf,
+      kdfIterations,
       kdfMemory,
       kdfParallelism
     )
@@ -24,22 +24,43 @@ async function make_key(
   return ''
 }
 
-async function unlock(data) {
+async function unlock(data = {
+  hashedPassword,
+  keyB64,
+  password,
+  username,
+  access_token,
+  key,
+  private_key,
+  kdf,
+  kdf_iterations,
+  kdf_memory,
+  kdf_parallelism
+}) {
   const userInfo = global.store.getState().auth.userInfo;
   if (global.jsCore && userInfo) {
     await global.jsCore.cryptoService.clearKeys()
     let hashedPassword = data?.hashedPassword;
     let makeKey = data?.keyB64 ? new SymmetricCryptoKey(Utils.fromB64ToArray(data?.keyB64).buffer) : null
     if (data.password) {
-      makeKey = await make_key(data.username, data.password, userInfo.kdf, userInfo.kdf_iterations)
+      makeKey = await make_key(
+        data.username,
+        data.password,
+        data.kdf,
+        data.kdf_iterations,
+        data.kdf_memory,
+        data.kdf_parallelism
+      )
       hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
     }
     await global.jsCore.tokenService.setTokens(data.access_token, null);
     await global.jsCore.userService.setInformation(
       global.jsCore.tokenService.getUserId(),
       data.username,
-      userInfo.kdf,
-      userInfo.kdf_iterations
+      data.kdf,
+      data.kdf_iterations,
+      data.kdf_memory,
+      data.kdf_parallelism
     )
     await global.jsCore.cryptoService.setKey(makeKey)
     await global.jsCore.cryptoService.setKeyHash(hashedPassword)

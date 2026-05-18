@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -50,6 +50,13 @@ const SignInForm = (props) => {
 
   const [form] = Form.useForm();
 
+  const showPW = useMemo(() => {
+    if (preLogin?.require_passwordless || (preLogin?.login_method === 'passwordless' && preLogin?.set_up_passwordless)) {
+      return false
+    }
+    return true
+  }, [preLogin])
+
   useEffect(() => {
     form.setFieldsValue({
       username: email || currentPage?.query?.email,
@@ -85,8 +92,6 @@ const SignInForm = (props) => {
         ...values,
         sync_all_platforms: preLogin.sync_all_platforms,
         unlock_method: values.unlock_method || otherMethod,
-        kdf: preLogin?.kdf,
-        kdf_iterations: preLogin?.kdf_iterations
       })
     } else {
       handlePrelogin(values)
@@ -122,7 +127,9 @@ const SignInForm = (props) => {
               keyB64: serviceUser?.key,
               unlock_method: cacheData?.unlock_method || null,
               kdf: preLogin?.kdf,
-              kdf_iterations: preLogin?.kdf_iterations
+              kdf_iterations: preLogin?.kdf_iterations,
+              kdf_memory: preLogin?.kdf_memory,
+              kdf_parallelism: preLogin?.kdf_parallelism
             })
           } else {
             setStep(2)
@@ -151,7 +158,9 @@ const SignInForm = (props) => {
             keyB64: serviceUser?.key,
             unlock_method: cacheData?.unlock_method || null,
             kdf: preLogin?.kdf,
-            kdf_iterations: preLogin?.kdf_iterations
+            kdf_iterations: preLogin?.kdf_iterations,
+            kdf_memory: preLogin?.kdf_memory,
+            kdf_parallelism: preLogin?.kdf_parallelism
           })
         }
       } catch (error) {
@@ -175,7 +184,14 @@ const SignInForm = (props) => {
       <Form
         form={form}
         key={locale}
-        onFinish={handleSubmit}
+        onFinish={(values) => handleSubmit({
+          username: values.username,
+          password: values.password,
+          kdf: preLogin?.kdf,
+          kdf_iterations: preLogin?.kdf_iterations,
+          kdf_memory: preLogin?.kdf_memory,
+          kdf_parallelism: preLogin?.kdf_parallelism
+        })}
         disabled={loading || callingAPI}
       >
         <div>
@@ -217,7 +233,7 @@ const SignInForm = (props) => {
             {
               step === 2 && <div>
                 {
-                  preLogin?.login_method === 'password' && <div>
+                  showPW && <div>
                     <Form.Item
                       name="password"
                       rules={[
@@ -276,9 +292,14 @@ const SignInForm = (props) => {
                     changing={loading}
                     userInfo={preLogin}
                     onRepair={() => setIsPair(true)}
-                    onConfirm={(password) => handleSubmit({
+                    onConfirm={(p) => handleSubmit({
                       username: preLogin.email,
-                      password
+                      password: p.secret,
+                      pwl_id: p.pwl_id,
+                      kdf: p.kdf,
+                      kdf_iterations: p.kdf_iterations,
+                      kdf_memory: p.kdf_memory,
+                      kdf_parallelism: p.kdf_parallelism
                     })}
                   />
                 }
@@ -286,9 +307,14 @@ const SignInForm = (props) => {
                   otherMethod === 'passkey' && <Passkey
                     changing={loading}
                     userInfo={preLogin}
-                    onConfirm={(password) => handleSubmit({
+                    onConfirm={(p) => handleSubmit({
                       username: preLogin.email,
-                      password
+                      password: p.secret,
+                      pwl_id: p.pwl_id,
+                      kdf: p.kdf,
+                      kdf_iterations: p.kdf_iterations,
+                      kdf_memory: p.kdf_memory,
+                      kdf_parallelism: p.kdf_parallelism
                     })}
                   />
                 }

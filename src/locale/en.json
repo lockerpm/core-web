@@ -201,7 +201,10 @@
     "least_length": "Ensure this {{name}} has at least {{ min }} characters.",
     "passwords_not_match": "The two passwords that you entered do not match!",
     "key_existed": "This key already exists on the chosen environment",
-    "expiration_year": "Enter the last two digits of the expiration year."
+    "expiration_year": "Enter the last two digits of the expiration year.",
+    "min": "Min value must be {{min}}",
+    "between": "Value must be between {{min}} and {{max}}",
+    "max": "Max value must be {{max}}" 
   },
   "notification": {
     "error": {
@@ -922,6 +925,37 @@
       "expire_in": "QR Code Expire in: {{expireCountdown}}s",
       "expired": "QR Code Expired"
     },
+    "encryption_key_settings": {
+      "title": "Encryption key settings",
+      "description": "Select the encryption algorithm used by Locker to protect your data.",
+      "algorithm": "Algorithm",
+      "iterations": "Iterations",
+      "memory": "KDF memory (MB)", 
+      "parallelism": "Parallelism",
+      "recommendation": "Recommendation",
+      "action": "Update",
+      "form_data": {
+        "title": "Encryption key settings",
+        "security_note": "Security Note",
+        "note1": "Use at least PBKDF2 with 600,000 iterations. Stronger algorithms may increase the time required to unlock your vault.",
+        "note2": "You should export your vault data in the unlikely event of an issue.",
+        "note3": "This setting will apply to all your unlock methods. If you unlock with a different method next time, you will need to re-authenticate it once.",
+        "explore_more": "Explore more"
+      },
+      "confirm_update": {
+        "title": "Confirm to update the Encryption key",
+        "description": "Once you click the <b>Confirm</b> button below, the key will be updated. ",
+        "note": "You will be logged out of your Vault once during the process.",
+        "action": "Confirm"
+      },
+      "update_now": {
+        "title": "Encryption Update",
+        "tag": "Recommended action",
+        "description": "Update Encryption key derivation for better security.",
+        "learn_more": "Learn more",
+        "action": "Update now"
+      }
+    }, 
     "two_fa": {
       "title": "Two-factor authentication (2FA)",
       "description": "Create an additional layer of security by setting up 2FA for your Locker account.",
