@@ -122,8 +122,11 @@ async function users_access_token(token) {
 async function users_session(data = {
   email,
   password,
+  hashedPassword,
   kdf,
-  kdf_iterations
+  kdf_iterations,
+  kdf_memory,
+  kdf_parallelism
 }) {
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
@@ -157,11 +160,13 @@ async function users_session_otp(data = {
   hashedPassword,
   password,
   email,
-  kdf,
-  kdf_iterations,
   method,
   save_device,
-  otp
+  otp,
+  kdf,
+  kdf_iterations,
+  kdf_memory,
+  kdf_parallelism,
 }) {
   global.jsCore.cryptoService.clearKeys();
   let hashedPassword = data?.hashedPassword || null;
