@@ -153,7 +153,7 @@ const Authenticate = () => {
     }
     await userServices.users_session(payload).then(async (response) => {
       if (response.is_factor2) {
-        setFactor2(response)
+        setFactor2({ ...response, ...payload })
         setCurrentPassword(values.current_password);
       } else {
         setFactor2(null)
