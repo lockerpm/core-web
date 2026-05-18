@@ -43,21 +43,12 @@ const remakeBackupPWL = async (response, payload) => {
         })
       }
       if (remakeResponse) {
-        await coreServices.unlock({
-          username: userInfo.email,
-          keyB64: remakeResponse.key.keyB64,
-          hashedPassword: remakeResponse.hashedPassword,
-          key: response.key,
-          access_token: response.access_token,
-          private_key: response.private_key,
-          kdf: userInfo.kdf,
-          kdf_iterations: userInfo.kdf_iterations,
-          kdf_memory: userInfo.kdf_memory,
-          kdf_parallelism: userInfo.kdf_parallelism
-        });
+        await coreServices.logout();
+        return remakeResponse;
       }
     }
   }
+  return null;
 }
 
 const unlockToVault = async (
@@ -83,13 +74,27 @@ const unlockToVault = async (
         ...response,
         ...payload
       });
-      await remakeBackupPWL(response, payload);
-      const isSynced = await commonServices.sync_data();
-      if (isSynced) {
-        if (query) {
-          callback();
-        } else {
-          global.navigate(global.keys.VAULT);
+      const remakeResponse = await remakeBackupPWL(response, payload);
+      if (remakeResponse) {
+        const newPayload = {
+          ...payload,
+          password: null,
+          hashedPassword: remakeResponse.hashedPassword,
+          keyB64: remakeResponse.key.keyB64,
+          kdf: remakeResponse.kdf,
+          kdf_iterations: remakeResponse.kdf_iterations,
+          kdf_memory: remakeResponse.kdf_memory,
+          kdf_parallelism: remakeResponse.kdf_parallelism
+        }
+        await unlockToVault(newPayload, query, callback)
+      } else {
+        const isSynced = await commonServices.sync_data();
+        if (isSynced) {
+          if (query) {
+            callback();
+          } else {
+            global.navigate(global.keys.VAULT);
+          }
         }
       }
     }

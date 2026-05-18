@@ -60,24 +60,6 @@ function UpdateEncryptionSettingsDrawer(props) {
     }
   }, [visible, userInfo]);
 
-  useEffect(() => {
-    if (kdf === KdfType.ARGON2ID) {
-      form.setFieldsValue({
-        kdf: kdf,
-        kdf_iterations: 2,
-        kdf_memory: 16,
-        kdf_parallelism: 1
-      })
-    } else {
-      form.setFieldsValue({
-        kdf: kdf,
-        kdf_iterations: 600000,
-        kdf_memory: null,
-        kdf_parallelism: null
-      })
-    }
-  }, [kdf])
-
   const handleUpdate = () => {
     if (userInfo.is_require_passwordless) {
       return;
@@ -202,6 +184,23 @@ function UpdateEncryptionSettingsDrawer(props) {
                   label: 'ARGON2ID'
                 }
               ]}
+              onChange={(v) => {
+                if (v === KdfType.ARGON2ID) {
+                  form.setFieldsValue({
+                    kdf: v,
+                    kdf_iterations: 2,
+                    kdf_memory: 16,
+                    kdf_parallelism: 1
+                  })
+                } else {
+                  form.setFieldsValue({
+                    kdf: v,
+                    kdf_iterations: 600000,
+                    kdf_memory: null,
+                    kdf_parallelism: null
+                  })
+                }
+              }}
             />
           </Form.Item>
           {
