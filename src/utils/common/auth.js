@@ -106,6 +106,7 @@ const unlockToVault = async (
 }
 
 export default {
-  unlockToVault
+  unlockToVault,
+  remakeBackupPWL
 }
 
