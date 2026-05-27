@@ -9,7 +9,8 @@ import {
   Drawer,
   Select,
   InputNumber,
-  Alert
+  Alert,
+  Input
 } from '@lockerpm/design';
 
 import {
@@ -167,17 +168,16 @@ function UpdateEncryptionSettingsDrawer(props) {
           <Form.Item
             name={'password'}
             label={
-              <p className='font-semibold'>{t('auth_pages.password')}</p>
+              <p className='font-semibold'>{commonT('auth_pages.password')}</p>
             }
             rules={[
-              global.rules.REQUIRED(t('auth_pages.password')),
+              global.rules.REQUIRED(commonT('auth_pages.password')),
             ]}
           >
             <Input.Password
               autoFocus={true}
               size="large"
-              placeholder={t('placeholder.enter')}
-              disabled={checking || callingAPI}
+              placeholder={commonT('placeholder.enter')}
             />
           </Form.Item>
           <Form.Item
