@@ -69,7 +69,6 @@ const EncryptionKeySettings = (props) => {
       </div>
       <UpdateEncryptionSettingsDrawer
         visible={formVisible}
-        masterPassword={masterPassword}
         onClose={() => setFormVisible(false)}
       />
     </div>

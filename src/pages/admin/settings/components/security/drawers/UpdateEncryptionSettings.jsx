@@ -31,7 +31,6 @@ function UpdateEncryptionSettingsDrawer(props) {
   const { ConfirmEncryptionUpdateModal } = securityModalsComponents;
   const {
     visible = false,
-    masterPassword,
     onClose = () => {},
   } = props
   const { t } = useTranslation(null, { keyPrefix: 'security.encryption_key_settings' })
@@ -78,13 +77,13 @@ function UpdateEncryptionSettingsDrawer(props) {
       await userServices.change_password({
         username: userInfo.email,
         login_method: 'password',
-        password: masterPassword.login.password,
+        password: values.password,
         kdf: userInfo.kdf,
         kdf_iterations: userInfo.kdf_iterations,
         kdf_memory: userInfo.kdf_memory,
         kdf_parallelism: userInfo.kdf_parallelism,
       }, {
-        password: masterPassword.login.password,
+        password: values.password,
         kdf: values.kdf,
         kdf_iterations: values.kdf_iterations,
         kdf_memory: values.kdf_memory * 1024,
@@ -165,6 +164,22 @@ function UpdateEncryptionSettingsDrawer(props) {
           labelAlign={'left'}
           disabled={userInfo.is_require_passwordless || callingAPI}
         >
+          <Form.Item
+            name={'password'}
+            label={
+              <p className='font-semibold'>{t('auth_pages.password')}</p>
+            }
+            rules={[
+              global.rules.REQUIRED(t('auth_pages.password')),
+            ]}
+          >
+            <Input.Password
+              autoFocus={true}
+              size="large"
+              placeholder={t('placeholder.enter')}
+              disabled={checking || callingAPI}
+            />
+          </Form.Item>
           <Form.Item
             name={'kdf'}
             label={
