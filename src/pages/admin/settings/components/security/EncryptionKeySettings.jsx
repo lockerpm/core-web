@@ -61,10 +61,10 @@ const EncryptionKeySettings = (props) => {
         </p>
         <p><span className="font-semibold">{t('security.encryption_key_settings.iterations')}</span>: { common.separatorNumber(userInfo.kdf_iterations) }</p>
         {
-          userInfo.kdf_memory && <p><span className="font-semibold">{t('security.encryption_key_settings.memory')}</span>: { common.separatorNumber(userInfo.kdf_memory / 1024) }</p>
+          !!userInfo.kdf_memory && <p><span className="font-semibold">{t('security.encryption_key_settings.memory')}</span>: { common.separatorNumber(userInfo.kdf_memory / 1024) }</p>
         }
         {
-          userInfo.kdf_parallelism && <p><span className="font-semibold">{t('security.encryption_key_settings.parallelism')}</span>: { common.separatorNumber(userInfo.kdf_parallelism) }</p>
+          !!userInfo.kdf_parallelism && <p><span className="font-semibold">{t('security.encryption_key_settings.parallelism')}</span>: { common.separatorNumber(userInfo.kdf_parallelism) }</p>
         }
       </div>
       <UpdateEncryptionSettingsDrawer
