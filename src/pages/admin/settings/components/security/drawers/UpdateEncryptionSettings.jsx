@@ -203,9 +203,9 @@ function UpdateEncryptionSettingsDrawer(props) {
                 if (v === KdfType.ARGON2ID) {
                   form.setFieldsValue({
                     kdf: v,
-                    kdf_iterations: 2,
+                    kdf_iterations: 3,
                     kdf_memory: 16,
-                    kdf_parallelism: 1
+                    kdf_parallelism: 4
                   })
                 } else {
                   form.setFieldsValue({
