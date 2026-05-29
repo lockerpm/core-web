@@ -87,8 +87,8 @@ function UpdateEncryptionSettingsDrawer(props) {
         password: values.password,
         kdf: values.kdf,
         kdf_iterations: values.kdf_iterations,
-        kdf_memory: values.kdf_memory * 1024,
-        kdf_parallelism: values.kdf_parallelism
+        kdf_memory: values.kdf_memory ? values.kdf_memory * 1024 : null,
+        kdf_parallelism: values.kdf_parallelism || null
       }).then(async () => {
         global.pushSuccess(commonT('notification.success.change_password.changed'));
         setConfirmVisible(false);
