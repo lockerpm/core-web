@@ -28,8 +28,8 @@ const ChangePasswordModal = (props) => {
   const handleSave = async (values) => {
     setCallingAPI(true);
     await userServices.change_password({
-      ...values,
       username: userInfo.email,
+      password_hint: values.password_hint || undefined,
       login_method: 'password',
       password: currentPassword,
       kdf: userInfo.kdf,
