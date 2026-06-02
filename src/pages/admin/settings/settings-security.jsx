@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 
 import { Divider } from '@lockerpm/design';
@@ -25,6 +26,8 @@ const Security = (props) => {
   const { } = props;
   const { t } = useTranslation();
   const [expand, setExpand] = useState(false);
+
+  const userInfo = useSelector(state => state.auth.userInfo);
   
   return (
     <div className="layout-content">
@@ -60,8 +63,12 @@ const Security = (props) => {
           </div>
         }
       </div>
-      <Divider />
-      <EncryptionKeySettings />
+      {
+        userInfo?.kdf_version >= 1 && <>
+          <Divider />
+          <EncryptionKeySettings />
+        </>
+      }
       <Divider />
       <TwoFA />
       <Divider />
