@@ -224,7 +224,7 @@ async function change_password(data = {
     data.kdf_parallelism
   )
   const passwordHash = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
-  const mewMakeKey = await coreServices.make_key(
+  const newMakeKey = await coreServices.make_key(
     data.username,
     newData.password,
     newData.kdf,
@@ -232,14 +232,14 @@ async function change_password(data = {
     newData.kdf_memory,
     newData.kdf_parallelism
   )
-  const newPasswordHash = await global.jsCore.cryptoService.hashPassword(newData.password, mewMakeKey);
+  const newPasswordHash = await global.jsCore.cryptoService.hashPassword(newData.password, newMakeKey);
 
   let encKey = null
   const existingEncKey = await global.jsCore.cryptoService.getEncKey();
   if (existingEncKey) {
-    encKey = await global.jsCore.cryptoService.remakeEncKey(mewMakeKey)
+    encKey = await global.jsCore.cryptoService.remakeEncKey(newMakeKey)
   } else {
-    encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
+    encKey = await global.jsCore.cryptoService.makeEncKey(newMakeKey)
   }
 
   const masterPasswordCipher = await common.createEncryptedMasterPw(newData.password, encKey[0])
@@ -314,7 +314,7 @@ async function reset_password(data = {
   full_name,
   login_method
 }) {
-  const mewMakeKey = await coreServices.make_key(
+  const newMakeKey = await coreServices.make_key(
     data.username,
     data.new_password,
     data.kdf,
@@ -322,8 +322,8 @@ async function reset_password(data = {
     data.kdf_memory,
     data.kdf_parallelism
   )
-  const newPasswordHash = await global.jsCore.cryptoService.hashPassword(data.new_password, mewMakeKey)
-  const encKey = await global.jsCore.cryptoService.makeEncKey(mewMakeKey)
+  const newPasswordHash = await global.jsCore.cryptoService.hashPassword(data.new_password, newMakeKey)
+  const encKey = await global.jsCore.cryptoService.makeEncKey(newMakeKey)
   const keys = await global.jsCore.cryptoService.makeKeyPair(encKey[0])
 
   const payload = {
