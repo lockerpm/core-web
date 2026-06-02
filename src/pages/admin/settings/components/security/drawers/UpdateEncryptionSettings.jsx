@@ -166,21 +166,6 @@ function UpdateEncryptionSettingsDrawer(props) {
           disabled={userInfo.is_require_passwordless || callingAPI}
         >
           <Form.Item
-            name={'password'}
-            label={
-              <p className='font-semibold'>{commonT('auth_pages.password')}</p>
-            }
-            rules={[
-              global.rules.REQUIRED(commonT('auth_pages.password')),
-            ]}
-          >
-            <Input.Password
-              autoFocus={true}
-              size="large"
-              placeholder={commonT('placeholder.enter')}
-            />
-          </Form.Item>
-          <Form.Item
             name={'kdf'}
             label={
               <p className='font-semibold'>{t('algorithm')}</p>
@@ -271,6 +256,21 @@ function UpdateEncryptionSettingsDrawer(props) {
               </Form.Item>
             </>
           }
+          <Form.Item
+            name={'password'}
+            label={
+              <p className='font-semibold'>{commonT('auth_pages.password')}</p>
+            }
+            rules={[
+              global.rules.REQUIRED(commonT('auth_pages.password')),
+            ]}
+          >
+            <Input.Password
+              autoFocus={true}
+              size="large"
+              placeholder={commonT('placeholder.enter')}
+            />
+          </Form.Item>
         </Form>
       </Drawer>
       <ConfirmEncryptionUpdateModal
