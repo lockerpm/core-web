@@ -32,7 +32,8 @@ function NoticeCards(props) {
   }, [myShares])
 
   const isEncryptionUpdate = useMemo(() => {
-    return userInfo.kdf === global.constants.CORE_JS_INFO.KDF && userInfo.kdf_iterations < global.constants.CORE_JS_INFO.KDF_ITERATIONS && userInfo.kdf_version >= 1
+    // return userInfo.kdf === global.constants.CORE_JS_INFO.KDF && userInfo.kdf_iterations < global.constants.CORE_JS_INFO.KDF_ITERATIONS && userInfo.kdf_version >= 1
+    return false
   }, [userInfo])
 
   useEffect(() => {
