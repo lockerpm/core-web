@@ -221,6 +221,10 @@ const getDuplicateObjects = (arr) => {
   return duplicates
 }
 
+const encryptionUpdateNow = () => {
+  global.navigate(global.keys.SETTINGS_SECURITY);
+}
+
 export default {
   isDiff,
   isEmpty,
@@ -248,5 +252,6 @@ export default {
   openDesktopApp,
   allRouters,
   allMenus,
-  getDuplicateObjects
+  getDuplicateObjects,
+  encryptionUpdateNow
 }

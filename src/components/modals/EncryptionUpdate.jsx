@@ -12,7 +12,7 @@ import {
 
 import itemsComponents from "../items";
 
-import global from "../../config/global";
+import common from "../../utils/common";
 
 const EncryptionUpdateModal = (props) => {
   const { RouterLink } = itemsComponents;
@@ -52,7 +52,7 @@ const EncryptionUpdateModal = (props) => {
           type="primary"
           size="large"
           onClick={() => {
-            global.navigate(global.keys.SETTINGS_SECURITY);
+            common.encryptionUpdateNow();
             onClose();
           }}
         >

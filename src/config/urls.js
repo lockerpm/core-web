@@ -6,5 +6,13 @@ export default {
   CHROME_LINK: 'https://support.locker.io/articles/Import-from-Google-Chrome-3418bcd6e1ea48b6a891d1f828e46ebb',
   FIREFOX_LINK: 'https://support.locker.io/articles/Import-from-Firefox-1995673b585a4a7f98192abdea06a0e6',
   ONE_PASSWORD_LINK: 'https://support.locker.io/articles/Import-from-1Password-50b668a9f5ab439a9c10f05df5de8544',
-  DOWNLOAD_DESKTOP_URL: 'https://locker.io/passwords/download'
+  DOWNLOAD_DESKTOP_URL: 'https://locker.io/passwords/download',
+  DOC_LINKS: {
+    vi: {
+      SECURITY_UPGRADE_URL: 'https://locker.io/vi/blog/nang-cap-bao-mat-khoa-chinh-master-key'
+    },
+    en: {
+      SECURITY_UPGRADE_URL: 'https://locker.io/blog/master-key-security-upgrade'
+    }
+  }
 }
