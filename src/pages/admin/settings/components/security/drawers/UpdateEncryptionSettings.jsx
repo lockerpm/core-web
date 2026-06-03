@@ -266,7 +266,6 @@ function UpdateEncryptionSettingsDrawer(props) {
           >
             <Input.Password
               autoFocus={true}
-              size="large"
               placeholder={commonT('placeholder.enter')}
             />
           </Form.Item>
