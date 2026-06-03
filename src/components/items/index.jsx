@@ -11,6 +11,7 @@ import NotifyButton from "./NotifyButton";
 import PolicyResult from "./PolicyResult";
 import UserInfo from "./UserInfo";
 import Attachment from "./Attachment";
+import DocLink from "./DocLink";
 
 const itemsComponents = {
   FilterTime,
@@ -25,7 +26,8 @@ const itemsComponents = {
   NotifyButton,
   PolicyResult,
   UserInfo,
-  Attachment
+  Attachment,
+  DocLink
 }
 
 export default itemsComponents

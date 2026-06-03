@@ -28,7 +28,7 @@ import userServices from '../../../../../../services/user';
 import authServices from '../../../../../../services/auth';
 
 function UpdateEncryptionSettingsDrawer(props) {
-  const { RouterLink } = itemsComponents;
+  const { DocLink } = itemsComponents;
   const { ConfirmEncryptionUpdateModal } = securityModalsComponents;
   const {
     visible = false,
@@ -150,11 +150,10 @@ function UpdateEncryptionSettingsDrawer(props) {
                 {t('form_data.note3')}
               </li>
             </ul>
-            <RouterLink
-              className={'font-semibold'}
-              label={t('form_data.explore_more')}
-              icon={<ArrowRightOutlined />}
-              onClick={() => {}}
+            <DocLink
+              className="font-semibold"
+              title={t('form_data.explore_more')}
+              docKey="SECURITY_UPGRADE_URL"
             />
           </div>}
           type={'warning'}
