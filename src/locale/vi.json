@@ -845,7 +845,8 @@
       "search_folder": "Tìm thư mục",
       "personal_email": "Email cá nhân",
       "personal_email_placeholder": "Nhập email để tìm kiếm",
-      "personal_email_note": "Thêm địa chỉ email, sau đó nhấn phím Enter."
+      "personal_email_note": "Thêm địa chỉ email, sau đó nhấn phím Enter.",
+      "hide_password": "Ẩn mật khẩu"
     }
   },
   "import_export": {
