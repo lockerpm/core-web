@@ -845,7 +845,8 @@
       "search_folder": "Rechercher dans le répertoire",
       "personal_email": "Email personnel",
       "personal_email_placeholder": "Entrez l'email à rechercher",
-      "personal_email_note": "Ajoutez une adresse e-mail, puis appuyez sur la touche Entrée."
+      "personal_email_note": "Ajoutez une adresse e-mail, puis appuyez sur la touche Entrée.",
+      "hide_password": "Masquer le mot de passe"
     }
   },
   "import_export": {

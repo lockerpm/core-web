@@ -344,7 +344,7 @@ function ShareMembers(props) {
                             value={item.role}
                             className='w-full'
                             options={global.constants.SHARE_PERMISSIONS.map((p) => ({ value: p.role, label: t(p.label) }))}
-                            onChange={(v) => handleChangePermission(item, v, item.hide_passwords)}
+                            onChange={(v) => handleChangePermission(item, v, false)}
                           />
                         </div>
                         <div style={{ width: 88 }} className='w-[88px] px-1 flex justify-start'>
@@ -368,16 +368,18 @@ function ShareMembers(props) {
                           }
                         </div>
                       </div>
-                      <div className='flex items-center gap-2 px-1'>
-                        <span className='text-xs font-semibold'>
-                          Ẩn Password:
-                        </span>
-                        <Switch
-                          size='small'
-                          checked={item.hide_passwords}
-                          onChange={(v) => handleChangePermission(item, item.role, v)}
-                        />
-                      </div>
+                      {
+                        item.role === global.constants.PERMISSION_ROLE.MEMBER && <div className='flex items-center gap-2 px-1'>
+                          <span className='text-xs font-semibold'>
+                            {t('shares.new_share.hide_password')}:
+                          </span>
+                          <Switch
+                            size='small'
+                            checked={item.hide_passwords}
+                            onChange={(v) => handleChangePermission(item, item.role, v)}
+                          />
+                        </div>
+                      }
                     </div>
                   </div>
                 }

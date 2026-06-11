@@ -845,7 +845,8 @@
       "search_folder": "Search Folder",
       "personal_email": "Personal email",
       "personal_email_placeholder": "Enter email to search",
-      "personal_email_note": "Add email address, then press the Enter key."
+      "personal_email_note": "Add email address, then press the Enter key.",
+      "hide_password": "Hide Password"
     }
   },
   "import_export": {

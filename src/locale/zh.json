@@ -845,7 +845,8 @@
       "search_folder": "搜尋資料夾",
       "personal_email": "個人電子信箱",
       "personal_email_placeholder": "輸入電子信箱",
-      "personal_email_note": "新增電子郵件地址，然後按 Enter 鍵。"
+      "personal_email_note": "新增電子郵件地址，然後按 Enter 鍵。",
+      "hide_password": "隱藏密碼"
     }
   },
   "import_export": {
