@@ -23,6 +23,7 @@ import sharingServices from '../../../services/sharing';
 
 import global from '../../../config/global';
 import common from '../../../utils/common';
+import { CipherType } from '../../../core-js/src/enums';
 
 function ShareMembers(props) {
   const {
@@ -369,7 +370,7 @@ function ShareMembers(props) {
                         </div>
                       </div>
                       {
-                        item.role === global.constants.PERMISSION_ROLE.MEMBER && <div className='flex items-center gap-2 px-1'>
+                        item.role === global.constants.PERMISSION_ROLE.MEMBER && cipherOrFolder?.type === CipherType.Login && <div className='flex items-center gap-2 px-1'>
                           <span className='text-xs font-semibold'>
                             {t('shares.new_share.hide_password')}:
                           </span>
