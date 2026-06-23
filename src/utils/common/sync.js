@@ -11,8 +11,8 @@ const syncProfile = async (data) => {
   let profile = data
   if (!profile) {
     profile = await syncServices.sync_profile();
-    global.store.dispatch(storeActions.updateSyncProfile(profile));
   }
+  global.store.dispatch(storeActions.updateSyncProfile(profile));
   await global.jsCore.syncService.syncProfile({
     key: profile?.key,
     privateKey: profile?.privateKey,

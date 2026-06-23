@@ -59,10 +59,10 @@ const ListData = (props) => {
         </div>
       }
       <div className="flex items-center mb-1">
-        <p className="font-semibold mr-2">{t('common.updated_time')}:</p>
+        <p className="font-semibold mr-2">{t('common.accepted_time')}:</p>
         <TextCopy
           className="text-xs"
-          value={record.revisionDate ? common.timeFromNow(record.revisionDate) : common.timeFromNow(record.access_time)}
+          value={record.revisionDate ? common.timeFromNow(record.revisionDate) : ''}
           align={'center'}
         />
       </div>

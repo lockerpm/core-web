@@ -21,6 +21,8 @@ import sharingServices from "../../../services/sharing";
 import common from "../../../utils/common";
 import global from "../../../config/global";
 
+import dayjs from "dayjs"
+
 const SharedWithMe = () => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -48,6 +50,7 @@ const SharedWithMe = () => {
   const allCollections = useSelector((state) => state.collection.allCollections)
   const invitations = useSelector((state) => state.share.invitations)
   const locale = useSelector((state) => state.system.locale);
+  const syncProfile = useSelector((state) => state.sync.syncProfile)
 
   const [menuType, setMenuType] = useState(menuTypes.CIPHERS);
   const [params, setParams] = useState({
@@ -67,6 +70,7 @@ const SharedWithMe = () => {
   }, [invitations])
 
   const items = useMemo(() => {
+    const profileOrganizations = syncProfile?.organizations || [];
     if (menuType === menuTypes.CIPHERS) {
       return [
         ...invitations
@@ -99,12 +103,16 @@ const SharedWithMe = () => {
           }),
         ...allCiphers
           .filter((c) => !c.isDeleted && !c.collectionIds.length && !common.isOwner(c))
-          .map((c) => ({
-            ...c,
-            share_type: common.isChangeCipher(c)
-              ? global.constants.PERMISSION.EDIT
-              : (c.viewPassword ? global.constants.PERMISSION.VIEW : global.constants.PERMISSION.ONLY_USE)
-          }))
+          .map((c) => {
+            const acceptedTime = profileOrganizations.find((org) => org.id === c.organizationId)?.acceptedTime;
+            return {
+              ...c,
+              share_type: common.isChangeCipher(c)
+                ? global.constants.PERMISSION.EDIT
+                : (c.viewPassword ? global.constants.PERMISSION.VIEW : global.constants.PERMISSION.ONLY_USE),
+              revisionDate: acceptedTime ? dayjs(acceptedTime * 1000).toDate() : c.revisionDate
+            }
+          })
       ]
     }
     return [
@@ -138,14 +146,28 @@ const SharedWithMe = () => {
         }),
       ...allCollections
         .filter((c) => !common.isOwner(c))
-        .map((c) => ({
-          ...c,
-          share_type: common.isChangeCipher(c)
-            ? global.constants.PERMISSION.EDIT
-            : (!c.hidePasswords ? global.constants.PERMISSION.VIEW : global.constants.PERMISSION.ONLY_USE)
-        }))
+        .map((c) => {
+          const acceptedTime = profileOrganizations.find((org) => org.id === c.organizationId)?.acceptedTime;
+          return {
+            ...c,
+            share_type: common.isChangeCipher(c)
+              ? global.constants.PERMISSION.EDIT
+              : (!c.hidePasswords ? global.constants.PERMISSION.VIEW : global.constants.PERMISSION.ONLY_USE),
+            revisionDate: acceptedTime ? dayjs(acceptedTime * 1000).toDate() : c.revisionDate
+          }
+        })
     ]
-  }, [allCiphers, allCollections, invitations, menuType, t, locale, params.orderField, params.orderDirection])
+  }, [
+    syncProfile?.organizations,
+    allCiphers,
+    allCollections,
+    invitations,
+    menuType,
+    t,
+    locale,
+    params.orderField,
+    params.orderDirection
+  ])
 
   const isEmpty = useMemo(() => {
     return items.length === 0
