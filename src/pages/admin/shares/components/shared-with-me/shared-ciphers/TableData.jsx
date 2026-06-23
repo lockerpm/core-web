@@ -78,13 +78,13 @@ const TableData = (props) => {
         render: (_, record) => t(common.cipherTypeInfo('type', record.cipher_type || record.type).name)
       },
       {
-        title: t('common.updated_time'),
+        title: t('common.accepted_time'),
         dataIndex: 'revisionDate',
         key: 'revisionDate',
         align: 'center',
         width: 200,
         render: (_, record) => <TextCopy
-          value={record.revisionDate ? common.timeFromNow(record.revisionDate) : common.timeFromNow(record.access_time)}
+          value={record.revisionDate ? common.timeFromNow(record.revisionDate) : ''}
           align={'center'}
         />
       },
