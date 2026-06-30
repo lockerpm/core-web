@@ -370,7 +370,7 @@ function ShareMembers(props) {
                         </div>
                       </div>
                       {
-                        item.role === global.constants.PERMISSION_ROLE.MEMBER && cipherOrFolder?.type === CipherType.Login && <div className='flex items-center gap-2 px-1'>
+                        item.role === global.constants.PERMISSION_ROLE.MEMBER && (cipherOrFolder?.type === CipherType.Login || cipherOrFolder?.isCollection) && <div className='flex items-center gap-2 px-1'>
                           <span className='text-xs font-semibold'>
                             {t('shares.new_share.hide_password')}:
                           </span>
