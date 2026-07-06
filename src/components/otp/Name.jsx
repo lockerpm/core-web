@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useSelector } from 'react-redux';
+import { Tooltip } from "@lockerpm/design";
 
 import itemsComponents from "../items";
 import commonComponents from "../common";
@@ -29,12 +30,16 @@ const Name = (props) => {
       <div className="ml-2" style={{ width: 'calc(100% - 40px)' }}>
         <div className="flex items-center justify-between">
           <div style={{ width: 'calc(100% - 124px)' }}>
-            <p
-              className={`font-semibold text-limited w-full flex-shrink-0`}
-              title={cipher.name}
+            <Tooltip
+              className="w-full"
+              title={isMobile ? cipher.name :  undefined}
             >
-              {cipher.name}
-            </p>
+              <p
+                className={`font-semibold text-limited w-full flex-shrink-0`}
+              >
+                {cipher.name}
+              </p>
+            </Tooltip>
             {
               !!otpPassword && <TextCopy
                 className="text-sm"
