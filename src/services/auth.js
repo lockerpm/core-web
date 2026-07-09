@@ -58,6 +58,7 @@ async function redirect_login() {
 }
 
 async function logout(isLogoutId = false) {
+  await coreServices.logout();
   const accessToken = await common.getAccessToken();
   if (accessToken && isLogoutId) {
     try {
@@ -65,7 +66,6 @@ async function logout(isLogoutId = false) {
         url: global.endpoint.LOGOUT,
         method: 'post',
       })
-      await coreServices.logout();
     } catch (error) {
     }
   }

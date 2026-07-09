@@ -134,7 +134,7 @@ const Authenticate = () => {
     setOtherMethod(method);
     setStep(3);
     if (method === 'security_key') {
-      setIsPair(!isConnected || !service.pairingService?.hasKey);
+      setIsPair(!isConnected || !service.hasPairingKey);
     } else {
       setIsPair(false)
     }

@@ -80,8 +80,8 @@ const Lock = () => {
 
   const getServiceUser = async () => {
     setLoading(true);
-    setIsPair(isDesktopConnected && !service.pairingService?.hasKey)
-    if (service.pairingService?.hasKey) {
+    setIsPair(isDesktopConnected && !service.hasPairingKey)
+    if (service.hasPairingKey) {
       try {
         const serviceUser = await service.getCurrentUser();
         if (serviceUser) {

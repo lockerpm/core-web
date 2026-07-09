@@ -115,8 +115,8 @@ const SignInForm = (props) => {
     } else if (!preLogin.is_password_changed || (preLogin.login_method === 'password' && preLogin.require_passwordless)) {
       global.navigate(global.keys.AUTHENTICATE, {}, { email: preLogin.email })
     } else if (preLogin.sync_all_platforms) {
-      setIsPair(isConnected && !service.pairingService?.hasKey)
-      if (isConnected && service.pairingService?.hasKey) {
+      setIsPair(isConnected && !service.hasPairingKey)
+      if (isConnected && service.hasPairingKey) {
         try {
           const serviceUser = await service.getCurrentUser();
           if (serviceUser?.email === preLogin.email) {
@@ -173,7 +173,7 @@ const SignInForm = (props) => {
     setStep(3);
     setOtherMethod(method);
     if (method === 'security_key') {
-      setIsPair(!isConnected || !service.pairingService?.hasKey);
+      setIsPair(!isConnected || !service.hasPairingKey);
     } else {
       setIsPair(false)
     }

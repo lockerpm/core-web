@@ -870,6 +870,7 @@
     "import_failed": "資料匯入失敗",
     "no_data": "沒有資料",
     "import_success": "已匯入 {{foldersCount}} 個資料夾，{{ciphersCount}}/{{total}} 個項目",
+    "export_note": "<b>注意：</b> 与您共享但未授予查看密码权限的项目将不会被导出。",
     "duplicate_popup": {
       "title": "偵測到重複項目",
       "desc": "您要匯入的檔案包含：",

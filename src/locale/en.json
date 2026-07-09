@@ -870,6 +870,7 @@
     "import_failed": "Data import failed",
     "no_data": "No data",
     "import_success": "Imported {{foldersCount}} folders, {{ciphersCount}}/{{total}} items",
+    "export_note": "<b>Note:</b> Items shared with you without permission to view their passwords will not be exported.",
     "duplicate_popup": {
       "title": "Duplicate items detected",
       "desc": "The file you are importing contains:",

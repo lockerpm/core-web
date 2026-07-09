@@ -133,7 +133,7 @@ const Setup2FA = () => {
   const selectOtherMethod = (method) => {
     setOtherMethod(method);
     if (method === 'security_key') {
-      setIsPair(!isConnected || !service.pairingService?.hasKey);
+      setIsPair(!isConnected || !service.hasPairingKey);
     } else {
       setIsPair(false)
     }

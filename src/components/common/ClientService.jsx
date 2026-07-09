@@ -11,7 +11,7 @@ function ClientService() {
   const isConnected = useSelector((state) => state.service.isConnected);
 
   service.on('serviceReady', () => {
-    global.store.dispatch(storeActions.updateIsConnected(service.grpcService?.isReady));
+    global.store.dispatch(storeActions.updateIsConnected(service.isBackgroundServiceReady));
   })
   service.on('serviceConnected', () => {
     global.store.dispatch(storeActions.updateIsConnected(true));
