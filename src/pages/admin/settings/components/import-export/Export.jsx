@@ -73,8 +73,10 @@ const Export = (props) => {
 
     // Don't export protected or deleted cipher
     ciphers = ciphers.filter(
-      cipher => !common.isProtectedCipher(cipher) && cipher.deletedDate === null
+      cipher => !common.isProtectedCipher(cipher) && cipher.deletedDate === null && cipher.viewPassword
     )
+
+    console.log('ciphers', ciphers)
 
     // CSV export
     if (format === global.constants.FILE_TYPE.CSV) {
@@ -253,6 +255,7 @@ const Export = (props) => {
           <div>
             <p className="font-semibold text-xl">{t('import_export.export')}</p>
             <p className="mt-1">{t('import_export.export_description')}</p>
+            <p className="mt-1 text-sm text-warning" dangerouslySetInnerHTML={{ __html: t('import_export.export_note') }}></p>
           </div>
         </Col>
         <Col lg={12} md={12} sm={24} xs={24}>

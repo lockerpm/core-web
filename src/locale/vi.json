@@ -870,6 +870,7 @@
     "import_failed": "Nhập dữ liệu thất bại",
     "no_data": "Không có dữ liệu",
     "import_success": "Đã nhập {{foldersCount}} thư mục, {{ciphersCount}}/{{total}} mục",
+    "export_note": "<b>Ghi chú:</b> Bạn không thể xuất các mục được chia sẻ bởi người khác nhưng bị ẩn mật khẩu.",
     "duplicate_popup": {
       "title": "Phát hiện mục bị trùng trong file",
       "desc": "Trong file bạn muốn nhập có:",

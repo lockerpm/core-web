@@ -58,7 +58,7 @@ const PasswordConfirmModal = (props) => {
 
   useEffect(() => {
     if (unlockMethod === 'security_key') {
-      setIsPair((!isConnected || !service.pairingService?.hasKey));
+      setIsPair((!isConnected || !service.hasPairingKey));
     } else {
       setIsPair(false);
     }

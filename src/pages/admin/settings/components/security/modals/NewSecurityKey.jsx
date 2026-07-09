@@ -20,7 +20,7 @@ const NewSecurityKeyModal = (props) => {
 
   const userInfo = useSelector(state => state.auth.userInfo);
 
-  const [isPair, setIsPair] = useState(!service.pairingService?.hasKey)
+  const [isPair, setIsPair] = useState(!service.hasPairingKey)
 
   return (
     <Modal

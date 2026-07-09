@@ -61,7 +61,7 @@ const LockForm = (props) => {
     setStep(2);
     setOtherMethod(method);
     if (method === 'security_key') {
-      setIsPair(!isConnected || !service.pairingService?.hasKey);
+      setIsPair(!isConnected || !service.hasPairingKey);
     } else {
       setIsPair(false)
     }

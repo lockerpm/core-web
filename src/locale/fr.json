@@ -870,6 +870,7 @@
     "import_failed": "Échec de l’importation des données",
     "no_data": "Pas de données",
     "import_success": "{{foldersCount}} dossiers importés, {{ciphersCount}}/{{total}} éléments",
+    "export_note": "<b>Remarque :</b> Les éléments partagés avec vous sans autorisation d'afficher leur mot de passe ne seront pas exportés.",
     "duplicate_popup": {
       "title": "Doublons détectés",
       "desc": "Le fichier que vous importez contient :",
