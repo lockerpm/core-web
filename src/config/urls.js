@@ -10,11 +10,11 @@ export default {
   DOC_LINKS: {
     vi: {
       SECURITY_UPGRADE_URL: 'https://locker.io/vi/blog/nang-cap-bao-mat-khoa-chinh-master-key',
-      DESKTOP_CONNECT_GUIDE_URL: 'https://support.locker.io'
+      DESKTOP_CONNECT_GUIDE_URL: 'https://support.locker.io/vi/locker-general/login-unlock/unlock-methods#tr%C3%AAn-web-app'
     },
     en: {
-      SECURITY_UPGRADE_URL: 'https://locker.io/blog/master-key-security-upgrade',
-      DESKTOP_CONNECT_GUIDE_URL: 'https://support.locker.io'
+      SECURITY_UPGRADE_URL: 'https://locker.io/en/blog/master-key-security-upgrade',
+      DESKTOP_CONNECT_GUIDE_URL: 'https://support.locker.io/en/locker-general/login-unlock/unlock-methods#on-web-app'
     }
   }
 }
