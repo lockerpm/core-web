@@ -479,6 +479,8 @@
     "reset_code": "Lấy mã mới",
     "open_desktop": "Vui lòng mở ứng dụng máy tính.",
     "install_desktop": "Vui lòng cài đặt ứng dụng máy tính.",
+    "desktop_connection_warning": "Nếu ứng dụng máy tính của bạn đã bật nhưng hệ thống vẫn không kết nối được, vui lòng kiểm tra lại kết nối \"App On Devices\".",
+    "see_guide_here": "Xem hướng dẫn tại đây",
     "connect_key": "Kết nối khóa bảo mật bạn muốn thêm với máy tính.",
     "no_key_found": "Không tìm thấy khóa nào",
     "scan_fingerprint": "Quét vân tay của bạn",

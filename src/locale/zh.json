@@ -479,6 +479,8 @@
     "reset_code": "重置程式碼",
     "open_desktop": "需要連接桌面應用，請開啟Locker桌面應用程式",
     "install_desktop": "需要安裝桌面應用程序，請下載並安裝Locker桌面應用程式",
+    "desktop_connection_warning": "如果您的桌面應用程式已開啟但系統仍無法連接，請檢查「App On Devices」連線。",
+    "see_guide_here": "在此處查看指南",
     "connect_key": "連線要新增的金鑰",
     "no_key_found": "未找到金鑰",
     "scan_fingerprint": "掃描您的指紋",

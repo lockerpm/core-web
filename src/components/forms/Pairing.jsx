@@ -5,7 +5,8 @@ import { useTranslation } from "react-i18next";
 import {
   Card,
   Button,
-  Spin
+  Spin,
+  Alert
 } from '@lockerpm/design';
 
 import {
@@ -16,12 +17,13 @@ import storeActions from "../../store/actions"
 
 import common from "../../utils/common";
 import global from "../../config/global";
+import DocLink from "../items/DocLink";
 
 const PairingForm = (props) => {
   const { t } = useTranslation()
   const {
     callingAPI = false,
-    onConfirm = () => {},
+    onConfirm = () => { },
   } = props;
 
   const isConnected = useSelector((state) => state.service.isConnected)
@@ -96,7 +98,7 @@ const PairingForm = (props) => {
                   className="text-center text-black-500 hover:text-primary cursor-pointer"
                   onClick={() => service.sendPairingRequest()}
                 >
-                  <ReloadOutlined className="text-[13px]"/> <span>{t('passwordless.reset_code')}</span>
+                  <ReloadOutlined className="text-[13px]" /> <span>{t('passwordless.reset_code')}</span>
                 </p>
               }
             </div>
@@ -106,7 +108,7 @@ const PairingForm = (props) => {
       {
         !isConnected && <div>
           <p className="my-8">
-            { t('passwordless.install_desktop')}
+            {t('passwordless.install_desktop')}
           </p>
           {
             isClickDownload ? <Button
@@ -134,7 +136,7 @@ const PairingForm = (props) => {
       {
         isConnected && !isDesktopConnected && <div>
           <p className="my-8">
-            { t('passwordless.open_desktop')}
+            {t('passwordless.open_desktop')}
           </p>
           <Button
             type="primary"
@@ -152,7 +154,24 @@ const PairingForm = (props) => {
           </Button>
         </div>
       }
-    </div> 
+      {
+        (!isConnected || !isDesktopConnected) && <Alert
+          className="mt-4 text-left"
+          type="warning"
+          message={
+            <div>
+              <div>{t('passwordless.desktop_connection_warning')}</div>
+              <div className="mt-1">
+                <DocLink
+                  title={t('passwordless.see_guide_here')}
+                  docKey="DESKTOP_CONNECT_GUIDE_URL"
+                />
+              </div>
+            </div>
+          }
+        />
+      }
+    </div>
   );
 }
 

@@ -479,6 +479,8 @@
     "reset_code": "Reset code",
     "open_desktop": "Desktop app connection is required. Please open Locker Desktop App",
     "install_desktop": "Desktop app installation is required. Please download and install Locker Desktop App",
+    "desktop_connection_warning": "If your Desktop app is turned on but the system still cannot connect, please check the \"App On Devices\" connection.",
+    "see_guide_here": "See guide here",
     "connect_key": "Connect the key you want to add",
     "no_key_found": "No key found",
     "scan_fingerprint": "Scan your fingerprint",
