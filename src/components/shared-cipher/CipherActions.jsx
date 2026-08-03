@@ -22,15 +22,15 @@ import common from "../../utils/common";
 
 const CipherActions = (props) => {
   const { t } = useTranslation()
-  
+
   const {
     className = '',
     cipher = null,
-    onMove = () => {},
-    onUpdate = () => {},
-    onLeave = () => {},
-    onUpdateStatus = () => {},
-    onAttachment = () => {}
+    onMove = () => { },
+    onUpdate = () => { },
+    onLeave = () => { },
+    onUpdateStatus = () => { },
+    onAttachment = () => { }
   } = props;
 
   const allCiphers = useSelector((state) => state.cipher.allCiphers)
@@ -202,7 +202,7 @@ const CipherActions = (props) => {
               type="text"
               size="small"
               icon={<ExportOutlined />}
-              onClick={() => common.openNewTab(originCipher.login.uri)}
+              onClick={() => common.openNewTab(originCipher.login.launchUri)}
             />
           </Tooltip>
         }
@@ -226,7 +226,7 @@ const CipherActions = (props) => {
             <Button
               type="text"
               size="small"
-              icon={<EllipsisOutlined style={{ fontSize: 16 }}/>}
+              icon={<EllipsisOutlined style={{ fontSize: 16 }} />}
             />
           </Dropdown>
         }

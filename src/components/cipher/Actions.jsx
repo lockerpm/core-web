@@ -30,14 +30,14 @@ const Actions = (props) => {
     className = '',
     size = "small",
     cipher = null,
-    onMove = () => {},
-    onUpdate = () => {},
-    onDelete = () => {},
-    onRestore = () => {},
-    onShare = () => {},
-    onStopSharing = () => {},
-    onPermanentlyDelete = () => {},
-    onAttachment = () => {}
+    onMove = () => { },
+    onUpdate = () => { },
+    onDelete = () => { },
+    onRestore = () => { },
+    onShare = () => { },
+    onStopSharing = () => { },
+    onPermanentlyDelete = () => { },
+    onAttachment = () => { }
   } = props;
 
   const currentPage = common.getRouterByLocation(location);
@@ -165,7 +165,7 @@ const Actions = (props) => {
   }
 
   const generalMenus = useMemo(() => {
-    if (originCipher.type === CipherType.MasterPassword ) {
+    if (originCipher.type === CipherType.MasterPassword) {
       return []
     }
     if (!originCipher.isDeleted) {
@@ -258,7 +258,7 @@ const Actions = (props) => {
               type="text"
               size={size}
               icon={<ExportOutlined />}
-              onClick={() => common.openNewTab(originCipher.login.uri)}
+              onClick={() => common.openNewTab(originCipher.login.launchUri)}
             />
           </Tooltip>
         }
@@ -294,7 +294,7 @@ const Actions = (props) => {
             <Button
               type="text"
               size={size}
-              icon={<EllipsisOutlined style={{ fontSize: 16 }}/>}
+              icon={<EllipsisOutlined style={{ fontSize: 16 }} />}
             />
           </Dropdown>
         }

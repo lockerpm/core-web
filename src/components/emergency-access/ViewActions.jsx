@@ -20,7 +20,7 @@ import common from "../../utils/common";
 
 const ViewActions = (props) => {
   const { t } = useTranslation()
-  
+
   const {
     className = '',
     size = "small",
@@ -126,7 +126,7 @@ const ViewActions = (props) => {
               type="text"
               size={size}
               icon={<ExportOutlined />}
-              onClick={() => common.openNewTab(originCipher.login.uri)}
+              onClick={() => common.openNewTab(originCipher.login.launchUri)}
             />
           </Tooltip>
         }
