@@ -55,6 +55,10 @@ const Authenticator = () => {
     return common.cipherTypeInfo('listRouter', currentPage.name)
   }, [JSON.stringify(currentPage)])
 
+  const otpCiphers = useMemo(() => {
+    return allCiphers.filter((c) => c.type === CipherType.Login && (c.subTitle || c.name || '').toLowerCase().includes(params.searchText?.toLowerCase()))
+  }, [allCiphers, params.searchText])
+
   useEffect(() => {
     if (currentPage?.query?.is_create == 1) {
       handleOpenForm(null);
@@ -84,10 +88,19 @@ const Authenticator = () => {
       params.orderDirection,
       [
         (f) => f.id,
-        (f) => params.searchText ? f.name.toLowerCase().includes(params.searchText.toLowerCase() || '') : true
+        (f) => {
+          let textFilter = true, cipherFilter = false
+          if (params.searchText) {
+            textFilter = (f.name || '').toLowerCase().includes(params.searchText.toLowerCase() || '')
+          }
+          if (otpCiphers.length > 0) {
+            cipherFilter = otpCiphers.map((c) => c.login.totp).filter(Boolean).includes(f.notes)
+          }
+          return textFilter || cipherFilter
+        }
       ]
     )
-  }, [ciphers, JSON.stringify(params)])
+  }, [ciphers, JSON.stringify(params), otpCiphers])
 
   useEffect(() => {
     setParams({

@@ -17,7 +17,7 @@ const Name = (props) => {
   const isMobile = useSelector((state) => state.system.isMobile);
   const allCiphers = useSelector((state) => state.cipher.allCiphers);
 
-  const otpPassword = useMemo(() => {
+  const otpCipher = useMemo(() => {
     return allCiphers.find((c) => c.type === CipherType.Login && c.login.totp === cipher.notes)
   }, [allCiphers])
 
@@ -32,7 +32,7 @@ const Name = (props) => {
           <div style={{ width: 'calc(100% - 124px)' }}>
             <Tooltip
               className="w-full"
-              title={isMobile ? cipher.name :  undefined}
+              title={isMobile ? cipher.name : undefined}
             >
               <p
                 className={`font-semibold text-limited w-full flex-shrink-0`}
@@ -41,9 +41,9 @@ const Name = (props) => {
               </p>
             </Tooltip>
             {
-              !!otpPassword && <TextCopy
+              !!otpCipher && <TextCopy
                 className="text-sm"
-                value={common.cipherSubtitle(otpPassword) || otpPassword.name}
+                value={common.cipherSubtitle(otpCipher) || otpCipher.name}
               />
             }
           </div>
