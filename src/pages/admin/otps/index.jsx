@@ -89,7 +89,7 @@ const Authenticator = () => {
       [
         (f) => f.id,
         (f) => {
-          let textFilter = true, cipherFilter = true
+          let textFilter = true, cipherFilter = false
           if (params.searchText) {
             textFilter = (f.name || '').toLowerCase().includes(params.searchText.toLowerCase() || '')
           }
