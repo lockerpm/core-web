@@ -30,7 +30,7 @@ const Vault = () => {
   const { Filter, TableData, ListData, FormData, MoveFolder, FormAttachment, DetailData } = vaultComponents;
   const { QuickShareReview } = shareComponents;
   const ShareFormData = shareComponents.FormData;
-  
+
   const { t } = useTranslation();
   const location = useLocation();
 

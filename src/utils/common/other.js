@@ -2,6 +2,7 @@ import global from '../../config/global';
 import { Trans } from 'react-i18next';
 import creditCardType from 'credit-card-type';
 import common from '.';
+import patterns from '../../config/patterns';
 
 const has = Object.prototype.hasOwnProperty
 
@@ -56,6 +57,10 @@ const getColorByIndex = index => {
 }
 
 const openNewTab = (link) => {
+  if (!patterns.LINK.test(link)) {
+    global.pushError(<Trans i18nKey='validation.invalid' value={{ name: 'URL' }} />);
+    return
+  }
   window.open(link, '_blank')
 }
 
