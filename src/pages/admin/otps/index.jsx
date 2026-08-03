@@ -122,7 +122,6 @@ const Authenticator = () => {
     setLoading(true);
     const result = await common.listCiphers({
       deleted: false,
-      searchText: params.searchText,
       filters: [(c) => c.type === CipherType.TOTP]
     }, allCiphers)
     setCiphers(result);
