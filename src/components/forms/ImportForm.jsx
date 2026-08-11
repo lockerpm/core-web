@@ -36,7 +36,7 @@ function ImportForm(props) {
   const {
     visible = false,
     isTutorial = false,
-    onClose = () => {},
+    onClose = () => { },
   } = props
   const { t } = useTranslation();
 
@@ -148,7 +148,7 @@ function ImportForm(props) {
           if (fContent) {
             content = fContent
           }
-        } catch {}
+        } catch { }
       }
       if (!content) {
         global.pushError({ message: t('import_export.select_appropriate_file') })
@@ -186,10 +186,10 @@ function ImportForm(props) {
   const checkingDuplicate = async (importResult) => {
     const currentCiphers = allCiphers
       .filter((c) => !c.isDeleted && c.type !== CipherType.MasterPassword)
-      .map((c) => ({ id: c.id, data: common.convertCipherToImportForm(c)}));
+      .map((c) => ({ id: c.id, data: common.convertCipherToImportForm(c) }));
     const importCiphers = importResult.ciphers
       .map((c) => common.parseNotesOfNewTypes(c))
-      .map((c) => ({ id: c.id, data: common.convertCipherToImportForm(c)}));
+      .map((c) => ({ id: c.id, data: common.convertCipherToImportForm(c) }));
     const currentFolders = [...allFolders, ...allCollections]
       .map((f) => ({ id: f.id, name: f.name }))
     const importFolders = importResult.folders
@@ -246,6 +246,24 @@ function ImportForm(props) {
     const requestFolders = [];
 
     let request = new ImportCiphersRequest();
+
+    // Build cipher-to-folder map from raw indices BEFORE encryption
+    // CipherRequest does not preserve the original cipher id,
+    // so we cannot rely on cipher.id after getEncCipherForRequest
+    const cipherToFolderMap = {}
+    if (importResult.folderRelationships != null) {
+      importResult.folderRelationships
+        .filter(r =>
+          !duplicatedCipherIds.includes(r[0]) &&
+          !duplicatedFolderIds.includes(r[1])
+        )
+        .forEach(r => {
+          cipherToFolderMap[r[0]] = r[1]
+        })
+    }
+
+    // Track original cipher index per position in request.ciphers
+    const cipherOriginalIds = []
     for (let i = 0; i < importResult.ciphers.length; i++) {
       if (!duplicatedCipherIds.includes(i)) {
         const { data } = await common.getEncCipherForRequest(
@@ -255,6 +273,7 @@ function ImportForm(props) {
           }
         )
         request.ciphers.push(data)
+        cipherOriginalIds.push(i)
       }
     }
     if (importResult.folders != null) {
@@ -266,12 +285,6 @@ function ImportForm(props) {
         }
       }
     }
-    if (importResult.folderRelationships != null) {
-      importResult.folderRelationships.forEach(r =>
-        request.folderRelationships.push(new KvpRequest(r[0], r[1]))
-      )
-    }
-    const folderRelationships = request.folderRelationships
     let folderImportResults = []
     let importedFolders = 0
     while (importedFolders < request.folders.length) {
@@ -283,14 +296,16 @@ function ImportForm(props) {
       folderImportResults = folderImportResults.concat(importFolderRes.ids || [])
       importedFolders += 1000
     }
-    request.ciphers = request.ciphers.map((cipher) => {
-      const folderRelationship = folderRelationships.find(item => item.key === cipher.id);
-      const requestFoldersIndex = requestFolders.findIndex((f) => f.id == folderRelationship?.value)
+
+    request.ciphers = request.ciphers.map((cipher, posIndex) => {
+      const originalCipherId = cipherOriginalIds[posIndex]
+      const originalFolderId = cipherToFolderMap[originalCipherId]
+      const requestFoldersIndex = requestFolders.findIndex((f) => f.id == originalFolderId)
       delete cipher.id
       return {
         ...cipher,
-        folderId: folderRelationship
-          ? folderImportResults[requestFoldersIndex]
+        folderId: originalFolderId !== undefined
+          ? (folderImportResults[requestFoldersIndex] ?? null)
           : null
       }
     })
@@ -340,12 +355,12 @@ function ImportForm(props) {
               disabled={!selectedFile && !fileContent}
               onClick={handleImport}
             >
-              { t('button.import') } 
+              {t('button.import')}
             </Button>
           </Space>
         }
       >
-       <Form
+        <Form
           form={form}
           layout="vertical"
           labelAlign={'left'}
