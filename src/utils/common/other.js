@@ -57,8 +57,10 @@ const getColorByIndex = index => {
 }
 
 const openNewTab = (link) => {
-  if (!patterns.LINK.test(link)) {
-    global.pushError(<Trans i18nKey='validation.invalid' value={{ name: 'URL' }} />);
+  if (patterns.LINK.test(link)) {
+    global.pushError({
+      message: <Trans i18nKey='validation.invalid' values={{ name: 'URL' }} />
+    });
     return
   }
   window.open(link, '_blank')

@@ -81,7 +81,9 @@ const PasswordConfirmModal = (props) => {
     if (!!storedKeyHash && !!keyHash && storedKeyHash == keyHash) {
       onConfirm(password);
     } else {
-      global.pushError({ message: t('validation.invalid', { name: t('lock.master_password') }) })
+      global.pushError({
+        message: t('validation.invalid', { name: t('lock.master_password') })
+      })
     }
     setChecking(false);
   }
@@ -91,7 +93,7 @@ const PasswordConfirmModal = (props) => {
       className="confirm-password"
       title={
         <div className="flex items-center">
-          <InfoCircleFilled className="text-warning"/>
+          <InfoCircleFilled className="text-warning" />
           <p className="ml-2">
             {title}
           </p>
