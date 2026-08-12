@@ -151,7 +151,9 @@ function FormData(props) {
       const fileType = file.type;
       const isFormat = fileType.includes('csv');
       if (!isFormat) {
-        global.pushError(t('drag_upload.invalid'));
+        global.pushError({
+          message: t('drag_upload.invalid')
+        });
       } else {
         setSelectedFile(file)
         const fileContent = await getFileContents(file);
@@ -164,9 +166,11 @@ function FormData(props) {
           })
         const newUsernames = [...new Set(emails)]
         if (newUsernames.length === 0) {
-          global.pushError(t('drag_upload.invalid'));
+          global.pushError({
+            message: t('drag_upload.invalid')
+          });
         } else {
-          form.setFieldValue('usernames', newUsernames )
+          form.setFieldValue('usernames', newUsernames)
         }
       }
     },

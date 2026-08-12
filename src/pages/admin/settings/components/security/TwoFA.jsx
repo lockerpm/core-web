@@ -30,7 +30,7 @@ import global from "../../../../../config/global";
 
 const TwoFA = (props) => {
   const { SmartOtpFormData, MailOtpFormData } = securityFormDataComponents;
-  const { PasswordConfirmModal} = modalsComponents;
+  const { PasswordConfirmModal } = modalsComponents;
   const {
     className = '',
   } = props;
@@ -74,7 +74,9 @@ const TwoFA = (props) => {
     if (userInfo.is_require_2fa) {
       const isActivateAll = factor2?.mail_otp?.is_activate && factor2?.smart_otp?.is_activate
       if (is_activate && !isActivateAll) {
-        global.pushError(t('security.two_fa.require_2fa'))
+        global.pushError({
+          message: <Trans i18nKey='security.two_fa.require_2fa' />
+        })
       } else {
         callback()
       }

@@ -52,17 +52,17 @@ function Notifications() {
 
   const getNotificationIcon = (type) => {
     switch (type) {
-    case global.constants.NOTIFICATION_TYPE.ITEM_SHARING:
-    case global.constants.NOTIFICATION_TYPE.MEMBER_TO_GROUP_SHARE:
-      return 'sharing'
-    case global.constants.NOTIFICATION_TYPE.EMERGENCY_ACCESS:
-      return 'emergency-access'
-    case global.constants.NOTIFICATION_TYPE.DATA_BREACH:
-      return 'data-breach'
-    case global.constants.NOTIFICATION_TYPE.PASSWORD_TIP_TRICK:
-      return 'tip-trick'
-    default:
-      return 'marketing'
+      case global.constants.NOTIFICATION_TYPE.ITEM_SHARING:
+      case global.constants.NOTIFICATION_TYPE.MEMBER_TO_GROUP_SHARE:
+        return 'sharing'
+      case global.constants.NOTIFICATION_TYPE.EMERGENCY_ACCESS:
+        return 'emergency-access'
+      case global.constants.NOTIFICATION_TYPE.DATA_BREACH:
+        return 'data-breach'
+      case global.constants.NOTIFICATION_TYPE.PASSWORD_TIP_TRICK:
+        return 'tip-trick'
+      default:
+        return 'marketing'
     }
   }
 
@@ -128,7 +128,7 @@ function Notifications() {
                   type="primary"
                   loading={callingAPI}
                   disabled={!!n.metadata?.clicked || callingAPI}
-                  onClick={() => {}}
+                  onClick={() => { }}
                 >
                   {
                     n.metadata?.clicked
@@ -180,7 +180,7 @@ function Notifications() {
         }
         break;
       case global.constants.NOTIFICATION_TYPE.EMERGENCY_ACCESS:
-          global.navigate(global.keys.SETTINGS_SECURITY, {}, { emergency_access: true })
+        global.navigate(global.keys.SETTINGS_SECURITY, {}, { emergency_access: true })
         break;
       case global.constants.NOTIFICATION_TYPE.MEMBER_TO_GROUP_SHARE:
         const { group_id, sharing_id, emails, clicked } = notification.metadata
@@ -228,7 +228,9 @@ function Notifications() {
     try {
       const orgKey = await global.jsCore.cryptoService.getOrgKey(sharingId)
       if (!orgKey) {
-        global.pushError({ message: t('notifications.item_no_longer_shared') })
+        global.pushError({
+          message: t('notifications.item_no_longer_shared')
+        })
         return
       }
       const members = await Promise.all(
@@ -251,7 +253,7 @@ function Notifications() {
     }
   }
 
-  const scrollEnd =  (event) => {
+  const scrollEnd = (event) => {
     if (event.target?.scrollTop == event.target?.scrollTopMax) {
       if (total > notifications.length && (page + 1 <= totalPage)) {
         const newPage = page + 1;
@@ -294,7 +296,7 @@ function Notifications() {
       onOpenChange={(open) => setIsOpen(open)}
     >
       <span>
-        <NotifyButton unreadCount={unreadCount}/>
+        <NotifyButton unreadCount={unreadCount} />
       </span>
     </Dropdown>
   );
