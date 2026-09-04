@@ -28,7 +28,7 @@ import common from "../../../utils/common";
 const BreachScanner = (props) => {
   const { ImageIcon, RouterLink } = itemsComponents;
   const { PageHeader } = commonComponents;
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
   const [callingAPI, setCallingAPI] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -73,7 +73,7 @@ const BreachScanner = (props) => {
           label={''}
           className={'font-semibold mr-4'}
           routerName={global.keys.SECURITY_TOOLS}
-          routerParams={{ }}
+          routerParams={{}}
           icon={<ArrowLeftOutlined />}
         />}
         Logo={() => <ImageIcon
@@ -119,7 +119,7 @@ const BreachScanner = (props) => {
           loading={callingAPI}
           onClick={handleCheckBreaches}
         >
-          { t('security_tools.data_breach_scanner.action') } 
+          {t('security_tools.data_breach_scanner.action')}
         </Button>
       </Card>
       {
@@ -151,7 +151,7 @@ const BreachScanner = (props) => {
                 </Col>
                 <Col span={14}>
                   <p className="font-semibold mb-2">
-                    { b.name }
+                    {b.name}
                   </p>
                   <div
                     className="mb-2"
@@ -159,7 +159,7 @@ const BreachScanner = (props) => {
                   />
                   <div className="setting-description">
                     <p className="font-semibold">
-                      { t('security_tools.data_breach_scanner.compromised_data') }:
+                      {t('security_tools.data_breach_scanner.compromised_data')}:
                     </p>
                     <ul className="list-disc list-inside">
                       {
@@ -187,21 +187,23 @@ const BreachScanner = (props) => {
                     <p className="font-semibold">
                       {t('security_tools.data_breach_scanner.breach_occurred')}
                     </p>
-                    <p>{common.convertDateTime(b.breach_date, 'DD MMMM, YYYY hh:mm A')}</p>
+                    <p>{common.convertDateTime(b.breach_date, 'YYYY')}</p>
                   </div>
-                  <div>
-                    <p className="font-semibold">
-                      {t('security_tools.data_breach_scanner.added_occurred')}
-                    </p>
-                    <p>{common.convertDateTime(b.added_date, 'DD MMMM, YYYY hh:mm A')}</p>
-                  </div>
+                  {
+                    !!b.added_date && <div>
+                      <p className="font-semibold">
+                        {t('security_tools.data_breach_scanner.added_occurred')}
+                      </p>
+                      <p>{common.convertDateTime(b.added_date, 'DD MMMM, YYYY hh:mm A')}</p>
+                    </div>
+                  }
                 </Col>
               </Row>
             </Card>)
           }
         </div>
       }
-      
+
     </div>
   );
 }
