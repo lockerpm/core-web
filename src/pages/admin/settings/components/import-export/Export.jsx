@@ -76,8 +76,6 @@ const Export = (props) => {
       cipher => !common.isProtectedCipher(cipher) && cipher.deletedDate === null && cipher.viewPassword
     )
 
-    console.log('ciphers', ciphers)
-
     // CSV export
     if (format === global.constants.FILE_TYPE.CSV) {
       const foldersMap = new Map()
