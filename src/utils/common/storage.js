@@ -22,6 +22,18 @@ const getAccessToken = async () => {
   }
 }
 
+const updateSessionToken = async (data) => {
+  localStorage.setItem('session_token', JSON.stringify(data))
+}
+
+const getSessionToken = async () => {
+  try {
+    return JSON.parse(localStorage.getItem('session_token'))
+  } catch (_) {
+    return ''
+  }
+}
+
 const updateAccessTokenType = async (data) => {
   localStorage.setItem('access_token_type', JSON.stringify(data))
 }
@@ -81,6 +93,8 @@ export default {
   getDeviceId,
   updateAccessToken,
   getAccessToken,
+  updateSessionToken,
+  getSessionToken,
   updateAccessTokenType,
   getAccessTokenType,
   updateSsoAccount,
