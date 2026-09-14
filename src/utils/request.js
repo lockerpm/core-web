@@ -11,10 +11,12 @@ const service = axios.create({
 service.interceptors.request.use(
   async config => {
     const deviceId = await common.getDeviceId();
-    const accessToken = await common.getAccessToken() || ''
+    const accessToken = await common.getAccessToken() || '';
+    const sessionToken = await common.getSessionToken() || '';
     const accessTokenType = await common.getAccessTokenType() || 'Bearer'
 
     config.headers['Content-Type'] = 'application/json'
+    config.headers['Locker-Session-Token'] = `${sessionToken}`
     config.headers['Authorization'] = `${accessTokenType} ${accessToken}`
     config.headers['CF-Access-Client-Id'] = process.env.REACT_APP_CF_ACCESS_CLIENT_ID
     config.headers['CF-Access-Client-Secret'] = process.env.REACT_APP_CF_ACCESS_CLIENT_SECRET
