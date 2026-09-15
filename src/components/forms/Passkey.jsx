@@ -17,7 +17,6 @@ const PasskeyForm = (props) => {
     userInfo = {},
     isAddKey = false,
     isNewKey = false,
-    accessToken = null,
     onConfirm = () => { },
   } = props;
 
@@ -40,8 +39,7 @@ const PasskeyForm = (props) => {
 
   const setBackupPwl = async (values) => {
     setCallingAPI(true)
-    const apiToken = accessToken || await common.getAccessToken();
-    await service.setApiToken(apiToken);
+    await common.serviceSetApiToken();
     const encKey = await global.jsCore.cryptoService.getEncKey();
     await service.setBackupPasswordlessUsingPasskey({
       email: userInfo.email,
@@ -58,7 +56,7 @@ const PasskeyForm = (props) => {
 
   const setNewPwl = async (values) => {
     setCallingAPI(true)
-    await service.setApiToken(accessToken);
+    await common.serviceSetApiToken();
     await service.setNewPasswordlessUsingPasskey({
       email: userInfo.email,
       name: userInfo.name,

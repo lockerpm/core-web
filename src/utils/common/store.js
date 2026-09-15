@@ -14,8 +14,7 @@ const fetchUserInfo = async () => {
     await global.jsCore.vaultTimeoutService.setVaultTimeoutOptions(response.timeout, response.timeout_action);
     let backupPwl = []
     try {
-      const apiToken = await common.getAccessToken();
-      await service?.setApiToken(apiToken);
+      await common.serviceSetApiToken();
       backupPwl = await service?.listBackupPasswordless() || [];
     } catch (error) {
       backupPwl = []

@@ -1868,10 +1868,10 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@lockerpm/client-service@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@lockerpm/client-service/-/client-service-2.2.1.tgz#0a78053707a4f86dec15a68092b09ccf67ff41d0"
-  integrity sha512-KEVycPYbuoCCu8zU2wWGdIbCNiHiVqygarsbWB24Kz9+ycfNTAIrAubHYVqwYBeBinjuMOVO7uP5cvJEiYluqw==
+"@lockerpm/client-service@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@lockerpm/client-service/-/client-service-2.3.0.tgz#1c4bb63274a09da339456a85afeefb4ab803e937"
+  integrity sha512-/uLibh1gvZ3TSstT6Ok6qnbLUyRxtjHoQHAn6JBrB1bmtuiAanqh2GDNHGl9K7tBc+L/3AUcM1b+Z8aYjtpVZA==
   dependencies:
     "@noble/hashes" "^2.2.0"
     axios "^1.18.1"

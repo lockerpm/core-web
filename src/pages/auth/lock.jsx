@@ -17,7 +17,7 @@ import global from "../../config/global";
 
 const Lock = () => {
   const { AuthCard, LockForm } = authComponents;
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,7 +49,7 @@ const Lock = () => {
   useEffect(() => {
     if (userInfo?.email) {
       if (!userInfo?.is_factor2 && userInfo?.require_2fa && userInfo?.is_password_changed) {
-        global.navigate(global.keys.SETUP_2FA, {}, { email: preLogin.email });
+        global.navigate(global.keys.SETUP_2FA, {}, { email: userInfo.email });
       } else if (!userInfo.is_password_changed || (userInfo.is_require_passwordless && userInfo.login_method === 'password')) {
         global.navigate(global.keys.AUTHENTICATE, {}, { email: userInfo.email })
       } else if (isUnlockByDesktop) {

@@ -70,7 +70,7 @@ async function logout(isLogoutId = false) {
     }
   }
   await common.updateUnlockMethod(null);
-  await common.updateAccessToken(null);
+  await common.updateToken(null);
   common.updateSsoAccount(null)
   global.navigate(global.keys.SIGN_IN, {}, {});
 }

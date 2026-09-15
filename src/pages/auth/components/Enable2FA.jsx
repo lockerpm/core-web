@@ -43,7 +43,7 @@ const Enable2FA = (props) => {
 
   const initEnabled2FA = async () => {
     setIdentity(factor2?.mail_otp ? global.constants.FACTOR2_IDENTITY.MAIL : global.constants.FACTOR2_IDENTITY.SMART_OTP)
-    await common.updateAccessToken(factor2?.token)
+    await common.updateToken(factor2)
   }
 
   const handleNext = async () => {

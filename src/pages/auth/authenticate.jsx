@@ -111,11 +111,13 @@ const Authenticate = () => {
   }, [preLogin, step])
 
   const getAccessTokenByToken = async () => {
-    await userServices.users_access_token(currentPage.query?.token).then((response) => {
-      setUserSession(response?.access_token);
-    }).catch((error) => {
+    await userServices.users_access_token(currentPage.query?.token).then(async (response) => {
+      await common.updateToken(response);
+      setUserSession(response);
+    }).catch(async () => {
       setStep(0)
       global.notification('error', t('notification.error.title'), t('auth_pages.authenticate.link_invalid'))
+      await common.updateToken(null);
       setUserSession(null);
     })
   }
@@ -124,7 +126,7 @@ const Authenticate = () => {
     setLoading(true)
     await userServices.users_prelogin({ email: currentPage.query?.email }).then(async (response) => {
       setPreLogin(response)
-    }).catch((error) => {
+    }).catch(async (error) => {
       global.navigate(global.keys.SIGN_IN, {}, { email: currentPage.query?.email })
     })
     setLoading(false)
@@ -156,11 +158,11 @@ const Authenticate = () => {
         setFactor2({ ...response, ...payload })
         setCurrentPassword(values.current_password);
       } else {
-        setFactor2(null)
+        setFactor2(null);
+        await common.updateToken(response);
         setUserSession({
           ...payload,
           ...response,
-          access_token: response.access_token || response.token,
         });
         setCurrentPassword(values.current_password);
         if (preLogin?.is_password_changed) {
@@ -190,7 +192,11 @@ const Authenticate = () => {
       kdf_memory: preLogin?.kdf_memory,
       kdf_parallelism: preLogin?.kdf_parallelism
     }).then(async (response) => {
-      setUserSession({ ...payload, ...response });
+      await common.updateToken(response);
+      setUserSession({
+        ...payload,
+        ...response
+      });
       if (preLogin?.is_password_changed) {
         setStep(2)
       } else {
@@ -219,8 +225,7 @@ const Authenticate = () => {
           kdf_parallelism: preLogin?.kdf_parallelism
         })
       } else {
-        await common.updateAccessTokenType(userSession.token_type)
-        await common.updateAccessToken(userSession.access_token);
+        await common.updateToken(userSession);
         if (newFullName || data.full_name) {
           await userServices.update_users_me({
             email: preLogin?.email,
@@ -324,7 +329,7 @@ const Authenticate = () => {
                       if (step === 2 && preLogin?.is_password_changed) {
                         setStep(0)
                       } else {
-                        setStep(step -1 )
+                        setStep(step - 1)
                       }
                     }}
                   />
@@ -462,7 +467,6 @@ const Authenticate = () => {
                         ...preLogin,
                         name: newFullName || preLogin?.name,
                       }}
-                      accessToken={userSession?.access_token}
                       isAddKey={true}
                       isNewKey={true}
                       onRepair={() => setIsPair(true)}
@@ -478,7 +482,6 @@ const Authenticate = () => {
                         ...preLogin,
                         name: newFullName || preLogin?.name,
                       }}
-                      accessToken={userSession?.access_token}
                       isAddKey={true}
                       isNewKey={true}
                       onConfirm={(p) => handleSave({
