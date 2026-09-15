@@ -31,7 +31,6 @@ const SecurityKeyForm = (props) => {
     userInfo = {},
     isAddKey = false,
     isNewKey = false,
-    accessToken = null,
     onRepair = () => { },
     onConfirm = () => { }
   } = props;
@@ -109,8 +108,7 @@ const SecurityKeyForm = (props) => {
   const setBackupPwl = async () => {
     setCallingAPI(true)
     try {
-      const apiToken = accessToken || await common.getAccessToken();
-      await service.setApiToken(apiToken);
+      await common.serviceSetApiToken();
       const encKey = await global.jsCore.cryptoService.getEncKey();
       const response = await service.setBackupPasswordless({
         email: userInfo.email,
@@ -132,7 +130,7 @@ const SecurityKeyForm = (props) => {
   const setNewPwl = async () => {
     setCallingAPI(true)
     try {
-      await service.setApiToken(accessToken);
+      await common.serviceSetApiToken();
       const response = await service.setNewPasswordless({
         email: userInfo.email,
         name: selectedDevice.name,

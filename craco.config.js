@@ -61,6 +61,21 @@ module.exports = {
               }
               oneOfRule.exclude.push(/node_modules\/papaparse/);
             }
+
+            if (Array.isArray(oneOfRule.use)) {
+              oneOfRule.use.forEach((useEntry) => {
+                const loader = typeof useEntry === 'string' ? useEntry : useEntry.loader;
+                if (loader && loader.includes('sass-loader')) {
+                  useEntry.options = {
+                    ...useEntry.options,
+                    sassOptions: {
+                      ...(useEntry.options?.sassOptions || {}),
+                      silenceDeprecations: ['legacy-js-api', 'import'],
+                    },
+                  };
+                }
+              });
+            }
           });
         }
       });

@@ -7,7 +7,24 @@ import global from "../../config/global";
 import common from ".";
 import storeActions from "../../store/actions";
 
-const remakeBackupPWL = async (response, payload) => {
+const serviceSetApiToken = async () => {
+  if (!service) return;
+  const accessToken = await common.getAccessToken();
+  await service.setApiToken(accessToken);
+  const sessionToken = await common.getSessionToken();
+  await service.setApiSessionToken(sessionToken);
+}
+
+const updateToken = async (response) => {
+  const accessTokenType = response?.token_type || 'Bearer';
+  const accessToken = response?.access_token || response?.token || null;
+  const sessionToken = response?.session_token || accessToken;
+  await common.updateAccessTokenType(accessTokenType);
+  await common.updateAccessToken(accessToken);
+  await common.updateSessionToken(sessionToken);
+}
+
+const remakeBackupPWL = async (payload) => {
   const userInfo = global.store.getState().auth.userInfo;
   if (payload.pwl_id && userInfo) {
     if (
@@ -16,7 +33,7 @@ const remakeBackupPWL = async (response, payload) => {
       payload.kdf_memory !== userInfo.kdf_memory ||
       payload.kdf_parallelism !== userInfo.kdf_parallelism
     ) {
-      await service.setApiToken(response.access_token);
+      await serviceSetApiToken();
       const encKey = await global.jsCore.cryptoService.getEncKey();
       let remakeResponse = null;
       if (payload.unlock_method === 'security_key') {
@@ -67,15 +84,14 @@ const unlockToVault = async (
       global.store.dispatch(storeActions.updateFactor2({ ...response, ...payload }));
       global.navigate(global.keys.SETUP_2FA, {}, query || {})
     } else {
-      await common.updateAccessTokenType(response.token_type)
-      await common.updateAccessToken(response.access_token);
+      await updateToken(response);
       await common.updateUnlockMethod(payload.unlock_method);
       await common.fetchUserInfo();
       await coreServices.unlock({
         ...response,
         ...payload
       });
-      const remakeResponse = await remakeBackupPWL(response, payload);
+      const remakeResponse = await remakeBackupPWL(payload);
       if (remakeResponse) {
         const newPayload = {
           ...payload,
@@ -106,6 +122,8 @@ const unlockToVault = async (
 }
 
 export default {
+  serviceSetApiToken,
+  updateToken,
   unlockToVault,
   remakeBackupPWL
 }

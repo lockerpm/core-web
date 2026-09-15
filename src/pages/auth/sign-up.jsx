@@ -45,8 +45,7 @@ const SingUp = () => {
         kdf_memory: null,
         kdf_parallelism: null
       }).then(async (response) => {
-        await common.updateAccessTokenType(response.token_type)
-        await common.updateAccessToken(response.access_token);
+        await common.updateToken(response);
         await common.fetchUserInfo();
         await coreServices.unlock({
           ...response,
