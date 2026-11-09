@@ -18,6 +18,7 @@ import {
 } from "@ant-design/icons";
 
 import itemsComponents from "../../../components/items";
+import { sanitizeRichHtml } from "../../../utils/common/sanitize";
 import commonComponents from "../../../components/common";
 
 import toolServices from "../../../services/tool";
@@ -155,7 +156,7 @@ const BreachScanner = (props) => {
                   </p>
                   <div
                     className="mb-2"
-                    dangerouslySetInnerHTML={{ __html: b.description }}
+                    dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(b.description) }}
                   />
                   <div className="setting-description">
                     <p className="font-semibold">
