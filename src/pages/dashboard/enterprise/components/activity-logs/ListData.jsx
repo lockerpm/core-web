@@ -16,6 +16,7 @@ import itemsComponents from "../../../../../components/items"
 
 import common from "../../../../../utils/common"
 import global from "../../../../../config/global"
+import { sanitizeLogHtml } from "../../../../../utils/common/sanitize"
 
 const ListData = (props) => {
   const { TextCopy, RouterLink } = itemsComponents;
@@ -36,7 +37,7 @@ const ListData = (props) => {
         <p className='font-semibold mr-2'>{t("common.action")}:</p>
         <div
           className='flex items-center text-limited'
-          dangerouslySetInnerHTML={{ __html: record.description[locale]?.replace('<b', '<b style="margin: 0 4px"') }}
+          dangerouslySetInnerHTML={{ __html: sanitizeLogHtml(record.description?.[locale]) }}
         />
       </div>
       <div className='flex items-center mb-1'>
