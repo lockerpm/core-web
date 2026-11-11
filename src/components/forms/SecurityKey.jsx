@@ -18,6 +18,7 @@ import {
 import itemsComponents from "../items";
 
 import commonServices from "../../services/common";
+import coreServices from "../../services/core";
 
 import storeActions from "../../store/actions";
 import global from "../../config/global";
@@ -43,6 +44,7 @@ const SecurityKeyForm = (props) => {
   const [devices, setDevices] = useState([])
   const [step, setStep] = useState(0)
   const [pin, setPin] = useState(null)
+  const [masterPassword, setMasterPassword] = useState('')
   const [passwordless, setPasswordless] = useState(null)
   const [loading, setLoading] = useState(false)
   const [callingAPI, setCallingAPI] = useState(false)
@@ -108,6 +110,15 @@ const SecurityKeyForm = (props) => {
   const setBackupPwl = async () => {
     setCallingAPI(true)
     try {
+      const makeKey = await coreServices.make_key(
+        userInfo.email,
+        masterPassword,
+        userInfo.kdf,
+        userInfo.kdf_iterations,
+        userInfo.kdf_memory,
+        userInfo.kdf_parallelism
+      )
+      const mainMasterPasswordHash = await global.jsCore.cryptoService.hashPassword(masterPassword, makeKey)
       await common.serviceSetApiToken();
       const encKey = await global.jsCore.cryptoService.getEncKey();
       const response = await service.setBackupPasswordless({
@@ -116,6 +127,7 @@ const SecurityKeyForm = (props) => {
         devicePath: selectedDevice.path,
         deviceName: selectedDevice.name,
         currentEncKey: encKey.key,
+        mainMasterPasswordHash,
         pin: pin
       })
       setStep(2);
@@ -228,11 +240,22 @@ const SecurityKeyForm = (props) => {
             >
               {t('passwordless.reload_devices')}
             </Button>
+            {
+              isAddKey && !isNewKey && <div className="mt-6 text-left">
+                <p className="mb-2">{t('lock.master_password')}</p>
+                <Input.Password
+                  size="large"
+                  value={masterPassword}
+                  placeholder={t('placeholder.enter')}
+                  onChange={(e) => setMasterPassword(e.target.value)}
+                />
+              </div>
+            }
             <Button
               className="mt-10 w-full"
               type="primary"
               size="large"
-              disabled={!selectedDevice}
+              disabled={!selectedDevice || (isAddKey && !isNewKey && !masterPassword)}
               onClick={() => handleContinue(null)}
             >
               {t('button.continue')}
