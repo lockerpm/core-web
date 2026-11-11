@@ -35,12 +35,14 @@ const remakeBackupPWL = async (payload) => {
     ) {
       await serviceSetApiToken();
       const encKey = await global.jsCore.cryptoService.getEncKey();
+      const currentMasterPasswordHash = await global.jsCore.cryptoService.getKeyHash();
       let remakeResponse = null;
       if (payload.unlock_method === 'security_key') {
         remakeResponse = await service.remakeBackupPasswordless({
           id: payload.pwl_id,
           email: userInfo.email,
           currentEncKey: encKey.key,
+          currentMasterPasswordHash,
           secret: payload.password,
           kdf: userInfo.kdf,
           kdfIterations: userInfo.kdf_iterations,
@@ -52,6 +54,7 @@ const remakeBackupPWL = async (payload) => {
           id: payload.pwl_id,
           email: userInfo.email,
           currentEncKey: encKey.key,
+          currentMasterPasswordHash,
           secret: payload.password,
           kdf: userInfo.kdf,
           kdfIterations: userInfo.kdf_iterations,

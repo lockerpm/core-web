@@ -7,6 +7,8 @@ import {
   Input
 } from '@lockerpm/design';
 
+import coreServices from "../../services/core";
+
 import global from "../../config/global";
 import common from "../../utils/common";
 
@@ -39,18 +41,29 @@ const PasskeyForm = (props) => {
 
   const setBackupPwl = async (values) => {
     setCallingAPI(true)
-    await common.serviceSetApiToken();
-    const encKey = await global.jsCore.cryptoService.getEncKey();
-    await service.setBackupPasswordlessUsingPasskey({
-      email: userInfo.email,
-      name: userInfo.name,
-      currentEncKey: encKey.key,
-      passkeyName: values.passkeyName
-    }).then(() => {
+    try {
+      const makeKey = await coreServices.make_key(
+        userInfo.email,
+        values.masterPassword,
+        userInfo.kdf,
+        userInfo.kdf_iterations,
+        userInfo.kdf_memory,
+        userInfo.kdf_parallelism
+      )
+      const mainMasterPasswordHash = await global.jsCore.cryptoService.hashPassword(values.masterPassword, makeKey)
+      await common.serviceSetApiToken();
+      const encKey = await global.jsCore.cryptoService.getEncKey();
+      await service.setBackupPasswordlessUsingPasskey({
+        email: userInfo.email,
+        name: userInfo.name,
+        currentEncKey: encKey.key,
+        mainMasterPasswordHash,
+        passkeyName: values.passkeyName
+      })
       onConfirm();
-    }).catch((error) => {
+    } catch (error) {
       global.pushError(error);
-    });
+    }
     setCallingAPI(false);
   }
 
@@ -103,6 +116,20 @@ const PasskeyForm = (props) => {
                 placeholder={t('placeholder.enter')}
               />
             </Form.Item>
+            {
+              !isNewKey && <Form.Item
+                name={'masterPassword'}
+                label={t('lock.master_password')}
+                rules={[
+                  global.rules.REQUIRED(t('lock.master_password')),
+                ]}
+              >
+                <Input.Password
+                  size="large"
+                  placeholder={t('placeholder.enter')}
+                />
+              </Form.Item>
+            }
             <Button
               className="w-full"
               type="primary"
