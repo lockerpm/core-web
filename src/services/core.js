@@ -53,7 +53,7 @@ async function unlock(data = {
       )
       hashedPassword = await global.jsCore.cryptoService.hashPassword(data.password, makeKey)
     }
-    await global.jsCore.tokenService.setTokens(data.access_token, null);
+    await global.jsCore.tokenService.setTokens(data.access_token || data.token, null);
     await global.jsCore.userService.setInformation(
       global.jsCore.tokenService.getUserId(),
       data.username,
