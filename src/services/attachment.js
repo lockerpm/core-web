@@ -31,6 +31,17 @@ async function get_file_url(path) {
   });
 }
 
+async function get_quick_shares_file_url(quick_share_id, path, token) {
+  return await request({
+    url: global.endpoint.QUICK_SHARES_ATTACHMENTS_URL.replace(':id', quick_share_id),
+    method: "post",
+    data: {
+      path,
+      attachment_token: token
+    }
+  });
+}
+
 async function remove(data = { paths: [] }) {
   return await request({
     url: global.endpoint.ATTACHMENTS_MULTIPLE_DELETE,
@@ -81,6 +92,7 @@ export default {
   get_upload_form,
   upload_file,
   get_file_url,
+  get_quick_shares_file_url,
   remove,
   encrypt_file,
   decrypt_file

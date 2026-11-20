@@ -1419,7 +1419,8 @@
     },
     "errors": {
       "large": "File is too large! Max size is 50MB.",
-      "limited": "You have exceeded the 1GB storage limit. Please delete unnecessary files to free up space." 
+      "limited": "You have exceeded the 1GB storage limit. Please delete unnecessary files to free up space.",
+      "token_expired": "The download link has expired. Please reload the page and try again."
     }
   }
 }

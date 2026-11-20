@@ -19,12 +19,12 @@ const Content = (props) => {
   const { Name } = quickShareComponents;
   const {
     cipher,
-    className
+    className,
+    quickShareId,
+    attachmentToken
   } = props
   const { t } = useTranslation();
   const [showText, setShowText] = useState(false)
-  useEffect(() => {
-  }, [])
 
   return (
     <div className={className}>
@@ -45,6 +45,8 @@ const Content = (props) => {
       <DetailList
         cipher={cipher}
         showText={showText}
+        attachmentToken={attachmentToken}
+        quickShareId={quickShareId}
         isPublic
       />
     </div>
