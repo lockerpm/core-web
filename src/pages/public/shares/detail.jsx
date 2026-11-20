@@ -32,6 +32,10 @@ const ShareDetail = () => {
   const [requireOtp, setRequireOtp] = useState(false);
   const [invalid, setInvalid] = useState(false);
   const [cipher, setCipher] = useState(null);
+  const [attachmentToken, setAttachmentToken] = useState({
+    expiredTime: null,
+    value: null
+  });
 
   useEffect(() => {
     getCipher()
@@ -47,6 +51,10 @@ const ShareDetail = () => {
         } else {
           const cipher = await common.decryptCipher(res.cipher, key)
           setCipher(common.parseNotesOfNewTypes(cipher))
+          setAttachmentToken(res.attachmentToken || {
+            expiredTime: null,
+            value: null
+          })
         }
       }).catch(() => {
         setInvalid(true)
@@ -122,6 +130,8 @@ const ShareDetail = () => {
                 {
                   cipher && <Content
                     cipher={cipher}
+                    quickShareId={id}
+                    attachmentToken={attachmentToken}
                   />
                 }
               </div>

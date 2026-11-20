@@ -2,8 +2,25 @@ import authServices from '../services/auth'
 import global from '../config/global'
 import common from '../utils/common'
 
+const matchEndpoint = (url = '', template = '') => {
+  if (!url || !template) {
+    return false
+  }
+  const pattern = template
+    .split(/:[a-zA-Z_]+/)
+    .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('[^/]+')
+  return new RegExp(`^${pattern}/?(\\?.*)?$`).test(url)
+}
+
 const handleResponseErrorMessage = async (err) => {
   if (err.response === undefined) {
+    return err
+  }
+  if (
+    err.response.status === 401 &&
+    matchEndpoint(err.config?.url, global.endpoint?.QUICK_SHARES_ATTACHMENTS_URL)
+  ) {
     return err
   }
   if (err.response.status === 401) {

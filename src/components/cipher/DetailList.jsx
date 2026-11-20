@@ -35,7 +35,12 @@ const DetailList = (props) => {
     loading,
     showText = true,
     isPublic = false,
-    isDrawer = false
+    isDrawer = false,
+    quickShareId = null,
+    attachmentToken = {
+      expiredTime: null,
+      value: null
+    }
   } = props;
 
   const { t } = useTranslation();
@@ -630,8 +635,14 @@ const DetailList = (props) => {
           <Row gutter={[12, 12]}>
             {
               (cipher?.attachments || []).map((attachment, index) => (
-                <Col lg={isDrawer ? 12 : 8} md={12} span={24} key={index}>
-                  <Attachment className="w-full" attachment={attachment} cipher={cipher}/>
+                <Col lg={(isDrawer || isPublic) ? 12 : 8} md={12} span={24} key={index}>
+                  <Attachment
+                    className="w-full"
+                    attachment={attachment}
+                    cipher={cipher}
+                    quickShareId={quickShareId}
+                    attachmentToken={attachmentToken}
+                  />
                 </Col>
               ))
             }

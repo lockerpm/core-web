@@ -26,6 +26,11 @@ const Attachment = (props) => {
     attachment = null,
     isCipherForm = false,
     callingAPI = false,
+    quickShareId = null,
+    attachmentToken = {
+      expiredTime: null,
+      value: null
+    },
     onDelete = () => {}
   } = props;
 
@@ -93,8 +98,27 @@ const Attachment = (props) => {
     if (downloading || !common.checkingHandleAttachment()) {
       return;
     }
+    if (
+      quickShareId && (
+        !attachmentToken?.value ||
+        !attachmentToken?.expiredTime ||
+        attachmentToken.expiredTime * 1000 < Date.now()
+      )
+    ) {
+      global.notification(
+        'error',
+        t('notification.error.title'),
+        t('attachments.errors.token_expired')
+      );
+      return;
+    }
     setDownloading(true);
-    attachmentServices.get_file_url(attachment?.url).then(async (res) => {
+    const request = quickShareId ? attachmentServices.get_quick_shares_file_url(
+      quickShareId,
+      attachment?.url,
+      attachmentToken.value
+    ) : attachmentServices.get_file_url(attachment?.url)
+    request.then(async (res) => {
       const fileRes = await fetch(res.url);
       const blob = await fileRes.blob();
       const key = Buffer.from(attachment.key, "base64");

@@ -1419,7 +1419,8 @@
     },
     "errors": {
       "large": "Tệp quá lớn! Kích thước tối đa là 50MB.",
-      "limited": "Bạn đã vượt quá giới hạn lưu trữ 1GB. Vui lòng xóa các tệp không cần thiết để giải phóng dung lượng."
+      "limited": "Bạn đã vượt quá giới hạn lưu trữ 1GB. Vui lòng xóa các tệp không cần thiết để giải phóng dung lượng.",
+      "token_expired": "Liên kết tải xuống đã hết hạn. Vui lòng tải lại trang và thử lại."
     }
   }
 }
