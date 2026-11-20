@@ -166,6 +166,7 @@ function QuickShare(props) {
               >
                 <InputNumber
                   className='w-full'
+                  min={1}
                   placeholder={t('placeholder.enter')}
                 />
               </Form.Item>
