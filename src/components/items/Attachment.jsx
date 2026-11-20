@@ -50,11 +50,14 @@ const Attachment = (props) => {
   }, [attachment, isCipherForm, cipher])
 
   const isDelete = useMemo(() => {
+    if (!!quickShareId) {
+      return false
+    }
     if (!attachment?.url) {
       return true
     }
     return !!cipher && common.isOwner(cipher)
-  }, [cipher]);
+  }, [quickShareId, cipher]);
 
   const deleteAttachment = () => {
     if (!attachment?.url) {
