@@ -50,9 +50,6 @@ const Attachment = (props) => {
   }, [attachment, isCipherForm, cipher])
 
   const isDelete = useMemo(() => {
-    if (!!quickShareId) {
-      return false
-    }
     if (!attachment?.url) {
       return true
     }
@@ -167,7 +164,7 @@ const Attachment = (props) => {
                 </> }
               </span>
               {
-                isDelete && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
+                isDelete && !quickShareId && <span className="font-semibold cursor-pointer text-danger" onClick={deleteAttachment}>
                   <DeleteOutlined className="text-[16px]"/>
                 </span>
               }
